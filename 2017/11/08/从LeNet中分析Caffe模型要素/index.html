@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Lenet,深度学习,caffe模型要素,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Caffe的模型需要两个重要的参数文件： 网络模型 和 参数配置 (分别是.prototxt文件和.solver.prototxt文件），本文通过经典的LeNet网络分析具体的参数意义。 网络模型Caffe的网络模型文件定义了网络的每一层行为，下图是用Caffe中的python/draw_net.py画出的LeNet的模型（如果图片太小看不清可以右击在选择在新窗口打开或者保存到本地用图片查看器放大">
+<meta name="keywords" content="Lenet,深度学习,caffe模型要素">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从LeNet中分析Caffe模型要素">
+<meta property="og:url" content="http://www.mashangxue123.com/2017/11/08/从LeNet中分析Caffe模型要素/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="Caffe的模型需要两个重要的参数文件： 网络模型 和 参数配置 (分别是.prototxt文件和.solver.prototxt文件），本文通过经典的LeNet网络分析具体的参数意义。 网络模型Caffe的网络模型文件定义了网络的每一层行为，下图是用Caffe中的python/draw_net.py画出的LeNet的模型（如果图片太小看不清可以右击在选择在新窗口打开或者保存到本地用图片查看器放大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20171108231630575?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-12-05T14:40:17.268Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从LeNet中分析Caffe模型要素">
+<meta name="twitter:description" content="Caffe的模型需要两个重要的参数文件： 网络模型 和 参数配置 (分别是.prototxt文件和.solver.prototxt文件），本文通过经典的LeNet网络分析具体的参数意义。 网络模型Caffe的网络模型文件定义了网络的每一层行为，下图是用Caffe中的python/draw_net.py画出的LeNet的模型（如果图片太小看不清可以右击在选择在新窗口打开或者保存到本地用图片查看器放大">
+<meta name="twitter:image" content="https://img-
+blog.csdn.net/20171108231630575?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2017/11/08/从LeNet中分析Caffe模型要素/">
+
+
+
+
+
+  <title>从LeNet中分析Caffe模型要素 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2017/11/08/从LeNet中分析Caffe模型要素/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从LeNet中分析Caffe模型要素</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T23:56:40+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习之caffe/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习之caffe</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Caffe的模型需要两个重要的参数文件： <strong>网络模型</strong> 和 <strong>参数配置</strong> (分别是<br>.prototxt文件和.solver.prototxt文件），本文通过经典的LeNet网络分析具体的参数意义。</p>
+<h1 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h1><p>Caffe的网络模型文件定义了网络的每一层行为，下图是用Caffe中的python/draw_net.py画出的LeNet的模型（如果图片太小看不清可以右击在选择在新窗口打开或者保存到本地用图片查看器放大查看）：</p>
+<p><img src="https://img-
+blog.csdn.net/20171108231630575?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="数据层"><a href="#数据层" class="headerlink" title="数据层"></a>数据层</h2><p>LeNet网络模型的输入层为数据层，即 <strong>网络模型的数据输入定义</strong> ，一般包括训练数据层和测试数据层两种类型。</p>
+<h3 id="LeNet训练数据层"><a href="#LeNet训练数据层" class="headerlink" title="LeNet训练数据层"></a>LeNet训练数据层</h3><pre><code> layer {
+  name: &quot;mnist&quot;
+  type: &quot;Data&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TRAIN
+  }0p
+  transform_param {
+    scale: 0.00390625//数据缩放因子
+  }
+  data_param {
+    source: &quot;examples/mnist/mnist_train_lmdb&quot;//数据路径
+    batch_size: 64//批处理数据大小即一次性读取图片的数目
+    backend: LMDB
+  }
+}
+</code></pre><p>LeNet测试数据层与训练数据层各字段含义相同。</p>
+<h3 id="LeNet训练卷积（Convoluation）层"><a href="#LeNet训练卷积（Convoluation）层" class="headerlink" title="LeNet训练卷积（Convoluation）层"></a>LeNet训练卷积（Convoluation）层</h3><pre><code>layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  param {
+    lr_mult: 1//表示weight（权重）更新时的学习率，1倍表示与全局参数一致
+  }
+  param {
+    lr_mult: 2/*表示bias（偏差）更新时的学习率，一般为权重学习率（weight）学习率的2倍，这样一般会取得很好的收敛速率*/
+  }
+  convolution_param {//卷积计算参数
+    num_output: 20//滤波个数即输出特征图（feature map）的数目
+    kernel_size: 5//滤波大小即卷积核尺寸（在这里为5×5）
+    stride: 1//步长即卷积输出跳跃间隔，1表示连续输出，无跳跃
+    weight_filler {
+      type: &quot;xavier&quot;/*滤波类型，在这里的意思就是权值使用xavier填充器*/
+    }
+    bias_filler {
+      type: &quot;constant&quot;//bias使用常数填充器，默认为0
+    }
+  }
+}
+</code></pre><h3 id="LeNet训练池化（Pooling）层"><a href="#LeNet训练池化（Pooling）层" class="headerlink" title="LeNet训练池化（Pooling）层"></a>LeNet训练池化（Pooling）层</h3><pre><code>layer {//又叫下采样层
+  name: &quot;pool1&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv1&quot;//输入blob
+  top: &quot;pool1&quot;//输出blob
+  pooling_param {//下采样参数
+    pool: MAX//采样方式，这里用的是最大采样
+    kernel_size: 2//下采样窗口尺寸
+    stride: 2//下采样跳跃间隔，这里为2×2
+  }
+}
+</code></pre><h3 id="LeNet训练全连接层"><a href="#LeNet训练全连接层" class="headerlink" title="LeNet训练全连接层"></a>LeNet训练全连接层</h3><pre><code>layer {
+  name: &quot;ip1&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;pool2&quot;//输入blob
+  top: &quot;ip1&quot;//输出blob
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 2
+  }
+  inner_product_param {//全连接层参数
+    num_output: 500//该层输出参数为500
+    weight_filler {
+      type: &quot;xavier&quot;
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+    }
+  }
+}
+</code></pre><h3 id="LeNet训练激活函数层"><a href="#LeNet训练激活函数层" class="headerlink" title="LeNet训练激活函数层"></a>LeNet训练激活函数层</h3><h4 id="ReLU层"><a href="#ReLU层" class="headerlink" title="ReLU层"></a>ReLU层</h4><pre><code>layer {//非线性层
+  name: &quot;relu1&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;ip1&quot;
+  top: &quot;ip1&quot;
+}
+</code></pre><h4 id="Softmax层"><a href="#Softmax层" class="headerlink" title="Softmax层"></a>Softmax层</h4><pre><code>layer {//损失层
+  name: &quot;loss&quot;
+  type: &quot;SoftmaxWithLoss&quot;//损失函数
+  bottom: &quot;ip2&quot;
+  bottom: &quot;label&quot;
+  top: &quot;loss&quot;
+}
+</code></pre><h1 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h1><p>Caffe中的参数配置文件.solver.prototxt定义了网络模型训练过程中需要设置的参数，比如学习率、权重衰减系数、迭代次数、使用CPU还是GPU等。</p>
+<h2 id="LeNet的参数文件解析"><a href="#LeNet的参数文件解析" class="headerlink" title="LeNet的参数文件解析"></a>LeNet的参数文件解析</h2><pre><code># The train/test net protocol buffer definition
+net: &quot;examples/mnist/lenet_train_test.prototxt&quot;
+# test_iter specifies how many forward passes the test should carry out.
+# In the case of MNIST, we have test batch size 100 and 100 test iterations,
+# covering the full 10,000 testing images.
+
+test_iter: 100//预测阶段迭代次数（要求与TEST层的batch_size相乘之后等于总的预测集的图片数）
+
+# Carry out testing every 500 training iterations.
+
+test_interval: 500//训练时每迭代500次进行一次预测
+
+# The base learning rate, momentum and the weight decay of the network.
+
+base_lr: 0.01//基础学习速率
+momentum: 0.9//冲量
+weight_decay: 0.0005//权衰量
+
+# The learning rate policy
+lr_policy: &quot;inv&quot;//学习速率的衰减策略
+gamma: 0.0001
+power: 0.75
+# Display every 100 iterations
+
+display: 100//没经过100次迭代在屏幕上打印一次运行log
+
+# The maximum number of iterations
+
+max_iter: 10000//最大迭代次数
+
+# snapshot intermediate results
+snapshot: 5000
+snapshot_prefix: &quot;examples/mnist/lenet&quot;
+# solver mode: CPU or GPU
+solver_mode: GPU//选择使用CPU还是GPU进行训练
+</code></pre><p>训练出的输出文件格式为.caffemodel即所求的model，可以拷贝至目标机器进行分类、定位和识别。</p>
+<p>参考资料：<br>【1】：深度学习——Caffe之经典模型详解与实战 乐毅 王斌 编著<br>【2】：深度学习——21天实战caffe 赵永科 编著</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Lenet/" rel="tag"># Lenet</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/caffe模型要素/" rel="tag"># caffe模型要素</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/08/深度学习入门知识/" rel="next" title="深度学习入门知识">
+                <i class="fa fa-chevron-left"></i> 深度学习入门知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/20/两种不同方式解决八皇后问题/" rel="prev" title="两种不同方式解决八皇后问题">
+                两种不同方式解决八皇后问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络模型"><span class="nav-number">1.</span> <span class="nav-text">网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据层"><span class="nav-number">1.1.</span> <span class="nav-text">数据层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet训练数据层"><span class="nav-number">1.1.1.</span> <span class="nav-text">LeNet训练数据层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet训练卷积（Convoluation）层"><span class="nav-number">1.1.2.</span> <span class="nav-text">LeNet训练卷积（Convoluation）层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet训练池化（Pooling）层"><span class="nav-number">1.1.3.</span> <span class="nav-text">LeNet训练池化（Pooling）层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet训练全连接层"><span class="nav-number">1.1.4.</span> <span class="nav-text">LeNet训练全连接层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeNet训练激活函数层"><span class="nav-number">1.1.5.</span> <span class="nav-text">LeNet训练激活函数层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ReLU层"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">ReLU层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Softmax层"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">Softmax层</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数配置"><span class="nav-number">2.</span> <span class="nav-text">参数配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeNet的参数文件解析"><span class="nav-number">2.1.</span> <span class="nav-text">LeNet的参数文件解析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,excel生成,数据导出,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;apos;net.sourceforge.jexcelapi&amp;apos;, name: &amp;apos;jxl&amp;apos;, version: &amp;apos;2.6.12&amp;apos; 编写excel工具类package cn.xiaojii.cas">
+<meta name="keywords" content="Android,excel生成,数据导出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android将数据导出为excel文件的方法">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android将数据导出为excel文件的方法/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;apos;net.sourceforge.jexcelapi&amp;apos;, name: &amp;apos;jxl&amp;apos;, version: &amp;apos;2.6.12&amp;apos; 编写excel工具类package cn.xiaojii.cas">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T14:39:23.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android将数据导出为excel文件的方法">
+<meta name="twitter:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;apos;net.sourceforge.jexcelapi&amp;apos;, name: &amp;apos;jxl&amp;apos;, version: &amp;apos;2.6.12&amp;apos; 编写excel工具类package cn.xiaojii.cas">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/09/05/Android将数据导出为excel文件的方法/">
+
+
+
+
+
+  <title>Android将数据导出为excel文件的方法 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/05/Android将数据导出为excel文件的方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android将数据导出为excel文件的方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-05T13:06:01+08:00">
+                2018-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h2><p>将应用内的数据导出为excel表格。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="添加依赖包"><a href="#添加依赖包" class="headerlink" title="添加依赖包"></a>添加依赖包</h3><p>在app的build.gradle里面添加依赖包:</p>
+<pre><code>implementation group: &apos;net.sourceforge.jexcelapi&apos;, name: &apos;jxl&apos;, version: &apos;2.6.12&apos;
+</code></pre><h3 id="编写excel工具类"><a href="#编写excel工具类" class="headerlink" title="编写excel工具类"></a>编写excel工具类</h3><pre><code>package cn.xiaojii.cashgift.util.io;
+
+
+import jxl.Workbook;
+import jxl.WorkbookSettings;
+import jxl.format.Colour;
+import jxl.write.Label;
+import jxl.write.WritableCell;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+
+/**
+ * @author dmrfcoder
+ * @date 2018/8/9
+ */
+public class ExcelUtil {
+    private static WritableFont arial14font = null;
+
+    private static WritableCellFormat arial14format = null;
+    private static WritableFont arial10font = null;
+    private static WritableCellFormat arial10format = null;
+    private static WritableFont arial12font = null;
+    private static WritableCellFormat arial12format = null;
+    private final static String UTF8_ENCODING = &quot;UTF-8&quot;;
+
+
+    /**
+     * 单元格的格式设置 字体大小 颜色 对齐方式、背景颜色等...
+     */
+    private static void format() {
+        try {
+            arial14font = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
+            arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);
+            arial14format = new WritableCellFormat(arial14font);
+            arial14format.setAlignment(jxl.format.Alignment.CENTRE);
+            arial14format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+            arial14format.setBackground(jxl.format.Colour.VERY_LIGHT_YELLOW);
+
+            arial10font = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
+            arial10format = new WritableCellFormat(arial10font);
+            arial10format.setAlignment(jxl.format.Alignment.CENTRE);
+            arial10format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+            arial10format.setBackground(Colour.GRAY_25);
+
+            arial12font = new WritableFont(WritableFont.ARIAL, 10);
+            arial12format = new WritableCellFormat(arial12font);
+            //对齐格式
+            arial10format.setAlignment(jxl.format.Alignment.CENTRE);
+            //设置边框
+            arial12format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+
+        } catch (WriteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 初始化Excel
+     *
+     * @param fileName 导出excel存放的地址（目录）
+     * @param colName excel中包含的列名（可以有多个）
+     */
+    public static void initExcel(String fileName, String[] colName) {
+        format();
+        WritableWorkbook workbook = null;
+        try {
+            File file = new File(fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            workbook = Workbook.createWorkbook(file);
+           //设置表格的名字
+            WritableSheet sheet = workbook.createSheet(&quot;账单&quot;, 0);
+            //创建标题栏
+            sheet.addCell((WritableCell) new Label(0, 0, fileName, arial14format));
+            for (int col = 0; col &lt; colName.length; col++) {
+                sheet.addCell(new Label(col, 0, colName[col], arial10format));
+            }
+            //设置行高
+            sheet.setRowView(0, 340);
+            workbook.write();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (workbook != null) {
+                try {
+                    workbook.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    public static &lt;T&gt; void writeObjListToExcel(List&lt;T&gt; objList, String fileName, Context c) {
+
+
+        if (objList != null &amp;&amp; objList.size() &gt; 0) {
+            WritableWorkbook writebook = null;
+            InputStream in = null;
+            try {
+                WorkbookSettings setEncode = new WorkbookSettings();
+                setEncode.setEncoding(UTF8_ENCODING);
+                in = new FileInputStream(new File(fileName));
+                Workbook workbook = Workbook.getWorkbook(in);
+                writebook = Workbook.createWorkbook(new File(fileName), workbook);
+                WritableSheet sheet = writebook.getSheet(0);
+
+                for (int j = 0; j &lt; objList.size(); j++) {
+                    ProjectBean projectBean = (ProjectBean) objList.get(j);
+                    List&lt;String&gt; list = new ArrayList&lt;&gt;();
+                    list.add(projectBean.getName());
+                    list.add(projectBean.getProject());
+                    list.add(projectBean.getMoney());
+                    list.add(projectBean.getYear() + &quot; &quot; + projectBean.getMonth()+&quot; &quot;+projectBean.getDay());
+                    list.add(projectBean.getBeizhu());
+
+                    for (int i = 0; i &lt; list.size(); i++) {
+                        sheet.addCell(new Label(i, j + 1, list.get(i), arial12format));
+                        if (list.get(i).length() &lt;= 4) {
+                            //设置列宽
+                            sheet.setColumnView(i, list.get(i).length() + 8);
+                        } else {
+                            //设置列宽
+                            sheet.setColumnView(i, list.get(i).length() + 5);
+                        }
+                    }
+                    //设置行高
+                    sheet.setRowView(j + 1, 350);
+                }
+
+                writebook.write();
+                Toast.makeText(c, &quot;导出Excel成功&quot;, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (writebook != null) {
+                    try {
+                        writebook.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+    }
+}
+</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>File file = new File(path);
+     //文件夹是否已经存在
+     if (!file.exists()) {
+         file.mkdirs();
+     }
+
+     String[] title = {&quot;姓名&quot;, &quot;项目&quot;, &quot;收支&quot;, &quot;日期&quot;, &quot;备注&quot;};
+     String fileName = file.toString() + &quot;/&quot; + excelname.xls;
+     ExcelUtil.initExcel(fileName, title);
+     ExcelUtil.writeObjListToExcel(list, fileName, (MainActivity) mainView);
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/excel生成/" rel="tag"># excel生成</a>
+          
+            <a href="/tags/数据导出/" rel="tag"># 数据导出</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/05/Android使用系统指纹对应用进行解锁加密的方法/" rel="next" title="Android使用系统指纹对应用进行解锁加密的方法">
+                <i class="fa fa-chevron-left"></i> Android使用系统指纹对应用进行解锁加密的方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/05/Android FragmentTransaction commit already called解决方案/" rel="prev" title="Android FragmentTransaction commit already called解决方案">
+                Android FragmentTransaction commit already called解决方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求描述"><span class="nav-number">1.</span> <span class="nav-text">需求描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加依赖包"><span class="nav-number">2.1.</span> <span class="nav-text">添加依赖包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写excel工具类"><span class="nav-number">2.2.</span> <span class="nav-text">编写excel工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.3.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

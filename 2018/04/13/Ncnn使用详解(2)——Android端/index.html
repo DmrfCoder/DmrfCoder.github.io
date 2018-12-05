@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="caffe,深度学习,android,ndk,ncnn,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要本片文章基于你已经完成了  这篇文章 的学习，主要介绍如何将写好的c代码应用到Android项目中。 环境说明系统：Ubuntu16.04软件：Android Studio 前期准备之ndk安装在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开AndroidStudio，然后依次点击File-&amp;gt;Settings-&amp;gt;Appearance&amp;amp;Behavior-">
+<meta name="keywords" content="caffe,深度学习,android,ndk,ncnn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ncnn使用详解(2)——Android端">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/04/13/Ncnn使用详解(2)——Android端/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="摘要本片文章基于你已经完成了  这篇文章 的学习，主要介绍如何将写好的c代码应用到Android项目中。 环境说明系统：Ubuntu16.04软件：Android Studio 前期准备之ndk安装在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开AndroidStudio，然后依次点击File-&amp;gt;Settings-&amp;gt;Appearance&amp;amp;Behavior-">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180413161729327?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/2018041316184860?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20171030113606747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180413162620477?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180413163646377?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180413163947939?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-12-05T14:39:49.306Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ncnn使用详解(2)——Android端">
+<meta name="twitter:description" content="摘要本片文章基于你已经完成了  这篇文章 的学习，主要介绍如何将写好的c代码应用到Android项目中。 环境说明系统：Ubuntu16.04软件：Android Studio 前期准备之ndk安装在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开AndroidStudio，然后依次点击File-&amp;gt;Settings-&amp;gt;Appearance&amp;amp;Behavior-">
+<meta name="twitter:image" content="https://img-
+blog.csdn.net/20180413161729327?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/04/13/Ncnn使用详解(2)——Android端/">
+
+
+
+
+
+  <title>Ncnn使用详解(2)——Android端 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/04/13/Ncnn使用详解(2)——Android端/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ncnn使用详解(2)——Android端</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T17:07:39+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本片文章基于你已经完成了 <a href="https://blog.csdn.net/qq_36982160/article/details/79929869" target="_blank" rel="noopener"> 这篇文章
+</a><br>的学习，主要介绍如何将写好的c代码应用到Android项目中。</p>
+<h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><p>系统：Ubuntu16.04<br>软件：Android Studio</p>
+<h1 id="前期准备之ndk安装"><a href="#前期准备之ndk安装" class="headerlink" title="前期准备之ndk安装"></a>前期准备之ndk安装</h1><p>在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开Android<br>Studio，然后依次点击File-&gt;Settings-&gt;Appearance&amp;Behavior-&gt;System Settings-&gt;Android<br>SDK，然后在SDK Tools下找到ndk，然后选中，点击apply就可以自动下载安装了，如图：<br><img src="https://img-
+blog.csdn.net/20180413161729327?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>完成之后在你的sdk目录下会多出一个ndk-bundle的包，这就是你ndk的路径，类似下图：<br><img src="https://img-
+blog.csdn.net/2018041316184860?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>至此，ndk已经安装完毕了，下一步是配置ndk的环境变量：<br>首先打开profile：</p>
+<pre><code>sudo vim /etc/profile
+</code></pre><p>打开后在profile文件的末尾加上：</p>
+<pre><code>export NDK_HOME=sdkroot/ndk-bundle
+PATH=$NDK_HOME:$PATH
+</code></pre><p>sdkroot是你的sdk目录，每个人的不一样，视情况而定，下面是我的配置截图：<br><img src="https://img-
+blog.csdn.net/20171030113606747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>添加完成后保存退出，使用以下命令使配置的环境变量生效：</p>
+<pre><code>source /etc/profile
+</code></pre><p>验证ndk是否配置成功：</p>
+<pre><code>ndk-build -v
+</code></pre><p>出现类似以下输出即说明ndk配置成功：<br><img src="https://img-
+blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="编译ncnn-sdk"><a href="#编译ncnn-sdk" class="headerlink" title="编译ncnn sdk"></a>编译ncnn sdk</h1><p>我们需要将ncnn打包，这样我们才能在android ndk的代码中使用include</p>
+<pre><code>mkdir build-android
+cd build-android
+cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+    -DANDROID_ABI=&quot;armeabi-v7a&quot; -DANDROID_ARM_NEON=ON \
+    -DANDROID_PLATFORM=android-14 ..
+make
+make install
+</code></pre><p>参数说明：</p>
+<pre><code>ANDROID_ABI 是架构名字，&quot;armeabi-v7a&quot; 支持绝大部分手机硬件
+
+ANDROID_ARM_NEON 是否使用 NEON 指令集，设为 ON 支持绝大部分手机硬件
+
+ANDROID_PLATFORM 指定最低系统版本，&quot;android-14&quot; 就是 android-4.0
+</code></pre><p>你可以根据自己的需要设置自己的参数，详见 <a href="https://github.com/Tencent/ncnn/wiki/cmake-%E6%89%93%E5%8C%85-android-sdk" target="_blank" rel="noopener"> 这里
+</a><br>完成后你就可以在ncnn/build-android下找到install了，大概如图：<br><img src="https://img-
+blog.csdn.net/20180413162620477?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>install下有include和lib两个文件夹，这两个文件夹下的东西后面会用到。</p>
+<h1 id="进行ndk开发"><a href="#进行ndk开发" class="headerlink" title="进行ndk开发"></a>进行ndk开发</h1><p>Android可以通过ndk-<br>build和cmake两种方式来编译c，而且官方比较推荐的是cmake的方式，但是我用cmake试了好长时间一直报各种诡异的错误，应该是我还没有学到ncnn<br>in ndk with cmake的正确打开方式，所以这里介绍一下使用ndk-build这种方式编译c，步骤如下：<br>我这里新建了一个android 的demo项目，项目结构如下：<br><img src="https://img-
+blog.csdn.net/20180413163646377?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>主要是assets文件夹下放置你的bin和param文件，jni文件夹下放置你的cpp和两个mk文件，具体内容下面会介绍（可以直接在对应位置新建这两个文件夹），然后要修改你的app<br>gradle文件：<br><img src="https://img-
+blog.csdn.net/20180413163947939?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>对应的内容你可以根据自己的情况修改，然后配置两个mk文件：  </p>
+<ul>
+<li>Android.mk </li>
+</ul>
+<pre><code>LOCAL_PATH := $(call my-dir)
+
+#把这个路径改成你自己刚才编译的install路径，用全路径！
+NCNN_INSTALL_PATH := ncnn-master/build-android/install
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := ncnn
+LOCAL_SRC_FILES := $(NCNN_INSTALL_PATH)/lib/libncnn.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := demo
+#这个是你的cpp文件
+LOCAL_SRC_FILES := demo.cpp
+
+LOCAL_C_INCLUDES := $(NCNN_INSTALL_PATH)/include
+
+LOCAL_STATIC_LIBRARIES := ncnn
+
+LOCAL_CFLAGS := -O2 -fvisibility=hidden -fomit-frame-pointer -fstrict-aliasing -ffunction-sections -fdata-sections -ffast-math
+LOCAL_CPPFLAGS := -O2 -fvisibility=hidden -fvisibility-inlines-hidden -fomit-frame-pointer -fstrict-aliasing -ffunction-sections -fdata-sections -ffast-math
+LOCAL_LDFLAGS += -Wl,--gc-sections
+
+LOCAL_CFLAGS += -fopenmp
+LOCAL_CPPFLAGS += -fopenmp
+LOCAL_LDFLAGS += -fopenmp
+
+LOCAL_LDLIBS := -lz -llog -ljnigraphics
+
+include $(BUILD_SHARED_LIBRARY)
+</code></pre><ul>
+<li>Application.mk </li>
+</ul>
+<pre><code># APP_STL := stlport_static
+APP_STL := gnustl_static
+# APP_ABI := armeabi armeabi-v7a
+APP_ABI := armeabi-v7a
+APP_PLATFORM := android-9
+#NDK_TOOLCHAIN_VERSION := 4.9
+</code></pre><p>这两个.mk文件我的建议是复制粘贴到你的项目里，只改动必要的文件路径，其余的参数别动，除非你直到你改的意思是什么～<br>因为ndk的原理是使用java接口调用c代码，所以我们需要进行java接口的编写，给出一个示例代码：</p>
+<pre><code>public class Ncnn
+{
+    public native boolean InitNcnn(String gestureDetectionModelPath);
+
+
+    public native  void Detect(float[] i,float[] q,float []scores,int[] a);
+
+
+    static {
+        System.loadLibrary(&quot;demo&quot;);
+    }
+
+
+
+}
+</code></pre><p>一共两个方法，一个是初始化，一个是执行预测，需要注意的是初始化方法调用的时候需要传入一个二进制文件路径的参数，大概思路是把bin和param文件拷贝到手机上然后让c代码读取，这里给出模板代码：</p>
+<pre><code>private void IniteNcnn() throws IOException {
+
+
+       ncnn = new Ncnn();//实例化上面的java接口类
+
+
+       try {
+           copyBigDataToSD(&quot;demo.bin&quot;);
+
+           copyBigDataToSD(&quot;demo.param&quot;);
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       //模型初始化
+       File sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+       String sdPath = sdDir.toString() + &quot;/gesturencnn/&quot;;
+       boolean b = ncnn.InitNcnn(sdPath);
+
+
+   }
+
+
+   private void copyBigDataToSD(String strOutFileName) throws IOException {
+
+       File sdDir = Environment.getExternalStorageDirectory();
+       File file = new File(sdDir.toString() + &quot;/demo/&quot;);
+       if (!file.exists()) {
+           file.mkdir();
+       }
+
+       String tmpFile = sdDir.toString() + &quot;/demo/&quot; + strOutFileName;
+       File f = new File(tmpFile);
+       if (f.exists()) {
+           return;
+       }
+       InputStream myInput;
+       java.io.OutputStream myOutput = new FileOutputStream(sdDir.toString() + &quot;/demo/&quot; + strOutFileName);
+       myInput = context.getAssets().open(strOutFileName);
+       byte[] buffer = new byte[1024];
+       int length = myInput.read(buffer);
+       while (length &gt; 0) {
+           myOutput.write(buffer, 0, length);
+           length = myInput.read(buffer);
+       }
+       myOutput.flush();
+       myInput.close();
+       myOutput.close();
+
+   }
+</code></pre><p>直接在你需要的地方调用IniteNcnn（）就可以了，需要注意的是要 <strong>进行内存卡读取权限的申请</strong> 哦</p>
+<p>然后将你上一篇教程写的demo.cpp放在jni目录下，对里面的代码进行必要的修改，主要需要实现模型的初始化和执行预测两个函数，初始化这里给出一个模板，至于执行预测的函数直接写一个对应函数然后调用你之前写好的c代码就可以了：</p>
+<ul>
+<li>初始化<br>这个函数是通用的，建议全部复制粘贴，具体对应的java接口代码后面会介绍</li>
+</ul>
+<pre><code> extern &quot;C&quot;{
+
+#注意把这里的函数名改成你自己对应的，一定不能错！
+JNIEXPORT jboolean JNICALL
+Java_com_example_dmrf_JniClass_Ncnn_InitNcnn(JNIEnv *env, jobject instance,
+                                                                    jstring DetectionModelPath_) {
+
+
+    const char *DetectionModelPath = env-&gt;GetStringUTFChars(DetectionModelPath_, 0);
+    if (NULL == DetectionModelPath) {
+        return false;
+    }
+
+    string tModelDir = DetectionModelPath;
+    string tLastChar = tModelDir.substr(tModelDir.length() - 1, 1);
+
+
+    if (&quot;\\&quot; == tLastChar) {
+        tModelDir = tModelDir.substr(0, tModelDir.length() - 1) + &quot;/&quot;;
+    } else if (tLastChar != &quot;/&quot;) {
+        tModelDir += &quot;/&quot;;
+    }
+
+
+    std::vector&lt;std::string&gt; param_files;
+    param_files.resize(1);
+    param_files[0] = tModelDir + &quot;/demo.param&quot;;
+
+    std::vector&lt;std::string&gt; bin_files;
+    bin_files.resize(1);
+    bin_files[0] = tModelDir + &quot;/demo.bin&quot;;
+
+
+    squeezenet.load_param(param_files[0].data());
+    squeezenet.load_model(bin_files[0].data());
+
+    env-&gt;ReleaseStringUTFChars(DetectionModelPath_, DetectionModelPath);
+
+    return true;
+}
+</code></pre><p>至此所有代码已经编写完毕，然后就可以build了，步骤如下：<br>cd到src/main/jni目录下，执行ndk-build，然后就会生成.so文件，然后你就可以干你的后序工作了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/caffe/" rel="tag"># caffe</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/ndk/" rel="tag"># ndk</a>
+          
+            <a href="/tags/ncnn/" rel="tag"># ncnn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/13/Ncnn使用详解(1)——PC端/" rel="next" title="Ncnn使用详解(1)——PC端">
+                <i class="fa fa-chevron-left"></i> Ncnn使用详解(1)——PC端
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/13/那些活在浪里的创业者最终被拍成了电影/" rel="prev" title="那些活在浪里的创业者最终被拍成了电影">
+                那些活在浪里的创业者最终被拍成了电影 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境说明"><span class="nav-number">2.</span> <span class="nav-text">环境说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备之ndk安装"><span class="nav-number">3.</span> <span class="nav-text">前期准备之ndk安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译ncnn-sdk"><span class="nav-number">4.</span> <span class="nav-text">编译ncnn sdk</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进行ndk开发"><span class="nav-number">5.</span> <span class="nav-text">进行ndk开发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

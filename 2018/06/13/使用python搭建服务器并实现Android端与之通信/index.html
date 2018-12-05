@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用PythonFlask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用python搭建服务器并实现Android端与之通信">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/06/13/使用python搭建服务器并实现Android端与之通信/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用PythonFlask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180613162927862?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180613163243652?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180613163325335?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-
+blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-12-05T14:39:35.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用python搭建服务器并实现Android端与之通信">
+<meta name="twitter:description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用PythonFlask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实这">
+<meta name="twitter:image" content="https://img-
+blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/06/13/使用python搭建服务器并实现Android端与之通信/">
+
+
+
+
+
+  <title>使用python搭建服务器并实现Android端与之通信 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/13/使用python搭建服务器并实现Android端与之通信/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用python搭建服务器并实现Android端与之通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T16:47:56+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python<br>Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。</p>
+<h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>环境：服务端使用Python3.5+PyCharm</p>
+<h2 id="新建Flask项目"><a href="#新建Flask项目" class="headerlink" title="新建Flask项目"></a>新建Flask项目</h2><p>看图：<br><img src="https://img-
+blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后create，初始化完成之后项目结构应该类似如下：<br><img src="https://img-
+blog.csdn.net/20180613162927862?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>其实这时候直接启动项目就可以在浏览器访问到：<br><img src="https://img-
+blog.csdn.net/20180613163243652?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-
+blog.csdn.net/20180613163325335?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>这就是使用现成框架的好处hhh，但是我们希望实现与客户端的通信，自然需要再做进一步code.</p>
+<h2 id="编写代码接受来自客户端的数据"><a href="#编写代码接受来自客户端的数据" class="headerlink" title="编写代码接受来自客户端的数据"></a>编写代码接受来自客户端的数据</h2><p>首先我们看一下hello_world的代码：</p>
+<pre><code>@app.route(&apos;/&apos;)
+def hello_world():
+    return &apos;Hello World!&apos;
+</code></pre><p>这里@app.route(‘/’)意思就是访问你服务端地址时调用这个方法，所以我们可以通过这种方式实现自己的需求，比如：</p>
+<pre><code>@app.route(&apos;/demo&apos;, methods=[&apos;POST&apos;])
+def demo():
+    value = request.form[&apos;demo_tag&apos;]
+    print(value)
+    return &quot;ok&quot;
+</code></pre><p>上面代码的意思就是你可以通过 <a href="http://127.0.0.1:5000/demo" target="_blank" rel="noopener"> http://127.0.0.1:5000/demo </a><br>访问到demo方法，request.form[‘demo_tag’]的返回值是你客户端发送的tag为demo_tag的数据，下文会详细介绍如何发送数据，最后返回值你可以自己指定，这里随便给了一个。到这里服务端已经ok了，我们看看客户端如何实现.</p>
+<h1 id="Android端"><a href="#Android端" class="headerlink" title="Android端"></a>Android端</h1><p>客户端使用Okhttp，需要导入两个jar包，地址<br>jar包下载地址： <a href="http://square.github.io/okhttp/" target="_blank" rel="noopener"> http://square.github.io/okhttp/ </a><br><img src="https://img-
+blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>注意2个jar包都要，图中3个圈点完就ok了，下载到本地自己导入，这部分就不详细写了，不会导入的可以Google一下。</p>
+<p>如果不想手动导入jar包可以:</p>
+<pre><code>implementation &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;
+</code></pre><p>导入之后直接看代码：</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ok = findViewById(R.id.ok);
+    username = findViewById(R.id.username);
+    password = findViewById(R.id.password);
+
+
+    ok.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String name = String.valueOf(username.getText());
+            String pass = String.valueOf(password.getText());
+            String url = &quot;http://112.86.199.151:5000/gesture&quot;;//替换成自己的服务器地址
+            SendMessage(url, name, pass);
+        }
+    });
+}
+
+
+private void SendMessage(String url, final String userName, String passWord) {
+
+    value = new float[550];
+    Random random = new Random();
+    for (int i = 0; i &lt; 550; i++) {
+        if (i % 2 == 0) {
+            value[i] = random.nextFloat();
+        } else {
+            value[i] = -random.nextFloat();
+        }
+
+    }
+    String str_value = FloatArrayToString(value);
+
+    OkHttpClient client = new OkHttpClient();
+    FormBody.Builder formBuilder = new FormBody.Builder();
+    formBuilder.add(&quot;demo&quot;, str_value);
+
+    Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
+    Call call = client.newCall(request);
+    call.enqueue(new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, &quot;服务器错误&quot;, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(Call call, final Response response) throws IOException {
+            final String res = response.body().string();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (res.equals(&quot;0&quot;)) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, &quot;失败&quot;, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, &quot;成功&quot;+res, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+                }
+            });
+        }
+    });
+
+}
+</code></pre><p>我这里随机生成了一个数组并将其发送到了服务器端，核心代码很简单，有框架真的可以为所欲为，写不动了吃饭去了，也许有心情会再更的详细点，给份现成代码自己研究研究吧：<br><a href="https://github.com/DmrfCoder/OkHttpDemo" target="_blank" rel="noopener"> https://github.com/DmrfCoder/OkHttpDemo
+</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/11/《微反应》/" rel="next" title="《微反应》">
+                <i class="fa fa-chevron-left"></i> 《微反应》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/13/使用python matplotlib实现动图绘制/" rel="prev" title="使用python matplotlib实现动图绘制">
+                使用python matplotlib实现动图绘制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端"><span class="nav-number">2.</span> <span class="nav-text">服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建Flask项目"><span class="nav-number">2.1.</span> <span class="nav-text">新建Flask项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写代码接受来自客户端的数据"><span class="nav-number">2.2.</span> <span class="nav-text">编写代码接受来自客户端的数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android端"><span class="nav-number">3.</span> <span class="nav-text">Android端</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

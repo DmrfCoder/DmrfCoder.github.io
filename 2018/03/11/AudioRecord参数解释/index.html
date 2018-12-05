@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AudioRecord,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,int audioFormat, int bufferSizeInBytes) 参数解释：audioSource 音频源指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC sampleRateInHz 采样率音频的采样频率，">
+<meta name="keywords" content="AudioRecord">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AudioRecord参数解释">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/03/11/AudioRecord参数解释/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,int audioFormat, int bufferSizeInBytes) 参数解释：audioSource 音频源指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC sampleRateInHz 采样率音频的采样频率，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T14:40:03.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AudioRecord参数解释">
+<meta name="twitter:description" content="public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,int audioFormat, int bufferSizeInBytes) 参数解释：audioSource 音频源指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC sampleRateInHz 采样率音频的采样频率，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/03/11/AudioRecord参数解释/">
+
+
+
+
+
+  <title>AudioRecord参数解释 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/11/AudioRecord参数解释/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AudioRecord参数解释</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-11T11:31:21+08:00">
+                2018-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</p>
+<h1 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h1><h2 id="audioSource-音频源"><a href="#audioSource-音频源" class="headerlink" title="audioSource 音频源"></a>audioSource 音频源</h2><p>指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC</p>
+<h2 id="sampleRateInHz-采样率"><a href="#sampleRateInHz-采样率" class="headerlink" title="sampleRateInHz 采样率"></a>sampleRateInHz 采样率</h2><p>音频的采样频率，每秒钟能够采样的次数，采样率越高，音质越高。给出的实例是<br>44100、22050、11025但不限于这几个参数。例如要采集低质量的音频就可以使用4000、<br>8000等低采样率。</p>
+<h2 id="channelConfig-声道设置"><a href="#channelConfig-声道设置" class="headerlink" title="channelConfig 声道设置"></a>channelConfig 声道设置</h2><p>android支持双声道立体声和单声道。MONO单声道，STEREO立体声</p>
+<h2 id="audioFormat-编码制式和采样大小"><a href="#audioFormat-编码制式和采样大小" class="headerlink" title="audioFormat 编码制式和采样大小"></a>audioFormat 编码制式和采样大小</h2><p>采集来的数据当然使用PCM编码(脉冲代码调制编码，即PCM编码。<br>PCM通过抽样、量化、编码三个步骤将连续变化的模拟信号转换为数字编码。)<br>android支持的采样大小16bit 或者8bit。当然采样大小越大，那么信息量越多，音质也越高，<br>现在主流的采样大小都是16bit，在低质量的语音传输的时候8bit足够了。</p>
+<h2 id="bufferSizeInBytes"><a href="#bufferSizeInBytes" class="headerlink" title="bufferSizeInBytes"></a>bufferSizeInBytes</h2><p>采集数据需要的缓冲区的大小，如果不知道最小需要的大小可以在getMinBufferSize()查看。</p>
+<p>采集到的数据保存在一个byteBuffer中，可以使用流将其读出。亦可保存成为文件的形式</p>
+<h1 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h1><p>从音频硬件录制缓冲区读取数据</p>
+<h2 id="audioData"><a href="#audioData" class="headerlink" title="audioData"></a>audioData</h2><p>写入的音频录制数据。</p>
+<h2 id="offsetInShorts"><a href="#offsetInShorts" class="headerlink" title="offsetInShorts"></a>offsetInShorts</h2><p>目标数组 audioData 的起始偏移量。</p>
+<h2 id="sizeInShorts"><a href="#sizeInShorts" class="headerlink" title="sizeInShorts"></a>sizeInShorts</h2><p>请求读取的数据大小。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，<br>如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。 返回数值不会超过sizeInShorts。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AudioRecord/" rel="tag"># AudioRecord</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/10/创建型模式——原型模式/" rel="next" title="创建型模式——原型模式">
+                <i class="fa fa-chevron-left"></i> 创建型模式——原型模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/12/结构型模式——适配器模式/" rel="prev" title="结构型模式——适配器模式">
+                结构型模式——适配器模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参数解释："><span class="nav-number">1.</span> <span class="nav-text">参数解释：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#audioSource-音频源"><span class="nav-number">1.1.</span> <span class="nav-text">audioSource 音频源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sampleRateInHz-采样率"><span class="nav-number">1.2.</span> <span class="nav-text">sampleRateInHz 采样率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#channelConfig-声道设置"><span class="nav-number">1.3.</span> <span class="nav-text">channelConfig 声道设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#audioFormat-编码制式和采样大小"><span class="nav-number">1.4.</span> <span class="nav-text">audioFormat 编码制式和采样大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bufferSizeInBytes"><span class="nav-number">1.5.</span> <span class="nav-text">bufferSizeInBytes</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><span class="nav-number">2.</span> <span class="nav-text">public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#audioData"><span class="nav-number">2.1.</span> <span class="nav-text">audioData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#offsetInShorts"><span class="nav-number">2.2.</span> <span class="nav-text">offsetInShorts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sizeInShorts"><span class="nav-number">2.3.</span> <span class="nav-text">sizeInShorts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回值"><span class="nav-number">2.4.</span> <span class="nav-text">返回值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

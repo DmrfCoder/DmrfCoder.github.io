@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="二分搜索Linearsearch/*  * 输入：n个元素的数组A[1...n]、x  * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0  */  int Linearsearch(int *A,int x, int n){     int j=0;     while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j]){         j++;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法分析基本概念">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/05/14/算法分析基本概念/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="二分搜索Linearsearch/*  * 输入：n个元素的数组A[1...n]、x  * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0  */  int Linearsearch(int *A,int x, int n){     int j=0;     while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j]){         j++;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T14:39:42.040Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法分析基本概念">
+<meta name="twitter:description" content="二分搜索Linearsearch/*  * 输入：n个元素的数组A[1...n]、x  * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0  */  int Linearsearch(int *A,int x, int n){     int j=0;     while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j]){         j++;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/05/14/算法分析基本概念/">
+
+
+
+
+
+  <title>算法分析基本概念 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/14/算法分析基本概念/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法分析基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T19:30:31+08:00">
+                2018-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">算法与数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="Linearsearch"><a href="#Linearsearch" class="headerlink" title="Linearsearch"></a>Linearsearch</h3><pre><code>/*
+ * 输入：n个元素的数组A[1...n]、x
+ * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
+ */
+
+int Linearsearch(int *A,int x, int n){
+    int j=0;
+    while (j&lt;n&amp;&amp;x!=A[j]){
+        j++;
+    }
+
+    if(x==A[j])return j;
+    return 0;
+}
+</code></pre><h3 id="Binarysearch"><a href="#Binarysearch" class="headerlink" title="Binarysearch"></a>Binarysearch</h3><pre><code>/*
+ * 输入：n个元素的升序数组A[1...n]、x
+ * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
+ */
+
+int Binarysearch(int *A, int x, int n) {
+    int low = 1, high = n, j = 0;
+    while (low &lt;= high &amp;&amp; j == 0) {
+        int mid = (int) ((low + high) / 2);
+        if (x == A[mid])j = mid;
+        else if (x &lt; A[mid])high = mid - 1;
+        else low = mid + 1;
+    }
+
+    return j;
+}
+</code></pre><p>要注意二分搜索的输入一定是一个 <strong>升序</strong><br>的数组，实质就是一个二叉搜索树（所以也把二分搜索的执行描述为决策树），对于一个大小为n的排序数组，算法Binarysearch执行比较的最大次数为int（logn）+1（如果输入数组不是递增排好序的，则可在nlogn内对其进行排序后再进行二分搜索）。</p>
+<h2 id="合并两个已排序的表"><a href="#合并两个已排序的表" class="headerlink" title="合并两个已排序的表"></a>合并两个已排序的表</h2><pre><code>/*
+ * 输入：数组A[1...m]和它的三个索引p，q，r，1&lt;=p&lt;=q&lt;r&lt;=m，p、q、r满足A[p...q]、A[q+1...r]分别按照升序排列
+ * 输出：合并两个子数组A[p...q]和A[q+1...r]的数组A[p...r]
+ */
+
+void Merge(int *A, int p, int q, int r) {
+    int B[r + 1];//B[p...r]是辅助数组
+    int s = p, t = q + 1, k = p;//s指向A[p...q]子数组，t指向A[q+1...r]子数组，k指向B数组
+    while (s &lt;= q &amp;&amp; t &lt;= r) {
+        if (A[s] &lt;= A[t]) {
+            B[k] = A[s];
+            s++;
+        } else {
+            B[k] = A[t];
+            t++;
+        }
+
+        k++;
+    }
+
+    if (s = q + 1) {//说明s指向的数组已经遍历完了
+        for (int i = t; i &lt;= r; ++i) {
+            B[k++] = A[i];
+        }
+    } else {
+        for (int i = s; i &lt;= r; ++i) {
+            B[k++] = A[i];
+        }
+    }
+
+    for (int j = p; j &lt;= r; ++j) {
+        A[j] = B[j];
+
+    }
+}
+</code></pre><p>设Merge算法要合并两个大小分别为n1和n2的数组（n1</p>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre><code>/*
+ * 输入：n个元素的数组A[1...n]
+ * 输出：按非降序排列的数组A[1...n]
+ */
+
+void SelectionSort(int *A, int n) {
+
+    for (int i = 0; i &lt; n; ++i) {
+
+        for (int j = i + 1; j &lt;= n; ++j) {
+            if (A[i] &gt; A[j]) {
+                int t = A[i];
+                A[i] = A[i];
+                A[i] = t;
+            }
+        }
+    }
+
+}
+</code></pre><p>算法SelectionSort所需的元素比较次数为n(n-1)/2（n-1+n-2+n-3+…+2+1=n(n-1)/2），因为每次交换需要3次赋值，所以元素的赋值次数介于0到3(n-1)之间。</p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；<br>接下来将第三个数与前两个数对比，比较的思路是先将第三个数存下来（记为x），然后将第三个数与第二个数比较，如果第二个数比第三个数大，则直接将第二个数向后移动一位，如果第二个数不比第三个数大，则说明此时前三个数都是有序的，因为之前前两个数是有序的，比较到最后，将x放到第三个数比较的终止位置即可。以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/*
+ * 输入：n个元素的数组A[1...n]
+ * 输出：按非降序排列的数组A[1...n]
+ */
+
+void InsertionSort(int *A, int n) {
+    for (int i = 2; i &lt;= n; ++i) {
+        int x = A[i];
+        int j = i - 1;
+        while (j &gt; 0 &amp;&amp; A[j] &gt; x) {
+            A[j + 1] = A[j];
+            j--;
+        }
+        A[j + 1] = x;
+    }
+}
+</code></pre><p>执行算法SelectionSort的元素比较次数在n-1到n(n-1)/2之间，元素赋值次数等于元素比较次数加上n-1.</p>
+<h2 id="自底向上合并排序"><a href="#自底向上合并排序" class="headerlink" title="自底向上合并排序"></a>自底向上合并排序</h2><pre><code>/*
+ * 输入：n个元素的数组A[1...n]
+ * 输出：按非降序排列的数组A[1...n]
+ */
+
+
+void Merge(int *A, int p, int q, int r);
+
+void BottomUpSort(int *A, int n) {
+    int t = 1;
+    while (t &lt; n) {
+        int s = t, t = 2 * s, i = 0;
+        while (i + t &lt;= n) {
+            Merge(A, i + 1, i + s, i + t);
+            i = i + t;
+        }
+        if (i + s &lt; n) {
+            Merge(A, i + 1, i + s, n);
+        }
+    }
+}
+</code></pre><p>用算法BottomUpSort对n个元素的数组进行排序，当n为2的幂时，元素比较次数在(nlogn)/2到nlogn-n+1之间。执行该算法的元素赋值次数为2nlogn。</p>
+<h2 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h2><h3 id="O"><a href="#O" class="headerlink" title="O"></a>O</h3><p>前文提到算法InsertionSort执行的运算次数至多为cn^2，其中c为某个适当选择的正常数。这时我们说算法InsertionSort的运行时间是O(n^2)，说明当排序元素的个数等于或超过某个阈值n0时，对于某个常亮c，运行时间是cn^2，<br><strong>O符号描述的是一个上界但不一定是算法的实际执行时间</strong><br>，比如当排序一个已经排序好的数组时InsertionSort的运行时间就不是O(n^2)而是O(n)了。</p>
+<h3 id="Ω"><a href="#Ω" class="headerlink" title="Ω"></a>Ω</h3><p>相比于O，Ω描述的是算法执行的 <strong>下界</strong><br>，比如算法InsertionSort的运算时间至少是cn，则称算法InsertionSort的运行时间是Ω（n），即无论何时，当被排序的元素个数等于或超过某一个阈值n0时，对于某个常数c，算法的运行时间至少是cn。</p>
+<h3 id="Senta"><a href="#Senta" class="headerlink" title="Senta"></a>Senta</h3><p>Senta描述的是一个确切界限，如果对于任意大小等于或超过某一阈值n0的输入，如果运行时间在c1g(n)和c2g(n)之间，则称算法的运行时间是Senta(g(n))。</p>
+<h3 id="复杂性类与-o-符号"><a href="#复杂性类与-o-符号" class="headerlink" title="复杂性类与 o 符号"></a>复杂性类与 o 符号</h3><h4 id="o符号"><a href="#o符号" class="headerlink" title="o符号"></a>o符号</h4><p>O 符号给出的上界可以是“紧”的,也可以是非“紧”的。<br>2<em> n^ 2 =O ( n^ 2 ) 是渐近性紧边界<br>2 </em>n = O ( n^ 2 ) 不是渐近性紧边界</p>
+<p>o 符号就用来表示 <strong>不是渐近性紧边界</strong> 的上界<br>举例: 2 n = o ( n ) , 2 ^n ！= o ( n )</p>
+<p>直观上来说,在小 o 符号中, f ( n ) =o ( g ( n )) ,当 n 趋向于无穷大时, f (n ) 函数相当于 g (n )<br>就变得不再重要了<br>即lim- &gt;+oof(n)/g(n)=0</p>
+<h4 id="w符号"><a href="#w符号" class="headerlink" title="w符号"></a>w符号</h4><p>用类比法来讲,小 w符号相对于大 Ω符号的关系正如 o 符号相对于 O 符号的关系。<br>我们用小 w 符号来表示一个 <strong>渐近性非紧密的下界</strong> 。<br>比如：</p>
+<blockquote>
+<p>(n^2)/2=w(n )<br> (n^2)/2!=w(n^2)</p>
+</blockquote>
+<p>lim- &gt;+oof(n)/g(n)=oo</p>
+<h2 id="空间复杂性"><a href="#空间复杂性" class="headerlink" title="空间复杂性"></a>空间复杂性</h2><p>我们把算法使用的空间 定义 、为:为了求解问题的实例而执行的计算步骤所需要的内存空间,它<br><strong>不包括分配用来存储输入的空间（为了区分那些在整个计算过程中占用了少于输入空间的算法）</strong> 。</p>
+<p>算法的 <strong>空间复杂性不可能超过运行时间的复杂性</strong> ,因为每写入一个内存单元都至少需要一定的时间。所以,如果用 T (n ) 和 S (n )<br>分别代表算法的时间复杂性和空<br>间复杂性,有: S ( n ) = O ( T ( n )) 。</p>
+<h2 id="最优算法"><a href="#最优算法" class="headerlink" title="最优算法"></a>最优算法</h2><p>如果可以证明任何一个求解问题 T的算法必定是Ω ( f ( n )) ,那么我们把在 O ( f ( n )) 时间内求解问题T的任何算法都称为问题<br>T的最优算法。</p>
+<h2 id="如何估计算法的运行时间"><a href="#如何估计算法的运行时间" class="headerlink" title="如何估计算法的运行时间"></a>如何估计算法的运行时间</h2><ul>
+<li>计算迭代次数 </li>
+<li>计算基本运算的频度 </li>
+</ul>
+<blockquote>
+</blockquote>
+<p>一般来说,在分析一个算法运行时间时,可以找出这样一个元运算,它的频率至少和任何其他运算的频度一样大,称这样的运算为基本运算。我们还可以放宽这个定义,把那些频度和运行时间成正比的运算包括进来。</p>
+<ul>
+<li>使用递推关系 </li>
+</ul>
+<blockquote>
+</blockquote>
+<p>如果一个算法本身是递归算法,那么计算这个算法运行时间的函数通常也是递归的,即是指,这个函数的定义中引用了函数自身。即便一个算法本身是非递归的,我们有时也可以用递归式来计算它的运行时间。</p>
+<p>lim- &gt;+oof(n)/g(n)!=oo f(n)=O(g(n))<br>lim-&gt;+oof(n)/g(n)!=0 f(n)=Ω(g(n))<br>lim-&gt;+oof(n)/g(n)==c f(n)=Senta(g(n))</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/11/软件系统介绍文档模板/" rel="next" title="软件系统介绍文档模板">
+                <i class="fa fa-chevron-left"></i> 软件系统介绍文档模板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/14/NP完全问题/" rel="prev" title="NP完全问题">
+                NP完全问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二分搜索"><span class="nav-number">1.</span> <span class="nav-text">二分搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linearsearch"><span class="nav-number">1.1.</span> <span class="nav-text">Linearsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binarysearch"><span class="nav-number">1.2.</span> <span class="nav-text">Binarysearch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并两个已排序的表"><span class="nav-number">2.</span> <span class="nav-text">合并两个已排序的表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">3.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">4.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自底向上合并排序"><span class="nav-number">5.</span> <span class="nav-text">自底向上合并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂性"><span class="nav-number">6.</span> <span class="nav-text">时间复杂性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#O"><span class="nav-number">6.1.</span> <span class="nav-text">O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ω"><span class="nav-number">6.2.</span> <span class="nav-text">Ω</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Senta"><span class="nav-number">6.3.</span> <span class="nav-text">Senta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂性类与-o-符号"><span class="nav-number">6.4.</span> <span class="nav-text">复杂性类与 o 符号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#o符号"><span class="nav-number">6.4.1.</span> <span class="nav-text">o符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#w符号"><span class="nav-number">6.4.2.</span> <span class="nav-text">w符号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间复杂性"><span class="nav-number">7.</span> <span class="nav-text">空间复杂性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最优算法"><span class="nav-number">8.</span> <span class="nav-text">最优算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何估计算法的运行时间"><span class="nav-number">9.</span> <span class="nav-text">如何估计算法的运行时间</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

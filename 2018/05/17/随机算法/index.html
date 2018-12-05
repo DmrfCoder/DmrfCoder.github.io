@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="随机算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述随机算法是一种在接受输入的同时，为了随机选择的目的，还接受一串随机比特流并且在运行过程中使用该比特流的算法(允许算法在执行过程中随机地选择下一个计算步骤)。 随机算法通常有两个 优点 ：  较之那些我们所知的解决同一问题最好的确定性算法，随机算法所需的运行时间或空间通常小一些。  随机算法比较易于理解和实现（呵，站着说话不腰疼）。   随机算法的 基本特征 ：对所求解问题的同一实例用同一随机算">
+<meta name="keywords" content="随机算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="随机算法">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/05/17/随机算法/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="概述随机算法是一种在接受输入的同时，为了随机选择的目的，还接受一串随机比特流并且在运行过程中使用该比特流的算法(允许算法在执行过程中随机地选择下一个计算步骤)。 随机算法通常有两个 优点 ：  较之那些我们所知的解决同一问题最好的确定性算法，随机算法所需的运行时间或空间通常小一些。  随机算法比较易于理解和实现（呵，站着说话不腰疼）。   随机算法的 基本特征 ：对所求解问题的同一实例用同一随机算">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T14:39:41.215Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="随机算法">
+<meta name="twitter:description" content="概述随机算法是一种在接受输入的同时，为了随机选择的目的，还接受一串随机比特流并且在运行过程中使用该比特流的算法(允许算法在执行过程中随机地选择下一个计算步骤)。 随机算法通常有两个 优点 ：  较之那些我们所知的解决同一问题最好的确定性算法，随机算法所需的运行时间或空间通常小一些。  随机算法比较易于理解和实现（呵，站着说话不腰疼）。   随机算法的 基本特征 ：对所求解问题的同一实例用同一随机算">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/05/17/随机算法/">
+
+
+
+
+
+  <title>随机算法 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/17/随机算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">随机算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T08:35:26+08:00">
+                2018-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>随机算法是一种在接受输入的同时，为了随机选择的目的，还接受一串随机比特流并且在运行过程中使用该比特流的算法(允许算法在执行过程中随机地选择下一个计算步骤)。</p>
+<p>随机算法通常有两个 <strong>优点</strong> ：</p>
+<ul>
+<li>较之那些我们所知的解决同一问题最好的确定性算法，随机算法所需的运行时间或空间通常小一些。 </li>
+<li>随机算法比较易于理解和实现（呵，站着说话不腰疼）。 </li>
+</ul>
+<p>随机算法的 <strong>基本特征</strong> ：对所求解问题的同一实例用同一随机算法求解两次可能得到完全不同的效果。<br>这两次求解所需的时间、所得到的结果可能会有相当大的差别。</p>
+<h2 id="随机算法的类别"><a href="#随机算法的类别" class="headerlink" title="随机算法的类别"></a>随机算法的类别</h2><p>随机（概率）算法大致分四类：</p>
+<ul>
+<li>数值概率算法 </li>
+</ul>
+<blockquote>
+<p>常用于数值问题的求解。<br> 这类算法所得到的往往是近似解且近似解的精度随计算时间的增加而不断提高。<br> 在许多情况下,要计算出问题的精确解是不可能的,或者没有必要,此时,用数值概率算法可以得到相当满意的解。</p>
+</blockquote>
+<ul>
+<li>蒙特卡洛(Monte Carlo)算法 </li>
+</ul>
+<blockquote>
+<p>用于求问题的准确解。<br> 对于许多问题来说,近似解毫无意义。<br> 例如,一个判定问题其解为“是”或“否” ,二者必居其一,<br> 不存在任何近似解。<br> 又如,我们要求一个整数的因子,这样问题的解答必须是准<br> 确的,一个整数的近似因子没有任何意义。<br> 用蒙特卡洛算法能求得问题的一个解,但这个解未必是正确的。<br> 求得正确解的概率依赖于算法所用的时间,算法所用的时间越多,得到正确解的概率就越高。<br> 蒙特卡洛算法的主要缺点也在于此,即无法有效地判定所得到的解是否肯定正确。</p>
+</blockquote>
+<ul>
+<li>拉斯维加斯(Las Vegas)算法 </li>
+</ul>
+<blockquote>
+<p>拉斯维加斯算法不会得到不正确的解。<br> 一旦用拉斯维加斯算法找到一个解,这个解就一定是正确<br> 解。<br> 但有时用拉斯维加斯算法会找不到解。<br> 与蒙特卡洛算法类似,拉斯维加斯算法找到正确解的<strong>概率随着它所用的计算时间<br> 的增加而提高</strong>。<br> 对于所求解问题的任一实例,用拉斯维加斯算法反复对该实例求解足够多次,可使求解失效的概率任意小。</p>
+</blockquote>
+<ul>
+<li>舍伍德(Sherwood)算法 </li>
+</ul>
+<blockquote>
+<p>舍伍德算法总能求得问题的一个解,且所求得的解总是正确的。  </p>
+</blockquote>
+<p>当一个确定性算法在最坏情况下的计算复杂性与其在平均情况下的计算复杂性有较大差别时,可在这个确定性算法中引入随机性,将它改造成一个舍伍德算法,消除或减少问题的好坏实例间的这种差别。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
+<li>Monte Carlo算法   </li>
+</ul>
+<blockquote>
+<p>总是给出解，但是偶尔可能会产生非正确的解。然而，可以通过多次运行原算法，并且满足每次运行时的随机选择都相互独立，使产生非正确解的概率可以减到任意小。</p>
+</blockquote>
+<h3 id="主主元素问题（多数元素问题）"><a href="#主主元素问题（多数元素问题）" class="headerlink" title="主主元素问题（多数元素问题）"></a>主主元素问题（多数元素问题）</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>设T[1…n]是一个长度为n的数组，当某个元素在该数组中存在的数量多于int(s/2)时称该元素为数组T的主元素（多数元素）。</p>
+<h4 id="求解思路"><a href="#求解思路" class="headerlink" title="求解思路"></a>求解思路</h4><p>算法随机选择数组元素x,由于数组T的非主元素个数小于n/2，所以，x不为主元素的概率小于1/2。因此判定数组T的主元素存在性的算法是一个偏真1/2正确的算法。50%的错误概率是不可容忍的，利用重复调用技术将错误概率降低到任何可接受的范围内。对于任何给定的p</p>
+<blockquote>
+</blockquote>
+<p>0，算法majorityMC重复调用(向上取整)log(1/p)次算法majority。它是一个偏真蒙特卡罗算法，且其错误概率小于p。算法majorityMC所需的计算时间显然是O(nlog(1/p))。</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>//重复k次调用算法Majority
+template&lt;class Type&gt;
+bool MajorityMC(Type *T,int n,double e)
+{
+    int k = ceil(log(1/e)/log((float)2));
+    for(int i=1; i&lt;=k; i++)
+    {
+        if(Majority(T,n))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+bool Majority(Type *T,int n)
+{
+    RandomNumber rnd;
+    int i = rnd.Random(n);
+
+    Type x = T[i];  //随机选择数组元素
+    int k = 0;
+
+    for(int j=0; j&lt;n; j++)
+    {
+        if(T[j] == x)
+        {
+            k++;
+        }
+    }
+
+    return (k&gt;n/2); //k&gt;n/2时，T含有主元素
+}
+</code></pre><h2 id="随机化快速排序"><a href="#随机化快速排序" class="headerlink" title="随机化快速排序"></a>随机化快速排序</h2><p>（可能是最为流行的一种随机算法？）<br>首先要明确传统快速排序的流程：从待排序序列中拿出最后一个（或者第一个）作为主元，将小于它的放在它的前面，大于它的放在它的后面，这时对该主元的前一部分和后一部分再分别递归进行“划分”，最后达到有序。这种方法有一个很大的问题就是当待排序数组是一个几乎有序的序列时其复杂度会很容易达到senta(n^2)，因为如果每次都选择第一个元素或者最后一个元素作为主元进行划分，对一个几乎有序的序列，划分后的递归对象（子序列）将会一个很长一个很短，这样可能经过好多次划分后还是有一个待划分的子部分很长。解决方法是每次不选择第一个或者最后一个作为主元，而是随机产生一个从第一个到最后一个之间的随机数作为主元进行划分，这样即保留了快速排序的优越性又避免了排序几乎有序序列时的痛点。</p>
+<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h3><pre><code>void RandomQuickSort(int low,int high){
+    if(low&lt;high){
+
+        int v=random(low,high);
+        int t=A[low];
+        A[low]=A[v];
+        A[v]=t;
+
+        Split(A[low...high],low);
+        RandomQuickSort(low,v-1);
+        RandomQuickSort(v+1,high);
+    }
+}
+</code></pre><p>该算法在最坏情况下仍然是senta(n^2)，但这与输入形式无关。如果最坏情况发生，那是因为用随机数选取的主元不凑巧，这个事件发生的概率是非常小的。事实上，没有一种输入的排列可以引起它的最坏情况，算法的期望运行时间是senta(nlogn).</p>
+<h2 id="随机化的选择算法"><a href="#随机化的选择算法" class="headerlink" title="随机化的选择算法"></a>随机化的选择算法</h2><p>什么是选择算法：</p>
+<h3 id="SELECT-算法描述"><a href="#SELECT-算法描述" class="headerlink" title="SELECT 算法描述"></a>SELECT 算法描述</h3><ol>
+<li>如果数组元素个数小于 44,则直接将数组排序并返回第 k小元素(采用直接的方法来解决问题,因为当总元素个数小于44*5=220的时候用直接的方法解决问题更快)。 </li>
+<li>把 n 个元素以每组 5 个元素划分为 int( n/5) 组,如果 n 不是 5的倍数则抛弃剩余元素。 </li>
+<li>对每组进行排序,之后取出每组的中间项(第 3 个元素)。 </li>
+<li>递归调用 SELECT 算法,得到这些中间项序列中的中项元素 mm </li>
+<li><p>根据 mm,将原数组 A 划分为三个子数组: </p>
+<ul>
+<li>A1={小于 mm 的元素}; </li>
+<li>A2={等于 mm 的元素}; </li>
+<li>A3={大于 mm 的元素}; </li>
+</ul>
+</li>
+<li>根据 k 的大小,判断第 k 小元素会出现在 A1,A2,A3 中的<br>哪一个数组里,之后,或者返回第 k 小元素(mm,在 A2<br>中),或者在 A1 或 A3 上递归。</li>
+</ol>
+<pre><code>    1：k &lt;len(A 1) 第 k 小元素在 A1 中;
+2：len(A 1) =k &lt;= A 1+ A 2 第 k 小元素在 A2 中;
+3： A 1 + A 2 &lt; k &lt;= A 1 + A 2+  A 3第 k 小元素在 A3 中;
+</code></pre><p>该算法的运行时间是senta(n)(T(n)&lt;=20cn,c是排序43个元素所需的时间)，具有一个很大的常数系数，所以就有了随机版的选择算法：</p>
+<pre><code>    /*
+ * 输入：n个元素的数组A[1...n]和整数k
+ * 输出：A中的第k小元素
+ * 
+ */
+
+R_Select(A,1,n,k);
+
+void R_Select(int *A, int low, int high, int k) {
+    int v = random(low, high);
+    int x = A[v];
+    A1 = {a | a &lt; x};
+    A2 = {a | a = x};
+    A3 = {a | a &gt; x};
+
+    if (A1.len &gt;= k)return R_Select(A, 1, A1.len, k);
+    else if (A.len + A2.len &gt;= k)return x;
+    else if (A1.len + A2.len &lt; k)return R_Select(A, 1, A3.len, k - A1.len - A2.len);
+}
+</code></pre><p>该版本的随机算法与原版本的主要不用是原版本是将序列分为若干个5元素序列分别进行排序后找到那些5元素序列中值组成的新序列的中值作为主元对元素进行划分，而随机算法是产生一个序列中的随机数（就是在待找序列中随机找了一个数）作为主元，省去了那些排序5元素数组的步骤，对于大小为n的输入，算法RandomizedSekect执行的期望比较次数小于4n，他的期望运行时间是senta(n)。<br>可以发现该随机算法最坏情况下的运行时间也是senta(n)，但是其发生最坏情况不依赖于输入，仅当产生的随机数序列很不凑巧时才会发生，而这种概率是非常小的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随机算法/" rel="tag"># 随机算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/14/NP完全问题/" rel="next" title="NP完全问题">
+                <i class="fa fa-chevron-left"></i> NP完全问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/17/Android解决The APK file app-debug.apk does not exist on disk./" rel="prev" title="Android解决The APK file app-debug.apk does not exist on disk.">
+                Android解决The APK file app-debug.apk does not exist on disk. <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机算法的类别"><span class="nav-number">2.</span> <span class="nav-text">随机算法的类别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主主元素问题（多数元素问题）"><span class="nav-number">3.1.</span> <span class="nav-text">主主元素问题（多数元素问题）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">3.1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求解思路"><span class="nav-number">3.1.2.</span> <span class="nav-text">求解思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">3.1.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机化快速排序"><span class="nav-number">4.</span> <span class="nav-text">随机化快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心代码"><span class="nav-number">4.1.</span> <span class="nav-text">核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机化的选择算法"><span class="nav-number">5.</span> <span class="nav-text">随机化的选择算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-算法描述"><span class="nav-number">5.1.</span> <span class="nav-text">SELECT 算法描述</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

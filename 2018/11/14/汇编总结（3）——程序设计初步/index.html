@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="堆栈的作用汇编语言中的堆栈就是高级语言中的栈。 堆栈主在汇编程序设计中主要有三个作用：  过程调用&amp;amp;返回指令  参数传递  局部变量   过程调用&amp;amp;返回指令过程调用中的过程指什么？ 汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 调用子程序需要考虑返回 。 过程调用指令 用于由主程序转移到子程序； 过程返回指令 用于由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编总结（3）——程序设计初步">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/11/14/汇编总结（3）——程序设计初步/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="堆栈的作用汇编语言中的堆栈就是高级语言中的栈。 堆栈主在汇编程序设计中主要有三个作用：  过程调用&amp;amp;返回指令  参数传递  局部变量   过程调用&amp;amp;返回指令过程调用中的过程指什么？ 汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 调用子程序需要考虑返回 。 过程调用指令 用于由主程序转移到子程序； 过程返回指令 用于由">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6qzct1yyj30aa06i75l.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6rdyo63xj30fo06iwgu.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx6rgiexu4j30j803awg0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fx6ri86sndj30j803ataf.jpg">
+<meta property="og:updated_time" content="2018-12-05T14:39:15.133Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编总结（3）——程序设计初步">
+<meta name="twitter:description" content="堆栈的作用汇编语言中的堆栈就是高级语言中的栈。 堆栈主在汇编程序设计中主要有三个作用：  过程调用&amp;amp;返回指令  参数传递  局部变量   过程调用&amp;amp;返回指令过程调用中的过程指什么？ 汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 调用子程序需要考虑返回 。 过程调用指令 用于由主程序转移到子程序； 过程返回指令 用于由">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6qzct1yyj30aa06i75l.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/11/14/汇编总结（3）——程序设计初步/">
+
+
+
+
+
+  <title>汇编总结（3）——程序设计初步 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/14/汇编总结（3）——程序设计初步/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编总结（3）——程序设计初步</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T17:28:43+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="堆栈的作用"><a href="#堆栈的作用" class="headerlink" title="堆栈的作用"></a>堆栈的作用</h2><p>汇编语言中的堆栈就是高级语言中的栈。</p>
+<p>堆栈主在汇编程序设计中主要有三个作用：</p>
+<ul>
+<li>过程调用&amp;返回指令 </li>
+<li>参数传递 </li>
+<li>局部变量 </li>
+</ul>
+<h3 id="过程调用-amp-返回指令"><a href="#过程调用-amp-返回指令" class="headerlink" title="过程调用&amp;返回指令"></a>过程调用&amp;返回指令</h3><p>过程调用中的过程指什么？</p>
+<p>汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 <strong>调用子程序需要考虑返回</strong> 。</p>
+<p><strong>过程调用指令</strong> 用于由主程序转移到子程序；</p>
+<p><strong>过程返回指令</strong> 用于由子程序返回到主程序。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CALL</td>
+<td>过程调用指令</td>
+<td>CALL LABEL</td>
+<td>段内直接调用LABEL</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>与jmp的区别在于call指令会在调用label之前保存返回地址（call 中return之后主程序还可以继续执行，jmp<br>当label执行完毕后不能返回主程序继续执行）<br>RET  |  段内过程返回指令  |  RET  |  使子程序结束，继续执行主程序  |  </p>
+<h4 id="call指令的背后"><a href="#call指令的背后" class="headerlink" title="call指令的背后"></a>call指令的背后</h4><p>段内直接调用的背后操作其实是两步：</p>
+<p>（1）把返回地址（EIP内容）压入堆栈</p>
+<p>（2）使得EIP内容为目标地址偏移，从而实现转移</p>
+<p>返回地址：紧随过程调用指令的下一条指令的地址（有效地址）</p>
+<p>目标地址：子程序开始处的地址（有效地址）</p>
+<p>与无条件转移相比，过程调用指令call只是多了第一步（保护现场）。</p>
+<h4 id="ret指令的背后"><a href="#ret指令的背后" class="headerlink" title="ret指令的背后"></a>ret指令的背后</h4><p>过程返回指令的执行其实进行的是如下操作：</p>
+<p>从堆栈中弹出地址偏移，送到指令指针寄存器EIP中，这个返回地址通常就是在执行相应的调用指令时所压入堆栈的返回地址。</p>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>入口参数：主程序传给子程序的参数</p>
+<p>出口参数：子程序传给主程序的参数</p>
+<p>参数传递的方法主要有： <strong>寄存器传递法</strong> 、 <strong>堆栈传递法</strong> 、约定内存单元传递法、call后续区传递法等。具体情况需要事先约定好。</p>
+<p>一般c语言的习惯是使用堆栈传递入口参数，使用寄存器传递出口参数，因为一般入口参数比较多，出口参数比较少。</p>
+<h3 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h3><p>这里就一个结论，堆栈可以用于安排动态局部变量。</p>
+<h2 id="算术逻辑运算指令"><a href="#算术逻辑运算指令" class="headerlink" title="算术逻辑运算指令"></a>算术逻辑运算指令</h2><h3 id="乘除指令"><a href="#乘除指令" class="headerlink" title="乘除指令"></a>乘除指令</h3><h4 id="无符号数乘法指令（MUL）"><a href="#无符号数乘法指令（MUL）" class="headerlink" title="无符号数乘法指令（MUL）"></a>无符号数乘法指令（MUL）</h4><p>指令格式：</p>
+<pre><code>MUL OPRD
+</code></pre><p>该指令实现两个无符号数的乘法运算，乘数是OPRD，被乘数位于AL、AX或EAX中（由OPRD的尺寸决定）。</p>
+<p>需要注意的是乘积之后尺寸翻倍，两个8位的数乘积为16位，结果存放在AX中，类似的，两个16位数的乘积结果为32位，放在DX：AX中，最后，64位的乘积放在EDX：EAX中。</p>
+<p>操作数OPRD可以是通用寄存器、存储单元，但是 <strong>不能是立即数</strong> 。</p>
+<h4 id="有符号数乘法指令（IMUL）"><a href="#有符号数乘法指令（IMUL）" class="headerlink" title="有符号数乘法指令（IMUL）"></a>有符号数乘法指令（IMUL）</h4><p>有符号乘法指令有三种使用形式：</p>
+<pre><code>IMUL OPRD ;
+IMUL DEST,SRC;
+IMUL DEST,SRC1,SEC2;
+</code></pre><p>具体解释如下：</p>
+<ul>
+<li>IMUL OPRD </li>
+</ul>
+<blockquote>
+<p>单操作数乘法指令和无符号数乘法的规则差不多，只是在乘的时候把乘数和被乘数都当成有符号数。</p>
+</blockquote>
+<ul>
+<li>IMUL DEST,SRC </li>
+</ul>
+<blockquote>
+<p>数据流方向是DEST&lt;=DEST*SRC</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>要求目的操作数DEST只能是16位或32位通用寄存器，源操作数SRC可以是通用寄存器或存储单元， <strong>需与目的操作数尺寸一致</strong><br>，可以是一个立即数（尺寸不能超过目的操作数）。</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>乘数和被乘数均作为有符号数。</p>
+</blockquote>
+<ul>
+<li>IMUL DEST,SRC1,SEC2 </li>
+</ul>
+<blockquote>
+<p>数据流方向为DEST &lt;=SRC1*SRC2</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>目的操作数DEST只能是16位或32位通用寄存器。</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>SRC1可以是通用寄存器或者存储单元，须 <strong>与目的操作数尺寸一致</strong> ，但 <strong>不能是立即数</strong> 。</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>SRC2只能是一个立即数， <strong>尺寸不能超过目的操作数</strong> 。</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>被乘数和乘数均为有符号数。</p>
+</blockquote>
+<h4 id="无符号数除法指令（DIV）"><a href="#无符号数除法指令（DIV）" class="headerlink" title="无符号数除法指令（DIV）"></a>无符号数除法指令（DIV）</h4><p>一般格式：</p>
+<pre><code>DIV OPRD
+</code></pre><p>OPRD是除数，被除数位于AX、DX：AX或EDX：EAX中，由OPRD的尺寸决定，被除数的尺寸翻倍，商在AL、AX或者EAX中，余数在AH、DX或者EDX中，商和余数的尺寸和OPRD相同。</p>
+<p>操作数OPRD可以是通用寄存器，可以是存储单元，但 <strong>不能是立即数</strong> 。</p>
+<p>注意使用DIV指令时要防止除溢出，比如：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6qzct1yyj30aa06i75l.jpg" alt="image-20181113211830792"></p>
+<p>比如上图，除完之后应该商300余0，可是300超出了AL的表示范围，这时候就产生了溢出情况，在实际使用中要注意防范类似情况。</p>
+<h4 id="有符号数除法指令（IDIV）"><a href="#有符号数除法指令（IDIV）" class="headerlink" title="有符号数除法指令（IDIV）"></a>有符号数除法指令（IDIV）</h4><p>指令格式：</p>
+<pre><code>IDIV OPRD
+</code></pre><p>基本原则和DIV一样，不同之处在于：</p>
+<ul>
+<li>除法时有符号的 </li>
+<li>如果不能整除，余数的符号与被除数符号一致，而且余数的绝对值小于除数的绝对值。 </li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MUL</td>
+<td>无符号数乘法指令  </td>
+</tr>
+<tr>
+<td>IMUL</td>
+<td>有符号数乘法指令  </td>
+</tr>
+<tr>
+<td>IMUL DEST，SRC</td>
+<td>有符号数乘法指令  </td>
+</tr>
+<tr>
+<td>IMUL DEST,SRC1,SRC2</td>
+<td>有符号数乘法指令  </td>
+</tr>
+<tr>
+<td>DIV</td>
+<td>无符号数除法指令  </td>
+</tr>
+<tr>
+<td>IDIV OPRD</td>
+<td>有符号数除法指令  </td>
+</tr>
+</tbody>
+</table>
+<h4 id="符号拓展指令"><a href="#符号拓展指令" class="headerlink" title="符号拓展指令"></a>符号拓展指令</h4><p>符号拓展指令的实质是用被拓展寄存器的符号位占据目标拓展寄存器。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CBW</td>
+<td>字节转化为字指令</td>
+<td>CBW</td>
+<td>把寄存器AL中的符号拓展到寄存器AH；  </td>
+</tr>
+</tbody>
+</table>
+<p>如果AL最高有效位、为0，则AH=0，如果AL最高位为1，则AH=FFH<br>CWD  |  字转化为双字指令  |  CWD  |  把寄存器AX中的符号拓展到寄存器DX；<br>AX最高位0和1不同情况的拓展策略同CBW<br>CDQ  |  双字转化为四字指令  |  CDQ  |  把寄存器EAX中的符号拓展到EDX；<br>AX最高位0和1不同情况的拓展策略同CBW<br>CWDE  |  字转化为双字指令  |  CWDE  |  把AX中的符号拓展到EAX的高16位；<br>AX最高位0和1不同情况的拓展策略同CBW  </p>
+<p>使用举例：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6rdyo63xj30fo06iwgu.jpg" alt="image-20181113213232393"></p>
+<h4 id="符号拓展传送指令（MOVSX）"><a href="#符号拓展传送指令（MOVSX）" class="headerlink" title="符号拓展传送指令（MOVSX）"></a>符号拓展传送指令（MOVSX）</h4><p>一般格式：</p>
+<pre><code>MOVSX DEST,SRC
+</code></pre><p>把SRC符号拓展后送到DEST。</p>
+<p>目的操作数的尺寸必须大于源操作数的尺寸。源操作数的尺寸可以是8位或16位，目的操作数的尺寸可以是8位或16位。</p>
+<p>使用举例：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx6rgiexu4j30j803awg0.jpg" alt="image-20181113213459899"></p>
+<h4 id="零拓展传送指令（MOVZX）"><a href="#零拓展传送指令（MOVZX）" class="headerlink" title="零拓展传送指令（MOVZX）"></a>零拓展传送指令（MOVZX）</h4><p>一般格式：</p>
+<pre><code>MOVZX DEST,SRC
+</code></pre><p>把SRC零拓展后送到DEST。</p>
+<p>源操作数可以是8位或16位，目的操作数可以是16位或32位。</p>
+<p>使用举例：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fx6ri86sndj30j803ataf.jpg" alt="image-20181113213639331"></p>
+<h3 id="逻辑运算指令"><a href="#逻辑运算指令" class="headerlink" title="逻辑运算指令"></a>逻辑运算指令</h3><p>需要注意：</p>
+<p>只有通用寄存器或者存储单元可作为目的操作数，用于存放运算结果。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NOT</td>
+<td>否运算指令</td>
+<td>NOT OPRD</td>
+<td>把操作数OPRD按位取反，然后送回OPRD</td>
+<td></td>
+</tr>
+<tr>
+<td>AND</td>
+<td>与运算指令</td>
+<td>AND DEST，SRC</td>
+<td>把两个操作数进行与运算之后结果送回DEST</td>
+<td>同1得1，否则得0  </td>
+</tr>
+<tr>
+<td>OR</td>
+<td>或运算指令</td>
+<td>OR DEST，SRC</td>
+<td>把两个操作数进行或运算之后结果送回DEST</td>
+<td>同0得0，否则得1  </td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>异或运算</td>
+<td>XOR DEST，SRC</td>
+<td>把两个操作数进行异或运算之后结果送回DEST</td>
+<td>相同得0不同得1  </td>
+</tr>
+<tr>
+<td>TEST</td>
+<td>测试指令</td>
+<td>TEST DEST，SRC</td>
+<td></td>
+</tr>
+<tr>
+<td>与AND指令类似，将各位相与，但是结果不送回DEST，仅影响状态位标志，指令执行后，ZF、PF、SF反映运算结果，CF和OF被清零</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>通常用于检测某些位是否为1，但又不希望改变操作数的值  </p>
+<p>test使用举例：</p>
+<p>判断AL中的位6和位2是否有一位为1:</p>
+<pre><code>test al ,01000100B;
+</code></pre><p>随后，判断标志位ZF，如果ZF为0，说明al第6位和第2位都为0，否则说明二者有一个为1.</p>
+<h3 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h3><h4 id="一般移位指令"><a href="#一般移位指令" class="headerlink" title="一般移位指令"></a>一般移位指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAL</td>
+<td>算术左移</td>
+<td>SAL OPRD，count</td>
+<td>把操作数oprd左移count位，右边补0</td>
+<td>与shl指令一样</td>
+</tr>
+</tbody>
+</table>
+<p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SHL  |  逻辑左移  |  SHL OPRD，count  |  把操作数oprd左移count位，右边补0  |  与sal指令一样<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SAR  |  算术右移  |  SAR OPRD，count  |<br>把操作数oprd右移count位，同时每右移一位，左边补符号位，移出的最低位进入标志位CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SHR  |  逻辑右移  |  SHR OPRD，count  |  把操作数oprd右移count位，左边补0，移出的最低位进入标志位CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
+<h4 id="循环移位指令"><a href="#循环移位指令" class="headerlink" title="循环移位指令"></a>循环移位指令</h4><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROL</td>
+<td>左循环移位指令</td>
+<td>ROL OPRD,count</td>
+<td>左循环移一位之后最高位移到最低位的同时也进入CF</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>ROR  |  右循环移位指令  |  ROR OPRD,count  |  右循环移一位之后最低位移到最高位的同时也进入CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCL  |  带进位左循环移位  |  RCL OPRD,count  |  相当于CF在最高位直接参与循环移位  |  大循环左移<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCR  |  带进位右循环移位  |  RCR OPRD,count  |  相当于CF在最高位直接参与循环移位  |  大循环右移<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
+<p>使用实例：</p>
+<p>实现把al的最低位送到bl的最低位，仍保持al不变。</p>
+<pre><code>ror bl,1;//bl循环右移一位
+ror al,1;//al循环右移一位，最低位进入cf
+rcl bl,1;//bl带进位左移，带进了来自al的最低位（cf）
+rol al,1;//恢复al
+</code></pre><h4 id="双精度移位指令"><a href="#双精度移位指令" class="headerlink" title="双精度移位指令"></a>双精度移位指令</h4><p>双精度移位指令是为了方便地把一个操作数的部分内容通过移位复制到另一个操作数。</p>
+<p>格式：</p>
+<ul>
+<li>双精度左移：SHLD OPRD1,OPRD2,count </li>
+<li>双精度右移：SHRD OPRD1,OPRD2,count </li>
+</ul>
+<p>解释：</p>
+<ul>
+<li>SHLD OPRD1,OPRD2,count </li>
+</ul>
+<blockquote>
+</blockquote>
+<p>将OPRD1左移指定的count位，在低端空出的位用操作数OPRD2高端的count位填补，但是OPRD2内容保持不变，操作数OPRD1中最后移出的位保留在进位标志CF中。</p>
+<ul>
+<li>SHRD OPRD1,OPRD2,count </li>
+</ul>
+<blockquote>
+</blockquote>
+<p>将OPRD1右移指定的count位，空出的位用OPRD2低端的count位填补，但是OPRD2内容保持不变，操作数OPRD1中最后移出的位保留在进位标志CF中。</p>
+<h2 id="分支程序设计"><a href="#分支程序设计" class="headerlink" title="分支程序设计"></a>分支程序设计</h2><h3 id="无条件和条件转移指令"><a href="#无条件和条件转移指令" class="headerlink" title="无条件和条件转移指令"></a>无条件和条件转移指令</h3><h4 id="段内转移和段间转移"><a href="#段内转移和段间转移" class="headerlink" title="段内转移和段间转移"></a>段内转移和段间转移</h4><ul>
+<li><strong>段内转移（近转移）</strong> ：仅仅重新设置指令指针寄存器EIP的转移，由于没有调整CS，所以转移后继续执行的指令仍在同一代码段中。 </li>
+<li><strong>段间转移（远转移）</strong> ：不仅重新设置EIP，而且重新设置代码段寄存器CS的转移，由于重置了CS，转移后继续执行的指令在另一代码段中。 </li>
+</ul>
+<p>对于段内转移和段间转移需要注意：</p>
+<ul>
+<li><strong>条件转移指令</strong> 和 <strong>循环指令</strong> 只能实现 <strong>段内转移</strong> ； </li>
+<li><strong>无条件转移指令</strong> 和 <strong>过程调用指令</strong> 以及 <strong>返回指令</strong> ，既可以是 <strong>段内转移</strong> ，也可以是 <strong>段间转移</strong> ； </li>
+<li><strong>软中断指令</strong> 和 <strong>中断返回指令</strong> 一定是 <strong>段间转移</strong> ； </li>
+</ul>
+<h4 id="直接转移和间接转移"><a href="#直接转移和间接转移" class="headerlink" title="直接转移和间接转移"></a>直接转移和间接转移</h4><ul>
+<li>直接转移：转移指令中直接给出转移目标地址的转移； </li>
+<li>间接转移：转移指令中给出包含转移目标地址的寄存器或者存储单元的转移； </li>
+</ul>
+<p>需要注意无条件转移指令和过程调用指令集可以是直接转移也可以是间接转移。</p>
+<h4 id="无条件转移指令"><a href="#无条件转移指令" class="headerlink" title="无条件转移指令"></a>无条件转移指令</h4><p>无条件转移指令分为4种：</p>
+<ul>
+<li>段内直接转移 </li>
+<li>段内间接转移 </li>
+<li>段间直接转移 </li>
+<li>段间间接转移 </li>
+</ul>
+<p>需要说明的是无条件转移指令均不影响标志寄存器的状态标志。</p>
+<h5 id="无条件段内直接转移"><a href="#无条件段内直接转移" class="headerlink" title="无条件段内直接转移"></a>无条件段内直接转移</h5><pre><code>JMP LABEL；
+</code></pre><p>标号LABEL表示要转移的目标位置（转移目的地）。</p>
+<p>无条件段内直接转移的机器码构成如下：</p>
+<pre><code>操作码OP  地址差rel
+</code></pre><p>地址差rel实际上是LABEL所指定的指令的地址偏移与紧跟JMP指令的下一条指令的地址偏移之间的差值，rel可正可负，这样才可以实现前后的跳转。地址差rel可以用一个字节表示，也可用4个字节或2字节表示，如果只用一个字节表示，就称之为<br><strong>短（short）转移</strong> ，否则称为 <strong>近（near）转移</strong><br>。一般如果当汇编器汇编到某条转移指令时可以计算出地址差rel，汇编器会自动判断出应该用1字节表示rel还是4字节或2字节，否则汇编器会使用较多的位数来表示地址差。所以，当程序员在写程序时能顾及出用8位就可以表示出地址差，那么可以在标号前加一个汇编器操作符<strong>“SHORT”</strong>来指定用一个字节表示地址差，表示转移的目的地就在附近。</p>
+<h5 id="无条件段内间接转移"><a href="#无条件段内间接转移" class="headerlink" title="无条件段内间接转移"></a>无条件段内间接转移</h5><pre><code>JMP OPRD
+</code></pre><p>OPRD是32位通用寄存器或者双字存储单元，比如：</p>
+<pre><code>JMP ECX;
+JMP DWORD PTR [EBX];
+</code></pre><h5 id="无条件段间转移指令JMP"><a href="#无条件段间转移指令JMP" class="headerlink" title="无条件段间转移指令JMP"></a>无条件段间转移指令JMP</h5><p>段间转移指令和段内转移指令差不多，只是涉及到改变代码段寄存器CS的内容，情况较为复杂，在之后的文章中介绍。</p>
+<h4 id="条件转移指令"><a href="#条件转移指令" class="headerlink" title="条件转移指令"></a>条件转移指令</h4><p>条件转移指令在前一篇文章已经介绍，这里不再赘述，只是需要特别明确一下rel偏移量的概念。</p>
+<h3 id="多路分支的实现"><a href="#多路分支的实现" class="headerlink" title="多路分支的实现"></a>多路分支的实现</h3><p>多路分支实际上指的就是switch-case的汇编实现，这里的实现原理主要是通过无条件间接转移指令和目标地址表来实现多路分支，举个例子：</p>
+<p>考虑一下多路分支程序：</p>
+<pre><code> int  cf319(int x,  int operation)
+{
+    int  y;
+    //多路分支
+    switch ( operation ) {
+        case 1:
+            y = 3*x;
+            break;
+        case 2:
+            y = 5*x+6;
+            break;
+        case 4:
+        case 5:
+            y = x*x ;
+            break;
+        case 8:
+            y = x*x+4*x;
+            break;
+        default:
+            y = x ;
+    }
+    if ( y &gt; 1000 )
+        y = 1000;
+    return  y;
+}
+</code></pre><p>上面的程序为了更加具有一般性，刻意没有安排连续的case值，其汇编的实现如下：</p>
+<pre><code> push  ebp
+ mov   ebp, esp
+                                   ; switch ( operation ) {
+ mov   eax, DWORD PTR [ebp+12]  ;取得参数operation（case值）
+ dec   eax                      ;从0开始计算，所以先减去1
+ cmp   eax, 7                   ;从0开始计算，最多就是7
+ ja    SHORT LN2cf319           ;超过，则转default（LN2cf319对应defalut处理语句）
+ ;
+ jmp   DWORD  PTR  LN12cf319[ eax*4 ]     ;这句是关键，这里实现了多路分支
+ ;
+
+
+LN12cf319:                           ;多向分支目标地址表
+    DD    LN6cf319                   ; case 1
+    DD    LN5cf319                   ; case 2
+    DD    LN2cf319                   ; default
+    DD    LN4cf319                   ; case 4
+    DD    LN4cf319                   ; case 5
+    DD    LN2cf319                   ; default
+    DD    LN2cf319                   ; default
+    DD    LN3cf319                   ; case 8
+</code></pre><p>看上面的汇编实现，其核心思想是巧妙地运用了无条件段内间接转移和目标地址表，因为 <strong>目标地址表每项占4个字节</strong><br>，所以跳转的地址是目标地址表的起始地址加case对象（这里是operation）乘以4，如果operation为0，跳到目标地址表的首地址，即就是LN6c，如果operation为1，跳到LN5c，以此类推就实现了多路分支的巧妙跳转。</p>
+<p>使用该方法的一般建议是：当多路分支数超过5时，考虑无条件间接转移方式和目标地址表结合实现多路分支会更高效。</p>
+<h2 id="循环程序设计"><a href="#循环程序设计" class="headerlink" title="循环程序设计"></a>循环程序设计</h2><h3 id="循环指令"><a href="#循环指令" class="headerlink" title="循环指令"></a>循环指令</h3><p>循环指令类似于条件转移指令，其采用的是段内相对转移的方式，是通过在指令指针寄存器EIP上加一个地址差的方式实现的转移，需要注意的是循环指令中的这个地址差只用了一个字节（8位）来表示，所以转移范围仅在-128-127之间。在保护方式（32位代码段）下，ECX作为循环计数器，实方式下，以CX为循环计数器，循环指令不影响各标志位。</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LOOP</td>
+<td>计数循环指令</td>
+<td>LOOP LABEL</td>
+<td>使ECX的值减1，当ECX的值不为0的时候跳转至LABEL，否则执行LOOP之后的语句</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>LOOPE</td>
+<td>等于循环指令</td>
+<td>LOOPE LABEL</td>
+<td></td>
+</tr>
+<tr>
+<td>使ECX的值减1，如果结果不等于0并且零标志ZF等于1（表示相等），那么就转移到LABEL，否则执行LOOPE之后的语句</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>LOOPZ  |  零循环指令  |  LOOPZ LABEL  |<br>使ECX的值减1，如果结果不等于0并且零标志ZF等于1（表示相等），那么就转移到LABEL，否则执行LOOPZ之后的语句  |<br>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>LOOPNE  |  不等于循环指令  |  LOOPE LABEL  |<br>使ECX的值减1，如果结果不等于0并且零标志ZF等于0（表示不相等），那么就转移到LABEL，否则执行LOOPNE之后的语句  |<br>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>LOOPNZ  |  非零循环指令  |  LOOPNZ LABEL  |<br>使ECX的值减1，如果结果不等于0并且零标志ZF等于0（表示不相等），那么9就转移到LABEL，否则执行LOOPNZ之后的语句  |<br>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>JECXZ  |  计数转移指令  |  JECXZ LABEL  |  当寄存器ECX的值为0时转移到LABEL，否则顺序执行  |<br>注意与LOOP的关系是JECXZ是直接判断ECX，没有先减ECX<br>通常在循环开始之前使用该指令，所以循环次数为0时，就可以跳过循环体  </p>
+<h2 id="子程序设计"><a href="#子程序设计" class="headerlink" title="子程序设计"></a>子程序设计</h2><h3 id="调用约定"><a href="#调用约定" class="headerlink" title="调用约定"></a>调用约定</h3><ul>
+<li><p><strong>-_cdecl</strong> 被称为 <strong>C</strong> 调用约定。缺省调用约定。参数按照从右至左的顺序入堆栈，函数本身不清理堆栈。 </p>
+</li>
+<li><p><strong>_stdcall</strong> 被称为 <strong>pascal</strong> 调用约定。参数按照从右至左的顺序入堆栈，函数自身清理堆栈。 </p>
+</li>
+<li><p><strong>_fastcall</strong> 是快速调用约定。通过 寄存器传递参数。前两个参数由 <strong>ECX</strong> 和 <strong>EDX</strong> 传送，其他参数按照从右至左的顺序入堆栈，函数自身清理堆栈。 </p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/13/汇编总结（1）——基础知识/" rel="next" title="汇编总结（1）——基础知识">
+                <i class="fa fa-chevron-left"></i> 汇编总结（1）——基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/14/汇编总结（4）——字符串操作和位操作/" rel="prev" title="汇编总结（4）——字符串操作和位操作">
+                汇编总结（4）——字符串操作和位操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈的作用"><span class="nav-number">1.</span> <span class="nav-text">堆栈的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过程调用-amp-返回指令"><span class="nav-number">1.1.</span> <span class="nav-text">过程调用&amp;返回指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#call指令的背后"><span class="nav-number">1.1.1.</span> <span class="nav-text">call指令的背后</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ret指令的背后"><span class="nav-number">1.1.2.</span> <span class="nav-text">ret指令的背后</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">1.2.</span> <span class="nav-text">参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部变量"><span class="nav-number">1.3.</span> <span class="nav-text">局部变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术逻辑运算指令"><span class="nav-number">2.</span> <span class="nav-text">算术逻辑运算指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#乘除指令"><span class="nav-number">2.1.</span> <span class="nav-text">乘除指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无符号数乘法指令（MUL）"><span class="nav-number">2.1.1.</span> <span class="nav-text">无符号数乘法指令（MUL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有符号数乘法指令（IMUL）"><span class="nav-number">2.1.2.</span> <span class="nav-text">有符号数乘法指令（IMUL）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无符号数除法指令（DIV）"><span class="nav-number">2.1.3.</span> <span class="nav-text">无符号数除法指令（DIV）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有符号数除法指令（IDIV）"><span class="nav-number">2.1.4.</span> <span class="nav-text">有符号数除法指令（IDIV）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.1.5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#符号拓展指令"><span class="nav-number">2.1.6.</span> <span class="nav-text">符号拓展指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#符号拓展传送指令（MOVSX）"><span class="nav-number">2.1.7.</span> <span class="nav-text">符号拓展传送指令（MOVSX）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#零拓展传送指令（MOVZX）"><span class="nav-number">2.1.8.</span> <span class="nav-text">零拓展传送指令（MOVZX）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑运算指令"><span class="nav-number">2.2.</span> <span class="nav-text">逻辑运算指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位指令"><span class="nav-number">2.3.</span> <span class="nav-text">移位指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一般移位指令"><span class="nav-number">2.3.1.</span> <span class="nav-text">一般移位指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环移位指令"><span class="nav-number">2.3.2.</span> <span class="nav-text">循环移位指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双精度移位指令"><span class="nav-number">2.3.3.</span> <span class="nav-text">双精度移位指令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支程序设计"><span class="nav-number">3.</span> <span class="nav-text">分支程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无条件和条件转移指令"><span class="nav-number">3.1.</span> <span class="nav-text">无条件和条件转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#段内转移和段间转移"><span class="nav-number">3.1.1.</span> <span class="nav-text">段内转移和段间转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接转移和间接转移"><span class="nav-number">3.1.2.</span> <span class="nav-text">直接转移和间接转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无条件转移指令"><span class="nav-number">3.1.3.</span> <span class="nav-text">无条件转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#无条件段内直接转移"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">无条件段内直接转移</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#无条件段内间接转移"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">无条件段内间接转移</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#无条件段间转移指令JMP"><span class="nav-number">3.1.3.3.</span> <span class="nav-text">无条件段间转移指令JMP</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件转移指令"><span class="nav-number">3.1.4.</span> <span class="nav-text">条件转移指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多路分支的实现"><span class="nav-number">3.2.</span> <span class="nav-text">多路分支的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环程序设计"><span class="nav-number">4.</span> <span class="nav-text">循环程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#循环指令"><span class="nav-number">4.1.</span> <span class="nav-text">循环指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子程序设计"><span class="nav-number">5.</span> <span class="nav-text">子程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#调用约定"><span class="nav-number">5.1.</span> <span class="nav-text">调用约定</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

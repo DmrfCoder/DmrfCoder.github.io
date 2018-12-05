@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概述建造者模式（BuilderPattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。一个 Builder 类会一步一步构造最终的对象。该 Builder 类是独立于其他对象的。 介绍意图将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。 主要解决主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建型模式——建造者模式">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/03/10/创建型模式——建造者模式/index.html">
+<meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="概述建造者模式（BuilderPattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。一个 Builder 类会一步一步构造最终的对象。该 Builder 类是独立于其他对象的。 介绍意图将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。 主要解决主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img-/%0Ablog.csdn.net/20180318160630347?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-12-05T14:40:04.735Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="创建型模式——建造者模式">
+<meta name="twitter:description" content="概述建造者模式（BuilderPattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。一个 Builder 类会一步一步构造最终的对象。该 Builder 类是独立于其他对象的。 介绍意图将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。 主要解决主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工">
+<meta name="twitter:image" content="http://img-/%0Ablog.csdn.net/20180318160630347?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/03/10/创建型模式——建造者模式/">
+
+
+
+
+
+  <title>创建型模式——建造者模式 | DmrfCoder的个人主页</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder的个人主页</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——建造者模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">创建型模式——建造者模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T11:30:47+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>建造者模式（Builder<br>Pattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>一个 Builder 类会一步一步构造最终的对象。该 Builder 类是独立于其他对象的。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>一些基本部件不会变，而其组合经常变化的时候。</p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>将变与不变分离开。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>建造者：创建和提供实例<br>导演：管理建造出来的实例的依赖关系。</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li><p>去肯德基，汉堡、可乐、薯条、炸鸡翅等是不变的，而其组合是经常变化的，生成出所谓的”套餐”。   </p>
+<ul>
+<li>JAVA 中的 StringBuilder。 </li>
+</ul>
+</li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>建造者独立，易扩展 </li>
+<li>便于控制细节风险。 </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>产品必须有共同点，范围有限制 </li>
+<li>如内部变化复杂，会有很多的建造类。 </li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>需要生成的对象具有复杂的内部结构 </li>
+<li>需要生成的对象内部属性本身相互依赖。 </li>
+</ul>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们假设在一个快餐店的商业案例中，一个典型的套餐可以是一个汉堡（Burger）和一杯冷饮（Cold drink）。汉堡（Burger）可以是素食汉堡（Veg<br>Burger）或鸡肉汉堡（Chicken Burger），它们是包在纸盒中。冷饮（Cold<br>drink）可以是可口可乐（coke）或百事可乐（pepsi），它们是装在瓶子中。<br>我们将创建一个表示食物条目（比如汉堡和冷饮）的 Item 接口和实现 Item 接口的实体类，以及一个表示食物包装的 Packing 接口和实现<br>Packing 接口的实体类，汉堡是包在纸盒中，冷饮是装在瓶子中。<br>然后我们创建一个 Meal 类，带有 Item 的 ArrayList 和一个通过结合 Item 来创建不同类型的 Meal 对象的<br>MealBuilder。BuilderPatternDemo，我们的演示类使用 MealBuilder 来创建一个 Meal:<br><img src="//img-
+blog.csdn.net/20180318160630347?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h2 id="创建一个表示食物条目和食物包装的接口"><a href="#创建一个表示食物条目和食物包装的接口" class="headerlink" title="创建一个表示食物条目和食物包装的接口"></a>创建一个表示食物条目和食物包装的接口</h2><p>Item.java</p>
+<pre><code>public interface Item { //食物条目（比如汉堡和冷饮）
+   public String name();
+   public Packing packing();
+   public float price();    
+}
+</code></pre><p>Packing.java</p>
+<pre><code>public interface Packing {
+   public String pack();
+}
+</code></pre><h2 id="创建实现-Packing-接口的实体类。"><a href="#创建实现-Packing-接口的实体类。" class="headerlink" title="创建实现 Packing 接口的实体类。"></a>创建实现 Packing 接口的实体类。</h2><p>Wrapper.java</p>
+<pre><code>public class Wrapper implements Packing {
+
+   @Override
+   public String pack() {
+      return &quot;Wrapper&quot;;
+   }
+}
+</code></pre><p>Bottle.java</p>
+<pre><code>public class Bottle implements Packing {
+
+   @Override
+   public String pack() {
+      return &quot;Bottle&quot;;
+   }
+}
+</code></pre><h2 id="创建实现-Item-接口的抽象类，该类提供了默认的功能"><a href="#创建实现-Item-接口的抽象类，该类提供了默认的功能" class="headerlink" title="创建实现 Item 接口的抽象类，该类提供了默认的功能"></a>创建实现 Item 接口的抽象类，该类提供了默认的功能</h2><p>Burger.java</p>
+<pre><code>public abstract class Burger implements Item {
+
+   @Override
+   public Packing packing() {
+      return new Wrapper();
+   }
+
+   @Override
+   public abstract float price();
+}
+</code></pre><p>ColdDrink.java</p>
+<pre><code>public abstract class ColdDrink implements Item {
+
+    @Override
+    public Packing packing() {
+       return new Bottle();
+    }
+
+    @Override
+    public abstract float price();
+}
+</code></pre><h2 id="创建扩展了-Burger-和-ColdDrink-的实体类。"><a href="#创建扩展了-Burger-和-ColdDrink-的实体类。" class="headerlink" title="创建扩展了 Burger 和 ColdDrink 的实体类。"></a>创建扩展了 Burger 和 ColdDrink 的实体类。</h2><p>VegBurger.java</p>
+<pre><code>public class VegBurger extends Burger {
+
+   @Override
+   public float price() {
+      return 25.0f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Veg Burger&quot;;
+   }
+}
+</code></pre><p>ChickenBurger.java</p>
+<pre><code>public class ChickenBurger extends Burger {
+
+   @Override
+   public float price() {
+      return 50.5f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Chicken Burger&quot;;
+   }
+}
+</code></pre><p>Coke.java</p>
+<pre><code>public class Coke extends ColdDrink {
+
+   @Override
+   public float price() {
+      return 30.0f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Coke&quot;;
+   }
+}
+</code></pre><p>Pepsi.java</p>
+<pre><code>public class Pepsi extends ColdDrink {
+
+   @Override
+   public float price() {
+      return 35.0f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Pepsi&quot;;
+   }
+}
+</code></pre><h2 id="创建一个-Meal-类，带有上面定义的-Item-对象"><a href="#创建一个-Meal-类，带有上面定义的-Item-对象" class="headerlink" title="创建一个 Meal 类，带有上面定义的 Item 对象"></a>创建一个 Meal 类，带有上面定义的 Item 对象</h2><p>Meal.java</p>
+<pre><code>import java.util.ArrayList;
+import java.util.List;
+
+public class Meal {
+   private List&lt;Item&gt; items = new ArrayList&lt;Item&gt;();    
+
+   public void addItem(Item item){
+      items.add(item);
+   }
+
+   public float getCost(){
+      float cost = 0.0f;
+      for (Item item : items) {
+         cost += item.price();
+      }        
+      return cost;
+   }
+
+   public void showItems(){
+      for (Item item : items) {
+         System.out.print(&quot;Item : &quot;+item.name());
+         System.out.print(&quot;, Packing : &quot;+item.packing().pack());
+         System.out.println(&quot;, Price : &quot;+item.price());
+      }        
+   }    
+}
+</code></pre><h2 id="创建一个-MealBuilder-类，实际的-builder-类负责创建-Meal-对象"><a href="#创建一个-MealBuilder-类，实际的-builder-类负责创建-Meal-对象" class="headerlink" title="创建一个 MealBuilder 类，实际的 builder 类负责创建 Meal 对象"></a>创建一个 MealBuilder 类，实际的 builder 类负责创建 Meal 对象</h2><p>MealBuilder.java</p>
+<pre><code>public class MealBuilder {
+
+   public Meal prepareVegMeal (){
+      Meal meal = new Meal();
+      meal.addItem(new VegBurger());
+      meal.addItem(new Coke());
+      return meal;
+   }   
+
+   public Meal prepareNonVegMeal (){
+      Meal meal = new Meal();
+      meal.addItem(new ChickenBurger());
+      meal.addItem(new Pepsi());
+      return meal;
+   }
+}
+</code></pre><h2 id="BuiderPatternDemo-使用-MealBuider-来演示建造者模式（Builder-Pattern）"><a href="#BuiderPatternDemo-使用-MealBuider-来演示建造者模式（Builder-Pattern）" class="headerlink" title="BuiderPatternDemo 使用 MealBuider 来演示建造者模式（Builder Pattern）"></a>BuiderPatternDemo 使用 MealBuider 来演示建造者模式（Builder Pattern）</h2><p>BuilderPatternDemo.java</p>
+<pre><code>public class BuilderPatternDemo {
+   public static void main(String[] args) {
+      MealBuilder mealBuilder = new MealBuilder();
+
+      Meal vegMeal = mealBuilder.prepareVegMeal();
+      System.out.println(&quot;Veg Meal&quot;);
+      vegMeal.showItems();
+      System.out.println(&quot;Total Cost: &quot; +vegMeal.getCost());
+
+      Meal nonVegMeal = mealBuilder.prepareNonVegMeal();
+      System.out.println(&quot;\n\nNon-Veg Meal&quot;);
+      nonVegMeal.showItems();
+      System.out.println(&quot;Total Cost: &quot; +nonVegMeal.getCost());
+   }
+}
+</code></pre><h2 id="输出。"><a href="#输出。" class="headerlink" title="输出。"></a>输出。</h2><pre><code>Veg Meal
+Item : Veg Burger, Packing : Wrapper, Price : 25.0
+Item : Coke, Packing : Bottle, Price : 30.0
+Total Cost: 55.0
+
+
+Non-Veg Meal
+Item : Chicken Burger, Packing : Wrapper, Price : 50.5
+Item : Pepsi, Packing : Bottle, Price : 35.0
+Total Cost: 85.5
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>建造者模式与工厂方法模式有类似的地方，但是建造者模式更加关注零件装配的顺序而且生成的对象内部属性本身具有相互依赖性，比如Demo中的食物和对应的容器具有很强的相互依赖性。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/10/创建型模式——单例模式/" rel="next" title="创建型模式——单例模式">
+                <i class="fa fa-chevron-left"></i> 创建型模式——单例模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/10/创建型模式——原型模式/" rel="prev" title="创建型模式——原型模式">
+                创建型模式——原型模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#意图"><span class="nav-number">2.1.</span> <span class="nav-text">意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要解决"><span class="nav-number">2.2.</span> <span class="nav-text">主要解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用"><span class="nav-number">2.3.</span> <span class="nav-text">何时使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-number">2.4.</span> <span class="nav-text">如何解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键代码"><span class="nav-number">2.5.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">2.6.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.7.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">2.8.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">2.9.</span> <span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个表示食物条目和食物包装的接口"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个表示食物条目和食物包装的接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实现-Packing-接口的实体类。"><span class="nav-number">3.2.</span> <span class="nav-text">创建实现 Packing 接口的实体类。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实现-Item-接口的抽象类，该类提供了默认的功能"><span class="nav-number">3.3.</span> <span class="nav-text">创建实现 Item 接口的抽象类，该类提供了默认的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建扩展了-Burger-和-ColdDrink-的实体类。"><span class="nav-number">3.4.</span> <span class="nav-text">创建扩展了 Burger 和 ColdDrink 的实体类。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个-Meal-类，带有上面定义的-Item-对象"><span class="nav-number">3.5.</span> <span class="nav-text">创建一个 Meal 类，带有上面定义的 Item 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个-MealBuilder-类，实际的-builder-类负责创建-Meal-对象"><span class="nav-number">3.6.</span> <span class="nav-text">创建一个 MealBuilder 类，实际的 builder 类负责创建 Meal 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BuiderPatternDemo-使用-MealBuider-来演示建造者模式（Builder-Pattern）"><span class="nav-number">3.7.</span> <span class="nav-text">BuiderPatternDemo 使用 MealBuider 来演示建造者模式（Builder Pattern）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出。"><span class="nav-number">3.8.</span> <span class="nav-text">输出。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
