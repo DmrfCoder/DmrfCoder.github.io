@@ -229,6 +229,2376 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/18/结构型模式——装饰器模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/18/结构型模式——装饰器模式/" itemprop="url">结构型模式——装饰器模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T17:39:24+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>装饰器模式（Decorator<br>Pattern）允许向一个现有的对象添加新的功能，同时又不改变其结构。这种类型的设计模式属于结构型模式，它是作为现有的类的一个包装。<br>这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供了额外的功能。<br>我们通过下面的实例来演示装饰器模式的用法。其中，我们将把一个形状装饰上不同的颜色，同时又不改变形状类。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>在不想增加很多子类的情况下扩展类。</p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>将具体功能职责划分，同时继承装饰者模式。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><ul>
+<li>Component 类充当抽象角色，不应该具体实现。 </li>
+<li>修饰类引用和继承 Component 类，具体扩展类重写父类方法。 </li>
+</ul>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li><p>孙悟空有 72 变，当他变成”庙宇”后，他的根本还是一只猴子，但是他又有了庙宇的功能。   </p>
+<ul>
+<li>不论一幅画有没有画框都可以挂在墙上，但是通常都是有画框的，并且实际上是画框被挂在墙上。在挂在墙上之前，画可以被蒙上玻璃，装到框子里；这时画、玻璃和画框形成了一个物体。 </li>
+</ul>
+</li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>多层装饰比较复杂。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>扩展一个类的功能。 </li>
+<li>动态增加功能，动态撤销。 </li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>可代替继承。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="创建一个接口"><a href="#创建一个接口" class="headerlink" title="创建一个接口"></a>创建一个接口</h2><ul>
+<li>Shape.java </li>
+</ul>
+<pre><code>public interface Shape {
+   void draw();
+}
+</code></pre><h2 id="创建实现接口的实体类"><a href="#创建实现接口的实体类" class="headerlink" title="创建实现接口的实体类"></a>创建实现接口的实体类</h2><ul>
+<li>Rectangle.java </li>
+</ul>
+<pre><code>public class Rectangle implements Shape {
+
+   @Override
+   public void draw() {
+      System.out.println(&quot;Shape: Rectangle&quot;);
+   }
+}
+</code></pre><ul>
+<li>Circle.java </li>
+</ul>
+<pre><code>public class Circle implements Shape {
+
+   @Override
+   public void draw() {
+      System.out.println(&quot;Shape: Circle&quot;);
+   }
+}
+</code></pre><h2 id="创建实现了-Shape-接口的抽象装饰类"><a href="#创建实现了-Shape-接口的抽象装饰类" class="headerlink" title="创建实现了 Shape 接口的抽象装饰类"></a>创建实现了 Shape 接口的抽象装饰类</h2><ul>
+<li>ShapeDecorator.java </li>
+</ul>
+<pre><code>public abstract class ShapeDecorator implements Shape {
+   protected Shape decoratedShape;
+
+   public ShapeDecorator(Shape decoratedShape){
+      this.decoratedShape = decoratedShape;
+   }
+
+   public void draw(){
+      decoratedShape.draw();
+   }    
+}
+</code></pre><h2 id="创建扩展了-ShapeDecorator-类的实体装饰类"><a href="#创建扩展了-ShapeDecorator-类的实体装饰类" class="headerlink" title="创建扩展了 ShapeDecorator 类的实体装饰类"></a>创建扩展了 ShapeDecorator 类的实体装饰类</h2><ul>
+<li>RedShapeDecorator.java </li>
+</ul>
+<pre><code>public class RedShapeDecorator extends ShapeDecorator {
+
+   public RedShapeDecorator(Shape decoratedShape) {
+      super(decoratedShape);        
+   }
+
+   @Override
+   public void draw() {
+      decoratedShape.draw();           
+      setRedBorder(decoratedShape);
+   }
+
+   private void setRedBorder(Shape decoratedShape){
+      System.out.println(&quot;Border Color: Red&quot;);
+   }
+}
+</code></pre><h2 id="使用-RedShapeDecorator-来装饰-Shape-对象"><a href="#使用-RedShapeDecorator-来装饰-Shape-对象" class="headerlink" title="使用 RedShapeDecorator 来装饰 Shape 对象"></a>使用 RedShapeDecorator 来装饰 Shape 对象</h2><ul>
+<li>DecoratorPatternDemo.java </li>
+</ul>
+<pre><code>public class DecoratorPatternDemo {
+   public static void main(String[] args) {
+
+      Shape circle = new Circle();
+
+      Shape redCircle = new RedShapeDecorator(new Circle());
+
+      Shape redRectangle = new RedShapeDecorator(new Rectangle());
+      System.out.println(&quot;Circle with normal border&quot;);
+      circle.draw();
+
+      System.out.println(&quot;\nCircle of red border&quot;);
+      redCircle.draw();
+
+      System.out.println(&quot;\nRectangle of red border&quot;);
+      redRectangle.draw();
+   }
+}
+</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><pre><code>Circle with normal border
+Shape: Circle
+
+Circle of red border
+Shape: Circle
+Border Color: Red
+
+Rectangle of red border
+Shape: Rectangle
+Border Color: Red
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>装饰者模式顾名思义就是起到一个装饰的作用，即在不改变原来类结构的前提下增加一些新的功能，这种模式一般会产生一个专门的装饰类，联想结构型设计模式的定义（描述不同类之间的关系），装饰者模式实际上描述的就是一个装饰与被装饰的关系，结合上面的demo，被装饰类是实现了shape接口的Rectangle类和Circle类，而装饰类ShapeDecorator是一个抽象装饰类，在其内部定义了装饰shape的方法draw，事实上是一种方法重写（准确来说是增加方法功能），然后在ShapeDecorator的子类RedShapeDecorator中的draw调用了起装饰作用的setRedBorder方法最终达到装饰实现shape子类的目的，从最终的输出也可以看出，装饰类的作用实际上就是在原有类的基础上新增加新的东西，还有一个比较接近现实的例子是玩游戏时开局一个英雄，玩着玩着英雄的装备越来越多、英雄的技能越来越多、英雄的皮肤越来越多，这些效果实际上都是在原来开局裸体（额实在不知道用什么形容词，懂我意思就好～）英雄的基础上装饰进去的，很好地体现了装饰的精髓。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/12/结构型模式——组合模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/12/结构型模式——组合模式/" itemprop="url">结构型模式——组合模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T19:04:04+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>组合模式（Composite<br>Pattern），又叫部分整体模式，是用于把一组相似的对象当作一个单一的对象。组合模式依据树形结构来组合对象，用来表示部分以及整体层次。这种类型的设计模式属于结构型模式，它创建了对象组的树形结构。<br>这种模式创建了一个包含自己对象组的类。该类提供了修改相同对象组的方式。<br>我们通过下面的实例来演示组合模式的用法。实例演示了一个组织中员工的层次结构。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>它在我们树型结构的问题中，模糊了简单元素和复杂元素的概念，客户程序可以向处理简单元素一样来处理复杂元素，从而使得客户程序与复杂元素的内部结构解耦。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><ul>
+<li>您想表示对象的部分-整体层次结构（树形结构）。 </li>
+<li>您希望用户忽略组合对象与单个对象的不同，用户将统一地使用组合结构中的所有对象。 </li>
+</ul>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>树枝和叶子实现统一接口，树枝内部组合该接口。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>树枝内部组合该接口，并且含有内部属性 List，里面放 Component。</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li>算术表达式包括操作数、操作符和另一个操作数，其中，另一个操作符也可以是操作树、操作符和另一个操作数。 </li>
+<li>在 JAVA AWT 和 SWING 中，对于 Button 和 Checkbox 是树叶，Container 是树枝。 </li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>高层模块调用简单。 </li>
+<li>节点自由增加。 </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>在使用组合模式时，其叶子和树枝的声明都是实现类，而不是接口，违反了依赖倒置原则。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>部分、整体场景，如树形菜单，文件、文件夹的管理。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>定义时为具体类。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们有一个类 Employee，该类被当作组合模型类。CompositePatternDemo，我们的演示类使用 Employee<br>类来添加部门层次结构，并打印所有员工。</p>
+<h2 id="创建-Employee-类，该类带有-Employee-对象的列表"><a href="#创建-Employee-类，该类带有-Employee-对象的列表" class="headerlink" title="创建 Employee 类，该类带有 Employee 对象的列表"></a>创建 Employee 类，该类带有 Employee 对象的列表</h2><p><strong>Employee.java</strong></p>
+<pre><code> import java.util.ArrayList;
+import java.util.List;
+
+public class Employee {
+   private String name;
+   private String dept;
+   private int salary;
+   private List&lt;Employee&gt; subordinates;
+
+   //构造函数
+   public Employee(String name,String dept, int sal) {
+      this.name = name;
+      this.dept = dept;
+      this.salary = sal;
+      subordinates = new ArrayList&lt;Employee&gt;();
+   }
+
+   public void add(Employee e) {
+      subordinates.add(e);
+   }
+
+   public void remove(Employee e) {
+      subordinates.remove(e);
+   }
+
+   public List&lt;Employee&gt; getSubordinates(){
+     return subordinates;
+   }
+
+   public String toString(){
+      return (&quot;Employee :[ Name : &quot;+ name 
+      +&quot;, dept : &quot;+ dept + &quot;, salary :&quot;
+      + salary+&quot; ]&quot;);
+   }   
+}
+</code></pre><h2 id="使用-Employee-类来创建和打印员工的层次结构"><a href="#使用-Employee-类来创建和打印员工的层次结构" class="headerlink" title="使用 Employee 类来创建和打印员工的层次结构"></a>使用 Employee 类来创建和打印员工的层次结构</h2><p><strong>CompositePatternDemo.java</strong></p>
+<pre><code> public class CompositePatternDemo {
+   public static void main(String[] args) {
+      Employee CEO = new Employee(&quot;John&quot;,&quot;CEO&quot;, 30000);
+
+      Employee headSales = new Employee(&quot;Robert&quot;,&quot;Head Sales&quot;, 20000);
+
+      Employee headMarketing = new Employee(&quot;Michel&quot;,&quot;Head Marketing&quot;, 20000);
+
+      Employee clerk1 = new Employee(&quot;Laura&quot;,&quot;Marketing&quot;, 10000);
+      Employee clerk2 = new Employee(&quot;Bob&quot;,&quot;Marketing&quot;, 10000);
+
+      Employee salesExecutive1 = new Employee(&quot;Richard&quot;,&quot;Sales&quot;, 10000);
+      Employee salesExecutive2 = new Employee(&quot;Rob&quot;,&quot;Sales&quot;, 10000);
+
+      CEO.add(headSales);
+      CEO.add(headMarketing);
+
+      headSales.add(salesExecutive1);
+      headSales.add(salesExecutive2);
+
+      headMarketing.add(clerk1);
+      headMarketing.add(clerk2);
+
+      //打印该组织的所有员工
+      System.out.println(CEO); 
+      for (Employee headEmployee : CEO.getSubordinates()) {
+         System.out.println(headEmployee);
+         for (Employee employee : headEmployee.getSubordinates()) {
+            System.out.println(employee);
+         }
+      }        
+   }
+}
+</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><pre><code>Employee :[ Name : John, dept : CEO, salary :30000 ]
+Employee :[ Name : Robert, dept : Head Sales, salary :20000 ]
+Employee :[ Name : Richard, dept : Sales, salary :10000 ]
+Employee :[ Name : Rob, dept : Sales, salary :10000 ]
+Employee :[ Name : Michel, dept : Head Marketing, salary :20000 ]
+Employee :[ Name : Laura, dept : Marketing, salary :10000 ]
+Employee :[ Name : Bob, dept : Marketing, salary :10000 ]
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>组合模式的要点在于组合和结构，通俗来讲就是通过不同的组合来形成一个体系结构，实现要点是list的使用，以上述demo为例，CEO的下属包含headSales和headMarketing，即CEO这个对象的下属list里面只要添加headSales和headMarketing即可，所以如果把CEO理解为一个东西的话它是由headSales和headMarketing组合而成的（如果没有这两者真不知道CEO存在的意义是什么，一自己当自己的CEO？），而headSales又有若干个salesExecutive下属，所以headSales对象的下属list里面应该添加若干个salesExecutive对象，以此类推（headMarketing由若干个clerk组成）。至此，通过不断的组合，我们就可以由salesExecutive和clerk一路不断组合直到CEO，这就是“组合”的含义，同时也体现了很强的层级关系。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/12/结构型模式——过滤器模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/12/结构型模式——过滤器模式/" itemprop="url">结构型模式——过滤器模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T18:42:53+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>过滤器模式（Filter Pattern）或标准模式（Criteria<br>Pattern）是一种设计模式，这种模式允许开发人员使用不同的标准来过滤一组对象，通过逻辑运算以解耦的方式把它们连接起来。这种类型的设计模式属于结构型模式，它结合多个标准来获得单一标准。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们将创建一个 Person 对象、Criteria 接口和实现了该接口的实体类，来过滤 Person<br>对象的列表。CriteriaPatternDemo，我们的演示类使用 Criteria 对象，基于各种标准和它们的结合来过滤 Person 对象的列表。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="创建一个类，在该类上应用标准"><a href="#创建一个类，在该类上应用标准" class="headerlink" title="创建一个类，在该类上应用标准"></a>创建一个类，在该类上应用标准</h3><p><strong>Person.java</strong></p>
+<pre><code> public class Person {
+
+   private String name;
+   private String gender;
+   private String maritalStatus;
+
+   public Person(String name,String gender,String maritalStatus){
+      this.name = name;
+      this.gender = gender;
+      this.maritalStatus = maritalStatus;        
+   }
+
+   public String getName() {
+      return name;
+   }
+   public String getGender() {
+      return gender;
+   }
+   public String getMaritalStatus() {
+      return maritalStatus;
+   }    
+}
+</code></pre><h3 id="为标准（Criteria）创建一个接口"><a href="#为标准（Criteria）创建一个接口" class="headerlink" title="为标准（Criteria）创建一个接口"></a>为标准（Criteria）创建一个接口</h3><p><strong>Criteria.java</strong></p>
+<pre><code>import java.util.List;
+
+ public interface Criteria {
+   public List&lt;Person&gt; meetCriteria(List&lt;Person&gt; persons);
+}
+</code></pre><h3 id="创建实现了-Criteria-接口的实体类"><a href="#创建实现了-Criteria-接口的实体类" class="headerlink" title="创建实现了 Criteria 接口的实体类"></a>创建实现了 Criteria 接口的实体类</h3><p><strong>CriteriaMale.java</strong></p>
+<pre><code> import java.util.ArrayList;
+import java.util.List;
+
+public class CriteriaMale implements Criteria {
+
+   @Override
+   public List&lt;Person&gt; meetCriteria(List&lt;Person&gt; persons) {
+      List&lt;Person&gt; malePersons = new ArrayList&lt;Person&gt;(); 
+      for (Person person : persons) {
+         if(person.getGender().equalsIgnoreCase(&quot;MALE&quot;)){
+            malePersons.add(person);
+         }
+      }
+      return malePersons;
+   }
+}
+</code></pre><p><strong>CriteriaFemale.java</strong></p>
+<pre><code> import java.util.ArrayList;
+import java.util.List;
+
+public class CriteriaFemale implements Criteria {
+
+   @Override
+   public List&lt;Person&gt; meetCriteria(List&lt;Person&gt; persons) {
+      List&lt;Person&gt; femalePersons = new ArrayList&lt;Person&gt;(); 
+      for (Person person : persons) {
+         if(person.getGender().equalsIgnoreCase(&quot;FEMALE&quot;)){
+            femalePersons.add(person);
+         }
+      }
+      return femalePersons;
+   }
+}
+</code></pre><p><strong>CriteriaSingle.java</strong></p>
+<pre><code> import java.util.ArrayList;
+import java.util.List;
+
+public class CriteriaSingle implements Criteria {
+
+   @Override
+   public List&lt;Person&gt; meetCriteria(List&lt;Person&gt; persons) {
+      List&lt;Person&gt; singlePersons = new ArrayList&lt;Person&gt;(); 
+      for (Person person : persons) {
+         if(person.getMaritalStatus().equalsIgnoreCase(&quot;SINGLE&quot;)){
+            singlePersons.add(person);
+         }
+      }
+      return singlePersons;
+   }
+}
+</code></pre><p><strong>AndCriteria.java</strong></p>
+<pre><code> import java.util.List;
+
+public class AndCriteria implements Criteria {
+
+   private Criteria criteria;
+   private Criteria otherCriteria;
+
+   public AndCriteria(Criteria criteria, Criteria otherCriteria) {
+      this.criteria = criteria;
+      this.otherCriteria = otherCriteria; 
+   }
+
+   @Override
+   public List&lt;Person&gt; meetCriteria(List&lt;Person&gt; persons) {
+      List&lt;Person&gt; firstCriteriaPersons = criteria.meetCriteria(persons);        
+      return otherCriteria.meetCriteria(firstCriteriaPersons);
+   }
+}
+</code></pre><p><strong>OrCriteria.java</strong></p>
+<pre><code> import java.util.List;
+
+public class OrCriteria implements Criteria {
+
+   private Criteria criteria;
+   private Criteria otherCriteria;
+
+   public OrCriteria(Criteria criteria, Criteria otherCriteria) {
+      this.criteria = criteria;
+      this.otherCriteria = otherCriteria; 
+   }
+
+   @Override
+   public List&lt;Person&gt; meetCriteria(List&lt;Person&gt; persons) {
+      List&lt;Person&gt; firstCriteriaItems = criteria.meetCriteria(persons);
+      List&lt;Person&gt; otherCriteriaItems = otherCriteria.meetCriteria(persons);
+
+      for (Person person : otherCriteriaItems) {
+         if(!firstCriteriaItems.contains(person)){
+            firstCriteriaItems.add(person);
+         }
+      }    
+      return firstCriteriaItems;
+   }
+}
+</code></pre><h3 id="使用不同的标准（Criteria）和它们的结合来过滤-Person-对象的列表"><a href="#使用不同的标准（Criteria）和它们的结合来过滤-Person-对象的列表" class="headerlink" title="使用不同的标准（Criteria）和它们的结合来过滤 Person 对象的列表"></a>使用不同的标准（Criteria）和它们的结合来过滤 Person 对象的列表</h3><p><strong>CriteriaPatternDemo.java</strong></p>
+<pre><code>import java.util.ArrayList; 
+import java.util.List;
+
+ public class CriteriaPatternDemo {
+   public static void main(String[] args) {
+      List&lt;Person&gt; persons = new ArrayList&lt;Person&gt;();
+
+      persons.add(new Person(&quot;Robert&quot;,&quot;Male&quot;, &quot;Single&quot;));
+      persons.add(new Person(&quot;John&quot;,&quot;Male&quot;, &quot;Married&quot;));
+      persons.add(new Person(&quot;Laura&quot;,&quot;Female&quot;, &quot;Married&quot;));
+      persons.add(new Person(&quot;Diana&quot;,&quot;Female&quot;, &quot;Single&quot;));
+      persons.add(new Person(&quot;Mike&quot;,&quot;Male&quot;, &quot;Single&quot;));
+      persons.add(new Person(&quot;Bobby&quot;,&quot;Male&quot;, &quot;Single&quot;));
+
+      Criteria male = new CriteriaMale();
+      Criteria female = new CriteriaFemale();
+      Criteria single = new CriteriaSingle();
+      Criteria singleMale = new AndCriteria(single, male);
+      Criteria singleOrFemale = new OrCriteria(single, female);
+
+      System.out.println(&quot;Males: &quot;);
+      printPersons(male.meetCriteria(persons));
+
+      System.out.println(&quot;\nFemales: &quot;);
+      printPersons(female.meetCriteria(persons));
+
+      System.out.println(&quot;\nSingle Males: &quot;);
+      printPersons(singleMale.meetCriteria(persons));
+
+      System.out.println(&quot;\nSingle Or Females: &quot;);
+      printPersons(singleOrFemale.meetCriteria(persons));
+   }
+
+   public static void printPersons(List&lt;Person&gt; persons){
+      for (Person person : persons) {
+         System.out.println(&quot;Person : [ Name : &quot; + person.getName() 
+            +&quot;, Gender : &quot; + person.getGender() 
+            +&quot;, Marital Status : &quot; + person.getMaritalStatus()
+            +&quot; ]&quot;);
+      }
+   }      
+}
+</code></pre><h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><pre><code>Males: 
+Person : [ Name : Robert, Gender : Male, Marital Status : Single ]
+Person : [ Name : John, Gender : Male, Marital Status : Married ]
+Person : [ Name : Mike, Gender : Male, Marital Status : Single ]
+Person : [ Name : Bobby, Gender : Male, Marital Status : Single ]
+
+Females: 
+Person : [ Name : Laura, Gender : Female, Marital Status : Married ]
+Person : [ Name : Diana, Gender : Female, Marital Status : Single ]
+
+Single Males: 
+Person : [ Name : Robert, Gender : Male, Marital Status : Single ]
+Person : [ Name : Mike, Gender : Male, Marital Status : Single ]
+Person : [ Name : Bobby, Gender : Male, Marital Status : Single ]
+
+Single Or Females: 
+Person : [ Name : Robert, Gender : Male, Marital Status : Single ]
+Person : [ Name : Diana, Gender : Female, Marital Status : Single ]
+Person : [ Name : Mike, Gender : Male, Marital Status : Single ]
+Person : [ Name : Bobby, Gender : Male, Marital Status : Single ]
+Person : [ Name : Laura, Gender : Female, Marital Status : Married ]
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>过滤器模式就是起一个筛选作用。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/12/结构型模式——桥接模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/12/结构型模式——桥接模式/" itemprop="url">结构型模式——桥接模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T17:37:47+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。<br>这种模式涉及到一个作为桥接的接口，使得实体类的功能独立于接口实现类。这两种类型的类可被结构化改变而互不影响。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>将抽象部分与实现部分分离，使它们都可以独立的变化。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>实现系统可能有多个角度分类，每一种角度都可能变化。</p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>把这种多角度分类分离出来，让它们独立变化，减少它们之间耦合。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>抽象类依赖实现类</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li>猪八戒从天蓬元帅转世投胎到猪，转世投胎的机制将尘世划分为两个等级，即：灵魂和肉体，前者相当于抽象化，后者相当于实现化。生灵通过功能的委派，调用肉体对象的功能，使得生灵可以动态地选择。 </li>
+<li>墙上的开关，可以看到的开关是抽象的，不用管里面具体怎么实现的。 </li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>抽象和实现的分离 </li>
+<li>优秀的扩展能力 </li>
+<li>实现细节对客户透明 </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系 </li>
+<li>对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用 </li>
+<li>一个类存在两个独立变化的维度，且这两个维度都需要进行扩展 </li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>对于两个独立变化的维度，使用桥接模式再适合不过了</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们有一个作为桥接实现的 DrawAPI 接口和实现了 DrawAPI 接口的实体类 RedCircle、GreenCircle。Shape<br>是一个抽象类，将使用 DrawAPI 的对象，我们的演示类使用 Shape 类来画出不同颜色的圆:<br><img src="//img-
+blog.csdn.net/20180318164223663?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h2 id="创建桥接实现接口"><a href="#创建桥接实现接口" class="headerlink" title="创建桥接实现接口"></a>创建桥接实现接口</h2><p><strong>DrawAPI.java</strong></p>
+<pre><code> public interface DrawAPI {
+   public void drawCircle(int radius, int x, int y);
+}
+</code></pre><h2 id="创建实现了-DrawAPI-接口的实体桥接实现类"><a href="#创建实现了-DrawAPI-接口的实体桥接实现类" class="headerlink" title="创建实现了 DrawAPI 接口的实体桥接实现类"></a>创建实现了 DrawAPI 接口的实体桥接实现类</h2><p><strong>RedCircle.java</strong></p>
+<pre><code> public class RedCircle implements DrawAPI {
+   @Override
+   public void drawCircle(int radius, int x, int y) {
+      System.out.println(&quot;Drawing Circle[ color: red, radius: &quot;
+         + radius +&quot;, x: &quot; +x+&quot;, &quot;+ y +&quot;]&quot;);
+   }
+}
+</code></pre><p><strong>GreenCircle.java</strong></p>
+<pre><code> public class GreenCircle implements DrawAPI {
+   @Override
+   public void drawCircle(int radius, int x, int y) {
+      System.out.println(&quot;Drawing Circle[ color: green, radius: &quot;
+         + radius +&quot;, x: &quot; +x+&quot;, &quot;+ y +&quot;]&quot;);
+   }
+}
+</code></pre><h2 id="使用-DrawAPI-接口创建抽象类-Shape"><a href="#使用-DrawAPI-接口创建抽象类-Shape" class="headerlink" title="使用 DrawAPI 接口创建抽象类 Shape"></a>使用 DrawAPI 接口创建抽象类 Shape</h2><p><strong>Shape.java</strong></p>
+<pre><code> public abstract class Shape {
+   protected DrawAPI drawAPI;
+   protected Shape(DrawAPI drawAPI){
+      this.drawAPI = drawAPI;
+   }
+   public abstract void draw();    
+}
+</code></pre><h2 id="创建实现了-Shape-接口的实体类"><a href="#创建实现了-Shape-接口的实体类" class="headerlink" title="创建实现了 Shape 接口的实体类"></a>创建实现了 Shape 接口的实体类</h2><p><strong>Circle.java</strong></p>
+<pre><code> public class Circle extends Shape {
+   private int x, y, radius;
+
+   public Circle(int x, int y, int radius, DrawAPI drawAPI) {
+      super(drawAPI);
+      this.x = x;  
+      this.y = y;  
+      this.radius = radius;
+   }
+
+   public void draw() {
+      drawAPI.drawCircle(radius,x,y);
+   }
+}
+</code></pre><h2 id="使用-Shape-和-DrawAPI-类画出不同颜色的圆"><a href="#使用-Shape-和-DrawAPI-类画出不同颜色的圆" class="headerlink" title="使用 Shape 和 DrawAPI 类画出不同颜色的圆"></a>使用 Shape 和 DrawAPI 类画出不同颜色的圆</h2><p><strong>BridgePatternDemo.java</strong></p>
+<pre><code> public class BridgePatternDemo {
+   public static void main(String[] args) {
+      Shape redCircle = new Circle(100,100, 10, new RedCircle());
+      Shape greenCircle = new Circle(100,100, 10, new GreenCircle());
+
+      redCircle.draw();
+      greenCircle.draw();
+   }
+}
+</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>Drawing Circle[ color: red, radius: 10, x: 100, 100]
+Drawing Circle[  color: green, radius: 10, x: 100, 100]
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当一个抽象类有多个实现时，通常用集成来协调他们。抽象类定义对该抽象的接口，而具体子类则用不同方式加以实现。但是此方法的缺点是将子类的抽象部分和实现部分固定在了一起，使得难以对抽象部分和实现部分进行修改、扩充和重用。<br>实现抽象化和实现化之间的解耦，具体到上述demo，抽象化指的是 draw redCircle和draw<br>greenCircle，如果不使用桥接模式，一般的实现方法是根据用户指令的不同（以参数的形式体现），实现不同的draw方法，而使用桥接模式，Circle类不用关心具体如何根据用户传入参数的不同实现不同的draw方法（即实现化部分），Circle类只需要根据用户传入接口的不同调用draw方法即可，具体的实现全都交给了DrawAPI（GreenCircle、ReadCircle）来做，即将draw这个功能的抽象化放在Circle类，实现化放在DrawAPI（GreenCircle、ReadCircle），从而实现了抽象化和实例化的分离。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/12/结构型模式——适配器模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/12/结构型模式——适配器模式/" itemprop="url">结构型模式——适配器模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T16:32:48+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>适配器模式（Adapter Pattern）是作为两个不兼容的接口之间的桥梁。这种类型的设计模式属于结构型模式，它结合了两个独立接口的功能。<br>这种模式涉及到一个单一的类，该类负责加入独立的或不兼容的接口功能。举个真实的例子，读卡器是作为内存卡和笔记本之间的适配器。你将内存卡插入读卡器，再将读卡器插入笔记本，这样就可以通过笔记本来读取内存卡。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>将一个类的接口转换成客户希望的另外一个接口。适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>主要解决在软件系统中，常常要将一些”现存的对象”放到新的环境中，而新环境要求的接口是现对象不能满足的。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><ul>
+<li>系统需要使用现有的类，而此类的接口不符合系统的需要 </li>
+<li>想要建立一个可以重复使用的类，用于与一些彼此之间没有太大关联的一些类，包括一些可能在将来引进的类一起工作，这些源类不一定有一致的接口 </li>
+<li>通过接口转换，将一个类插入另一个类系中。（比如老虎和飞禽，现在多了一个飞虎，在不增加实体的需求下，增加一个适配器，在里面包容一个虎对象，实现飞的接口。） </li>
+</ul>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>继承或依赖（推荐）</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>适配器继承或依赖已有的对象，实现想要的目标接口。</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li>美国电器 110V，中国 220V，就要有一个适配器将 110V 转化为 220V </li>
+<li>在 LINUX 上运行 WINDOWS 程序 </li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>可以让任何两个没有关联的类一起运行 </li>
+<li>提高了类的复用 </li>
+<li>增加了类的透明度 </li>
+<li>灵活性好。 </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>过多地使用适配器，会让系统非常零乱，不易整体进行把握。比如，明明看到调用的是 A 接口，其实内部被适配成了 B 接口的实现，一个系统如果太多出现这种情况，无异于一场灾难。因此如果不是很有必要，可以不使用适配器，而是直接对系统进行重构 </li>
+<li>.由于 JAVA 至多继承一个类，所以至多只能适配一个适配者类，而且目标类必须是抽象类。 </li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>有动机地修改一个正常运行的系统的接口，这时应该考虑使用适配器模式。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>适配器不是在详细设计时添加的，而是解决正在服役的项目的问题(即在改装现存代码时可能会用到)。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>我们有一个 MediaPlayer 接口和一个实现了 MediaPlayer 接口的实体类 AudioPlayer。默认情况下，AudioPlayer<br>可以播放 mp3 格式的音频文件。<br>我们还有另一个接口 AdvancedMediaPlayer 和实现了 AdvancedMediaPlayer 接口的实体类。该类可以播放 vlc 和 mp4<br>格式的文件。<br>我们想要让 AudioPlayer 播放其他格式的音频文件。为了实现这个功能，我们需要创建一个实现了 MediaPlayer 接口的适配器类<br>MediaAdapter，并使用 AdvancedMediaPlayer 对象来播放所需的格式。<br>AudioPlayer 使用适配器类 MediaAdapter 传递所需的音频类型，不需要知道能播放所需格式音频的实际类:<br><img src="//img-
+blog.csdn.net/20180318162533969?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写代码片"></p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="为媒体播放器和更高级的媒体播放器创建接口"><a href="#为媒体播放器和更高级的媒体播放器创建接口" class="headerlink" title="为媒体播放器和更高级的媒体播放器创建接口"></a>为媒体播放器和更高级的媒体播放器创建接口</h3><p><strong>MediaPlayer.java</strong></p>
+<pre><code> public interface MediaPlayer {
+   public void play(String audioType, String fileName);
+}
+</code></pre><p><strong>AdvancedMediaPlayer.java</strong></p>
+<pre><code> public interface AdvancedMediaPlayer {    
+   public void playVlc(String fileName);
+   public void playMp4(String fileName);
+}
+</code></pre><h3 id="创建实现了-AdvancedMediaPlayer-接口的实体类"><a href="#创建实现了-AdvancedMediaPlayer-接口的实体类" class="headerlink" title="创建实现了 AdvancedMediaPlayer 接口的实体类"></a>创建实现了 AdvancedMediaPlayer 接口的实体类</h3><p><strong>VlcPlayer.java</strong></p>
+<pre><code> public class VlcPlayer implements AdvancedMediaPlayer{
+   @Override
+   public void playVlc(String fileName) {
+      System.out.println(&quot;Playing vlc file. Name: &quot;+ fileName);        
+   }
+
+   @Override
+   public void playMp4(String fileName) {
+      //什么也不做
+   }
+}
+</code></pre><p><strong>Mp4Player.java</strong></p>
+<pre><code> public class Mp4Player implements AdvancedMediaPlayer{
+
+   @Override
+   public void playVlc(String fileName) {
+      //什么也不做
+   }
+
+   @Override
+   public void playMp4(String fileName) {
+      System.out.println(&quot;Playing mp4 file. Name: &quot;+ fileName);        
+   }
+}
+</code></pre><h3 id="创建实现了-MediaPlayer-接口的适配器类"><a href="#创建实现了-MediaPlayer-接口的适配器类" class="headerlink" title="创建实现了 MediaPlayer 接口的适配器类"></a>创建实现了 MediaPlayer 接口的适配器类</h3><p><strong>MediaAdapter.java</strong></p>
+<pre><code> public class MediaAdapter implements MediaPlayer {
+
+   AdvancedMediaPlayer advancedMusicPlayer;
+
+   public MediaAdapter(String audioType){
+      if(audioType.equalsIgnoreCase(&quot;vlc&quot;) ){
+         advancedMusicPlayer = new VlcPlayer();            
+      } else if (audioType.equalsIgnoreCase(&quot;mp4&quot;)){
+         advancedMusicPlayer = new Mp4Player();
+      }    
+   }
+
+   @Override
+   public void play(String audioType, String fileName) {
+      if(audioType.equalsIgnoreCase(&quot;vlc&quot;)){
+         advancedMusicPlayer.playVlc(fileName);
+      }else if(audioType.equalsIgnoreCase(&quot;mp4&quot;)){
+         advancedMusicPlayer.playMp4(fileName);
+      }
+   }
+}
+</code></pre><h3 id="创建实现了-MediaPlayer-接口的实体类"><a href="#创建实现了-MediaPlayer-接口的实体类" class="headerlink" title="创建实现了 MediaPlayer 接口的实体类"></a>创建实现了 MediaPlayer 接口的实体类</h3><p><strong>AudioPlayer.java</strong></p>
+<pre><code> public class AudioPlayer implements MediaPlayer {
+   MediaAdapter mediaAdapter; 
+
+   @Override
+   public void play(String audioType, String fileName) {        
+
+      //播放 mp3 音乐文件的内置支持
+      if(audioType.equalsIgnoreCase(&quot;mp3&quot;)){
+         System.out.println(&quot;Playing mp3 file. Name: &quot;+ fileName);            
+      } 
+      //mediaAdapter 提供了播放其他文件格式的支持
+      else if(audioType.equalsIgnoreCase(&quot;vlc&quot;) 
+         || audioType.equalsIgnoreCase(&quot;mp4&quot;)){
+         mediaAdapter = new MediaAdapter(audioType);
+         mediaAdapter.play(audioType, fileName);
+      }
+      else{
+         System.out.println(&quot;Invalid media. &quot;+
+            audioType + &quot; format not supported&quot;);
+      }
+   }   
+}
+</code></pre><h3 id="使用-AudioPlayer-来播放不同类型的音频格式"><a href="#使用-AudioPlayer-来播放不同类型的音频格式" class="headerlink" title="使用 AudioPlayer 来播放不同类型的音频格式"></a>使用 AudioPlayer 来播放不同类型的音频格式</h3><p><strong>AdapterPatternDemo.java</strong></p>
+<pre><code> public class AdapterPatternDemo {
+   public static void main(String[] args) {
+      AudioPlayer audioPlayer = new AudioPlayer();
+
+      audioPlayer.play(&quot;mp3&quot;, &quot;beyond the horizon.mp3&quot;);
+      audioPlayer.play(&quot;mp4&quot;, &quot;alone.mp4&quot;);
+      audioPlayer.play(&quot;vlc&quot;, &quot;far far away.vlc&quot;);
+      audioPlayer.play(&quot;avi&quot;, &quot;mind me.avi&quot;);
+   }
+}
+</code></pre><h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><pre><code>Playing mp3 file. Name: beyond the horizon.mp3
+Playing mp4 file. Name: alone.mp4
+Playing vlc file. Name: far far away.vlc
+Invalid media. avi format not supported
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为两个不兼容的接口之间的桥梁，它结合了两个独立接口的功能。<br>这种模式涉及到一个单一的类，该类负责加入独立的或不兼容的接口功能。<br>注意，要点是要在原来类的基础上使原本不兼容的功能变得兼容。<br>Adapter类一般是用来实现与原有类不兼容的功能，比如demo中的MediaAdapter实现了MediaPlayer没有的特殊功能，用户只要调用AudioPlayer中的play方法，AudioPlayer会自动根据音频的类型选择不同的play方式，当音频类型不符合传统player的能力时AudioPlayer会使用adapter去调用之前不兼容的方法（功能），这样就实现了所谓的适配。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/11/AudioRecord参数解释/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/11/AudioRecord参数解释/" itemprop="url">AudioRecord参数解释</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-11T11:31:21+08:00">
+                2018-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</p>
+<h1 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h1><h2 id="audioSource-音频源"><a href="#audioSource-音频源" class="headerlink" title="audioSource 音频源"></a>audioSource 音频源</h2><p>指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC</p>
+<h2 id="sampleRateInHz-采样率"><a href="#sampleRateInHz-采样率" class="headerlink" title="sampleRateInHz 采样率"></a>sampleRateInHz 采样率</h2><p>音频的采样频率，每秒钟能够采样的次数，采样率越高，音质越高。给出的实例是<br>44100、22050、11025但不限于这几个参数。例如要采集低质量的音频就可以使用4000、<br>8000等低采样率。</p>
+<h2 id="channelConfig-声道设置"><a href="#channelConfig-声道设置" class="headerlink" title="channelConfig 声道设置"></a>channelConfig 声道设置</h2><p>android支持双声道立体声和单声道。MONO单声道，STEREO立体声</p>
+<h2 id="audioFormat-编码制式和采样大小"><a href="#audioFormat-编码制式和采样大小" class="headerlink" title="audioFormat 编码制式和采样大小"></a>audioFormat 编码制式和采样大小</h2><p>采集来的数据当然使用PCM编码(脉冲代码调制编码，即PCM编码。<br>PCM通过抽样、量化、编码三个步骤将连续变化的模拟信号转换为数字编码。)<br>android支持的采样大小16bit 或者8bit。当然采样大小越大，那么信息量越多，音质也越高，<br>现在主流的采样大小都是16bit，在低质量的语音传输的时候8bit足够了。</p>
+<h2 id="bufferSizeInBytes"><a href="#bufferSizeInBytes" class="headerlink" title="bufferSizeInBytes"></a>bufferSizeInBytes</h2><p>采集数据需要的缓冲区的大小，如果不知道最小需要的大小可以在getMinBufferSize()查看。</p>
+<p>采集到的数据保存在一个byteBuffer中，可以使用流将其读出。亦可保存成为文件的形式</p>
+<h1 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h1><p>从音频硬件录制缓冲区读取数据</p>
+<h2 id="audioData"><a href="#audioData" class="headerlink" title="audioData"></a>audioData</h2><p>写入的音频录制数据。</p>
+<h2 id="offsetInShorts"><a href="#offsetInShorts" class="headerlink" title="offsetInShorts"></a>offsetInShorts</h2><p>目标数组 audioData 的起始偏移量。</p>
+<h2 id="sizeInShorts"><a href="#sizeInShorts" class="headerlink" title="sizeInShorts"></a>sizeInShorts</h2><p>请求读取的数据大小。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，<br>如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。 返回数值不会超过sizeInShorts。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——原型模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/创建型模式——原型模式/" itemprop="url">创建型模式——原型模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T11:44:49+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>原型模式（Prototype Pattern）是用于 <strong>创建重复的对象</strong><br>，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式是实现了一个原型接口， <strong>该接口用于创建当前对象的克隆</strong><br>。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>在运行期建立和删除原型。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><ul>
+<li>当一个系统应该独立于它的产品创建，构成和表示时 </li>
+<li>当要实例化的类是在运行时刻指定时，例如，通过动态装载 </li>
+<li>为了避免创建一个与产品类层次平行的工厂类层次时 </li>
+<li>当一个类的实例只能有几个不同状态组合中的一种时 </li>
+<li>建立相应数目的原型并克隆它们可能比每次用合适的状态手工实例化该类更方便一些 </li>
+</ul>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>利用已有的一个原型对象，快速地生成和原型对象一样的实例。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><ul>
+<li>实现克隆操作，在 JAVA 继承 Cloneable，重写 clone()。 </li>
+<li>原型模式同样用于隔离类对象的使用者和具体类型（易变类）之间的耦合关系，它同样要求这些”易变类”拥有稳定的接口。 </li>
+</ul>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li>细胞分裂 </li>
+<li>JAVA 中的 Object clone() 方法。 </li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>性能提高 </li>
+<li>逃避构造函数的约束。 </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>配备克隆方法需要对类的功能进行通盘考虑，这对于全新的类不是很难，但对于已有的类不一定很容易，特别当一个类引用不支持串行化的间接对象，或者引用含有循环结构的时候 </li>
+<li>必须实现 Cloneable 接口。 </li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>资源优化场景 </li>
+<li>类初始化需要消化非常多的资源，这个资源包括数据、硬件资源等 </li>
+<li>性能和安全要求的场景 </li>
+<li>通过 new 产生一个对象需要非常繁琐的数据准备或访问权限，则可以使用原型模式 </li>
+<li>一个对象多个修改者的场景 </li>
+<li>一个对象需要提供给其他对象访问，而且各个调用者可能都需要修改其值时，可以考虑使用原型模式拷贝多个对象供调用者使用 </li>
+<li>在实际项目中，原型模式很少单独出现， <strong>一般是和工厂方法模式一起出现</strong> ，通过 clone 的方法创建一个对象，然后由工厂方法提供给调用者。原型模式已经与 Java 融为浑然一体，大家可以随手拿来使用。 </li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>与通过对一个类进行实例化来构造新对象不同的是，原型模式是通过拷贝一个现有对象生成新对象的。浅拷贝实现 Cloneable，重写，深拷贝是通过实现<br>Serializable 读取二进制流。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们将创建一个抽象类 Shape 和扩展了 Shape 类的实体类。下一步是定义类 ShapeCache，该类把 shape 对象存储在一个<br>Hashtable 中，并在请求的时候返回它们的克隆。</p>
+<h2 id="创建一个实现了-Clonable-接口的抽象类。"><a href="#创建一个实现了-Clonable-接口的抽象类。" class="headerlink" title="创建一个实现了 Clonable 接口的抽象类。"></a>创建一个实现了 Clonable 接口的抽象类。</h2><p>Shape.java</p>
+<pre><code> public abstract class Shape implements Cloneable {
+
+   private String id;
+   protected String type;
+
+   abstract void draw();
+
+   public String getType(){
+      return type;
+   }
+
+   public String getId() {
+      return id;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
+   public Object clone() {
+      Object clone = null;
+      try {
+         clone = super.clone();
+      } catch (CloneNotSupportedException e) {
+         e.printStackTrace();
+      }
+      return clone;
+   }
+}
+</code></pre><h2 id="创建扩展了上面抽象类的实体类。"><a href="#创建扩展了上面抽象类的实体类。" class="headerlink" title="创建扩展了上面抽象类的实体类。"></a>创建扩展了上面抽象类的实体类。</h2><p>Rectangle.java</p>
+<pre><code>public class Rectangle extends Shape {
+
+   public Rectangle(){
+     type = &quot;Rectangle&quot;;
+   }
+
+   @Override
+   public void draw() {
+      System.out.println(&quot;Inside Rectangle-&gt;draw() method.&quot;);
+   }
+}
+</code></pre><p>Square.java</p>
+<pre><code>public class Square extends Shape {
+
+   public Square(){
+     type = &quot;Square&quot;;
+   }
+
+   @Override
+   public void draw() {
+      System.out.println(&quot;Inside Square-&gt;draw() method.&quot;);
+   }
+}
+</code></pre><p>Circle.java</p>
+<pre><code>public class Circle extends Shape {
+
+   public Circle(){
+     type = &quot;Circle&quot;;
+   }
+
+   @Override
+   public void draw() {
+      System.out.println(&quot;Inside Circle-&gt;draw() method.&quot;);
+   }
+}
+</code></pre><h2 id="创建一个类，从数据库获取实体类，并把它们存储在一个-Hashtable-中"><a href="#创建一个类，从数据库获取实体类，并把它们存储在一个-Hashtable-中" class="headerlink" title="创建一个类，从数据库获取实体类，并把它们存储在一个 Hashtable 中"></a>创建一个类，从数据库获取实体类，并把它们存储在一个 Hashtable 中</h2><p>ShapeCache.java</p>
+<pre><code>import java.util.Hashtable;
+
+public class ShapeCache {
+
+   private static Hashtable&lt;String, Shape&gt; shapeMap 
+      = new Hashtable&lt;String, Shape&gt;();
+
+   public static Shape getShape(String shapeId) {
+      Shape cachedShape = shapeMap.get(shapeId);
+      return (Shape) cachedShape.clone();
+   }
+
+   // 对每种形状都运行数据库查询，并创建该形状
+   // shapeMap.put(shapeKey, shape);
+   // 例如，我们要添加三种形状
+   public static void loadCache() {
+      Circle circle = new Circle();
+      circle.setId(&quot;1&quot;);
+      shapeMap.put(circle.getId(),circle);
+
+      Square square = new Square();
+      square.setId(&quot;2&quot;);
+      shapeMap.put(square.getId(),square);
+
+      Rectangle rectangle = new Rectangle();
+      rectangle.setId(&quot;3&quot;);
+      shapeMap.put(rectangle.getId(),rectangle);
+   }
+}
+</code></pre><h2 id="PrototypePatternDemo-使用-ShapeCache-类来获取存储在-Hashtable-中的形状的克隆"><a href="#PrototypePatternDemo-使用-ShapeCache-类来获取存储在-Hashtable-中的形状的克隆" class="headerlink" title="PrototypePatternDemo 使用 ShapeCache 类来获取存储在 Hashtable 中的形状的克隆"></a>PrototypePatternDemo 使用 ShapeCache 类来获取存储在 Hashtable 中的形状的克隆</h2><p>PrototypePatternDemo.java</p>
+<pre><code>public class PrototypePatternDemo {
+   public static void main(String[] args) {
+      ShapeCache.loadCache();
+
+      Shape clonedShape = (Shape) ShapeCache.getShape(&quot;1&quot;);
+      System.out.println(&quot;Shape : &quot; + clonedShape.getType());        
+
+      Shape clonedShape2 = (Shape) ShapeCache.getShape(&quot;2&quot;);
+      System.out.println(&quot;Shape : &quot; + clonedShape2.getType());        
+
+      Shape clonedShape3 = (Shape) ShapeCache.getShape(&quot;3&quot;);
+      System.out.println(&quot;Shape : &quot; + clonedShape3.getType());        
+   }
+}
+</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>Shape : Circle
+Shape : Square
+Shape : Rectangle
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>原型模式实现的功能就是对象的拷贝，只不过这种拷贝的功能是在类中定义好的，即在定义类的时候就定义好了一个clone的接口，当这个类对应的对象在某一时刻需要拷贝出另一个对象时，只需调用这个对象的clone方法即可返回一个本对象的克隆体，那么为什么不直接实例化一个新的对象而要采用这种克隆的机制呢？想象一下如果一个类的某些属性的值需要从数据库中查询，这样每实例化一个新类就需要做查询的耗时操作，这时候如果直接用一个已有的对象去clone出一个新的对象就可以避免诸如数据库查询之类的耗时操作，提高了软件的执行效率。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——建造者模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/创建型模式——建造者模式/" itemprop="url">创建型模式——建造者模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T11:30:47+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>建造者模式（Builder<br>Pattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>一个 Builder 类会一步一步构造最终的对象。该 Builder 类是独立于其他对象的。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>一些基本部件不会变，而其组合经常变化的时候。</p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>将变与不变分离开。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>建造者：创建和提供实例<br>导演：管理建造出来的实例的依赖关系。</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li><p>去肯德基，汉堡、可乐、薯条、炸鸡翅等是不变的，而其组合是经常变化的，生成出所谓的”套餐”。   </p>
+<ul>
+<li>JAVA 中的 StringBuilder。 </li>
+</ul>
+</li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>建造者独立，易扩展 </li>
+<li>便于控制细节风险。 </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ul>
+<li>产品必须有共同点，范围有限制 </li>
+<li>如内部变化复杂，会有很多的建造类。 </li>
+</ul>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>需要生成的对象具有复杂的内部结构 </li>
+<li>需要生成的对象内部属性本身相互依赖。 </li>
+</ul>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们假设在一个快餐店的商业案例中，一个典型的套餐可以是一个汉堡（Burger）和一杯冷饮（Cold drink）。汉堡（Burger）可以是素食汉堡（Veg<br>Burger）或鸡肉汉堡（Chicken Burger），它们是包在纸盒中。冷饮（Cold<br>drink）可以是可口可乐（coke）或百事可乐（pepsi），它们是装在瓶子中。<br>我们将创建一个表示食物条目（比如汉堡和冷饮）的 Item 接口和实现 Item 接口的实体类，以及一个表示食物包装的 Packing 接口和实现<br>Packing 接口的实体类，汉堡是包在纸盒中，冷饮是装在瓶子中。<br>然后我们创建一个 Meal 类，带有 Item 的 ArrayList 和一个通过结合 Item 来创建不同类型的 Meal 对象的<br>MealBuilder。BuilderPatternDemo，我们的演示类使用 MealBuilder 来创建一个 Meal:<br><img src="//img-
+blog.csdn.net/20180318160630347?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h2 id="创建一个表示食物条目和食物包装的接口"><a href="#创建一个表示食物条目和食物包装的接口" class="headerlink" title="创建一个表示食物条目和食物包装的接口"></a>创建一个表示食物条目和食物包装的接口</h2><p>Item.java</p>
+<pre><code>public interface Item { //食物条目（比如汉堡和冷饮）
+   public String name();
+   public Packing packing();
+   public float price();    
+}
+</code></pre><p>Packing.java</p>
+<pre><code>public interface Packing {
+   public String pack();
+}
+</code></pre><h2 id="创建实现-Packing-接口的实体类。"><a href="#创建实现-Packing-接口的实体类。" class="headerlink" title="创建实现 Packing 接口的实体类。"></a>创建实现 Packing 接口的实体类。</h2><p>Wrapper.java</p>
+<pre><code>public class Wrapper implements Packing {
+
+   @Override
+   public String pack() {
+      return &quot;Wrapper&quot;;
+   }
+}
+</code></pre><p>Bottle.java</p>
+<pre><code>public class Bottle implements Packing {
+
+   @Override
+   public String pack() {
+      return &quot;Bottle&quot;;
+   }
+}
+</code></pre><h2 id="创建实现-Item-接口的抽象类，该类提供了默认的功能"><a href="#创建实现-Item-接口的抽象类，该类提供了默认的功能" class="headerlink" title="创建实现 Item 接口的抽象类，该类提供了默认的功能"></a>创建实现 Item 接口的抽象类，该类提供了默认的功能</h2><p>Burger.java</p>
+<pre><code>public abstract class Burger implements Item {
+
+   @Override
+   public Packing packing() {
+      return new Wrapper();
+   }
+
+   @Override
+   public abstract float price();
+}
+</code></pre><p>ColdDrink.java</p>
+<pre><code>public abstract class ColdDrink implements Item {
+
+    @Override
+    public Packing packing() {
+       return new Bottle();
+    }
+
+    @Override
+    public abstract float price();
+}
+</code></pre><h2 id="创建扩展了-Burger-和-ColdDrink-的实体类。"><a href="#创建扩展了-Burger-和-ColdDrink-的实体类。" class="headerlink" title="创建扩展了 Burger 和 ColdDrink 的实体类。"></a>创建扩展了 Burger 和 ColdDrink 的实体类。</h2><p>VegBurger.java</p>
+<pre><code>public class VegBurger extends Burger {
+
+   @Override
+   public float price() {
+      return 25.0f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Veg Burger&quot;;
+   }
+}
+</code></pre><p>ChickenBurger.java</p>
+<pre><code>public class ChickenBurger extends Burger {
+
+   @Override
+   public float price() {
+      return 50.5f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Chicken Burger&quot;;
+   }
+}
+</code></pre><p>Coke.java</p>
+<pre><code>public class Coke extends ColdDrink {
+
+   @Override
+   public float price() {
+      return 30.0f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Coke&quot;;
+   }
+}
+</code></pre><p>Pepsi.java</p>
+<pre><code>public class Pepsi extends ColdDrink {
+
+   @Override
+   public float price() {
+      return 35.0f;
+   }
+
+   @Override
+   public String name() {
+      return &quot;Pepsi&quot;;
+   }
+}
+</code></pre><h2 id="创建一个-Meal-类，带有上面定义的-Item-对象"><a href="#创建一个-Meal-类，带有上面定义的-Item-对象" class="headerlink" title="创建一个 Meal 类，带有上面定义的 Item 对象"></a>创建一个 Meal 类，带有上面定义的 Item 对象</h2><p>Meal.java</p>
+<pre><code>import java.util.ArrayList;
+import java.util.List;
+
+public class Meal {
+   private List&lt;Item&gt; items = new ArrayList&lt;Item&gt;();    
+
+   public void addItem(Item item){
+      items.add(item);
+   }
+
+   public float getCost(){
+      float cost = 0.0f;
+      for (Item item : items) {
+         cost += item.price();
+      }        
+      return cost;
+   }
+
+   public void showItems(){
+      for (Item item : items) {
+         System.out.print(&quot;Item : &quot;+item.name());
+         System.out.print(&quot;, Packing : &quot;+item.packing().pack());
+         System.out.println(&quot;, Price : &quot;+item.price());
+      }        
+   }    
+}
+</code></pre><h2 id="创建一个-MealBuilder-类，实际的-builder-类负责创建-Meal-对象"><a href="#创建一个-MealBuilder-类，实际的-builder-类负责创建-Meal-对象" class="headerlink" title="创建一个 MealBuilder 类，实际的 builder 类负责创建 Meal 对象"></a>创建一个 MealBuilder 类，实际的 builder 类负责创建 Meal 对象</h2><p>MealBuilder.java</p>
+<pre><code>public class MealBuilder {
+
+   public Meal prepareVegMeal (){
+      Meal meal = new Meal();
+      meal.addItem(new VegBurger());
+      meal.addItem(new Coke());
+      return meal;
+   }   
+
+   public Meal prepareNonVegMeal (){
+      Meal meal = new Meal();
+      meal.addItem(new ChickenBurger());
+      meal.addItem(new Pepsi());
+      return meal;
+   }
+}
+</code></pre><h2 id="BuiderPatternDemo-使用-MealBuider-来演示建造者模式（Builder-Pattern）"><a href="#BuiderPatternDemo-使用-MealBuider-来演示建造者模式（Builder-Pattern）" class="headerlink" title="BuiderPatternDemo 使用 MealBuider 来演示建造者模式（Builder Pattern）"></a>BuiderPatternDemo 使用 MealBuider 来演示建造者模式（Builder Pattern）</h2><p>BuilderPatternDemo.java</p>
+<pre><code>public class BuilderPatternDemo {
+   public static void main(String[] args) {
+      MealBuilder mealBuilder = new MealBuilder();
+
+      Meal vegMeal = mealBuilder.prepareVegMeal();
+      System.out.println(&quot;Veg Meal&quot;);
+      vegMeal.showItems();
+      System.out.println(&quot;Total Cost: &quot; +vegMeal.getCost());
+
+      Meal nonVegMeal = mealBuilder.prepareNonVegMeal();
+      System.out.println(&quot;\n\nNon-Veg Meal&quot;);
+      nonVegMeal.showItems();
+      System.out.println(&quot;Total Cost: &quot; +nonVegMeal.getCost());
+   }
+}
+</code></pre><h2 id="输出。"><a href="#输出。" class="headerlink" title="输出。"></a>输出。</h2><pre><code>Veg Meal
+Item : Veg Burger, Packing : Wrapper, Price : 25.0
+Item : Coke, Packing : Bottle, Price : 30.0
+Total Cost: 55.0
+
+
+Non-Veg Meal
+Item : Chicken Burger, Packing : Wrapper, Price : 50.5
+Item : Pepsi, Packing : Bottle, Price : 35.0
+Total Cost: 85.5
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>建造者模式与工厂方法模式有类似的地方，但是建造者模式更加关注零件装配的顺序而且生成的对象内部属性本身具有相互依赖性，比如Demo中的食物和对应的容器具有很强的相互依赖性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——单例模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/10/创建型模式——单例模式/" itemprop="url">创建型模式——单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T11:15:19+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><ul>
+<li>单例类只能有一个实例。 </li>
+<li>单例类必须自己创建自己的唯一实例。 </li>
+<li>单例类必须给所有其他对象提供这一实例。 </li>
+</ul>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
+<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>一个全局使用的类频繁地创建与销毁。</p>
+<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>当您想控制实例数目，节省系统资源的时候。</p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>判断系统是否已经有这个单例，如果有则返回，如果没有则创建。</p>
+<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>构造函数是私有的。</p>
+<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><ul>
+<li>一个党只能有一个主席 </li>
+<li>Windows 是多进程多线程的，在操作一个文件的时候，就不可避免地出现多个进程或线程同时操作一个文件的现象，所以所有文件的处理必须通过唯一的实例来进行 </li>
+</ul>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和销毁实例（比如管理学院首页页面缓存） </li>
+<li>避免对资源的多重占用（比如写文件操作） </li>
+</ul>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>没有接口，不能继承，与单一职责原则冲突，一个类应该只关心内部逻辑，而不关心外面怎么样来实例化。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>要求生产唯一序列号 </li>
+<li>WEB 中的计数器，不用每次刷新都在数据库里加一次，用单例先缓存起来 </li>
+<li>创建的一个对象需要消耗的资源过多，比如 I/O 与数据库的连接等。 </li>
+</ul>
+<h1 id="注意事项-这个注意事项放在这么显眼的位置就是为了说明它的重要性"><a href="#注意事项-这个注意事项放在这么显眼的位置就是为了说明它的重要性" class="headerlink" title="注意事项(这个注意事项放在这么显眼的位置就是为了说明它的重要性)"></a>注意事项(这个注意事项放在这么显眼的位置就是为了说明它的重要性)</h1><p><strong>getInstance() 方法中需要使用同步锁 synchronized (Singleton.class) 防止多线程同时进入造成 instance<br>被多次实例化。</strong></p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们将创建一个 SingleObject 类。SingleObject 类有它的私有构造函数和本身的一个静态实例。<br>SingleObject 类提供了一个静态方法，供外界获取它的静态实例。</p>
+<h2 id="创建一个-Singleton-类"><a href="#创建一个-Singleton-类" class="headerlink" title="创建一个 Singleton 类"></a>创建一个 Singleton 类</h2><p>SingleObject.java</p>
+<pre><code> public class SingleObject {
+
+   //创建 SingleObject 的一个对象
+   private static SingleObject instance = new SingleObject();
+
+   //让构造函数为 private，这样该类就不会被实例化
+   private SingleObject(){}
+
+   //获取唯一可用的对象
+   public static SingleObject getInstance(){
+      return instance;
+   }
+
+   public void showMessage(){
+      System.out.println(&quot;Hello World!&quot;);
+   }
+}
+</code></pre><h2 id="从-singleton-类获取唯一的对象"><a href="#从-singleton-类获取唯一的对象" class="headerlink" title="从 singleton 类获取唯一的对象"></a>从 singleton 类获取唯一的对象</h2><p>SingletonPatternDemo.java</p>
+<pre><code>public class SingletonPatternDemo {
+   public static void main(String[] args) {
+
+      //不合法的构造函数
+      //编译时错误：构造函数 SingleObject() 是不可见的
+      //SingleObject object = new SingleObject();
+
+      //获取唯一可用的对象
+      SingleObject object = SingleObject.getInstance();
+
+      //显示消息
+      object.showMessage();
+   }
+}
+</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>Hello World!
+</code></pre><h1 id="单例模式的几种实现方式"><a href="#单例模式的几种实现方式" class="headerlink" title="单例模式的几种实现方式"></a>单例模式的几种实现方式</h1><p>单例模式的实现有多种方式，如下所示：</p>
+<h2 id="懒汉式，线程不安全"><a href="#懒汉式，线程不安全" class="headerlink" title="懒汉式，线程不安全"></a>懒汉式，线程不安全</h2><p>是否 Lazy 初始化：是<br>是否多线程安全：否<br>实现难度：易<br>描述：这种方式是最基本的实现方式，这种实现最大的问题就是不支持多线程。因为没有加锁 synchronized，所以严格意义上它并不算单例模式。<br>这种方式 lazy loading 很明显，不要求线程安全，在多线程不能正常工作。<br>代码实例：</p>
+<pre><code>public class Singleton {  
+    private static Singleton instance;  
+    private Singleton (){}  
+
+    public static Singleton getInstance() {  
+    if (instance == null) {  
+        instance = new Singleton();  
+    }  
+    return instance;  
+    }  
+}  
+</code></pre><p>接下来介绍的几种实现方式都支持多线程，但是在性能上有所差异。</p>
+<h2 id="懒汉式，线程安全"><a href="#懒汉式，线程安全" class="headerlink" title="懒汉式，线程安全"></a>懒汉式，线程安全</h2><p>是否 Lazy 初始化：是<br>是否多线程安全：是<br>实现难度：易<br>描述：这种方式具备很好的 lazy loading，能够在多线程中很好的工作，但是，效率很低，99% 情况下不需要同步。<br>优点：第一次调用才初始化，避免内存浪费。<br>缺点：必须加锁 synchronized 才能保证单例，但 <strong>加锁会影响效率</strong> 。<br>getInstance() 的性能对应用程序不是很关键（该方法使用不太频繁）。<br>代码实例：</p>
+<pre><code> public class Singleton {  
+    private static Singleton instance;  
+    private Singleton (){}  
+    public static synchronized Singleton getInstance() {  
+    if (instance == null) {  
+        instance = new Singleton();  
+    }  
+    return instance;  
+    }  
+}
+</code></pre><h2 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h2><p>是否 Lazy 初始化：否<br>是否多线程安全：是<br>实现难度：易<br>描述：这种方式比较常用，但容易产生垃圾对象。<br>优点：没有加锁，执行效率会提高。<br>缺点：类加载时就初始化，浪费内存。<br>它基于 classloder 机制避免了多线程的同步问题，不过，instance<br>在类装载时就实例化，虽然导致类装载的原因有很多种，在单例模式中大多数都是调用 getInstance 方法，<br>但是也不能确定有其他的方式（或者其他的静态方法）导致类装载，这时候初始化 instance 显然没有达到 lazy loading 的效果。<br>代码实例：</p>
+<pre><code>public class Singleton {  
+    private static Singleton instance = new Singleton();  
+    private Singleton (){}  
+    public static Singleton getInstance() {  
+    return instance;  
+    }  
+}
+</code></pre><h2 id="双检锁-双重校验锁（DCL，即-double-checked-locking）"><a href="#双检锁-双重校验锁（DCL，即-double-checked-locking）" class="headerlink" title="双检锁/双重校验锁（DCL，即 double-checked locking）"></a>双检锁/双重校验锁（DCL，即 double-checked locking）</h2><p>JDK 版本：JDK1.5 起<br>是否 Lazy 初始化：是<br>是否多线程安全：是<br>实现难度：较复杂<br>描述：这种方式采用双锁机制，安全且在多线程情况下能保持高性能。<br>getInstance() 的性能对应用程序很关键。<br>代码实例：</p>
+<pre><code>public class Singleton {  
+    private volatile static Singleton singleton;  
+    private Singleton (){}  
+    public static Singleton getSingleton() {  
+    if (singleton == null) {  
+        synchronized (Singleton.class) {  
+        if (singleton == null) {  
+            singleton = new Singleton();  
+        }  
+        }  
+    }  
+    return singleton;  
+    }  
+}  
+</code></pre><h3 id="volatile和synchronized关键字的区别"><a href="#volatile和synchronized关键字的区别" class="headerlink" title="volatile和synchronized关键字的区别"></a>volatile和synchronized关键字的区别</h3><p><a href="http://blog.csdn.net/qq_36982160/article/details/79506026" target="_blank" rel="noopener"> Java中volatile和synchronized关键字的区别
+</a></p>
+<h2 id="登记式-静态内部类"><a href="#登记式-静态内部类" class="headerlink" title="登记式/静态内部类"></a>登记式/静态内部类</h2><p>是否 Lazy 初始化：是<br>是否多线程安全：是<br>实现难度：一般<br>描述：这种方式能达到双检锁方式一样的功效，但实现更简单。对静态域使用延迟初始化，应使用这种方式而不是双检锁方式。这种方式只适用于静态域的情况，双检锁方式可在实例域需要延迟初始化时使用。<br>这种方式同样利用了 classloder 机制来保证初始化 instance 时只有一个线程，它跟第 3 种方式不同的是：第 3 种方式只要<br>Singleton 类被装载了，那么 instance 就会被实例化（没有达到 lazy loading 效果），而这种方式是 Singleton<br>类被装载了，instance 不一定被初始化。因为 SingletonHolder 类没有被主动使用，只有通过显式调用 getInstance<br>方法时，才会显式装载 SingletonHolder 类，从而实例化 instance。想象一下，如果实例化 instance<br>很消耗资源，所以想让它延迟加载，另外一方面，又不希望在 Singleton 类加载时就实例化，因为不能确保 Singleton<br>类还可能在其他的地方被主动使用从而被加载，那么这个时候实例化 instance 显然是不合适的。这个时候，这种方式相比第 3 种方式就显得很合理。<br>代码实例：</p>
+<pre><code>public class Singleton {  
+    private static class SingletonHolder {  
+    private static final Singleton INSTANCE = new Singleton();  
+    }  
+    private Singleton (){}  
+    public static final Singleton getInstance() {  
+    return SingletonHolder.INSTANCE;  
+    }  
+}   
+</code></pre><h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>JDK 版本：JDK1.5 起<br>是否 Lazy 初始化：否<br>是否多线程安全：是<br>实现难度：易<br>描述：这种实现方式还没有被广泛采用，但这是实现单例模式的最佳方法。它更简洁，自动支持序列化机制，绝对防止多次实例化。<br>这种方式是 Effective Java 作者 Josh Bloch<br>提倡的方式，它不仅能避免多线程同步问题，而且还自动支持序列化机制，防止反序列化重新创建新的对象，绝对防止多次实例化。不过，由于 JDK1.5 之后才加入<br>enum 特性，用这种方式写不免让人感觉生疏，在实际工作中，也很少用。<br>不能通过 reflection attack 来调用私有构造方法。<br>代码实例：</p>
+<pre><code>public enum Singleton {  
+    INSTANCE;  
+    public void whateverMethod() {  
+    }  
+}  
+</code></pre><p>关于java中的enum，详见 <a href="https://www.jianshu.com/p/46dbd930f6a2" target="_blank" rel="noopener"> 这里 </a></p>
+<h2 id="经验之谈"><a href="#经验之谈" class="headerlink" title="经验之谈"></a>经验之谈</h2><p>一般情况下，不建议使用第 1 种和第 2 种懒汉方式，建议使用第 3 种饿汉方式。只有在要明确实现 lazy loading 效果时，才会使用第 5<br>种登记方式。如果涉及到反序列化创建对象时，可以尝试使用第 6 种枚举方式。如果有其他特殊的需求，可以考虑使用第 4 种双检锁方式。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实单例模式通俗来讲就是让一个类在整个程序中只有一个对象。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/java中volatile和synchronized的区别/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -346,1749 +2716,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——抽象工厂模式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/10/创建型模式——抽象工厂模式/" itemprop="url">创建型模式——抽象工厂模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T10:40:27+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>抽象工厂模式（Abstract Factory<br>Pattern）是围绕一个超级工厂创建其他工厂。该超级工厂又称为其他工厂的工厂。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>在抽象工厂模式中，接口是负责创建一个相关对象的工厂，不需要显式指定它们的类。每个生成的工厂都能按照工厂模式提供对象。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</p>
-<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>主要解决接口选择的问题。</p>
-<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>系统的产品有多于一个的产品族，而系统只消费其中某一族的产品。</p>
-<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>在一个产品族里面，定义多个产品。</p>
-<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>在一个工厂里聚合多个同类产品。</p>
-<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p>工作了，为了参加一些聚会，肯定有两套或多套衣服吧，比如说有商务装（成套，一系列具体产品）、时尚装（成套，一系列具体产品），甚至对于一个家庭来说，可能有商务女装、商务男装、时尚女装、时尚男装，这些也都是成套的，即一系列具体产品。假设一种情况（现实中是不存在的，要不然，没法进入共产主义了，但有利于说明抽象工厂模式），在您的家中，某一个衣柜（具体工厂）只能存放某一种这样的衣服（成套，一系列具体产品），每次拿这种成套的衣服时也自然要从这个衣柜中取出了。用<br>OO<br>的思想去理解，所有的衣柜（具体工厂）都是衣柜类的（抽象工厂）某一个，而每一件成套的衣服又包括具体的上衣（某一具体产品），裤子（某一具体产品），这些具体的上衣其实也都是上衣（抽象产品），具体的裤子也都是裤子（另一个抽象产品）。</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>当一个产品族中的多个对象被设计成一起工作时，它能保证客户端始终只使用同一个产品族中的对象。</p>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>产品族扩展非常困难，要增加一个系列的某一产品，既要在抽象的 Creator 里加代码，又要在具体的里面加代码。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
-<li>QQ 换皮肤，一整套一起换 </li>
-<li>生成不同操作系统的程序。 </li>
-</ul>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>产品族难扩展，产品等级易扩展。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们将创建 Shape 和 Color 接口和实现这些接口的实体类。下一步是创建抽象工厂类 AbstractFactory。接着定义工厂类<br>ShapeFactory 和 ColorFactory，这两个工厂类都是扩展了 AbstractFactory。然后创建一个工厂创造器/生成器类 :<br><img src="//img-
-blog.csdn.net/20180318154032560?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们的演示类使用 FactoryProducer 来获取 AbstractFactory 对象。它将向 AbstractFactory 传递形状信息<br>Shape（CIRCLE / RECTANGLE / SQUARE），以便获取它所需对象的类型。同时它还向 AbstractFactory 传递颜色信息<br>Color（RED / GREEN / BLUE），以便获取它所需对象的类型。</p>
-<h3 id="为形状创建一个接口"><a href="#为形状创建一个接口" class="headerlink" title="为形状创建一个接口"></a>为形状创建一个接口</h3><p>Shape.java</p>
-<pre><code>public interface Shape {
-   void draw();
-}
-</code></pre><h3 id="创建实现形状接口的实体类"><a href="#创建实现形状接口的实体类" class="headerlink" title="创建实现形状接口的实体类"></a>创建实现形状接口的实体类</h3><p>Rectangle.java</p>
-<pre><code>public class Rectangle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Rectangle-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><p>Square.java</p>
-<pre><code>public class Square implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Square-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><p>Circle.java</p>
-<pre><code>public class Circle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Circle-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><h3 id="为颜色创建一个接口。"><a href="#为颜色创建一个接口。" class="headerlink" title="为颜色创建一个接口。"></a>为颜色创建一个接口。</h3><p>Color.java</p>
-<pre><code>public interface Color {
-   void fill();
-}
-</code></pre><h3 id="创建实现颜色接口的实体类"><a href="#创建实现颜色接口的实体类" class="headerlink" title="创建实现颜色接口的实体类"></a>创建实现颜色接口的实体类</h3><p>Red.java</p>
-<pre><code>public class Red implements Color {
-
-   @Override
-   public void fill() {
-      System.out.println(&quot;Inside Red-&gt;fill() method.&quot;);
-   }
-}
-</code></pre><p>Green.java</p>
-<pre><code>public class Green implements Color {
-
-   @Override
-   public void fill() {
-      System.out.println(&quot;Inside Green-&gt;fill() method.&quot;);
-   }
-}
-</code></pre><p>Blue.java</p>
-<pre><code>public class Blue implements Color {
-
-   @Override
-   public void fill() {
-      System.out.println(&quot;Inside Blue-&gt;fill() method.&quot;);
-   }
-}
-</code></pre><h3 id="为-Color-和-Shape-对象创建抽象类来获取工厂"><a href="#为-Color-和-Shape-对象创建抽象类来获取工厂" class="headerlink" title="为 Color 和 Shape 对象创建抽象类来获取工厂"></a>为 Color 和 Shape 对象创建抽象类来获取工厂</h3><p>AbstractFactory.java</p>
-<pre><code>public abstract class AbstractFactory {
-   abstract Color getColor(String color);
-   abstract Shape getShape(String shape) ;
-}
-</code></pre><h4 id="abstract复习"><a href="#abstract复习" class="headerlink" title="abstract复习"></a>abstract复习</h4><p>abstract修饰类，会使这个类成为一个抽象类，这个类将不能生成对象实例，但可以做为对象变量声明的类型（见下面代码），也就是编译时类型。抽象类就相当于一类的半成品，需要子类继承并覆盖其中的抽象方法。</p>
-<h2 id="创建扩展了-AbstractFactory-的工厂类，基于给定的信息生成实体类的对象"><a href="#创建扩展了-AbstractFactory-的工厂类，基于给定的信息生成实体类的对象" class="headerlink" title="创建扩展了 AbstractFactory 的工厂类，基于给定的信息生成实体类的对象"></a>创建扩展了 AbstractFactory 的工厂类，基于给定的信息生成实体类的对象</h2><p>ShapeFactory.java</p>
-<pre><code>public class ShapeFactory extends AbstractFactory {
-
-   @Override
-   public Shape getShape(String shapeType){
-      if(shapeType == null){
-         return null;
-      }        
-      if(shapeType.equalsIgnoreCase(&quot;CIRCLE&quot;)){
-         return new Circle();
-      } else if(shapeType.equalsIgnoreCase(&quot;RECTANGLE&quot;)){
-         return new Rectangle();
-      } else if(shapeType.equalsIgnoreCase(&quot;SQUARE&quot;)){
-         return new Square();
-      }
-      return null;
-   }
-
-   @Override
-   Color getColor(String color) {
-      return null;
-   }
-}
-</code></pre><p>ColorFactory.java</p>
-<pre><code>public class ColorFactory extends AbstractFactory {
-
-   @Override
-   public Shape getShape(String shapeType){
-      return null;
-   }
-
-   @Override
-   Color getColor(String color) {
-      if(color == null){
-         return null;
-      }        
-      if(color.equalsIgnoreCase(&quot;RED&quot;)){
-         return new Red();
-      } else if(color.equalsIgnoreCase(&quot;GREEN&quot;)){
-         return new Green();
-      } else if(color.equalsIgnoreCase(&quot;BLUE&quot;)){
-         return new Blue();
-      }
-      return null;
-   }
-}
-</code></pre><h3 id="创建一个工厂创造器-生成器类，通过传递形状或颜色信息来获取工厂"><a href="#创建一个工厂创造器-生成器类，通过传递形状或颜色信息来获取工厂" class="headerlink" title="创建一个工厂创造器/生成器类，通过传递形状或颜色信息来获取工厂"></a>创建一个工厂创造器/生成器类，通过传递形状或颜色信息来获取工厂</h3><p>FactoryProducer.java</p>
-<pre><code>public class FactoryProducer {
-   public static AbstractFactory getFactory(String choice){
-      if(choice.equalsIgnoreCase(&quot;SHAPE&quot;)){
-         return new ShapeFactory();
-      } else if(choice.equalsIgnoreCase(&quot;COLOR&quot;)){
-         return new ColorFactory();
-      }
-      return null;
-   }
-}
-</code></pre><h3 id="使用-FactoryProducer-来获取-AbstractFactory，通过传递类型信息来获取实体类的对象"><a href="#使用-FactoryProducer-来获取-AbstractFactory，通过传递类型信息来获取实体类的对象" class="headerlink" title="使用 FactoryProducer 来获取 AbstractFactory，通过传递类型信息来获取实体类的对象"></a>使用 FactoryProducer 来获取 AbstractFactory，通过传递类型信息来获取实体类的对象</h3><p>AbstractFactoryPatternDemo.java</p>
-<pre><code>public class AbstractFactoryPatternDemo {
-   public static void main(String[] args) {
-
-      //获取形状工厂
-      AbstractFactory shapeFactory = FactoryProducer.getFactory(&quot;SHAPE&quot;);
-
-      //获取形状为 Circle 的对象
-      Shape shape1 = shapeFactory.getShape(&quot;CIRCLE&quot;);
-
-      //调用 Circle 的 draw 方法
-      shape1.draw();
-
-      //获取形状为 Rectangle 的对象
-      Shape shape2 = shapeFactory.getShape(&quot;RECTANGLE&quot;);
-
-      //调用 Rectangle 的 draw 方法
-      shape2.draw();
-
-      //获取形状为 Square 的对象
-      Shape shape3 = shapeFactory.getShape(&quot;SQUARE&quot;);
-
-      //调用 Square 的 draw 方法
-      shape3.draw();
-
-      //获取颜色工厂
-      AbstractFactory colorFactory = FactoryProducer.getFactory(&quot;COLOR&quot;);
-
-      //获取颜色为 Red 的对象
-      Color color1 = colorFactory.getColor(&quot;RED&quot;);
-
-      //调用 Red 的 fill 方法
-      color1.fill();
-
-      //获取颜色为 Green 的对象
-      Color color2 = colorFactory.getColor(&quot;Green&quot;);
-
-      //调用 Green 的 fill 方法
-      color2.fill();
-
-      //获取颜色为 Blue 的对象
-      Color color3 = colorFactory.getColor(&quot;BLUE&quot;);
-
-      //调用 Blue 的 fill 方法
-      color3.fill();
-   }
-}
-</code></pre><h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><pre><code>Inside Circle-&gt;draw() method.
-Inside Rectangle-&gt;draw() method.
-Inside Square-&gt;draw() method.
-Inside Red-&gt;fill() method.
-Inside Green-&gt;fill() method.
-Inside Blue-&gt;fill() method.
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对比工厂方法模式，因为一个工厂只能生产一个产品，比如 <a href="http://blog.csdn.net/qq_36982160/article/details/79505390" target="_blank" rel="noopener"> 博客
-</a><br>中一个ShapeFactory只能根据不同情况实例化不同的Shape，那么当我们需要一整套的产品（比如形状和颜色形成了一套产品）时使用工厂方法显然就不能解决了，所以就需要抽象工厂模式，抽象工厂模式实际上是工厂的工厂，即其作用的目的是为了实例化不同的工厂，用户再通过不同的工厂实例化不同场景下成套的产品。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——工厂方法(虚构造器)模式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/10/创建型模式——工厂方法(虚构造器)模式/" itemprop="url">创建型模式——工厂方法(虚构造器)模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T10:04:36+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>工厂模式（Factory Pattern）是 面向对象语言最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>定义一个创建对象的接口， <strong>让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行</strong> 。</p>
-<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>主要解决接口选择的问题。</p>
-<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>我们明确地计划不同条件下创建不同实例时。</p>
-<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>让其子类实现工厂接口，返回的也是一个抽象的产品。</p>
-<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>创建过程在其子类执行。</p>
-<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p>你需要一辆汽车，可以直接从工厂里面提货，而不用去管这辆汽车是怎么做出来的，以及这个汽车里面的具体实现。</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>一个调用者想创建一个对象，只要知道其名称就可以了 </li>
-<li>扩展性高，如果想增加一个产品，只要扩展一个工厂类就可以 </li>
-<li>屏蔽产品的具体实现，调用者只关心产品的接口。 </li>
-</ul>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>每次增加一个产品时，都需要增加一个具体类和对象实现工厂，使得系统中类的个数成倍增加，在一定程度上增加了系统的复杂度，同时也增加了系统具体类的依赖。这并不是什么好事。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="日志记录器"><a href="#日志记录器" class="headerlink" title="日志记录器"></a>日志记录器</h3><p>记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。</p>
-<h3 id="数据库访问"><a href="#数据库访问" class="headerlink" title="数据库访问"></a>数据库访问</h3><p>当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。</p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式。有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过<br>new 就可以完成创建的对象，无需使用工厂模式。如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们的demo使用 ShapeFactory 来获取 Shape 对象。它将向 ShapeFactory 传递信息（CIRCLE / RECTANGLE /<br>SQUARE），以便获取它所需对象的类型:<br><img src="//img-
-blog.csdn.net/20180318151655716?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h2 id="创建一个接口"><a href="#创建一个接口" class="headerlink" title="创建一个接口"></a>创建一个接口</h2><p>Shape.java</p>
-<pre><code> public interface Shape {
-   void draw();
-}
-</code></pre><h2 id="创建实现接口的实体类"><a href="#创建实现接口的实体类" class="headerlink" title="创建实现接口的实体类"></a>创建实现接口的实体类</h2><p>Rectangle.java</p>
-<pre><code>public class Rectangle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Rectangle-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><p>Square.java</p>
-<pre><code>public class Square implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Square-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><p>Circle.java</p>
-<pre><code>public class Circle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Circle-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><h2 id="创建一个工厂，生成基于给定信息的实体类的对象"><a href="#创建一个工厂，生成基于给定信息的实体类的对象" class="headerlink" title="创建一个工厂，生成基于给定信息的实体类的对象"></a>创建一个工厂，生成基于给定信息的实体类的对象</h2><p>ShapeFactory.java</p>
-<pre><code>public class ShapeFactory {
-
-   //使用 getShape 方法获取形状类型的对象
-   public Shape getShape(String shapeType){
-      if(shapeType == null){
-         return null;
-      }        
-      if(shapeType.equalsIgnoreCase(&quot;CIRCLE&quot;)){
-         return new Circle();
-      } else if(shapeType.equalsIgnoreCase(&quot;RECTANGLE&quot;)){
-         return new Rectangle();
-      } else if(shapeType.equalsIgnoreCase(&quot;SQUARE&quot;)){
-         return new Square();
-      }
-      return null;
-   }
-}
-</code></pre><h2 id="使用该工厂，通过传递类型信息来获取实体类的对象"><a href="#使用该工厂，通过传递类型信息来获取实体类的对象" class="headerlink" title="使用该工厂，通过传递类型信息来获取实体类的对象"></a>使用该工厂，通过传递类型信息来获取实体类的对象</h2><p>FactoryPatternDemo.java</p>
-<pre><code>public class FactoryPatternDemo {
-
-   public static void main(String[] args) {
-      ShapeFactory shapeFactory = new ShapeFactory();
-
-      //获取 Circle 的对象，并调用它的 draw 方法
-      Shape shape1 = shapeFactory.getShape(&quot;CIRCLE&quot;);
-
-      //调用 Circle 的 draw 方法
-      shape1.draw();
-
-      //获取 Rectangle 的对象，并调用它的 draw 方法
-      Shape shape2 = shapeFactory.getShape(&quot;RECTANGLE&quot;);
-
-      //调用 Rectangle 的 draw 方法
-      shape2.draw();
-
-      //获取 Square 的对象，并调用它的 draw 方法
-      Shape shape3 = shapeFactory.getShape(&quot;SQUARE&quot;);
-
-      //调用 Square 的 draw 方法
-      shape3.draw();
-   }
-}
-</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>Inside Circle-&gt;draw() method.
-Inside Rectangle-&gt;draw() method.
-Inside Square-&gt;draw() method.
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>工厂方法模式其实就是当一个类的实例化依赖于不同场景时需要使用的，比如上面demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的实现细节隐藏起来，用户只需要告诉工厂类自己需要什么情况下的产品，工厂就可以自动调用自己内部对应场景的代码从而返回一个用户需要的“产品”。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/概述/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/10/概述/" itemprop="url">概述</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T09:45:44+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h1><p>设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代码可靠性。<br>毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。项目中合理地运用设计模式可以完美地解决很多问题，每种模式在现实中都有相应的原理来与之对应，每种模式都描述了一个在我们周围不断重复发生的问题，以及该问题的核心解决方案，这也是设计模式能被广泛应用的原因。</p>
-<h1 id="都有哪些设计模式"><a href="#都有哪些设计模式" class="headerlink" title="都有哪些设计模式"></a>都有哪些设计模式</h1><h2 id="创建型模式-对象怎么来"><a href="#创建型模式-对象怎么来" class="headerlink" title="创建型模式:对象怎么来"></a>创建型模式:对象怎么来</h2><p>这些设计模式提供了一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new<br>运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</p>
-<h3 id="具体模式"><a href="#具体模式" class="headerlink" title="具体模式"></a>具体模式</h3><ul>
-<li>工厂模式（Factory Pattern） </li>
-<li>抽象工厂模式（Abstract Factory Pattern） </li>
-<li>单例模式（Singleton Pattern） </li>
-<li>建造者模式（Builder Pattern） </li>
-<li>原型模式（Prototype Pattern） </li>
-</ul>
-<h2 id="结构型模式-对象和谁有关"><a href="#结构型模式-对象和谁有关" class="headerlink" title="结构型模式:对象和谁有关"></a>结构型模式:对象和谁有关</h2><p>这些设计模式关注类和对象的组合。继承的概念被用来组合接口和定义组合对象获得新功能的方式。</p>
-<h3 id="具体模式-1"><a href="#具体模式-1" class="headerlink" title="具体模式"></a>具体模式</h3><ul>
-<li>适配器模式（Adapter Pattern） </li>
-<li>桥接模式（Bridge Pattern） </li>
-<li>过滤器模式（Filter、Criteria Pattern） </li>
-<li>组合模式（Composite Pattern） </li>
-<li>装饰器模式（Decorator Pattern） </li>
-<li>外观模式（Facade Pattern） </li>
-<li>享元模式（Flyweight Pattern） </li>
-<li>代理模式（Proxy Pattern） </li>
-</ul>
-<h2 id="行为型模式-对象与对象在干嘛"><a href="#行为型模式-对象与对象在干嘛" class="headerlink" title="行为型模式:对象与对象在干嘛"></a>行为型模式:对象与对象在干嘛</h2><p>这些设计模式特别关注对象之间的通信。</p>
-<h3 id="具体模式-2"><a href="#具体模式-2" class="headerlink" title="具体模式"></a>具体模式</h3><ul>
-<li>责任链模式（Chain of Responsibility Pattern） </li>
-<li>命令模式（Command Pattern） </li>
-<li>解释器模式（Interpreter Pattern） </li>
-<li>迭代器模式（Iterator Pattern） </li>
-<li>中介者模式（Mediator Pattern） </li>
-<li>备忘录模式（Memento Pattern） </li>
-<li>观察者模式（Observer Pattern） </li>
-<li>状态模式（State Pattern） </li>
-<li>空对象模式（Null Object Pattern） </li>
-<li>策略模式（Strategy Pattern） </li>
-<li>模板模式（Template Pattern） </li>
-<li>访问者模式（Visitor Pattern） </li>
-</ul>
-<h1 id="设计模式的六大原则"><a href="#设计模式的六大原则" class="headerlink" title="设计模式的六大原则"></a>设计模式的六大原则</h1><h2 id="开闭原则（Open-Close-Principle）：实现热插拔，提高扩展性"><a href="#开闭原则（Open-Close-Principle）：实现热插拔，提高扩展性" class="headerlink" title="开闭原则（Open Close Principle）：实现热插拔，提高扩展性"></a>开闭原则（Open Close Principle）：实现热插拔，提高扩展性</h2><p>对扩展开放，对修改关闭。在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。简言之，是为了使程序的扩展性好，易于维护和升级。想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。</p>
-<h2 id="里氏代换原则（Liskov-Substitution-Principle）：实现抽象的规范，实现子父类互相替换"><a href="#里氏代换原则（Liskov-Substitution-Principle）：实现抽象的规范，实现子父类互相替换" class="headerlink" title="里氏代换原则（Liskov Substitution Principle）：实现抽象的规范，实现子父类互相替换"></a>里氏代换原则（Liskov Substitution Principle）：实现抽象的规范，实现子父类互相替换</h2><p>里氏代换原则是面向对象设计的基本原则之一。 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。LSP<br>是继承复用的基石，只有当派生类可以替换掉基类，且软件单位的功能不受到影响时，基类才能真正被复用，而派生类也能够在基类的基础上增加新的行为。里氏代换原则是对开闭原则的补充。实现开闭原则的关键步骤就是抽象化，而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。</p>
-<h2 id="依赖倒转原则（Dependence-Inversion-Principle）：针对接口编程，实现开闭原则的基础"><a href="#依赖倒转原则（Dependence-Inversion-Principle）：针对接口编程，实现开闭原则的基础" class="headerlink" title="依赖倒转原则（Dependence Inversion Principle）：针对接口编程，实现开闭原则的基础"></a>依赖倒转原则（Dependence Inversion Principle）：针对接口编程，实现开闭原则的基础</h2><p>这个原则是开闭原则的基础，具体内容：针对接口编程，依赖于抽象而不依赖于具体。</p>
-<h2 id="接口隔离原则（Interface-Segregation-Principle）：降低耦合度，接口单独设计，互相隔离"><a href="#接口隔离原则（Interface-Segregation-Principle）：降低耦合度，接口单独设计，互相隔离" class="headerlink" title="接口隔离原则（Interface Segregation Principle）：降低耦合度，接口单独设计，互相隔离"></a>接口隔离原则（Interface Segregation Principle）：降低耦合度，接口单独设计，互相隔离</h2><p>使用多个隔离的接口，比使用单个接口要好。它还有另外一个意思是：降低类之间的耦合度。由此可见，其实设计模式就是从大型软件架构出发、便于升级和维护的软件设计思想，它强调降低依赖，降低耦合。</p>
-<h2 id="迪米特法则，又称最少知道原则（Demeter-Principle）：功能模块尽量独立"><a href="#迪米特法则，又称最少知道原则（Demeter-Principle）：功能模块尽量独立" class="headerlink" title="迪米特法则，又称最少知道原则（Demeter Principle）：功能模块尽量独立"></a>迪米特法则，又称最少知道原则（Demeter Principle）：功能模块尽量独立</h2><p>一个实体应当尽量少地与其他实体之间发生相互作用，使得系统功能模块相对独立。</p>
-<h2 id="合成复用原则（Composite-Reuse-Principle）：尽量使用聚合，组合，而不是继承"><a href="#合成复用原则（Composite-Reuse-Principle）：尽量使用聚合，组合，而不是继承" class="headerlink" title="合成复用原则（Composite Reuse Principle）：尽量使用聚合，组合，而不是继承"></a>合成复用原则（Composite Reuse Principle）：尽量使用聚合，组合，而不是继承</h2><p>尽量使用合成/聚合的方式，而不是使用继承。</p>
-<h1 id="tip"><a href="#tip" class="headerlink" title="tip"></a>tip</h1><p>软件体系机构是指一个系统的有目的的设计和规划，这个设计规划既不描述活动，也不描述系统怎样开发，它只描述系统的组成元素及相互的交互协作。<br>一个UML模型只描述了一个系统要做什么，他并没有告诉我们系统怎么做。</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>本系列文章将主要参考：《设计模式——可复用面向对象软件的基础》&amp; <a href="http://www.runoob.com/design-
-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener"> http://www.runoob.com/design-<br>pattern/design-pattern-tutorial.html </a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/06/python中文件读写的基本操作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/06/python中文件读写的基本操作/" itemprop="url">python中文件读写的基本操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T17:50:36+08:00">
-                2018-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>获取某一文件夹下的所有文件： </li>
-</ul>
-<pre><code>files1 = os.listdir(path1)#获取path1下的所有文件（夹）
-</code></pre><ul>
-<li>复制文件： </li>
-</ul>
-<pre><code>import shutil
-shutil.copyfile(path1, path2)#将path1下的文件复制到path2
-</code></pre><ul>
-<li>从txt文件中获取数据到矩阵中： </li>
-</ul>
-<pre><code>import numpy as np
-datai = np.loadtxt(path1)
-</code></pre><ul>
-<li>新建文件夹： </li>
-</ul>
-<pre><code>os.mkdir(path3 ）#新建一个path3文件夹
-</code></pre><ul>
-<li>将numpy矩阵保存到txt文件中： </li>
-</ul>
-<pre><code>np.savetxt(path, result)#将result（矩阵）保存到path路径
-</code></pre><ul>
-<li>重命名文件 </li>
-</ul>
-<pre><code>os.rename(path2, path2)#将path1重命名为path2
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/06/利用numpy对矩阵进行归一化处理的方法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/06/利用numpy对矩阵进行归一化处理的方法/" itemprop="url">利用numpy对矩阵进行归一化处理的方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-06T17:11:36+08:00">
-                2018-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本文不讲归一化原理，只介绍实现（事实上看了代码就会懂原理），代码如下：</p>
-<pre><code>def Normalize(data):
-    m = np.mean(data)
-    mx = max(data)
-    mn = min(data)
-    return [(float(i) - m) / (mx - mn) for i in data]
-</code></pre><p>代码只有5行并不复杂，但是需要注意的一点是一定要将计算的均值以及矩阵的最大、最小值存为变量放到循环里，如果直接在循环里计算对应的值会造成归一化特别慢，笔者之前有过深切的酸爽体验….</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/02/26/android中AudioRecord使用详解/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/26/android中AudioRecord使用详解/" itemprop="url">android中AudioRecord使用详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T23:45:29+08:00">
-                2018-02-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。</p>
-<h1 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h1><p>AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。<br>通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：</p>
-<pre><code>read(byte[], int, int)
-read(short[], int, int)
-read(ByteBuffer, int).
-</code></pre><p>无论使用哪种音频格式，使用AudioRecord是最方便的。</p>
-<p>在创建AudioRecord对象时，AudioRecord会初始化，并和音频缓冲区连接，用来缓冲新的音频数据。<br>根据构造时指定的缓冲区大小，来决定AudioRecord能够记录多长的数据。 从硬件设备读取的数据，应小于整个记录缓冲区。</p>
-<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><strong>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</strong></p>
-<h2 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h2><p><strong>audioSource：</strong><br>音频源：指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC<br><strong>sampleRateInHz：</strong><br>采样率：音频的采样频率，每秒钟能够采样的次数，采样率越高，音质越高。给出的实例是44100、22050、11025但不限于这几个参数。例如要采集低质量的音频就可以使用4000、8000等低采样率。<br><strong>channelConfig：</strong><br>声道设置：android支持双声道立体声和单声道。MONO单声道，STEREO立体声<br><strong>audioFormat：</strong><br>编码制式和采样大小：采集来的数据当然使用PCM编码(脉冲代码调制编码，即PCM编码。PCM通过抽样、量化、编码三个步骤将连续变化的模拟信号转换为数字编码。)<br>android支持的采样大小16bit<br>或者8bit。当然采样大小越大，那么信息量越多，音质也越高，现在主流的采样大小都是16bit，在低质量的语音传输的时候8bit足够了。<br><strong>bufferSizeInBytes：</strong><br>采集数据需要的缓冲区的大小，如果不知道最小需要的大小可以在getMinBufferSize()查看。</p>
-<h1 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h1><h2 id="public-int-getAudioFormat"><a href="#public-int-getAudioFormat" class="headerlink" title="public int getAudioFormat ()"></a>public int getAudioFormat ()</h2><p>返回设置的音频数据格式。</p>
-<h2 id="public-int-getAudioSource"><a href="#public-int-getAudioSource" class="headerlink" title="public int getAudioSource ()"></a>public int getAudioSource ()</h2><p>返回音频录制源。</p>
-<h2 id="public-int-getChannelConfiguration"><a href="#public-int-getChannelConfiguration" class="headerlink" title="public int getChannelConfiguration ()"></a>public int getChannelConfiguration ()</h2><p>返回设置的频道设置。</p>
-<h2 id="public-int-getChannelCount"><a href="#public-int-getChannelCount" class="headerlink" title="public int getChannelCount ()"></a>public int getChannelCount ()</h2><p>返回设置的频道数目。</p>
-<h2 id="public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><a href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig" class="headerlink" title="public static int getMinBufferSize (int sampleRateInHz, int channelConfig,"></a>public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</h2><p>int audioFormat)</p>
-<p>返回成功创建AudioRecord对象所需要的最小缓冲区大小。<br>注意：这个大小并不保证在负荷下的流畅录制，应根据预期的频率来选择更高的值，AudioRecord实例在推送新数据时使用此值。</p>
-<h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>sampleRateInHz      默认采样率，单位Hz。
-
-channelConfig           描述音频通道设置。
-
-audioFormat             音频数据保证支持此格式
-</code></pre><h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>如果硬件不支持录制参数，或输入了一个无效的参数，则返回ERROR_BAD_VALUE，如果硬件查询到输出属性没有实现，或最小缓冲区用byte表示，则返回ERROR。</p>
-<h2 id="public-int-getNotificationMarkerPosition"><a href="#public-int-getNotificationMarkerPosition" class="headerlink" title="public int getNotificationMarkerPosition ()"></a>public int getNotificationMarkerPosition ()</h2><p>返回通知，标记框架中的位置。</p>
-<h2 id="public-int-getPositionNotificationPeriod"><a href="#public-int-getPositionNotificationPeriod" class="headerlink" title="public int getPositionNotificationPeriod ()"></a>public int getPositionNotificationPeriod ()</h2><p>返回通知，更新框架中的时间位置。</p>
-<h2 id="public-int-getRecordingState"><a href="#public-int-getRecordingState" class="headerlink" title="public int getRecordingState ()"></a>public int getRecordingState ()</h2><p>返回AudioRecord实例的录制状态。</p>
-<h2 id="public-int-getSampleRate"><a href="#public-int-getSampleRate" class="headerlink" title="public int getSampleRate ()"></a>public int getSampleRate ()</h2><p>返回设置的音频数据样本采样率，单位Hz。</p>
-<h2 id="public-int-getState"><a href="#public-int-getState" class="headerlink" title="public int getState ()"></a>public int getState ()</h2><p>返回AudioRecord实例的状态。 这点非常有用，用在AudioRecord 实例创建成功后，检查初始化属性。 它能肯定请求到了合适的硬件资源。</p>
-<h2 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h2><p>从音频硬件录制缓冲区读取数据。</p>
-<h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioData        写入的音频录制数据。
-
-offsetInShorts           目标数组 audioData 的起始偏移量。
-
-sizeInShorts              请求读取的数据大小。
-</code></pre><h3 id="返回值：-1"><a href="#返回值：-1" class="headerlink" title="返回值："></a>返回值：</h3><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>返回数值不会超过sizeInShorts。</p>
-<h2 id="public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><a href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes" class="headerlink" title="public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)"></a>public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据。</p>
-<h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioData        写入的音频录制数据。
-
-offsetInBytes            audioData的起始偏移值，单位byte。
-
-sizeInBytes                读取的最大字节数。
-</code></pre><h3 id="返回值：-2"><a href="#返回值：-2" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。</p>
-<h2 id="public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><a href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes" class="headerlink" title="public int read (ByteBuffer audioBuffer, int sizeInBytes)"></a>public int read (ByteBuffer audioBuffer, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据，直接复制到指定缓冲区。 如果audioBuffer不是直接的缓冲区，此方法总是返回0。</p>
-<h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioBuffer               存储写入音频录制数据的缓冲区。
-
-sizeInBytes                请求的最大字节数。
-</code></pre><h3 id="返回值：-3"><a href="#返回值：-3" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。<br>public void release ()：释放本地AudioRecord资源。<br>对象不能经常使用此方法，而且在调用release()后，必须设置引用为null。</p>
-<h2 id="public-int-setNotificationMarkerPosition-int-markerInFrames"><a href="#public-int-setNotificationMarkerPosition-int-markerInFrames" class="headerlink" title="public int setNotificationMarkerPosition (int markerInFrames)"></a>public int setNotificationMarkerPosition (int markerInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置位置标记。</p>
-<h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>markerInFrames      在框架中快速标记位置。
-</code></pre><h3 id="返回值：-4"><a href="#返回值：-4" class="headerlink" title="返回值："></a>返回值：</h3><p>返回错误或成功代码，请见SUCCESS、ERROR_BAD_VALUE、ERROR_INVALID_OPERATION。</p>
-<h2 id="public-int-setPositionNotificationPeriod-int-periodInFrames"><a href="#public-int-setPositionNotificationPeriod-int-periodInFrames" class="headerlink" title="public int setPositionNotificationPeriod (int periodInFrames)"></a>public int setPositionNotificationPeriod (int periodInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置时间标记。</p>
-<h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>markerInFrames      在框架中快速更新时间标记。
-</code></pre><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回错误或成功代码</p>
-<h2 id="public-void-setRecordPositionUpdateListener"><a href="#public-void-setRecordPositionUpdateListener" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener, Handler handler)</p>
-<p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。 使用此方法来将Handler 和别的线程联系起来，来接收AudioRecord<br>事件，比创建AudioTrack 实例更好一些。</p>
-<h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>handler    用来接收事件通知消息。
-</code></pre><h2 id="public-void-setRecordPositionUpdateListener-1"><a href="#public-void-setRecordPositionUpdateListener-1" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener)</p>
-<p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。</p>
-<h2 id="public-void-startRecording"><a href="#public-void-startRecording" class="headerlink" title="public void startRecording ()"></a>public void startRecording ()</h2><p>AudioRecord实例开始进行录制。</p>
-<h1 id="受保护方法"><a href="#受保护方法" class="headerlink" title="受保护方法"></a>受保护方法</h1><h2 id="protected-void-finalize"><a href="#protected-void-finalize" class="headerlink" title="protected void finalize ()"></a>protected void finalize ()</h2><p>通知VM回收此对象内存。 此方法只能用在运行的应用程序没有任何线程再使用此对象，来告诉垃圾回收器回收此对象。</p>
-<p>此方法用于释放系统资源，由垃圾回收器清除此对象。 默认没有实现，由VM来决定，但子类根据需要可重写finalize()。<br>在执行期间，调用此方法可能会立即抛出未定义异常，但是可以忽略。</p>
-<p>注意：VM保证对象可以一次或多次调用finalize()，但并不保证finalize()会马上执行。<br>例如，对象B的finalize()可能延迟执行，等待对象A的finalize()延迟回收A的内存。<br>为了安全起见，请看ReferenceQueue，它提供了更多地控制VM的垃圾回收。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/02/25/《颠覆者》/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/25/《颠覆者》/" itemprop="url">《颠覆者》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T14:02:09+08:00">
-                2018-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本博客主要记载国内第一民间网络安全公司360创始人兼CEO周鸿祎的自传《颠覆者》中较为经典的语录。</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>实现自我颠覆的人都有一点共性。通过我的观察，最终能够实现这种颠覆的人，都有着强烈的“内在驱动力”和“使命感”，如同万维钢在《智识分子》这本书里写到的那样：“内在动力才真正体现了一个人的自由意志，我之所以这么干不是谁刺激我，而纯粹是因为我就想这么干。对于这些人来说，工作已经不是简单的上下班的事了，而是一项事业。他们做这件事不需要外界的监督和激励，是自己要求自己非要把这件事情做成不可。所以真正了不起的事业应该是由使命感驱动”</p>
-<p>所谓英雄，就是超越了阶层出身、超越了周边环境、超越了性格局限，拒绝按照任何设定好的程序行事，不能被大数据预测，能给世界带来惊喜，最不像机器的人。（万维钢<br>《智识分子》）</p>
-<p>英雄，不是那些被大数据预测的俗人，他们，让这个世界变得有意思。</p>
-<p>从零到一，每个创业者在从无到有创立一家公司后，都要经受非人的考验，每一天都有形式不同的突发情况，大家都要经历那种面对突发情况的紧、九死一生的惊险、迅速做出决定的逼仄、死而复生的恍惚。这所有的一切都如同<br><strong>本.霍洛维茨</strong> 在《创业维艰》中描述的那样——解决这些难题，没有任何公式套路可用。</p>
-<p>但让人无奈的是，每一次美国做空机构都是在他们的白天发布报告，而我不得不在中国的半夜把员工叫起来开会应对。这样的剧情如此反复循环重复，实在让人睡眠不足。</p>
-<p>在我从事软件行业的时候，很少有人直到软件是什么，电脑只是一个行业，电脑工程师只是一个职业。但是今天，无论是手机APP，还是智慧城市、电子政务、物联网（IOT），以及将来的无人驾驶汽车，很多东西都和软件息息相关。人们开始说，软件定义世界，一切皆可编程，万物均要互联。</p>
-<p>我认为一个企业的存在不在于你的股价有多高，因为股价再高，随着历史的推进，有一天也终会跌到零；也不在于企业有多少利润，这些东西都会随着时间的流逝而消逝。有的公司消逝了大家可能感觉无所谓，或者很快就有替代产品出现，大家不觉得缺这样一家公司别人会为它感到难过。我希望我们能做一家让大家离不开的公司。</p>
-<p>作为一个决策者，做决定很多时候都要面临艰难的处境，但是决策必须当机立断，正如 <strong>本.霍洛维茨</strong><br>在《创业维艰》里说的那样——那些看似微不足道的踌躇和犹豫，可能会造成致命的延误。我承担不起任何犹豫不决。</p>
-<p>虽然有精忠报国的愿望，也对未来充满了希望。但是市场不相信口号，也不相信眼泪，投资人不会为你的理想买单，</p>
-<p>如果对360的私有化做一个比喻，我觉得这个过程就像我们半夜在盘山公路狂奔，没有开灯。但是回头看，幸亏我们没有开灯。如果直到路途如此惊险，也许在路途中，我们早已吓得魂飞魄散。</p>
-<p>真正的勇敢，并非骁勇善战，而是无论何时何地都不忘初心，坚守信仰，并秉持自己始终不会放弃的那种纯粹。</p>
-<p>人类社会经历过的PC互联网时代、移动互联网时代，以及现在所处的物联网时代，技术发展和商业模式创新之间始终是相辅相成的关系，每当科技发展的红利被商业模式创新挖掘殆尽后，经济也随之步入寒冬，直到下一次技术革命的出现，商业模式创新才能重新迸发生机。</p>
-<p>现阶段移动互联网的商业模式创新已经挖光了Web2.0时代的技术红利，所有人都在寻找新技术，以期获得新的商业模式创新。人工智能技术无疑就是下一轮技术革命的焦点，假如未来的某一天，我们在这方面有了突破，那么新的商业模式也将涌现出来，带来一个甚至多个万亿级市场。</p>
-<p>在我们的世界中，科技已经如自然一样成为一股强大的力量，而我们将借助这种力量，乘风破浪。对于人工智能时代的来临，我愿意引用 <strong>凯文.凯利</strong><br>在《必然》中描述的场景，对此我深信不疑：</p>
-<p><em>千年之后，当历史学家回溯过往的时候，会认为第三个千禧之年的开端是一个古老的绝妙时代。在这个时代中，地球上的居民首次把自己与一种巨大的失误相连。未来，它的规模将会继续增加，但是如今，你我正生活在它刚刚苏醒的时刻。</em></p>
-<p><em>未来的人们会羡慕我们，希望自己也能亲眼见证它的诞生。这些年里，人类开始用微小的智能让没有生气的事物变得活跃，把他们编织进云端机器智能这张大网中，并将数十亿心智作为一个超级心智相连。</em></p>
-<p><em>这个聚拢的过程将被当做这个星球上迄今为止发生的最重要的、最负责任也是最令人惊叹的事件。</em></p>
-<p>单纯的理工男经常缺乏基本的人文认知，就算技术再好也有软肋。</p>
-<p>文字素养是一个人的基本素养。文字不好，你没有办法写出一个漂亮的商业计划书，前言不搭后语而经常错失投资人；文字不好，你没有办法成为一个好的产品经理，因为你没有办法精准地描述出产品的功能，打动不了用户；文字不好，你不能和竞争对手在公开领域沟通，做不出好的PR（公关），甚至连场口水仗都赢不了。</p>
-<p>《史蒂夫.乔布斯传》、《富兰克林传》、《爱因斯坦传》的作者 <strong>沃尔特.艾萨克森</strong><br>在写了这些伟人的传记后从他们的身上得出了：一个具有强烈个性的人身上集合了人文和科学的天赋后所产生的那种创造力，我相信这种创造力也是在21世纪建立创新型经济的关键因素。</p>
-<p>尽管破旧的城市、沉闷的生活，以及正统的世界让我没有方向，但是计算机那扇窗已经略微地打开了，若隐若现的光照射进来，变成了我每天生活的希望。</p>
-<p>作为一个年轻人，真正幸运的并不是在很年轻的时候就得到了很多财富，而是在成年之前就感受到了自己来到这个世界的使命，有了目标之后努力才不会盲目。</p>
-<p><strong>丹尼尔.科伊尔</strong><br>在《一万小时天才理论》中说：“在未来某些时候，也许已经发生了——你会坠入爱河。不是和某个人，而是和某个你自己的想法——关于你想成为谁，关于你生来会成为谁。这种爱，这种激情，就是发展才能的原始燃料”。</p>
-<p>“我的理想很明确，这辈子就要做一个电脑软件的开发者。做一款产品，改变世界”。 ——周鸿祎在高二班会上关于自己理想的描述</p>
-<p>乔布斯说：“一个人开始热爱一件事的时候，就会达到一种非理性的状态”。</p>
-<p>做一件事情总要不计回报，一旦投入了全部的感情，最后的回报总会出其不意地到来。</p>
-<p>做产品不能总从程序员和产品经理的角度出发，还要化繁为简，达到使用的极简主义。</p>
-<p>我的大学很充实，但似乎很难用开心和不开心来总结。开心来自简单的事情：吃了一顿好饭、听了一首好歌、疯狂地读了一晚上程序，或者暑假的时候邮购了音响零件，自己制成了一个噪声巨大的音响。而不开心的时候也是有的：走在西安交通大学的林荫大道上，没有姑娘的瞩目，没有浪漫的故事，有的只是一颗理工男的寂寞心，偶尔悲壮。</p>
-<p>如果一个社会只以成败论英雄，或者只以金钱多少论英雄，是不可能激励年轻人创新的。</p>
-<p>注册公司只是创业的形式，创业的关键在于推出什么样的产品。</p>
-<p>周鸿祎描述当初创业做反病毒卡的自己：“一个希望以查杀计算机病毒起家的学生公司，需要每天在电脑上调试程序，寻找病毒特征，而此时，我们连一台属于自己的计算机都没有。”</p>
-<p>王朔在《玩的就是心跳》中说：“我们受的教育一贯是把个人置于一种渺小的境界。这是我们的悲剧，也是我们的习惯，很明白却无能为力”。</p>
-<p>现实世界让我认识到，客户使用产品的环境远远比试验中的环境复杂，你必须从客户的角度去考虑和解决问题。从那个时候开始，我作为技术专家的优越感和自负被砍掉，这就是做第一个产品让我悟出的道理。</p>
-<p>做生意并不像想象中的那样充满浪漫，做生意是丑陋的、累心的、让人见识冷血和无情的。</p>
-<p>当我们尝试一个新技能时，我们就像进入黑屋子的人，总是碰到家具，但是每次碰撞都会让我们明确往哪走。我们不应该忽视错误或者试图忘记它们，因为它们为我们指出了道路所在，同时为我们指出了一个事实，那些不敢冒险的人就无法施展它们的才华。——《一万小时天才理论》</p>
-<p>固执是产品经理的大敌。</p>
-<p>在任何一个领域想要出众，都是要经过至少一万小时的练习才可以。并且，这些练习并不是在你的舒适区进行，而是要在容易犯错的地方进行精深练习。</p>
-<p>以我自身经验来说，大学生也好，研究生也好，我已经算是比一般的学生更接近社会三教九流的人了，但是当我真正走出去的时候，我还是感觉离真正的时长太远太远了。</p>
-<p>创业是一种精深，但是不要为了创业而创业，不要把创业狭义地理解为开公司，当CEO。这种事情太容易了，但是它未必成功。</p>
-<p>无论你做什么，所有的努力都不会白费。</p>
-<p>今天的辛苦，就是明天的财富。</p>
-<p>关于谈恋爱，我并不是很在行，我很少地会讨好地说一些甜言蜜语去“撩妹”，一般只是讲述自己的事儿。那个时候我还是个很落魄的小工程师，每个月的收入只有1000块，没单独的地方住，每天在北大食堂蹭饭吃，外表看上去毫不起眼。在胡欢（周鸿祎的妻子）面前，我喜欢讲述自己过去创业的经历，大谈特谈自己的梦想、未来自己想做的事，我讲到我会怎么样用一个软件或者程序去改变世界，一副“`天将降大任于斯人也”的样子。一般女孩看到我这样的人，会觉得我有点不切实际，或者是神经病，但是胡欢没有这样认为。她一直坚信我说的是真的，并且后来也一直用行动支持着我。</p>
-<p>做产品的人往往都会把自己的主观感受无限放大，把自己的需求认为是所有人的需求。</p>
-<p>高瞻远瞩不是天生的，每个人的见识都是一点一点积累出来的。</p>
-<p>很多互联网的成功其实都不是技术的成功，而是商业模式和理念的成功。</p>
-<p>周鸿祎关于“裸辞”的回忆：“我就是当年‘裸辞’的程序员一名。除了我以外，第一代互联网创业者都在当时纷纷‘裸辞’了，丁磊和马云辞得更彻底。《沸腾十五年》里记录：1995年，丁磊从宁波电信局辞职，按照规定，这个时候大学生辞职要补偿国家培养大学生的费用，要交1万元。但丁磊当时没有那么多钱，只能提着箱子离开了单位，结果按照除名处置。同一年，马云向杭州电子科技大学提出辞职，第二天就借了10万元注册公司。他们比‘裸辞’做得更进一步，一辞职就负债了，比‘裸辞’更绝”。</p>
-<p>创业者的孤独，不仅仅是要忍受创业路上资金的捉襟见肘、寻找投资人的种种困难，还要承受大多数人可能根本听不懂你创意的现实，一瞬间，你变成了孤独的星球。</p>
-<p>互联网公司开发布会其实是挺可笑的一件事，最牛的互联网产品应该是人们使用过之后觉得这个产品太好了，急不可待地介绍给周围的朋友。最后用户量通过口碑营销不知不觉地就涨起来了。产品做得不好，发布会开的再绚烂也没用，这都是在漫无目的地烧钱。</p>
-<p>很多创业者长期沉浸在自己的世界里，相信自己的直觉和判断，有的时候甚至到了偏执的状态，听不进去有经验人的劝解，最终错过了发展黄金期。</p>
-<p>创业，每天都是在走钢丝，每天都是在做选择题，每天都在对抗杂乱无章的信息。<br>很多创业者的路，都是在一片从未有过脚印的土地上一路走过来的。<br>谁痛苦谁知道。</p>
-<p>竞争对手是你的磨刀石，竞争对手越强大，对你的磨炼和考验越大，很多坚强的性格，都是残酷的市场竞争的衍生品。狼性和血性都是伴随着对人性的观察和考验而来的。</p>
-<p>市场竞争，绝不会留给竞争者闪烁一个悲伤眼神的时间。</p>
-<p>你以为自己已经跌倒了谷底，其实还有更深的深渊在前方等待，这是创业者时常遇到的境遇。</p>
-<p>互联网上的应用，多一步就是99%的损耗。</p>
-<p>一个公司对用户不作恶是成功的基础。</p>
-<p><strong>韦尔奇</strong><br>在《商业的本质》中写到：这是一种很稀缺的优秀品质。我们谈论的不是对风险的普通容忍。要成为一个企业家，你需要极大的勇气、疯狂的激情和超出理性的决心，忍受反复出现的近乎死亡的体验。</p>
-<p>品牌延伸让新的产品在人们心目中没有自己独立的位置，还会让原来的品牌地位模糊不清，结往往是灾难性的。</p>
-<p>对于跟随者来说，跟风发起跟风产品，绝对不是好的策略，因为好的品牌已经在消费者的心中占据了统治地位，这种地位一时间很难挑战。新的公司只有在大公司的业务机构里寻找薄弱环节，跟随者才有厚积薄发的可能。</p>
-<p>作为一家技术公司，别的都是虚的，用户体验才是最重要的。</p>
-<p>富贵非吾志。但知临水登山啸咏，自引壶觞自醉。<br>此生天命更何疑？且乘流，遇坎还止步。</p>
-<p>成功都是熬出来的，成功都是被逼出来的，很多时候，是看你熬不熬得住。</p>
-<p>互联网是不断变化的，经验往往是靠不住的，你必须随时处于归零状态，从用户角度出发，随时把握用户新的需求。</p>
-<p>只要在江湖，就难以避免征战，难以避免经理一些黑暗的时光；<br>只要在江湖，就经常面临利益与长远的选择。</p>
-<p>真正的光明却不是没有黑暗的时间，只是永不被黑暗所掩蔽罢了。真正的英雄绝不是没有卑下的情操，只是永不被卑下的情操屈服罢了。</p>
-<p>只要是人人都需要的，就应该是免费的。</p>
-<p>任何企业都可以找最强的竞争对手打，但是有一个对手是你打不过的，那就是趋势，趋势一旦爆发，就不会是一种线性的发展。它会积蓄力量于无形，然后突然爆发出雪崩效应。任何不愿意改变的力量都会在雪崩面前被毁灭，被市场边缘化。</p>
-<p>将来会有越来越多的管理者认识到，保守而谨慎，必将引向毁灭之路，而不可能逃避经济风暴的摧残或将此作为长治久安的生存方式。</p>
-<p>互联网公司之间竞争的严酷程度大大超过了普通的商业战争，大家都无所不用其极。</p>
-<p>中国做互联网的人，一定会遇到三个无法回避的问题：生、死、腾讯。</p>
-<p>任何做客户端的都怕腾讯，主要是怕两方面：第一是被它抄袭，第二是它厉害的推广平台。</p>
-<p>真正的难题不是拥有伟大的梦想，而是你在半夜一身冷汗地惊醒时，发现梦想变成了一场噩梦。 ——《创业维艰》</p>
-<p>商场就是战场，我们同样是战场上的军人，商业竞争对手就是我们的敌人，他们像饥饿的狼群一样守候在我们的身旁，随时准备吞噬着我们的客户。如果我们畏惧、退让，那么他们张开的血盆大口就会连同我们一起吞噬。</p>
-<p>任何中国的互联网创业公司发展到一定的阶段，必然会遭遇腾讯“抄袭+捆绑”的“水泥天花板”。</p>
-<p>正如人体骨骼在负重和压力下反而会越发强壮，谣言和暴动在遏制和镇压下反而愈演愈烈一样，我们生活中的许许多多事物也会从压力、混乱、波动和动荡中受益。</p>
-<p>创业就像是搏击，不仅是因为要不停痛击你的对手。创业艰辛而孤独，需要持续不断地集中注意力。无论你做的多好，你都必须时刻准备再一次出拳打击。在搏击中，你被打了，感到痛苦不堪，然后你坐在场边，等肾上腺素消逝后，你才真切感受到那疼痛，然后，你要再去打下一回合。</p>
-<p>似乎每个创业者在外界看来都是气势汹汹，但是每个人的心里有很多不踏实的地方，没有安全感。也许正是这种特质，造就了这类人容易成就一番事业。一个容易骄傲自满的人，不可能走得长远。</p>
-<p>人们总是问我：当一名CEO的秘诀是什么？<br>遗憾的是，没有秘诀。如果说存在这样一种技巧，那就是看其专心致志的能力和在无路可走时选择最佳路线的能力。与普通人相比，那些令你想躲藏起来甚至直接死掉的时刻，就是你作为一名CEO要经历的不同于常人的地方。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/02/15/2017年度总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/15/2017年度总结/" itemprop="url">2017年度总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-15T23:55:31+08:00">
-                2018-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>写在前面：讲道理我是不太擅长于写这类非技术性的博文，但是觉得一眨眼又走过了一年，是得停下脚步回头看看，写点东西记录一下这一年的得失、展望一下新的一年，为新的一年立一些flag，如果没有什么意外以后每一年的年末我都会写一篇这样的总结性文章作为自己成长路上的标记，希望若干年后的自己可以通过这些东西看到当年的自己。</p>
-<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>其实今年前期还是很在意学习方面的，也花费了很多时间在平时的课程上，可是好像out和in有点不对应，而且挤掉了很多本该用来做自己喜欢的事情上的时间，到后来就干脆顺其自然，没有太在意这方面，事实证明好像也没太大负面影响，而且可以有很多时间去研究自己感兴趣的东西，觉得这样挺好。但是回过头来客观来说还是学渣一枚（哭），看看身边大佬的绩点再看看自己的真的被虐到了，希望在新的一年里在学业上可以有进步，起码绩点不要太低，最好英语过六级哈哈</p>
-<h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><p>今年前期重点主要放在了开发类上面，利用时间做了几个hobby<br>project，基本上都是android项目，接了几个朋友介绍的外包都是做一些边缘开发没有做到很核心的大项目，这和自己的技术不过关有很大的关系，后来在老哥的指导下基本弃了开发类的学习转到DL方面，帮着别人做了两个DL的基础识别应用觉得很受鼓舞，还有就是参加了创新工场的场景分类比赛拿到了名次，但是想一下这些东西都只是套别人的模型做了一下复现，很多核心的理论知识都不懂，所以希望新的一年可以静下心来研究一下DL的相关原理，打好理论基础。</p>
-<h2 id="work"><a href="#work" class="headerlink" title="work"></a>work</h2><p>今年暑假本来有机会去网易做实习，但是由于提前被国防企业面对面的活动埋进坑里再加上对自己的技术不是很自信所以就阴差阳错丢掉了机会，寒假又不想离家太远想回家陪爸妈所以更没时间，希望2018的自己可以去参加一两场实习跟着老哥混混职场，也为了给简历上加两行字哈哈。</p>
-<h2 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h2><p>今年好像大大小小也参加了十几场比赛，拿了一点奖（大多都是参与奖哈哈），但是也搞了很多和专业不想关的比赛（比如环保知识竞赛……我也不知道当时怎么就脑抽参加这种比赛），在比赛中认识了很多大牛，增长了自己的见识，希望明年的自己可以少参加一些没必要的比赛，把主要精力放在对自己重要的比赛上，这样可能产值会高一点。</p>
-<h2 id="科创"><a href="#科创" class="headerlink" title="科创"></a>科创</h2><p>科创刚开题的那段时间好像什么都想做，觉得好像一个月就能肝完一个项目，后来阴差阳错接到超哥的题目，才发现都是自己太单纯，各种问题源源不断，到现在也没一个理想的成果，说到底还是自己太浮躁太心急，希望新年可以静下心来耐心搞完这个题目，至于明年还要不要再接科创就要看明年科创开题时的心情了说不定到时候一抽风又给自己背个锅，不管怎么样一定保佑今年的题目结题<br>啊！！！</p>
-<h2 id="感情"><a href="#感情" class="headerlink" title="感情"></a>感情</h2><p>今年前半年我还是有女朋友的，可是到这会早就成一个人撸键盘了，老铁们都说是我情商太低，我觉得也是哈哈，毕竟自己几乎把所有空闲时间都给了电脑键盘，谁也受不了啊，所以就顺其自然吧，相信缘分就好。</p>
-<h2 id="鸡汤"><a href="#鸡汤" class="headerlink" title="鸡汤"></a>鸡汤</h2><p>之前一直觉得搞技术的就得老老实实学技术，直到后来老哥的话改变了我的想法，从吴军的专栏到逻辑思维的某些文章再到周鸿祎的自传，让我懂了互联网行业不光是有技术就行，还得有不可言说的境界与见识，希望18年的自己可以抽一些时间补一些行业的经典读物，提升一下自己的见识与境界。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这会觉得自己过去的一年好像一事无成，觉得自己过去的一年很浮躁，忙忙碌碌一年也没什么太大的收获，希望18年的自己可以静下心来做一些应该做的事情，希望明年这个时候可以有更多的收获，加油！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/02/12/使用gdb调试程序完全教程/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/12/使用gdb调试程序完全教程/" itemprop="url">使用gdb调试程序完全教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T15:14:07+08:00">
-                2018-02-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近用python做数据可视化导入moviepy的时候报错imageio.core.fetching.NeedDownloadError: Need<br>ffmpeg exe. You can download it by calling:<br>imageio.plugins.ffmpeg.download()<br><img src="https://img-
-blog.csdn.net/20180212151002752?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>按照提示是要下载ffmpeg，所以只需import imaheio并download即可，即在程序的开始加上：</p>
-<pre><code>import imageio
-imageio.plugins.ffmpeg.download()
-</code></pre><p>注意：这两行代码一定要加在import moviepy之前。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2134,7 +2766,7 @@ imageio.plugins.ffmpeg.download()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2145,7 +2777,7 @@ imageio.plugins.ffmpeg.download()
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2156,7 +2788,7 @@ imageio.plugins.ffmpeg.download()
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2376,6 +3008,28 @@ imageio.plugins.ffmpeg.download()
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

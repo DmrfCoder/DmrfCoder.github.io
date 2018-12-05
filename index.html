@@ -2588,6 +2588,601 @@ MOV BYTE PTR [EBX+8], 5 //字节
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/10/Logistic Regression with a Neural Network mindset/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/10/Logistic Regression with a Neural Network mindset/" itemprop="url">Logistic Regression with a Neural Network mindset</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T23:51:18+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Logistic-Regression-with-a-Neural-Network-mindset"><a href="#Logistic-Regression-with-a-Neural-Network-mindset" class="headerlink" title="Logistic Regression with a Neural Network mindset"></a>Logistic Regression with a Neural Network mindset</h1><h2 id="General-Architecture-of-the-learning-algorithm"><a href="#General-Architecture-of-the-learning-algorithm" class="headerlink" title="General Architecture of the learning algorithm"></a>General Architecture of the learning algorithm</h2><p>It’s time to design a simple algorithm to distinguish cat images from non-cat<br>images.</p>
+<p>I will build a Logistic Regression, using a Neural Network mindset. The<br>following Figure explains why <strong>Logistic Regression is actually a very simple<br>Neural Network!</strong></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx3dzp5164j314k0ne417.jpg" alt="image-20181110233216084"></p>
+<p><strong>Mathematical expression of the algorithm</strong> :</p>
+<p>For one example Missing superscript or subscript argument x^{(i)} :</p>
+<p>(1)  z  (  i  )  =  w  T  x  (  i  )  +  b  z^{(i)} = w^T x^{(i)} + b \tag{1}<br>z  (  i  )  =  w  T  x  (  i  )  +  b  (  1  )</p>
+<p>(2)  y  ^  (  i  )  =  a  (  i  )  =  s  i  g  m  o  i  d  (  z  (  i  )  )<br>\hat{y}^{(i)} = a^{(i)} = sigmoid(z^{(i)})\tag{2}  y  ^  ​  (  i  )  =  a  (<br>i  )  =  s  i  g  m  o  i  d  (  z  (  i  )  )  (  2  )</p>
+<p>(3)  L  (  a  (  i  )  ,  y  (  i  )  )  =  −  y  (  i  )  log  ⁡  (  a  (  i<br>)  )  −  (  1  −  y  (  i  )  )  log  ⁡  (  1  −  a  (  i  )  )<br>\mathcal{L}(a^{(i)}, y^{(i)}) = - y^{(i)} \log(a^{(i)}) - (1-y^{(i)} )<br>\log(1-a^{(i)})\tag{3}  L  (  a  (  i  )  ,  y  (  i  )  )  =  −  y  (  i  )<br>lo  g  (  a  (  i  )  )  −  (  1  −  y  (  i  )  )  lo  g  (  1  −  a  (  i  )<br>)  (  3  )</p>
+<p>The cost is then computed by summing over all training examples:<br>(4)  J  =  1  m  ∑  i  =  1  m  L  (  a  (  i  )  ,  y  (  i  )  )  J =<br>\frac{1}{m} \sum_{i=1}^m \mathcal{L}(a^{(i)}, y^{(i)})\tag{4}  J  =  m  1  ​<br>i  =  1  ∑  m  ​  L  (  a  (  i  )  ,  y  (  i  )  )  (  4  )</p>
+<p><strong>Key steps</strong> :<br>In this exercise, I will carry out the following steps:</p>
+<pre><code>- Initialize the parameters of the model
+</code></pre><ul>
+<li>Learn the parameters for the model by minimizing the cost </li>
+<li>Use the learned parameters to make predictions (on the test set) </li>
+<li>Analyse the results and conclude </li>
+</ul>
+<h2 id="Building-the-parts-of-algorithm"><a href="#Building-the-parts-of-algorithm" class="headerlink" title="Building the parts of algorithm"></a>Building the parts of algorithm</h2><p>The main steps for building a Neural Network are:</p>
+<ol>
+<li>Define the model structure (such as number of input features) </li>
+<li>Initialize the model’s parameters </li>
+<li>Loop: <ul>
+<li>Calculate current loss (forward propagation) </li>
+<li>Calculate current gradient (backward propagation) </li>
+<li>Update parameters (gradient descent) </li>
+</ul>
+</li>
+</ol>
+<p>You often build 1-3 separately and integrate them into one function we call <code>model()</code> .</p>
+<h3 id="Helper-functions"><a href="#Helper-functions" class="headerlink" title="Helper functions"></a>Helper functions</h3><h4 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h4><p>Using code from “Python Basics”, implement <code>sigmoid()</code> . As we seen in the<br>figure above, I will compute  s  i  g  m  o  i  d  (  w  T  x  +  b  )  =  1<br>1  +  e  −  (  w  T  x  +  b  )  sigmoid( w^T x + b) = \frac{1}{1 + e^{-(w^T<br>x + b)}}  s  i  g  m  o  i  d  (  w  T  x  +  b  )  =  1  +  e  −  (  w  T<br>x  +  b  )  1  ​  to make predictions. I will use np.exp().</p>
+<pre><code>def sigmoid(z):
+   &quot;&quot;&quot;
+   Compute the sigmoid of z
+
+   Arguments:
+   z -- A scalar or numpy array of any size.
+
+   Return:
+   s -- sigmoid(z)
+   &quot;&quot;&quot;
+
+   ### START CODE HERE ### (≈ 1 line of code)
+   s = 1 / (1 + np.exp(-z))
+   ### END CODE HERE ###
+
+   return s
+</code></pre><h4 id="initialize-with-zeros"><a href="#initialize-with-zeros" class="headerlink" title="initialize_with_zeros"></a>initialize_with_zeros</h4><pre><code>def initialize_with_zeros(dim):
+    &quot;&quot;&quot;
+    This function creates a vector of zeros of shape (dim, 1) for w and initializes b to 0.
+
+    Argument:
+    dim -- size of the w vector we want (or number of parameters in this case)
+
+    Returns:
+    w -- initialized vector of shape (dim, 1)
+    b -- initialized scalar (corresponds to the bias)
+    &quot;&quot;&quot;
+
+    ### START CODE HERE ### (≈ 1 line of code)
+    w = np.zeros(shape=(dim, 1))
+    b = 0
+    ### END CODE HERE ###
+
+    assert (w.shape == (dim, 1))
+    assert (isinstance(b, float) or isinstance(b, int))
+
+    return w, b
+</code></pre><h4 id="Forward-and-Backward-propagation"><a href="#Forward-and-Backward-propagation" class="headerlink" title="Forward and Backward propagation"></a>Forward and Backward propagation</h4><p>Now that our parameters are initialized, we can do the “forward” and<br>“backward” propagation steps for learning the parameters.</p>
+<p><strong>Exercise:</strong> Implement a function <code>propagate()</code> that computes the cost<br>function and its gradient.</p>
+<p><strong>Hints</strong> :</p>
+<p>Forward Propagation:</p>
+<ul>
+<li>I get X </li>
+<li>I compute  A  =  σ  (  w  T  X  +  b  )  =  (  a  (  1  )  ,  a  (  2  )  ,  .  .  .  ,  a  (  m  −  1  )  ,  a  (  m  )  )  A = \sigma(w^T X + b) = (a^{(1)}, a^{(2)}, …, a^{(m-1)}, a^{(m)})  A  =  σ  (  w  T  X  +  b  )  =  (  a  (  1  )  ,  a  (  2  )  ,  .  .  .  ,  a  (  m  −  1  )  ,  a  (  m  )  ) </li>
+<li>I calculate the cost function:  J  =  −  1  m  ∑  i  =  1  m  y  (  i  )  log  ⁡  (  a  (  i  )  )  +  (  1  −  y  (  i  )  )  log  ⁡  (  1  −  a  (  i  )  )  J = -\frac{1}{m}\sum_{i=1}^{m}y^{(i)}\log(a^{(i)})+(1-y^{(i)})\log(1-a^{(i)})  J  =  −  m  1  ​  ∑  i  =  1  m  ​  y  (  i  )  lo  g  (  a  (  i  )  )  +  (  1  −  y  (  i  )  )  lo  g  (  1  −  a  (  i  )  ) </li>
+</ul>
+<p>Here are the two formulas I will be using:</p>
+<p>(5)  ∂  J  ∂  w  =  1  m  X  (  A  −  Y  )  T  \frac{\partial J}{\partial w} =<br>\frac{1}{m}X(A-Y)^T\tag{5}  ∂  w  ∂  J  ​  =  m  1  ​  X  (  A  −  Y  )  T  (<br>5  )<br>(6)  ∂  J  ∂  b  =  1  m  ∑  i  =  1  m  (  a  (  i  )  −  y  (  i  )  )<br>\frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^m<br>(a^{(i)}-y^{(i)})\tag{6}  ∂  b  ∂  J  ​  =  m  1  ​  i  =  1  ∑  m  ​  (  a  (<br>i  )  −  y  (  i  )  )  (  6  )</p>
+<pre><code>def propagate(w, b, X, Y):
+   &quot;&quot;&quot;
+   Implement the cost function and its gradient for the propagation explained above
+
+   Arguments:
+   w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+   b -- bias, a scalar
+   X -- data of size (num_px * num_px * 3, number of examples)
+   Y -- true &quot;label&quot; vector (containing 0 if non-cat, 1 if cat) of size (1, number of examples)
+
+   Return:
+   cost -- negative log-likelihood cost for logistic regression
+   dw -- gradient of the loss with respect to w, thus same shape as w
+   db -- gradient of the loss with respect to b, thus same shape as b
+
+   Tips:
+   - Write your code step by step for the propagation. np.log(), np.dot()
+   &quot;&quot;&quot;
+
+   m = X.shape[1]
+
+   # FORWARD PROPAGATION (FROM X TO COST)
+   ### START CODE HERE ### (≈ 2 lines of code)
+   A = sigmoid(np.dot(w.T, X) + b)  # compute activation
+   cost = -(1 / m) * np.sum(Y * np.log(A) + (1 - Y) * np.log(1 - A), axis=1)  # compute cost
+   ### END CODE HERE ###
+
+   # BACKWARD PROPAGATION (TO FIND GRAD)
+   ### START CODE HERE ### (≈ 2 lines of code)
+   dw = (1 / m) * np.dot(X, (A - Y).T)
+   db = (1 / m) * np.sum(A - Y)
+   ### END CODE HERE ###
+
+   assert (dw.shape == w.shape)
+   assert (db.dtype == float)
+   cost = np.squeeze(cost)
+   assert (cost.shape == ())
+
+   grads = {&quot;dw&quot;: dw,
+            &quot;db&quot;: db}
+
+   return grads, cost
+</code></pre><h4 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h4><ul>
+<li>I have initialized our parameters. </li>
+<li>We are also able to compute a cost function and its gradient. </li>
+<li>Now, I want to update the parameters using gradient descent. </li>
+</ul>
+<p><strong>Exercise:</strong> Write down the optimization function. The goal is to learn w and<br>b by minimizing the cost function J. For a parameter \theta, the update rule<br>is  θ  =  θ  −  α  d  θ  \theta = \theta - \alpha \text{ } d\theta  θ  =  θ  −<br>α  d  θ  , where  α  \alpha  α  is the learning rate.</p>
+<pre><code>def optimize(w, b, X, Y, num_iterations, learning_rate, print_cost=False):
+   &quot;&quot;&quot;
+   This function optimizes w and b by running a gradient descent algorithm
+
+   Arguments:
+   w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+   b -- bias, a scalar
+   X -- data of shape (num_px * num_px * 3, number of examples)
+   Y -- true &quot;label&quot; vector (containing 0 if non-cat, 1 if cat), of shape (1, number of examples)
+   num_iterations -- number of iterations of the optimization loop
+   learning_rate -- learning rate of the gradient descent update rule
+   print_cost -- True to print the loss every 100 steps
+
+   Returns:
+   params -- dictionary containing the weights w and bias b
+   grads -- dictionary containing the gradients of the weights and bias with respect to the cost function
+   costs -- list of all the costs computed during the optimization, this will be used to plot the learning curve.
+
+   Tips:
+   You basically need to write down two steps and iterate through them:
+       1) Calculate the cost and the gradient for the current parameters. Use propagate().
+       2) Update the parameters using gradient descent rule for w and b.
+   &quot;&quot;&quot;
+
+   costs = []
+
+   for i in range(num_iterations):
+
+       # Cost and gradient calculation (≈ 1-4 lines of code)
+       ### START CODE HERE ### 
+       grads, cost = propagate(w, b, X, Y)
+       ### END CODE HERE ###
+
+       # Retrieve derivatives from grads
+       dw = grads[&quot;dw&quot;]
+       db = grads[&quot;db&quot;]
+
+       # update rule (≈ 2 lines of code)
+       ### START CODE HERE ###
+       w = w - learning_rate * dw
+       b = b - learning_rate * db
+       ### END CODE HERE ###
+
+       # Record the costs
+       if i % 100 == 0:
+           costs.append(cost)
+
+       # Print the cost every 100 training iterations
+       if print_cost and i % 100 == 0:
+           print(&quot;Cost after iteration %i: %f&quot; % (i, cost))
+
+   params = {&quot;w&quot;: w,
+             &quot;b&quot;: b}
+
+   grads = {&quot;dw&quot;: dw,
+            &quot;db&quot;: db}
+
+   return params, grads, costs
+</code></pre><h2 id="predict"><a href="#predict" class="headerlink" title="predict"></a>predict</h2><p><strong>Exercise:</strong> The previous function will output the learned w and b. We are<br>able to use w and b to predict the labels for a dataset X. Implement the <code>predict()</code> function. There are two steps to computing predictions:</p>
+<ol>
+<li>Calculate  Y  ^  =  A  =  σ  (  w  T  X  +  b  )  \hat{Y} = A = \sigma(w^T X + b)  Y  ^  =  A  =  σ  (  w  T  X  +  b  ) </li>
+<li>Convert the entries of a into 0 (if activation  &lt;= 0.5) or 1 (if activation &gt; 0.5), stores the predictions in a vector <code>Y_prediction</code> . If you wish, you can use an <code>if</code> / <code>else</code> statement in a <code>for</code> loop (though there is also a way to vectorize this). </li>
+</ol>
+<pre><code>def predict(w, b, X):
+    &apos;&apos;&apos;
+    Predict whether the label is 0 or 1 using learned logistic regression parameters (w, b)
+
+    Arguments:
+    w -- weights, a numpy array of size (num_px * num_px * 3, 1)
+    b -- bias, a scalar
+    X -- data of size (num_px * num_px * 3, number of examples)
+
+    Returns:
+    Y_prediction -- a numpy array (vector) containing all predictions (0/1) for the examples in X
+    &apos;&apos;&apos;
+
+    m = X.shape[1]
+    Y_prediction = np.zeros((1, m))
+    w = w.reshape(X.shape[0], 1)
+
+    # Compute vector &quot;A&quot; predicting the probabilities of a cat being present in the picture
+    ### START CODE HERE ### (≈ 1 line of code)
+    A = sigmoid(np.dot(w.T, X) + b)
+    ### END CODE HERE ###
+
+    for i in range(A.shape[1]):
+
+        # Convert probabilities A[0,i] to actual predictions p[0,i]
+        ### START CODE HERE ### (≈ 4 lines of code)
+        if A[0][i] &lt; 0.5:
+            Y_prediction[0][i] = 0
+        else:
+            Y_prediction[0][i] = 1
+
+        ### END CODE HERE ###
+
+    assert (Y_prediction.shape == (1, m))
+
+    return Y_prediction
+</code></pre><h4 id="What-to-remember"><a href="#What-to-remember" class="headerlink" title="What to remember"></a>What to remember</h4><p>We’ve implemented several functions that:</p>
+<ul>
+<li>Initialize (w,b) </li>
+<li>Optimize the loss iteratively to learn parameters (w,b): <ul>
+<li>computing the cost and its gradient </li>
+<li>updating the parameters using gradient descent </li>
+</ul>
+</li>
+<li>Use the learned (w,b) to predict the labels for a given set of examples </li>
+</ul>
+<h4 id="Merge-all-functions-into-a-model"><a href="#Merge-all-functions-into-a-model" class="headerlink" title="Merge all functions into a model"></a>Merge all functions into a model</h4><p>You will now see how the overall model is structured by putting together all<br>the building blocks (functions implemented in the previous parts) together, in<br>the right order.</p>
+<p><strong>Exercise:</strong> Implement the model function. Use the following notation:</p>
+<pre><code>- Y_prediction_test for your predictions on the test set
+</code></pre><ul>
+<li>Y_prediction_train for your predictions on the train set </li>
+<li>w, costs, grads for the outputs of optimize() </li>
+</ul>
+<pre><code>def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0.5, print_cost=False):
+   &quot;&quot;&quot;
+   Builds the logistic regression model by calling the function you&apos;ve implemented previously
+
+   Arguments:
+   X_train -- training set represented by a numpy array of shape (num_px * num_px * 3, m_train)
+   Y_train -- training labels represented by a numpy array (vector) of shape (1, m_train)
+   X_test -- test set represented by a numpy array of shape (num_px * num_px * 3, m_test)
+   Y_test -- test labels represented by a numpy array (vector) of shape (1, m_test)
+   num_iterations -- hyperparameter representing the number of iterations to optimize the parameters
+   learning_rate -- hyperparameter representing the learning rate used in the update rule of optimize()
+   print_cost -- Set to true to print the cost every 100 iterations
+
+   Returns:
+   d -- dictionary containing information about the model.
+   &quot;&quot;&quot;
+
+   ### START CODE HERE ###
+
+   # initialize parameters with zeros (≈ 1 line of code)
+   w, b = initialize_with_zeros(X_train.shape[0])
+
+   # Gradient descent (≈ 1 line of code)
+   params, grads, costs = optimize(w, b, X_train, Y_train, num_iterations=num_iterations, learning_rate=learning_rate,
+                                   print_cost=print_cost)
+
+   # Retrieve parameters w and b from dictionary &quot;parameters&quot;
+   w = params[&quot;w&quot;]
+   b = params[&quot;b&quot;]
+
+   # Predict test/train set examples (≈ 2 lines of code)
+   Y_prediction_test = predict(w, b, X_test)
+   Y_prediction_train = predict(w, b, X_train)
+
+   ### END CODE HERE ###
+
+   # Print train/test Errors
+   print(&quot;train accuracy: {} %&quot;.format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+   print(&quot;test accuracy: {} %&quot;.format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+
+   d = {&quot;costs&quot;: costs,
+        &quot;Y_prediction_test&quot;: Y_prediction_test,
+        &quot;Y_prediction_train&quot;: Y_prediction_train,
+        &quot;w&quot;: w,
+        &quot;b&quot;: b,
+        &quot;learning_rate&quot;: learning_rate,
+        &quot;num_iterations&quot;: num_iterations}
+
+   return d
+</code></pre><h3 id="train"><a href="#train" class="headerlink" title="train"></a>train</h3><pre><code>d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations=2000, learning_rate=0.005, print_cost=True)
+</code></pre><h3 id="test-our-image"><a href="#test-our-image" class="headerlink" title="test our image"></a>test our image</h3><pre><code>## START CODE HERE ## (PUT YOUR IMAGE NAME) 
+my_image = &quot;my_image.jpg&quot;   # change this to the name of your image file 
+## END CODE HERE ##
+
+# We preprocess the image to fit your algorithm.
+fname = &quot;images/&quot; + my_image
+image = np.array(ndimage.imread(fname, flatten=False))
+my_image = scipy.misc.imresize(image, size=(num_px,num_px)).reshape((1, num_px*num_px*3)).T
+my_predicted_image = predict(d[&quot;w&quot;], d[&quot;b&quot;], my_image)
+
+plt.imshow(image)
+print(&quot;y = &quot; + str(np.squeeze(my_predicted_image)) + &quot;, your algorithm predicts a \&quot;&quot; + classes[int(np.squeeze(my_predicted_image)),].decode(&quot;utf-8&quot;) +  &quot;\&quot; picture.&quot;)
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/09/Normalizing rows with Python/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/Normalizing rows with Python/" itemprop="url">Normalizing rows with Python</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T00:11:51+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>A common technique we use in Machine Learning and Deep Learning is to<br>normalize our data. It often leads to a better performance because gradient<br>descent converges faster after normalization. Here, by normalization we mean<br>changing x to :<br><img src="https://img-blog.csdnimg.cn/20181109000849389.png" alt="在这里插入图片描述"><br>(dividing each row vector of x by its norm).</p>
+<p>For example, if  (3)  x  =  [  0  3  4  2  6  4  ]  x = \begin{bmatrix} 0<br>&amp; 3 &amp; 4 \\ 2 &amp; 6 &amp; 4 \\ \end{bmatrix}\tag{3}  x  =  [  0  2<br>​  3  6  ​  4  4  ​  ]  (  3  )  then  (4)  ∥  x  ∥  =  n  p  .  l  i  n  a  l<br>g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e  e  p  d  i  m  s  =  T<br>r  u  e  )  =  [  5  56  ]  | x| = np.linalg.norm(x, axis = 1, keepdims =<br>True) = \begin{bmatrix} 5 \\ \sqrt{56} \\ \end{bmatrix}\tag{4}  ∥  x  ∥  =<br>n  p  .  l  i  n  a  l  g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e<br>e  p  d  i  m  s  =  T  r  u  e  )  =  [  5  5  6  ​  ​  ]  (  4  )  and  (5)<br>x  _  n  o  r  m  a  l  i  z  e  d  =  x  ∥  x  ∥  =  [  0  3  5  4  5  2  56<br>6  56  4  56  ]  x\_normalized = \frac{x}{| x|} = \begin{bmatrix} 0 &amp;<br>\frac{3}{5} &amp; \frac{4}{5} \\ \frac{2}{\sqrt{56}} &amp;<br>\frac{6}{\sqrt{56}} &amp; \frac{4}{\sqrt{56}} \\ \end{bmatrix}\tag{5}  x  _<br>n  o  r  m  a  l  i  z  e  d  =  ∥  x  ∥  x  ​  =  [  0  5  6  ​  2  ​  ​  5<br>3  ​  5  6  ​  6  ​  ​  5  4  ​  5  6  ​  4  ​  ​  ]  (  5  )<br><strong>Exercise</strong> : Implement normalizeRows() to normalize the rows of a matrix.<br>After applying this function to an input matrix x, each row of x should be a<br>vector of unit length (meaning length 1).</p>
+<h2 id="implement"><a href="#implement" class="headerlink" title="implement"></a>implement</h2><pre><code># GRADED FUNCTION: normalizeRows
+
+def normalizeRows(x):
+    &quot;&quot;&quot;
+    Implement a function that normalizes each row of the matrix x (to have unit length).
+
+    Argument:
+    x -- A numpy matrix of shape (n, m)
+
+    Returns:
+    x -- The normalized (by row) numpy matrix. You are allowed to modify x.
+    &quot;&quot;&quot;
+
+    ### START CODE HERE ### (≈ 2 lines of code)
+    # Compute x_norm as the norm 2 of x. Use np.linalg.norm(..., ord = 2, axis = ..., keepdims = True)
+    x_norm = np.linalg.norm(x,axis=1,keepdims=True)
+
+    # Divide x by its norm.
+    x = x/x_norm
+    ### END CODE HERE ###
+
+    return x
+
+
+
+x = np.array([
+    [0, 3, 4],
+    [1, 6, 4]])
+print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
+</code></pre><p>output:<br><img src="https://img-blog.csdnimg.cn/20181109001059672.png" alt="在这里插入图片描述"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/10/06/汇编常用指令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -3587,423 +4182,11 @@ server.httpsPort = localhost
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/21/Activity 与 Fragment 通信方式总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/21/Activity 与 Fragment 通信方式总结/" itemprop="url">Activity 与 Fragment 通信方式总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T15:52:32+08:00">
-                2018-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>通常，Fragment 与 Activity 通信存在三种情形：</p>
-<ul>
-<li><p>Activity 操作内嵌的 Fragment </p>
-</li>
-<li><p>Fragment 操作宿主 Activity </p>
-</li>
-<li><p>Fragment 操作同属 Activity中的其他 Fragment </p>
-</li>
-</ul>
-<p>在Android中我们可以通过以下几种方式优雅地实现Activity和fragment之间的通信：</p>
-<ul>
-<li><p>Handler </p>
-</li>
-<li><p>广播 </p>
-</li>
-<li><p>EventBus </p>
-</li>
-<li><p>接口回调 </p>
-</li>
-<li><p>Bundle和setArguments(bundle) </p>
-</li>
-</ul>
-<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><pre><code>public class MainActivity extends FragmentActivity{ 
-      //声明一个Handler 
-      public Handler mHandler = new Handler(){       
-          @Override
-           public void handleMessage(Message msg) { 
-                super.handleMessage(msg);
-                 //相应的逻辑处理代码
-           }
-     }
-
-   } 
-    public class MainFragment extends Fragment{ 
-          //保存Activity传递的handler
-           private Handler mHandler;
-           @Override
-           public void onAttach(Activity activity) { 
-                super.onAttach(activity);
-
-                if(activity instance MainActivity){ 
-                      mHandler =  ((MainActivity)activity).mHandler; 
-                }
-           }
-
-     }
-</code></pre><p>这种方式的缺点：</p>
-<ul>
-<li><p>Fragment对具体的Activity存在耦合，不利于Fragment复用 </p>
-</li>
-<li><p>不利于维护，若想删除相应的Activity，Fragment也得改动 </p>
-</li>
-<li><p>没法获取Activity的返回数据 </p>
-</li>
-</ul>
-<p>所以一般不建议使用这种方法。</p>
-<h2 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h2><p>在 Activity 中注册广播接收器，在 Fragment中发送广播：</p>
-<pre><code>private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
-        if (action.equals(ACTION_NAME)) {
-            String msg = intent.getStringExtra(&quot;msg&quot;);
-            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-        }
-    }
-};
-public void registerBoradcastReceiver() {
-    IntentFilter myIntentFilter = new IntentFilter();
-    myIntentFilter.addAction(ACTION_NAME);
-    registerReceiver(mBroadcastReceiver, myIntentFilter);
-}
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    unregisterReceiver(mBroadcastReceiver);
-}
-</code></pre><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h2><ul>
-<li><p>MainActivity </p>
-<pre><code>//注册订阅者
-</code></pre><p>EventBus.getDefault().register(this);<br>//定义接收信息的方法<br>@Subscribe</p>
-<pre><code>public void onEventMainThread(UserEvent event) {
-    btn.setText(event.getUserName());
-    service_tv.setText(event.getUserName());
-}
-</code></pre></li>
-</ul>
-<pre><code>* Fragment发送信息 
-
-            UserEvent event=new UserEvent();
-    EventBus.getDefault().post(event);
-</code></pre><h3 id="接口回调"><a href="#接口回调" class="headerlink" title="接口回调"></a>接口回调</h3><ul>
-<li><p>在 Fragment 中定义一个接口 </p>
-</li>
-<li><p>调用接口中的抽象方法 </p>
-</li>
-<li><p>在 Activity 中实现接口，并具体实现接口中的方法，完成通信。 </p>
-</li>
-</ul>
-<h3 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h3><pre><code>public class MainFragment extends Fragment{
-       public FragmentListener mListener; 
-
-      //MainFragment开放的接口 
-      public static interface FragmentListener{ 
-
-          //跳到h5页面
-         void toH5Page();
-
-         //展示消息
-         void showMsg(String str);
-       }
-       @Override 
-      public void onAttach(Activity activity) { 
-            super.onAttach(activity); 
-            //对传递进来的Activity进行接口转换
-             if(activity instance FragmentListener){
-
-                 mListener = ((FragmentListener)activity); 
-
-            }
-       }
-       ...其他处理代码省略 
-
-       mButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              msgListener.showMsg(&quot;Hello 传递数据给Activity展示&quot;);
-          }
-      });
-}
-</code></pre><h3 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h3><pre><code>// MainActivity 实现 MainFragment开放的接口 
-  public class MainActivity extends FragmentActivity implements FragmentListener{ 
-        @override
-         public void toH5Page(){... }
-
-        @Override
-         public void showMsg(String str) {
-            Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
-        }
-
-       ...其他处理代码省略
-   }
-</code></pre><h3 id="Bundle和setArguments-bundle"><a href="#Bundle和setArguments-bundle" class="headerlink" title="Bundle和setArguments(bundle)"></a>Bundle和setArguments(bundle)</h3><p>参见 <a href="https://blog.csdn.net/qq_36982160/article/details/82422365" target="_blank" rel="noopener"> Android如何优雅地向Fragment传递参数
-</a></p>
-<h2 id="Fragment-amp-amp-Fragment-数据交互"><a href="#Fragment-amp-amp-Fragment-数据交互" class="headerlink" title="Fragment &amp;&amp; Fragment 数据交互"></a>Fragment &amp;&amp; Fragment 数据交互</h2><p>Fragment和Fragment间数据交互，应该也是会经常用到的。我们可以使用宿主Activity做传递媒介。原理其实也是通过使用onActivityResult回调，完成Fragment<br>&amp;&amp; Fragment<br>的数据交互，这其中有两个比较重要的方法：Fragment.setTargetFragment、getTargetFragment()。</p>
-<p>在 FirstFragment 中，通过setTargetFragment来连接需要交互的Fragment：</p>
-<pre><code>secondFragment.setTargetFragment(FirstFragment.this, REQUEST_CODE);
-</code></pre><p>接着实现onActivityResult,处理传递过来的数据：</p>
-<pre><code>@Override  
-   public void onActivityResult(int requestCode, int resultCode, Intent data) {  
-       super.onActivityResult(requestCode, resultCode, data);  
-       if(resultCode != Activity.RESULT_OK){  
-           return;  
-       }else{  
-           Integer str = data.getIntExtra(&quot;key&quot;,-1);  
-           //处理数据...
-       }  
-   }
-</code></pre><p>在 SecondFragment 中调用sendResult（）方法，回传数据给 FirstFragment:</p>
-<pre><code>private void sendResult(int resultOk) {  
-        if(getTargetFragment() == null){  
-            return;  
-        }else{  
-            Intent intent = new Intent();  
-            intent.putExtra(&quot;key&quot;, 520); 
-                           getTargetFragment().onActivityResult(FirstFragment.REQUEST_CODE,resultOk,intent);  
-        }  
-    }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/21/Android使edittext弹出的软键盘位于输入框下面而不是覆盖输入框/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/21/Android使edittext弹出的软键盘位于输入框下面而不是覆盖输入框/" itemprop="url">Android使edittext弹出的软键盘位于输入框下面而不是覆盖输入框</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T15:35:08+08:00">
-                2018-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>提供三个方法：</p>
-<p>1:在你的activity中的oncreate中setContentView之前写上这个代码</p>
-<pre><code>getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)；
-</code></pre><p>2:在项目的AndroidManifest.xml文件中界面对应的里加入:</p>
-<pre><code>android:windowSoftInputMode=&quot;stateVisible|adjustResize&quot; //这样会让屏幕整体上移android:windowSoftInputMode=&quot;adjustPan&quot; //这样键盘会覆盖屏幕
-</code></pre><p>3:把顶级的layout替换成ScrollView，或者说在顶级的Layout上面再加一层ScrollView的封装。这样就会把软键盘和输入框一起滚动了，软键盘会一直处于底部。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -4049,7 +4232,7 @@ protected void onDestroy() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -4060,7 +4243,7 @@ protected void onDestroy() {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -4071,7 +4254,7 @@ protected void onDestroy() {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -4291,6 +4474,28 @@ protected void onDestroy() {
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

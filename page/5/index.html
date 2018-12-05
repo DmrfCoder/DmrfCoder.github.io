@@ -229,6 +229,1307 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/18/Android Studio解决org.gradle.api.resources.ResourceException: Could not get resource/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/18/Android Studio解决org.gradle.api.resources.ResourceException: Could not get resource/" itemprop="url">Android Studio解决org.gradle.api.resources.ResourceException Could not get resource</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T00:49:52+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>报错信息如下:</p>
+<pre><code>Caused by: org.gradle.api.resources.ResourceException: Could not get resource ‘https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/3.1.0/gradle-3.1.0.pom 7
+</code></pre><p>解决方案:<br><img src="http://www.updateweb.cn/images/zwfec/20180531/1527781034399981.png" alt="这里写图片描述"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/13/使用python matplotlib实现动图绘制/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/使用python matplotlib实现动图绘制/" itemprop="url">使用python matplotlib实现动图绘制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T17:17:43+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>动图的核心函数是matplotlib.animation.FuncAnimation，基本用法：</p>
+<pre><code>anim = animation.funcanimation(fig, animate, init_func=init, frames=100, interval=20, blit=true)
+# fig: 是我们创建的画布
+# animat: 是重点，是我们每个时刻要更新图形对象的函数，返回值和init_func相同
+# init_func: 初始化函数，其返回值就是每次都要更新的对象，
+#    告诉FuncAnimation在不同时刻要更新哪些图形对象
+# frames: 相当于时刻t，要模拟多少帧图画，不同时刻的t相当于animat的参数
+# interval: 刷新频率，毫秒
+# blit: blit是一个非常重要的关键字，它告诉动画只重绘修改的部分，结合上面保存的时间，
+#    blit=true会使动画显示得会非常非常快
+</code></pre><p>动图绘制的关键是动态更新数据并刷新图像，更新数据需要写一个animat函数，看具体实现：</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>给出代码及对应注释，你应该会秒懂：</p>
+<pre><code># -*-coding:utf-8-*-
+import random
+from matplotlib.backends.backend_agg import FigureCanvas
+
+
+
+
+from matplotlib import pyplot as plt
+from matplotlib import animation
+import numpy as np
+import seaborn as sns
+from matplotlib.image import imread
+
+
+
+
+
+
+
+
+
+
+
+gesture_i = [0] * 2200
+gesture_q = [0] * 2200
+acc_first = [0] * 6
+acc_second = [0] * 6
+
+acc_first_max_index = 0
+acc_second_max_index = 0
+acc_first_max = 0
+acc_second_max = 0
+
+cur_data_count = 0
+
+update_first_flag = False
+update_second_flag = False
+
+
+
+
+
+
+
+
+name_list = [&quot;Static&quot;, &quot;Approach&quot;, &quot;Apart&quot;, &quot;Click&quot;, &quot;Flip&quot;, &quot;Circle&quot;]
+
+# 创建画布，包含4个子图
+fig = plt.figure(figsize=(15, 10))
+
+bgimg=imread(&quot;bac2.jpg&quot;)#设置背景图片
+fig.figimage(bgimg,resize=True)#设置窗口自适应（背景图片）
+
+
+
+ax1 = fig.add_subplot(2, 2, 1)
+ax1.set_facecolor(&apos;none&apos;)#设置该子图背景透明，其他子图同理
+
+
+ax2 = fig.add_subplot(2, 2, 3)
+ax2.set_facecolor(&apos;none&apos;)
+
+
+
+ax3 = fig.add_subplot(2, 2, 2)
+ax3.set_facecolor(&apos;none&apos;)
+
+ax4 = fig.add_subplot(2, 2, 4)
+ax4.set_facecolor(&apos;none&apos;)
+
+# 绘制初始图形
+bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+
+
+bar2 = ax4.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+
+
+x = np.arange(0, 2200, 1)  # x轴
+
+ax1.set_ylim(-1, 1)#设置y轴范围为-1到1
+line1, = ax1.plot(x, gesture_i,color=&apos;coral&apos;)
+
+ax2.set_ylim(-1, 1)
+line2, = ax2.plot(x, gesture_q,color=&apos;coral&apos;)
+
+#初始化函数
+def init():
+    # 构造开始帧函数init
+    # 改变y轴数据，x轴不需要改
+    line1.set_ydata(gesture_i)
+    line2.set_ydata(gesture_q)
+    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&apos;rgb&apos;, tick_label=name_list)
+
+    ax1.set_xlabel(&quot;I&quot;)
+    ax2.set_xlabel(&quot;Q&quot;)
+
+    return line1, line2, ax1  # 注意返回值，我们要更新的就是这些数据
+
+#更新图像的函数
+def animate(i):
+    #注意这里必须要用global声明，不然可能出现无法动态更新数据的情况
+    global gesture_i
+    global gesture_q
+    global update_first_flag
+    global update_second_flag
+
+    line1.set_ydata(gesture_i)
+
+    ax3.cla()
+    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+    ax3.legend()
+
+    ax4.cla()
+    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&apos;rgb&apos;, tick_label=name_list)
+    ax4.legend
+
+
+
+    return line1, line2, ax1
+
+
+
+
+
+def draw_view():
+# 调用FuncAnimation函数生成动画。参数说明：
+# fig 进行动画绘制的figure
+# func 自定义动画函数，即传入刚定义的函数animate
+# frames 动画长度，一次循环包含的帧数
+# init_func 自定义开始帧，即传入刚定义的函数init
+# interval 更新频率，以ms计
+# blit 选择更新所有点，还是仅更新产生变化的点。应选择True，但mac用户请选择False，否则无法显示动画
+    ani = animation.FuncAnimation(fig=fig,
+                                  func=animate,
+                                  frames=100,
+                                  init_func=init,
+                                  interval=100,
+                                  blit=False)
+    plt.show()
+
+
+if __name__ == &apos;__main__&apos;:
+    draw_view()
+</code></pre><p>说明：实现动态数据可视化的思路是将绘制图像所用的数据写成全局变量，然后动态更新你的数据，UI层会一帧一帧地刷新图像，这样只要你的数据在变，图像就会是变化的，给一张效果图：<br><img src="https://img-
+blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/13/使用python搭建服务器并实现Android端与之通信/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/使用python搭建服务器并实现Android端与之通信/" itemprop="url">使用python搭建服务器并实现Android端与之通信</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T16:47:56+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python<br>Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。</p>
+<h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>环境：服务端使用Python3.5+PyCharm</p>
+<h2 id="新建Flask项目"><a href="#新建Flask项目" class="headerlink" title="新建Flask项目"></a>新建Flask项目</h2><p>看图：<br><img src="https://img-
+blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后create，初始化完成之后项目结构应该类似如下：<br><img src="https://img-
+blog.csdn.net/20180613162927862?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>其实这时候直接启动项目就可以在浏览器访问到：<br><img src="https://img-
+blog.csdn.net/20180613163243652?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-
+blog.csdn.net/20180613163325335?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>这就是使用现成框架的好处hhh，但是我们希望实现与客户端的通信，自然需要再做进一步code.</p>
+<h2 id="编写代码接受来自客户端的数据"><a href="#编写代码接受来自客户端的数据" class="headerlink" title="编写代码接受来自客户端的数据"></a>编写代码接受来自客户端的数据</h2><p>首先我们看一下hello_world的代码：</p>
+<pre><code>@app.route(&apos;/&apos;)
+def hello_world():
+    return &apos;Hello World!&apos;
+</code></pre><p>这里@app.route(‘/’)意思就是访问你服务端地址时调用这个方法，所以我们可以通过这种方式实现自己的需求，比如：</p>
+<pre><code>@app.route(&apos;/demo&apos;, methods=[&apos;POST&apos;])
+def demo():
+    value = request.form[&apos;demo_tag&apos;]
+    print(value)
+    return &quot;ok&quot;
+</code></pre><p>上面代码的意思就是你可以通过 <a href="http://127.0.0.1:5000/demo" target="_blank" rel="noopener"> http://127.0.0.1:5000/demo </a><br>访问到demo方法，request.form[‘demo_tag’]的返回值是你客户端发送的tag为demo_tag的数据，下文会详细介绍如何发送数据，最后返回值你可以自己指定，这里随便给了一个。到这里服务端已经ok了，我们看看客户端如何实现.</p>
+<h1 id="Android端"><a href="#Android端" class="headerlink" title="Android端"></a>Android端</h1><p>客户端使用Okhttp，需要导入两个jar包，地址<br>jar包下载地址： <a href="http://square.github.io/okhttp/" target="_blank" rel="noopener"> http://square.github.io/okhttp/ </a><br><img src="https://img-
+blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>注意2个jar包都要，图中3个圈点完就ok了，下载到本地自己导入，这部分就不详细写了，不会导入的可以Google一下。</p>
+<p>如果不想手动导入jar包可以:</p>
+<pre><code>implementation &apos;com.squareup.okhttp3:okhttp:3.11.0&apos;
+</code></pre><p>导入之后直接看代码：</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ok = findViewById(R.id.ok);
+    username = findViewById(R.id.username);
+    password = findViewById(R.id.password);
+
+
+    ok.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String name = String.valueOf(username.getText());
+            String pass = String.valueOf(password.getText());
+            String url = &quot;http://112.86.199.151:5000/gesture&quot;;//替换成自己的服务器地址
+            SendMessage(url, name, pass);
+        }
+    });
+}
+
+
+private void SendMessage(String url, final String userName, String passWord) {
+
+    value = new float[550];
+    Random random = new Random();
+    for (int i = 0; i &lt; 550; i++) {
+        if (i % 2 == 0) {
+            value[i] = random.nextFloat();
+        } else {
+            value[i] = -random.nextFloat();
+        }
+
+    }
+    String str_value = FloatArrayToString(value);
+
+    OkHttpClient client = new OkHttpClient();
+    FormBody.Builder formBuilder = new FormBody.Builder();
+    formBuilder.add(&quot;demo&quot;, str_value);
+
+    Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
+    Call call = client.newCall(request);
+    call.enqueue(new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, &quot;服务器错误&quot;, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(Call call, final Response response) throws IOException {
+            final String res = response.body().string();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (res.equals(&quot;0&quot;)) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, &quot;失败&quot;, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this, &quot;成功&quot;+res, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
+
+                }
+            });
+        }
+    });
+
+}
+</code></pre><p>我这里随机生成了一个数组并将其发送到了服务器端，核心代码很简单，有框架真的可以为所欲为，写不动了吃饭去了，也许有心情会再更的详细点，给份现成代码自己研究研究吧：<br><a href="https://github.com/DmrfCoder/OkHttpDemo" target="_blank" rel="noopener"> https://github.com/DmrfCoder/OkHttpDemo
+</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/11/《微反应》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/11/《微反应》/" itemprop="url">《微反应》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T13:41:30+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h1><p>姜振宇，中国政法大学中国法律信息中心主任，著名测谎专家，领导着国内首家应用微反应理论进行测谎的研究团队。</p>
+<h1 id="关于本书"><a href="#关于本书" class="headerlink" title="关于本书"></a>关于本书</h1><p>《微反应》是姜振宇及其团队经过5年研究，与8家司法科研机构合作，在一万多条测试数据的基础上写成的，对微反应进行了系统的分析和归类，并融入了大量常见的生活案例，非常便于应用。了解这些“微反应”，不仅可以有效地判断谎言，识别伪装，还可以从自身的微反应中发现自己没有意识到的情绪，帮助你更好地认识自己。</p>
+<h1 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h1><ul>
+<li>什么是微反应； </li>
+<li>常见的微反应类型及其背后的心理机制。<br><img src="https://img-
+blog.csdn.net/20180611133727101?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></li>
+</ul>
+<h1 id="什么是微反应"><a href="#什么是微反应" class="headerlink" title="什么是微反应"></a>什么是微反应</h1><p>人在面对突发情况和刺激时，不由自主地表现出的微小反应，它源于 <strong>人的生存本能</strong><br>。人和动物的不同，是在长期进化中发展了智力，可以有意识地控制自己的反应和行为，甚至可以很好地伪装自己的真实反应。然而，在受到突然的刺激和威胁时，由于生存本能的强大作用，人会在极短的时间内退回动物的水平，出现种种瞬间的、微小的动作或表情。</p>
+<h1 id="常见的微反应类型及其背后的心理机制"><a href="#常见的微反应类型及其背后的心理机制" class="headerlink" title="常见的微反应类型及其背后的心理机制"></a>常见的微反应类型及其背后的心理机制</h1><h2 id="冻结反应"><a href="#冻结反应" class="headerlink" title="冻结反应"></a>冻结反应</h2><p>是人在惊讶、恐惧的心理状态下产生的微反应。在遇到意外的情况时，本能地减少动作，保持不动。<br>（1）面部惊讶 人在惊讶时，往往会面部呆滞，眼睛睁大，嘴巴微张，这其实就是冻结的一种表现。<br>（2）呼吸控制<br>呼吸的冻结反应，是不自觉地屏住呼吸或者放慢呼吸。<br>（3）手脚约束<br>女性常见的动作是把双手拉住放在身前，男性常见的动作则是把双手拉住放在身后，或者插在裤兜里。脚的拘束最常见的是把双腿固定成一种不能乱动的状态，比如把两腿并拢别在椅子背后；而在站姿中，则表现为双腿并拢挺直，肌肉紧张，不敢轻松随意地叉开双腿站立。</p>
+<h2 id="安慰反应"><a href="#安慰反应" class="headerlink" title="安慰反应"></a>安慰反应</h2><p>（1）视觉安慰<br>视线转移。婴儿会更喜欢看对他笑的人，而板起脸的人，会让婴儿转过头去甚至啼哭。而当一个成年人感到负面情绪时，往往会下意识地转移视线，减少目光接触，降低受到的负面刺激，而下一步，可能是看向自己比较熟悉，或者能让自己感到安全的地方。<br>（2）口唇安慰<br>紧张时大口喝水、吸烟、咬铅笔等等。在潜意识中告诉自己：“不要怕，没关系，现在我有充足的食物，我在吃东西，我很安全。”<br>（3）皮肤安慰<br>最常见的皮肤安慰集中在头部、脸部，这是因为这两个部位距离大脑很近，而且布满了血管和神经，非常敏感。对这个区域进行安慰动作，效果最快。比如，挠头往往用来缓解尴尬，抚摸鼻子和嘴，揉搓脖子可以有效地消除不安。<br>手部和胸腹部的微反应，比较常见的动作是搓手、反复交错手指，抚摸手背，背后隐藏的是焦虑。对胸腹部皮肤的安慰，也会使人产生许多微反应，比如抓住衣领或者按住胸口，让压力得以缓解。</p>
+<h2 id="逃离反应"><a href="#逃离反应" class="headerlink" title="逃离反应"></a>逃离反应</h2><p>遇到危险逃跑是生物的本能，逃离反应是逃跑行为的变形。比如，人在焦急紧张的时候会跺脚，忧虑的时候会来来回回地在房间里走，都是内心想要逃跑的表现。<br>（1）视觉逃离<br>视觉逃离和视觉安慰的区别是，视觉安慰是让视线离开负面刺激，下一步通常是寻找积极的刺激。而视觉逃离往往没有下一步动作，只是因为想要逃离危险，这就是为什么视觉逃离往往表现为眼神飘忽不定，这说明了对方的心虚。<br>（2）角度扭转<br>双腿倾斜变成双腿并拢直立，是逃离的准备动作。<br>在坐姿上，翘二郎腿是比较轻松舒适的坐姿，而当对方感到不快或者受到威胁时，典型的微反应是收起二郎腿，把双脚一前一后摆好，还有可能用双手撑住座椅。<br>在站姿上，当某人想要逃离的时候，会把双脚的位置调整成一前一后，而不会同时面向让他感到威胁的方向。双脚一前一后，其实正是一种起跑的姿态。<br>头部转移，对方把头转向一边，好像在观察别的地方，稍后再转回头来，保持微笑，好像是告诉你“我还在听”，过了一会儿却又把头转开。这也是一种逃离的表现，它隐含的语言是：“这个话题我不感兴趣”。</p>
+<h2 id="仰视反应"><a href="#仰视反应" class="headerlink" title="仰视反应"></a>仰视反应</h2><p>（1）仰头或低头<br>下巴抬高，头向后仰，心理的状态是不屑和傲慢。满意、骄傲时，也常常是微微抬头的状态。低头表示谦卑和服从。如果在低头时，对方的背依旧是挺直的，他的心里通常是服从但不服气。如果在低头时，背部是弯曲的，而身体的其他部分也表现出向地弯曲的状态，那么可以基本判定，对方没有反抗的心态。<br>（2）拥抱<br>标准的拥抱是双方的身体正面贴在一起，手臂搂住对方并且向自己一方用力；而违心的拥抱，是对胸部以下距离的控制。如果两个人面带笑容地走到一起，热情地拥抱对方，但是在抱在一起的时候，只有肩部和头部贴在一起，而胸部以下并不接触，也就是说，双方都有点驼着背在拥抱，这其实是有意让躯干和腿远离对方，这也暴露了内心的疏远。</p>
+<h2 id="领地反应"><a href="#领地反应" class="headerlink" title="领地反应"></a>领地反应</h2><p>动物会用味道来圈定自己的领地，而人圈定领地的方式是一些微小的姿态和动作。观察这些微反应，可以及时把握人际交往的距离。领地反应有两个表现，一是在领地里展示权威，二是在领地外表示防御。<br>（1）在领地里展示权威<br>双腿叉开，两臂张开，拳头向下，让自己所占的面积扩大，起到威慑的作用。<br>（2）在领地外表示防御，抱起双臂，交叉胸前。肌肉的收缩和重叠，可以让上身看起来更加魁梧，增加威慑的效果。无论是两臂张开，还是抱起双臂，都可以帮你判断出对方产生了戒备心理。</p>
+<h2 id="战斗反应"><a href="#战斗反应" class="headerlink" title="战斗反应"></a>战斗反应</h2><p>这种微反应的背后往往是愤怒的情绪。在所有的情绪中，愤怒是最难控制的一种情绪，一旦被唤醒，会调动全身上下的战斗状态来应对威胁，也会消耗最多的身体能量。<br>（1）脸部的战斗反应<br>眼睛瞪大，鼻孔张大，眉头紧皱，咬牙切齿。整个脸部的肌肉都变为紧张状态，这就是为什么，我们会形容一个人的脸“因为愤怒而扭曲”。<br>（2）身体的战斗反应<br>身体绷紧，双拳握紧，准备迎战。</p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>某个单位为了测试员工的心理水平，设计了一场比赛，每回答对一道题目，答题者就会获得相应的奖金，同时可以选择继续答题或放弃，如果继续答题并回答错误，之前的奖金就会一笔勾销。比赛中有一位女士，连续答对了很多问题，但随着问题的难度逐渐加大，她犹豫要不要回答下一道问题的时间也越来越长。研究员认为，她还会选择继续答题。因为这位女士的拳头频频用力握紧，呈现出经典的战斗预备反应，说明还在调动身体的全部能量，打算继续接受挑战，而不会中途放弃。果然，这位女士选择继续答题。<br>（3）手指的微动作<br>战斗反应在手指上的动作，最经典的表现就是去指别人。如果对方在说话时，下意识地用力用手指点，基本可以判断对方正处在愤怒之中；还有一个表现是食指和中指并拢，用力按在桌子上，这也可以表示对方内心的不满和愤怒。</p>
+<h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><p>克林顿面对公众发表谈话：我从没有和那个女人，莱温斯基小姐发生过关系，从来没有。说这段话的时候，他的语气平和，语速也很正常。但他的动作泄露了内心的愤怒和不安。因为在说话时，他的右手食指飞快地多次用力指向前下方，这个动作其实是战斗中攻击动作的变形，表达了他在说谎时恼羞成怒的真实心理。</p>
+<h1 id="金句"><a href="#金句" class="headerlink" title="金句"></a>金句</h1><ol>
+<li>双手交叉抱臂，看起来很怕冷是示弱的表现，常常被用来获取怜爱和关注。 </li>
+<li>低头表示了谦卑和服从。而低头时脊背是否挺直，往往表达了内心是否真正的服从。 </li>
+<li>冻结反应背后的动物本能，一是减少被猎手的关注，二是减少能量损耗，以迅速决定下一步要采取的行动。 </li>
+<li>用手撑住座椅背后的心理活动是，害怕仅靠腿的力量逃跑得不够迅速，因此想要用手撑一下来起跑得更快。 </li>
+<li>抱起双臂，交叉在胸前，让肌肉的收缩和重叠，使上身看起来更加魁梧，增加威慑效果。 </li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/11/《隐秘的知识》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/11/《隐秘的知识》/" itemprop="url">《隐秘的知识》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T13:33:17+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h1><p>大卫·霍克尼，英国画家，长期住在美国。20世纪中期，他的油画就已经享誉世界。</p>
+<h1 id="关于本书"><a href="#关于本书" class="headerlink" title="关于本书"></a>关于本书</h1><p>大卫·霍克尼是个画家，但一般人不知道的是，他还对绘画制作的理论、材料以及工具做过认真的研究，这本《隐秘的知识》就是成果之一。这本书最初实际上不是一本书，而是<br>BBC 给霍克尼做的一个75分钟长的纪录片。在这个纪录片里，霍克尼细细地叙述了他 <strong>在西方绘画史当中所发现的秘密</strong><br>，也就是书名所说的“隐秘的知识”。在这本书里，他将和你探讨“ <strong>什么是艺术的真实</strong> ”这个问题。</p>
+<h1 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h1><p>大卫·霍克尼说，西方古代绘画大师之所以画得那么逼真，是因为他们用了一个失传的秘密方法，也就是光学仪器。但是那种逼真在大卫·霍克尼看来，是虚假的，只不过是一种真实的幻象，而不是我们眼睛真实感受到的有生命的东西。与西方古代绘画不同，当代西方和古代东方，包括中国，一直都是画家以自己的肉眼观看和描绘世界，用心灵体味世界。<br><img src="https://img-
+blog.csdn.net/20180611125401658?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>图片来源：得到</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本片文章主要介绍大卫·霍克尼的《隐秘的知识——重新发现西方绘画大师的失传技艺》。在这本书里，一个西方画家和我们探讨了“ <strong>画中所画的东西是否真实</strong><br>”这个问题。<br>我们都觉得西方古代绘画特别逼真，但作者告诉我们，它们其实是用了光学仪器的，所以，西方古代绘画只不过是一种 <strong>真实的幻象</strong><br>，而不是我们眼睛真实感受到的有生命的东西。与西方古代绘画不同的是，当代西方和古代东方，包括中国，一直都是画家以自己的肉眼观看和描绘世界，用心灵体味世界。<br>你可能会问，古代画家用光学仪器来画画这事儿为什么是个秘密，又怎么会失传了呢？这是因为在过去，这个知识就像魔术师的机密，只是在师徒之间秘密相传，从没有人真正公开讨论过这些绘画技巧。不但从未讨论过，而且讳莫如深，因为这个秘密一旦传出去，就毁了画家的名声，承认了自己的高超画艺不过是临摹镜子的投影而已。到了19世纪末，随着照相机的发明，画家们有了新的秘密工具，因此这个隐秘的知识就失传了。是霍克尼拿出福尔摩斯的探究能力和对绘画的深刻理解，并用书信的形式跟大量画家、研究者沟通，终于使这个隐秘暴露在阳光下。<br>首先介绍一下这本书的作者，大卫·霍克尼。他是一个英国画家，长期住在美国。20世纪中期，他的油画就已经享誉世界，国内美术圈里的人对这个名字不会觉得陌生。早在70年代末，他就来过中国，到中央美术学院，和那里的学生、研究生、老师交流，后来他还把在北京这几天的记忆和经历写成了一本书，叫《北京日记》。前两年他又来到中国，在北京大学做过一个演讲，据说是人山人海，水泄不通。大卫·霍克尼是个画家，但一般人不知道的是，他还对绘画制作的理论、材料以及工具做过很认真的研究，这本《隐秘的知识》就是他的成果之一。这本书最初实际上不是一本书，是<br>BBC 给霍克尼做的一个75分钟长的纪录片。在这个纪录片里，霍克尼细细地叙述了他在西方绘画史当中所发现的秘密，也就是书名所说的“隐秘的知识”。<br>那么，霍克尼作为一个画家，他为什么要讨论这个问题呢？他探究西方古代大师作品真实背后的秘密，其实是为了解决两个重要的问题：第一个，就是<br><strong>当代艺术、当代绘画和古代绘画艺术的区别究竟在哪儿</strong> ；第二个对于我们中国人来说更重要，他分析了<br><strong>中国古代大师和西方古代大师绘画的重大区别究竟在哪儿</strong> 。<br>霍克尼的最终结论应该会让我们中国人感到很自豪，那就是我们前面说的，西方古代大师其实没有用自己的心和眼睛去观看世界，而是借用光学器材和自己的技法，在画面上临摹了光学工具投射在画布上逼真的、微妙的、精确的光影效果，这些绘画欺骗了我们的眼睛。我们看到的是这些光影在画面上造成的视觉上的幻觉，也就是像真的一样。在这一点上，西方当代艺术反倒是和中国古代艺术一样，是真实的，是用自己的眼睛、跟着自己的心去观看自然。换句话说，<br><strong>中国古代绘画很接近西方当代的观察和表现方式</strong><br>，他们画的是一种心灵感受，这就是霍克尼要表达的真正核心。当然，霍克尼说这些，其实背后都还有一个更为重要的出发点，就是——我，大卫·霍克尼，是一个当代画家，我的画和古代油画大师的画不同之处是，我没临摹复制光学工具投射的幻影。<br>好，下面我们就来一步一步地看看这本书究竟怎么论证了这个观点。</p>
+<h1 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h1><p>我们要说的第一个问题是，书名所说的“隐秘的知识”是什么？霍克尼回顾了西方绘画史中很多经典作品，追问西方人怎么能够做到在画中用如此精准的透视手法，把对象刻画得令人叹为观止。在追问中，霍克尼列举了西方艺术史上许多经典大师，其中包括著名的维米尔、卡拉瓦乔和拉图尔。<br>在讲这些画家的画里面有什么样的秘密之前，我先来解释一下什么是透视。<br>根据欧洲艺术史的记载，意大利建筑师布鲁内列斯基在1420年发明了透视，也就是 <strong>焦点透视</strong><br>，这也成了西方绘画的一个基本原则。其实，霍克尼写这本书就源自他对透视这个问题的迷恋。在这本书的中译本中，霍克尼特别对中国读者说了一段话，他说，透视就是借以在二维平面上描绘出三维空间的系统，就是在一个平面的纸上怎么画出有立体空间和深度的一张画。这是一个非常令人着迷的问题，今天谈这个问题的人不多了，但在百年以前的巴黎，它却是热门话题。他接着说，中国人从来都不用所谓的文艺复兴发展出来的透视体系，这是因为中国人对风景的态度和欧洲人不同：<br><strong>欧洲人是通过一扇扇窗户来看风景，把自己隔在景外；相反，中国人是随着景色漫步，观者就在景中</strong> 。<br>当然，光学透视今天已经主宰了电视、电影、摄影的世界，不过新技术能改变这一状况，或许一个崭新的满怀自信的中国能够对此有所贡献，给人类带来比现在更好的、更加人性的观看世界的方式。这段话是写给中国读者的，其实也几乎是霍克尼写这本书真正的核心目标之一。<br>下面我们回到主题。通过一一分析大量西方美术史里著名画家的作品，大卫·霍克尼发现了一个非常有趣的现象，那就是在14世纪，西方的画家还画得非常拙稚，尽管画面非常好看，已经掌握了普通的、初浅的透视效果和原理，但是画中人物衣服上的图案却画得很简单拙劣，甚至文艺复兴初期画家画的透视效果还非常幼稚；而到了文艺复兴中后期，也就是15世纪末16世纪初，写实绘画的技术突飞猛进，用了一百来年的时间，画家居然就能够把服装上的图案画得惟妙惟肖，逼真准确，和今天照相机拍出来的效果有一拼。这是怎么做到的呢？难道透视原理能够使画家看到如此准确的图案变化吗？<br>大卫·霍克尼说，不是这样的。霍克尼指出，欧洲画家在一百年的时间内掌握了一个秘密，这个秘密就是<br><strong>借助镜子或者透镜在画布上投射出阳光下物体的影像，然后用笔把这些影像描绘出来</strong> 。<br>霍克尼举了一个比较早的例子，那就是文艺复兴后期画家乔瓦尼·巴蒂斯塔·莫罗尼所能够画出的最为精准、精致的服装上的图案。那衣服表面张扬复杂的纹样，居然画得非常逼真准确，令人信服，特别是微妙的高光和阴影，以及图案随着身体的变化而变化，那种准确感、那种完美的逼真感、那种真实感，简直是不可思议。他是怎样才能够画出这样效果？大卫·霍克尼说，这样的准确度一定是使用了新工具，因为不可能依赖眼睛做到。问题是，他们究竟使用了什么样的工具？我把大卫·霍克尼的发现总结成三个不同的秘密。<br><img src="https://img-
+blog.csdn.net/2018061112582352?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述">  </p>
+<p><em>乔瓦尼·巴蒂斯塔·莫罗尼，Isotta Brembati 的画像</em></p>
+<p>第一个秘密，是 <strong>维米尔的小镜子</strong> 。<br>有一幅画叫《带珍珠耳环的少女》，让无数人着迷，还有人以这幅画为灵感拍了一部同名电影，这幅画的作者就是维米尔。几年前，中央美术学院给前院长靳尚谊先生举办了一个展览，叫做《向维米尔致敬》，特别强调了对维米尔逼真描绘生活的艺术手法的敬仰。<br>由于维米尔的作品几乎都是在室内画的，透过一扇窗户的光线照在室内的物体和人物上，形成令人着迷的光影效果，因此他也被称为绘画的光影大师。维米尔是17世纪的荷兰人，荷兰是光学器材的发源地之一，也是非常发达的光学器材制造地之一，所以很多人都认为维米尔使用了光学器材。大家一直都在猜测，维米尔是不是用了针孔成像，可是大卫·霍克尼认为不是，因为针孔成像只能在墙面上或者是画布上形成一种模模糊糊的图像，不可能给维米尔提供如此准确的结果。霍克尼说，维米尔的画应该用的是其他光学工具，这个工具应该类似我们现在的照相机，或者是其他镜面投射的手段。<br>霍克尼的研究结果是惊人的，维米尔使用的是小镜子。如果你看过本书的封面照片就会知道，这本书的封面就是大卫·霍克尼在使用小镜子投射物体到画布上的姿态。他模拟的是维米尔当时画画的情景，把小镜子调整好角度面对着对象，让小镜子里折射的图像与桌面上的画布重合，只要用笔顺着小镜子的边缘描绘出和小镜子重叠的部分图像，就能在画布上准确地描绘出小镜子上的颜色和图像，最后画出完整的对象来。也就是说，用这种方法可以准确无误地从光学的角度再现对象，所以霍克尼推测，维米尔真的就是在复制他用光学器材的折射效果投射出来的图像。<br><img src="https://img-
+blog.csdn.net/20180611125929151?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述">  </p>
+<p><em>霍克尼在用使用小镜子作画</em></p>
+<p>霍克尼找到了维米尔的秘密。除了霍克尼，美国还有一个叫汤姆的光学专家也关注到这个密秘。在他退休之后，由于对光学原理和维米尔的画着迷，他按一比一的比例复制了一间维米尔画中的房间。通过使用小镜子，这位完全没有受过绘画训练的光学专家，面对着维米尔画中复制出来的房间的景色、光源等等，用自己没有受过绘画训练的手，居然也画出了类似的逼真的光影变化。霍克尼和这位光学专家最后都得出结论，维米尔的作品一定是使用了这样的小镜子。有些东西在小镜子上面呈现的是带有很准确的焦距，带有很准确的焦点，而另外地方有些模糊。维米尔对这些焦点和失去了焦点的模糊感很着迷，他的画面上也呈现出来了，你可以看文中的插图，是能够感觉到的。<br>接着霍克尼就说，这是维米尔的秘密，但是欧洲其他大师，比如说文艺复兴晚期以使用模特作画而著名的卡拉瓦乔用的是什么方法？为什么没有模特，卡拉瓦乔就不作画？霍克尼说，从画面看，卡拉瓦乔用的应该不是维米尔这种方法。霍克尼同样也再现了卡拉瓦乔和一系列使用这个方法的画家的秘密，这就是我们要说的第二个秘密，<br><strong>暗室投影法</strong> 。<br>在这种画法中，画家坐在一间比较暗的屋子里，不是全部的漆黑，然后在这个屋子的门上开一个像画布一样的方洞，让被画者在门外强烈的光线下坐着，再用镜子折射被画者的像，透过那个方洞投进来，投射在画布上。用这种手法在画布上所呈现的图像就达到了光学高度的精准，而且是有色彩的，只不过当你用凹透镜的时候，这个图像是倒过来的，而用平面镜子的时候这个图像是向上的。其实，对画家来说颠倒不颠倒都不重要，就按着画布上投射的图像直接勾描就行了。这就是卡拉瓦乔的秘密，就是他没有模特就不能作画的原因。<br><img src="https://img-
+blog.csdn.net/20180611131101329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述">  </p>
+<p><em>卡拉瓦乔 《琉特琴乐手》</em><br>在研究暗室投影法的时候，大卫·霍克尼还发现了第三个秘密，就是在很多大型的、多人物的绘画作品中，虽然也是用了光学原理，但是这些作品中的人物并不是一次性同时画成的，而是<br><strong>多次单独投射绘制，最后拼接</strong><br>在一起的。因为不可能在同一时间，所有的画中人物都穿上道具服装坐在太阳光下，让画家慢慢地一个一个画下来，这样的话，这些人物都要晒得油汗直淌。霍克尼确定地认为，这些画家是分别画了人物之后，再把人物拼接在一起，最后才成为多人物大型作品的。<br>他的理由是，作品中存在着多个几何形图案的透视关系不统一的现象。如果一幅画不是拼接而是一次完成的，按照焦点透视的画法，画中所有的人物应该有一个共同的焦点，但是这些画中的人物不是。比如画面上的桌布，不同人物面前的桌布图案和透视有相当的误差，虽然这个误差在拼接时调整过，但是人物众多，这个人面前的图案与透视消失点准确地重合了，另一个人面前的就不一定准确，所以只好不断调整，调整来、调整去，调整出一个勉强的图案，但是明眼人就会发现它有些不正确、不准确。这个发现是在大卫·霍克尼通过暗室投射的方法一一画出不同的人后才发现的，因此也就找到了另一个依据，来说明这些画家有可能使用了镜面或透镜投射的手法来制作这些精准的图像。<br>由于我们肉眼的生理构成无法观察到如此细微的光影变化，因此，古代大师在画中画出了眼睛无法捕捉到的光影效果，这背后一定使用了秘密工具，而霍克尼找到了他们作画的秘密——<br><strong>他们之所以能够把物体和形态画得如此精准，是借用了光学工具和手段，把带有光影的形态投射到画布上，再描摹出来</strong><br>。因为西方绘画追求的是逼真的形似，所以画家就要不择手段地将人物和各种东西以及自然景观真实地或者说是在观者眼中乱真地描绘出来。</p>
+<h1 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h1><p>说完了古代大师的秘密，下面我们再来说说霍克尼对这个秘密的态度。<br>霍克尼比较了两件作品：一件作品是西方现代艺术之父保罗·塞尚的《裸女》，另一件作品是19世纪末法国矫饰主义写实油画家布格柔的《海边的裸女》。塞尚和梵高、莫奈是同一时期的画家，他的影响力甚至超过了这两位著名的画家，就是因为他决心要客观地表现世界。而这个布格柔，他跟中国美术界其实有很密切的关系，布格柔的学生之一是达仰，而达仰是中国20世纪油画的祖师爷徐悲鸿的老师，按照这个师承关系续下来，徐悲鸿是布格柔的徒孙，那中国很多油画家都是布格柔徒孙的子子孙孙，这就续下好多代了，也就很有意思了。<br><img src="https://img-
+blog.csdn.net/20180611131315613?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述">  </p>
+<p><em>塞尚，《裸女》</em><br><img src="https://img-
+blog.csdn.net/20180611131336736?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><em>布格柔，《海边的裸女》</em><br>这两幅《裸女》摆在一起，给人的视觉感受截然相反。塞尚的《裸女》，画面特别简单，只能看清人物的边缘和姿势，用笔粗粝，甚至会让你觉得有点粗糙，跟背景统一在一片蓝灰色的调子里，从中你可以感受到他创作所追求的那种结实而深邃的感觉。而布格柔的《裸女》就像我们现在的明星海报一样清晰，人物的脸孔皮肤、身边的海水、背后的岩石，每一个细节都细腻而柔和。但霍克尼在书中说，塞尚的裸女是真实的、有生命的，而布格柔的裸女是矫揉造作而又虚假的形象。西方近现代美术史对布格柔持有批评态度，而且是毫不留情的批评，认为在布格柔所处的19世纪末，现代艺术已经崛起了，而他居然依然用这种看似逼真实际上是欺骗视网膜的方法作画，太不真实了。<br>那么布格柔的作品哪里不真实呢？霍克尼认为，布格柔的这个裸女一定是借助光学器材手法画出来的。你可以打开文稿，仔细看这件作品，你就会发现裸女本身跟海水的关系、她坐的岩石跟海水的关系，这三个东西是完全不吻合的，是三个元素拼在一起的。这件作品不表现任何自然或生活中的场景，只是以一个矫揉造作的女性人体欺骗观者的眼睛，这种逼真是为了博得观者产生视觉上的幻觉真实，这是一种对眼睛的欺骗、对视网膜的欺骗。而塞尚的作品完全没有利用任何器材来辅助，完全是用自己眼睛看到的真实裸女，他的作品追求的不是一种视觉上的真实，而是一种心灵的真实。塞尚的心灵和眼睛聚在一处，心与眼的观察最后在画面上呈现，因此，他画中的裸女是真实的。所以霍克尼的结论是，<br><strong>塞尚的裸女看起来好像很简约，实际是真实的心灵的体现，而布格柔画得很细腻，看似很逼真，但这是一种迷惑视网膜的欺骗</strong> 。<br>霍克尼的发现和他这些骇世惊俗的话，一说出来就引发了美术史界对他的狂暴攻击。他在这个 BBC<br>节目公开播放之后，有好长一段时间不得不穿着一件汗衫，汗衫上印着几个大字“我知道我是正确的”。<br>你有没有发现，说到布格柔，大卫·霍克尼是持强烈的批评态度的。他没说古代的大师是欺骗，他只是说古代大师用这种方法画出了真实的作品，欺骗了我们的眼睛，让我们的眼睛受了骗，他却明确地说布格柔欺骗了我们。他对布格柔这么苛刻，其实是有原因的。这主要是因为，在布格柔的时代已经有了摄影和照相机，也有了各种光学器材，在布格柔的晚年更有了现代艺术运动，而布格柔居然依旧用这种光学的手法来欺骗人们的眼睛，所以霍克尼认为这太廉价了——在现代运动如火如荼的年代，你居然继续做这样欺骗视网膜的行货。<br>在这本书里，霍克尼从古代大师讲到布格柔，也讲到他自己和亚洲美术，这就是第二个问题，也是对我们普通人来说最重要的问题，就是今天我们到底应该怎么理解绘画中的真实。这本书的第一部分，就是我们前面讲的，他发现了古代欧洲大师的作画秘密，而在第二部分他开始介绍亚洲人怎么画画，波斯人、印度人、日本人，尤其是中国人怎么画画。他说这些文明中的人通通没有使用光学器材来辅助作画，而且对这些没有兴趣，因为他们要画的不是欺骗眼睛的真实图像，他们要画的是心灵所感受到的，对心灵、对大脑来说同时是真实的图像。霍克尼分析了一系列东方的作品，包括波斯细密画和黄公望的《富春山居图》。<br>这使我想起好多年前霍克尼还有一个节目，是在美国纽约大都会博物馆做的。在这个节目里，他探讨的就是东方艺术和西方艺术的区别。<br>他在这个节目里仔细观察了大都会博物馆所藏的两张画，一张是欧洲的风景画，一张是《康熙南巡图》。他说，欧洲古代的这张风景画是站在窗户后面所看到的风景，窗户就是一个镜框，这是焦点透视，并且是闭上一只眼睛、另外一个眼睛盯着这个焦点所画出来的画。而《康熙南巡图》的画家，好像是跟着康熙一路记录下来所见，而且还有动感，透视的角度随着他身躯的移动而产生变化，于是带着观者看到这些房屋在透视下的变化，好像是摄影机在跟踪摄影这些房屋的时候，房屋的透视在摄影机的下面产生的变化，这就是散点透视。他觉得中国人的散点透视太先进了，根本就是一种生态的、伴随着人的眼睛和心灵的透视，并且能够在画面上体现出来，根本不像西方美术史所说的，这是一种原始的、不发达的、不科学的透视方法。<br><img src="https://img-
+blog.csdn.net/20180611131544124?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><em>《康熙南巡图》（局部）</em></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>霍克尼发现的秘密和他对绘画的真实看法我们就讲完了，下面我们来回顾一下。<br>西方古代大师用了秘密工具，达到了一种精准的视觉表现，其实是为了欺骗人的眼睛。而塞尚和他的时代的作品，也就是现代艺术运动以来的绘画作品，是心灵跟着眼睛、没用任何光学器材画出来的，对于大脑来说是真实的图像。也就是塞尚所说，我的作品是真实的，有生命的。说到古代绘画手法的弊病，霍克尼特别拿出布格柔来证明自己的观点：发展到如今已经有了照相机的时代，这类作品就是虚假的，没有生命的。<br>之后是霍克尼对东方和西方美术的讨论。他在这个 BBC 节目和书中说，东方不比西方低矮，东方不比西方落后，东方画的是“我手写我心”。<br><strong>中国的散点透视是世界上最高明的一种透视方式</strong><br>，散点透视表现出观看的动感，散点透视的高明和先进，达到了用平面静止的图像表现出我们用摄像机所捕捉的透视效果，是带有动感的，步移景移的散点透视。<br>到今天为止，很多中国人依然认为西方古代的绘画是先进的，比中国古代绘画好，因为他们有光影，因为他们的光影表现了体量，也就是人对事物的一种直观感受。霍克尼说，不，这种体量是虚假的，只有用光学器材才能够捕捉住光影效果，而我们人类的眼睛看东西是不需要光影的。光线的投射使我们看见了东西，但我们的眼睛总是忽略影子的存在，因为影子虽然对我们捕捉物像的状态、色彩和状态起到一定作用，但其实是不必画到作品里的。对于画家来说，把握和描绘世界的方法是多种的，而如果没有光影，没有光线和影子，光学器材就无法呈现对象，这是人类与机械观察世界的最大的区别。我们看到的外轮廓，我们在大脑中把它总结成线条来勾勒，这个形象就出来了，而光学器材只有用光影才能显现出形态来。<br>可以想象，听到霍克尼的这个说法，整个西方美术界就翻了天了，对他的反感、对他的批评扑面而来，说他攻击古代大师的都有。大卫·霍克尼说，我没说他们欺骗我们，而是说他们使用的艺术表现手法、他们追求真实刻画的手法，使我们的眼睛受了欺骗。其实，霍克尼没有必要和那些有偏见的人辩论，因为他们永远都不愿从偏见的美梦中醒来。<br>这就涉及到这本书里最后的一个问题，也是前面说的两个问题背后的潜台词：我，大卫·霍克尼画了一辈子的画，我是现当代艺术运动中的旗手，而我的画是最真实的，我没用任何光学器材；我找到了你们作画逼真的秘密，因此我知道我比你高妙，我高就高在我画的不是光影投射在画布上之后用临摹、描摹的手法绘制出来的东西，我不画照片，我不借助光学器材；我画的是我的心灵，我像亚洲人一样，画的是自己的心灵，我的画像黄公望的《富春山居图》一样，是一种心灵之旅在画面上留下的痕迹。因此，合上这本书，我对大卫·霍克尼更增加了一层敬重。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/10/《大学之路》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/10/《大学之路》/" itemprop="url">《大学之路》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T19:13:14+08:00">
+                2018-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h1><p>吴军，著名的计算机科学家，投资人，“得到”订阅专栏《吴军的谷歌方法论》的主理人，毕业于清华大学和美国的约翰・霍普金斯大学，在清华大学担任过班主任，参与过约翰・霍普金斯大学的管理工作。</p>
+<h1 id="关于本书"><a href="#关于本书" class="headerlink" title="关于本书"></a>关于本书</h1><p>《大学之路》是一本介绍西方大学教育的书，是作者吴军在陪女儿走访过十几所欧美顶级名校之后写成的，重点讨论了西方高等教育这一宏观话题。</p>
+<h1 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h1><ul>
+<li>东西方人对大学的认知差异； </li>
+<li>两种不同的办学理念，通才教育和专才教育； </li>
+<li>介绍美国私立大学的管理。 </li>
+</ul>
+<p><img src="https://img-
+blog.csdn.net/20180610171406912?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h2 id="东西方人对大学的认知差异"><a href="#东西方人对大学的认知差异" class="headerlink" title="东西方人对大学的认知差异"></a>东西方人对大学的认知差异</h2><p>亚洲人认为，大学几乎是一个必选项，一定要上，只有上大学，以后才能有体面的生活；而西方人认为，大学只是众多选项里的一个，只有想从事某些特定的职业，才需要上大学。为什么会存在这么大的差异呢？吴军认为，这是因为<br><strong>东西方大学的历史传统有本质的区别</strong> 。<br>中国高等教育的雏形，可以追溯到 <strong>孔子</strong><br>时代。孔子时代的教育，主要学的不是具体的谋生手段，而是社会精英应该有的智慧和见识。到了隋代，有了科举制度，科举成为了国家选拔人才的主要手段，也是普通人进入上层社会的唯一通道，从这时开始，中国的教育和考试开始紧密结合，自然而然地和社会地位、做官就联系在一起了。这种观念对国人影响深远，直到今天，很多中国人还是把考试、升学和获得社会地位联系起来。从这个角度来看，中国人千方百计地要读大学、接受高等教育，也就不难理解了。<br>西方高等教育的萌芽，和中国很相似，也是一位智者带着一帮学生，这个人就是 <strong>毕达哥拉斯</strong><br>，古希腊的数学家、哲学家。现代大学是在中世纪诞生的，“大学”是指一种包括老师和学生在内的团体，这种团体直接受到领主保护，拥有学术特权。和中国的大学不一样，接受学术特权的西方大学，教授的内容大多数都是神学知识、拉丁文写作技巧和自然科学的知识，来这里上大学的学生，一开始想的就不是升官发财。这个传统一直延续至今，也是西方人并不是全民都想上大学的思想根源。<br>虽然东西方高等教育在历史上的差异很大，但就现在来说，<br><strong>中国人读大学也并不都是抱着功利的目的，很多人都是因为对知识纯粹的渴望去读大学的（也许这指的就是我hhh）</strong><br>。不过，在吴军看来，不管有没有上大学、抱着什么目的去上大学，这都不重要，人生是一场马拉松，拿到一所名牌大学的毕业证，不过是在马拉松赛跑里取得了一个还不错的站位而已。<br>看过马拉松的人都知道，在起跑的一瞬间道路非常拥挤，但等比赛过了四分之一，选手和选手之间的距离已经拉开很远了，起跑时占的那一点点便宜早就没什么意义了。我们经常听到一句话，说不能让孩子输在起跑线上，但事实上，成功的道路并没有想象中的那么拥挤，在人生的马拉松上，绝大多数人跑不到一半就弃权了，到后来剩下的少数人，不是嫌竞争对手太多，而是要发愁怎么才能找到一个同伴，陪自己一起跑下去。<br><strong>笑到最后的，一定是终身学习者</strong> 。</p>
+<h1 id="两种教育理念"><a href="#两种教育理念" class="headerlink" title="两种教育理念"></a>两种教育理念</h1><h2 id="纽曼式的通才教育"><a href="#纽曼式的通才教育" class="headerlink" title="纽曼式的通才教育"></a>纽曼式的通才教育</h2><p>纽曼认为， <strong>学生们除了学习知识以外，更重要的是要互相交流、互相学习，彼此成为朋友</strong> 。他还认为，<br><strong>教育的终极目的，是培养有能力服务于社会的人，而不是教授一些具体的雕虫小技</strong><br>。纽曼反对一上来就给学生教授某个专业的具体技能，认为大学生的知识面一定要广，不能过早地局限在某个具体的专业里。当然，想要实现通才式的教育，光有理念上的认同是不够的，还必须同时具备两个要素：第一，是<br><strong>给学生选课和换专业的自由</strong> ，第二，是 <strong>学校要有实力开出足够多、足够广泛的课程</strong> 。</p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p>哈佛大学，首先在选课上给予了学生绝对的自由，大一新生不分专业，学生们可以随便选课，在学习的过程中慢慢地了解自己的真实兴趣；其次，哈佛开出了足够多的课程，<br><strong>哈佛大约有6000名本科生，他们居然开出了6000门课，而且还可以去隔壁的麻省理工学院选课</strong> 。</p>
+<h2 id="洪堡式的专才教育"><a href="#洪堡式的专才教育" class="headerlink" title="洪堡式的专才教育"></a>洪堡式的专才教育</h2><p>洪堡建立的高等教育体系，非常重视职业教育和技能教育，强调 <strong>大学生在学校要学习马上就能用的知识，一走出校园就能为社会提供服务、创造价值</strong><br>。为了能让学生做到这一点，实行洪堡制大学的很多专业都需要五年才能毕业，最后两年学习的是非常精深的专业知识。而且，采取洪堡制的大学都会花大价钱建立研究生院，这也是实现专才教育的物质基础。</p>
+<h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><p>著名的麻省理工学院，就是实施洪堡式专才教育的典范，它最突出的一个特点，是让大一新生就有机会参与真正的科研。一般大学里让本科生参与的科研，其实就是教授让学生们练练手，随便做点事情，因为很多教授认为，自己的科研项目本科生做不了，他也没时间手把手地辅导学生，但<br>MIT 不一样，MIT 的教授会让本科生参与自己拿了经费的科研项目，并且让他们承担这个项目里的一个工作，这就需要教授花时间来指导学生，还要承担相应的风险。</p>
+<h1 id="美国私立大学的管理"><a href="#美国私立大学的管理" class="headerlink" title="美国私立大学的管理"></a>美国私立大学的管理</h1><h2 id="终身教职"><a href="#终身教职" class="headerlink" title="终身教职"></a>终身教职</h2><p>有的教授公开发表一些反教会的观点，或者是公开地批评某一个资本家，学校就会遭到宗教势力和资本家的施压，被逼迫着解雇那些他们不喜欢的教授，这种现象会干扰到教授们的学术研究，为了让教授们自由发声，美国的几所大学和美国教授协会开始号召实行不能随意解雇教授的制度，也就是现在的终身教职制度。终身教职强调的不是铁饭碗，而是学术自由。</p>
+<h2 id="教授治校"><a href="#教授治校" class="headerlink" title="教授治校"></a>教授治校</h2><p>教授们的管理范围只到系这一级，主要的工作就是制定制度和执行制度。在美国大部分的学校里，每次系里面制定或者修改制度，一般都需要系里面全体教授的通过。在制度的执行过程里，除了在教授晋升上，资深教授更有发言权之外，其他事情的发言权一律平等，不分新老，不看资历，非常民主。教授治校，行政成本低，学校管理公正透明，还维护了教授们的尊严和权威，保证了学术自由，是很好的管理制度。</p>
+<h2 id="校董会"><a href="#校董会" class="headerlink" title="校董会"></a>校董会</h2><p>总的来说，对内，校董负责筹集资金、拍板大事、规划未来；对外，校董们就是学校的形象大使，到处给人布道，用他们自己的影响力，在世界各地帮学校做宣传，帮助大学和各种机构建立合作。大学校董并不是一个用钱买来的虚职，真正的校董，会为大学的发展尽心尽力，提供最多的帮助。</p>
+<h1 id="金句"><a href="#金句" class="headerlink" title="金句"></a>金句</h1><ul>
+<li><p>到了隋代，有了科举制度，科举是国家选拔人才的主要手段，也是普通人进入上层社会的唯一通道，从这时开始，中国的教育和考试开始紧密结合，自然而然地就和社会地位、做官联系在一起了。 </p>
+</li>
+<li><p>我们经常听到一句话，说不能让孩子输在起跑线上，但事实上，成功的道路并没有想象中得那么拥挤，在人生的马拉松上，绝大多数人跑不到一半就弃权了，笑到最后的，一定是终身学习者。 </p>
+</li>
+<li><p>清华大学老校长梅贻琦有句名言，大概意思是说，大学之所以叫大学，不是因为这里面有大楼，而是因为这里面有大师。但吴军认为，大楼的作用也许被严重低估了， <strong>大师固然重要，但没有大楼，也就是没有物质基础，大师们的教育理念也很难实现</strong> 。 </p>
+</li>
+<li><p>当许多聪明、求知欲强、具有同情心而又目光敏锐的年轻人聚在一起，即使没有人教，他们也能互相学习，所以， <strong>你也许不用纠结自己是去接受通才教育还是专才教育，上大学本身，也许就是最好的教育</strong> 。 </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/10/《重来》/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/10/《重来》/" itemprop="url">《重来》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T17:00:52+08:00">
+                2018-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于作者"><a href="#关于作者" class="headerlink" title="关于作者"></a>关于作者</h1><p>本书的作者有两位，分别是贾森·弗里德和戴维·汉森。他们是美国一家小型互联网公司 37signals<br>的联合创始人，而且都是程序员出身（这才是最重要的），崇尚用极简主义的风格来设计软件和管理公司。</p>
+<h1 id="关于本书"><a href="#关于本书" class="headerlink" title="关于本书"></a>关于本书</h1><p>在本书里，两位作者从自己的亲身经验出发，为我们展示了在创办和经营一家企业的过程中，可能会面临的问题和相关经验。全书以清单体排列，由几十篇短文构成，每篇短文都是一个经营要点。本书多次登顶美国和英国的管理类图书榜单，畅销全球。</p>
+<h1 id="核心内容"><a href="#核心内容" class="headerlink" title="核心内容"></a>核心内容</h1><p>本书的核心思想只有两个字： <strong>简单</strong><br>。作者用自己的亲身经验告诉我们，创办经营一家企业，你不需要成为工作狂，不需要大量招兵买马，更不用把时间浪费在会议和规划上，甚至可能不需要一间办公室。你只要抓住“赚钱”这个公司存在的最根本目的，做好自己最该做好的本职业务，从一切方面尽可能地提高公司的经营效率，你的公司就能变得更加成功。</p>
+<p><img src="https://img-
+blog.csdn.net/2018061016372986?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>图片来源：得到</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要记录书中精髓： <strong>追求简单和效率，是让一家企业变得更赚钱的最好方法</strong> 。<br>很多企业管理类的书里都会大谈特谈制订商业计划，分析竞争形势，寻找投资人等等这些事，但是本书可不是这样。翻开本书的第一页，它就说了，“如果你要找的是那样的书，那就把这本书放回书架吧”。这本书不是一本传统意义上的企业管理书，也不会教给你那些传统的商业知识。实际上，这本书无论是从形式还是理念上讲，都算是相当另类的。比如这本书的排版就很特别，书虽然有200多页，但全书是以清单体排列的，由几十篇短文构成，每篇短文都是一个经营要点。而且每个要点大多只有一页纸，并配有一整页的插图，所以每张纸的正反两面都自成体系。<br>美国科普作家凯西·西拉看过这本书之后给了一个很幽默的评价，“我必须努力克制住把每一页书都撕下来贴在墙上的冲动”。除了排版，本书作者的经营理念也特别不拘一格，他们认为经营一家企业的方法可以非常简单，传统的经验也可以完全是错的，一切都可以重新定义，一切都可以重来。所以这本书的名字就是：Rework——重来。<br>本书一开始就指出，这本书的目标受众，不仅仅是企业家或者创业者，所有梦想着有自己事业的人，比如职场白领、失业者或者艺术家，都可以从本书中获得灵感。这本书的核心思想只有两个字：简单。作者用自己的亲身经验告诉我们，创办经营一家企业，你不需要成为工作狂，并不需要大量招兵买马，更不用把时间浪费在会议和规划上，你甚至不需要一间办公室，只要做好自己最该做好的本职业务，你的公司就能赚钱。<br>听到这儿你可能觉得，作者的口气还挺大。作者之所以有底气来写一本这么与众不同的商业管理书，是因为他们有着与众不同的，成功的创业经历。本书的作者有两位，分别是贾森·弗里德和戴维·汉森，他们是美国一家小型互联网公司<br>37signals 的联合创始人。两位作者都是程序员出身，而且崇尚用极简主义的风格来设计软件和管理公司。这本书里介绍的商业管理经验，也都是这两个人在创办<br>37signals 时一步步摸索出来的，所以也有着鲜明的极简主义风格。<br>大部分读者可能对 37signals 这家公司不太了解，这很正常，因为这本书出版时 37signals<br>也只有16名员工，是一个名副其实的小公司，主要业务就是制作一些网站上的应用程序。但公司规模小并不意味着实力弱，毕竟，全球有超过300万人在使用他们的产品。37signals<br>创办近20年以来，美国无数的互联网公司建立又倒闭，但 37signals<br>不仅顽强地存活了下来，而且每年都能盈利好几百万美元，所以作者觉得自己的公司还算成功。当然了，作为一家小型互联网公司，他们在这本书里提出的管理经验适合他们自己，如果推广开的话，对<br><strong>小型的创业公司</strong> 可能更适用一些。<br>接下来就让我们看看本书到底介绍了些什么不一样的经验吧。整本书虽然由好几十篇相对独立的短文组成，但是根据内容可以分成四个方面，我就来按照这四个方面的重点内容，来介绍这本书。<br>第一个重点， <strong>公司文化</strong> 方面，计划、会议、工作狂和规章制度，看起来都很有用，但实际上可能是效率杀手。<br>第二个重点， <strong>公司规模</strong> 方面，小公司并不只是一块跳板，小公司本身就可以是一个伟大的目标。<br>第三个重点， <strong>人力资源</strong> 方面，要控制员工数量，放慢招聘步伐，这样每个人才能独当一面。<br>第四个重点， <strong>外部关系</strong> 方面，坚持主见，不模仿不盲从，面对对手和客户时才能占据主动。</p>
+<h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>我们就先来看看第一个重点，从公司文化方面来分析企业，计划、会议、工作狂和规章制度，表面上看起来都很有用，但实际上可能是效率杀手。<br><strong>所有公司存在的目的都是为了赚钱</strong><br>（那些号称为了改变世界而生的公司就另说了），公司的一切也都要为赚钱而服务，公司文化作为公司宏观层面的理念，自然也要做到这一点。现有的制度和规范要是不能帮助公司赚钱，就没有继续存在下去的理由，不管它有多么地完美。作者认为，只有<br><strong>简单和效率</strong><br>才是王道。作为一本观点不拘一格的商业书，作者一针见血地批判了几个看似必须，但实际上会拖累公司效率的现象，我在这里给你讲其中最重要的四个，分别是：<br><strong>计划、会议、工作狂和规章制度</strong> 。</p>
+<p>先说 <strong>计划</strong> 。不出意外的话，几乎每个公司都会有自己的经营计划，但是作者认为， <strong>计划就是瞎猜，预估的都是垃圾</strong><br>。你会不会觉得很意外？作者的理由是这样的，因为在经济活动中不能掌控的因素太多了，比如市场环境、竞争对手、客户群体等等都是不可控的因素，而制定计划会让人感觉自己把握住了某些东西，但实际上根本就不现实。比如你有没有遇到过这种情况：本来说去楼下超市随便逛一下，可是一回来却发现过去了俩小时；或者本来打算花俩小时采购商品，可实际上二十分钟就搞定了。人连这种小事儿都估算不准，更别说长达几个月甚至几年的计划了。作者认为，<br><strong>不做计划不代表无视未来</strong><br>，预防练习总是有必要的，没人喜欢看篇幅庞大的计划书，长篇大论的计划只会放在柜子里吃土。有这精力还不如做好眼前的事情，找到下一项最重要的任务，然后行动就行了。</p>
+<p>作者批判的第二个现象是 <strong>开会</strong> 。 <strong>开会会降低效率</strong><br>，因为会议能传达的信息量一般不多，而且很多时候7分钟就能说完的事，总是被会议拖到半小时以上。毕竟，没人会订一间7分钟的会议室。随着开会时间的增加，会议的成本就高的吓人，比如一个1小时的会议如果有10人参加，那时间成本实际上就是10个小时。你可以想想，开这种会真的值么？所以作者说会议有毒，会拖累工作的效率，<br><strong>就算要开会，会议时间也应该被严格控制</strong> ，开始后就直接切入主题，而且 <strong>最好还别去会议室，就在出现问题的地点开会</strong><br>。这些方法可以抓住事情的本质，大大节约每个人的时间，提高工作效率。<br>第三个再来说说 <strong>工作狂</strong> 。作者也在书里批判了他们，这可能也会让很多人大跌眼镜，因为不少人都觉得企业里有工作狂是个好事。但作者认为，<br><strong>工作狂的文化不仅没有必要，而且还特别蠢</strong><br>。因为工作狂们看似能解决一些问题，但其实制造的麻烦更多。比如他们总是用蛮力来弥补思维上的惰性，结果只能折腾出一堆不实用的方案。而且在工作狂扎堆的环境里，就连按时上下班好像都成了一种无理要求，这会让其他正常工作的员工士气低落，最后的结果就是大家都低效率地加着班，这有什么意义呢。所以作者批评说，<br><strong>工作狂们不是英雄，他们做的更多的只是浪费时间</strong> 。<br>作者推崇的是按时上下班，下班时间一到就准时放人，因为我们追求的不是工作时间，而是工作效率。每个员工都有自己的生活，当他们家里有事时，就会努力在办公时间内把活儿干完。而且为了提高工作效率，作者还建议一定要按时睡觉。偶尔一两次熬夜没什么问题，但要是长期熬夜，问题可就多了去了，比如人的工作效率会降低，同时缺乏创意，士气低落，还会容易情绪失控。总之，作者坚决<br><strong>反对工作狂文化，因为工作狂只是表面上的努力工作，实际效率却很低</strong> 。</p>
+<p>作者批评的第四个现象是 <strong>规章制度</strong> 。他们认为，规章制度在某种程度上是组织机体上的伤疤，也是 <strong>官僚主义产生的温床</strong><br>。如果某个员工做错了事，告诉他不要再犯就行了。比如有个新来的员工穿着短裤来上班，那老板最好的做法，就是告诉这个员工下次别穿成这样就行。要是着急就这件事制定规章，那就是对个人过失的集体惩罚，真没那个必要。只有一件事重复发生时，才需要为此制定规章制度。<br>以上就是第一个重点，说了这么多，作者的目的其实只有一个，那就是<br><strong>企业文化要为企业的根本目的，也就是为赚钱服务，这就要求企业提高效率，集中精力做真正有意义的事儿</strong><br>。计划、会议、工作狂和规章制度，看起来是一家成功公司的必须要素，但实际上却往往会给公司的效率拖后腿，所以<br><strong>如果它们真的降低了效率，那公司管理者一定要敢于抛弃</strong> 。总之一句话， <strong>提高效率才是王道</strong> 。</p>
+<h2 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h2><p>作者认为，37signals 正是因为做到了这一点，所以才能保持高效，在创造出相对较多利润的同时还能保持一个比较小的规模。而 37signals<br>的小规模也是作者很引以为傲的一件事，所以接下来的第二个重点讲的就是，公司规模方面，小公司并不只是一块跳板，小公司本身就可以是一个伟大的目标。<br>企业的经营者们可能经常会被问到这样一个问题：你的公司有多大？一般来说，经营者说出的规模越大，就越容易得到别人的夸赞。但你有没有想过，为什么要把扩张当做奋斗目标，大就一定好吗？作者觉得可不一定。举个例子，<br><strong>扩大招生规模、在全世界到处开分校，这种做法并不会让哈佛和牛津变得更伟大</strong><br>。所以同样地，更大的规模也不一定会让一个公司变得更强大。也许一个公司的最佳规模就是5个人，也没准是一个人加一台电脑就成。作者觉得，<br><strong>创业者不要一开始就给公司设立一个目标规模，而是要找到合适的目标定位</strong> 。对求职者来说也是一样，要知道 <strong>就算是小公司，同样也可以很伟大</strong> 。<br>比如 37signals<br>自己就是这样，十几个人的小公司能拥有300万以上的客户，作者认为这样的规模就够了，所以没有必要再扩大自己的规模。再比如著名的分类广告网站<br>Craigslist，也只有几十个员工，每年却能实现几千万美元的利润，而且他们还在很大程度上改变了美国广告行业的格局，让整个报刊行业的竞争对手失去大量客户。所以对很多公司来说，真没必要一定去追求大规模。当然了，很多公司的特点决定了它们确实需要比较多的人手、比较大的规模，比如外卖和快递行业，但这不是问题，只要符合自己公司的真正需求，大或者小都是好的。作者只是想提醒经营者，<br><strong>做公司确实没必要一味地追求“大”</strong> 。<br>而且，应该在创业初期就规划好公司的规模。很多创业者都会面临资金问题，而要想获得足够的种子资金，可能就需要借助外部投资。作者认为，如果创业者创办的是一家工厂或餐厅，那确实有很多需要用钱的地方，比如租赁场地，购买设备。但今天大量的服务型公司，资金门槛其实非常低，比如咨询、软件、平面设计公司等，这些公司本身不需要太多的资金投入，如果创办的是这种公司，作者建议那<br><strong>最好别用别人的钱</strong><br>。作者总结了不少原因，比如最直接的，融资会稀释你的股份；还有投资人的那种“套现离场”的想法，会毁掉你创建伟大公司的梦想。总之作者的态度很简单，那就是花别人的钱看似轻松，但都是有代价的。一句话，<br><strong>能不融资就千万别融资</strong> 。<br>这时候肯定有人会问，不融资说得轻松，那我要租办公室，买办公设备，给员工发工资，不融资哪儿来的钱啊？作者的回答很简单，那就是<br><strong>公司的需求可能没有想象的那么多</strong><br>。比如企业经营者可能不需要雇10个人，3个人也能应付；可能不需要一间大办公室，在家办公也行；可能不需要会计，自己用软件记账也不错。37signals<br>就是这样，它刚推出第一个产品时，连办公室都没有，员工们只能和别人共用办公室；他们也没做广告，只是通过在网上分享经验来传播自己，不过这些都没有影响公司的发展。而且作者认为，<br><strong>外部条件受限其实也是一种好事，因为有限的资源能激发你在现有条件下的创造力</strong> 。<br>美国西南航空公司就是一个很好的例子，它只有波音737这一种型号的飞机，这就意味着，公司的每一个飞行员、空乘员和地勤人员遇到的问题，都只可能是一个机型上出现的问题，这样他们就能为航空公司的所有航班服务，而且所有飞机的配件都是通用的，这些都大大降低了公司的运营成本和运营难度。所以西南航空公司的运营成本特别低，赚的钱却不比别人少。你看，条件受限反而成了好事了。<br>公司规模不仅仅指的是公司的大小，也包括公司的业务种类。作者相信， <strong>把一件事做好要比同时做一堆傻事要有意义得多</strong><br>，所以对公司来说，能把自己的主业做好就不错了，没必要参与太多的副业。著名大厨戈登·拉姆齐在他的书《厨房噩梦》中就提到，在失败餐馆的菜单上，菜品总是太多。所以拉姆齐到一个餐馆工作时的第一步就是删减菜单，然后把剩下的菜品做成精品。公司的业务也是这样，专注做好一个业务比把一堆任务都做得马马虎虎要有意义得多。而且，公司事业的核心原则应该是不会随时间改变的，比如日本汽车厂商追求的核心原则是可靠性、性价比和实用性，人们对这几点的追求不会改变，再过30年也一样。37signals<br>的宗旨是简洁易用，放到10年后也不会有人说“哥们，我觉得软件还是难用一些好”。<br>上面就是第二个重点，这部分作者的主要观点， <strong>不是反对扩大公司规模，只是说不要一味地追求扩大规模，有什么样的条件做什么样的事儿</strong><br>。要是能把业务做好，把钱赚到手，那小公司本身就可以很伟大，追求简单和效率的原则又在这里得到体现。小规模不是所有公司发展过程中必然要经过的跳板阶段，有时候它也是公司发展的最终和最佳形态，可别掉进越大越好的怪圈里。</p>
+<h2 id="第三部分"><a href="#第三部分" class="headerlink" title="第三部分"></a>第三部分</h2><p>说完了比较宏观的公司文化和公司定位，作者还为我们分享了一些更微观的操作经验。下面我们来说第三个重点，在人力资源方面，公司要控制员工数量，<br><strong>放慢招聘步伐，这样每个员工才能独当一面</strong> 。<br>其实这个部分里作者提到的控制员工数量，也算是公司规模的一方面，但因为作者花了很大的篇幅，专门讲述人力资源方面的经营经验，所以我们在这儿就把员工规模的内容也一并说了。<br>就像扩大公司规模一样，很多公司也特别喜欢招很多员工，更多的人既能分担更多的活儿，也能让老板觉得有面子。但作者认为，公司招人的基本原则，应该是为了解除过多的工作带来的痛苦。如果公司能用一套软件或者更好的工作方法来完成任务，那就可以不用招那么多人。作者的亲身经验是，招人的最佳时机应该是：<br><strong>因为工作太多，给你带来了长久的压力，甚至让你的工作质量下滑了，这时才是公司真正应该招人的时候</strong> 。<br>就算公司真的需要招人了，那老板们还应该注意， <strong>招人的速度别太快</strong><br>。作者举了个例子，假如你去参加一个都是陌生人的酒会，你是不是会只谈一些无聊的八卦，而且会有意识地回避严肃或有争议的观点，只有在老朋友或者熟人的聚会上时，你才会毫不保留地说出你真正的想法。所以如果一个公司在短时间内招了太多人，那给员工们的感觉就特别像是进入了一个都是陌生人的酒会，人们一团和气、互不攻击，看起来好像很融洽，但结果却是，没人好意思站出来指出他看到的问题，这样一来公司的效率又从何谈起呢？所以作者才说，放慢招聘的步伐很有必要。<br>不过，光控制员工数量和招人的速度可远远不够，人力资源方面的另一个重点是要知道该招什么样的人。这就需要问一个问题了，判断员工最重要的条件是什么？你可能会回答，学历和工作经验。要是这么说，那可正好撞到作者的枪口上了。先说学历，作者觉得学历其实没有那么重要，因为象牙塔外面的聪明人多得是。作者统计，美国500强企业的<br>CEO 里，有90%都没有在常青藤学校接受过本科教育，但你能说这些 CEO 水平差吗？肯定不能。<br>再来看工作经验，很多公司特别看重这个，动不动就要求，比方说五年以上的工作经验，其实这真没必要。员工确实一般都需要半年或一年的时间，来养成工作习惯，掌握一定的工作技巧，但这段时间之后，成长曲线其实就趋于平缓了。作者认为，<br><strong>有6个月的工作经验和有6年工作经验的应聘者，他们之间的差距一般不会大</strong><br>。因为真正干得好的人，几个月就能轻松上手，而没有天赋的人，干上一辈子也不会有什么出息。所以你不能拿时间长短论英雄，真正重要的是他们到底做得有多好。所以下次招聘的时候，还是别看那些虚的了，判断员工的能力才是最重要的。<br>假如企业管理者完成了招聘任务，团队到齐之后，接下来要做的事，就是让每个人都上场干活。那有的管理者就会想，要不要再招个评估绩效的人，记录大家都干了多少活呢？作者觉得，尤其在小公司里面，其实根本不需要那种监督别人干活的监工，每个人都应该撸起袖子加油干，为公司创造价值。在做到了上面的几点之后，公司里的员工应该个个都是干活儿的能手了，所以他们每个人自然都有能力去独当一面，公司管理者在招人时付出的辛苦，都会转化为日后的高效和轻松。<br>以上就是第三个重点，这部分作者给出的建议是：在人力资源方面要谨慎，要尽可能少、尽可能慢地招实实在在有能力的员工，然后每个员工要尽可能多地创造价值。做到这一点，招人的目的就算达到了。总之就是<br><strong>简简单单，效率第一</strong> 。</p>
+<h2 id="第四部分"><a href="#第四部分" class="headerlink" title="第四部分"></a>第四部分</h2><p>从企业的社会关系层面来看，人力资源属于企业的内部关系，那讲完了内部关系，企业的外部关系也不能忽视。所以接下来，为你介绍的最后一个重点：<br><strong>在处理外部关系方面，我们要坚持主见，不模仿不盲从，这样面对对手和客户时才能占据主动</strong> 。<br>对手和客户，可能是让所有公司管理者都头痛的两种人。对付他们，作者给出了一个聪明的策略，那就是 <strong>坚持主见、做好业务</strong><br>，这样就能占据主动，让对手和客户围着你转。具体该怎么做呢？</p>
+<p>先说对手。作者认为，对手不值得关注。这是因为，如果一个企业的领袖要是太操心对手，就会陷入紧张和焦虑之中，成天会想着对手在干什么，而忘记自己该干什么。所以<br><strong>要想战胜对手，管理者在做好本职业务的同时，首先从态度上就不能太把他们当回事</strong> 。<br>有了态度然后就是行动，管理者在和竞争对手竞争的过程中，行动上也要有自己的主见。作者认为，既然要和对手竞争，管理者首先就应该拒绝照搬对手的做法。虽然有时照猫画虎也是一种学习过程，但商业上的模仿却不太招人喜欢。一家公司当然可以轻松地复制粘贴，剽窃别人的文字、图像或者代码，但这种方式是注定是会失败的。因为<br><strong>简单的复制会让一家公司失去深刻理解的能力，而只有理解才能激发成长</strong> 。要是只会抄别人的，那这个公司就永远没法掌握主动，只能当个尾随者了。<br>不过，就算不抄袭别人，别的公司也有可能抄袭我们。尤其是当自己的公司获得成功时，那模仿者肯定就蜂拥而上了。那这时公司又该怎么保护自己不被模仿者吞没呢？作者在这儿给了个建议，那就是可以让自己成为产品或服务的一部分，这样对手就再也模仿不来了。举个例子，美国著名的农业公司“多元农场”，它就把自己变成了产品的一部分。他们是这么做的：多元农场会不顾成本地给牛喂食昂贵的草饲料，而且坚持不给牲畜使用抗生素，这样肉制品的品质就会更好、更健康。它还开放了自己的农场，让所有人随意参观肉制品制作的整个生产流程。正因为这种“看得见的健康”，它的客户甚至愿意开车200公里来采购牛肉和鸡肉。所以你看，“多元农场”看起来卖的是农产品，但实际上卖的是自己的这种健康理念，卖的是自己这块招牌，这样，别人就算是想模仿也模仿不来。<br>刚才我们说了，公司的外部关系由对手和客户组成，说完了对手，咱再来看看该怎么对付客户。作者对客户的态度特别简单粗暴，那就是“ <strong>别太把客户当回事</strong><br>”，要学会对他们说“不”。美国汽车大王亨利·福特曾说过，“如果一味听顾客的，我就只能给他们弄一匹更快的马”。话虽然好笑，但却很有道理，因为客户有可能不知道自己到底想要什么。如果他们提的要求企业管理者都答应，就很可能不得不改变自己思考了很久的创意，让本来可以顺利完成的事情变复杂，最后把自己的产品弄得一团糟。<br>尤其是对一些大客户，作者说，千万别太恭维他们。因为 <strong>公司如果处处迎合这些大客户的话，只要有一天客户离开，那这家公司就可能要饿死</strong><br>。因为他们的产品一直以来都是为了迎合特定的客户而设计的，所以可能已经不再有吸引力大众的能力，公司就容易经营不下去了。37signals<br>就绝不恭维客户，只做好自己的本职工作， <strong>宁可让客户放弃自己的产品，也不愿意做任何妥协</strong><br>。因为他们一直记得一句话，那就是，没有用过你们产品的客户永远比用过的多。作者认为，确保自己的产品容易让所有人上手，这就是持续成长的潜力所在。<br>总之在公司的外部关系上，作者认为，企业管理者要把对手和客户放到一个合适的位置上。不能因为他们的存在就迷失自己，坚持主见做好自己的本职工作，不模仿也不盲从，这样才能不被别人扰乱自己的节奏，面对对手和客户时主动权自然就掌握在自己手里了。这又是一种以简单取胜的思维。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>说到这儿，本篇文章的内容就说得差不多了。下面来简单为你回顾一下这本书的内容：<br>首先，在公司文化方面，计划、会议、工作狂和规章制度，看起来都很有用，但实际上可能是效率的杀手。虽然很多公司都乐此不疲地制定计划和规章，不断地开会和加班，但这些东西，其实公司并不一定真的需要。判断公司是不是需要它们，要看它们到底能不能帮公司赚钱。如果发现这些行为原来都是效率的杀手，那还不如早早取消这些制度。<br>第二，在公司规模方面，公司不一定要做大才有意义，小公司本身就可以是一个伟大的目标。对管理者来说，有什么样的条件就做什么样的事儿，有限的资源还能激发公司的创造力，激励公司尽可能地缩减不必要的开支。要是能把业务做得好能赚钱，那小公司完全可以作为企业管理者奋斗的最终目标。<br>第三，在人力资源方面，公司要控制员工数量，放慢招聘步伐，这样每个人才能独当一面。作者说，不到万不得已绝不多招人，只有控制好新员工进入的速度，公司的气氛才适合高效的工作。而且，学历和工作经验不应该成为判断一个员工是否合适的标准，管理者应该实在点儿评判：只要能把活干好就是好员工。做到这几点，公司里的每个员工就都能独当一面，不会出现人浮于事的情况。<br>最后，在外部关系方面，坚持主见，不模仿不盲从，面对对手和客户时才能占据主动。面对对手，管理者在态度上不能太把他们当回事，行动上别抄袭他们，也要注意别让他们抄袭自己。面对客户，别围着他们转，也别因为他们的要求而改变自己的主见，永远要做好自己的本职业务。做到这些，公司才能在面对对手和客户时占据主动。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/06/10/《最强大脑》/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -735,2784 +2036,11 @@ blog.csdn.net/20180610161649183?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/22/Algorithm summary/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/Algorithm summary/" itemprop="url">Algorithm summary</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T22:49:00+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2018.5.24日更新：<br>去掉原文中的目录，修正了目前我发现的错别字（其实也没几个，但是本着严谨的态度我还是决定修改过来），增添了部分代码注释（发现自己写的代码现在竟然看不懂，只能强行加注释了～）</p>
-<h1 id="一：算法分析基本概念"><a href="#一：算法分析基本概念" class="headerlink" title="一：算法分析基本概念"></a>一：算法分析基本概念</h1><h2 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="Linearsearch"><a href="#Linearsearch" class="headerlink" title="Linearsearch"></a>Linearsearch</h3><pre><code>/*
- * 输入：n个元素的数组A[1...n]、x
- * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
- */
-
-int Linearsearch(int *A,int x, int n){
-    int j=0;
-    while (j&lt;n&amp;&amp;x!=A[j]){
-        j++;
-    }
-
-    if(x==A[j])return j;
-    return 0;
-}
-</code></pre><h3 id="Binarysearch"><a href="#Binarysearch" class="headerlink" title="Binarysearch"></a>Binarysearch</h3><pre><code>/*
- * 输入：n个元素的升序数组A[1...n]、x
- * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
- */
-
-int Binarysearch(int *A, int x, int n) {
-    int low = 1, high = n, j = 0;
-    while (low &lt;= high &amp;&amp; j == 0) {
-        int mid = (int) ((low + high) / 2);
-        if (x == A[mid])j = mid;
-        else if (x &lt; A[mid])high = mid - 1;
-        else low = mid + 1;
-    }
-
-    return j;
-}
-</code></pre><p>要注意二分搜索的输入一定是一个 <strong>升序</strong><br>的数组，实质就是一个二叉搜索树（所以也把二分搜索的执行描述为决策树），对于一个大小为n的排序数组，算法Binarysearch执行比较的最大次数为int（logn）+1（如果输入数组不是递增排好序的，则可在nlogn内对其进行排序后再进行二分搜索）。</p>
-<h2 id="合并两个已排序的表"><a href="#合并两个已排序的表" class="headerlink" title="合并两个已排序的表"></a>合并两个已排序的表</h2><pre><code>/*
- * 输入：数组A[1...m]和它的三个索引p，q，r，1&lt;=p&lt;=q&lt;r&lt;=m，p、q、r满足A[p...q]、A[q+1...r]分别按照升序排列
- * 输出：合并两个子数组A[p...q]和A[q+1...r]的数组A[p...r]
- */
-
-void Merge(int *A, int p, int q, int r) {
-    int B[r + 1];//B[p...r]是辅助数组
-    int s = p, t = q + 1, k = p;//s指向A[p...q]子数组，t指向A[q+1...r]子数组，k指向B数组
-    while (s &lt;= q &amp;&amp; t &lt;= r) {
-        if (A[s] &lt;= A[t]) {
-            B[k] = A[s];
-            s++;
-        } else {
-            B[k] = A[t];
-            t++;
-        }
-
-        k++;
-    }
-
-    if (s = q + 1) {//说明s指向的数组已经遍历完了
-        for (int i = t; i &lt;= r; ++i) {
-            B[k++] = A[i];
-        }
-    } else {
-        for (int i = s; i &lt;= r; ++i) {
-            B[k++] = A[i];
-        }
-    }
-
-    for (int j = p; j &lt;= r; ++j) {
-        A[j] = B[j];
-
-    }
-}
-</code></pre><p>设Merge算法要合并两个大小分别为n1和n2的数组（n1</p>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-void SelectionSort(int *A, int n) {
-
-    for (int i = 0; i &lt; n; ++i) {
-
-        for (int j = i + 1; j &lt;= n; ++j) {
-            if (A[i] &gt; A[j]) {
-                int t = A[i];
-                A[i] = A[i];
-                A[i] = t;
-            }
-        }
-    }
-
-}
-</code></pre><p>算法SelectionSort所需的元素比较次数为n(n-1)/2（n-1+n-2+n-3+…+2+1=n(n-1)/2），因为每次交换需要3次赋值，所以元素的赋值次数介于0到3(n-1)之间。</p>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；<br>接下来将第三个数与前两个数对比，比较的思路是先将第三个数存下来（记为x），然后将第三个数与第二个数比较，如果第二个数比第三个数大，则直接将第二个数向后移动一位，如果第二个数不比第三个数大，则说明此时前三个数都是有序的，因为之前前两个数是有序的，比较到最后，将x放到第三个数比较的终止位置即可。以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-void InsertionSort(int *A, int n) {
-    for (int i = 2; i &lt;= n; ++i) {
-        int x = A[i];
-        int j = i - 1;
-        while (j &gt; 0 &amp;&amp; A[j] &gt; x) {
-            A[j + 1] = A[j];
-            j--;
-        }
-        A[j + 1] = x;
-    }
-}
-</code></pre><p>执行算法SelectionSort的元素比较次数在n-1到n(n-1)/2之间，元素赋值次数等于元素比较次数加上n-1.</p>
-<h2 id="自底向上合并排序"><a href="#自底向上合并排序" class="headerlink" title="自底向上合并排序"></a>自底向上合并排序</h2><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-
-void Merge(int *A, int p, int q, int r);
-
-void BottomUpSort(int *A, int n) {
-    int t = 1;
-    while (t &lt; n) {
-        int s = t, t = 2 * s, i = 0;
-        while (i + t &lt;= n) {
-            Merge(A, i + 1, i + s, i + t);
-            i = i + t;
-        }
-        if (i + s &lt; n) {
-            Merge(A, i + 1, i + s, n);
-        }
-    }
-}
-</code></pre><p>用算法BottomUpSort对n个元素的数组进行排序，当n为2的幂时，元素比较次数在(nlogn)/2到nlogn-n+1之间。执行该算法的元素赋值次数为2nlogn。</p>
-<h2 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h2><h3 id="O"><a href="#O" class="headerlink" title="O"></a>O</h3><p>前文提到算法InsertionSort执行的运算次数至多为cn^2，其中c为某个适当选择的正常数。这时我们说算法InsertionSort的运行时间是O(n^2)，说明当排序元素的个数等于或超过某个阈值n0时，对于某个常量c，运行时间是cn^2，<br><strong>O符号描述的是一个上界但不一定是算法的实际执行时间</strong><br>，比如当排序一个已经排序好的数组时InsertionSort的运行时间就不是O(n^2)而是O(n)了。</p>
-<h3 id="Ω"><a href="#Ω" class="headerlink" title="Ω"></a>Ω</h3><p>相比于O，Ω描述的是算法执行的 <strong>下界</strong><br>，比如算法InsertionSort的运算时间至少是cn，则称算法InsertionSort的运行时间是Ω（n），即无论何时，当被排序的元素个数等于或超过某一个阈值n0时，对于某个常数c，算法的运行时间至少是cn。</p>
-<h3 id="Senta"><a href="#Senta" class="headerlink" title="Senta"></a>Senta</h3><p>Senta描述的是一个确切界限，如果对于任意大小等于或超过某一阈值n0的输入，如果运行时间在c1g(n)和c2g(n)之间，则称算法的运行时间是Senta(g(n))。</p>
-<h3 id="复杂性类与-o-符号"><a href="#复杂性类与-o-符号" class="headerlink" title="复杂性类与 o 符号"></a>复杂性类与 o 符号</h3><h4 id="o符号"><a href="#o符号" class="headerlink" title="o符号"></a>o符号</h4><p>O 符号给出的上界可以是“紧”的,也可以是非“紧”的。<br>2<em> n^ 2 =O ( n^ 2 ) 是渐近性紧边界<br>2 </em>n = O ( n^ 2 ) 不是渐近性紧边界</p>
-<p>o 符号就用来表示 <strong>不是渐近性紧边界</strong> 的上界<br>举例: 2 n = o ( n ) , 2 ^n ！= o ( n )</p>
-<p>直观上来说,在小 o 符号中, f ( n ) =o ( g ( n )) ,当 n 趋向于无穷大时, f (n ) 函数相当于 g (n )<br>就变得不再重要了<br>即lim- &gt;+oof(n)/g(n)=0</p>
-<h4 id="w符号"><a href="#w符号" class="headerlink" title="w符号"></a>w符号</h4><p>用类比法来讲,小 w符号相对于大 Ω符号的关系正如 o 符号相对于 O 符号的关系。<br>我们用小 w 符号来表示一个 <strong>渐近性非紧密的下界</strong> 。<br>比如：</p>
-<blockquote>
-<p>(n^2)/2=w(n )<br> (n^2)/2!=w(n^2)</p>
-</blockquote>
-<p>lim- &gt;+oof(n)/g(n)=oo</p>
-<h2 id="空间复杂性"><a href="#空间复杂性" class="headerlink" title="空间复杂性"></a>空间复杂性</h2><p>我们把算法使用的空间 定义 、为:为了求解问题的实例而执行的计算步骤所需要的内存空间,它<br><strong>不包括分配用来存储输入的空间（为了区分那些在整个计算过程中占用了少于输入空间的算法）</strong> 。</p>
-<p>算法的 <strong>空间复杂性不可能超过运行时间的复杂性</strong> ,因为每写入一个内存单元都至少需要一定的时间。所以,如果用 T (n ) 和 S (n )<br>分别代表算法的时间复杂性和空<br>间复杂性,有: S ( n ) = O ( T ( n )) 。</p>
-<h2 id="最优算法"><a href="#最优算法" class="headerlink" title="最优算法"></a>最优算法</h2><p>如果可以证明任何一个求解问题 T的算法必定是Ω ( f ( n )) ,那么我们把在 O ( f ( n )) 时间内求解问题T的任何算法都称为问题<br>T的最优算法。</p>
-<h3 id="如何估计算法的运行时间"><a href="#如何估计算法的运行时间" class="headerlink" title="如何估计算法的运行时间"></a>如何估计算法的运行时间</h3><ul>
-<li>计算迭代次数 </li>
-<li>计算基本运算的频度 </li>
-</ul>
-<blockquote>
-</blockquote>
-<p>一般来说,在分析一个算法运行时间时,可以找出这样一个元运算,它的频率至少和任何其他运算的频度一样大,称这样的运算为基本运算。我们还可以放宽这个定义,把那些频度和运行时间成正比的运算包括进来。</p>
-<ul>
-<li>使用递推关系 </li>
-</ul>
-<blockquote>
-</blockquote>
-<p>如果一个算法本身是递归算法,那么计算这个算法运行时间的函数通常也是递归的,即是指,这个函数的定义中引用了函数自身。即便一个算法本身是非递归的,我们有时也可以用递归式来计算它的运行时间。</p>
-<p>lim- &gt;+oof(n)/g(n)!=oo f(n)=O(g(n))<br>lim-&gt;+oof(n)/g(n)!=0 f(n)=Ω(g(n))<br>lim-&gt;+oof(n)/g(n)==c f(n)=Senta(g(n))</p>
-<h1 id="二：堆和不相交集数据结构"><a href="#二：堆和不相交集数据结构" class="headerlink" title="二：堆和不相交集数据结构"></a>二：堆和不相交集数据结构</h1><p>在很多情况下我们需要使用一种具有 <strong>插入元素</strong> 和 <strong>查找最大值元素</strong> 的数据结构，这种数据结构叫做 <strong>优先队列</strong><br>，如果采用普通队列，那么寻找最大元素需要搜索整个队列，开销比较大；如果使用排序数组，插入运算就需要移动很多的元素，开销也会比较大。这时候 <strong>堆</strong><br>就是一种 <strong>有效的实现优先队列的数据结构</strong> 。</p>
-<p>堆的特点：</p>
-<ul>
-<li>父节点大于等于子节点（但是两个子节点之间的大小关系没有要求），这样可以做到 <strong>沿着每条从根节点到叶子节点的路径，元素的键值都是以非升序排列的</strong> 。 </li>
-<li>堆是一个 <strong>几乎完全的二叉树</strong> ，所以具有和完全二叉树一样的特点，即一般是存储在一个数组A[n]中，A[i]的左子节点在A[2i]中，右子节点在A[2i+1]中（当他们存在的时候）,A[i]的父亲节点在A[i/2]中（如果存在，i/2向下取整）。 </li>
-</ul>
-<p>堆需要支持的几种运算：</p>
-<pre><code>* delete-max[H] 从一个非空的堆H中删除最大元素并将数据项返回 
-* insert[H,x] 将x插入到对H中 
-* delete[H,i] 从堆中删除第i项（注意不是删除i） 
-* makeheap[A] 将A转换成一个堆 
-</code></pre><h2 id="堆上的运算"><a href="#堆上的运算" class="headerlink" title="堆上的运算"></a>堆上的运算</h2><h3 id="两个辅助运算"><a href="#两个辅助运算" class="headerlink" title="两个辅助运算"></a>两个辅助运算</h3><h4 id="SIFT-UP"><a href="#SIFT-UP" class="headerlink" title="SIFT-UP"></a>SIFT-UP</h4><h5 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h5><p>当某个节点（H[i]）的值大于他的父亲节点的值时，需要通过SITF-UP将这个节点 <strong>沿着从H[i]到H[1]这条唯一的路径</strong><br>上移到合适的位置以形成一个合格的堆。</p>
-<h5 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h5><p>将H[i]与其父亲节点H[i/2]比较，如果H[i]大于H[i/2]，则将H[i]与H[i/2]互换，直到H[i]没有父节点或者H[i]不大于H[i/2]。</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><pre><code> int SiftUp(int *H, int i) {
-
-    while (true) {
-        if (i == 1) {
-            break;//说明当前i是根节点
-        }
-        if (H[i] &gt; H[(int) i / 2]) {//如果当前节点比父亲节点大
-            int t;
-            t = H[i];
-            H[i] = H[(int) i / 2];
-            H[(int) i / 2] = t;
-            i = i / 2;
-        } else {
-            break;
-        }
-    }
-    return 0;
-}
-</code></pre><h4 id="SIFT-DOWN"><a href="#SIFT-DOWN" class="headerlink" title="SIFT-DOWN"></a>SIFT-DOWN</h4><h5 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h5><p>当某个节点（H[i]，i&lt;=(int)n/2即 <strong>非叶子节点</strong><br>）的值小于它的两个子节点H[2i]和H[2i+1]（如果存在的话）的最大值时，需要将SIFT-DOWN将渗到合适的位置。</p>
-<h5 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h5><p>将H[i]与其两个子节点中值最大的元素比较，如果小于最大的那个节点，则将H[i]与其最大的那个子节点互换。</p>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5><pre><code> int SiftDown(int *H, int i, int n) {
-    while (true) {
-        i = 2 * i;
-        if (i &gt; n) {
-            break;
-        }
-
-        if (i + 1 &lt;= n) {
-            if (H[i + 1] &gt; H[i]) {//比较两个子节点哪个最大
-                i++;
-            }
-        }
-
-        if (H[i] &gt; H[(int) i / 2]) {
-            int t;
-            t = H[i];
-            H[i] = H[(int) i / 2];
-            H[(int) i / 2] = t;
-        }
-    }
-}
-</code></pre><h3 id="插入（insert）"><a href="#插入（insert）" class="headerlink" title="插入（insert）"></a>插入（insert）</h3><h5 id="功能-2"><a href="#功能-2" class="headerlink" title="功能"></a>功能</h5><p>将元素x插入到已有的堆H中</p>
-<h5 id="实现思路-2"><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h5><p>首先将堆的大小增加1（n++），然后将x放在H[n]中，然后根据需要将H[n]中的元素x进行上移操作，直到最后形成一个合格的堆。</p>
-<h5 id="算法时间复杂度分析"><a href="#算法时间复杂度分析" class="headerlink" title="算法时间复杂度分析"></a>算法时间复杂度分析</h5><p>一个大小为n的二叉堆其高度应该为（int）logn，所以将一个元素插入大小为n的堆中所需的时间复杂度为 <strong>O（logn）</strong></p>
-<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><pre><code> void insert(int *H,int x,int &amp;n){
-    n++;
-    //这里默认H开的空间够用
-    H[n]=x;
-    SiftUp(H, n);//将x根据需要上移
-}
-</code></pre><h3 id="删除（delete）"><a href="#删除（delete）" class="headerlink" title="删除（delete）"></a>删除（delete）</h3><h5 id="功能-3"><a href="#功能-3" class="headerlink" title="功能"></a>功能</h5><p>将堆H中的元素x删除</p>
-<h5 id="实现思路-3"><a href="#实现思路-3" class="headerlink" title="实现思路"></a>实现思路</h5><p>用堆中的最后一个元素H[n]替换需要删除的元素H[i]，然后堆的大小减一（n–），然后根据需要对H[i]进行上移或者下渗直到最后形成一个合格的堆。</p>
-<h5 id="算法时间复杂度分析-1"><a href="#算法时间复杂度分析-1" class="headerlink" title="算法时间复杂度分析"></a>算法时间复杂度分析</h5><p>一个大小为n的二叉堆其高度应该为（int）logn，所以从一个大小为n的堆中将一个元素删除所需的时间复杂度为 <strong>O（logn）</strong></p>
-<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><pre><code> void Delete(int *H, int i, int &amp;n) {
-
-    if (i == n) {//如果需要删除的是最后一个元素
-        n--;
-        return;
-    }
-
-    H[i] = H[n];
-    n--;
-
-    if (H[i] &gt; H[(int) i / 2]) {//如果当前节点比父亲节点大则需要上移
-        SiftUp(H, i);
-    } else {//否则进行下渗
-        SiftDown(H, i, n);
-    }
-}
-</code></pre><h3 id="删除最大值（deletemax）"><a href="#删除最大值（deletemax）" class="headerlink" title="删除最大值（deletemax）"></a>删除最大值（deletemax）</h3><h5 id="功能-4"><a href="#功能-4" class="headerlink" title="功能"></a>功能</h5><p>将堆H中的最大元素x删除并返回最大值。</p>
-<h5 id="实现思路-4"><a href="#实现思路-4" class="headerlink" title="实现思路"></a>实现思路</h5><p>用堆中的最后一个元素H[n]替换需要删除的元素H[1]，然后堆的大小减一（n–），然后根据需要对H[1]进行上移或者下渗直到最后形成一个合格的堆。</p>
-<h5 id="算法时间复杂度分析-2"><a href="#算法时间复杂度分析-2" class="headerlink" title="算法时间复杂度分析"></a>算法时间复杂度分析</h5><p>一个大小为n的二叉堆其高度应该为（int）logn，所以从一个大小为n的堆中将一个元素删除所需的时间复杂度为 <strong>O（logn）</strong></p>
-<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><pre><code> int DeleteMax(int *H,int &amp;n){
-    int x=H[1];
-    Delete(H, 1, n);
-    return x;
-}
-</code></pre><h3 id="创建堆（makeheap）"><a href="#创建堆（makeheap）" class="headerlink" title="创建堆（makeheap）"></a>创建堆（makeheap）</h3><h5 id="功能-5"><a href="#功能-5" class="headerlink" title="功能"></a>功能</h5><p>给出一个有n个元素的数组H[1….n]，创建一个包含这些元素的堆。</p>
-<h5 id="实现思路-5"><a href="#实现思路-5" class="headerlink" title="实现思路"></a>实现思路</h5><p>类似于分治，首先，H的叶子节点（即最下面的一层单个元素）可以认为是若干个小堆，然后我们从倒数第二层开始，将倒数第二层和倒数第一层的元素进行适当调整，使得调整之后整个二叉完全树的最后两层是若干个子堆，按照这个思路，依次向上走，最终走到第1层的时候就可以保证整个完全二叉树是一个符合要求的堆。</p>
-<p>需要注意的是对于一个完全二叉树， <strong>倒数第二层的最后一个元素的下标为int(n/2)</strong> ，（因为倒数第二层的最后一个节点的下标x应该满足x*2=n）.</p>
-<h5 id="算法时间复杂度分析-3"><a href="#算法时间复杂度分析-3" class="headerlink" title="算法时间复杂度分析"></a>算法时间复杂度分析</h5><p>senta(n)</p>
-<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><pre><code> void makeheap(int *H,int n){
-    for (int i = n/2; i &gt;=1 ; --i) {//从倒数第二层到第一层
-        SiftDown(H,i,n);
-    }
-}
-</code></pre><h3 id="堆排序（heapsort）"><a href="#堆排序（heapsort）" class="headerlink" title="堆排序（heapsort）"></a>堆排序（heapsort）</h3><h5 id="功能-6"><a href="#功能-6" class="headerlink" title="功能"></a>功能</h5><p>利用堆对数组H[n]进行排序。</p>
-<h5 id="实现思路-6"><a href="#实现思路-6" class="headerlink" title="实现思路"></a>实现思路</h5><p>首先将数组H[n]调整成为一个（大顶）堆，这时可以保证H[1]是数组中的最大元素，然后将H[1]与H[n]互换位置，然后再调整1——n-1为一个大顶堆，然后将H[1]与H[n-1]互换，以此类推，最后就可以保证H为一个非升序的数组。</p>
-<h5 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h5><p>空间复杂度：因为本算法是在数组H原有的空间基础上进行排序的，所以空间复杂度是Senta（1）。<br>时间复杂度：</p>
-<ul>
-<li>建堆 senta(n) </li>
-<li>执行n-1次siftdown nlog(n)<br>所以总的时间复杂度是nlog（n）</li>
-</ul>
-<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><pre><code>void HeapSort(int *H,int n){
-    makeheap(H,n);
-    int t;
-    for (int i = n; i &gt;=2 ; --i) {
-        t=H[i];
-        H[i]=H[1];
-        H[1]=t;
-        SiftDown(H,1,i-1);
-    }
-}
-</code></pre><h1 id="三：归纳法"><a href="#三：归纳法" class="headerlink" title="三：归纳法"></a>三：归纳法</h1><p>只调用一次的递归叫做尾递归</p>
-<h2 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h2><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>基数排序需要经历d次，d为所要排序数列中位数最多的数的位数，其过程是首先根据数列中数的个位的数值将所有数入0~9这10个队列，然后从0~9将元素依次出队，然后再根据十位元素的数值再次入队，然后出队，以此类推重复d次，最终即可完成排序。</p>
-<h3 id="时间空间复杂度及稳定性"><a href="#时间空间复杂度及稳定性" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h3><ul>
-<li>T(n)=O(d*n) d为排序数中最大数的位数 </li>
-<li>S(n)=O(n) </li>
-<li>稳定 </li>
-</ul>
-<h3 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h3><pre><code>void radixSort(vector&lt;int&gt; v) {
-
-    int d = GetMaxBit(v);
-
-    int *count = new int[10];
-    queue&lt;int&gt; q[10];
-
-    int radix = 1;
-    for (int i = 0; i &lt; d; ++i) {
-        for (int j = 0; j &lt; v.size(); ++j) {
-            int t;
-            t = (v[j] / radix) % 10;
-            q[t].push(v[j]);
-        }
-
-        int p = 0;
-        for (int k = 0; k &lt; 10; ++k) {
-            while (!q[k].empty()) {
-                v[p++] = q[k].front();
-                q[k].pop();
-            }
-        }
-        radix *= 10;
-    }
-    show(v);
-
-}
-</code></pre><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>对于任何的基数都可以归纳出算法，而不仅仅是以10做基数。比如可以把二进制的每四位作为一个数字，也就是用16作为基数，表的数目将和基数相等但是要保证从低位开始将数分配到表中。</p>
-<h2 id="整数幂"><a href="#整数幂" class="headerlink" title="整数幂"></a>整数幂</h2><h3 id="场景介绍"><a href="#场景介绍" class="headerlink" title="场景介绍"></a>场景介绍</h3><p>很多时候我们需要求实数x的n次方即x^n，按照常规做法一般会对x进行n次自乘以得到x^n，但是这是非常低效的，因为它需要senta（n）次乘法，按照输入的大小来说它是指数级的。</p>
-<h3 id="归纳法思路"><a href="#归纳法思路" class="headerlink" title="归纳法思路"></a>归纳法思路</h3><p>一个比较高效的归纳算法是令m=int(n/2)，假设已经知道如何计算x^m,那么根据x^m次方来计算x^n次方就有两种情况：</p>
-<ul>
-<li>n为偶数 则x^n=（x^m）^2 </li>
-<li>n为奇数 则x^n=x(x^m)^2 </li>
-</ul>
-<h3 id="归纳法实现代码（Exprec）"><a href="#归纳法实现代码（Exprec）" class="headerlink" title="归纳法实现代码（Exprec）"></a>归纳法实现代码（Exprec）</h3><pre><code>int power(int x,int n){
-    if (n==0){
-        return 1;
-    }
-
-    int m=n/2;
-    int y;
-    y=power(x,n/2);
-    y=y*y;
-    if (n%2!=0){//如果n是奇数
-        y=y*x;
-    }
-
-    return y;
-}
-</code></pre><h3 id="迭代法实现思路"><a href="#迭代法实现思路" class="headerlink" title="迭代法实现思路"></a>迭代法实现思路</h3><p>上述归纳法实现求x^n的关键部分在于采用递归不断判断n/2的奇偶性，所以我们可以采用迭代的办法，因为一个数除以2的k次方后的奇偶性由其化为二进制数的第k低位决定的（因为除法除以2就相当于二进制的左移操作），所以我们可以将n化为二进制数字d_k,d_(k-1)……d_0，从y=1开始，从左到右扫描二进制数字，如果当前二进制数字为0，则对应递归情况下的偶数情况即应该y=y^2，否则即为y=y(y^m)^2</p>
-<h3 id="迭代法实现代码（Exp）"><a href="#迭代法实现代码（Exp）" class="headerlink" title="迭代法实现代码（Exp）"></a>迭代法实现代码（Exp）</h3><pre><code>int Exp(int x,int n){
-    int d[10];//假设n化为2进制数字后存在d数组里面
-    int y=1;
-    for (int i = len(d); i &gt;=0 ; --i) {
-        y=y*y;
-        if(d[i]==1){
-            y=y*x;
-        }
-    }
-}
-</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>假设每次乘法的时间是常数，那么这两种方法所需的运行时间都是 <strong>senta(lohn)</strong> ，他们对于输入大小来说都是 <strong>线性</strong> 的。</p>
-<h2 id="多项式求值（Horner规则）"><a href="#多项式求值（Horner规则）" class="headerlink" title="多项式求值（Horner规则）"></a>多项式求值（Horner规则）</h2><h3 id="场景介绍-1"><a href="#场景介绍-1" class="headerlink" title="场景介绍"></a>场景介绍</h3><p>假设有n+2个数a_0,a_1,……,a_n和x序列，要对多项式 <strong>P_n(x)=a_n<em>x^n+a_(n-1)</em>x^(n-1)+…+a_1*x</strong><br>求值，传统的办法是分别对每一个子项求值，然后再对整个式子求值，但是这种方法很低效，因为它需要n+（n-1）+（n-2）+…..+1=n(n+1)/2次乘法。</p>
-<h3 id="归纳法解决思路"><a href="#归纳法解决思路" class="headerlink" title="归纳法解决思路"></a>归纳法解决思路</h3><p>首先我们发现原式可进行如下化简（这么丑的字不是我写的…）：<br><img src="https://img-
-blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>化简之后我们可以发现如果我们假设已知P_(n-1)(x)，那么P_n(x)=x*P_(n-1)(x)+a_0,所以就有了算法HORNER。</p>
-<h3 id="HORNER算法代码实现"><a href="#HORNER算法代码实现" class="headerlink" title="HORNER算法代码实现"></a>HORNER算法代码实现</h3><pre><code>int Horner(int *A,int n,int x){//数组A的长度为n+2，从A[0]到A[n+1]代表了a_0到a_(n+1)
-
-    int p=A[n+1];//p=a_(n+1)
-    for (int i = 1; i &lt;=n ; ++i) {
-        p=p*x+A[n+1-i];//p=p*x+a_(n-i)
-    }
-
-}
-</code></pre><h2 id="寻找多数元素"><a href="#寻找多数元素" class="headerlink" title="寻找多数元素"></a>寻找多数元素</h2><h3 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h3><p>令A[1…n]是一个整数序列，如果该序列中的某一个数x在该序列中出现的次数多余int(n/2)，则称x为该序列的 <strong>多数元素</strong> 。</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ul>
-<li>蛮力法 将每个元素与其他因素进行比较，并且对每一个元素计数，如果某个元素的计数大于int(n/2)，就可以断言它是多数元素。但是这种方法的比较次数是n(n-1)/2=senta(n^2)，代价过于昂贵。 </li>
-<li>利用排序 先将原序列进行排序，在最坏情况下，排序这一步需要Ω(nlogn)次比较。 </li>
-<li>寻找中间元素 因为多数元素排序后一定是中间元素，可以找到该序列的中间元素后扫描整个序列该中间元素的出现次数来验证该元素是否为多数元素，由于中间元素可以在senta(n)时间内找到，这个方法要花费senta(n)时间。 </li>
-<li>MAJORITY算法 首先我们需要知道，去掉一个序列中的两个不同的数后该序列原来的多数元素现在依然是新序列的多数元素，所以我们……我们能怎么样呢，这不好描述啊，还是看代码吧…… </li>
-</ul>
-<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>int majority(int *A, int n) {
-    int c = candidate(A, 1, n);
-    int count = 0;
-    for (int i = 1; i &lt;= n; ++i) {
-        if (A[i] == c) {
-            count++;
-        }
-    }
-    if (count &gt; (int) n / 2) {
-        return c;
-    } else {
-        return NULL;
-    }
-}
-
-int candidate(int *A, int m, int n) {//寻找A[m...n]中的多数元素
-    int j = m;
-    int c = A[m];
-    int count = 1;
-    while (j &lt; n &amp;&amp; count &gt; 0) {
-        j++;
-        if (A[j] == c) {
-            count++;
-        } else {
-            count--;
-        }
-    }
-    if (j == n) {
-        return c;
-    } else {
-        return candidate(A, j + 1, n);
-    }
-}
-</code></pre><h1 id="四：分治法"><a href="#四：分治法" class="headerlink" title="四：分治法"></a>四：分治法</h1><h2 id="什么是分治"><a href="#什么是分治" class="headerlink" title="什么是分治"></a>什么是分治</h2><p>一个分治算法把问题实例划分为若干个子问题（一般是两个），并分别使用递归解决每个子实例，然后把这些子实例的解组合起来，得到原问题的解。</p>
-<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>考虑这样一个问题：我们需要在序列Ａ[1….n]中找到该序列的最大值元素和最小值元素，一种直接的算法是扫描一遍Ａ序列，用两个标志位max和min分别表示最大值和最小值元素，然后扫描时根据每个元素与当前最大最小值的比较情况动态调整最大最小值直至最后找到最大最小值，代码如下：</p>
-<pre><code>void MaxMin(int *A,int n){
-    int max,min;
-    min=max=A[0];
-    for (int i = 1; i &lt;n ; ++i) {
-        if(A[i]&gt;max)max=A[i];
-        if(A[i]&lt;min)min=A[i];
-    }
-
-    cout&lt;&lt;max&lt;&lt;min&lt;&lt;endl;
-}
-</code></pre><p>显然，此种方法的元素比较次数是２ｎ－２，但是利用分治策略就可以将元素比较次数减少到(３ｎ)/2-2，具体做法：将数组分割成两半，Ａ[1…n/2]和Ａ[n/2+1…n]，在每一半中分别找到最大值和最小值，并返回这两个最小值中的最小值、这两个最大值中的最大值作为最终的最小、最大值。对应伪代码如下：</p>
-<pre><code>(max min) MaxMin2(int *A,int low,int high){
-    if (high-low==1){
-        if (A[low]&lt;A[high])return (A[low],A[high]);
-        else return (A[high],A[low]);
-    } else{
-        int mid=(high+low)/2;
-        (x1,y1)=MaxMin2(A,low,mid);
-        (x2,y2)=MaxMin2(A,mid+1,high);
-        x=min(x1,x2);
-        y=max(y1,y2);
-
-        return (x,y);
-    }
-}
-</code></pre><p>按照上述算法，设Ａ[1…n]有ｎ个元素，ｎ为２的幂，则仅用３ｎ/2-2次元素比较就可以在数组Ａ中找出最大值和最小值。</p>
-<h2 id="二分搜索-1"><a href="#二分搜索-1" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="分治（递归）实现"><a href="#分治（递归）实现" class="headerlink" title="分治（递归）实现"></a>分治（递归）实现</h3><p>原理比较简单，给出代码：</p>
-<pre><code>int binarysearch(int *A, int low, int high, int x) {//A是已经排序过的数组,A[1....n]
-
-    if (low &gt; high)return 0;
-    int mid = (high + low) / 2;
-    if (x == A[mid])return mid;
-    if (x &lt; A[mid])return binarysearch(A, low, mid, x - 1);
-    else return binarysearch(A, mid + 1, high, x);
-
-
-}
-</code></pre><p>算法BINARYSEARCHREC在ｎ个元素组成的数组中搜索某个元素所执行的比较次数不超过((int)logn)+1，时间复杂度是Ｏ(logn)。</p>
-<h3 id="迭代实现"><a href="#迭代实现" class="headerlink" title="迭代实现"></a>迭代实现</h3><pre><code>int binarysearch(int *A, int n, int x) {//A是已经排序过的数组,A[1....n]
-
-    int low, high, j;
-    low =1;
-    high = n;
-    j = 0;//j表示ｘ的下标
-    while (low &lt;= high &amp;&amp; j == 0) {
-        int mid = (high + low) / 2;
-        if (x == A[mid])  j = mid;
-        else if (x &lt; A[mid])high = mid - 1;
-        else low = mid + 1;
-    }
-    return j;
-}
-</code></pre><h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>递归和迭代实现二分搜索算法的元素比较次数都在int(logn)+１内，但是迭代算法只需要senta(１)的空间，而递归算法由于递归深度为Ｏ(logn)，每个递归层次需要senta(1)的空间，所以总的需要的空间总量是Ｏ(logn)。</p>
-<h2 id="归并（合并）排序"><a href="#归并（合并）排序" class="headerlink" title="归并（合并）排序"></a>归并（合并）排序</h2><p>这里需要区分迭代式合并排序和递归式合并排序的区别：</p>
-<ul>
-<li><p>迭代式 自底向上<br><img src="/home/dmrf/图片/merge2.jpg" alt=""></p>
-</li>
-<li><p>递归式 自顶向下<br><img src="/home/dmrf/图片/merge1.jpg" alt=""></p>
-</li>
-</ul>
-<h3 id="迭代式"><a href="#迭代式" class="headerlink" title="迭代式"></a>迭代式</h3><p>主要思路是将所要排序数列看做若干个有序的小数列，因为将两个有序数列合并之后所得数列还是有序数列，所以经过不断合并，最后可将数列排为有序。</p>
-<h4 id="时间空间复杂度及稳定性-1"><a href="#时间空间复杂度及稳定性-1" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h4><ul>
-<li>T(n)=O(nlog2– &gt;n) </li>
-<li>S(n)=O(n) </li>
-<li>稳定 </li>
-</ul>
-<h4 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h4><pre><code>void MSort(vector&lt;int&gt; v) {
-
-
-    vector&lt;int&gt; h;
-    h = v;
-
-    int start, seg;
-
-
-    for (seg = 1; seg &lt; v.size(); seg *= 2) {
-        int k = 0;
-        for (start = 0; start &lt; v.size(); start = start + seg * 2) {
-            int end;
-            end = start + seg;
-            int low = start;
-            while (low &lt; start + seg &amp;&amp; end &lt; start + seg + seg &amp;&amp; low &lt; v.size() &amp;&amp; end &lt; v.size()) {
-                if (v[low] &lt;= v[end]) {
-                    h[k++] = v[low];
-                    low++;
-                } else {
-                    h[k++] = v[end];
-                    end++;
-                }
-            }
-
-            while (low &lt; start + seg &amp;&amp; low &lt; v.size()) {
-                h[k++] = v[low++];
-            }
-            while (end &lt; start + seg + seg &amp;&amp; end &lt; v.size()) {
-                h[k++] = v[end++];
-            }
-
-        }
-
-        v = h;
-    }
-    show(v);
-
-}
-</code></pre><h3 id="递归式"><a href="#递归式" class="headerlink" title="递归式"></a>递归式</h3><p>主要思路是将待排序序列分成两个小部分，然后再对两个小部分运行相同的排序方法进行递归排序，最后将两个小部分合并起来。</p>
-<h3 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h3><p>MergeSort（A,1,n）;</p>
-<pre><code>void MergeSort(int *A, int low, int high) {
-    if (low &lt; high) {
-        int mid = (high + low) / 2;
-        MergeSort(A, low, mid);
-        MergeSort(A, high, mid + 1);
-        Merge(A, low, mid, high);
-    }
-}
-
-void Merge(int *A, int low, int mid, int high) {
-    int n = high - low;
-    int B[high - low];
-    int b = mid;
-    int i;
-    for (i = 0; i &lt; n &amp;&amp; low &lt; mid &amp;&amp; b &lt; high; ++i) {
-        if (A[low] &lt; A[b]) {
-            B[i] = A[low++];
-        } else {
-            B[i] = A[b++];
-        }
-    }
-
-    for (int j = low; j &lt; mid; ++j) {
-        B[i] = A[j];
-    }
-    for (int k = b; k &lt; high; ++k) {
-        B[i] = A[k];
-    }
-
-    for (int l = low; l &lt;high ; ++l) {
-        A[l]=B[i];
-    }
-}
-</code></pre><h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>算法MergeSort对一个n个元素的数组排序所需的时间是senta(nlogn)，空间是senta(n).</p>
-<h2 id="寻找中项和第k小元素"><a href="#寻找中项和第k小元素" class="headerlink" title="寻找中项和第k小元素"></a>寻找中项和第k小元素</h2><h3 id="场景描述-1"><a href="#场景描述-1" class="headerlink" title="场景描述"></a>场景描述</h3><p>寻找序列A[1…n]中的第k小元素。</p>
-<h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p>传统的方法是直接将A[1…n]进行排序，然后取排序后的序列的第k个即为第k小元素，但是这种方法需要Ω(nlogn)的时间，因为任何基于比较的排序过程在最坏情况下必须花费这么多时间，所以我们选择一种新的算法：<br>我们要在n个元素中找到第k小元素的实质是寻找第k小元素在A中的位置，所以我们可以将A划分成三个子序列A1 A2<br>A3，其中A2为单个元素的序列，A1中的所有元素小于A2，A3中的所有元素大于A2，此时就有以下几种情况：</p>
-<ul>
-<li>如果A1的长度大于k则A序列中第K小元素一定在A1中，我们只需寻找A1中的第k小元素即可 </li>
-<li>如果A1的长度等于k-1，则A2中的那个单元素就是我们要找的第k小元素 </li>
-<li>如果A1的长度小于k-1，则我们需要在A3序列中找到第k-len(A1)-1小元素 </li>
-</ul>
-<p>这样，我们就可以采用分治的思想将原来的n个元素中寻找第k小元素不断缩小范围最终找到目标元素，具体算法步骤描述如下：</p>
-<h4 id="SELECT-算法描述"><a href="#SELECT-算法描述" class="headerlink" title="SELECT 算法描述"></a>SELECT 算法描述</h4><ol>
-<li>如果数组元素个数小于 44,则直接将数组排序并返回第 k小元素(采用直接的方法来解决问题,因为当总元素个数小于44*5=220的时候用直接的方法解决问题更快)。 </li>
-<li>把 n 个元素以每组 5 个元素划分为 int( n/5) 组,如果 n 不是 5的倍数则抛弃剩余元素。 </li>
-<li>对每组进行排序,之后取出每组的中间项(第 3 个元素)。 </li>
-<li>递归调用 SELECT 算法,得到这些中间项序列中的中项元素 mm </li>
-<li><p>根据 mm,将原数组 A 划分为三个子数组: </p>
-<ul>
-<li>A1={小于 mm 的元素}; </li>
-<li>A2={等于 mm 的元素}; </li>
-<li>A3={大于 mm 的元素}; </li>
-</ul>
-</li>
-<li><p>根据 k 的大小,判断第 k 小元素会出现在 A1,A2,A3 中的<br>哪一个数组里,之后,或者返回第 k 小元素(mm,在 A2<br>中),或者在 A1 或 A3 上递归。</p>
-<ul>
-<li>k </li>
-</ul>
-</li>
-</ol>
-<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>void sort(int *A, int low, int high) {
-    for (int i = low; i &lt; high; ++i) {
-        for (int j = i + 1; j &lt; high; ++j) {
-            if (A[i] &gt; A[j]) {
-                int t = A[i];
-                A[i] = A[j];
-                A[j] = t;
-            }
-        }
-    }
-}
-
-int Select(int *A, int low, int high, int k) {
-    int p = high - low + 1;
-    if (p &lt; 44) {
-        sort(A, low, high);
-        return A[k];
-
-    }
-    int q = p / 5;
-    int M[q];
-
-    for (int i = 0; i &lt; q; ++i) {
-        sort(A, i * 5, (i + 1) * 5);//将A分成q组，每组5个元素，如果5不整除p，则排除剩余元素
-        M[i] = A[i * 5 + 3];//M为q个子序列中的中项（中项集合）
-    }
-
-    int mm = M[q / 2];//mm为中项集合的中项
-    int *A1, a1 = 0;
-    int *A2, a2 = 0;
-    int *A3, a3 = 0;
-    //这里节省空间没有new（其实是懒...）
-    for (int j = low; j &lt; high; ++j) {
-        if (A[j] &lt; mm)A1[a1++] = A[j];
-        if (A[j] = mm)A2[a2++] = A[j];
-        if (A[j] &gt; mm)A3[a3++] = A[j];
-    }
-    if (a1 &gt;= k)return Select(A1, 1, a1, k);
-    if (a1 + a2 == k)return mm;
-    if (a1 + a2 &lt; k)return Select(A3, 1, a3, k - a1 - a2);
-
-
-}
-</code></pre><h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>在一个由n个元素组成的线序集合中提取第k小元素，所需的时间是senta(n)(T(n)&lt;=20cn,c是排序43个元素所需的时间)，特别地，n个元素元素的中值可以在senta(n)时间找出。<br>需要注意的是，虽然此算法所需的时间是senta(n)但是其中的倍数常量（20c）还是太大，我们会在随讲机算法的时候提出一个具有较小倍数常量的算法。</p>
-<h2 id="快速排序（QuickSort）"><a href="#快速排序（QuickSort）" class="headerlink" title="快速排序（QuickSort）"></a>快速排序（QuickSort）</h2><p>快速排序（QuickSort）是一种具有senta(nlogn)时间复杂度的排序算法，相比MergeSort，QuickSort不需要辅助的存储空间，这是它的优势。</p>
-<h3 id="划分算法（Split）"><a href="#划分算法（Split）" class="headerlink" title="划分算法（Split）"></a>划分算法（Split）</h3><p>在进行快速排序算法的实现之前我们需要先实现划分算法，它是快速排序算法的基础。</p>
-<h4 id="什么是划分算法"><a href="#什么是划分算法" class="headerlink" title="什么是划分算法"></a>什么是划分算法</h4><p>设A[low…high]是一个包含n个数的序列，设x=a[low],我们希望对A中的元素进行位置调整后实现当i&lt; new index of x时A[i]&lt;<br>x,当i&gt; new index of x时A[i]&gt;x。</p>
-<h4 id="实现思路-7"><a href="#实现思路-7" class="headerlink" title="实现思路"></a>实现思路</h4><p>对一个指定序列A[low…high]，从A[low+1]开始向后扫描元素，如果当前元素a&lt;=A[low]，则将a与第A[i]的元素互换位置，其中i是从low开始的，每进行一次元素的互换之前i++，最后，当A中元素扫描完毕时所有小于等于A[low]的元素都在i之前的位置（包括A[i]），所以此时只需将A[low]和A[i]的元素互换位置即可满足划分的定义，此时的i对应的就是元素A[low]的新位置.</p>
-<h4 id="代码实现-3"><a href="#代码实现-3" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>int Split(int *A, int low, int high) {//输入一个序列，返回A[low]对应元素的新位置
-    int i = low;
-    int x = A[low];
-    for (int j = low + 1; j &lt;= high; ++j) {
-        if (A[j] &lt;= x) {
-            i++;
-            if (i != j) {
-                int t = A[i];
-                A[i] = A[j];
-                A[j] = t;
-            }
-        }
-    }
-
-    int t;
-    t = A[low];
-    A[low] = A[i];
-    A[i] = t;
-
-    return i;
-}
-</code></pre><h4 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>因为算法split的元素比较次数恰好是n-1，所以它的时间复杂性为senta(n).</p>
-<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><h4 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h4><p>算法QuickSort的主要思路是利用Split算法将A[low…high]中的A[low]排列到其正确的位置A[w]，然后对子数组A[low…w-1]和子数组A[w+1…high]递归地进行排序从而产生整个排序数组。</p>
-<h4 id="代码实现-4"><a href="#代码实现-4" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>void QuickSort(int *A, int low, int high) {
-    if (low &lt; high) {
-        int w = Split(A, low, high);//w为A[low]的新位置
-        QuickSort(A, low, w - 1);
-        QuickSort(A, w + 1, high);
-    }
-}
-</code></pre><h4 id="复杂度分析-2"><a href="#复杂度分析-2" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>算法QuickSort对n个元素的数组进行排序时执行的平均比较次数是senta(nlogn)</p>
-<h1 id="五：动态规划"><a href="#五：动态规划" class="headerlink" title="五：动态规划"></a>五：动态规划</h1><h2 id="什么是动态规划"><a href="#什么是动态规划" class="headerlink" title="什么是动态规划"></a>什么是动态规划</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>动态规划过程是：每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生出来的，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。动态规划是一种被广泛用于求解组合最优化问题的算法。</p>
-<h3 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a>算法思想</h3><p>算法思想与分治法类似，也是 <strong>将待求解的问题分解为若干个子问题</strong> （阶段），按顺序求解子阶段，<br><strong>前一子问题的解，为后一子问题的求解提供了有用的信息</strong><br>。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。<br>由于动态规划解决的问题多数有重叠子问题这个特点，为减少重复计算，对每一个子问题只解一次，将其不同阶段的不同状态保存在一个二维数组中。</p>
-<h4 id="与分治法的差别"><a href="#与分治法的差别" class="headerlink" title="与分治法的差别"></a>与分治法的差别</h4><p>适合于用动态规划法求解的问题，经分解后得到的子问题往往 <strong>不是互相独立</strong> 的（即下一个子阶段的求解是建立在上一个子阶段的解的基础上，进行进一步的求解）。</p>
-<h4 id="适用的情况"><a href="#适用的情况" class="headerlink" title="适用的情况"></a>适用的情况</h4><p>能采用动态规划求解的问题的一般要具有3个性质：</p>
-<ul>
-<li><p>最优化原理：如果问题的最优解所包含的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。 </p>
-</li>
-<li><p>无后效性：即某阶段状态一旦确定，就不受这个状态以后决策的影响。也就是说，某状态以后的过程不会影响以前的状态，只与当前状态有关。 </p>
-</li>
-<li><p>有重叠子问题：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。（ <strong>该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势</strong> ） </p>
-</li>
-</ul>
-<h2 id="最长公共子序列问题"><a href="#最长公共子序列问题" class="headerlink" title="最长公共子序列问题"></a>最长公共子序列问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定两个长度为n和m的字符串A和B，确定A和B中最长公共子序列的长度。</p>
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><ul>
-<li><p>传统算法 一种传统的方式是使用蛮力搜索的方法，列举A所有的2^n个子序列对于每一个子序列子在senta(m)时间内来确定它是否也是B的子序列。该算法的时间复杂性是senta(m2^n)，是指数复杂性的。 </p>
-</li>
-<li><p>动态规划算法 寻找一个求最长公共子序列的递推公式，令A=a_1a_2a_3….a_n和B=b_1b_2b_3…b_m，令L[i,j]表示a_1a_2_3…a_i和b_1b_2b_3…b_j的最长公共子序列的长度，则就有当i和j都大于0的时候，如果a_i=b_j，则L[i,j]=L[i-1,j-1]+1，反之，如果a_i!=b_j，则L[i,j]=max(L[i-1,j],L[i,j-1])所以就有以下递推公式： </p>
-</li>
-</ul>
-<pre><code>L [i,j]=0 i==0||j==0
-
-L[i,j]=L[i-1,j-1]+1 i,j&gt;0&amp;&amp;a_i==b_j
-
-L[i,j]=max(L[i-1,j],L[i,j-1]) i,j&gt;0&amp;&amp;a_i=b_j
-</code></pre><h3 id="代码实现-5"><a href="#代码实现-5" class="headerlink" title="代码实现"></a>代码实现</h3><p>输入A和B字符串，返回二者的最长子序列长度</p>
-<pre><code>int Lcs(char *A, int n, char *B, int m) {//A[0...n] B[0...m]
-    int L[n + 1][m + 1];
-    for (int i = 0; i &lt;= n; ++i) {
-        L[i][0] = 0;
-    }
-    for (int j = 0; j &lt;= m; ++j) {
-        L[0][j] = 0;
-    }
-
-    for (int k = 1; k &lt;= n; ++k) {
-        for (int i = 1; i &lt;= m; ++i) {
-            if (A[k] == B[i])L[k][i] = L[k - 1][i - 1] + 1;
-            else L[k][i] = L[k][i - 1] &gt; L[k - 1][i] ? L[k][i - 1] : L[k - 1][i];
-        }
-    }
-
-    return L[n][m];
-}
-</code></pre><p>注意，以上算法需要的空间复杂度是senta(mn)，但是因为计算表中每一项的计算仅仅需要其上一行和上一列的元素，所以对算法进行改进可以使得空间复杂度降为senta(min(m,n))<br>（准确来说是需要2min(m,n)的空间，仅仅将前一行和当前行存储下来即可）。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>最长公共子序列问题的最优解能够在senta(mn)时间和senta(min(m,n))空间内计算得到。</p>
-<h2 id="矩阵链相乘"><a href="#矩阵链相乘" class="headerlink" title="矩阵链相乘"></a>矩阵链相乘</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个n个矩阵的序列⟨A1,A2,A3…An⟩,我们要计算他们的乘积：A1A2A3…AnA1A2A3…An，由于矩阵乘法满足结合律，加括号不会影响结果，但是不同的加括号方法，算法复杂度有很大的差别：<br>考虑矩阵链⟨A1,A2,A3⟩，三个矩阵规模分别为10×100、100×5、5×50：</p>
-<ul>
-<li>按((A1A2)A3)方式，需要做10∗100∗5=5000次，再与A3相乘，又需要10∗5∗50=2500，共需要7500次运算； </li>
-<li>按(A1（A2A3）)方式计算，共需要100∗5∗50+10∗100∗50=75000次标量乘法 </li>
-</ul>
-<p>以上两种不同的加括号方式具有10倍的差别，可见一个好的加括号方式，对计算效率有很大影响。</p>
-<h3 id="解决思路-1"><a href="#解决思路-1" class="headerlink" title="解决思路"></a>解决思路</h3><p>使用一个长度为n+1的一维数组p来记录每个矩阵的规模，其中n为矩阵下标，i的范围1~n，例如对于矩阵Ai而言，它的规模应该是p[i-1]×p[i]。由于i是从1到n取值，所以数组p的下标是从0到n。</p>
-<p>用于存储最少乘法执行次数和最佳分段方式的结构是两个二维数组m和s，都是从1~n取值。m[i][j]记录矩阵链&lt; Ai,Ai+1,…,Aj&gt;的<br><strong>最少乘法执行次数</strong> ，而s[i][j]则记录 最优质m[i][j]的分割点k。</p>
-<p>需要注意的一点是当i=j时，m[i][j]=m[i][i]=0，因为一个矩阵不需要任何乘法。</p>
-<p>假设矩阵链从Ai到Aj，有j-i+1个矩阵，我们从k处分开，将矩阵链分为Ai~Ak和Ak+1到Aj两块，那么我们可以比较容易的给出m[i][j]从k处分隔的公式：</p>
-<pre><code>m[i][j]=m[i][k]+m[k+1][j]+p[i-1]*p[k]*p[j]；
-</code></pre><p>在一组确定的i和j值的情况下，要使m[i][j]的值最小，我们只要在所有的k取值中（i &lt;=k&lt; j)，寻找一个让m[i][j]最小的值即可。</p>
-<p>假设L为矩阵链的长度，那么L=j-i+1。当L=1时，只有一个矩阵，不需要计算。那么我们可以从L=2到n进行循环，对每个合理的i和j值的组合，遍历所有k值对应的m[i][j]值，将最小的一个记录下来，存储到m[i][j]中，并将对应的k存储到s[i][j]中，就得到了我们想要的结果。</p>
-<h3 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h3><pre><code>/*
- * 输入：ms[1...n+1],ms[i]表示第i个矩阵的行数，ms[i+1]表示第i个矩阵的列数
- * 输出：n个矩阵的数量乘法的最小次数
- */
-
-int dp[1024][1024] = { 0 };
-
-struct Matrix {
-    int row;
-    int column;
-};
-
-int matrixChainCost(Matrix *ms, int n) {
-    for (int scale = 2; scale &lt;= n; scale++) {
-        for (int i = 0; i &lt;= n - scale; i++) {
-            int j = i + scale - 1;
-            dp[i][j] = INT_MAX;
-            for (int k = i; k &lt; j; k++) {
-                dp[i][j] = std::min(dp[i][j], dp[i][k] + dp[k+1][j] + (ms[i].row*ms[k].column*ms[j].column));
-            }
-        }
-    }
-    return dp[0][n - 1];
-}
-</code></pre><h3 id="复杂度分析-3"><a href="#复杂度分析-3" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><ul>
-<li>时间复杂度：senta(n^3) </li>
-<li>空间复杂度：senta(n^2) </li>
-</ul>
-<h2 id="所有点对的最短路径问题"><a href="#所有点对的最短路径问题" class="headerlink" title="所有点对的最短路径问题"></a>所有点对的最短路径问题</h2><h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>设G是一个有向图，其中每条边(i, j)都有一个非负的长度L[i, j]，若点i 到点j 没有边相连，则设L[i, j] = ∞.<br>找出每个顶点到其他所有顶点的最短路径所对应的长度。<br>例如：<br><img src="https://img-
-blog.csdn.net/20180508082542596?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p>则 L： 0 2 9</p>
-<p>8 0 6</p>
-<p>1 ∞ 0</p>
-<h3 id="解决思路（Floyd算法）"><a href="#解决思路（Floyd算法）" class="headerlink" title="解决思路（Floyd算法）"></a>解决思路（Floyd算法）</h3><p>Floyd算法（所有点对最短路径）就是每对可以联通的顶点之间总存在一个借助于其他顶点作为媒介而达到路径最短的最短路径值（这个值通过不断增添的媒介顶点而得到更新，也可能不更新——通过媒介的路径并不比其原路径更短），所有的值存储于邻接矩阵中，这是典型的动态规划思想。</p>
-<p>值得注意的是，Floyd算法本次的状态的获取 <strong>只用到了上个阶段的状态</strong> ，而没有用到其他阶段的状态，这就为 <strong>压缩空间</strong> 奠定了条件。</p>
-<p>Floyd算法能够成功的关键之一就是D0(初始矩阵，即权重矩阵)的初始化，凡是不相连接的边必须其dij必须等于正无穷且dii=0(矩阵对角线上的元素！)</p>
-<h3 id="代码实现-6"><a href="#代码实现-6" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code> /*
- * 输入：n×n维矩阵l[1...n,1...n]，对于有向图G=({1,2,...n},E)中的边(i,j)的长度为l[i,j]
- * 输出：矩阵D，使得D[i,j]等于i到j的距离
- * l矩阵需要满足：l[i,i]=0，对于m--&gt;n没有直接连接的有向边（因为是有向图，只考虑单边），应有l[m,n]=INT.MAX（即无穷）
- *
- */
-
-void Floyd(int **l,int n){
-    int **d= reinterpret_cast&lt;int **&gt;(new int[n + 1][n + 1]);
-    for (int i = 1; i &lt;=n ; ++i) {
-        for (int j = 1; j &lt;=n ; ++j) {
-            d[i][j]=l[i][j];
-        }
-    }
-
-    for (int k = 1; k &lt;=n ; ++k) {
-        for (int i = 1; i &lt;=n ; ++i) {
-            for (int j = 1; j &lt;=n ; ++j) {
-                d[i][j]=min(d[i][j],d[i][k]+d[k][j]);
-            }
-
-        }
-    }
-
-}
-</code></pre><h3 id="复杂度分析-4"><a href="#复杂度分析-4" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>算法的运行时间是senta(n^3)<br>算法的空间复杂性是senta(n^2)</p>
-<h2 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h2><h3 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h3><p>设U={u1,u2,u3…un}是一个准备放入容量为C的背包中的n项物品的集合。我们要做的是从U中拿出若干物品装入背包C，要求这些物品的总体积不超过C，但是要求装入背包的物品总价值最大。</p>
-<h3 id="解决思路-2"><a href="#解决思路-2" class="headerlink" title="解决思路"></a>解决思路</h3><p>有 n 种物品，物品 i 的体积为 v[i], 价值为 p[i]. 假定所有物品的体积和价格都大于 0, 以及背包的体积为 V.<br>mp[x][y] 表示体积不超过 y 且可选前 x 种物品的情况下的最大总价值<br>那么原问题可表示为 mp[n][V]。<br>递归关系：</p>
-<table>
-<thead>
-<tr>
-<th>递归式</th>
-<th>解释  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mp[0][y] = 0</td>
-<td>表示体积不超过 y 且可选前 0 种物品的情况下的最大总价值，没有物品可选，所以总价值为 0  </td>
-</tr>
-<tr>
-<td>mp[x][0] = 0</td>
-<td>表示体积不超过 0 且可选前 x 种物品的情况下的最大总价值，没有物品可选，所以总价值为 0  </td>
-</tr>
-<tr>
-<td>当 v[x] &gt; y 时，mp[x][y] = mp[x-1][y]</td>
-<td>因为 x 这件物品的体积已经超过所能允许的最大体积了，所以肯定不能放这件物品，</td>
-</tr>
-</tbody>
-</table>
-<p>那么只能在前 x-1 件物品里选了<br>当 v[x] &lt;= y 时，mp[x][y] = max{ mp[x-1][y] , p[x] +<br>mp[x-1][y-v[x]]（选中A，则其余y-v[x]应在前x-1件物品中选） }  |  x<br>这件物品可能放入背包也可能不放入背包，所以取前两者的最大值就好了， 这样就将前两种情况都包括进来了  </p>
-<h3 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h3><pre><code>/*
- * 输入：物品集合U={u1,u2,u3...un}，体积为s1,s2,s3...sn，价值为v1,v2,v3...vn，容量为C的背包
- * 输出：满足条件的最大价值
- *
- */
-int Knapsack(int *s,int *v,int C,int n){
-    int V[n+1][C+1];//V[i][j]表示从前i项找出的装入体积为j背包的最大值
-    for (int i = 0; i &lt;=n ; ++i) {
-        V[i][0]=0;
-    }
-    for (int j = 0; j &lt;=C ; ++j) {
-        V[0][j]=0;
-    }
-
-    for (int k = 1; k &lt;=n ; ++k) {
-        for (int i = 1; i &lt;=C ; ++i) {
-            if(s[k]&lt;=i){
-                V[k][i]=max(V[k-1][i],V[k-1][i-s[k]]+v[k]);
-            }
-        }
-    }
-
-    return V[n][C];
-}
-</code></pre><h3 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h3><p>背包问题的最优解可以在senta(nC)时间内和senta(C)空间内解得。<br>注意，上述算法的时间复杂性对输入不是多项式的，但是它的运行时间关于输入值是多项式的（时间复杂性+其他耗费时间），故认为它是伪多项式时间算法。</p>
-<h1 id="六：贪心算法"><a href="#六：贪心算法" class="headerlink" title="六：贪心算法"></a>六：贪心算法</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>所谓贪心算法是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说， <strong>不从整体最优上加以考虑</strong> ，他所做出的仅是在某种意义上的<br><strong>局部最优解</strong> 。<br>贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备 <strong>无后效性</strong><br>，即 <strong>某个状态以后的过程不会影响以前的状态，只与当前状态有关</strong> 。<br>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。</p>
-<h2 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h2><h3 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h3><p>给定一个有向图G=(V,E),s为V中一点,以s为起点,要确定从s出发到V中每一个其他顶点的距离(距离的定义是最短路径对应的长度).</p>
-<h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h3><h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><ul>
-<li><p>初始时，S只包含源点，即S＝{v}，v的距离为0。U包含除v外的其他顶点，即:U={其余顶点}，若v与U中顶点u有边，则  &lt; u,v &gt;正常有权值，若u不是v的出边邻接点，则 &lt; u,v &gt; 权值为∞ </p>
-</li>
-<li><p>从U中选取一个距离v最小的顶点k，把k，加入S中（该选定的距离就是v到k的最短路径长度） </p>
-</li>
-<li><p>以k为新考虑的中间点，修改U中各顶点的距离；若从源点v到顶点u的距离（经过顶点k）比原来距离（不经过顶点k）短，则修改顶点u的距离值，修改后的距离值的顶点k的距离加上边上的权 </p>
-</li>
-<li><p>重复步骤b和c直到所有顶点都包含在S中 </p>
-</li>
-</ul>
-<h4 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h4><pre><code>const int  MAXINT = 32767;
-const int MAXNUM = 10;
-int dist[MAXNUM];//表示距离
-int prev[MAXNUM];//记录每个顶点的前驱顶点(因为最短路径的唯一性,所以每个点的前驱元素都是唯一的)
-
-int A[MAXUNM][MAXNUM];
-
-void Dijkstra(int v0)
-{
-  　　bool S[MAXNUM];                                  // 判断是否已存入该点到S集合中
-      int n=MAXNUM;
-  　　for(int i=1; i&lt;=n; ++i)//初始化dist[]、prev[]
- 　　 {
-      　　dist[i] = A[v0][i];
-      　　S[i] = false;                                // 初始都未用过该点
-      　　if(dist[i] == MAXINT)   //如果该点与源点之间无边 
-            　　prev[i] = -1;
- 　　     else 
-            　　prev[i] = v0;
-   　　}
-   　 dist[v0] = 0;
-   　 S[v0] = true; 　　
- 　　 for(int i=2; i&lt;=n; i++)
- 　　 {
-       　　int mindist = MAXINT;
-       　　int u = v0; 　　                            // 找出当前未使用的点j的dist[j]最小值
-      　　 for(int j=1; j&lt;=n; ++j)
-      　　    if((!S[j]) &amp;&amp; dist[j]&lt;mindist)//如果j点没有被用过而且dist[j]小于mindist
-      　　    {
-         　　       u = j;                             // u保存当前邻接点中距离最小的点的号码 
-         　 　      mindist = dist[j];
-       　　   }
-       　　S[u] = true; //将u置为已用
-       　　for(int j=1; j&lt;=n; j++)//更新u加入已用集合后的未用顶点集合中点到已用集合中点的距离
-       　　    if((!S[j]) &amp;&amp; A[u][j]&lt;MAXINT)
-       　　    {
-           　    　if(dist[u] + A[u][j] &lt; dist[j])     //在通过新加入的u点路径找到离v0点更短的路径  
-           　    　{
-                   　　dist[j] = dist[u] + A[u][j];    //更新dist 
-                   　　prev[j] = u;                    //记录前驱顶点 
-            　　    }
-        　    　}
-   　　}
-}
-</code></pre><h4 id="算法复杂度-1"><a href="#算法复杂度-1" class="headerlink" title="算法复杂度"></a>算法复杂度</h4><p>算法的时间复杂度是senta(n^2)</p>
-<h3 id="稠图的线性时间算法"><a href="#稠图的线性时间算法" class="headerlink" title="稠图的线性时间算法"></a>稠图的线性时间算法</h3><p>稠(臭)图不想看，也许不考…</p>
-<h2 id="最小耗费生成树"><a href="#最小耗费生成树" class="headerlink" title="最小耗费生成树"></a>最小耗费生成树</h2><h3 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h3><p>设G =<br>(V,E)是无向连通带权图，即一个网络。E中的每一条边（v,w）的权为c[v][w]。如果G的子图G’是一棵包含G的所有顶点的树，则称G’为G的生成树。生成树上各边权的总和称为生成树的耗费。在G的所有生成树中，耗费最小的生成树称为G的最小生成树。<br>最小生成树最常见的题就是求解n个城市之间的修路方案问题.</p>
-<h2 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h2><h5 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h5><p>给定无向连通带权图G = (V,E),V = {1,2,…,n}。Kruskal算法构造G的最小生成树的基本思想是：</p>
-<ul>
-<li><p>将G的n个顶点看成n个孤立的连通分支,将所有的边按权从小大排序。 </p>
-</li>
-<li><p>从第一条边开始，依边权递增的顺序检查每一条边。并按照下述方法连接两个不同的连通分支：当查看到第k条边(v,w)时，如果端点v和w分别是当前两个不同的连通分支T1和T2的端点时，就用边(v,w)将T1和T2连接成一个连通分支，然后继续查看第k+1条边；如果端点v和w在当前的同一个连通分支中，就直接再查看k+1条边。这个过程一个进行到只剩下一个连通分支时为止。 </p>
-</li>
-</ul>
-<p>此时，已构成G的一棵最小生成树。</p>
-<h4 id="代码实现-7"><a href="#代码实现-7" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cstring&gt;
-using namespace std;
-
-#define maxn 110    //最多点个数
-int n, m;   //点个数，边数
-int parent[maxn];   //父亲节点，当值为-1时表示根节点
-int ans;    //存放最小生成树权值
-struct eage     //边的结构体，u、v为两端点，w为边权值
-{
-    int u, v, w;
-}EG[5010];
-
-bool cmp(eage a, eage b)    //排序调用
-{
-    return a.w &lt; b.w;
-}
-
-int Find(int x)     //寻找根节点，判断是否在同一棵树中的依据
-{
-    if(parent[x] == -1) return x;
-    return Find(parent[x]);
-}
-
-void Kruskal()      //Kruskal算法，parent能够还原一棵生成树，或者森林
-{
-    memset(parent, -1, sizeof(parent));
-    sort(EG+1, EG+m+1, cmp);    //按权值将边从小到大排序
-    ans = 0;
-    for(int i = 1; i &lt;= m; i++)     //按权值从小到大选择边
-    {
-        int t1 = Find(EG[i].u), t2 = Find(EG[i].v);
-        if(t1 != t2)    //若不在同一棵树种则选择该边，合并两棵树
-        {
-            ans += EG[i].w;
-            parent[t1] = t2;
-        }
-    }
-}
-</code></pre><h4 id="复杂度分析-5"><a href="#复杂度分析-5" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>当图的边数为e时，Kruskal算法所需的时间是O(eloge).</p>
-<h3 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h3><h4 id="算法描述-2"><a href="#算法描述-2" class="headerlink" title="算法描述"></a>算法描述</h4><p>设G = (V,E)是连通带权图，V = {1,2,…,n}。构造G的最小生成树,Prim算法的基本思想是：首先置S =<br>{1}，然后，只要S是V的真子集，就进行如下的贪心选择：选取满足条件i ∈S,j ∈V –<br>S,且c[i][j]最小的边，将顶点j添加到S中。这个过程一直进行到S = V时为止。在这个过程中选取到的所有边恰好构成G的一棵最小生成树。</p>
-<h4 id="代码实现-8"><a href="#代码实现-8" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>/* Prim算法生成最小生成树  */
-void MiniSpanTree_Prim(MGraph MG)
-{
-    int min, i, j, k;
-    int adjvex[MAXVEX];/* 保存相关顶点的父亲节点 */
-    int lowcost[MAXVEX];/* 保存相关顶点间边的权值 */
-    lowcost[0] = 0;/* 初始化第一个权值为0，即v0加入生成树 */
-    /* lowcost的值为0，在这里就是此下标的顶点已经加入生成树 */
-    adjvex[0] = 0;/* 初始化第一个顶点下标为0 */
-    cout &lt;&lt; &quot;最小生成树的边为：&quot; &lt;&lt; endl;
-    for (i = 1; i &lt; MG.numVertexes; i++)
-    {
-        lowcost[i] = MG.arc[0][i];/* 将v0顶点与之有边的权值存入数组 */
-        adjvex[i] = 0;/* 初始化都为v0的下标 */
-    }
-
-    for (i = 1; i &lt; MG.numVertexes; i++)
-    {
-        min = INFINITY; /* 初始化最小权值为∞， */
-
-        j = 1;
-        k = 0;
-
-        while (j &lt; MG.numVertexes)/* 循环全部顶点 */
-        {
-            if (lowcost[j] != 0 &amp;&amp; lowcost[j] &lt; min)/* 如果权值不为0且权值小于min */
-            {
-                min = lowcost[j];/* 则让当前权值成为最小值 */
-                k = j;/* 将当前最小值的下标存入k */
-            }
-
-            j++;
-        }
-
-        cout &lt;&lt; &quot;(&quot; &lt;&lt; adjvex[k] &lt;&lt; &quot;, &quot; &lt;&lt; k &lt;&lt; &quot;)&quot; &lt;&lt; &quot;  &quot;; /* 打印当前顶点边中权值最小的边 */
-        lowcost[k] = 0;/* 将当前顶点的权值设置为0,表示此顶点已经完成任务 */
-
-        for (j = 1; j &lt; MG.numVertexes; j++)/* 循环所有顶点 */
-        {
-            /* 如果下标为k顶点各边权值小于此前这些顶点未被加入生成树权值 */
-            if (lowcost[j] != 0 &amp;&amp; MG.arc[k][j] &lt; lowcost[j])
-            {
-                lowcost[j] = MG.arc[k][j];/* 将较小的权值存入lowcost相应位置 */
-                adjvex[j] = k;/* 将k设为下标j的父亲节点 */
-            }
-        }
-    }
-    cout &lt;&lt; endl;
-}
-</code></pre><h4 id="复杂度分析-6"><a href="#复杂度分析-6" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>此算法的时间复杂度为O(n^2)</p>
-<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>（这个写的我也看不懂了…应该是当时笔误，具体想表达什么意思猜猜吧）<br>当e = Ω(n^2)时，Kruskal算法比Prim算法差；<br>但当e = o(n^2)时，Kruskal算法比Prim算法好得多。</p>
-<h1 id="七：NP完全问题"><a href="#七：NP完全问题" class="headerlink" title="七：NP完全问题"></a>七：NP完全问题</h1><p>如果一个算法的最差时间效率属于 O ( p ( n )) ,其中 p (n ) 是问题输入规模 n 的一个多项式函数,我们说该算法能<br><strong>够在多项式的时间内对问题求解</strong> 。<br>我们把可以在多项式时间内求解的问题称为 <strong>易解的</strong> ,而不能在多项式时间内求解的问题则称为 <strong>难解的</strong> 。</p>
-<h2 id="P和NP问题"><a href="#P和NP问题" class="headerlink" title="P和NP问题"></a>P和NP问题</h2><p>非正式地说，我们可以把那些 <strong>能够在多项式时间内求解</strong> 的问题当作计算机科学家所说的 <em><em> P 集合</em></em> 。<br>正式点，只有那些 <strong>能够回答是或否</strong> 的问题（又称判定问题）才属于 P。</p>
-<h3 id="P-类问题"><a href="#P-类问题" class="headerlink" title="P 类问题"></a>P 类问题</h3><p>P 类问题是一类能够用 <strong>确定性算法在多项式时间内求解</strong> 的 <strong>判定问题</strong> 。<br>这种问题类型也称为 <strong>多项式类型</strong> 。</p>
-<p>绝大多数判定问题的一个公共特性是:</p>
-<blockquote>
-<p>虽然在计算上对问题求解可能是困难的,但在计算上 <strong>判定一个待定解是否解决了该问题</strong> 却是简单的,并且,这种判定可以在多项式时间内完成。</p>
-</blockquote>
-<p>一个不确定算法是一个两阶段的过程,它把一个判定问题的实例 l 作为它的输入,并进行下面的操作:</p>
-<ul>
-<li>猜测(非确定)阶段:   </li>
-</ul>
-<blockquote>
-<p>生成一个任意串 S,把它当作给定实例 l 的一个候选解,但 S也可能是完全不着边际的。</p>
-</blockquote>
-<ul>
-<li>验证(确定)阶段:<br>确定算法把 l 和 S 都作为它的输入,如果 S 的确是 l 的一个解的话,就输出“是”;<br>如果 S 不是 l 的一个解,该算法要么返回“否”,要么就根本停不下来。</li>
-</ul>
-<p>如果一个不确定算法在验证阶段的时间效率是多项式级的,我们说它是 <strong>不确定多项式类型</strong> 的算法。 <strong>NP 类问题</strong>(Non-deterministic<br>Polynomial)是一类可以用不确定多项式算法求解的判定问题。我们把这种问题类型称为不确定多项式类。 我们说一个判定问题 D 1<br>可以多项式地化简为一个判定问题 D 2 ,条件是存在一个函数 t 能够把 D 1 的实例转化为D 2 的实例,使得:</p>
-<ul>
-<li>t 把 D 1 的所有真实例映射为 D 2 的真实例,把 D 1 的所有假实例映射为 D 2 的假实例。 </li>
-<li>t 可以用一个多项式算法计算。 </li>
-</ul>
-<p>我们说一个判定问题 D 是 NP 完全问题,条件是:</p>
-<ul>
-<li>它属于 NP 类型。 </li>
-<li>NP 中的任何问题都能够在多项式时间内化简为 D。 </li>
-</ul>
-<p>NP 完全问题:</p>
-<blockquote>
-<p>合取范式的可满足性问题<br> 哈密顿回路问题<br> 旅行商问题</p>
-</blockquote>
-<p>NP 完全问题的定义意味着,如果我们得到了一个 NP 完全问题的多项式确定算法,就说明所有的 NP 问题都能够用一个确定算法在多项式的时间内解出,因此,P<br>= NP.换句话说,得到了一个 NP<br>完全问题的多项式确定性算法可以表明,对于所有类型的判定问题来说,检验待定解和在多项式时间内求解在复杂性上没有本质的差别。<br>这种推论使得大多数计算机科学家相信 P ≠ NP但是,到目前为止,还没有人能从数学上证明这一猜想。</p>
-<h1 id="八：回溯算法"><a href="#八：回溯算法" class="headerlink" title="八：回溯算法"></a>八：回溯算法</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>回溯算法是一种组织搜索的一般技术，它常常可以避免搜索所有的可能性，适用于求解那些有潜在的大量解但是有限个数的解已经检查过的问题。</p>
-<h2 id="3着色问题"><a href="#3着色问题" class="headerlink" title="3着色问题"></a>3着色问题</h2><h3 id="问题描述-6"><a href="#问题描述-6" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个无向图G=(V,E)，需要用三种颜色之一为V中的每个顶点着色，要求没有两个相邻的顶点有相同的颜色。</p>
-<h3 id="算法思想-3"><a href="#算法思想-3" class="headerlink" title="算法思想"></a>算法思想</h3><p>我们称没有两个邻接顶点有同样颜色的着色方案为合法的，反之成为非法的。如果不考虑合法性的要求，给出n个顶点的无向图，将其用三种颜色着色，共有n^3种不同的方法，因为每一个顶点都有三种不同的着色方案，这就构成了一颗三叉树，如图：<br><img src="https://img-
-blog.csdn.net/20180505141608137?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>在该三叉树中，从根到叶子节点的每一条路径代表一种着色方法（合法的和不合法的），我们需要做的就是选出一条合法的从根到叶子的路径即可。所以我们从根节点开始向叶子节点走，这时有两种情况：</p>
-<ul>
-<li><p>从根到当前节点的路径对应一个合法的着色： </p>
-<ul>
-<li>当前路径长度等于n：过程终止（除非希望找到不止一种着色方案） </li>
-<li>当前路径长度小于n：生成当前节点的一个子节点，并将生成的当前节点的子节点标记为新的当前节点 </li>
-</ul>
-</li>
-<li>从根到当前节点的路径对应一个非法的着色：回溯到当前节点的父节点即将当前节点的父节点标记为新的当前节点 </li>
-</ul>
-<h3 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h3><p>使用数组c[1…n]代表图的顶点集合，判断合法性只需判断与当前有联系的点中是否存在与之涂色相同的点即可，此处为节省时间省略该部分代码的实现。</p>
-<h4 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h4><pre><code> void ColorItre(int *c) {//c[1...n]
-    for (int i = 1; i &lt;= n; ++i) {
-        c[i] = 0;
-    }
-    bool flag = false;
-    int k = 1;
-    while (k &gt;= 1) {
-        while (c[k] &lt;= 2) {//从0-2对应三种涂色（实际上是 下面加一之后的1-3对应三种不同颜色）
-            c[k] = c[k] + 1;
-            if (c[k]为合法的){
-                if (k == n) {//如果k已经是最后一个点
-                    flag = true;
-                    break;
-                } else {
-                    k++;
-                }
-
-            }
-        }
-
-        if (flag) {
-            break;
-        }
-
-        //如果第二个循环跳出执行到这里，则说明当前节点k试遍了三种颜色仍然没有找到合法的着色，则将k--进行回溯，注意要将c[k]置为初始值0
-        c[k] = 0;
-        k--;
-    }
-
-    if (flag) {
-        cout &lt;&lt; &quot;success&quot; &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
-    }
-
-}
-</code></pre><h4 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h4><pre><code>void ColorRec(int *c) {//c[1...n]
-    for (int i = 1; i &lt;= n; ++i) {
-        c[i] = 0;
-    }
-
-    bool flag = false;
-    flag = graphcolor(c, 1);
-    if (flag) {
-        cout &lt;&lt; &quot;success&quot; &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
-    }
-}
-
-bool graphcolor(int *c, int i) {
-    for (int color = 1; color &lt;= 3; ++color) {
-        c[i] = color;
-        if (c[i]是合法的){
-            if (i &lt; n) {
-                graphcolor(c, i + 1);
-            } else {
-                return true;
-            }
-        }
-    }
-    //如果执行到这里说明当前节点不存在合法着色，需要回溯，返回false即可激活前一次递归（即让前一层for循环的color加一），以此达到回溯的目的
-    return false;
-}
-</code></pre><h3 id="复杂度分析-7"><a href="#复杂度分析-7" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>这两种实现方式在最坏情况下生成了O(3^n)个节点，对于每个生成的节点，判断当前节点的合法性（合法、部分、二者都不是）需要O(n)的工作来检查，因此，最坏情况下的运行时间是O(n3^n)。</p>
-<h3 id="回溯法的特点"><a href="#回溯法的特点" class="headerlink" title="回溯法的特点"></a>回溯法的特点</h3><ul>
-<li>节点是使用深度优先搜索算法生成的 </li>
-<li>不需要存储整棵搜索树，只需存储根到当前活动节点的路径 </li>
-</ul>
-<h2 id="8皇后问题"><a href="#8皇后问题" class="headerlink" title="8皇后问题"></a>8皇后问题</h2><p>代码见 <a href="https://blog.csdn.net/qq_36982160/article/details/78585680" target="_blank" rel="noopener"> 两种不同方式解决八皇后问题
-</a> ，此处主要介绍算法思路。</p>
-<h3 id="问题描述-7"><a href="#问题描述-7" class="headerlink" title="问题描述"></a>问题描述</h3><p>八皇后问题是一个以国际象棋为背景的问题：如何能够在 8×8<br>的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为n×n，而皇后个数也变成n。当且仅当<br>n = 1 或 n ≥ 4 时问题有解。</p>
-<h3 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h3><p>代码和着色问题代码几乎一样，这里不做过多介绍，给出参考代码：</p>
-<pre><code>void eight_Queens() {
-    int c[9];
-    for (int i = 1; i &lt;= 8; ++i) {
-        c[i] = 0;
-    }
-
-    bool flag = false;
-    int k = 1;
-    while (k &gt;= 1) {
-        while (c[k] &lt;= 7) {
-            c[k]++;
-            if (c[k]为合法着色){
-                if (k == 8) {
-                    flag = true;
-                    break;
-                } else {
-                    k++;
-                }
-            }
-        }
-        if (flag) {
-            break;
-        }
-        c[k] = 0;
-        k--;
-    }
-
-    if (flag) {
-        cout &lt;&lt; &quot;success&quot; &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
-    }
-}
-</code></pre><h3 id="复杂度分析-8"><a href="#复杂度分析-8" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>回溯法在最坏情况下需要O（n^2）的运行时间。<br>但是需要注意，虽然蛮力搜索法的最坏情况也需要<br>O（n^2）的时间，但是根据经验回溯法的有效性远远超过蛮力法。(鬼知道这是谁的经验，反正只要知道考试用蛮力法肯定会xx)</p>
-<h2 id="一般回溯方法"><a href="#一般回溯方法" class="headerlink" title="一般回溯方法"></a>一般回溯方法</h2><h3 id="什么是一般回溯法"><a href="#什么是一般回溯法" class="headerlink" title="什么是一般回溯法"></a>什么是一般回溯法</h3><p>在回溯法中，解向量中每个xi都属于一个有限的线序集Xi，因此，算法最初从空向量开始，然后选择X1中最小的元素作为x1，如果（x1）是一个部分解，算法从X2中找出最小的元素作为x2继续，如果（x1，x2）是一个部分解，则从X3中找出最小元素作为x3，否则跳过x2寻找下一个。一般地，假如算法已经找到部分解（x1,x2,x3…,xj），在判断v=（x1,x2,x3…,xj,x_j+1）时有以下情况：</p>
-<ul>
-<li>v是最终解：记录下当前v作为一组解，如果只想求得一组解则算法结束，否则继续寻找其他解 </li>
-<li>v是一组部分解：从X_j+2中寻找新的最小元素继续向前走 </li>
-<li><p>v既不是最终解也不是部分解：   </p>
-<ul>
-<li>X_j+1中还有其他元素可供选择：在X_j+1中寻找下一个元素 </li>
-<li>X_j+1中没有其他元素可供选择：将x_j置为X_j中的下一个元素回溯，如果X_j中仍然没有其他元素可供选择，则照此方法继续向前回溯。 </li>
-</ul>
-</li>
-</ul>
-<h2 id="分支限界法"><a href="#分支限界法" class="headerlink" title="分支限界法"></a>分支限界法</h2><h3 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h3><p>分支限界法（branch and bound method）是求解 <strong>纯整数规划</strong> 或 <strong>混合整数规划</strong> 问题的经典方法，在上世纪六十年代由Land<br>Doig和Dakin等人提出。这种方法灵活且便于用计算机求解，目前已经成功运用于求解生产进度问题、旅行推销员问题、工厂选址问题、背包问题及分配问题等。算法基本思想如下：</p>
-<ul>
-<li>按宽度优先策略遍历解空间树； </li>
-<li>在遍历过程中，对处理的每个结点vi，根据界限函数，估计沿该结点向下搜索所可能达到的完全解的目标函数的可能取值范围—界限bound(vi)=[downi, upi]； </li>
-<li>从中选择使目标函数取的极值(最大、最小)的结点优先进行宽度优先搜索，从而不断调整搜索方向，尽快找到问题解。 </li>
-</ul>
-<p>各结点的界限函数bound(vi)=[downi,<br>upi]是解决问题的关键，通常依据具体问题而定。常见的两种分支限界法是队列式分支限界法和优先队列式分支限界法，它们分别按照队列先进先出的原则和优先队列中规定的优先级选取下一个节点为扩展节点。</p>
-<h3 id="分支限界法与回溯法的区别"><a href="#分支限界法与回溯法的区别" class="headerlink" title="分支限界法与回溯法的区别"></a>分支限界法与回溯法的区别</h3><h4 id="求解目标不同"><a href="#求解目标不同" class="headerlink" title="求解目标不同"></a>求解目标不同</h4><ul>
-<li><p>回溯法的求解目标是找出解空间树中满足约束条件的 <strong>所有解</strong></p>
-</li>
-<li><p>分支限界法的求解目标则是尽快找出满足约束条件的 <strong>一个解</strong> ，或是在满足约束条件的解中找出在某种意义下的 <strong>最优解</strong></p>
-</li>
-<li><p>分支限界法通常用于解决 <strong>离散值的最优化问题</strong></p>
-</li>
-</ul>
-<h4 id="搜索方式不同"><a href="#搜索方式不同" class="headerlink" title="搜索方式不同"></a>搜索方式不同</h4><ul>
-<li>回溯法以 <strong>深度优先</strong> 的方式（遍历结点）搜索解空间树 </li>
-<li>分支限界法以 <strong>广度优先</strong> 或 <strong>最小耗费优先</strong> 的方式搜索解空间树 </li>
-</ul>
-<h4 id="对扩展结点的扩展方式不同"><a href="#对扩展结点的扩展方式不同" class="headerlink" title="对扩展结点的扩展方式不同"></a>对扩展结点的扩展方式不同</h4><ul>
-<li>分支限界法中，每一个活结点只有一次机会成为扩展结点，活结点一旦成为扩展结点，就一次性产生其所有儿子结点 </li>
-<li>重复上述结点扩展过程，直至到找到所需的解或活结点表为空时为止 </li>
-</ul>
-<h3 id="Demo——旅行商问题求解"><a href="#Demo——旅行商问题求解" class="headerlink" title="Demo——旅行商问题求解"></a>Demo——旅行商问题求解</h3><p>参考： <a href="https://blog.csdn.net/qq_32400847/article/details/51813606" target="_blank" rel="noopener"> 这里 </a></p>
-<h4 id="问题描述-8"><a href="#问题描述-8" class="headerlink" title="问题描述"></a>问题描述</h4><p>给出一个城市的集合和一个定义在 <strong>每一对城市之间</strong> 的耗费函数，找出耗费最小的旅行。</p>
-<h4 id="解决思路-3"><a href="#解决思路-3" class="headerlink" title="解决思路"></a>解决思路</h4><p>考虑下图所示的情况及其代价矩阵，假定起始城市为1号城市：</p>
-<p><img src="https://img-blog.csdn.net/20160703014447395" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20160703014332283" alt="这里写图片描述"><br>注意代价矩阵的特点，每条满足要求的回路在代价矩阵中的每一行每一列有且只有1个元素与之对应。据此，我们可以用贪心算法计算问题的上界：<br>以起始城市作为出发城市，每次从当前出发城市发出的多条边中，选择没有遍历过的最短边连接的城市，作为下一步达到城市。在这个问题中，从城市1出发，途经1→3→5→4→2→1，路径长度1+2+3+7+3=16作为上界，即最短路径长度<br>&lt;=16。<br>对于下界，一个简单的办法是直接将矩阵中每一行的最小元素相加，在这个问题中，路径长度1+3+1+3+2=10作为下界，即最短路径长度&gt;=10。更优的计算方式是<br><strong>将矩阵中每一行最小的2个元素相加除以2并向上取整</strong><br>。因为在一条路径上，每个城市有2条邻接边：进入该城市、离开该城市。对每一步经过的城市j，从最近的上一个城市i来，再到下一个最近城市k去，即i→j→k。在这个问题中，路径长度{(1+3)+(3+6)+(1+2)+(3+4)+(2+3)}/2向上取整等于14作为下界，即最短路径长度</p>
-<blockquote>
-<p>=14。因此，以最短路径长度dist作为TSP问题目标函数，则dist的界为[14,16]。在问题求解过程中，如果1个部分解的目标函数dist下界超出此界限，则该部分解对应了死结点，可剪枝。对于1条正在生成的路径/部分解，设已经确定的顶点(已经经过/遍历的城市)集合为U=(r1,<br>r2, …,<br>rk)，则该部分解的目标函数的下界为(已经经过的路径的总长的2倍+从起点到最近未遍历城市的距离+从终点到最近未遍历城市的距离+进入/离开未遍历城市时各未遍历城市带来的最小路径成本)除以2并向上取整。假设正在生成的路径/部分解为1→4,U={1,4},未遍历城市={2,3,5},该部分解下界为{2*5+1+3+(3+6)+(1+2)+(2+3)}/2向上取整等于16：<br><img src="https://img-blog.csdn.net/20160703021801114" alt="这里写图片描述"></p>
-</blockquote>
-<h1 id="九：随机算法"><a href="#九：随机算法" class="headerlink" title="九：随机算法"></a>九：随机算法</h1><h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><p>随机算法是一种在接受输入的同时，为了随机选择的目的，还接受一串随机比特流并且在运行过程中使用该比特流的算法(允许算法在执行过程中随机地选择下一个计算步骤)。</p>
-<p>随机算法通常有两个 <strong>优点</strong> ：</p>
-<ul>
-<li>较之那些我们所知的解决同一问题最好的确定性算法，随机算法所需的运行时间或空间通常小一些。 </li>
-<li>随机算法比较易于理解和实现（呵，站着说话不腰疼）。 </li>
-</ul>
-<p>随机算法的 <strong>基本特征</strong> ：对所求解问题的同一实例用同一随机算法求解两次可能得到完全不同的效果。<br>这两次求解所需的时间、所得到的结果可能会有相当大的差别。</p>
-<h2 id="随机算法的类别"><a href="#随机算法的类别" class="headerlink" title="随机算法的类别"></a>随机算法的类别</h2><p>随机（概率）算法大致分四类：</p>
-<ul>
-<li>数值概率算法 </li>
-</ul>
-<blockquote>
-<p>常用于数值问题的求解。<br> 这类算法所得到的往往是近似解且近似解的精度随计算时间的增加而不断提高。<br> 在许多情况下,要计算出问题的精确解是不可能的,或者没有必要,此时,用数值概率算法可以得到相当满意的解。</p>
-</blockquote>
-<ul>
-<li>蒙特卡洛(Monte Carlo)算法 </li>
-</ul>
-<blockquote>
-<p>用于求问题的准确解。<br> 对于许多问题来说,近似解毫无意义。<br> 例如,一个判定问题其解为“是”或“否” ,二者必居其一,<br> 不存在任何近似解。<br> 又如,我们要求一个整数的因子,这样问题的解答必须是准<br> 确的,一个整数的近似因子没有任何意义。<br> 用蒙特卡洛算法能求得问题的一个解,但这个解未必是正确的。<br> 求得正确解的概率依赖于算法所用的时间,算法所用的时间越多,得到正确解的概率就越高。<br> 蒙特卡洛算法的主要缺点也在于此,即无法有效地判定所得到的解是否肯定正确。</p>
-</blockquote>
-<ul>
-<li>拉斯维加斯(Las Vegas)算法 </li>
-</ul>
-<blockquote>
-<p>拉斯维加斯算法不会得到不正确的解。<br> 一旦用拉斯维加斯算法找到一个解,这个解就一定是正确<br> 解。<br> 但有时用拉斯维加斯算法会找不到解。<br> 与蒙特卡洛算法类似,拉斯维加斯算法找到正确解的<strong>概率随着它所用的计算时间<br> 的增加而提高</strong>。<br> 对于所求解问题的任一实例,用拉斯维加斯算法反复对该实例求解足够多次,可使求解失效的概率任意小。</p>
-</blockquote>
-<ul>
-<li>舍伍德(Sherwood)算法 </li>
-</ul>
-<blockquote>
-<p>舍伍德算法总能求得问题的一个解,且所求得的解总是正确的。  </p>
-</blockquote>
-<p>当一个确定性算法在最坏情况下的计算复杂性与其在平均情况下的计算复杂性有较大差别时,可在这个确定性算法中引入随机性,将它改造成一个舍伍德算法,消除或减少问题的好坏实例间的这种差别。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
-<li>Monte Carlo算法   </li>
-</ul>
-<blockquote>
-<p>总是给出解，但是偶尔可能会产生非正确的解。然而，可以通过多次运行原算法，并且满足每次运行时的随机选择都相互独立，使产生非正确解的概率可以减到任意小。</p>
-</blockquote>
-<h3 id="主元素问题（多数元素问题）"><a href="#主元素问题（多数元素问题）" class="headerlink" title="主元素问题（多数元素问题）"></a>主元素问题（多数元素问题）</h3><h4 id="问题描述-9"><a href="#问题描述-9" class="headerlink" title="问题描述"></a>问题描述</h4><p>设T[1…n]是一个长度为n的数组，当某个元素在该数组中存在的数量多于int(s/2)时称该元素为数组T的主元素（多数元素）。</p>
-<h4 id="求解思路"><a href="#求解思路" class="headerlink" title="求解思路"></a>求解思路</h4><p>算法随机选择数组元素x,由于数组T的非主元素个数小于n/2，所以，x不为主元素的概率小于1/2。因此判定数组T的主元素存在性的算法是一个偏真1/2正确的算法。50%的错误概率是不可容忍的，利用重复调用技术将错误概率降低到任何可接受的范围内。对于任何给定的p</p>
-<blockquote>
-</blockquote>
-<p>0，算法majorityMC重复调用(向上取整)log(1/p)次算法majority。它是一个偏真蒙特卡罗算法，且其错误概率小于p。算法majorityMC所需的计算时间显然是O(nlog(1/p))。</p>
-<h4 id="代码实现-9"><a href="#代码实现-9" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>//重复k次调用算法Majority
-template&lt;class Type&gt;
-bool MajorityMC(Type *T,int n,double e)
-{
-    int k = ceil(log(1/e)/log((float)2));
-    for(int i=1; i&lt;=k; i++)
-    {
-        if(Majority(T,n))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-bool Majority(Type *T,int n)
-{
-    RandomNumber rnd;
-    int i = rnd.Random(n);
-
-    Type x = T[i];  //随机选择数组元素
-    int k = 0;
-
-    for(int j=0; j&lt;n; j++)
-    {
-        if(T[j] == x)
-        {
-            k++;
-        }
-    }
-
-    return (k&gt;n/2); //k&gt;n/2时，T含有主元素
-}
-</code></pre><h2 id="随机化快速排序"><a href="#随机化快速排序" class="headerlink" title="随机化快速排序"></a>随机化快速排序</h2><p>（可能是最为流行的一种随机算法？）<br>首先要明确传统快速排序的流程：从待排序序列中拿出最后一个（或者第一个）作为主元，将小于它的放在它的前面，大于它的放在它的后面，这时对该主元的前一部分和后一部分再分别递归进行“划分”，最后达到有序。这种方法有一个很大的问题就是当待排序数组是一个几乎有序的序列时其复杂度会很容易达到senta(n^2)，因为如果每次都选择第一个元素或者最后一个元素作为主元进行划分，对一个几乎有序的序列，划分后的递归对象（子序列）将会一个很长一个很短，这样可能经过好多次划分后还是有一个待划分的子部分很长。解决方法是每次不选择第一个或者最后一个作为主元，而是随机产生一个从第一个到最后一个之间的随机数作为主元进行划分，这样即保留了快速排序的优越性又避免了排序几乎有序序列时的痛点。</p>
-<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h3><pre><code>void RandomQuickSort(int low,int high){
-    if(low&lt;high){
-
-        int v=random(low,high);
-        int t=A[low];
-        A[low]=A[v];
-        A[v]=t;
-
-        Split(A[low...high],low);
-        RandomQuickSort(low,v-1);
-        RandomQuickSort(v+1,high);
-    }
-}
-</code></pre><p>该算法在最坏情况下仍然是senta(n^2)，但这与输入形式无关。如果最坏情况发生，那是因为用随机数选取的主元不凑巧，这个事件发生的概率是非常小的。事实上，没有一种输入的排列可以引起它的最坏情况，算法的期望运行时间是senta(nlogn).</p>
-<h2 id="随机化的选择算法（寻找第k小元素）"><a href="#随机化的选择算法（寻找第k小元素）" class="headerlink" title="随机化的选择算法（寻找第k小元素）"></a>随机化的选择算法（寻找第k小元素）</h2><p>什么是选择算法：</p>
-<h3 id="SELECT-算法描述-1"><a href="#SELECT-算法描述-1" class="headerlink" title="SELECT 算法描述"></a>SELECT 算法描述</h3><ol>
-<li>如果数组元素个数小于 44,则直接将数组排序并返回第 k小元素(采用直接的方法来解决问题,因为当总元素个数小于44*5=220的时候用直接的方法解决问题更快)。 </li>
-<li>把 n 个元素以每组 5 个元素划分为 int( n/5) 组,如果 n 不是 5的倍数则抛弃剩余元素。 </li>
-<li>对每组进行排序,之后取出每组的中间项(第 3 个元素)。 </li>
-<li>递归调用 SELECT 算法,得到这些中间项序列中的中项元素 mm </li>
-<li><p>根据 mm,将原数组 A 划分为三个子数组: </p>
-<ul>
-<li>A1={小于 mm 的元素}; </li>
-<li>A2={等于 mm 的元素}; </li>
-<li>A3={大于 mm 的元素}; </li>
-</ul>
-</li>
-<li>根据 k 的大小,判断第 k 小元素会出现在 A1,A2,A3 中的<br>哪一个数组里,之后,或者返回第 k 小元素(mm,在 A2<br>中),或者在 A1 或 A3 上递归。</li>
-</ol>
-<pre><code>    1：k &lt;len(A 1) 第 k 小元素在 A1 中;
-2：len(A 1) =k &lt;= A 1+ A 2 第 k 小元素在 A2 中;
-3： A 1 + A 2 &lt; k &lt;= A 1 + A 2+  A 3第 k 小元素在 A3 中;
-</code></pre><p>该算法的运行时间是senta(n)(T(n)&lt;=20cn,c是排序43个元素所需的时间)，具有一个很大的常数系数，所以就有了随机版的选择算法：</p>
-<pre><code>    /*
- * 输入：n个元素的数组A[1...n]和整数k
- * 输出：A中的第k小元素
- * 
- */
-
-R_Select(A,1,n,k);
-
-void R_Select(int *A, int low, int high, int k) {
-    int v = random(low, high);
-    int x = A[v];
-    A1 = {a | a &lt; x};
-    A2 = {a | a = x};
-    A3 = {a | a &gt; x};
-
-    if (A1.len &gt;= k)return R_Select(A, 1, A1.len, k);
-    else if (A.len + A2.len &gt;= k)return x;
-    else if (A1.len + A2.len &lt; k)return R_Select(A, 1, A3.len, k - A1.len - A2.len);
-}
-</code></pre><p>该版本的随机算法与原版本的主要不用是原版本是将序列分为若干个5元素序列分别进行排序后找到那些5元素序列中值组成的新序列的中值作为主元对元素进行划分，而随机算法是产生一个序列中的随机数（就是在待找序列中随机找了一个数）作为主元，省去了那些排序5元素数组的步骤，对于大小为n的输入，算法RandomizedSekect执行的期望比较次数小于4n，他的期望运行时间是senta(n)。<br>可以发现该随机算法最坏情况下的运行时间也是senta(n)，但是其发生最坏情况不依赖于输入，仅当产生的随机数序列很不凑巧时才会发生，而这种概率是非常小的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/17/Android解决The APK file app-debug.apk does not exist on disk./">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/17/Android解决The APK file app-debug.apk does not exist on disk./" itemprop="url">Android解决The APK file app-debug.apk does not exist on disk.</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T09:31:58+08:00">
-                2018-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>Android studio run app的时候报错The APK file app-debug.apk does not exist on disk.</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="Edit-Configurations"><a href="#Edit-Configurations" class="headerlink" title="Edit Configurations"></a>Edit Configurations</h2><p><img src="https://img-
-blog.csdn.net/20180517092441412?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>如图，点击Edit Configurations，查看你app配置中的是否有如下选项：<br><img src="https://img-
-blog.csdn.net/201805170926187?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>如果没有则点击+号：<br><img src="https://img-
-blog.csdn.net/20180517092659139?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后这里置为空直接ok：<br><img src="https://img-
-blog.csdn.net/20180517092741458?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后点击ok重新run，如果不出意外该错误已经解决。</p>
-<h1 id="Gradle-build"><a href="#Gradle-build" class="headerlink" title="Gradle build"></a>Gradle build</h1><p>如果第一种方法还未解决你的问题，可以尝试：<br><img src="https://img-
-blog.csdn.net/20180517092912158?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-
-blog.csdn.net/20180517092941420?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-
-blog.csdn.net/20180517093055534?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/17/随机算法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/17/随机算法/" itemprop="url">随机算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T08:35:26+08:00">
-                2018-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>随机算法是一种在接受输入的同时，为了随机选择的目的，还接受一串随机比特流并且在运行过程中使用该比特流的算法(允许算法在执行过程中随机地选择下一个计算步骤)。</p>
-<p>随机算法通常有两个 <strong>优点</strong> ：</p>
-<ul>
-<li>较之那些我们所知的解决同一问题最好的确定性算法，随机算法所需的运行时间或空间通常小一些。 </li>
-<li>随机算法比较易于理解和实现（呵，站着说话不腰疼）。 </li>
-</ul>
-<p>随机算法的 <strong>基本特征</strong> ：对所求解问题的同一实例用同一随机算法求解两次可能得到完全不同的效果。<br>这两次求解所需的时间、所得到的结果可能会有相当大的差别。</p>
-<h2 id="随机算法的类别"><a href="#随机算法的类别" class="headerlink" title="随机算法的类别"></a>随机算法的类别</h2><p>随机（概率）算法大致分四类：</p>
-<ul>
-<li>数值概率算法 </li>
-</ul>
-<blockquote>
-<p>常用于数值问题的求解。<br> 这类算法所得到的往往是近似解且近似解的精度随计算时间的增加而不断提高。<br> 在许多情况下,要计算出问题的精确解是不可能的,或者没有必要,此时,用数值概率算法可以得到相当满意的解。</p>
-</blockquote>
-<ul>
-<li>蒙特卡洛(Monte Carlo)算法 </li>
-</ul>
-<blockquote>
-<p>用于求问题的准确解。<br> 对于许多问题来说,近似解毫无意义。<br> 例如,一个判定问题其解为“是”或“否” ,二者必居其一,<br> 不存在任何近似解。<br> 又如,我们要求一个整数的因子,这样问题的解答必须是准<br> 确的,一个整数的近似因子没有任何意义。<br> 用蒙特卡洛算法能求得问题的一个解,但这个解未必是正确的。<br> 求得正确解的概率依赖于算法所用的时间,算法所用的时间越多,得到正确解的概率就越高。<br> 蒙特卡洛算法的主要缺点也在于此,即无法有效地判定所得到的解是否肯定正确。</p>
-</blockquote>
-<ul>
-<li>拉斯维加斯(Las Vegas)算法 </li>
-</ul>
-<blockquote>
-<p>拉斯维加斯算法不会得到不正确的解。<br> 一旦用拉斯维加斯算法找到一个解,这个解就一定是正确<br> 解。<br> 但有时用拉斯维加斯算法会找不到解。<br> 与蒙特卡洛算法类似,拉斯维加斯算法找到正确解的<strong>概率随着它所用的计算时间<br> 的增加而提高</strong>。<br> 对于所求解问题的任一实例,用拉斯维加斯算法反复对该实例求解足够多次,可使求解失效的概率任意小。</p>
-</blockquote>
-<ul>
-<li>舍伍德(Sherwood)算法 </li>
-</ul>
-<blockquote>
-<p>舍伍德算法总能求得问题的一个解,且所求得的解总是正确的。  </p>
-</blockquote>
-<p>当一个确定性算法在最坏情况下的计算复杂性与其在平均情况下的计算复杂性有较大差别时,可在这个确定性算法中引入随机性,将它改造成一个舍伍德算法,消除或减少问题的好坏实例间的这种差别。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
-<li>Monte Carlo算法   </li>
-</ul>
-<blockquote>
-<p>总是给出解，但是偶尔可能会产生非正确的解。然而，可以通过多次运行原算法，并且满足每次运行时的随机选择都相互独立，使产生非正确解的概率可以减到任意小。</p>
-</blockquote>
-<h3 id="主主元素问题（多数元素问题）"><a href="#主主元素问题（多数元素问题）" class="headerlink" title="主主元素问题（多数元素问题）"></a>主主元素问题（多数元素问题）</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>设T[1…n]是一个长度为n的数组，当某个元素在该数组中存在的数量多于int(s/2)时称该元素为数组T的主元素（多数元素）。</p>
-<h4 id="求解思路"><a href="#求解思路" class="headerlink" title="求解思路"></a>求解思路</h4><p>算法随机选择数组元素x,由于数组T的非主元素个数小于n/2，所以，x不为主元素的概率小于1/2。因此判定数组T的主元素存在性的算法是一个偏真1/2正确的算法。50%的错误概率是不可容忍的，利用重复调用技术将错误概率降低到任何可接受的范围内。对于任何给定的p</p>
-<blockquote>
-</blockquote>
-<p>0，算法majorityMC重复调用(向上取整)log(1/p)次算法majority。它是一个偏真蒙特卡罗算法，且其错误概率小于p。算法majorityMC所需的计算时间显然是O(nlog(1/p))。</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>//重复k次调用算法Majority
-template&lt;class Type&gt;
-bool MajorityMC(Type *T,int n,double e)
-{
-    int k = ceil(log(1/e)/log((float)2));
-    for(int i=1; i&lt;=k; i++)
-    {
-        if(Majority(T,n))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-
-bool Majority(Type *T,int n)
-{
-    RandomNumber rnd;
-    int i = rnd.Random(n);
-
-    Type x = T[i];  //随机选择数组元素
-    int k = 0;
-
-    for(int j=0; j&lt;n; j++)
-    {
-        if(T[j] == x)
-        {
-            k++;
-        }
-    }
-
-    return (k&gt;n/2); //k&gt;n/2时，T含有主元素
-}
-</code></pre><h2 id="随机化快速排序"><a href="#随机化快速排序" class="headerlink" title="随机化快速排序"></a>随机化快速排序</h2><p>（可能是最为流行的一种随机算法？）<br>首先要明确传统快速排序的流程：从待排序序列中拿出最后一个（或者第一个）作为主元，将小于它的放在它的前面，大于它的放在它的后面，这时对该主元的前一部分和后一部分再分别递归进行“划分”，最后达到有序。这种方法有一个很大的问题就是当待排序数组是一个几乎有序的序列时其复杂度会很容易达到senta(n^2)，因为如果每次都选择第一个元素或者最后一个元素作为主元进行划分，对一个几乎有序的序列，划分后的递归对象（子序列）将会一个很长一个很短，这样可能经过好多次划分后还是有一个待划分的子部分很长。解决方法是每次不选择第一个或者最后一个作为主元，而是随机产生一个从第一个到最后一个之间的随机数作为主元进行划分，这样即保留了快速排序的优越性又避免了排序几乎有序序列时的痛点。</p>
-<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h3><pre><code>void RandomQuickSort(int low,int high){
-    if(low&lt;high){
-
-        int v=random(low,high);
-        int t=A[low];
-        A[low]=A[v];
-        A[v]=t;
-
-        Split(A[low...high],low);
-        RandomQuickSort(low,v-1);
-        RandomQuickSort(v+1,high);
-    }
-}
-</code></pre><p>该算法在最坏情况下仍然是senta(n^2)，但这与输入形式无关。如果最坏情况发生，那是因为用随机数选取的主元不凑巧，这个事件发生的概率是非常小的。事实上，没有一种输入的排列可以引起它的最坏情况，算法的期望运行时间是senta(nlogn).</p>
-<h2 id="随机化的选择算法"><a href="#随机化的选择算法" class="headerlink" title="随机化的选择算法"></a>随机化的选择算法</h2><p>什么是选择算法：</p>
-<h3 id="SELECT-算法描述"><a href="#SELECT-算法描述" class="headerlink" title="SELECT 算法描述"></a>SELECT 算法描述</h3><ol>
-<li>如果数组元素个数小于 44,则直接将数组排序并返回第 k小元素(采用直接的方法来解决问题,因为当总元素个数小于44*5=220的时候用直接的方法解决问题更快)。 </li>
-<li>把 n 个元素以每组 5 个元素划分为 int( n/5) 组,如果 n 不是 5的倍数则抛弃剩余元素。 </li>
-<li>对每组进行排序,之后取出每组的中间项(第 3 个元素)。 </li>
-<li>递归调用 SELECT 算法,得到这些中间项序列中的中项元素 mm </li>
-<li><p>根据 mm,将原数组 A 划分为三个子数组: </p>
-<ul>
-<li>A1={小于 mm 的元素}; </li>
-<li>A2={等于 mm 的元素}; </li>
-<li>A3={大于 mm 的元素}; </li>
-</ul>
-</li>
-<li>根据 k 的大小,判断第 k 小元素会出现在 A1,A2,A3 中的<br>哪一个数组里,之后,或者返回第 k 小元素(mm,在 A2<br>中),或者在 A1 或 A3 上递归。</li>
-</ol>
-<pre><code>    1：k &lt;len(A 1) 第 k 小元素在 A1 中;
-2：len(A 1) =k &lt;= A 1+ A 2 第 k 小元素在 A2 中;
-3： A 1 + A 2 &lt; k &lt;= A 1 + A 2+  A 3第 k 小元素在 A3 中;
-</code></pre><p>该算法的运行时间是senta(n)(T(n)&lt;=20cn,c是排序43个元素所需的时间)，具有一个很大的常数系数，所以就有了随机版的选择算法：</p>
-<pre><code>    /*
- * 输入：n个元素的数组A[1...n]和整数k
- * 输出：A中的第k小元素
- * 
- */
-
-R_Select(A,1,n,k);
-
-void R_Select(int *A, int low, int high, int k) {
-    int v = random(low, high);
-    int x = A[v];
-    A1 = {a | a &lt; x};
-    A2 = {a | a = x};
-    A3 = {a | a &gt; x};
-
-    if (A1.len &gt;= k)return R_Select(A, 1, A1.len, k);
-    else if (A.len + A2.len &gt;= k)return x;
-    else if (A1.len + A2.len &lt; k)return R_Select(A, 1, A3.len, k - A1.len - A2.len);
-}
-</code></pre><p>该版本的随机算法与原版本的主要不用是原版本是将序列分为若干个5元素序列分别进行排序后找到那些5元素序列中值组成的新序列的中值作为主元对元素进行划分，而随机算法是产生一个序列中的随机数（就是在待找序列中随机找了一个数）作为主元，省去了那些排序5元素数组的步骤，对于大小为n的输入，算法RandomizedSekect执行的期望比较次数小于4n，他的期望运行时间是senta(n)。<br>可以发现该随机算法最坏情况下的运行时间也是senta(n)，但是其发生最坏情况不依赖于输入，仅当产生的随机数序列很不凑巧时才会发生，而这种概率是非常小的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/14/NP完全问题/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/14/NP完全问题/" itemprop="url">NP完全问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T20:07:21+08:00">
-                2018-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如果一个算法的最差时间效率属于 O ( p ( n )) ,其中 p (n ) 是问题输入规模 n 的一个多项式函数,我们说该算法能<br><strong>够在多项式的时间内对问题求解</strong> 。<br>我们把可以在多项式时间内求解的问题称为 <strong>易解的</strong> ,而不能在多项式时间内求解的问题则称为 <strong>难解的</strong> 。</p>
-<p>非正式地说，我们可以把那些 <strong>能够在多项式时间内求解</strong> 的问题当作计算机科学家所说的 <em><em> P 集合</em></em> 。<br>正式点，只有那些 <strong>能够回答是或否</strong> 的问题（又称判定问题）才属于 P。</p>
-<p>P 类问题是一类能够用 <strong>确定性算法在多项式时间内求解</strong> 的 <strong>判定问题</strong> 。<br>这种问题类型也称为 <strong>多项式类型</strong> 。</p>
-<p>绝大多数判定问题的一个公共特性是:</p>
-<blockquote>
-<p>虽然在计算上对问题求解可能是困难的,但在计算上 <strong>判定一个待定解是否解决了该问题</strong> 却是简单的,并且,这种判定可以在多项式时间内完成。</p>
-</blockquote>
-<p>一个不确定算法是一个两阶段的过程,它把一个判定问题的实例 l 作为它的输入,并进行下面的操作:</p>
-<ul>
-<li>猜测(非确定)阶段:   </li>
-</ul>
-<blockquote>
-<p>生成一个任意串 S,把它当作给定实例 l 的一个候选解,但 S也可能是完全不着边际的。</p>
-</blockquote>
-<ul>
-<li>验证(确定)阶段:<br>确定算法把 l 和 S 都作为它的输入,如果 S 的确是 l 的一个解的话,就输出“是”;<br>如果 S 不是 l 的一个解,该算法要么返回“否”,要么就根本停不下来。</li>
-</ul>
-<p>如果一个不确定算法在验证阶段的时间效率是多项式级的,我们说它是 <strong>不确定多项式类型</strong> 的算法。 <strong>NP 类问题</strong>(Non-deterministic<br>Polynomial)是一类可以用不确定多项式算法求解的判定问题。我们把这种问题类型称为不确定多项式类。 我们说一个判定问题 D 1<br>可以多项式地化简为一个判定问题 D 2 ,条件是存在一个函数 t 能够把 D 1 的实例转化为D 2 的实例,使得:</p>
-<ul>
-<li>t 把 D 1 的所有真实例映射为 D 2 的真实例,把 D 1 的所有假实例映射为 D 2 的假实例。 </li>
-<li>t 可以用一个多项式算法计算。 </li>
-</ul>
-<p>我们说一个判定问题 D 是 NP 完全问题,条件是:</p>
-<ul>
-<li>它属于 NP 类型。 </li>
-<li>NP 中的任何问题都能够在多项式时间内化简为 D。 </li>
-</ul>
-<p>NP 完全问题:</p>
-<blockquote>
-<p>合取范式的可满足性问题<br> 哈密顿回路问题<br> 旅行商问题</p>
-</blockquote>
-<p>NP 完全问题的定义意味着,如果我们得到了一个 NP 完全问题的多项式确定算法,就说明所有的 NP 问题都能够用一个确定算法在多项式的时间内解出,因此,P<br>= NP.换句话说,得到了一个 NP<br>完全问题的多项式确定性算法可以表明,对于所有类型的判定问题来说,检验待定解和在多项式时间内求解在复杂性上没有本质的差别。<br>这种推论使得大多数计算机科学家相信 P ≠ NP但是,到目前为止,还没有人能从数学上证明这一猜想。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/14/算法分析基本概念/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/14/算法分析基本概念/" itemprop="url">算法分析基本概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-14T19:30:31+08:00">
-                2018-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="Linearsearch"><a href="#Linearsearch" class="headerlink" title="Linearsearch"></a>Linearsearch</h3><pre><code>/*
- * 输入：n个元素的数组A[1...n]、x
- * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
- */
-
-int Linearsearch(int *A,int x, int n){
-    int j=0;
-    while (j&lt;n&amp;&amp;x!=A[j]){
-        j++;
-    }
-
-    if(x==A[j])return j;
-    return 0;
-}
-</code></pre><h3 id="Binarysearch"><a href="#Binarysearch" class="headerlink" title="Binarysearch"></a>Binarysearch</h3><pre><code>/*
- * 输入：n个元素的升序数组A[1...n]、x
- * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
- */
-
-int Binarysearch(int *A, int x, int n) {
-    int low = 1, high = n, j = 0;
-    while (low &lt;= high &amp;&amp; j == 0) {
-        int mid = (int) ((low + high) / 2);
-        if (x == A[mid])j = mid;
-        else if (x &lt; A[mid])high = mid - 1;
-        else low = mid + 1;
-    }
-
-    return j;
-}
-</code></pre><p>要注意二分搜索的输入一定是一个 <strong>升序</strong><br>的数组，实质就是一个二叉搜索树（所以也把二分搜索的执行描述为决策树），对于一个大小为n的排序数组，算法Binarysearch执行比较的最大次数为int（logn）+1（如果输入数组不是递增排好序的，则可在nlogn内对其进行排序后再进行二分搜索）。</p>
-<h2 id="合并两个已排序的表"><a href="#合并两个已排序的表" class="headerlink" title="合并两个已排序的表"></a>合并两个已排序的表</h2><pre><code>/*
- * 输入：数组A[1...m]和它的三个索引p，q，r，1&lt;=p&lt;=q&lt;r&lt;=m，p、q、r满足A[p...q]、A[q+1...r]分别按照升序排列
- * 输出：合并两个子数组A[p...q]和A[q+1...r]的数组A[p...r]
- */
-
-void Merge(int *A, int p, int q, int r) {
-    int B[r + 1];//B[p...r]是辅助数组
-    int s = p, t = q + 1, k = p;//s指向A[p...q]子数组，t指向A[q+1...r]子数组，k指向B数组
-    while (s &lt;= q &amp;&amp; t &lt;= r) {
-        if (A[s] &lt;= A[t]) {
-            B[k] = A[s];
-            s++;
-        } else {
-            B[k] = A[t];
-            t++;
-        }
-
-        k++;
-    }
-
-    if (s = q + 1) {//说明s指向的数组已经遍历完了
-        for (int i = t; i &lt;= r; ++i) {
-            B[k++] = A[i];
-        }
-    } else {
-        for (int i = s; i &lt;= r; ++i) {
-            B[k++] = A[i];
-        }
-    }
-
-    for (int j = p; j &lt;= r; ++j) {
-        A[j] = B[j];
-
-    }
-}
-</code></pre><p>设Merge算法要合并两个大小分别为n1和n2的数组（n1</p>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-void SelectionSort(int *A, int n) {
-
-    for (int i = 0; i &lt; n; ++i) {
-
-        for (int j = i + 1; j &lt;= n; ++j) {
-            if (A[i] &gt; A[j]) {
-                int t = A[i];
-                A[i] = A[i];
-                A[i] = t;
-            }
-        }
-    }
-
-}
-</code></pre><p>算法SelectionSort所需的元素比较次数为n(n-1)/2（n-1+n-2+n-3+…+2+1=n(n-1)/2），因为每次交换需要3次赋值，所以元素的赋值次数介于0到3(n-1)之间。</p>
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；<br>接下来将第三个数与前两个数对比，比较的思路是先将第三个数存下来（记为x），然后将第三个数与第二个数比较，如果第二个数比第三个数大，则直接将第二个数向后移动一位，如果第二个数不比第三个数大，则说明此时前三个数都是有序的，因为之前前两个数是有序的，比较到最后，将x放到第三个数比较的终止位置即可。以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-void InsertionSort(int *A, int n) {
-    for (int i = 2; i &lt;= n; ++i) {
-        int x = A[i];
-        int j = i - 1;
-        while (j &gt; 0 &amp;&amp; A[j] &gt; x) {
-            A[j + 1] = A[j];
-            j--;
-        }
-        A[j + 1] = x;
-    }
-}
-</code></pre><p>执行算法SelectionSort的元素比较次数在n-1到n(n-1)/2之间，元素赋值次数等于元素比较次数加上n-1.</p>
-<h2 id="自底向上合并排序"><a href="#自底向上合并排序" class="headerlink" title="自底向上合并排序"></a>自底向上合并排序</h2><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-
-void Merge(int *A, int p, int q, int r);
-
-void BottomUpSort(int *A, int n) {
-    int t = 1;
-    while (t &lt; n) {
-        int s = t, t = 2 * s, i = 0;
-        while (i + t &lt;= n) {
-            Merge(A, i + 1, i + s, i + t);
-            i = i + t;
-        }
-        if (i + s &lt; n) {
-            Merge(A, i + 1, i + s, n);
-        }
-    }
-}
-</code></pre><p>用算法BottomUpSort对n个元素的数组进行排序，当n为2的幂时，元素比较次数在(nlogn)/2到nlogn-n+1之间。执行该算法的元素赋值次数为2nlogn。</p>
-<h2 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h2><h3 id="O"><a href="#O" class="headerlink" title="O"></a>O</h3><p>前文提到算法InsertionSort执行的运算次数至多为cn^2，其中c为某个适当选择的正常数。这时我们说算法InsertionSort的运行时间是O(n^2)，说明当排序元素的个数等于或超过某个阈值n0时，对于某个常亮c，运行时间是cn^2，<br><strong>O符号描述的是一个上界但不一定是算法的实际执行时间</strong><br>，比如当排序一个已经排序好的数组时InsertionSort的运行时间就不是O(n^2)而是O(n)了。</p>
-<h3 id="Ω"><a href="#Ω" class="headerlink" title="Ω"></a>Ω</h3><p>相比于O，Ω描述的是算法执行的 <strong>下界</strong><br>，比如算法InsertionSort的运算时间至少是cn，则称算法InsertionSort的运行时间是Ω（n），即无论何时，当被排序的元素个数等于或超过某一个阈值n0时，对于某个常数c，算法的运行时间至少是cn。</p>
-<h3 id="Senta"><a href="#Senta" class="headerlink" title="Senta"></a>Senta</h3><p>Senta描述的是一个确切界限，如果对于任意大小等于或超过某一阈值n0的输入，如果运行时间在c1g(n)和c2g(n)之间，则称算法的运行时间是Senta(g(n))。</p>
-<h3 id="复杂性类与-o-符号"><a href="#复杂性类与-o-符号" class="headerlink" title="复杂性类与 o 符号"></a>复杂性类与 o 符号</h3><h4 id="o符号"><a href="#o符号" class="headerlink" title="o符号"></a>o符号</h4><p>O 符号给出的上界可以是“紧”的,也可以是非“紧”的。<br>2<em> n^ 2 =O ( n^ 2 ) 是渐近性紧边界<br>2 </em>n = O ( n^ 2 ) 不是渐近性紧边界</p>
-<p>o 符号就用来表示 <strong>不是渐近性紧边界</strong> 的上界<br>举例: 2 n = o ( n ) , 2 ^n ！= o ( n )</p>
-<p>直观上来说,在小 o 符号中, f ( n ) =o ( g ( n )) ,当 n 趋向于无穷大时, f (n ) 函数相当于 g (n )<br>就变得不再重要了<br>即lim- &gt;+oof(n)/g(n)=0</p>
-<h4 id="w符号"><a href="#w符号" class="headerlink" title="w符号"></a>w符号</h4><p>用类比法来讲,小 w符号相对于大 Ω符号的关系正如 o 符号相对于 O 符号的关系。<br>我们用小 w 符号来表示一个 <strong>渐近性非紧密的下界</strong> 。<br>比如：</p>
-<blockquote>
-<p>(n^2)/2=w(n )<br> (n^2)/2!=w(n^2)</p>
-</blockquote>
-<p>lim- &gt;+oof(n)/g(n)=oo</p>
-<h2 id="空间复杂性"><a href="#空间复杂性" class="headerlink" title="空间复杂性"></a>空间复杂性</h2><p>我们把算法使用的空间 定义 、为:为了求解问题的实例而执行的计算步骤所需要的内存空间,它<br><strong>不包括分配用来存储输入的空间（为了区分那些在整个计算过程中占用了少于输入空间的算法）</strong> 。</p>
-<p>算法的 <strong>空间复杂性不可能超过运行时间的复杂性</strong> ,因为每写入一个内存单元都至少需要一定的时间。所以,如果用 T (n ) 和 S (n )<br>分别代表算法的时间复杂性和空<br>间复杂性,有: S ( n ) = O ( T ( n )) 。</p>
-<h2 id="最优算法"><a href="#最优算法" class="headerlink" title="最优算法"></a>最优算法</h2><p>如果可以证明任何一个求解问题 T的算法必定是Ω ( f ( n )) ,那么我们把在 O ( f ( n )) 时间内求解问题T的任何算法都称为问题<br>T的最优算法。</p>
-<h2 id="如何估计算法的运行时间"><a href="#如何估计算法的运行时间" class="headerlink" title="如何估计算法的运行时间"></a>如何估计算法的运行时间</h2><ul>
-<li>计算迭代次数 </li>
-<li>计算基本运算的频度 </li>
-</ul>
-<blockquote>
-</blockquote>
-<p>一般来说,在分析一个算法运行时间时,可以找出这样一个元运算,它的频率至少和任何其他运算的频度一样大,称这样的运算为基本运算。我们还可以放宽这个定义,把那些频度和运行时间成正比的运算包括进来。</p>
-<ul>
-<li>使用递推关系 </li>
-</ul>
-<blockquote>
-</blockquote>
-<p>如果一个算法本身是递归算法,那么计算这个算法运行时间的函数通常也是递归的,即是指,这个函数的定义中引用了函数自身。即便一个算法本身是非递归的,我们有时也可以用递归式来计算它的运行时间。</p>
-<p>lim- &gt;+oof(n)/g(n)!=oo f(n)=O(g(n))<br>lim-&gt;+oof(n)/g(n)!=0 f(n)=Ω(g(n))<br>lim-&gt;+oof(n)/g(n)==c f(n)=Senta(g(n))</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/11/软件系统介绍文档模板/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/11/软件系统介绍文档模板/" itemprop="url">软件系统介绍文档模板</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T17:06:40+08:00">
-                2018-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂烩/" itemprop="url" rel="index">
-                    <span itemprop="name">杂烩</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="开发背景"><a href="#开发背景" class="headerlink" title="开发背景"></a>开发背景</h3><p>【比如为什么要开发这个系统】</p>
-<h3 id="开发目标"><a href="#开发目标" class="headerlink" title="开发目标"></a>开发目标</h3><p>【该系统需要完成的基本功能，对系统的大体描述】</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>【该系统涉及的开源项目等】</p>
-<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p>【设计该系统遵守的原则，比如支持多数据库，可移植行，可拓展性等】</p>
-<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><h3 id="需求陈述"><a href="#需求陈述" class="headerlink" title="需求陈述"></a>需求陈述</h3><p>【用平常语言描述该系统的全部功能和细节】</p>
-<h3 id="操作用例"><a href="#操作用例" class="headerlink" title="操作用例"></a>操作用例</h3><p>【描述具体的操作例子，比如登录后进行何种操作】</p>
-<h3 id="功能分析划分"><a href="#功能分析划分" class="headerlink" title="功能分析划分"></a>功能分析划分</h3><p>【分析功能并划分功能块】</p>
-<h4 id="系统登录"><a href="#系统登录" class="headerlink" title="系统登录"></a>系统登录</h4><p>【比如，需要实现两种登录模块，普通登录，管理员登录，并且描述可能出现的各种情况以及问题处理】</p>
-<h4 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h4><p>【比如：实现用户显示，添加，删除，修改】</p>
-<p>……</p>
-<h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><h2 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h2><h3 id="系统建模"><a href="#系统建模" class="headerlink" title="系统建模"></a>系统建模</h3><h4 id="层次方框图"><a href="#层次方框图" class="headerlink" title="层次方框图"></a>层次方框图</h4><p>【从顶部开始，按照层次分类进行细化】</p>
-<h4 id="ER图（实体-联系图）"><a href="#ER图（实体-联系图）" class="headerlink" title="ER图（实体-联系图）"></a>ER图（实体-联系图）</h4><p>【分析各个对象之间的联系，画图ER图】</p>
-<h2 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h2><h3 id="类图设计"><a href="#类图设计" class="headerlink" title="类图设计"></a>类图设计</h3><p>【使用UML画出各个类的属性、继承和方法】</p>
-<h3 id="接口设计-1"><a href="#接口设计-1" class="headerlink" title="接口设计"></a>接口设计</h3><p>【各个子系统之间的接口和用户接口】</p>
-<h4 id="内部接口设计"><a href="#内部接口设计" class="headerlink" title="内部接口设计"></a>内部接口设计</h4><p>【各个部件是通过何种方式进行连接，比如通过远程数据库，http等】</p>
-<h4 id="登录界面设计"><a href="#登录界面设计" class="headerlink" title="登录界面设计"></a>登录界面设计</h4><h4 id="用户管理界面设计"><a href="#用户管理界面设计" class="headerlink" title="用户管理界面设计"></a>用户管理界面设计</h4><p>……</p>
-<h3 id="数据库结构设计"><a href="#数据库结构设计" class="headerlink" title="数据库结构设计"></a>数据库结构设计</h3><p>【主要是描述】</p>
-<h4 id="数据库E-R图"><a href="#数据库E-R图" class="headerlink" title="数据库E-R图"></a>数据库E-R图</h4><h4 id="数据库逻辑设计"><a href="#数据库逻辑设计" class="headerlink" title="数据库逻辑设计"></a>数据库逻辑设计</h4><h3 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h3><p>【描述如果出错的处理方法】</p>
-<h3 id="安全保密设计"><a href="#安全保密设计" class="headerlink" title="安全保密设计"></a>安全保密设计</h3><p>【描述采用何种方法保证安全性】</p>
-<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><h3 id="程序流程图"><a href="#程序流程图" class="headerlink" title="程序流程图"></a>程序流程图</h3><p>【具体来说就是把经过总体设计得到的各个模块详细的加以描述。】</p>
-<h3 id="伪代码编写"><a href="#伪代码编写" class="headerlink" title="伪代码编写"></a>伪代码编写</h3><p>【使用中文或者英文进行伪代码编写，以后这些伪代码将会成为代码的注释】</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><h4 id="代码约定"><a href="#代码约定" class="headerlink" title="代码约定"></a>代码约定</h4><h4 id="代码编写原则"><a href="#代码编写原则" class="headerlink" title="代码编写原则"></a>代码编写原则</h4><h3 id="测试要点"><a href="#测试要点" class="headerlink" title="测试要点"></a>测试要点</h3><h4 id="登录测试要点"><a href="#登录测试要点" class="headerlink" title="登录测试要点"></a>登录测试要点</h4><p>【描述该如何测试，数据的输入，类型】</p>
-<h4 id="主界面测试要点"><a href="#主界面测试要点" class="headerlink" title="主界面测试要点"></a>主界面测试要点</h4><p>……</p>
-<h3 id="测试结果和总结"><a href="#测试结果和总结" class="headerlink" title="测试结果和总结"></a>测试结果和总结</h3><h2 id="维护"><a href="#维护" class="headerlink" title="维护"></a>维护</h2><h3 id="维护方法"><a href="#维护方法" class="headerlink" title="维护方法"></a>维护方法</h3><h3 id="维护文档"><a href="#维护文档" class="headerlink" title="维护文档"></a>维护文档</h3><h3 id="功能拓展方法"><a href="#功能拓展方法" class="headerlink" title="功能拓展方法"></a>功能拓展方法</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/08/贪心算法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/08/贪心算法/" itemprop="url">贪心算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T20:25:41+08:00">
-                2018-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>所谓贪心算法是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说， <strong>不从整体最优上加以考虑</strong> ，他所做出的仅是在某种意义上的局部最优解。<br>贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。<br>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。</p>
-<h1 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个有向图G=(V,E),s为V中一点,以s为起点,要确定从s出发到V中每一个其他定点的距离(距离的定义是最短路径对应的长度).</p>
-<h2 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h2><h3 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h3><ul>
-<li><p>初始时，S只包含源点，即S＝{v}，v的距离为0。U包含除v外的其他顶点，即:U={其余顶点}，若v与U中顶点u有边，则  &lt; u,v &gt;正常有权值，若u不是v的出边邻接点，则 &lt; u,v &gt; 权值为∞ </p>
-</li>
-<li><p>从U中选取一个距离v最小的顶点k，把k，加入S中（该选定的距离就是v到k的最短路径长度） </p>
-</li>
-<li><p>以k为新考虑的中间点，修改U中各顶点的距离；若从源点v到顶点u的距离（经过顶点k）比原来距离（不经过顶点k）短，则修改顶点u的距离值，修改后的距离值的顶点k的距离加上边上的权 </p>
-</li>
-<li><p>重复步骤b和c直到所有顶点都包含在S中 </p>
-</li>
-</ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre><code>const int  MAXINT = 32767;
-const int MAXNUM = 10;
-int dist[MAXNUM];//表示距离
-int prev[MAXNUM];//记录每个顶点的前驱顶点(因为最短路径的唯一性,所以每个点的前驱元素都是唯一的)
-
-int A[MAXUNM][MAXNUM];
-
-void Dijkstra(int v0)
-{
-  　　bool S[MAXNUM];                                  // 判断是否已存入该点到S集合中
-      int n=MAXNUM;
-  　　for(int i=1; i&lt;=n; ++i)
- 　　 {
-      　　dist[i] = A[v0][i];
-      　　S[i] = false;                                // 初始都未用过该点
-      　　if(dist[i] == MAXINT)   //如果该点与源点之间无边 
-            　　prev[i] = -1;
- 　　     else 
-            　　prev[i] = v0;
-   　　}
-   　 dist[v0] = 0;
-   　 S[v0] = true; 　　
- 　　 for(int i=2; i&lt;=n; i++)
- 　　 {
-       　　int mindist = MAXINT;
-       　　int u = v0; 　　                            // 找出当前未使用的点j的dist[j]最小值
-      　　 for(int j=1; j&lt;=n; ++j)
-      　　    if((!S[j]) &amp;&amp; dist[j]&lt;mindist)//如果j点没有被用过而且dist[j]小于mindist
-      　　    {
-         　　       u = j;                             // u保存当前邻接点中距离最小的点的号码 
-         　 　      mindist = dist[j];
-       　　   }
-       　　S[u] = true; //将u置为已用
-       　　for(int j=1; j&lt;=n; j++)//更新u加入已用集合后的未用顶点集合中点到已用集合中点的距离
-       　　    if((!S[j]) &amp;&amp; A[u][j]&lt;MAXINT)
-       　　    {
-           　    　if(dist[u] + A[u][j] &lt; dist[j])     //在通过新加入的u点路径找到离v0点更短的路径  
-           　    　{
-                   　　dist[j] = dist[u] + A[u][j];    //更新dist 
-                   　　prev[j] = u;                    //记录前驱顶点 
-            　　    }
-        　    　}
-   　　}
-}
-</code></pre><h3 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h3><p>算法的时间复杂度是senta(n^2)</p>
-<h2 id="稠图的线性时间算法"><a href="#稠图的线性时间算法" class="headerlink" title="稠图的线性时间算法"></a>稠图的线性时间算法</h2><h1 id="最小耗费生成树"><a href="#最小耗费生成树" class="headerlink" title="最小耗费生成树"></a>最小耗费生成树</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>设G =<br>(V,E)是无向连通带权图，即一个网络。E中的每一条边（v,w）的权为c[v][w]。如果G的子图G’是一棵包含G的所有顶点的树，则称G’为G的生成树。生成树上各边权的总和称为生成树的耗费。在G的所有生成树中，耗费最小的生成树称为G的最小生成树。<br>最小生成树最常见的题就是求解n个城市之间的修路问题.</p>
-<h2 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h2><h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><p>给定无向连同带权图G = (V,E),V = {1,2,…,n}。Kruskal算法构造G的最小生成树的基本思想是：</p>
-<ul>
-<li><p>将G的n个顶点看成n个孤立的连通分支,将所有的边按权从小大排序。 </p>
-</li>
-<li><p>从第一条边开始，依边权递增的顺序检查每一条边。并按照下述方法连接两个不同的连通分支：当查看到第k条边(v,w)时，如果端点v和w分别是当前两个不同的连通分支T1和T2的端点时，就用边(v,w)将T1和T2连接成一个连通分支，然后继续查看第k+1条边；如果端点v和w在当前的同一个连通分支中，就直接再查看k+1条边。这个过程一个进行到只剩下一个连通分支时为止。 </p>
-</li>
-</ul>
-<p>此时，已构成G的一棵最小生成树。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>#include &lt;iostream&gt;
-#include &lt;cstdio&gt;
-#include &lt;algorithm&gt;
-#include &lt;cstring&gt;
-using namespace std;
-
-#define maxn 110    //最多点个数
-int n, m;   //点个数，边数
-int parent[maxn];   //父亲节点，当值为-1时表示根节点
-int ans;    //存放最小生成树权值
-struct eage     //边的结构体，u、v为两端点，w为边权值
-{
-    int u, v, w;
-}EG[5010];
-
-bool cmp(eage a, eage b)    //排序调用
-{
-    return a.w &lt; b.w;
-}
-
-int Find(int x)     //寻找根节点，判断是否在同一棵树中的依据
-{
-    if(parent[x] == -1) return x;
-    return Find(parent[x]);
-}
-
-void Kruskal()      //Kruskal算法，parent能够还原一棵生成树，或者森林
-{
-    memset(parent, -1, sizeof(parent));
-    sort(EG+1, EG+m+1, cmp);    //按权值将边从小到大排序
-    ans = 0;
-    for(int i = 1; i &lt;= m; i++)     //按权值从小到大选择边
-    {
-        int t1 = Find(EG[i].u), t2 = Find(EG[i].v);
-        if(t1 != t2)    //若不在同一棵树种则选择该边，合并两棵树
-        {
-            ans += EG[i].w;
-            parent[t1] = t2;
-        }
-    }
-}
-</code></pre><h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>当图的边数为e时，Kruskal算法所需的时间是O(eloge).</p>
-<h2 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h2><h3 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h3><p>设G = (V,E)是连通带权图，V = {1,2,…,n}。构造G的最小生成树,Prim算法的基本思想是：首先置S =<br>{1}，然后，只要S是V的真子集，就进行如下的贪心选择：选取满足条件i ∈S,j ∈V –<br>S,且c[i][j]最小的边，将顶点j添加到S中。这个过程一直进行到S = V时为止。在这个过程中选取到的所有边恰好构成G的一棵最小生成树。</p>
-<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/* Prim算法生成最小生成树  */
-void MiniSpanTree_Prim(MGraph MG)
-{
-    int min, i, j, k;
-    int adjvex[MAXVEX];/* 保存相关顶点的父亲节点 */
-    int lowcost[MAXVEX];/* 保存相关顶点间边的权值 */
-    lowcost[0] = 0;/* 初始化第一个权值为0，即v0加入生成树 */
-    /* lowcost的值为0，在这里就是此下标的顶点已经加入生成树 */
-    adjvex[0] = 0;/* 初始化第一个顶点下标为0 */
-    cout &lt;&lt; &quot;最小生成树的边为：&quot; &lt;&lt; endl;
-    for (i = 1; i &lt; MG.numVertexes; i++)
-    {
-        lowcost[i] = MG.arc[0][i];/* 将v0顶点与之有边的权值存入数组 */
-        adjvex[i] = 0;/* 初始化都为v0的下标 */
-    }
-
-    for (i = 1; i &lt; MG.numVertexes; i++)
-    {
-        min = INFINITY; /* 初始化最小权值为∞， */
-
-        j = 1;
-        k = 0;
-
-        while (j &lt; MG.numVertexes)/* 循环全部顶点 */
-        {
-            if (lowcost[j] != 0 &amp;&amp; lowcost[j] &lt; min)/* 如果权值不为0且权值小于min */
-            {
-                min = lowcost[j];/* 则让当前权值成为最小值 */
-                k = j;/* 将当前最小值的下标存入k */
-            }
-
-            j++;
-        }
-
-        cout &lt;&lt; &quot;(&quot; &lt;&lt; adjvex[k] &lt;&lt; &quot;, &quot; &lt;&lt; k &lt;&lt; &quot;)&quot; &lt;&lt; &quot;  &quot;; /* 打印当前顶点边中权值最小的边 */
-        lowcost[k] = 0;/* 将当前顶点的权值设置为0,表示此顶点已经完成任务 */
-
-        for (j = 1; j &lt; MG.numVertexes; j++)/* 循环所有顶点 */
-        {
-            /* 如果下标为k顶点各边权值小于此前这些顶点未被加入生成树权值 */
-            if (lowcost[j] != 0 &amp;&amp; MG.arc[k][j] &lt; lowcost[j])
-            {
-                lowcost[j] = MG.arc[k][j];/* 将较小的权值存入lowcost相应位置 */
-                adjvex[j] = k;/* 将k设为下标j的父亲节点 */
-            }
-        }
-    }
-    cout &lt;&lt; endl;
-}
-</code></pre><h3 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>此算法的时间复杂度为O(n^2)</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当e = Ω(n^2)时，Kruskal算法比Prim算法差；<br>但当e = o(n^2)时，Kruskal算法比Prim算法好得多。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -3558,7 +2086,7 @@ void MiniSpanTree_Prim(MGraph MG)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -3569,7 +2097,7 @@ void MiniSpanTree_Prim(MGraph MG)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -3580,7 +2108,7 @@ void MiniSpanTree_Prim(MGraph MG)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3800,6 +2328,28 @@ void MiniSpanTree_Prim(MGraph MG)
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
