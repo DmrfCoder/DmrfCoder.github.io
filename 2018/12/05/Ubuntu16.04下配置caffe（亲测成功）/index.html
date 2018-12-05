@@ -79,13 +79,26 @@
 
 
 
-<meta property="og:type" content="website">
+<meta name="description" content="##前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不">
+<meta property="og:type" content="article">
 <meta property="og:title" content="DmrfCoder的个人主页">
-<meta property="og:url" content="http://www.mashangxue123.com/index.html">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/12/05/Ubuntu16.04下配置caffe（亲测成功）/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
+<meta property="og:description" content="##前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008174717457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008174802571?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008174958111?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008175030676?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008175120021?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008175156262?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008175248069?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20171008175515060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-12-05T05:51:46.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DmrfCoder的个人主页">
+<meta name="twitter:description" content="##前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171008174717457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -115,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://www.mashangxue123.com/">
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/12/05/Ubuntu16.04下配置caffe（亲测成功）/">
 
 
 
 
 
-  <title>DmrfCoder的个人主页</title>
+  <title> | DmrfCoder的个人主页</title>
   
 
 
@@ -140,8 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -214,9 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +258,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/05/Ubuntu16.04下配置caffe（亲测成功）/" itemprop="url">未命名</a></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -298,9 +308,7 @@
       
 
       
-        
-          
-            <p>##前言：<br>历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感谢，好了，废话不多说，进入正文！</p>
+        <p>##前言：<br>历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感谢，好了，废话不多说，进入正文！</p>
 <p>##目录结构<br><strong>1：安装开发所需依赖包</strong><br><strong>2：下载安装CUDA8.0并验证是否安装成功</strong><br><strong>3:下载安装cudnn并验证是否安装成功</strong><br><strong>4：下载安装opencv并验证是否安装成功</strong><br><strong>5：安装编译caffe</strong></p>
 <p>  <strong>特别说明：</strong><br>1:本教程版本搭配为：Ubuntu16.04+CUDA8.0+Opencv3.1.0，建议初学者尽量按照本教程的搭配进行配置，防止出现版本不搭造成的错误，这一点笔者真是深有体会，当然鼓励大家尝试新版本，如果有成功的同仁麻烦告诉我你的搭配，笔者不胜感激。<br>2:建议大家在输入所有命令之前加上sudo，防止出现“权限不够”这类情况，笔者为了节省时间在教程里面有的需要加sudo的地方没有加，大家可不要偷懒～～<br>3：本文主要参考blog：<a href="http://blog.csdn.net/yhaolpz" target="_blank" rel="noopener">http://blog.csdn.net/yhaolpz</a> ，感谢大神博主的教程 </p>
 <h2 id="安装开发所需依赖包"><a href="#安装开发所需依赖包" class="headerlink" title="安装开发所需依赖包"></a>安装开发所需依赖包</h2><p> 命令行直接复制粘贴进以下命令即可：</p>
@@ -399,8 +407,6 @@ make -j8  #编译
 <p>如果出现类似如下信息则说明caffe配置成功：<br><img src="http://img.blog.csdn.net/20171008175515060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p><strong>至此我们就完成caffe的配置工作了，希望大家可以积极指出本文的不足之处便于笔者改正，不胜感激，最后给出本文的所有资源大礼包，下载链接: <a href="https://pan.baidu.com/s/1pKU5hrX" target="_blank" rel="noopener">https://pan.baidu.com/s/1pKU5hrX</a> 密码: xk5x</strong></p>
 
-          
-        
       
     </div>
     
@@ -417,12 +423,12 @@ make -j8  #编译
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -432,10 +438,11 @@ make -j8  #编译
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -443,6 +450,10 @@ make -j8  #编译
 
 
           
+
+  
+
+
 
         </div>
         
@@ -463,8 +474,17 @@ make -j8  #编译
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -506,6 +526,22 @@ make -j8  #编译
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装开发所需依赖包"><span class="nav-number">1.</span> <span class="nav-text">安装开发所需依赖包</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -639,6 +675,10 @@ make -j8  #编译
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
