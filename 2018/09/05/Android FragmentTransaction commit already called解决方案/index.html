@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将： private FragmentManager fragmentManager; private FragmentTransaction fragmentTransaction;  @Override protected void onCreate(@">
+<meta name="description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     private FragmentManager fragmentManager;     private FragmentTransaction fragmentTransaction;      @Override     protected">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android FragmentTransaction commit already called解决方案">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android FragmentTransaction commit already called解决方案/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将： private FragmentManager fragmentManager; private FragmentTransaction fragmentTransaction;  @Override protected void onCreate(@">
+<meta property="og:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     private FragmentManager fragmentManager;     private FragmentTransaction fragmentTransaction;      @Override     protected">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:39:23.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android FragmentTransaction commit already called解决方案">
-<meta name="twitter:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将： private FragmentManager fragmentManager; private FragmentTransaction fragmentTransaction;  @Override protected void onCreate(@">
+<meta name="twitter:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     private FragmentManager fragmentManager;     private FragmentTransaction fragmentTransaction;      @Override     protected">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>Android FragmentTransaction commit already called解决方案 | DmrfCoder的个人主页</title>
+  <title>Android FragmentTransaction commit already called解决方案 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -301,47 +301,47 @@
       
         <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>将：</p>
-<pre><code>private FragmentManager fragmentManager;
-private FragmentTransaction fragmentTransaction;
- @Override
-protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    fragmentManager = getSupportFragmentManager();
-    fragmentTransaction = fragmentManager.beginTransaction();
+<pre><code>    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-    .....
-}
-
-
-@Override
-public void startfragment(Fragment targetFragment, boolean addToBackStack) {
-
-    fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());
-    if (addToBackStack) {
-        fragmentTransaction.addToBackStack(null);
-    } else {
-        mainPresenter.initActivityData();
+        .....
     }
-    fragmentTransaction.commitAllowingStateLoss();
-}
+
+
+    @Override
+    public void startfragment(Fragment targetFragment, boolean addToBackStack) {
+
+        fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        } else {
+            mainPresenter.initActivityData();
+        }
+        fragmentTransaction.commitAllowingStateLoss();
+    }
 </code></pre><p>改为：</p>
-<pre><code>private FragmentManager fragmentManager;
-private FragmentTransaction fragmentTransaction;
+<pre><code>  private FragmentManager fragmentManager;
+  private FragmentTransaction fragmentTransaction;
 
 
-  @Override
-  public void startfragment(Fragment targetFragment, boolean addToBackStack) {
-       fragmentManager = getSupportFragmentManager();
-      fragmentTransaction = fragmentManager.beginTransaction();
-      fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());
-      if (addToBackStack) {
-          fragmentTransaction.addToBackStack(null);
-      } else {
-          mainPresenter.initActivityData();
-      }
-      fragmentTransaction.commitAllowingStateLoss();
-  }
+    @Override
+    public void startfragment(Fragment targetFragment, boolean addToBackStack) {
+         fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        } else {
+            mainPresenter.initActivityData();
+        }
+        fragmentTransaction.commitAllowingStateLoss();
+    }
 </code></pre>
       
     </div>
@@ -455,7 +455,7 @@ private FragmentTransaction fragmentTransaction;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -477,7 +477,7 @@ private FragmentTransaction fragmentTransaction;
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -664,7 +664,7 @@ private FragmentTransaction fragmentTransaction;
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

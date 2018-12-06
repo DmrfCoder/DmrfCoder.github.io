@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;apos;libs/sdk.jar&amp;apos;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
+<meta name="description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;#39;libs/sdk.jar&amp;#39;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用gradle打包指定类为jar包的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/07/27/使用gradle打包指定类为jar包的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;apos;libs/sdk.jar&amp;apos;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
+<meta property="og:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;#39;libs/sdk.jar&amp;#39;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:39:30.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用gradle打包指定类为jar包的方法">
-<meta name="twitter:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;apos;libs/sdk.jar&amp;apos;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
+<meta name="twitter:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;#39;libs/sdk.jar&amp;#39;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>使用gradle打包指定类为jar包的方法 | DmrfCoder的个人主页</title>
+  <title>使用gradle打包指定类为jar包的方法 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -301,33 +301,33 @@
       
         <p>在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本：</p>
 <h2 id="打包某个包下的所有文件"><a href="#打包某个包下的所有文件" class="headerlink" title="打包某个包下的所有文件"></a>打包某个包下的所有文件</h2><pre><code>task clearJar(type: Delete) { 
-    delete &apos;libs/sdk.jar&apos; 
+    delete &#39;libs/sdk.jar&#39; 
 } 
 
 task makeJar(type:org.gradle.api.tasks.bundling.Jar) {
     //指定生成的jar名
-    baseName &apos;sdk&apos;
+    baseName &#39;sdk&#39;
     //从哪里打包class文件
-    from(&apos;build/intermediates/classes/debug/org/cmdmac/cloud/pluginsdk/&apos;)
+    from(&#39;build/intermediates/classes/debug/org/cmdmac/cloud/pluginsdk/&#39;)
     //打包到jar后的目录结构 
-    into(&apos;org/cmdmac/cloud/pluginsdk/&apos;)
+    into(&#39;org/cmdmac/cloud/pluginsdk/&#39;)
     //去掉不需要打包的目录和文件 
-    exclude(&apos;test/&apos;, &apos;BuildConfig.class&apos;, &apos;R.class&apos;)
+    exclude(&#39;test/&#39;, &#39;BuildConfig.class&#39;, &#39;R.class&#39;)
     //去掉R$开头的文件 
-    exclude{ it.name.startsWith(&apos;R$&apos;);} 
+    exclude{ it.name.startsWith(&#39;R$&#39;);} 
 } 
 
 makeJar.dependsOn(clearJar, build)
 </code></pre><p>在build.gradle写上后，只要在命令行执行gradle makeJar就可以在build/libs目录下找到这个jar。</p>
 <p>上面是个简单的例子，只能打包某个包下面的所有文件，如果要实现只打某个包下面的某些子包或者文件可参考如下示例</p>
 <pre><code>task makeSdkJar(type:org.gradle.api.tasks.bundling.Jar) {
-    baseName &apos;pluginsdk&apos;
+    baseName &#39;pluginsdk&#39;
     //只打包org.cmdmac下的org.cmdmac.pluginsdk.impl和org.cmdmac.gamecenter,其他子包不会被打包进去
-    from(&apos;build/intermediates/classes/debug/org/cmdmac/&apos;) {
-        include &apos;pluginsdk/impl&apos;
-        include &apos;gamecenter&apos;
+    from(&#39;build/intermediates/classes/debug/org/cmdmac/&#39;) {
+        include &#39;pluginsdk/impl&#39;
+        include &#39;gamecenter&#39;
     }
-    into(&apos;org/cmdmac/&apos;)
+    into(&#39;org/cmdmac/&#39;)
 }
 </code></pre>
       
@@ -442,7 +442,7 @@ makeJar.dependsOn(clearJar, build)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +464,7 @@ makeJar.dependsOn(clearJar, build)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,7 +651,7 @@ makeJar.dependsOn(clearJar, build)
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

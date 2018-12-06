@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -121,7 +121,7 @@
 
 
 
-  <title>DmrfCoder的个人主页</title>
+  <title>DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -215,309 +215,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/05/07/回溯算法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/07/回溯算法/" itemprop="url">回溯算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T17:19:42+08:00">
-                2018-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>回溯算法是一种组织搜索的一般技术，它常常可以避免搜索所有的可能性，适用于求解那些有潜在的大量解但是有限个数的解已经检查过的问题。</p>
-<h1 id="3着色问题"><a href="#3着色问题" class="headerlink" title="3着色问题"></a>3着色问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给出一个无向图G=(V,E)，需要用三种颜色之一为V中的每个顶点着色，要求没有两个相邻的顶点有相同的颜色。</p>
-<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>我们称没有两个邻接顶点有同样颜色的着色方案为合法的，反之成为非法的。如果不考虑合法性的要求，给出n个顶点的无向图，将其用三种颜色着色，共有n^3种不同的方法，因为没一个顶点都有三种不同的着色方案，这就构成了一颗三叉树，如图：<br><img src="https://img-
-blog.csdn.net/20180505141608137?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>在该三叉树中，从根到叶子节点的每一条路径代表一种着色方法（合法的和不合法的），我们需要做的就是选出一条合法的从根到叶子的路径即可。所以我们从跟节点开始向叶子节点走，这时有两种情况：</p>
-<ul>
-<li><p>从根到当前节点的路径对应一个合法的着色：   </p>
-<ul>
-<li>当前路径长度小于n：过程终止（除非希望找到不止一种着色方案） </li>
-<li>当前路径长度等于n：生成当前节点的一个子节点，并将生成的当前节点的子节点标记为新的当前节点 </li>
-</ul>
-</li>
-<li>从根到当前节点的路径对应一个非法的着色：回溯到当前节点的父节点即将当前节点的父节点标记为新的当前节点 </li>
-</ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>使用数组c[1…n]代表图的顶点集合，判断合法性只需判断与当前有联系的点中是否存在与之涂色相同的点即可，此处为节省时间省略该部分代码的实现。</p>
-<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><pre><code>void ColorItre(int *c) {//c[1...n]
-    for (int i = 1; i &lt;= n; ++i) {
-        c[i] = 0;
-    }
-    bool flag = false;
-    int k = 1;
-    while (k &gt;= 1) {
-        while (c[k] &lt;= 2) {
-            c[k] = c[k] + 1;
-            if (c[k]为合法的){
-                if (k == n) {
-                    flag = true;
-                    break;
-                } else {
-                    k++;
-                }
-
-            }
-        }
-
-        if (flag) {
-            break;
-        }
-
-        //如果第二个循环跳出执行到这里，则说明当前节点k试遍了三种颜色仍然没有找到合法的着色，则将k--进行回溯，注意要将c[k]置为初始值0
-        c[k] = 0;
-        k--;
-    }
-
-    if (flag) {
-        cout &lt;&lt; &quot;success&quot; &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
-    }
-
-}
-</code></pre><h3 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h3><pre><code>void ColorRec(int *c) {//c[1...n]
-    for (int i = 1; i &lt;= n; ++i) {
-        c[i] = 0;
-    }
-
-    bool flag = false;
-    flag = graphcolor(c, 1);
-    if (flag) {
-        cout &lt;&lt; &quot;success&quot; &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
-    }
-}
-
-bool graphcolor(int *c, int i) {
-    for (int color = 1; color &lt;= 3; ++color) {
-        c[i] = color;
-        if (c[i]是合法的){
-            if (i &lt; n) {
-                graphcolor(c, i + 1);
-            } else {
-                return true;
-            }
-        }
-    }
-    //如果执行到这里说明当前节点不存在合法着色，需要回溯，返回false即可激活前一次递归（即让前一层for循环的color加一），以此达到回溯的目的
-    return false;
-}
-</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>这两种实现方式在最坏情况下生成了O(3^n)个节点，对于每个生成的节点，判断当前节点的合法性（合法、部分、二者都不是）需要O(n)的工作来检查，因此，最坏情况下的运行时间是O(n3^n)。</p>
-<h2 id="回溯法的特点"><a href="#回溯法的特点" class="headerlink" title="回溯法的特点"></a>回溯法的特点</h2><ul>
-<li>节点是使用深度优先搜索算法生成的 </li>
-<li>不需要存储整棵搜索树，只需存储根到当前活动节点的路径 </li>
-</ul>
-<h1 id="8皇后问题"><a href="#8皇后问题" class="headerlink" title="8皇后问题"></a>8皇后问题</h1><p>代码见 <a href="https://blog.csdn.net/qq_36982160/article/details/78585680" target="_blank" rel="noopener"> 两种不同方式解决八皇后问题
-</a> ，此处主要介绍算法思路。</p>
-<h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>八皇后问题是一个以国际象棋为背景的问题：如何能够在 8×8<br>的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为n×n，而皇后个数也变成n。当且仅当<br>n = 1 或 n ≥ 4 时问题有解。</p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>代码和着色问题代码几乎一样，这里不做过多介绍，给出参考代码：</p>
-<pre><code>void eight_Queens() {
-    int c[9];
-    for (int i = 1; i &lt;= 8; ++i) {
-        c[i] = 0;
-    }
-
-    bool flag = false;
-    int k = 1;
-    while (k &gt;= 1) {
-        while (c[k] &lt;= 7) {
-            c[k]++;
-            if (c[k]为合法着色){
-                if (k == 8) {
-                    flag = true;
-                    break;
-                } else {
-                    k++;
-                }
-            }
-        }
-        if (flag) {
-            break;
-        }
-        c[k] = 0;
-        k--;
-    }
-
-    if (flag) {
-        cout &lt;&lt; &quot;success&quot; &lt;&lt; endl;
-    } else {
-        cout &lt;&lt; &quot;no solution&quot; &lt;&lt; endl;
-    }
-}
-</code></pre><h2 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>回溯法在最坏情况下需要O（n^2）的运行时间。<br>但是需要注意，虽然蛮力搜索法的最坏情况也需要<br>O（n^2）的时间，但是根据经验回溯法的有效性远远超过蛮力法。(鬼知道这是谁的经验，反正只要知道考试用蛮力法肯定会xx)</p>
-<h1 id="一般回溯方法"><a href="#一般回溯方法" class="headerlink" title="一般回溯方法"></a>一般回溯方法</h1><h2 id="什么是一般回溯法"><a href="#什么是一般回溯法" class="headerlink" title="什么是一般回溯法"></a>什么是一般回溯法</h2><p>在回溯法中，解向量中每个xi都属于一个有限的线序集Xi，因此，算法最初从空向量开始，然后选择X1中最小的元素作为x1，如果（x1）是一个部分解，算法从X2中找出最小的元素作为x2继续，如果（x1，x2）是一个部分解，则从X3中找出最小元素作为x3，否则跳过x2寻找下一个。一般地，假如算法已经找到部分解（x1,x2,x3…,xj），在判断v=（x1,x2,x3…,xj,x_j+1）时有以下情况：</p>
-<ul>
-<li>v是最终解：记录下当前v作为一组解，如果只想求得一组解则算法结束，否则继续寻找其他解 </li>
-<li>v是一组部分解：从X_j+2中寻找新的最小元素继续向前走 </li>
-<li><p>v既不是最终解也不是部分解：   </p>
-<ul>
-<li>X_j+1中还有其他元素可供选择：在X_j+1中寻找下一个元素 </li>
-<li>X_j+1中没有其他元素可供选择：将x_j置为X_j中的下一个元素回溯，如果X_j中仍然没有其他元素可供选择，则照此方法继续向前回溯。 </li>
-</ul>
-</li>
-</ul>
-<h1 id="分支限界法"><a href="#分支限界法" class="headerlink" title="分支限界法"></a>分支限界法</h1><h2 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h2><p>分支限界法（branch and bound method）是求解 <strong>纯整数规划</strong> 或 <strong>混合整数规划</strong> 问题的经典方法，在上世纪六十年代由Land<br>Doig和Dakin等人提出。这种方法灵活且便于用计算机求解，目前已经成功运用于求解生产进度问题、旅行推销员问题、工厂选址问题、背包问题及分配问题等。算法基本思想如下：</p>
-<ul>
-<li>按宽度优先策略遍历解空间树； </li>
-<li>在遍历过程中，对处理的每个结点vi，根据界限函数，估计沿该结点向下搜索所可能达到的完全解的目标函数的可能取值范围—界限bound(vi)=[downi, upi]； </li>
-<li>从中选择使目标函数取的极值(最大、最小)的结点优先进行宽度优先搜索，从而不断调整搜索方向，尽快找到问题解。 </li>
-</ul>
-<p>各结点的界限函数bound(vi)=[downi,<br>upi]是解决问题的关键，通常依据具体问题而定。常见的两种分支限界法是队列式分支限界法和优先队列式分支限界法，它们分别按照队列先进先出的原则和优先队列中规定的优先级选取下一个节点为扩展节点。</p>
-<h2 id="分支限界法与回溯法的区别"><a href="#分支限界法与回溯法的区别" class="headerlink" title="分支限界法与回溯法的区别"></a>分支限界法与回溯法的区别</h2><h3 id="求解目标不同"><a href="#求解目标不同" class="headerlink" title="求解目标不同"></a>求解目标不同</h3><ul>
-<li><p>回溯法的求解目标是找出解空间树中满足约束条件的 <strong>所有解</strong></p>
-</li>
-<li><p>分支限界法的求解目标则是尽快找出满足约束条件的 <strong>一个解</strong> ，或是在满足约束条件的解中找出在某种意义下的 <strong>最优解</strong></p>
-</li>
-<li><p>分支限界法通常用于解决 <strong>离散值的最优化问题</strong></p>
-</li>
-</ul>
-<h3 id="搜索方式不同"><a href="#搜索方式不同" class="headerlink" title="搜索方式不同"></a>搜索方式不同</h3><ul>
-<li>回溯法以 <strong>深度优先</strong> 的方式（遍历结点）搜索解空间树 </li>
-<li>分支限界法以 <strong>广度优先</strong> 或 <strong>最小耗费优先</strong> 的方式搜索解空间树 </li>
-</ul>
-<h3 id="对扩展结点的扩展方式不同"><a href="#对扩展结点的扩展方式不同" class="headerlink" title="对扩展结点的扩展方式不同"></a>对扩展结点的扩展方式不同</h3><ul>
-<li>分支限界法中，每一个活结点只有一次机会成为扩展结点，活结点一旦成为扩展结点，就一次性产生其所有儿子结点 </li>
-<li>重复上述结点扩展过程，直至到找到所需的解或活结点表为空时为止 </li>
-</ul>
-<h2 id="Demo——旅行商问题求解"><a href="#Demo——旅行商问题求解" class="headerlink" title="Demo——旅行商问题求解"></a>Demo——旅行商问题求解</h2><p>参考： <a href="https://blog.csdn.net/qq_32400847/article/details/51813606" target="_blank" rel="noopener"> 这里 </a></p>
-<h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个城市的集合和一个定义在 <strong>每一对城市之间</strong> 的耗费函数，找出耗费最小的旅行。</p>
-<h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>考虑下图所示的情况及其代价矩阵，假定起始城市为1号城市：</p>
-<p><img src="https://img-blog.csdn.net/20160703014447395" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20160703014332283" alt="这里写图片描述"><br>注意代价矩阵的特点，每条满足要求的回路在代价矩阵中的每一行每一列有且只有1个元素与之对应。据此，我们可以用贪心算法计算问题的上界：<br>以起始城市作为出发城市，每次从当前出发城市发出的多条边中，选择没有遍历过的最短边连接的城市，作为下一步达到城市。在这个问题中，从城市1出发，途经1→3→5→4→2→1，路径长度1+2+3+7+3=16作为上界，即最短路径长度<br>&lt;=16。<br>对于下界，一个简单的办法是直接将矩阵中每一行的最小元素相加，在这个问题中，路径长度1+3+1+3+2=10作为下界，即最短路径长度&gt;=10。更优的计算方式是<br><strong>将矩阵中每一行最小的2个元素相加除以2并向上取整</strong><br>。因为在一条路径上，每个城市有2条邻接边：进入该城市、离开该城市。对每一步经过的城市j，从最近的上一个城市i来，再到下一个最近城市k去，即i→j→k。在这个问题中，路径长度{(1+3)+(3+6)+(1+2)+(3+4)+(2+3)}/2向上取整等于14作为下界，即最短路径长度</p>
-<blockquote>
-<p>=14。因此，以最短路径长度dist作为TSP问题目标函数，则dist的界为[14,16]。在问题求解过程中，如果1个部分解的目标函数dist下界超出此界限，则该部分解对应了死结点，可剪枝。对于1条正在生成的路径/部分解，设已经确定的顶点(已经经过/遍历的城市)集合为U=(r1,<br>r2, …,<br>rk)，则该部分解的目标函数的下界为(已经经过的路径的总长的2倍+从起点到最近未遍历城市的距离+从终点到最近未遍历城市的距离+进入/离开未遍历城市时各未遍历城市带来的最小路径成本)除以2并向上取整。假设正在生成的路径/部分解为1→4,U={1,4},未遍历城市={2,3,5},该部分解下界为{2*5+1+3+(3+6)+(1+2)+(2+3)}/2向上取整等于16：<br><img src="https://img-blog.csdn.net/20160703021801114" alt="这里写图片描述"></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -1213,7 +910,7 @@ int Select(int *A, int low, int high, int k) {
 
     return y;
 }
-</code></pre><h2 id="迭代法实现思路"><a href="#迭代法实现思路" class="headerlink" title="迭代法实现思路"></a>迭代法实现思路</h2><p>上述归纳法实现求x^n的关键部分在于采用递归不断判断n/2的奇偶性，所以我们可以采用迭代的办法，因为一个数除以2的k次方后的奇偶性由其化为二进制数的第k低位决定的（因为除法除以2就相当于二进制的左移操作），所以我们可以将n化为二进制数字d_k,d_(k-1)……d_0，从y=1开始，从左到右扫描二进制数字，如果当前二进制数字为0，则对应递归情况下的偶数情况即应该y=y^2，否则即为y=y(y^m)^2</p>
+</code></pre><h2 id="迭代法实现思路"><a href="#迭代法实现思路" class="headerlink" title="迭代法实现思路"></a>迭代法实现思路</h2><p>上述归纳法实现求x^n的关键部分在于采用递归不断判断n/2的奇偶性，所以我们可以采用迭代的办法，因为一个数除以2的k次方后的奇偶性由其化为二进制数的第k低位决定的（因为除法除以2就相当于二进制的左移操作），所以我们可以将n化为二进制数字d<em>k,d</em>(k-1)……d_0，从y=1开始，从左到右扫描二进制数字，如果当前二进制数字为0，则对应递归情况下的偶数情况即应该y=y^2，否则即为y=y(y^m)^2</p>
 <h2 id="迭代法实现代码（Exp）"><a href="#迭代法实现代码（Exp）" class="headerlink" title="迭代法实现代码（Exp）"></a>迭代法实现代码（Exp）</h2><pre><code>int Exp(int x,int n){
     int d[10];//假设n化为2进制数字后存在d数组里面
     int y=1;
@@ -1225,9 +922,9 @@ int Select(int *A, int low, int high, int k) {
     }
 }
 </code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>假设每次乘法的时间是常数，那么这两种方法所需的运行时间都是 <strong>senta(lohn)</strong> ，他们对于输入大小来说都是 <strong>线性</strong> 的。</p>
-<h1 id="多项式求值（Horner规则）"><a href="#多项式求值（Horner规则）" class="headerlink" title="多项式求值（Horner规则）"></a>多项式求值（Horner规则）</h1><h2 id="场景介绍-1"><a href="#场景介绍-1" class="headerlink" title="场景介绍"></a>场景介绍</h2><p>假设有n+2个数a_0,a_1,……,a_n和x序列，要对多项式 <strong>P_n(x)=a_n<em>x^n+a_(n-1)</em>x^(n-1)+…+a_1*x</strong><br>求值，传统的办法是分别对每一个子项求值，然后再对整个式子求值，但是这种方法很低效，因为它需要n+（n-1）+（n-2）+…..+1=n(n+1)/2次乘法。</p>
+<h1 id="多项式求值（Horner规则）"><a href="#多项式求值（Horner规则）" class="headerlink" title="多项式求值（Horner规则）"></a>多项式求值（Horner规则）</h1><h2 id="场景介绍-1"><a href="#场景介绍-1" class="headerlink" title="场景介绍"></a>场景介绍</h2><p>假设有n+2个数a<em>0,a_1,……,a_n和x序列，要对多项式 <em>*P_n(x)=a_n</em>x^n+a</em>(n-1)<em>x^(n-1)+…+a_1</em>x**<br>求值，传统的办法是分别对每一个子项求值，然后再对整个式子求值，但是这种方法很低效，因为它需要n+（n-1）+（n-2）+…..+1=n(n+1)/2次乘法。</p>
 <h2 id="归纳法解决思路"><a href="#归纳法解决思路" class="headerlink" title="归纳法解决思路"></a>归纳法解决思路</h2><p>首先我们发现原式可进行如下化简：<br><img src="https://img-
-blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>化简之后我们可以发现如果我们假设已知P_(n-1)(x)，那么P_n(x)=x*P_(n-1)(x)+a_0,所以就有了算法HORNER。</p>
+blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>化简之后我们可以发现如果我们假设已知P<em>(n-1)(x)，那么P_n(x)=x*P</em>(n-1)(x)+a_0,所以就有了算法HORNER。</p>
 <h2 id="HORNER算法代码实现"><a href="#HORNER算法代码实现" class="headerlink" title="HORNER算法代码实现"></a>HORNER算法代码实现</h2><pre><code>int Horner(int *A,int n,int x){//数组A的长度为n+2，从A[0]到A[n+1]代表了a_0到a_(n+1)
 
     int p=A[n+1];//p=a_(n+1)
@@ -1828,64 +1525,64 @@ blog.csdn.net/20180427131809302?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 blog.csdn.net/20180427131818464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>进一步打开Response，看到网页返回的原始数据：<br><img src="https://img-
 blog.csdn.net/20180427131827248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>可以看到，网页返回的原始数据是用一个fetchJSON_comment98vv1587包裹着的json字符串，到这里，我们的思路就很清晰了：<br><strong>首先用URL和对应的Query String<br>Parameters模仿网页发送请求，收到的Response将会是一份由fetchJSON_comment98vv1587（）包裹着的包含json数据的String，我们用正则表达式将json数据提取出来，然后对json数据进行解析并获取想要字段的数据即可。</strong></p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先根据网页控制台的信息定义相关必要的变量：</p>
-<pre><code>url=&apos;https://club.jd.com/comment/productPageComments.action&apos;
+<pre><code>url=&#39;https://club.jd.com/comment/productPageComments.action&#39;
 
-QueryStringParameters={ &apos;callback&apos;:&apos;fetchJSON_comment98vv1587&apos;,
-       &apos;productId&apos;:&apos;7029545&apos;,
-       &apos;score&apos;:0,
-       &apos;sortType&apos;:5,
-       &apos;page&apos;:0,
-       &apos;pageSize&apos;:10,
-       &apos;isShadowSku&apos;:0,
-       &apos;fold&apos;:1 }
+QueryStringParameters={ &#39;callback&#39;:&#39;fetchJSON_comment98vv1587&#39;,
+       &#39;productId&#39;:&#39;7029545&#39;,
+       &#39;score&#39;:0,
+       &#39;sortType&#39;:5,
+       &#39;page&#39;:0,
+       &#39;pageSize&#39;:10,
+       &#39;isShadowSku&#39;:0,
+       &#39;fold&#39;:1 }
 </code></pre><p>需要注意的是这里的url并不是直接将控制台显示的url全部拿过来，而是只要其前一部分，因为如果用控制台上的url，则只能获取到当前页面的评论，我们想要获取全部的评论，所以必须动态变化url，这里我们将url分为两部分写，这样方便后面调整page以获取不同页面的评论。<br>然后实现爬取数据的逻辑代码：</p>
 <pre><code>hotcomments = []
 while(True):
     t=s.get(url,params=data).text #模拟网页发送请求并接收返回数据
 
     try:
-        t=re.search(r&apos;(?&lt;=fetchJSON_comment98vv1587\().*(?=\);)&apos;,t).group(0)#使用正则表达式匹配‘fetchJSON_comment98vv1587’
+        t=re.search(r&#39;(?&lt;=fetchJSON_comment98vv1587\().*(?=\);)&#39;,t).group(0)#使用正则表达式匹配‘fetchJSON_comment98vv1587’
     except Exception as e:
         break
     j=json.loads(t) #解析json
 
-    commentSummary=j[&apos;comments&apos;]
+    commentSummary=j[&#39;comments&#39;]
     flag=0
     for comment in commentSummary:
         flag=1
         num=num+1
         item = {
-            &apos;content&apos;: comment[&apos;content&apos;] ,
-            &apos;nickname&apos;: comment[&apos;nickname&apos;],
-            &apos;score&apos;: comment[&apos;score&apos;],
-            &apos;creationTime&apos;:comment[&apos;creationTime&apos;],
-            &apos;productColor&apos;:comment[&apos;productColor&apos;]
+            &#39;content&#39;: comment[&#39;content&#39;] ,
+            &#39;nickname&#39;: comment[&#39;nickname&#39;],
+            &#39;score&#39;: comment[&#39;score&#39;],
+            &#39;creationTime&#39;:comment[&#39;creationTime&#39;],
+            &#39;productColor&#39;:comment[&#39;productColor&#39;]
         }
         hotcomments.append(item)
     if flag==0:
         break
-    data[&apos;page&apos;]+=1  #改变page字段，下一次循环爬取下一页评论
+    data[&#39;page&#39;]+=1  #改变page字段，下一次循环爬取下一页评论
 </code></pre><p>当以上当以上代码执行完成之后就可以将所有评论信息放在 hotcomments中，然后就可以从中拿取数据进行分析了。</p>
-<h2 id="使用Bar进行各项指标柱状图可视化"><a href="#使用Bar进行各项指标柱状图可视化" class="headerlink" title="使用Bar进行各项指标柱状图可视化"></a>使用Bar进行各项指标柱状图可视化</h2><h3 id="三种不同颜色评论数量所占百分比"><a href="#三种不同颜色评论数量所占百分比" class="headerlink" title="三种不同颜色评论数量所占百分比"></a>三种不同颜色评论数量所占百分比</h3><pre><code>a= productColor.count(u&apos;碳黑色&apos;)
-b=productColor.count(u&apos;酒红色&apos;)
-c=productColor.count(u&apos;浅金色&apos;)
+<h2 id="使用Bar进行各项指标柱状图可视化"><a href="#使用Bar进行各项指标柱状图可视化" class="headerlink" title="使用Bar进行各项指标柱状图可视化"></a>使用Bar进行各项指标柱状图可视化</h2><h3 id="三种不同颜色评论数量所占百分比"><a href="#三种不同颜色评论数量所占百分比" class="headerlink" title="三种不同颜色评论数量所占百分比"></a>三种不同颜色评论数量所占百分比</h3><pre><code>a= productColor.count(u&#39;碳黑色&#39;)
+b=productColor.count(u&#39;酒红色&#39;)
+c=productColor.count(u&#39;浅金色&#39;)
 d=float(a+b+c)
 a=float(a/d)
 b=float(b/d)
 c=float(c/d)
 
 ds = tablib.Dataset()
-ds.headers = [&apos;颜色&apos;, &apos;评论数&apos;]
+ds.headers = [&#39;颜色&#39;, &#39;评论数&#39;]
 
-ds.append([&apos;碳黑色&apos;,a])
-ds.append([&apos;酒红色&apos;, b])
-ds.append([&apos;浅金色&apos;, c])
+ds.append([&#39;碳黑色&#39;,a])
+ds.append([&#39;酒红色&#39;, b])
+ds.append([&#39;浅金色&#39;, c])
 
-bar = Bar(&apos;颜色&apos;)
-bar.add(&apos;评论数量(%)&apos;, ds.get_col(0), ds.get_col(1))
-bar.render(&apos;color_bar.html&apos;)
+bar = Bar(&#39;颜色&#39;)
+bar.add(&#39;评论数量(%)&#39;, ds.get_col(0), ds.get_col(1))
+bar.render(&#39;color_bar.html&#39;)
 </code></pre><h3 id="从9号到26号单天评价数量所占百分比"><a href="#从9号到26号单天评价数量所占百分比" class="headerlink" title="从9号到26号单天评价数量所占百分比"></a>从9号到26号单天评价数量所占百分比</h3><pre><code>ds2 = tablib.Dataset()
-ds2.headers = [&apos;评价时间&apos;, &apos;评论数&apos;]
+ds2.headers = [&#39;评价时间&#39;, &#39;评论数&#39;]
 f=0.0
 for i in range(9,27):
     f=f+creationTime.count(i)
@@ -1893,11 +1590,11 @@ for i in range(9,27):
 for i in range(9,27):
     ds2.append([str(i), creationTime.count(i)/f])
 
-bar2 = Bar(&apos;评价时间（购买时间）&apos;)
-bar2.add(&apos;评论数量(%)&apos;, ds2.get_col(0), ds2.get_col(1))
-bar2.render(&apos;time_bar.html&apos;)
+bar2 = Bar(&#39;评价时间（购买时间）&#39;)
+bar2.add(&#39;评论数量(%)&#39;, ds2.get_col(0), ds2.get_col(1))
+bar2.render(&#39;time_bar.html&#39;)
 </code></pre><h3 id="不同评分所占百分比"><a href="#不同评分所占百分比" class="headerlink" title="不同评分所占百分比"></a>不同评分所占百分比</h3><pre><code>ds3 = tablib.Dataset()
-ds3.headers = [&apos;评分&apos;, &apos;评论数&apos;]
+ds3.headers = [&#39;评分&#39;, &#39;评论数&#39;]
 e=0.0
 for i in range(0,6):
     j=5-i
@@ -1908,15 +1605,15 @@ for i in range(0,6):
     j=5-i
     ds3.append([str(j), score.count(j)/e])
 
-bar3 = Bar(&apos;评分&apos;)
-bar3.add(&apos;评论数量(%)&apos;, ds3.get_col(0), ds3.get_col(1))
-bar3.render(&apos;score_bar.html&apos;)
+bar3 = Bar(&#39;评分&#39;)
+bar3.add(&#39;评论数量(%)&#39;, ds3.get_col(0), ds3.get_col(1))
+bar3.render(&#39;score_bar.html&#39;)
 </code></pre><h2 id="使用WordCloud进行评论词云可视化"><a href="#使用WordCloud进行评论词云可视化" class="headerlink" title="使用WordCloud进行评论词云可视化"></a>使用WordCloud进行评论词云可视化</h2><pre><code>content_text = &quot; &quot;.join(content_list)
-bg_pic = imread(&apos;../WoMen_EasonChen/eason2.png&apos;)
-wordcloud = WordCloud(mask=bg_pic,font_path=&apos;../Font/SourceHanSansSC-Heavy.otf&apos;,background_color=&apos;white&apos;,max_words=200).generate(content_text)
+bg_pic = imread(&#39;../WoMen_EasonChen/eason2.png&#39;)
+wordcloud = WordCloud(mask=bg_pic,font_path=&#39;../Font/SourceHanSansSC-Heavy.otf&#39;,background_color=&#39;white&#39;,max_words=200).generate(content_text)
 plt.figure()
-plt.imshow(wordcloud,interpolation=&apos;bilinear&apos;)
-plt.axis(&apos;off&apos;)
+plt.imshow(wordcloud,interpolation=&#39;bilinear&#39;)
+plt.axis(&#39;off&#39;)
 plt.show()
 </code></pre><h2 id="可视化结果"><a href="#可视化结果" class="headerlink" title="可视化结果"></a>可视化结果</h2><p><img src="https://img-
 blog.csdn.net/20180427131847405?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>从图中可以看出，大部分用户比较喜欢碳黑色（74.38%），购买浅金色的用户最少，约占5%<br><img src="https://img-
@@ -2074,29 +1771,29 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #labels表示你不同类别的代号，比如这里的demo中有13个类别
-labels = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;F&apos;, &apos;G&apos;, &apos;H&apos;, &apos;I&apos;, &apos;J&apos;, &apos;K&apos;, &apos;L&apos;, &apos;M&apos;, &apos;N&apos;, &apos;O&apos;]
+labels = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;O&#39;]
 
 #y_true代表真实的label值 y_pred代表预测得到的lavel值
-y_true = np.loadtxt(&apos;../Data/re_label.txt&apos;)
-y_pred = np.loadtxt(&apos;../Data/pr_label.txt&apos;)
+y_true = np.loadtxt(&#39;../Data/re_label.txt&#39;)
+y_pred = np.loadtxt(&#39;../Data/pr_label.txt&#39;)
 
 tick_marks = np.array(range(len(labels))) + 0.5
 
 
-def plot_confusion_matrix(cm, title=&apos;Confusion Matrix&apos;, cmap=plt.cm.binary):
-    plt.imshow(cm, interpolation=&apos;nearest&apos;, cmap=cmap)
+def plot_confusion_matrix(cm, title=&#39;Confusion Matrix&#39;, cmap=plt.cm.binary):
+    plt.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap)
     plt.title(title)
     plt.colorbar()
     xlocations = np.array(range(len(labels)))
     plt.xticks(xlocations, labels, rotation=90)
     plt.yticks(xlocations, labels)
-    plt.ylabel(&apos;True label&apos;)
-    plt.xlabel(&apos;Predicted label&apos;)
+    plt.ylabel(&#39;True label&#39;)
+    plt.xlabel(&#39;Predicted label&#39;)
 
 
 cm = confusion_matrix(y_true, y_pred)
 np.set_printoptions(precision=2)
-cm_normalized = cm.astype(&apos;float&apos;) / cm.sum(axis=1)[:, np.newaxis]
+cm_normalized = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis]
 print cm_normalized
 plt.figure(figsize=(12, 8), dpi=120)
 
@@ -2106,18 +1803,18 @@ x, y = np.meshgrid(ind_array, ind_array)
 for x_val, y_val in zip(x.flatten(), y.flatten()):
     c = cm_normalized[y_val][x_val]
     if c &gt; 0.01:
-        plt.text(x_val, y_val, &quot;%0.2f&quot; % (c,), color=&apos;red&apos;, fontsize=7, va=&apos;center&apos;, ha=&apos;center&apos;)
+        plt.text(x_val, y_val, &quot;%0.2f&quot; % (c,), color=&#39;red&#39;, fontsize=7, va=&#39;center&#39;, ha=&#39;center&#39;)
 # offset the tick
 plt.gca().set_xticks(tick_marks, minor=True)
 plt.gca().set_yticks(tick_marks, minor=True)
-plt.gca().xaxis.set_ticks_position(&apos;none&apos;)
-plt.gca().yaxis.set_ticks_position(&apos;none&apos;)
-plt.grid(True, which=&apos;minor&apos;, linestyle=&apos;-&apos;)
+plt.gca().xaxis.set_ticks_position(&#39;none&#39;)
+plt.gca().yaxis.set_ticks_position(&#39;none&#39;)
+plt.grid(True, which=&#39;minor&#39;, linestyle=&#39;-&#39;)
 plt.gcf().subplots_adjust(bottom=0.15)
 
-plot_confusion_matrix(cm_normalized, title=&apos;Normalized confusion matrix&apos;)
+plot_confusion_matrix(cm_normalized, title=&#39;Normalized confusion matrix&#39;)
 # show confusion matrix
-plt.savefig(&apos;../Data/confusion_matrix.png&apos;, format=&apos;png&apos;)
+plt.savefig(&#39;../Data/confusion_matrix.png&#39;, format=&#39;png&#39;)
 plt.show()
 </code></pre><h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="https://img-
 blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
@@ -2540,6 +2237,285 @@ public class Client {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/04/13/那些活在浪里的创业者最终被拍成了电影/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/那些活在浪里的创业者最终被拍成了电影/" itemprop="url">那些活在浪里的创业者最终被拍成了电影</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T17:41:58+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>“我又融了一个亿。”</p>
+<p>在创业圈，这句话是奖章，也是把创业者逼至悬崖的剑。</p>
+<p>中国互联网创业刚经历了最初的十年，创业者活在浪里。</p>
+<p>这些浪里的人，包括罗永浩、戴威、张颖、Papi、傅盛、安传东，也包括了金星、马薇薇、唐岩、许单单、孙海涛、孟雷和潘飞。</p>
+<p>2008年，摇滚乐队R.E.M.把西南偏南带到了中国。</p>
+<p>那年，《断背山》男主角希斯·莱杰去世，R.E.M.乐队在西南偏南演出时将新歌献给了他。中国媒体刊发了这篇报道，人们第一次认识到了这个大洋彼岸的音乐节。<br><img src="https://img-
+blog.csdn.net/20180507190557455?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>其实，在那年的西南偏南上，最火爆的是扎克伯格的采访。因为话题过于陈旧，一位与会者直接大声打断，引来一片欢呼。人们将这件事发到了Twitter上，西南偏南的知名度也因此大幅提升。</p>
+<p>就在西南偏南举办的同时，苹果相继发布了iPhone软件开发包和预装App<br>Store的3G版iPhone。智慧的迅速变现让不少人蜂拥而至，掀起了一股开发热潮，移动互联网浪潮的序幕正式拉开。</p>
+<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>对大多数中国人来说，2008年最不可磨灭的记忆是北京奥运会，很多人为此开始苦练英语。</p>
+<p>那年，36岁的罗永浩开始了人生的第一次创业，成立“老罗英语”。</p>
+<p>消息公布后，他遭到了很多粉丝的谩骂，“你不是一个理想主义者吗？你怎么做生意去了？”罗永浩觉得这种指责十分滑稽，后来干脆把自己的演讲主题改成了《一个理想主义者的创业故事》。</p>
+<p>在与这场演讲一同发售的自传《我的奋斗》里，罗永浩写道，“每一个生命来到世间，都注定要改变这个世界，你别无选择”。<br><img src="https://img-
+blog.csdn.net/20180507190610663?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="罗永浩"></p>
+<p>那年，罗永浩的另一个身份是网易的评委，四处开炮。这个活动的发起人是唐岩。当时，唐岩还是网易奥运频道的主编。</p>
+<p>后来，罗永浩想做手机，但始终筹不到钱，中途萌生过先做个网站赚钱的念头。唐岩问他，你到底想做什么？老罗老实说：手机。唐岩一口应下，“我帮你找钱”。</p>
+<p>2013年，智能机的出货量首次超越功能机。两个传统巨头诺基亚和摩托罗拉先后被收购，功能机的时代画上了句号，智能机全面进入了人们的生活。</p>
+<p>这其中流露出的机会，被一个叫张颖的人抓住了。2008年，他创立了经纬中国，投资团队只有8个人，也没有定下豪赌移动互联网的战略，并不被人看好。</p>
+<p>那年，一个刚满30岁的产品经理跟所在的公司决裂离职，举目无亲。这个年轻人就是傅盛。</p>
+<p>张颖看到这个消息，要来电话打了过去，俩人下午就碰了头。张颖建议傅盛去虎跳峡散散心，并邀请他到经纬做EIR（入驻企业家）作为创业前的过渡。这段经历，也为经纬之后大举从互联网公司招募年轻人埋下了伏笔。<br><img src="https://img-
+blog.csdn.net/20180507190624171?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>张颖</p>
+<p>那年秋天，美国第四大投行雷曼兄弟宣告破产。这只曾被纽约大学金融教授罗伊·史密斯形容为“有19条命的猫”，耗尽了自己的最后一条命。随后，美国次贷危机迅速演变成全球金融危机。</p>
+<p>金星的第一次创业也在这时宣告失败。那是一个叫“美丽家族”的购物分享社区，模式与后来的蘑菇街很像。金融危机袭来后，已经谈妥的风投无法落实。他问家里借了一笔钱，强撑了一段时间，弹尽粮绝后不得不解散了公司。</p>
+<p>他对仅剩的几名员工说，公司账上没钱了，就剩下这些电脑，大家分一分吧。吃完散伙饭后，金星一个人躲在办公室里哭了一下午。之后的很长一段时间，他都陷入在悲伤中不可自拔。</p>
+<p>这些创始人只想躲起来乃至干脆去死的时刻其实是通往成功的必经之路。创业就像搏击，艰辛而孤独，你必须时刻准备着迎接击打，一次又一次。被击中后，可能痛苦不堪，但也只能等肾上腺素消失后，再去打下一个回合。</p>
+<p>2008年，姜逸磊还在中戏导演系念大三，刚以“papi酱”为名注册了自己的豆瓣账号。</p>
+<p>这一年，全球第一家共享经济公司Airbnb迎着金融危机诞生。为了推广，布莱恩·切斯基决定去西南偏南碰碰运气，但最终一共才定出去了两间房，其中一间还是他们自己定的。总之，这门生意当时完全没有任何火起来的迹象。</p>
+<p>这时，后来成为中国共享经济引领者的戴威还在读高二，他的志向是考北大。</p>
+<p>在移动互联网开端的这一年，未来还是面目模糊的样子，人人都在摸索着前行。</p>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>2011年，乔布斯的辞世引发了海啸般的悼念。</p>
+<p>人们感叹苹果失去了一位有远见的天才，世界失去了一位出色的人类，一个传奇就此落幕。</p>
+<p><img src="https://img-
+blog.csdn.net/20180507190657755?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>很多人陷入到“成为下一个乔布斯”的期待中，江湖风起云涌。尽管罗永浩已经从英语培训里挣到了钱，但他感到自己真正热爱的事业终于来了，“手机行业唯一的聪明人死后，不是我选择了这个行业，是命运选中了我。”</p>
+<p>他遭遇了很多人的嘲笑和质疑，甚至有600多人在网上诅咒他死全家。罗永浩一度觉得，自己好像没有那么爱这个世界了。但他坚持下来了，因为“不被嘲笑的愿望是不值得去实现的。”</p>
+<p>罗永浩的手机梦想埋下种子时，他日后的投资人唐岩刚刚开始创业。上司方三文辞职创立雪球网后，唐岩意识到宴席终究要散场，他开始琢磨着自己出来单干。</p>
+<p>唐岩判断，将来在移动端一定会有一个社交帝国，于是他做了陌陌。但这个想法投资人并不买账。有人问腾讯做陌陌这个事怎么办？唐岩心想，该怎么办就怎么办呗，不能因为这个可能性就不干了。<br><img src="https://img-
+blog.csdn.net/20180507190718340?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>唐岩</p>
+<p>移动互联网创业之风兴起时，张颖敏锐地注意到，人们黏在手机上的时间成倍增加，决定“豪赌移动互联网”，因为“一个能让手机变得像人体器官一样的行业，可以构成对任何传统行业的颠覆”。</p>
+<p>他制定了人海战术，从互联网招了一批没有投资经验的产品经理来做投资。刚刚加入经纬的王华东，在微博上刷到了陌陌的内测版。陌陌正式上线4周后，就冲到了App<br>Store社交类免费榜第三，王华东立刻安排了和唐岩的再次见面。一拍即合的张颖和唐岩，当场签下了投资意向书。</p>
+<p>这一年，傅盛创立的可牛影像与雷军的金山合并后，一直没有在市场上找到自己的位置——PC上有360，只能做到第二；手机上有360和腾讯，只能做老三——这是“注定的结果”。为此，傅盛特别痛苦，天天琢磨着怎么突破。</p>
+<p>毕业后的papi酱也处于迷茫期，她说自己每天都站在人生的“米字路口”，凡是和专业沾边的工作都尝试了一圈。</p>
+<p>她甚至去剧组试过几次戏，但总是被嫌弃，别人比她年轻、比她高、还比她好看……后来，她又尝试过导演，也写过剧本，但最后都不了了之。</p>
+<p>最穷的时候，面条青菜就能应付一顿。她说，那时候做得最有追求的事情是定期买彩票。</p>
+<p>失意之人又何止于她。</p>
+<p>这一年，许单单开了国内首家众筹创业咖啡馆，邀请了一大批企业界、投资界的重要人士加盟，光股东就有100多位。但咖啡馆很难盈利，3W咖啡亏得一塌糊涂。</p>
+<p><img src="https://img-
+blog.csdn.net/20180507190741844?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>孟雷正处在人生的第一次创业中。他的创业方向是服务高端人群的国际头等舱、公务舱机票预订等服务。虽然公司年利润超两千万，但基于对旅游产业的洞察，孟雷意识到，传统方式在未来会遇到极大的瓶颈。</p>
+<p>孙海涛在杭州进行自己第三次创业。那时，他隐约觉得这个项目模式走不通了，<br>“作为CEO，我感觉是带着一帮人在巷子里跟人打架，但是打赢了你也出不去，因为你是在巷子里面。那时候很迷茫，想转型。”</p>
+<p>地球的另一边，Airbnb这次在西南偏南迎来了曙光。暴增的音乐节参与人数让房东看到了商机，订不到酒店的人也找到了住处。这一次，Airbnb终于火了。</p>
+<p>这一年，机敏的创业者们嗅到了移动互联网未来的方向，但他们并不被理解，依然在通往成功的路上孤独前行。当然，也不是每一个人都有好运降临。更多的人，仍然在焦虑和无助中试着拨开迷雾。就像丘吉尔所言：既然必须穿越地狱，那就走下去吧。</p>
+<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>2014年，乌镇举办了首届世界互联网大会，中国成为了世界互联网的一极。</p>
+<p>此时，中国智能手机正处于井喷期，每个季度销售量达到9000万台，是美国市场的三倍，80后90后平均每人每天在手机上花去3个小时。</p>
+<p>草蛇灰线，伏脉千里。移动互联网的全面爆发，让那些眼光长远的人迎来了收获期。</p>
+<p>陌陌就是其中的代表。上线三年的陌陌，在纳斯达克挂牌。两岁的儿子替唐岩敲响了开市钟，成为史上最小的敲钟人。唐岩也成为了《财富》杂志“全球40位40岁以下的商界精英”中的唯一中国上榜者。</p>
+<p>但他说，“不是说钱不好，但钱有点平凡。”</p>
+<p>傅盛也迎来了他的高光时刻。上市的猎豹，成为中国移动互联网公司出海的样本。</p>
+<p>上市时，傅盛把五岁的女儿带去了美国的迪士尼。看着玩耍的女儿，他掉下了眼泪——梦想带领傅盛和猎豹走向了从未抵达的世界。</p>
+<p>此时的经纬，累计投资了190家公司。张颖的办公室里有一块黑板，上面密密麻麻地记录着经纬系每家公司融资、并购行进的阶段。他常关上办公室的门，在黑板前审视河山。</p>
+<p>“投资圈是个江湖，本该有门有派，可并不是谁都能被称为系。我的理解是没投资过100家，没有系统的布局，没有固执的行业关注，不能称之为系。”张颖说，“我们是哪一派我不好说，但你得承认，经纬有称‘系’的资格了。”</p>
+<p>这一年，张颖日后投资的戴威刚刚开始创业。那时，戴威刚从青海支教回来，创业圈的风起云涌让戴威也有些心动。他在宿舍里完成了域名ofo的注册，这个创业项目很快获得了100万的天使投资。</p>
+<p>没过多久，钱烧光了，工资发不出来的戴威开始失眠。他跑遍了市面上几十家基金，没有人看好这个项目。在整个资本市场最火热的时候，他一分钱也没融到。</p>
+<p>烧完100万，戴威非常内疚也不甘心。他开始思考用户的痛点，最终决定转型做共享自行车。</p>
+<p>2015年5月，ofo在微信公号上发布文章《这2000名北大人要干一票大的》，宣布将为北大校园提供超过一万辆自行车，同时呼吁北大师生贡献出自己的单车。文章末尾写道，“100多年来，有很多北大人改变北大，也改变了世界，这次轮到你了！”<br><img src="https://img-
+blog.csdn.net/20180507190826885?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>戴威</p>
+<p>戴威在北大四处推广共享单车时，曾与草根创业者安传东打过一次照面。一年之后，两人境遇大相径庭。</p>
+<p>安传东出生于河南安阳的农村。他曾跟随做泥瓦匠的父亲到北京，顶着烈日在天坛搬砖。干完之后，老板企图赖账。大家手拉手上天台要跳楼，这才维权成功。</p>
+<p>他第一次认识到现实的残酷，心里想着，我以后一定要留在北京，在这个城市出人头地。</p>
+<p>2014年，安传东如愿留在了北京。但他觉得，在这个时代只有创业才能实现人生的翻盘。那时候，他没有经验也没有人脉，在一个孵化器睡了九个月的会议桌，才拉到了第一笔钱。</p>
+<p>“每天都不挣钱，每天都往外支出，电费怎么那么贵啊？也是蛮让人心慌的。”安传东每天都生活在恐惧之中，靠写文案挣钱给同事发工资，最苦的时候自己连4毛钱公交车费都拿不出来。</p>
+<p>最终，安传东没能成为厮杀的胜者。团队解散，只剩下了他一个人，但他还是不想放弃。“合伙人走了可以再找，高管走了可以再招，没钱了可以再融，但我要是放弃了，公司就真没了。”<br><img src="https://img-
+blog.csdn.net/20180507190840809?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>安传东</p>
+<p>孟雷开始了他的共享经济创业。他卖掉了之前的公司，创立了一个专门连接境外华人司导和出境游用户的包车游品牌——皇包车旅行。后来，他还挖来了在旅行行业深耕十年的潘飞作为公司的CEO。</p>
+<p><img src="https://img-
+blog.csdn.net/20180507190912693?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>孟雷（左）潘飞（右）</p>
+<p>许单单创办了拉勾网，他希望做一个薪资透明、每一封简历都有回馈的招聘网站。“尊严在当下社会是最值钱的。”许单单觉得，只要有效击中“尊严”这个社会痛点，网站做起来，是毫无悬念的。</p>
+<p>这一年，珠海姑娘马薇薇和丈夫离了婚，父亲又查出了癌症。为了逃离阴霾，她坐上了北上的飞机，参加了《奇葩说》，并获得了冠军。马薇薇在节目中金句频出。比如，“这是一个什么都缺，唯独不缺梦想的年代。”她的这番话被视为金玉良言，在网上热传。</p>
+<p>这一年，棱镜门主角斯诺登以远程的方式登陆西南偏南。他的发言掀起了公众对数据隐私、数据开放的思考，也促进了科技公司加强隐私保护的意识。</p>
+<p>这一年，移动互联网全面爆发，人们看到了前所未有的创业速度——一家公司在三四年里实现了从有收入到有利润再到上市，创业者正以前所未有的速度完成造梦。这种速度，令围观者，甚至创业者本人惊叹，也吸引了越来越多的人加入创业大潮。</p>
+<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p>2016年，全球智能机销量近15亿部，庞大数字下是仅2%的增长率，市场迎来停滞。</p>
+<p>这年的世界互联网大会上，王兴提出了互联网下半场的概念。“之前中国互联网的发展，在很大程度上靠的是人口红利，因为用户在快速增长，每年卖几亿部智能手机，大家的业务跟着水涨船高。但是现在，这个时代已经过去了，智能手机的年销量已经不增长了，总体网民的增长也大幅趋缓。”</p>
+<p>与此同时，中国出现了25461支私募股权投资基金，可投资规模达4.29万亿元。数万亿资金像饿狼一样四处觅食，任何能带来用户流量和现金流的项目都遭到了疯狂的追捧。</p>
+<p>这一年，这样的赛道有三个：共享单车、网络直播、内容创业。</p>
+<p>2016年，ofo走出校园，日订单量从200迅速攀升至50万单。9月底，滴滴宣布战略投资ofo。戴威和共享单车从无人问津到炙手可热，似乎就是一夜之间。</p>
+<p>有投资人说，“如果你人不在北京，基本上就投不进去了”。截至当年底，ofo完成了五轮融资，身后站着几乎所有重量级的投资机构。这样的情况，戴威从来没有遇过，他甚至失眠了两晚。</p>
+<p>《胡润百富榜2017》显示，戴威成为首位上榜的90后。他创办的ofo获得了互联网史上最快最炫目的“融资加速度”。共享单车席卷全球，成为了“新四大发明”之一。</p>
+<p>另一个赛道里，直播行业凶猛崛起，唐岩加入了直播大军之中。</p>
+<p>上市后，陌陌股价始终被低估。那段时间，深夜不眠的唐岩经常看《我是歌手》，琢磨着做个有逼格的版本出来。高管全体反对，但他还是强制执行了。只不过，陌陌最终推出的是全民直播。唐岩抓住了大潮，局势一举扭转。2016年直播营收猛涨，陌陌开始迈向高点。</p>
+<p>“你要非说理想败给了现实也可以。但理想和现实，肯定不是一个黑白分明的东西。”唐岩说，“人成熟的过程，本来就是一个不断妥协的过程”。</p>
+<p>资本受益于时代浪潮，同时也在助推时代浪潮的前行。内容创业的风口里，papi酱和马薇薇是最大的获益者和代表者。</p>
+<p>这一年，papi酱成了“第一网红”，拿到了1200万的投资，站上了网红界的金字塔塔尖。同时，她的首支贴片视频广告拍出了2200万的天价。由此，她达到了个人流量的最高点。</p>
+<p>谈及自己的成功时，papi酱一脸庆幸地说，“感谢互联网的诞生，互联网是谁发明的啊！”<br><img src="https://img-
+blog.csdn.net/20180507190947424?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>papi酱</p>
+<p>马薇薇也凭借奇葩说中积攒的粉丝和流量，创立了米果文化，踩上了风口。好友评价说，“马薇薇是一个最能够闻到钱的味道的人”。</p>
+<p>孙海涛看到了投资的高回报，从创业者转向投资者，带领着51信用卡开始进行产业投资布局。<br><img src="https://img-
+blog.csdn.net/20180507191002321?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>孙海涛</p>
+<p>这一年，锤子亏损4亿元，一度徘徊在破产的边缘。罗永浩说，自从他做手机以来，他的头发掉了一半，胆结石大了一倍，体重增加了20%，但这些跟他获得的无穷无尽的快乐、满足、成就感和难以置信的温暖支持和鼓励相比，根本不值一提。</p>
+<p>为了和科技走得更近一些，奥巴马成了首位参加西南偏南的美国总统。他翘掉了里根总统遗孀的葬礼，被不少政治界人士批评，回馈他的是巨星演唱会般的开场。至此，西南偏南真正走向了大众。</p>
+<p>这一年，踏着时代的浪尖，很多人赶上了移动互联网的末班车，怀抱着希望，也在甘苦中煎熬。随着互联网下半场的开启，所有人都不得不承认竞争更残酷了。上半场的时候，错了也许还有机会。但现在，如果错了，想要翻身就更为艰难了。</p>
+<h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1><p>2017年，移动互联网正在经历十字路口，它可能在等着创造新的辉煌也可能在等着低谷降临。创业者和投资人都意识到，当有了超级应用以后，流量的获取变得越来越难，谁懂得高效获取和利用流量，谁就有权力主宰新城邦。</p>
+<p>这一年，我们拍摄了一部纪录片《燃点》，试图记录正在发生的创业史。</p>
+<p>这一年，为了筹钱，罗永浩和直播平台签订合作，甚至以个人名义借款，以此维持公司的运转。因为他知道，公司活着就意味着一切。</p>
+<p>罗永浩将2017年形容为“起死回生”。经历了大半年的生死煎熬，锤子科技终于扭转了颓势——坚果Pro 和坚果 Pro 2<br>接连赢得了好评，销量上也收获了前所未有的佳绩。</p>
+<p>“通往牛逼的路上，风景差得让人只想说脏话，但创业者在意的是远方。”罗永浩对创业这件事充满了热爱和任性，不管别人认为这条路适不适合他，他都要走下去。</p>
+<p>陌陌收购探探，成为2018年农历新年后的第一场互联网公司收购。但唐岩依然有他新的焦虑。</p>
+<p>这一年，经纬迎来了十周年纪念日。经纬系450多家公司，占据了中国移动互联网的半壁江山。即便如此，张颖还是在焦虑：“我们做得那么好了，我们怎么能再错过呢？”</p>
+<p>狂飙猛进的共享单车市场进入胶着期，摩拜被王兴的美团收购了，ofo一度被传账上现金仅能支持一个月。唱衰的声浪都压在了戴威的肩上，直到新一轮融资完成，他才松了一口气。</p>
+<p>但戴威仍然没有忘记他的初心，“我一直认为应该去做改变世界的事情。这是一个中国原创的，并且为全世界人去提供便捷服务的公司。”这也是ofo的愿景——让世界没有陌生的角落。戴威从不把情怀挂在嘴上，但你能从他的脸上看到，他还是那个愿意相信“美好终将发生”的人。</p>
+<p>对傅盛来说，这也是艰难的一年。他问埃隆•马斯克：你做SpaceX、特斯拉，是不是觉得这件事情能赢？马斯克说，“我真的不知道我是不是一定能赢，这件事非常难，但我做这件事并不是因为它容易，就是因为它难。难，才有我做的价值；难，才有机会取得不一样的成就。”傅盛觉得，猎豹今天也处在这样的阶段。</p>
+<p><img src="https://img-
+blog.csdn.net/20180507191020854?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>傅盛</p>
+<p>安传东经历了第三次失败，又一个项目草草结束。过年的时候，他跟父亲说起了在北京的创业经历，说着说着就掉下了眼泪。最近，在投资人的鼓舞下，安传东又开始了新一轮创业。</p>
+<p>安传东屡战屡败的模样像极了年轻时跌跌撞撞的我们——我们都有过他那样非常努力的时刻，年轻、充满激情，但没有经验、没有资源、一无所有……一次又一次被命运击打。每个创业者都可以在安传东身上找到自己的第一次：成功了，就是一道风景；失败了，也是痛苦但舍不下的回忆。</p>
+<p>金星的第三次创业四平八稳，他抓住了“男性创业，女性整形”的潮流，创立了医美平台新氧。2017年的第一个工作日，成立三年的新氧开始盈利。金星越来越成熟、稳当、有条不紊，他的现在，就像长大了的我们。<br><img src="https://img-
+blog.csdn.net/20180507191034956?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>金星（左）</p>
+<p>医美整形的每一步都面临着伦理的质疑，在对立中探索的金星也面临着一部分创业者的终极命题：如何领航一个不成熟的行业，又能在前行的同时避开暗礁？</p>
+<p>行业虽不同，困惑却如出一辙。papi酱和马薇薇作为大众娱乐明星已经成功，但作为创业者，她们还在各自寻找着更清晰的方向。</p>
+<p>罗辑思维撤资后，面临质疑的papi酱开始探索从个人IP进化到MCN平台，她做了papitube。</p>
+<p>马薇薇经历着同样的瓶颈，严重的失眠症长期困扰着她。</p>
+<p><img src="https://img-
+blog.csdn.net/20180507191046794?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>马薇薇</p>
+<p>焦虑也许正是这个时代的候群症。对抗焦虑的最好手段，就是不甘现状和剑及履及的进步。</p>
+<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p>十年如弹指般流逝，移动互联网浪潮全面席卷中国，以更高的效率和新的消费者互动关系，重构了商业的基本逻辑——信息获取、社交、购物、日常服务以及金融支付等方式都发生了翻天覆地的改变。</p>
+<p>《燃点》的主角们也都完成了自己的逆袭，他们身上都有着鲜明的时代烙印，他们的故事，就是一部正在发生的创业史。</p>
+<p>在这十年里，中国的经济总量增长了2.5倍，一跃超过日本，居于世界第二；人民币的规模总量增长了3倍，外汇储备增加了1.5倍；网民数量增长了2.5倍，电子商务在社会零售总额中的占比增长了13倍；中产阶层人口数量达到2.2亿，每年出境旅游人口增加了2.7倍；中国的消费者每年买走全球70%的奢侈品，而他们的平均年龄只有39岁。</p>
+<p>今年是改革开放的第40个年头。40年前，高考实现了市场经济下最早的人才选拔。40年后，在一个愈加成熟的商业中国，创业者如走上搏击台，实现了以弱胜强的创富神话。</p>
+<p>曾经，人们常用Copy to China来形容中国的发展模式，即将美国的创新抄袭到中国，国人大多也有这样的文化不自信。这十年来，人们一次次看到了Copy<br>to Global，Made in China正在变成Created in China，中国的创业者也从跟随者变成了引领者。</p>
+<p>我们试图记录下这个时代。我们不负责臧否成败，我们选取的也不是“成功者”或“失败者”，而是那些“强烈的人格”。这些人格包括了罗永浩、唐岩、戴威、金星、张颖、傅盛、papi酱、安传东、马薇薇、孟雷、潘飞、许单单、孙海涛。</p>
+<p>他们纵身跃出舒适区，打破旧有常规，推动社会前进，并先于所有人迎接未来。这些创业者改造着一个个产业，也改变着中国。他们站在一起，就是当下中国创业史的最好记录。</p>
+<p>原文地址： <a href="https://mp.weixin.qq.com/s?__biz=MzI2OTU3MTQxOA==&amp;mid=2247485301&amp;idx=1&amp;sn=ca187014fc63b4973387d3cc92a1db42&amp;chksm=eadf0340dda88a5615f435f72bad72f6054ec640ddbb70af8aa962976ffb9cda0f073524f3a0&amp;mpshare=1&amp;scene=1&amp;srcid=0413BJnFpmvnP3y8KoLoydb0#rd" target="_blank" rel="noopener"> 这里
+</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2590,7 +2566,7 @@ public class Client {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2612,7 +2588,7 @@ public class Client {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2851,7 +2827,7 @@ public class Client {
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

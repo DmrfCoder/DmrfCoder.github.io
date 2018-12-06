@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -126,7 +126,7 @@
 
 
 
-  <title>随机算法 | DmrfCoder的个人主页</title>
+  <title>随机算法 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -353,8 +353,8 @@
 </ul>
 <blockquote>
 <p>舍伍德算法总能求得问题的一个解,且所求得的解总是正确的。  </p>
-</blockquote>
 <p>当一个确定性算法在最坏情况下的计算复杂性与其在平均情况下的计算复杂性有较大差别时,可在这个确定性算法中引入随机性,将它改造成一个舍伍德算法,消除或减少问题的好坏实例间的这种差别。</p>
+</blockquote>
 <h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><ul>
 <li>Monte Carlo算法   </li>
 </ul>
@@ -362,10 +362,7 @@
 <p>总是给出解，但是偶尔可能会产生非正确的解。然而，可以通过多次运行原算法，并且满足每次运行时的随机选择都相互独立，使产生非正确解的概率可以减到任意小。</p>
 </blockquote>
 <h3 id="主主元素问题（多数元素问题）"><a href="#主主元素问题（多数元素问题）" class="headerlink" title="主主元素问题（多数元素问题）"></a>主主元素问题（多数元素问题）</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>设T[1…n]是一个长度为n的数组，当某个元素在该数组中存在的数量多于int(s/2)时称该元素为数组T的主元素（多数元素）。</p>
-<h4 id="求解思路"><a href="#求解思路" class="headerlink" title="求解思路"></a>求解思路</h4><p>算法随机选择数组元素x,由于数组T的非主元素个数小于n/2，所以，x不为主元素的概率小于1/2。因此判定数组T的主元素存在性的算法是一个偏真1/2正确的算法。50%的错误概率是不可容忍的，利用重复调用技术将错误概率降低到任何可接受的范围内。对于任何给定的p</p>
-<blockquote>
-</blockquote>
-<p>0，算法majorityMC重复调用(向上取整)log(1/p)次算法majority。它是一个偏真蒙特卡罗算法，且其错误概率小于p。算法majorityMC所需的计算时间显然是O(nlog(1/p))。</p>
+<h4 id="求解思路"><a href="#求解思路" class="headerlink" title="求解思路"></a>求解思路</h4><p>算法随机选择数组元素x,由于数组T的非主元素个数小于n/2，所以，x不为主元素的概率小于1/2。因此判定数组T的主元素存在性的算法是一个偏真1/2正确的算法。50%的错误概率是不可容忍的，利用重复调用技术将错误概率降低到任何可接受的范围内。对于任何给定的p<br>&gt;<br>0，算法majorityMC重复调用(向上取整)log(1/p)次算法majority。它是一个偏真蒙特卡罗算法，且其错误概率小于p。算法majorityMC所需的计算时间显然是O(nlog(1/p))。</p>
 <h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>//重复k次调用算法Majority
 template&lt;class Type&gt;
 bool MajorityMC(Type *T,int n,double e)
@@ -573,7 +570,7 @@ void R_Select(int *A, int low, int high, int k) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -595,7 +592,7 @@ void R_Select(int *A, int low, int high, int k) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -782,7 +779,7 @@ void R_Select(int *A, int low, int high, int k) {
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

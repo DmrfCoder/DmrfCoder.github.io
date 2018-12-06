@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="直接贴代码： @RequiresApi(api = Build.VERSION_CODES.KITKAT)    public static String getpath(Context context, Uri uri){        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {            if (Doc">
+<meta name="description" content="直接贴代码：  @RequiresApi(api = Build.VERSION_CODES.KITKAT)     public static String getpath(Context context, Uri uri){         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {             if">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android将Uri转化为文件路径的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/03/Android将Uri转化为文件路径的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="直接贴代码： @RequiresApi(api = Build.VERSION_CODES.KITKAT)    public static String getpath(Context context, Uri uri){        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {            if (Doc">
+<meta property="og:description" content="直接贴代码：  @RequiresApi(api = Build.VERSION_CODES.KITKAT)     public static String getpath(Context context, Uri uri){         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {             if">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:39:26.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android将Uri转化为文件路径的方法">
-<meta name="twitter:description" content="直接贴代码： @RequiresApi(api = Build.VERSION_CODES.KITKAT)    public static String getpath(Context context, Uri uri){        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {            if (Doc">
+<meta name="twitter:description" content="直接贴代码：  @RequiresApi(api = Build.VERSION_CODES.KITKAT)     public static String getpath(Context context, Uri uri){         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {             if">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>Android将Uri转化为文件路径的方法 | DmrfCoder的个人主页</title>
+  <title>Android将Uri转化为文件路径的方法 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -300,78 +300,78 @@
 
       
         <p>直接贴代码：</p>
-<pre><code>@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-   public static String getpath(Context context, Uri uri){
-       if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-           if (DocumentsContract.isDocumentUri(context, uri)) {
-               if (isExternalStorageDocument(uri)) {
-                   // ExternalStorageProvider
-                   final String docId = DocumentsContract.getDocumentId(uri);
-                   final String[] split = docId.split(&quot;:&quot;);
-                   final String type = split[0];
-                   if (&quot;primary&quot;.equalsIgnoreCase(type)) {
-                       String path = Environment.getExternalStorageDirectory() + &quot;/&quot; + split[1];
-                       return path;
-                   }
-               } else if (isDownloadsDocument(uri)) {
-                   // DownloadsProvider
-                   final String id = DocumentsContract.getDocumentId(uri);
-                   final Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;),
-                           Long.valueOf(id));
-                   String path = getDataColumn(context, contentUri, null, null);
-                   return path;
-               } else if (isMediaDocument(uri)) {
-                   // MediaProvider
-                   final String docId = DocumentsContract.getDocumentId(uri);
-                   final String[] split = docId.split(&quot;:&quot;);
-                   final String type = split[0];
-                   Uri contentUri = null;
-                   if (&quot;image&quot;.equals(type)) {
-                       contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                   } else if (&quot;video&quot;.equals(type)) {
-                       contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                   } else if (&quot;audio&quot;.equals(type)) {
-                       contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                   }
-                   final String selection = &quot;_id=?&quot;;
-                   final String[] selectionArgs = new String[]{split[1]};
-                   String path = getDataColumn(context, contentUri, selection, selectionArgs);
-                   return path;
-               }
-           }
-       }
-       return null;
-   }
+<pre><code> @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static String getpath(Context context, Uri uri){
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            if (DocumentsContract.isDocumentUri(context, uri)) {
+                if (isExternalStorageDocument(uri)) {
+                    // ExternalStorageProvider
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(&quot;:&quot;);
+                    final String type = split[0];
+                    if (&quot;primary&quot;.equalsIgnoreCase(type)) {
+                        String path = Environment.getExternalStorageDirectory() + &quot;/&quot; + split[1];
+                        return path;
+                    }
+                } else if (isDownloadsDocument(uri)) {
+                    // DownloadsProvider
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;),
+                            Long.valueOf(id));
+                    String path = getDataColumn(context, contentUri, null, null);
+                    return path;
+                } else if (isMediaDocument(uri)) {
+                    // MediaProvider
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(&quot;:&quot;);
+                    final String type = split[0];
+                    Uri contentUri = null;
+                    if (&quot;image&quot;.equals(type)) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                    } else if (&quot;video&quot;.equals(type)) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    } else if (&quot;audio&quot;.equals(type)) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                    }
+                    final String selection = &quot;_id=?&quot;;
+                    final String[] selectionArgs = new String[]{split[1]};
+                    String path = getDataColumn(context, contentUri, selection, selectionArgs);
+                    return path;
+                }
+            }
+        }
+        return null;
+    }
 
 
-   private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-       Cursor cursor = null;
-       final String column = &quot;_data&quot;;
-       final String[] projection = {column};
-       try {
-           cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-           if (cursor != null &amp;&amp; cursor.moveToFirst()) {
-               final int column_index = cursor.getColumnIndexOrThrow(column);
-               return cursor.getString(column_index);
-           }
-       } finally {
-           if (cursor != null)
-               cursor.close();
-       }
-       return null;
-   }
+    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = &quot;_data&quot;;
+        final String[] projection = {column};
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null &amp;&amp; cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
 
-   private static boolean isExternalStorageDocument(Uri uri) {
-       return &quot;com.android.externalstorage.documents&quot;.equals(uri.getAuthority());
-   }
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return &quot;com.android.externalstorage.documents&quot;.equals(uri.getAuthority());
+    }
 
-   private static boolean isDownloadsDocument(Uri uri) {
-       return &quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority());
-   }
+    private static boolean isDownloadsDocument(Uri uri) {
+        return &quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority());
+    }
 
-   private static boolean isMediaDocument(Uri uri) {
-       return &quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority());
-   }
+    private static boolean isMediaDocument(Uri uri) {
+        return &quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority());
+    }
 </code></pre>
       
     </div>
@@ -476,7 +476,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -498,7 +498,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -669,7 +669,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

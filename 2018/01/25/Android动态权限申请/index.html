@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句： implementation  &amp;apos;com.github.dfqin:grantor:2.1.0&amp;apos;">
+<meta name="description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句：  implementation  &amp;#39;com.github.dfqin:grantor:2.1.0&amp;#39;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android动态权限申请">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/01/25/Android动态权限申请/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句： implementation  &amp;apos;com.github.dfqin:grantor:2.1.0&amp;apos;">
+<meta property="og:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句：  implementation  &amp;#39;com.github.dfqin:grantor:2.1.0&amp;#39;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:40:11.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动态权限申请">
-<meta name="twitter:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句： implementation  &amp;apos;com.github.dfqin:grantor:2.1.0&amp;apos;">
+<meta name="twitter:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句：  implementation  &amp;#39;com.github.dfqin:grantor:2.1.0&amp;#39;">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>Android动态权限申请 | DmrfCoder的个人主页</title>
+  <title>Android动态权限申请 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -302,7 +302,7 @@
         <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题</p>
 <h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。</p>
 <h1 id="添加相关依赖"><a href="#添加相关依赖" class="headerlink" title="添加相关依赖"></a>添加相关依赖</h1><p>在你项目的app gradle的dependencies下添加下列语句：</p>
-<pre><code>implementation  &apos;com.github.dfqin:grantor:2.1.0&apos;
+<pre><code> implementation  &#39;com.github.dfqin:grantor:2.1.0&#39;
 </code></pre><p>添加后Sync，即可将相关工具代码导入</p>
 <h1 id="代码实现动态权限申请"><a href="#代码实现动态权限申请" class="headerlink" title="代码实现动态权限申请"></a>代码实现动态权限申请</h1><p>首先要保证在manifests里面加上你需要的权限，然后在MainActivity中添加如下方法：</p>
 <pre><code>private void RequestPermission() {
@@ -440,7 +440,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -462,7 +462,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -649,7 +649,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

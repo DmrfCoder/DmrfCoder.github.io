@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 
 
 
-  <title>汇编总结（4）——字符串操作和位操作 | DmrfCoder的个人主页</title>
+  <title>汇编总结（4）——字符串操作和位操作 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -339,13 +339,11 @@
 <blockquote>
 <p>LOADSB 装入字节（Byte），执行后ESI变化1</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p>LOADSW 装入字（Word），执行后ESI变化2</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p>LOADD 装入双字（Double Word），执行后ESI变化4</p>
 </blockquote>
@@ -354,13 +352,11 @@
 <blockquote>
 <p>STOSB 存储字节（Byte）</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p>STOSW 存储字（Word），执行后ESI变化2</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p>STOSD 存储双字（Double Word），执行后ESI变化4</p>
 </blockquote>
@@ -369,13 +365,11 @@
 <blockquote>
 <p><strong>MOVSB</strong> <strong>;</strong>字节传送</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p><strong>MOVSW</strong> <strong>;</strong>字传送</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p><strong>MOVSD</strong> <strong>;</strong>双字传送</p>
 </blockquote>
@@ -387,51 +381,47 @@ STOSB
 <blockquote>
 <p><strong>SCASB</strong> <strong>;</strong>串字节扫描</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p><strong>SCASW</strong> <strong>;</strong>串字扫描</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p><strong>SCASD</strong> <strong>;</strong>串双字扫描</p>
 </blockquote>
 <p>把累加器AL/AX/EAX中的内容和由寄存器EDI所指向的一个字节/字/双字的目标数据采用相减的方式比较，相减结果反映到各状态标志，但不影响两个操作数，然后根据字符大小和方向标志DF调整EDI的值。</p>
 <h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><p>判断一个字符是否是十六进制字符：</p>
-<pre><code> char  string[] =&quot;0123456789ABCDEFabcdef&quot;;
-char  varch= &apos;%&apos;;       //用于保存其他方式输入的字符
-int  flag;              /反映是否为十六进制数符号
-_asm  {
-    MOV   AL, varch     ;把要判断的字符送AL
-    MOV   ECX, 22       ;合计22个十六进制数符号
-    LEA   EDI, string
-NEXT:
-    SCASB             ;
-    LOOPNZ   NEXT      ;没有找遍，且没有找到，继续找
-    JNZ   NOT_FOUND     ;没有找到
-FOUND:                   ;找到，字符是十六进制数符号
-    MOV   flag, 1
-    JMP   SHORT  OVER
-NOT_FOUND:               ;字符不是十六进制数符号
-    MOV   flag, 0
-OVER:
-}
-printf(&quot;flag=%d\n&quot;, flag);    //显示为flag=0
-return  0;
+<pre><code>     char  string[] =&quot;0123456789ABCDEFabcdef&quot;;
+    char  varch= &#39;%&#39;;       //用于保存其他方式输入的字符
+    int  flag;              /反映是否为十六进制数符号
+    _asm  {
+        MOV   AL, varch     ;把要判断的字符送AL
+        MOV   ECX, 22       ;合计22个十六进制数符号
+        LEA   EDI, string
+    NEXT:
+        SCASB             ;
+        LOOPNZ   NEXT      ;没有找遍，且没有找到，继续找
+        JNZ   NOT_FOUND     ;没有找到
+    FOUND:                   ;找到，字符是十六进制数符号
+        MOV   flag, 1
+        JMP   SHORT  OVER
+    NOT_FOUND:               ;字符不是十六进制数符号
+        MOV   flag, 0
+    OVER:
+    }
+    printf(&quot;flag=%d\n&quot;, flag);    //显示为flag=0
+    return  0;
 </code></pre><p>核心算法思想是将呆判断字符放在AL中，将EDI指向十六进制标准字符串的首地址，然后使用SCASB，如果执行SCASB后ZF标志位不为0，就说明待判断字符和十六进制标准字符串中的当前字符不等，然后进入下一个循环，注意此时EDI已经自动指向了十六进制标准字符串的下一位。如果此时ZF为0了，会进入JNZ<br>NOT_FOUND 这句，但是由于相等时ZF等于0，所以不会执行JNZ，会执行其下一句FOUND。</p>
 <p>这就是主要的逻辑。</p>
 <h4 id="字符串比较指令（CoMPare-String）"><a href="#字符串比较指令（CoMPare-String）" class="headerlink" title="字符串比较指令（CoMPare String）"></a>字符串比较指令（CoMPare String）</h4><p>三种格式：</p>
 <blockquote>
 <p><strong>CMPS**</strong>B<strong> </strong>;**串字节比较</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p><strong>CMPS**</strong>W<strong> </strong>;**串字比较</p>
 </blockquote>
-<blockquote>
-</blockquote>
+<p>&gt;</p>
 <blockquote>
 <p><strong>CMPS**</strong>D<strong> </strong>;**串双字比较</p>
 </blockquote>
@@ -519,10 +509,10 @@ BSR     OPRD1，OPRD2
 <li>逆向位扫描指令BSR，从左向右（位15或位31至位0）扫描字或双字操作数OPRD2中第一个含“1”的位，并把扫描到的第一个含“1”的位的位号送操作数OPRD1。 </li>
 <li>如果字或双字操作数OPRD2等于0，那么零标志ZF被置1，操作数OPRD1的值不确定；否则零标志ZF被清0。 </li>
 </ul>
-<h4 id="Demo-4"><a href="#Demo-4" class="headerlink" title="Demo"></a>Demo</h4><pre><code>MOV   EBX , 12345678H//1在第28位
-BSR   EAX, EBX                ;ZF=0, EAX=1CH=12+16=28
-BSF   DX, AX                  ;AX=CH=1100B,ZF=0, DX=2=10B
-BSF   CX, DX                  ;ZF=0, CX=1
+<h4 id="Demo-4"><a href="#Demo-4" class="headerlink" title="Demo"></a>Demo</h4><pre><code>    MOV   EBX , 12345678H//1在第28位
+    BSR   EAX, EBX                ;ZF=0, EAX=1CH=12+16=28
+    BSF   DX, AX                  ;AX=CH=1100B,ZF=0, DX=2=10B
+    BSF   CX, DX                  ;ZF=0, CX=1
 </code></pre><h2 id="条件设置字节指令"><a href="#条件设置字节指令" class="headerlink" title="条件设置字节指令"></a>条件设置字节指令</h2><p>一般格式：</p>
 <pre><code>SETcc OPRD
 </code></pre><p>符号cc是代表各种条件的缩写，是指令助记符的一部分；操作数OPRD只能是8位寄存器或者字节存储单元，用于存放设置结果。当条件满足时，那么将目的操作数OPRD设置成1，否则设置成0。这里的条件<br><strong>与条件转移指令中的条件一样</strong> 。</p>
@@ -651,7 +641,7 @@ SETae   r3
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -673,7 +663,7 @@ SETae   r3
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -860,7 +850,7 @@ SETae   r3
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

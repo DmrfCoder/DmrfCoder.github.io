@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -128,7 +128,7 @@
 
 
 
-  <title>Normalizing rows with Python | DmrfCoder的个人主页</title>
+  <title>Normalizing rows with Python | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -147,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -303,7 +303,7 @@
 
       
         <p>A common technique we use in Machine Learning and Deep Learning is to<br>normalize our data. It often leads to a better performance because gradient<br>descent converges faster after normalization. Here, by normalization we mean<br>changing x to :<br><img src="https://img-blog.csdnimg.cn/20181109000849389.png" alt="在这里插入图片描述"><br>(dividing each row vector of x by its norm).</p>
-<p>For example, if  (3)  x  =  [  0  3  4  2  6  4  ]  x = \begin{bmatrix} 0<br>&amp; 3 &amp; 4 \\ 2 &amp; 6 &amp; 4 \\ \end{bmatrix}\tag{3}  x  =  [  0  2<br>​  3  6  ​  4  4  ​  ]  (  3  )  then  (4)  ∥  x  ∥  =  n  p  .  l  i  n  a  l<br>g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e  e  p  d  i  m  s  =  T<br>r  u  e  )  =  [  5  56  ]  | x| = np.linalg.norm(x, axis = 1, keepdims =<br>True) = \begin{bmatrix} 5 \\ \sqrt{56} \\ \end{bmatrix}\tag{4}  ∥  x  ∥  =<br>n  p  .  l  i  n  a  l  g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e<br>e  p  d  i  m  s  =  T  r  u  e  )  =  [  5  5  6  ​  ​  ]  (  4  )  and  (5)<br>x  _  n  o  r  m  a  l  i  z  e  d  =  x  ∥  x  ∥  =  [  0  3  5  4  5  2  56<br>6  56  4  56  ]  x\_normalized = \frac{x}{| x|} = \begin{bmatrix} 0 &amp;<br>\frac{3}{5} &amp; \frac{4}{5} \\ \frac{2}{\sqrt{56}} &amp;<br>\frac{6}{\sqrt{56}} &amp; \frac{4}{\sqrt{56}} \\ \end{bmatrix}\tag{5}  x  _<br>n  o  r  m  a  l  i  z  e  d  =  ∥  x  ∥  x  ​  =  [  0  5  6  ​  2  ​  ​  5<br>3  ​  5  6  ​  6  ​  ​  5  4  ​  5  6  ​  4  ​  ​  ]  (  5  )<br><strong>Exercise</strong> : Implement normalizeRows() to normalize the rows of a matrix.<br>After applying this function to an input matrix x, each row of x should be a<br>vector of unit length (meaning length 1).</p>
+<p>For example, if  (3)  x  =  [  0  3  4  2  6  4  ]  x = \begin{bmatrix} 0<br>&amp; 3 &amp; 4 \\ 2 &amp; 6 &amp; 4 \\ \end{bmatrix}\tag{3}  x  =  [  0  2<br>​  3  6  ​  4  4  ​  ]  (  3  )  then  (4)  ∥  x  ∥  =  n  p  .  l  i  n  a  l<br>g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e  e  p  d  i  m  s  =  T<br>r  u  e  )  =  [  5  56  ]  | x| = np.linalg.norm(x, axis = 1, keepdims =<br>True) = \begin{bmatrix} 5 \\ \sqrt{56} \\ \end{bmatrix}\tag{4}  ∥  x  ∥  =<br>n  p  .  l  i  n  a  l  g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e<br>e  p  d  i  m  s  =  T  r  u  e  )  =  [  5  5  6  ​  ​  ]  (  4  )  and  (5)<br>x  <em>  n  o  r  m  a  l  i  z  e  d  =  x  ∥  x  ∥  =  [  0  3  5  4  5  2  56<br>6  56  4  56  ]  x\_normalized = \frac{x}{| x|} = \begin{bmatrix} 0 &amp;<br>\frac{3}{5} &amp; \frac{4}{5} \\ \frac{2}{\sqrt{56}} &amp;<br>\frac{6}{\sqrt{56}} &amp; \frac{4}{\sqrt{56}} \\ \end{bmatrix}\tag{5}  x  </em><br>n  o  r  m  a  l  i  z  e  d  =  ∥  x  ∥  x  ​  =  [  0  5  6  ​  2  ​  ​  5<br>3  ​  5  6  ​  6  ​  ​  5  4  ​  5  6  ​  4  ​  ​  ]  (  5  )<br><strong>Exercise</strong> : Implement normalizeRows() to normalize the rows of a matrix.<br>After applying this function to an input matrix x, each row of x should be a<br>vector of unit length (meaning length 1).</p>
 <h2 id="implement"><a href="#implement" class="headerlink" title="implement"></a>implement</h2><pre><code># GRADED FUNCTION: normalizeRows
 
 def normalizeRows(x):
@@ -368,8 +368,8 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/10/Logistic Regression with a Neural Network mindset/" rel="prev" title="Logistic Regression with a Neural Network mindset">
-                Logistic Regression with a Neural Network mindset <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/13/汇编总结（2）——IA-32处理器基本功能/" rel="prev" title="汇编总结（2）——IA-32处理器基本功能">
+                汇编总结（2）——IA-32处理器基本功能 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -447,7 +447,7 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +469,7 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -656,7 +656,7 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

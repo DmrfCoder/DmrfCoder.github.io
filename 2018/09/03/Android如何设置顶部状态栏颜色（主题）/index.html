@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -130,7 +130,7 @@ blog.csdn.net/20180903171621608?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
 
-  <title>Android如何设置顶部状态栏颜色（主题） | DmrfCoder的个人主页</title>
+  <title>Android如何设置顶部状态栏颜色（主题） | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -149,7 +149,7 @@ blog.csdn.net/20180903171621608?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -371,12 +371,12 @@ blog.csdn.net/20180903171621608?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 <p>1:AndroidManifest.xml文件中的targetSdkVersion必须设置在 <strong>21</strong> 以上。</p>
 <p>2.parent主题必须是 <strong>Theme.AppCompat</strong> 开头，兼容包下的主题，所以必须一用 <strong>v7</strong> 包。</p>
 <h2 id="在顶部标题栏设置属性值达到风格一致的目的"><a href="#在顶部标题栏设置属性值达到风格一致的目的" class="headerlink" title="在顶部标题栏设置属性值达到风格一致的目的"></a>在顶部标题栏设置属性值达到风格一致的目的</h2><p>首先修改res/values-v19文件夹下的styles.xml文件内容如下（如果没有可以新建一个）：</p>
-<pre><code>&lt;style name= &quot;AppTheme&quot; parent=&quot;@style/BaseAppTheme&quot;&gt;
-&lt;item name=&quot;android:windowTranslucentStatus&quot;&gt;true&lt;/item&gt;
-&lt;/style&gt;
+<pre><code> &lt;style name= &quot;AppTheme&quot; parent=&quot;@style/BaseAppTheme&quot;&gt;
+ &lt;item name=&quot;android:windowTranslucentStatus&quot;&gt;true&lt;/item&gt;
+ &lt;/style&gt;
 </code></pre><p>然后设置顶部标题控件的两个属性：</p>
-<pre><code>android:background=&quot;@android:color/holo_blue_bright&quot;
-android:fitsSystemWindows=&quot;true&quot;
+<pre><code> android:background=&quot;@android:color/holo_blue_bright&quot;
+ android:fitsSystemWindows=&quot;true&quot;
 </code></pre><p>这时状态栏会保持与设置fitsSystemWindow属性的控件的背景颜色一致。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/Free-Thinker/p/5210663.html" target="_blank" rel="noopener"> Android状态栏颜色修改 </a></p>
 
@@ -498,7 +498,7 @@ android:fitsSystemWindows=&quot;true&quot;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -520,7 +520,7 @@ android:fitsSystemWindows=&quot;true&quot;
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -707,7 +707,7 @@ android:fitsSystemWindows=&quot;true&quot;
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

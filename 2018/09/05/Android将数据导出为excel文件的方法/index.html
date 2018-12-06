@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;apos;net.sourceforge.jexcelapi&amp;apos;, name: &amp;apos;jxl&amp;apos;, version: &amp;apos;2.6.12&amp;apos; 编写excel工具类package cn.xiaojii.cas">
+<meta name="description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;#39;net.sourceforge.jexcelapi&amp;#39;, name: &amp;#39;jxl&amp;#39;, version: &amp;#39;2.6.12&amp;#39; 编写excel工具类package cn.xiaojii.cashgift.">
 <meta name="keywords" content="Android,excel生成,数据导出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android将数据导出为excel文件的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android将数据导出为excel文件的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;apos;net.sourceforge.jexcelapi&amp;apos;, name: &amp;apos;jxl&amp;apos;, version: &amp;apos;2.6.12&amp;apos; 编写excel工具类package cn.xiaojii.cas">
+<meta property="og:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;#39;net.sourceforge.jexcelapi&amp;#39;, name: &amp;#39;jxl&amp;#39;, version: &amp;#39;2.6.12&amp;#39; 编写excel工具类package cn.xiaojii.cashgift.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:39:23.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android将数据导出为excel文件的方法">
-<meta name="twitter:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;apos;net.sourceforge.jexcelapi&amp;apos;, name: &amp;apos;jxl&amp;apos;, version: &amp;apos;2.6.12&amp;apos; 编写excel工具类package cn.xiaojii.cas">
+<meta name="twitter:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;#39;net.sourceforge.jexcelapi&amp;#39;, name: &amp;#39;jxl&amp;#39;, version: &amp;#39;2.6.12&amp;#39; 编写excel工具类package cn.xiaojii.cashgift.">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Android将数据导出为excel文件的方法 | DmrfCoder的个人主页</title>
+  <title>Android将数据导出为excel文件的方法 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -324,7 +324,7 @@
       
         <h2 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h2><p>将应用内的数据导出为excel表格。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="添加依赖包"><a href="#添加依赖包" class="headerlink" title="添加依赖包"></a>添加依赖包</h3><p>在app的build.gradle里面添加依赖包:</p>
-<pre><code>implementation group: &apos;net.sourceforge.jexcelapi&apos;, name: &apos;jxl&apos;, version: &apos;2.6.12&apos;
+<pre><code>implementation group: &#39;net.sourceforge.jexcelapi&#39;, name: &#39;jxl&#39;, version: &#39;2.6.12&#39;
 </code></pre><h3 id="编写excel工具类"><a href="#编写excel工具类" class="headerlink" title="编写excel工具类"></a>编写excel工具类</h3><pre><code>package cn.xiaojii.cashgift.util.io;
 
 
@@ -485,16 +485,16 @@ public class ExcelUtil {
         }
     }
 }
-</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>File file = new File(path);
-     //文件夹是否已经存在
-     if (!file.exists()) {
-         file.mkdirs();
-     }
+</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>   File file = new File(path);
+        //文件夹是否已经存在
+        if (!file.exists()) {
+            file.mkdirs();
+        }
 
-     String[] title = {&quot;姓名&quot;, &quot;项目&quot;, &quot;收支&quot;, &quot;日期&quot;, &quot;备注&quot;};
-     String fileName = file.toString() + &quot;/&quot; + excelname.xls;
-     ExcelUtil.initExcel(fileName, title);
-     ExcelUtil.writeObjListToExcel(list, fileName, (MainActivity) mainView);
+        String[] title = {&quot;姓名&quot;, &quot;项目&quot;, &quot;收支&quot;, &quot;日期&quot;, &quot;备注&quot;};
+        String fileName = file.toString() + &quot;/&quot; + excelname.xls;
+        ExcelUtil.initExcel(fileName, title);
+        ExcelUtil.writeObjListToExcel(list, fileName, (MainActivity) mainView);
 </code></pre>
       
     </div>
@@ -618,7 +618,7 @@ public class ExcelUtil {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -640,7 +640,7 @@ public class ExcelUtil {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -827,7 +827,7 @@ public class ExcelUtil {
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -129,7 +129,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
 
-  <title>使用python matplotlib实现动图绘制 | DmrfCoder的个人主页</title>
+  <title>使用python matplotlib实现动图绘制 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -148,7 +148,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -372,34 +372,34 @@ fig.figimage(bgimg,resize=True)#设置窗口自适应（背景图片）
 
 
 ax1 = fig.add_subplot(2, 2, 1)
-ax1.set_facecolor(&apos;none&apos;)#设置该子图背景透明，其他子图同理
+ax1.set_facecolor(&#39;none&#39;)#设置该子图背景透明，其他子图同理
 
 
 ax2 = fig.add_subplot(2, 2, 3)
-ax2.set_facecolor(&apos;none&apos;)
+ax2.set_facecolor(&#39;none&#39;)
 
 
 
 ax3 = fig.add_subplot(2, 2, 2)
-ax3.set_facecolor(&apos;none&apos;)
+ax3.set_facecolor(&#39;none&#39;)
 
 ax4 = fig.add_subplot(2, 2, 4)
-ax4.set_facecolor(&apos;none&apos;)
+ax4.set_facecolor(&#39;none&#39;)
 
 # 绘制初始图形
-bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
 
 
-bar2 = ax4.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+bar2 = ax4.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
 
 
 x = np.arange(0, 2200, 1)  # x轴
 
 ax1.set_ylim(-1, 1)#设置y轴范围为-1到1
-line1, = ax1.plot(x, gesture_i,color=&apos;coral&apos;)
+line1, = ax1.plot(x, gesture_i,color=&#39;coral&#39;)
 
 ax2.set_ylim(-1, 1)
-line2, = ax2.plot(x, gesture_q,color=&apos;coral&apos;)
+line2, = ax2.plot(x, gesture_q,color=&#39;coral&#39;)
 
 #初始化函数
 def init():
@@ -407,8 +407,8 @@ def init():
     # 改变y轴数据，x轴不需要改
     line1.set_ydata(gesture_i)
     line2.set_ydata(gesture_q)
-    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
-    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&apos;rgb&apos;, tick_label=name_list)
+    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
+    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&#39;rgb&#39;, tick_label=name_list)
 
     ax1.set_xlabel(&quot;I&quot;)
     ax2.set_xlabel(&quot;Q&quot;)
@@ -426,11 +426,11 @@ def animate(i):
     line1.set_ydata(gesture_i)
 
     ax3.cla()
-    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&apos;rgb&apos;, tick_label=name_list)
+    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
     ax3.legend()
 
     ax4.cla()
-    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&apos;rgb&apos;, tick_label=name_list)
+    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&#39;rgb&#39;, tick_label=name_list)
     ax4.legend
 
 
@@ -458,7 +458,7 @@ def draw_view():
     plt.show()
 
 
-if __name__ == &apos;__main__&apos;:
+if __name__ == &#39;__main__&#39;:
     draw_view()
 </code></pre><p>说明：实现动态数据可视化的思路是将绘制图像所用的数据写成全局变量，然后动态更新你的数据，UI层会一帧一帧地刷新图像，这样只要你的数据在变，图像就会是变化的，给一张效果图：<br><img src="https://img-
 blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
@@ -575,7 +575,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -597,7 +597,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -784,7 +784,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

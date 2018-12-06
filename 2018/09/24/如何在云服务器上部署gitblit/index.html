@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -135,7 +135,7 @@
 
 
 
-  <title>如何在云服务器上部署gitblit | DmrfCoder的个人主页</title>
+  <title>如何在云服务器上部署gitblit | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -154,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -364,13 +364,13 @@ server.httpsPort = localhost
 </ul>
 <p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fvkr6xk0jvj31340c8400.jpg" alt="image-20180924163912987"></p>
 <p>这个时候你可以把xxxx设置为上面的端口，比如22或者3389，但是这么做有个风险，就是有可能这几个端口被其他service占用了，所以最好在设置之前先查看一下对应端口是否被占用：</p>
-<pre><code>lsof -i :xxxx
+<pre><code>    lsof -i :xxxx
 </code></pre><p>如果什么都没有输出，就说明该端口未被占用（如果已经被占用可以杀死该端口对应的service，具体方法自行google，不建议这样）。</p>
 <p>修改完成后保存退出。</p>
 <h4 id="修改service-centos-sh"><a href="#修改service-centos-sh" class="headerlink" title=" 修改service-centos.sh "></a><a href="http://xn--service-centos-u82w550w.sh" target="_blank" rel="noopener"> 修改service-centos.sh </a></h4><p>在/opt/gitblib下：</p>
-<pre><code>sudo vim service-centos.sh
+<pre><code>    sudo vim service-centos.sh
 </code></pre><p>主要修改：</p>
-<pre><code>GITBLIT_HTTP_PORT = xxxx
+<pre><code>    GITBLIT_HTTP_PORT = xxxx
 </code></pre><p>这里的xxxx是你刚才在defaults.properties设置的httpPort的值。</p>
 <h3 id="启动GitBlit"><a href="#启动GitBlit" class="headerlink" title="启动GitBlit"></a>启动GitBlit</h3><p>这里提供有两种方法启动GitBlit：</p>
 <p>1:</p>
@@ -519,7 +519,7 @@ server.httpsPort = localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -541,7 +541,7 @@ server.httpsPort = localhost
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -728,7 +728,7 @@ server.httpsPort = localhost
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

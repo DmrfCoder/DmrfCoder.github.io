@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -142,7 +142,7 @@ blog.csdn.net/20180413161729327?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
 
-  <title>Ncnn使用详解(2)——Android端 | DmrfCoder的个人主页</title>
+  <title>Ncnn使用详解(2)——Android端 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -161,7 +161,7 @@ blog.csdn.net/20180413161729327?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -435,55 +435,55 @@ APP_PLATFORM := android-9
 
 }
 </code></pre><p>一共两个方法，一个是初始化，一个是执行预测，需要注意的是初始化方法调用的时候需要传入一个二进制文件路径的参数，大概思路是把bin和param文件拷贝到手机上然后让c代码读取，这里给出模板代码：</p>
-<pre><code>private void IniteNcnn() throws IOException {
+<pre><code> private void IniteNcnn() throws IOException {
 
 
-       ncnn = new Ncnn();//实例化上面的java接口类
+        ncnn = new Ncnn();//实例化上面的java接口类
 
 
-       try {
-           copyBigDataToSD(&quot;demo.bin&quot;);
+        try {
+            copyBigDataToSD(&quot;demo.bin&quot;);
 
-           copyBigDataToSD(&quot;demo.param&quot;);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       //模型初始化
-       File sdDir = Environment.getExternalStorageDirectory();//获取跟目录
-       String sdPath = sdDir.toString() + &quot;/gesturencnn/&quot;;
-       boolean b = ncnn.InitNcnn(sdPath);
-
-
-   }
+            copyBigDataToSD(&quot;demo.param&quot;);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //模型初始化
+        File sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+        String sdPath = sdDir.toString() + &quot;/gesturencnn/&quot;;
+        boolean b = ncnn.InitNcnn(sdPath);
 
 
-   private void copyBigDataToSD(String strOutFileName) throws IOException {
+    }
 
-       File sdDir = Environment.getExternalStorageDirectory();
-       File file = new File(sdDir.toString() + &quot;/demo/&quot;);
-       if (!file.exists()) {
-           file.mkdir();
-       }
 
-       String tmpFile = sdDir.toString() + &quot;/demo/&quot; + strOutFileName;
-       File f = new File(tmpFile);
-       if (f.exists()) {
-           return;
-       }
-       InputStream myInput;
-       java.io.OutputStream myOutput = new FileOutputStream(sdDir.toString() + &quot;/demo/&quot; + strOutFileName);
-       myInput = context.getAssets().open(strOutFileName);
-       byte[] buffer = new byte[1024];
-       int length = myInput.read(buffer);
-       while (length &gt; 0) {
-           myOutput.write(buffer, 0, length);
-           length = myInput.read(buffer);
-       }
-       myOutput.flush();
-       myInput.close();
-       myOutput.close();
+    private void copyBigDataToSD(String strOutFileName) throws IOException {
 
-   }
+        File sdDir = Environment.getExternalStorageDirectory();
+        File file = new File(sdDir.toString() + &quot;/demo/&quot;);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
+        String tmpFile = sdDir.toString() + &quot;/demo/&quot; + strOutFileName;
+        File f = new File(tmpFile);
+        if (f.exists()) {
+            return;
+        }
+        InputStream myInput;
+        java.io.OutputStream myOutput = new FileOutputStream(sdDir.toString() + &quot;/demo/&quot; + strOutFileName);
+        myInput = context.getAssets().open(strOutFileName);
+        byte[] buffer = new byte[1024];
+        int length = myInput.read(buffer);
+        while (length &gt; 0) {
+            myOutput.write(buffer, 0, length);
+            length = myInput.read(buffer);
+        }
+        myOutput.flush();
+        myInput.close();
+        myOutput.close();
+
+    }
 </code></pre><p>直接在你需要的地方调用IniteNcnn（）就可以了，需要注意的是要 <strong>进行内存卡读取权限的申请</strong> 哦</p>
 <p>然后将你上一篇教程写的demo.cpp放在jni目录下，对里面的代码进行必要的修改，主要需要实现模型的初始化和执行预测两个函数，初始化这里给出一个模板，至于执行预测的函数直接写一个对应函数然后调用你之前写好的c代码就可以了：</p>
 <ul>
@@ -657,7 +657,7 @@ Java_com_example_dmrf_JniClass_Ncnn_InitNcnn(JNIEnv *env, jobject instance,
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -679,7 +679,7 @@ Java_com_example_dmrf_JniClass_Ncnn_InitNcnn(JNIEnv *env, jobject instance,
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -866,7 +866,7 @@ Java_com_example_dmrf_JniClass_Ncnn_InitNcnn(JNIEnv *env, jobject instance,
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

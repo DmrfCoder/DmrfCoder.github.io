@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取： read(byte[]">
+<meta name="description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：      read(b">
 <meta name="keywords" content="Android,AudioRecord">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android中AudioRecord使用详解">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/02/26/android中AudioRecord使用详解/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取： read(byte[]">
+<meta property="og:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：      read(b">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:40:09.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android中AudioRecord使用详解">
-<meta name="twitter:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取： read(byte[]">
+<meta name="twitter:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：      read(b">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>android中AudioRecord使用详解 | DmrfCoder的个人主页</title>
+  <title>android中AudioRecord使用详解 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -324,9 +324,9 @@
       
         <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。</p>
 <h1 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h1><p>AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。<br>通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：</p>
-<pre><code>read(byte[], int, int)
-read(short[], int, int)
-read(ByteBuffer, int).
+<pre><code>     read(byte[], int, int)
+     read(short[], int, int)
+     read(ByteBuffer, int).
 </code></pre><p>无论使用哪种音频格式，使用AudioRecord是最方便的。</p>
 <p>在创建AudioRecord对象时，AudioRecord会初始化，并和音频缓冲区连接，用来缓冲新的音频数据。<br>根据构造时指定的缓冲区大小，来决定AudioRecord能够记录多长的数据。 从硬件设备读取的数据，应小于整个记录缓冲区。</p>
 <h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><strong>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</strong></p>
@@ -337,11 +337,11 @@ read(ByteBuffer, int).
 <h2 id="public-int-getChannelCount"><a href="#public-int-getChannelCount" class="headerlink" title="public int getChannelCount ()"></a>public int getChannelCount ()</h2><p>返回设置的频道数目。</p>
 <h2 id="public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><a href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig" class="headerlink" title="public static int getMinBufferSize (int sampleRateInHz, int channelConfig,"></a>public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</h2><p>int audioFormat)</p>
 <p>返回成功创建AudioRecord对象所需要的最小缓冲区大小。<br>注意：这个大小并不保证在负荷下的流畅录制，应根据预期的频率来选择更高的值，AudioRecord实例在推送新数据时使用此值。</p>
-<h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>sampleRateInHz      默认采样率，单位Hz。
+<h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>    sampleRateInHz      默认采样率，单位Hz。
 
-channelConfig           描述音频通道设置。
+    channelConfig           描述音频通道设置。
 
-audioFormat             音频数据保证支持此格式
+    audioFormat             音频数据保证支持此格式
 </code></pre><h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>如果硬件不支持录制参数，或输入了一个无效的参数，则返回ERROR_BAD_VALUE，如果硬件查询到输出属性没有实现，或最小缓冲区用byte表示，则返回ERROR。</p>
 <h2 id="public-int-getNotificationMarkerPosition"><a href="#public-int-getNotificationMarkerPosition" class="headerlink" title="public int getNotificationMarkerPosition ()"></a>public int getNotificationMarkerPosition ()</h2><p>返回通知，标记框架中的位置。</p>
 <h2 id="public-int-getPositionNotificationPeriod"><a href="#public-int-getPositionNotificationPeriod" class="headerlink" title="public int getPositionNotificationPeriod ()"></a>public int getPositionNotificationPeriod ()</h2><p>返回通知，更新框架中的时间位置。</p>
@@ -349,33 +349,33 @@ audioFormat             音频数据保证支持此格式
 <h2 id="public-int-getSampleRate"><a href="#public-int-getSampleRate" class="headerlink" title="public int getSampleRate ()"></a>public int getSampleRate ()</h2><p>返回设置的音频数据样本采样率，单位Hz。</p>
 <h2 id="public-int-getState"><a href="#public-int-getState" class="headerlink" title="public int getState ()"></a>public int getState ()</h2><p>返回AudioRecord实例的状态。 这点非常有用，用在AudioRecord 实例创建成功后，检查初始化属性。 它能肯定请求到了合适的硬件资源。</p>
 <h2 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h2><p>从音频硬件录制缓冲区读取数据。</p>
-<h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioData        写入的音频录制数据。
+<h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>        audioData        写入的音频录制数据。
 
-offsetInShorts           目标数组 audioData 的起始偏移量。
+        offsetInShorts           目标数组 audioData 的起始偏移量。
 
-sizeInShorts              请求读取的数据大小。
+        sizeInShorts              请求读取的数据大小。
 </code></pre><h3 id="返回值：-1"><a href="#返回值：-1" class="headerlink" title="返回值："></a>返回值：</h3><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>返回数值不会超过sizeInShorts。</p>
 <h2 id="public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><a href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes" class="headerlink" title="public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)"></a>public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据。</p>
-<h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioData        写入的音频录制数据。
+<h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>       audioData        写入的音频录制数据。
 
-offsetInBytes            audioData的起始偏移值，单位byte。
+       offsetInBytes            audioData的起始偏移值，单位byte。
 
-sizeInBytes                读取的最大字节数。
+       sizeInBytes                读取的最大字节数。
 </code></pre><h3 id="返回值：-2"><a href="#返回值：-2" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。</p>
 <h2 id="public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><a href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes" class="headerlink" title="public int read (ByteBuffer audioBuffer, int sizeInBytes)"></a>public int read (ByteBuffer audioBuffer, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据，直接复制到指定缓冲区。 如果audioBuffer不是直接的缓冲区，此方法总是返回0。</p>
-<h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioBuffer               存储写入音频录制数据的缓冲区。
+<h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>     audioBuffer               存储写入音频录制数据的缓冲区。
 
-sizeInBytes                请求的最大字节数。
+     sizeInBytes                请求的最大字节数。
 </code></pre><h3 id="返回值：-3"><a href="#返回值：-3" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。<br>public void release ()：释放本地AudioRecord资源。<br>对象不能经常使用此方法，而且在调用release()后，必须设置引用为null。</p>
 <h2 id="public-int-setNotificationMarkerPosition-int-markerInFrames"><a href="#public-int-setNotificationMarkerPosition-int-markerInFrames" class="headerlink" title="public int setNotificationMarkerPosition (int markerInFrames)"></a>public int setNotificationMarkerPosition (int markerInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置位置标记。</p>
-<h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>markerInFrames      在框架中快速标记位置。
+<h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>      markerInFrames      在框架中快速标记位置。
 </code></pre><h3 id="返回值：-4"><a href="#返回值：-4" class="headerlink" title="返回值："></a>返回值：</h3><p>返回错误或成功代码，请见SUCCESS、ERROR_BAD_VALUE、ERROR_INVALID_OPERATION。</p>
 <h2 id="public-int-setPositionNotificationPeriod-int-periodInFrames"><a href="#public-int-setPositionNotificationPeriod-int-periodInFrames" class="headerlink" title="public int setPositionNotificationPeriod (int periodInFrames)"></a>public int setPositionNotificationPeriod (int periodInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置时间标记。</p>
-<h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>markerInFrames      在框架中快速更新时间标记。
+<h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>       markerInFrames      在框架中快速更新时间标记。
 </code></pre><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回错误或成功代码</p>
 <h2 id="public-void-setRecordPositionUpdateListener"><a href="#public-void-setRecordPositionUpdateListener" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener, Handler handler)</p>
 <p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。 使用此方法来将Handler 和别的线程联系起来，来接收AudioRecord<br>事件，比创建AudioTrack 实例更好一些。</p>
-<h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>handler    用来接收事件通知消息。
+<h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>          handler    用来接收事件通知消息。
 </code></pre><h2 id="public-void-setRecordPositionUpdateListener-1"><a href="#public-void-setRecordPositionUpdateListener-1" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener)</p>
 <p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。</p>
 <h2 id="public-void-startRecording"><a href="#public-void-startRecording" class="headerlink" title="public void startRecording ()"></a>public void startRecording ()</h2><p>AudioRecord实例开始进行录制。</p>
@@ -503,7 +503,7 @@ sizeInBytes                请求的最大字节数。
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -525,7 +525,7 @@ sizeInBytes                请求的最大字节数。
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -712,7 +712,7 @@ sizeInBytes                请求的最大字节数。
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

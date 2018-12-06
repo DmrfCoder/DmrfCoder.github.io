@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 
 
 
-  <title>Android okhttp cookie持久化方法 | DmrfCoder的个人主页</title>
+  <title>Android okhttp cookie持久化方法 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -396,78 +396,78 @@
 <p>  public static final String HOST = “host”;<br>  public static final String NAME = “name”;<br>  public static final String DOMAIN = “domain”;<br>  public static final String COOKIE = “cookie”;</p>
 <p>  public String host;<br>  public String name;<br>  public String domain;<br>  private transient Cookie cookie;<br>  private transient Cookie clientCookie;</p>
 <p>  public SerializableCookie(String host, Cookie cookie) {</p>
-<pre><code>this.cookie = cookie;
-this.host = host;
-this.name = cookie.name();
-this.domain = cookie.domain();
+<pre><code>  this.cookie = cookie;
+  this.host = host;
+  this.name = cookie.name();
+  this.domain = cookie.domain();
 </code></pre><p>  }</p>
 <p>  public Cookie getCookie() {</p>
-<pre><code>Cookie bestCookie = cookie;
-if (clientCookie != null) {
-    bestCookie = clientCookie;
-}
-return bestCookie;
+<pre><code>  Cookie bestCookie = cookie;
+  if (clientCookie != null) {
+      bestCookie = clientCookie;
+  }
+  return bestCookie;
 </code></pre><p>  }</p>
 <p>  private void writeObject(ObjectOutputStream out) throws IOException {</p>
-<pre><code>out.defaultWriteObject();
-out.writeObject(cookie.name());
-out.writeObject(cookie.value());
-out.writeLong(cookie.expiresAt());
-out.writeObject(cookie.domain());
-out.writeObject(cookie.path());
-out.writeBoolean(cookie.secure());
-out.writeBoolean(cookie.httpOnly());
-out.writeBoolean(cookie.hostOnly());
-out.writeBoolean(cookie.persistent());
+<pre><code>  out.defaultWriteObject();
+  out.writeObject(cookie.name());
+  out.writeObject(cookie.value());
+  out.writeLong(cookie.expiresAt());
+  out.writeObject(cookie.domain());
+  out.writeObject(cookie.path());
+  out.writeBoolean(cookie.secure());
+  out.writeBoolean(cookie.httpOnly());
+  out.writeBoolean(cookie.hostOnly());
+  out.writeBoolean(cookie.persistent());
 </code></pre><p>  }</p>
 <p>  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {</p>
-<pre><code>in.defaultReadObject();
-String name = (String) in.readObject();
-String value = (String) in.readObject();
-long expiresAt = in.readLong();
-String domain = (String) in.readObject();
-String path = (String) in.readObject();
-boolean secure = in.readBoolean();
-boolean httpOnly = in.readBoolean();
-boolean hostOnly = in.readBoolean();
-boolean persistent = in.readBoolean();
-Cookie.Builder builder = new Cookie.Builder();
-builder = builder.name(name);
-builder = builder.value(value);
-builder = builder.expiresAt(expiresAt);
-builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);
-builder = builder.path(path);
-builder = secure ? builder.secure() : builder;
-builder = httpOnly ? builder.httpOnly() : builder;
-clientCookie = builder.build();
+<pre><code>  in.defaultReadObject();
+  String name = (String) in.readObject();
+  String value = (String) in.readObject();
+  long expiresAt = in.readLong();
+  String domain = (String) in.readObject();
+  String path = (String) in.readObject();
+  boolean secure = in.readBoolean();
+  boolean httpOnly = in.readBoolean();
+  boolean hostOnly = in.readBoolean();
+  boolean persistent = in.readBoolean();
+  Cookie.Builder builder = new Cookie.Builder();
+  builder = builder.name(name);
+  builder = builder.value(value);
+  builder = builder.expiresAt(expiresAt);
+  builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);
+  builder = builder.path(path);
+  builder = secure ? builder.secure() : builder;
+  builder = httpOnly ? builder.httpOnly() : builder;
+  clientCookie = builder.build();
 </code></pre><p>  }</p>
 <p>  public static SerializableCookie parseCursorToBean(Cursor cursor) {</p>
-<pre><code>String host = cursor.getString(cursor.getColumnIndex(HOST));
-byte[] cookieBytes = cursor.getBlob(cursor.getColumnIndex(COOKIE));
-Cookie cookie = bytesToCookie(cookieBytes);
-return new SerializableCookie(host, cookie);
+<pre><code>  String host = cursor.getString(cursor.getColumnIndex(HOST));
+  byte[] cookieBytes = cursor.getBlob(cursor.getColumnIndex(COOKIE));
+  Cookie cookie = bytesToCookie(cookieBytes);
+  return new SerializableCookie(host, cookie);
 </code></pre><p>  }</p>
 <p>  public static ContentValues getContentValues(SerializableCookie serializableCookie) {</p>
-<pre><code>ContentValues values = new ContentValues();
-values.put(SerializableCookie.HOST, serializableCookie.host);
-values.put(SerializableCookie.NAME, serializableCookie.name);
-values.put(SerializableCookie.DOMAIN, serializableCookie.domain);
-values.put(SerializableCookie.COOKIE, cookieToBytes(serializableCookie.host, serializableCookie.getCookie()));
-return values;
+<pre><code>  ContentValues values = new ContentValues();
+  values.put(SerializableCookie.HOST, serializableCookie.host);
+  values.put(SerializableCookie.NAME, serializableCookie.name);
+  values.put(SerializableCookie.DOMAIN, serializableCookie.domain);
+  values.put(SerializableCookie.COOKIE, cookieToBytes(serializableCookie.host, serializableCookie.getCookie()));
+  return values;
 </code></pre><p>  }</p>
 <p>  /**</p>
 <ul>
 <li>cookies 序列化成 string<br>*</li>
 <li>@param cookie 要序列化</li>
 <li><p>@return 序列化之后的string<br>*/<br>public static String encodeCookie(String host, Cookie cookie) {<br> if (cookie == null) {</p>
-<pre><code>return null;
+<pre><code> return null;
 </code></pre><p> }<br> byte[] cookieBytes = cookieToBytes(host, cookie);<br> return byteArrayToHexString(cookieBytes);<br>}</p>
 <p>public static byte[] cookieToBytes(String host, Cookie cookie) {<br> SerializableCookie serializableCookie = new SerializableCookie(host, cookie);<br> ByteArrayOutputStream os = new ByteArrayOutputStream();<br> try {</p>
-<pre><code>ObjectOutputStream outputStream = new ObjectOutputStream(os);
-outputStream.writeObject(serializableCookie);
+<pre><code> ObjectOutputStream outputStream = new ObjectOutputStream(os);
+ outputStream.writeObject(serializableCookie);
 </code></pre><p> } catch (IOException e) {</p>
-<pre><code>Log.e(&quot;cookieToBytes: &quot;, e.toString());
-return null;
+<pre><code> Log.e(&quot;cookieToBytes: &quot;, e.toString());
+ return null;
 </code></pre><p> }<br> return os.toByteArray();<br>}</p>
 <p>/**</p>
 </li>
@@ -475,39 +475,39 @@ return null;
 <li>@param cookieString cookies string</li>
 <li><p>@return cookie object<br>*/<br>public static Cookie decodeCookie(String cookieString) {<br> byte[] bytes = hexStringToByteArray(cookieString);<br> return bytesToCookie(bytes);<br>}</p>
 <p>public static Cookie bytesToCookie(byte[] bytes) {<br> ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);<br> Cookie cookie = null;<br> try {</p>
-<pre><code>ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-cookie = ((SerializableCookie) objectInputStream.readObject()).getCookie();
+<pre><code> ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+ cookie = ((SerializableCookie) objectInputStream.readObject()).getCookie();
 </code></pre><p> } catch (Exception e) {</p>
-<pre><code>Log.e(&quot;bytesToCookie: &quot;, e.toString());
+<pre><code> Log.e(&quot;bytesToCookie: &quot;, e.toString());
 </code></pre><p> }<br> return cookie;<br>}</p>
 <p>/**</p>
 </li>
 <li>二进制数组转十六进制字符串<br>*</li>
 <li>@param bytes byte array to be converted</li>
 <li><p>@return string containing hex values<br><em>/<br>private static String byteArrayToHexString(byte[] bytes) {<br> StringBuilder sb = new StringBuilder(bytes.length </em> 2);<br> for (byte element : bytes) {</p>
-<pre><code>int v = element &amp; 0xff;
-if (v &lt; 16) {
-    sb.append(&apos;0&apos;);
-}
-sb.append(Integer.toHexString(v));
+<pre><code> int v = element &amp; 0xff;
+ if (v &lt; 16) {
+     sb.append(&#39;0&#39;);
+ }
+ sb.append(Integer.toHexString(v));
 </code></pre><p> }<br> return sb.toString().toUpperCase(Locale.US);<br>}</p>
 <p>/**</p>
 </li>
 <li>十六进制字符串转二进制数组<br>*</li>
 <li>@param hexString string of hex-encoded values</li>
 <li><p>@return decoded byte array<br>*/<br>private static byte[] hexStringToByteArray(String hexString) {<br> int len = hexString.length();<br> byte[] data = new byte[len / 2];<br> for (int i = 0; i &lt; len; i += 2) {</p>
-<pre><code>data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) &lt;&lt; 4) + Character.digit(hexString.charAt(i + 1), 16));
+<pre><code> data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) &lt;&lt; 4) + Character.digit(hexString.charAt(i + 1), 16));
 </code></pre><p> }<br> return data;<br>}</p>
 <p>/**</p>
 </li>
 <li><p>host, name, domain 标识一个cookie是否唯一<br>*/<br>@Override<br>public boolean equals(Object o) {<br> if (this == o) {</p>
-<pre><code>return true;
+<pre><code> return true;
 </code></pre><p> }<br> if (o == null || getClass() != o.getClass()) {</p>
-<pre><code>return false;
+<pre><code> return false;
 </code></pre><p> }</p>
 <p> SerializableCookie that = (SerializableCookie) o;</p>
 <p> if (host != null ? !host.equals(that.host) : that.host != null) {</p>
-<pre><code>return false;
+<pre><code> return false;
 </code></pre><p> }<br> return (name != null ? name.equals(that.name) : that.name == null) &amp;&amp; (domain != null ? domain.equals(that.domain) : that.domain == null);<br>}</p>
 <p>@Override<br>public int hashCode() {<br> int result = host != null ? host.hashCode() : 0;<br> result = 31 <em> result + (name != null ? name.hashCode() : 0);<br> result = 31 </em> result + (domain != null ? domain.hashCode() : 0);<br> return result;<br>}<br>}</p>
 </li>
@@ -526,7 +526,7 @@ sb.append(Integer.toHexString(v));
 <li>@date 2018/8/28<br>*/</li>
 </ul>
 <p>public class SPCookieStore implements CookieJarImpl.CookieStore {</p>
-<p>  private static final String COOKIE_PREFS = “sp_cookie”;           //cookie使用prefs保存<br>  private static final String COOKIE_NAME_PREFIX = “cookie_”;         //cookie持久化的统一前缀</p>
+<p>  private static final String COOKIE<em>PREFS = “sp_cookie”;           //cookie使用prefs保存<br>  private static final String COOKIE_NAME_PREFIX = “cookie</em>“;         //cookie持久化的统一前缀</p>
 </li>
 </ul>
 <pre><code>  private final Map&lt;String, ConcurrentHashMap&lt;String, Cookie&gt;&gt; cookies;
@@ -720,7 +720,7 @@ sb.append(Integer.toHexString(v));
 <p>/**</p>
 <ul>
 <li>cookie管理工具类</li>
-<li><p>@author dmrfcoder<br>*/<br>public class CookieUtil {<br>/**</p>
+<li><p>@author dmrfcoder<br><em>/<br>public class CookieUtil {<br>/*</em></p>
 <ul>
 <li>获取指定URL对应的cookie<br>*</li>
 <li>@param baseUrl</li>
@@ -807,7 +807,7 @@ public class OkManager {
       return okManager;
   }
 }
-</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>private OkHttpClient okHttpClient = OkManager.getInstance().getClient();
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>    private OkHttpClient okHttpClient = OkManager.getInstance().getClient();
 </code></pre><p>然后就实现了cookie的持久化。</p>
 
       
@@ -922,7 +922,7 @@ public class OkManager {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -944,7 +944,7 @@ public class OkManager {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1131,7 +1131,7 @@ public class OkManager {
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

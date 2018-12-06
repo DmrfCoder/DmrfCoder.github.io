@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -152,7 +152,7 @@ blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
 
-  <title>爬取了3W+用户评价后发现用户眼中的坚果3是这样的 | DmrfCoder的个人主页</title>
+  <title>爬取了3W+用户评价后发现用户眼中的坚果3是这样的 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -171,7 +171,7 @@ blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -357,64 +357,64 @@ blog.csdn.net/20180427131809302?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 blog.csdn.net/20180427131818464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>进一步打开Response，看到网页返回的原始数据：<br><img src="https://img-
 blog.csdn.net/20180427131827248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>可以看到，网页返回的原始数据是用一个fetchJSON_comment98vv1587包裹着的json字符串，到这里，我们的思路就很清晰了：<br><strong>首先用URL和对应的Query String<br>Parameters模仿网页发送请求，收到的Response将会是一份由fetchJSON_comment98vv1587（）包裹着的包含json数据的String，我们用正则表达式将json数据提取出来，然后对json数据进行解析并获取想要字段的数据即可。</strong></p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先根据网页控制台的信息定义相关必要的变量：</p>
-<pre><code>url=&apos;https://club.jd.com/comment/productPageComments.action&apos;
+<pre><code>url=&#39;https://club.jd.com/comment/productPageComments.action&#39;
 
-QueryStringParameters={ &apos;callback&apos;:&apos;fetchJSON_comment98vv1587&apos;,
-       &apos;productId&apos;:&apos;7029545&apos;,
-       &apos;score&apos;:0,
-       &apos;sortType&apos;:5,
-       &apos;page&apos;:0,
-       &apos;pageSize&apos;:10,
-       &apos;isShadowSku&apos;:0,
-       &apos;fold&apos;:1 }
+QueryStringParameters={ &#39;callback&#39;:&#39;fetchJSON_comment98vv1587&#39;,
+       &#39;productId&#39;:&#39;7029545&#39;,
+       &#39;score&#39;:0,
+       &#39;sortType&#39;:5,
+       &#39;page&#39;:0,
+       &#39;pageSize&#39;:10,
+       &#39;isShadowSku&#39;:0,
+       &#39;fold&#39;:1 }
 </code></pre><p>需要注意的是这里的url并不是直接将控制台显示的url全部拿过来，而是只要其前一部分，因为如果用控制台上的url，则只能获取到当前页面的评论，我们想要获取全部的评论，所以必须动态变化url，这里我们将url分为两部分写，这样方便后面调整page以获取不同页面的评论。<br>然后实现爬取数据的逻辑代码：</p>
 <pre><code>hotcomments = []
 while(True):
     t=s.get(url,params=data).text #模拟网页发送请求并接收返回数据
 
     try:
-        t=re.search(r&apos;(?&lt;=fetchJSON_comment98vv1587\().*(?=\);)&apos;,t).group(0)#使用正则表达式匹配‘fetchJSON_comment98vv1587’
+        t=re.search(r&#39;(?&lt;=fetchJSON_comment98vv1587\().*(?=\);)&#39;,t).group(0)#使用正则表达式匹配‘fetchJSON_comment98vv1587’
     except Exception as e:
         break
     j=json.loads(t) #解析json
 
-    commentSummary=j[&apos;comments&apos;]
+    commentSummary=j[&#39;comments&#39;]
     flag=0
     for comment in commentSummary:
         flag=1
         num=num+1
         item = {
-            &apos;content&apos;: comment[&apos;content&apos;] ,
-            &apos;nickname&apos;: comment[&apos;nickname&apos;],
-            &apos;score&apos;: comment[&apos;score&apos;],
-            &apos;creationTime&apos;:comment[&apos;creationTime&apos;],
-            &apos;productColor&apos;:comment[&apos;productColor&apos;]
+            &#39;content&#39;: comment[&#39;content&#39;] ,
+            &#39;nickname&#39;: comment[&#39;nickname&#39;],
+            &#39;score&#39;: comment[&#39;score&#39;],
+            &#39;creationTime&#39;:comment[&#39;creationTime&#39;],
+            &#39;productColor&#39;:comment[&#39;productColor&#39;]
         }
         hotcomments.append(item)
     if flag==0:
         break
-    data[&apos;page&apos;]+=1  #改变page字段，下一次循环爬取下一页评论
+    data[&#39;page&#39;]+=1  #改变page字段，下一次循环爬取下一页评论
 </code></pre><p>当以上当以上代码执行完成之后就可以将所有评论信息放在 hotcomments中，然后就可以从中拿取数据进行分析了。</p>
-<h2 id="使用Bar进行各项指标柱状图可视化"><a href="#使用Bar进行各项指标柱状图可视化" class="headerlink" title="使用Bar进行各项指标柱状图可视化"></a>使用Bar进行各项指标柱状图可视化</h2><h3 id="三种不同颜色评论数量所占百分比"><a href="#三种不同颜色评论数量所占百分比" class="headerlink" title="三种不同颜色评论数量所占百分比"></a>三种不同颜色评论数量所占百分比</h3><pre><code>a= productColor.count(u&apos;碳黑色&apos;)
-b=productColor.count(u&apos;酒红色&apos;)
-c=productColor.count(u&apos;浅金色&apos;)
+<h2 id="使用Bar进行各项指标柱状图可视化"><a href="#使用Bar进行各项指标柱状图可视化" class="headerlink" title="使用Bar进行各项指标柱状图可视化"></a>使用Bar进行各项指标柱状图可视化</h2><h3 id="三种不同颜色评论数量所占百分比"><a href="#三种不同颜色评论数量所占百分比" class="headerlink" title="三种不同颜色评论数量所占百分比"></a>三种不同颜色评论数量所占百分比</h3><pre><code>a= productColor.count(u&#39;碳黑色&#39;)
+b=productColor.count(u&#39;酒红色&#39;)
+c=productColor.count(u&#39;浅金色&#39;)
 d=float(a+b+c)
 a=float(a/d)
 b=float(b/d)
 c=float(c/d)
 
 ds = tablib.Dataset()
-ds.headers = [&apos;颜色&apos;, &apos;评论数&apos;]
+ds.headers = [&#39;颜色&#39;, &#39;评论数&#39;]
 
-ds.append([&apos;碳黑色&apos;,a])
-ds.append([&apos;酒红色&apos;, b])
-ds.append([&apos;浅金色&apos;, c])
+ds.append([&#39;碳黑色&#39;,a])
+ds.append([&#39;酒红色&#39;, b])
+ds.append([&#39;浅金色&#39;, c])
 
-bar = Bar(&apos;颜色&apos;)
-bar.add(&apos;评论数量(%)&apos;, ds.get_col(0), ds.get_col(1))
-bar.render(&apos;color_bar.html&apos;)
+bar = Bar(&#39;颜色&#39;)
+bar.add(&#39;评论数量(%)&#39;, ds.get_col(0), ds.get_col(1))
+bar.render(&#39;color_bar.html&#39;)
 </code></pre><h3 id="从9号到26号单天评价数量所占百分比"><a href="#从9号到26号单天评价数量所占百分比" class="headerlink" title="从9号到26号单天评价数量所占百分比"></a>从9号到26号单天评价数量所占百分比</h3><pre><code>ds2 = tablib.Dataset()
-ds2.headers = [&apos;评价时间&apos;, &apos;评论数&apos;]
+ds2.headers = [&#39;评价时间&#39;, &#39;评论数&#39;]
 f=0.0
 for i in range(9,27):
     f=f+creationTime.count(i)
@@ -422,11 +422,11 @@ for i in range(9,27):
 for i in range(9,27):
     ds2.append([str(i), creationTime.count(i)/f])
 
-bar2 = Bar(&apos;评价时间（购买时间）&apos;)
-bar2.add(&apos;评论数量(%)&apos;, ds2.get_col(0), ds2.get_col(1))
-bar2.render(&apos;time_bar.html&apos;)
+bar2 = Bar(&#39;评价时间（购买时间）&#39;)
+bar2.add(&#39;评论数量(%)&#39;, ds2.get_col(0), ds2.get_col(1))
+bar2.render(&#39;time_bar.html&#39;)
 </code></pre><h3 id="不同评分所占百分比"><a href="#不同评分所占百分比" class="headerlink" title="不同评分所占百分比"></a>不同评分所占百分比</h3><pre><code>ds3 = tablib.Dataset()
-ds3.headers = [&apos;评分&apos;, &apos;评论数&apos;]
+ds3.headers = [&#39;评分&#39;, &#39;评论数&#39;]
 e=0.0
 for i in range(0,6):
     j=5-i
@@ -437,15 +437,15 @@ for i in range(0,6):
     j=5-i
     ds3.append([str(j), score.count(j)/e])
 
-bar3 = Bar(&apos;评分&apos;)
-bar3.add(&apos;评论数量(%)&apos;, ds3.get_col(0), ds3.get_col(1))
-bar3.render(&apos;score_bar.html&apos;)
+bar3 = Bar(&#39;评分&#39;)
+bar3.add(&#39;评论数量(%)&#39;, ds3.get_col(0), ds3.get_col(1))
+bar3.render(&#39;score_bar.html&#39;)
 </code></pre><h2 id="使用WordCloud进行评论词云可视化"><a href="#使用WordCloud进行评论词云可视化" class="headerlink" title="使用WordCloud进行评论词云可视化"></a>使用WordCloud进行评论词云可视化</h2><pre><code>content_text = &quot; &quot;.join(content_list)
-bg_pic = imread(&apos;../WoMen_EasonChen/eason2.png&apos;)
-wordcloud = WordCloud(mask=bg_pic,font_path=&apos;../Font/SourceHanSansSC-Heavy.otf&apos;,background_color=&apos;white&apos;,max_words=200).generate(content_text)
+bg_pic = imread(&#39;../WoMen_EasonChen/eason2.png&#39;)
+wordcloud = WordCloud(mask=bg_pic,font_path=&#39;../Font/SourceHanSansSC-Heavy.otf&#39;,background_color=&#39;white&#39;,max_words=200).generate(content_text)
 plt.figure()
-plt.imshow(wordcloud,interpolation=&apos;bilinear&apos;)
-plt.axis(&apos;off&apos;)
+plt.imshow(wordcloud,interpolation=&#39;bilinear&#39;)
+plt.axis(&#39;off&#39;)
 plt.show()
 </code></pre><h2 id="可视化结果"><a href="#可视化结果" class="headerlink" title="可视化结果"></a>可视化结果</h2><p><img src="https://img-
 blog.csdn.net/20180427131847405?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>从图中可以看出，大部分用户比较喜欢碳黑色（74.38%），购买浅金色的用户最少，约占5%<br><img src="https://img-
@@ -580,7 +580,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -602,7 +602,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -789,7 +789,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

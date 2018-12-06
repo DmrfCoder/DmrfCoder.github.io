@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -121,7 +121,7 @@
 
 
 
-  <title>DmrfCoder的个人主页</title>
+  <title>DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -215,180 +215,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/03/Android添加listview item左滑事件的方法（仿QQ实现左滑弹出删除menu）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/Android添加listview item左滑事件的方法（仿QQ实现左滑弹出删除menu）/" itemprop="url">Android添加listview item左滑事件的方法（仿QQ实现左滑弹出删除menu）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T17:28:32+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在使用 listview时经常会遇到左滑弹出删除或者对item进行其他操作的需求，就是下图中红色圈圈的部分：<br><img src="https://img-
-blog.csdn.net/20180903172749216?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<p>本文本着避免重造轮子的原则使用这个 <a href="https://github.com/baoyongzhang/SwipeMenuListView" target="_blank" rel="noopener"> 开源库 </a><br>，具体用法；</p>
-<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><pre><code>dependencies {
-    compile &apos;com.baoyz.swipemenulistview:library:1.3.0&apos;
-}
-</code></pre><h2 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h2><pre><code>SwipeMenuCreator creater = new SwipeMenuCreator() {
-            @Override
-            public void create(SwipeMenu menu) {
-
-                // create置顶item
-                SwipeMenuItem item1 = new SwipeMenuItem(getActivity());
-                // set item background
-                item1.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
-                // set item width
-                item1.setWidth(dp2px(90));
-                // set item title
-                item1.setTitle(&quot;删除&quot;);
-                // set item title fontsize
-                item1.setTitleSize(18);
-                // set item title font color
-                item1.setTitleColor(Color.WHITE);
-                // add to menu
-                menu.addMenuItem(item1);
-
-            }
-        };
-listview.setMenuCreator(creater);
-</code></pre><p>添加点击事件：</p>
-<pre><code>listview.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
-                switch (index) {
-                    case 0:
-                        new AlertDialog(getActivity())
-                                .setTitle(&quot;删除亲友&quot;)
-                                .setMessage(&quot;将彻底删除该亲友的所有条目，确认删除？&quot;)
-                                .setLeftButton(&quot;取消&quot;, null)
-                                .setRightButton(&quot;确定&quot;, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        //删除的逻辑
-                                    }
-                                })
-                                .show();
-
-
-                        break;
-
-                    default:
-                        break;
-                }
-                return false;
-            }
-        });
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -482,7 +308,7 @@ listview.setMenuCreator(creater);
 </code></pre><ul>
 <li>报错： </li>
 </ul>
-<pre><code>java.lang.RuntimeException: Can&apos;t create handler inside thread that has not called Looper.prepare()
+<pre><code>java.lang.RuntimeException: Can&#39;t create handler inside thread that has not called Looper.prepare()
 </code></pre><ul>
 <li>解决方案： </li>
 </ul>
@@ -719,78 +545,78 @@ toast.show();
 <p>  public static final String HOST = “host”;<br>  public static final String NAME = “name”;<br>  public static final String DOMAIN = “domain”;<br>  public static final String COOKIE = “cookie”;</p>
 <p>  public String host;<br>  public String name;<br>  public String domain;<br>  private transient Cookie cookie;<br>  private transient Cookie clientCookie;</p>
 <p>  public SerializableCookie(String host, Cookie cookie) {</p>
-<pre><code>this.cookie = cookie;
-this.host = host;
-this.name = cookie.name();
-this.domain = cookie.domain();
+<pre><code>  this.cookie = cookie;
+  this.host = host;
+  this.name = cookie.name();
+  this.domain = cookie.domain();
 </code></pre><p>  }</p>
 <p>  public Cookie getCookie() {</p>
-<pre><code>Cookie bestCookie = cookie;
-if (clientCookie != null) {
-    bestCookie = clientCookie;
-}
-return bestCookie;
+<pre><code>  Cookie bestCookie = cookie;
+  if (clientCookie != null) {
+      bestCookie = clientCookie;
+  }
+  return bestCookie;
 </code></pre><p>  }</p>
 <p>  private void writeObject(ObjectOutputStream out) throws IOException {</p>
-<pre><code>out.defaultWriteObject();
-out.writeObject(cookie.name());
-out.writeObject(cookie.value());
-out.writeLong(cookie.expiresAt());
-out.writeObject(cookie.domain());
-out.writeObject(cookie.path());
-out.writeBoolean(cookie.secure());
-out.writeBoolean(cookie.httpOnly());
-out.writeBoolean(cookie.hostOnly());
-out.writeBoolean(cookie.persistent());
+<pre><code>  out.defaultWriteObject();
+  out.writeObject(cookie.name());
+  out.writeObject(cookie.value());
+  out.writeLong(cookie.expiresAt());
+  out.writeObject(cookie.domain());
+  out.writeObject(cookie.path());
+  out.writeBoolean(cookie.secure());
+  out.writeBoolean(cookie.httpOnly());
+  out.writeBoolean(cookie.hostOnly());
+  out.writeBoolean(cookie.persistent());
 </code></pre><p>  }</p>
 <p>  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {</p>
-<pre><code>in.defaultReadObject();
-String name = (String) in.readObject();
-String value = (String) in.readObject();
-long expiresAt = in.readLong();
-String domain = (String) in.readObject();
-String path = (String) in.readObject();
-boolean secure = in.readBoolean();
-boolean httpOnly = in.readBoolean();
-boolean hostOnly = in.readBoolean();
-boolean persistent = in.readBoolean();
-Cookie.Builder builder = new Cookie.Builder();
-builder = builder.name(name);
-builder = builder.value(value);
-builder = builder.expiresAt(expiresAt);
-builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);
-builder = builder.path(path);
-builder = secure ? builder.secure() : builder;
-builder = httpOnly ? builder.httpOnly() : builder;
-clientCookie = builder.build();
+<pre><code>  in.defaultReadObject();
+  String name = (String) in.readObject();
+  String value = (String) in.readObject();
+  long expiresAt = in.readLong();
+  String domain = (String) in.readObject();
+  String path = (String) in.readObject();
+  boolean secure = in.readBoolean();
+  boolean httpOnly = in.readBoolean();
+  boolean hostOnly = in.readBoolean();
+  boolean persistent = in.readBoolean();
+  Cookie.Builder builder = new Cookie.Builder();
+  builder = builder.name(name);
+  builder = builder.value(value);
+  builder = builder.expiresAt(expiresAt);
+  builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);
+  builder = builder.path(path);
+  builder = secure ? builder.secure() : builder;
+  builder = httpOnly ? builder.httpOnly() : builder;
+  clientCookie = builder.build();
 </code></pre><p>  }</p>
 <p>  public static SerializableCookie parseCursorToBean(Cursor cursor) {</p>
-<pre><code>String host = cursor.getString(cursor.getColumnIndex(HOST));
-byte[] cookieBytes = cursor.getBlob(cursor.getColumnIndex(COOKIE));
-Cookie cookie = bytesToCookie(cookieBytes);
-return new SerializableCookie(host, cookie);
+<pre><code>  String host = cursor.getString(cursor.getColumnIndex(HOST));
+  byte[] cookieBytes = cursor.getBlob(cursor.getColumnIndex(COOKIE));
+  Cookie cookie = bytesToCookie(cookieBytes);
+  return new SerializableCookie(host, cookie);
 </code></pre><p>  }</p>
 <p>  public static ContentValues getContentValues(SerializableCookie serializableCookie) {</p>
-<pre><code>ContentValues values = new ContentValues();
-values.put(SerializableCookie.HOST, serializableCookie.host);
-values.put(SerializableCookie.NAME, serializableCookie.name);
-values.put(SerializableCookie.DOMAIN, serializableCookie.domain);
-values.put(SerializableCookie.COOKIE, cookieToBytes(serializableCookie.host, serializableCookie.getCookie()));
-return values;
+<pre><code>  ContentValues values = new ContentValues();
+  values.put(SerializableCookie.HOST, serializableCookie.host);
+  values.put(SerializableCookie.NAME, serializableCookie.name);
+  values.put(SerializableCookie.DOMAIN, serializableCookie.domain);
+  values.put(SerializableCookie.COOKIE, cookieToBytes(serializableCookie.host, serializableCookie.getCookie()));
+  return values;
 </code></pre><p>  }</p>
 <p>  /**</p>
 <ul>
 <li>cookies 序列化成 string<br>*</li>
 <li>@param cookie 要序列化</li>
 <li><p>@return 序列化之后的string<br>*/<br>public static String encodeCookie(String host, Cookie cookie) {<br> if (cookie == null) {</p>
-<pre><code>return null;
+<pre><code> return null;
 </code></pre><p> }<br> byte[] cookieBytes = cookieToBytes(host, cookie);<br> return byteArrayToHexString(cookieBytes);<br>}</p>
 <p>public static byte[] cookieToBytes(String host, Cookie cookie) {<br> SerializableCookie serializableCookie = new SerializableCookie(host, cookie);<br> ByteArrayOutputStream os = new ByteArrayOutputStream();<br> try {</p>
-<pre><code>ObjectOutputStream outputStream = new ObjectOutputStream(os);
-outputStream.writeObject(serializableCookie);
+<pre><code> ObjectOutputStream outputStream = new ObjectOutputStream(os);
+ outputStream.writeObject(serializableCookie);
 </code></pre><p> } catch (IOException e) {</p>
-<pre><code>Log.e(&quot;cookieToBytes: &quot;, e.toString());
-return null;
+<pre><code> Log.e(&quot;cookieToBytes: &quot;, e.toString());
+ return null;
 </code></pre><p> }<br> return os.toByteArray();<br>}</p>
 <p>/**</p>
 </li>
@@ -798,39 +624,39 @@ return null;
 <li>@param cookieString cookies string</li>
 <li><p>@return cookie object<br>*/<br>public static Cookie decodeCookie(String cookieString) {<br> byte[] bytes = hexStringToByteArray(cookieString);<br> return bytesToCookie(bytes);<br>}</p>
 <p>public static Cookie bytesToCookie(byte[] bytes) {<br> ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);<br> Cookie cookie = null;<br> try {</p>
-<pre><code>ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-cookie = ((SerializableCookie) objectInputStream.readObject()).getCookie();
+<pre><code> ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+ cookie = ((SerializableCookie) objectInputStream.readObject()).getCookie();
 </code></pre><p> } catch (Exception e) {</p>
-<pre><code>Log.e(&quot;bytesToCookie: &quot;, e.toString());
+<pre><code> Log.e(&quot;bytesToCookie: &quot;, e.toString());
 </code></pre><p> }<br> return cookie;<br>}</p>
 <p>/**</p>
 </li>
 <li>二进制数组转十六进制字符串<br>*</li>
 <li>@param bytes byte array to be converted</li>
 <li><p>@return string containing hex values<br><em>/<br>private static String byteArrayToHexString(byte[] bytes) {<br> StringBuilder sb = new StringBuilder(bytes.length </em> 2);<br> for (byte element : bytes) {</p>
-<pre><code>int v = element &amp; 0xff;
-if (v &lt; 16) {
-    sb.append(&apos;0&apos;);
-}
-sb.append(Integer.toHexString(v));
+<pre><code> int v = element &amp; 0xff;
+ if (v &lt; 16) {
+     sb.append(&#39;0&#39;);
+ }
+ sb.append(Integer.toHexString(v));
 </code></pre><p> }<br> return sb.toString().toUpperCase(Locale.US);<br>}</p>
 <p>/**</p>
 </li>
 <li>十六进制字符串转二进制数组<br>*</li>
 <li>@param hexString string of hex-encoded values</li>
 <li><p>@return decoded byte array<br>*/<br>private static byte[] hexStringToByteArray(String hexString) {<br> int len = hexString.length();<br> byte[] data = new byte[len / 2];<br> for (int i = 0; i &lt; len; i += 2) {</p>
-<pre><code>data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) &lt;&lt; 4) + Character.digit(hexString.charAt(i + 1), 16));
+<pre><code> data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) &lt;&lt; 4) + Character.digit(hexString.charAt(i + 1), 16));
 </code></pre><p> }<br> return data;<br>}</p>
 <p>/**</p>
 </li>
 <li><p>host, name, domain 标识一个cookie是否唯一<br>*/<br>@Override<br>public boolean equals(Object o) {<br> if (this == o) {</p>
-<pre><code>return true;
+<pre><code> return true;
 </code></pre><p> }<br> if (o == null || getClass() != o.getClass()) {</p>
-<pre><code>return false;
+<pre><code> return false;
 </code></pre><p> }</p>
 <p> SerializableCookie that = (SerializableCookie) o;</p>
 <p> if (host != null ? !host.equals(that.host) : that.host != null) {</p>
-<pre><code>return false;
+<pre><code> return false;
 </code></pre><p> }<br> return (name != null ? name.equals(that.name) : that.name == null) &amp;&amp; (domain != null ? domain.equals(that.domain) : that.domain == null);<br>}</p>
 <p>@Override<br>public int hashCode() {<br> int result = host != null ? host.hashCode() : 0;<br> result = 31 <em> result + (name != null ? name.hashCode() : 0);<br> result = 31 </em> result + (domain != null ? domain.hashCode() : 0);<br> return result;<br>}<br>}</p>
 </li>
@@ -849,7 +675,7 @@ sb.append(Integer.toHexString(v));
 <li>@date 2018/8/28<br>*/</li>
 </ul>
 <p>public class SPCookieStore implements CookieJarImpl.CookieStore {</p>
-<p>  private static final String COOKIE_PREFS = “sp_cookie”;           //cookie使用prefs保存<br>  private static final String COOKIE_NAME_PREFIX = “cookie_”;         //cookie持久化的统一前缀</p>
+<p>  private static final String COOKIE<em>PREFS = “sp_cookie”;           //cookie使用prefs保存<br>  private static final String COOKIE_NAME_PREFIX = “cookie</em>“;         //cookie持久化的统一前缀</p>
 </li>
 </ul>
 <pre><code>  private final Map&lt;String, ConcurrentHashMap&lt;String, Cookie&gt;&gt; cookies;
@@ -1043,7 +869,7 @@ sb.append(Integer.toHexString(v));
 <p>/**</p>
 <ul>
 <li>cookie管理工具类</li>
-<li><p>@author dmrfcoder<br>*/<br>public class CookieUtil {<br>/**</p>
+<li><p>@author dmrfcoder<br><em>/<br>public class CookieUtil {<br>/*</em></p>
 <ul>
 <li>获取指定URL对应的cookie<br>*</li>
 <li>@param baseUrl</li>
@@ -1130,7 +956,7 @@ public class OkManager {
       return okManager;
   }
 }
-</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>private OkHttpClient okHttpClient = OkManager.getInstance().getClient();
+</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>    private OkHttpClient okHttpClient = OkManager.getInstance().getClient();
 </code></pre><p>然后就实现了cookie的持久化。</p>
 
           
@@ -1318,12 +1144,12 @@ blog.csdn.net/20180903171621608?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 <p>1:AndroidManifest.xml文件中的targetSdkVersion必须设置在 <strong>21</strong> 以上。</p>
 <p>2.parent主题必须是 <strong>Theme.AppCompat</strong> 开头，兼容包下的主题，所以必须一用 <strong>v7</strong> 包。</p>
 <h2 id="在顶部标题栏设置属性值达到风格一致的目的"><a href="#在顶部标题栏设置属性值达到风格一致的目的" class="headerlink" title="在顶部标题栏设置属性值达到风格一致的目的"></a>在顶部标题栏设置属性值达到风格一致的目的</h2><p>首先修改res/values-v19文件夹下的styles.xml文件内容如下（如果没有可以新建一个）：</p>
-<pre><code>&lt;style name= &quot;AppTheme&quot; parent=&quot;@style/BaseAppTheme&quot;&gt;
-&lt;item name=&quot;android:windowTranslucentStatus&quot;&gt;true&lt;/item&gt;
-&lt;/style&gt;
+<pre><code> &lt;style name= &quot;AppTheme&quot; parent=&quot;@style/BaseAppTheme&quot;&gt;
+ &lt;item name=&quot;android:windowTranslucentStatus&quot;&gt;true&lt;/item&gt;
+ &lt;/style&gt;
 </code></pre><p>然后设置顶部标题控件的两个属性：</p>
-<pre><code>android:background=&quot;@android:color/holo_blue_bright&quot;
-android:fitsSystemWindows=&quot;true&quot;
+<pre><code> android:background=&quot;@android:color/holo_blue_bright&quot;
+ android:fitsSystemWindows=&quot;true&quot;
 </code></pre><p>这时状态栏会保持与设置fitsSystemWindow属性的控件的背景颜色一致。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/Free-Thinker/p/5210663.html" target="_blank" rel="noopener"> Android状态栏颜色修改 </a></p>
 
@@ -1446,78 +1272,78 @@ android:fitsSystemWindows=&quot;true&quot;
         
           
             <p>直接贴代码：</p>
-<pre><code>@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-   public static String getpath(Context context, Uri uri){
-       if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-           if (DocumentsContract.isDocumentUri(context, uri)) {
-               if (isExternalStorageDocument(uri)) {
-                   // ExternalStorageProvider
-                   final String docId = DocumentsContract.getDocumentId(uri);
-                   final String[] split = docId.split(&quot;:&quot;);
-                   final String type = split[0];
-                   if (&quot;primary&quot;.equalsIgnoreCase(type)) {
-                       String path = Environment.getExternalStorageDirectory() + &quot;/&quot; + split[1];
-                       return path;
-                   }
-               } else if (isDownloadsDocument(uri)) {
-                   // DownloadsProvider
-                   final String id = DocumentsContract.getDocumentId(uri);
-                   final Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;),
-                           Long.valueOf(id));
-                   String path = getDataColumn(context, contentUri, null, null);
-                   return path;
-               } else if (isMediaDocument(uri)) {
-                   // MediaProvider
-                   final String docId = DocumentsContract.getDocumentId(uri);
-                   final String[] split = docId.split(&quot;:&quot;);
-                   final String type = split[0];
-                   Uri contentUri = null;
-                   if (&quot;image&quot;.equals(type)) {
-                       contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                   } else if (&quot;video&quot;.equals(type)) {
-                       contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                   } else if (&quot;audio&quot;.equals(type)) {
-                       contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                   }
-                   final String selection = &quot;_id=?&quot;;
-                   final String[] selectionArgs = new String[]{split[1]};
-                   String path = getDataColumn(context, contentUri, selection, selectionArgs);
-                   return path;
-               }
-           }
-       }
-       return null;
-   }
+<pre><code> @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static String getpath(Context context, Uri uri){
+        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            if (DocumentsContract.isDocumentUri(context, uri)) {
+                if (isExternalStorageDocument(uri)) {
+                    // ExternalStorageProvider
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(&quot;:&quot;);
+                    final String type = split[0];
+                    if (&quot;primary&quot;.equalsIgnoreCase(type)) {
+                        String path = Environment.getExternalStorageDirectory() + &quot;/&quot; + split[1];
+                        return path;
+                    }
+                } else if (isDownloadsDocument(uri)) {
+                    // DownloadsProvider
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;),
+                            Long.valueOf(id));
+                    String path = getDataColumn(context, contentUri, null, null);
+                    return path;
+                } else if (isMediaDocument(uri)) {
+                    // MediaProvider
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(&quot;:&quot;);
+                    final String type = split[0];
+                    Uri contentUri = null;
+                    if (&quot;image&quot;.equals(type)) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                    } else if (&quot;video&quot;.equals(type)) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    } else if (&quot;audio&quot;.equals(type)) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                    }
+                    final String selection = &quot;_id=?&quot;;
+                    final String[] selectionArgs = new String[]{split[1]};
+                    String path = getDataColumn(context, contentUri, selection, selectionArgs);
+                    return path;
+                }
+            }
+        }
+        return null;
+    }
 
 
-   private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-       Cursor cursor = null;
-       final String column = &quot;_data&quot;;
-       final String[] projection = {column};
-       try {
-           cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-           if (cursor != null &amp;&amp; cursor.moveToFirst()) {
-               final int column_index = cursor.getColumnIndexOrThrow(column);
-               return cursor.getString(column_index);
-           }
-       } finally {
-           if (cursor != null)
-               cursor.close();
-       }
-       return null;
-   }
+    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = &quot;_data&quot;;
+        final String[] projection = {column};
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            if (cursor != null &amp;&amp; cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
 
-   private static boolean isExternalStorageDocument(Uri uri) {
-       return &quot;com.android.externalstorage.documents&quot;.equals(uri.getAuthority());
-   }
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return &quot;com.android.externalstorage.documents&quot;.equals(uri.getAuthority());
+    }
 
-   private static boolean isDownloadsDocument(Uri uri) {
-       return &quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority());
-   }
+    private static boolean isDownloadsDocument(Uri uri) {
+        return &quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority());
+    }
 
-   private static boolean isMediaDocument(Uri uri) {
-       return &quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority());
-   }
+    private static boolean isMediaDocument(Uri uri) {
+        return &quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority());
+    }
 </code></pre>
           
         
@@ -1641,31 +1467,31 @@ android:fitsSystemWindows=&quot;true&quot;
 <p>AES 与 DES<br>一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反馈模式（CFB）和输出反馈模式（OFB）。关于加密模式的介绍，推荐这篇文章：<br><a href="https://blog.poxiao.me/p/advanced-
 encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高级加密标准AES的工作模式（ECB、CBC、CFB、OFB） </a></p>
 <p>直接给代码：</p>
-<h2 id="加密-byte级别"><a href="#加密-byte级别" class="headerlink" title="加密(byte级别)"></a>加密(byte级别)</h2><pre><code>   /* 加密使用的 key */
-   private static final String AES_KEY = &quot;KUbHwTqBy6TBQ2gN&quot;;
-   /* 加密使用的 IV */
-   private static final String AES_IV = &quot;pIbF6GR3XEN1PG05&quot;;
+<h2 id="加密-byte级别"><a href="#加密-byte级别" class="headerlink" title="加密(byte级别)"></a>加密(byte级别)</h2><pre><code>    /* 加密使用的 key */
+    private static final String AES_KEY = &quot;KUbHwTqBy6TBQ2gN&quot;;
+    /* 加密使用的 IV */
+    private static final String AES_IV = &quot;pIbF6GR3XEN1PG05&quot;;
 
-/**
-    * AES 加密
-    *
-    * @param content 待加密内容
-    * @param key     密钥
-    * @return 加密的数据
-    */
-   public static byte[] encryptAES(byte[] content, byte[] key) {
-       try {
-           SecretKeySpec secretKeySpec = new SecretKeySpec(key, &quot;AES&quot;);
-           // AES 是加密方式, CBC 是工作模式, PKCS5Padding 是填充模式
-           Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-           // IV 是初始向量，可以增强密码的强度
-           cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(AES_IV.getBytes()));
-           return cipher.doFinal(content);
-       } catch (Exception e) {
-           logger.error(e);
-       }
-       return null;
-   }
+ /**
+     * AES 加密
+     *
+     * @param content 待加密内容
+     * @param key     密钥
+     * @return 加密的数据
+     */
+    public static byte[] encryptAES(byte[] content, byte[] key) {
+        try {
+            SecretKeySpec secretKeySpec = new SecretKeySpec(key, &quot;AES&quot;);
+            // AES 是加密方式, CBC 是工作模式, PKCS5Padding 是填充模式
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            // IV 是初始向量，可以增强密码的强度
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(AES_IV.getBytes()));
+            return cipher.doFinal(content);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return null;
+    }
 </code></pre><h2 id="解密-（byte级别）"><a href="#解密-（byte级别）" class="headerlink" title="解密 （byte级别）"></a>解密 （byte级别）</h2><pre><code>/**
      * AES 解密
      *
@@ -1684,32 +1510,32 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
         }
         return null;
     }
-</code></pre><h2 id="加密（String级别）"><a href="#加密（String级别）" class="headerlink" title="加密（String级别）"></a>加密（String级别）</h2><pre><code>private final static String TOKEN_KEY = &quot;91a29fa7w46d8x41&quot;;
+</code></pre><h2 id="加密（String级别）"><a href="#加密（String级别）" class="headerlink" title="加密（String级别）"></a>加密（String级别）</h2><pre><code>    private final static String TOKEN_KEY = &quot;91a29fa7w46d8x41&quot;;
 
-public static String encrypt(String plain) {
-    try {
-        Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-        AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
-        SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
-        cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
-        return new String(cipher.doFinal(plain.getBytes()));
-    } catch (Exception e) {
-        Ln.e(e);
-        return null;
+    public static String encrypt(String plain) {
+        try {
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
+            SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
+            cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
+            return new String(cipher.doFinal(plain.getBytes()));
+        } catch (Exception e) {
+            Ln.e(e);
+            return null;
+        }
     }
-}
-</code></pre><h2 id="解密（String级别）"><a href="#解密（String级别）" class="headerlink" title="解密（String级别）"></a>解密（String级别）</h2><pre><code>public static String decrypt(String encoded) {
-       try {
-           Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-           AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
-           SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
-           cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);
-           return new String(cipher.doFinal(encoded.getBytes()));
-       } catch (Exception e) {
-           Ln.e(e);
-           return null;
-       }
-   }
+</code></pre><h2 id="解密（String级别）"><a href="#解密（String级别）" class="headerlink" title="解密（String级别）"></a>解密（String级别）</h2><pre><code> public static String decrypt(String encoded) {
+        try {
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
+            SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
+            cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);
+            return new String(cipher.doFinal(encoded.getBytes()));
+        } catch (Exception e) {
+            Ln.e(e);
+            return null;
+        }
+    }
 </code></pre>
           
         
@@ -2166,7 +1992,7 @@ public static String encrypt(String plain) {
          */
         @Override
         protected char[] getAcceptedChars() {
-            char[] chars = new char[]{&apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;, &apos;6&apos;, &apos;7&apos;, &apos;8&apos;, &apos;9&apos;, &apos;X&apos;};
+            char[] chars = new char[]{&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;X&#39;};
             return chars;
 //            return new char[0];
         }
@@ -2460,2175 +2286,2175 @@ blog.csdn.net/20180728144205934?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 <p>好了，原理说完了，大家有木有看懂呢？</p>
 <h3 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h3><h4 id="1、创建图像处理类ImageProcessing"><a href="#1、创建图像处理类ImageProcessing" class="headerlink" title="1、创建图像处理类ImageProcessing"></a>1、创建图像处理类ImageProcessing</h4><p>这个类主要提供处理图像本身的方法。</p>
 <p>具体实现如下：</p>
-<pre><code>    1. package com.lyz.monitor.utils;
+<pre><code>      1. package com.lyz.monitor.utils;
 
-2.  
+  2.  
 
-3. /**
+  3. /**
 
-4.  * 图像处理类
+  4.  * 图像处理类
 
-5.  * @author liuyazhuang
+  5.  * @author liuyazhuang
 
-6.  *
+  6.  *
 
-7.  */
+  7.  */
 
-8. public abstract class ImageProcessing {
+  8. public abstract class ImageProcessing {
 
-9.  
+  9.  
 
-10.    /**
+  10.    /**
 
-11.    * 内部调用的处理图片的方法
+  11.    * 内部调用的处理图片的方法
 
-12.     * @param yuv420sp
+  12.     * @param yuv420sp
 
-13.     * @param width
+  13.     * @param width
 
-14.    * @param height
+  14.    * @param height
 
-15.   * @return
+  15.   * @return
 
-16.     */
+  16.     */
 
-17.   private static int decodeYUV420SPtoRedSum(byte[] yuv420sp, int width,int height) {
+  17.   private static int decodeYUV420SPtoRedSum(byte[] yuv420sp, int width,int height) {
 
-18.       if (yuv420sp == null)
+  18.       if (yuv420sp == null)
 
-19.            return 0;
+  19.            return 0;
 
-20.         final int frameSize = width * height;
+  20.         final int frameSize = width * height;
 
-21.        int sum = 0;
+  21.        int sum = 0;
 
-22.      for (int j = 0, yp = 0; j &lt; height; j++) {
+  22.      for (int j = 0, yp = 0; j &lt; height; j++) {
 
-23.          int uvp = frameSize + (j &gt;&gt; 1) * width, u = 0, v = 0;
+  23.          int uvp = frameSize + (j &gt;&gt; 1) * width, u = 0, v = 0;
 
-24.             for (int i = 0; i &lt; width; i++, yp++) {
+  24.             for (int i = 0; i &lt; width; i++, yp++) {
 
-25.              int y = (0xff &amp; ((int) yuv420sp[yp])) - 16;
+  25.              int y = (0xff &amp; ((int) yuv420sp[yp])) - 16;
 
-26.                if (y &lt; 0)
+  26.                if (y &lt; 0)
 
-27.                     y = 0;
+  27.                     y = 0;
 
-28.              if ((i &amp; 1) == 0) {
+  28.              if ((i &amp; 1) == 0) {
 
-29.                  v = (0xff &amp; yuv420sp[uvp++]) - 128;
+  29.                  v = (0xff &amp; yuv420sp[uvp++]) - 128;
 
-30.                    u = (0xff &amp; yuv420sp[uvp++]) - 128;
+  30.                    u = (0xff &amp; yuv420sp[uvp++]) - 128;
 
-31.                }
+  31.                }
 
-32.                int y1192 = 1192 * y;
+  32.                int y1192 = 1192 * y;
 
-33.                 int r = (y1192 + 1634 * v);
+  33.                 int r = (y1192 + 1634 * v);
 
-34.               int g = (y1192 - 833 * v - 400 * u);
+  34.               int g = (y1192 - 833 * v - 400 * u);
 
-35.                 int b = (y1192 + 2066 * u);
+  35.                 int b = (y1192 + 2066 * u);
 
-36.  
+  36.  
 
-37.              if (r &lt; 0)
+  37.              if (r &lt; 0)
 
-38.                     r = 0;
+  38.                     r = 0;
 
-39.              else if (r &gt; 262143)
+  39.              else if (r &gt; 262143)
 
-40.                     r = 262143;
+  40.                     r = 262143;
 
-41.                 if (g &lt; 0)
+  41.                 if (g &lt; 0)
 
-42.                     g = 0;
+  42.                     g = 0;
 
-43.              else if (g &gt; 262143)
+  43.              else if (g &gt; 262143)
 
-44.                     g = 262143;
+  44.                     g = 262143;
 
-45.                 if (b &lt; 0)
+  45.                 if (b &lt; 0)
 
-46.                     b = 0;
+  46.                     b = 0;
 
-47.              else if (b &gt; 262143)
+  47.              else if (b &gt; 262143)
 
-48.                     b = 262143;
+  48.                     b = 262143;
 
-49.  
+  49.  
 
-50.                int pixel = 0xff000000 | ((r &lt;&lt; 6) &amp; 0xff0000)
+  50.                int pixel = 0xff000000 | ((r &lt;&lt; 6) &amp; 0xff0000)
 
-51.                        | ((g &gt;&gt; 2) &amp; 0xff00) | ((b &gt;&gt; 10) &amp; 0xff);
+  51.                        | ((g &gt;&gt; 2) &amp; 0xff00) | ((b &gt;&gt; 10) &amp; 0xff);
 
-52.              int red = (pixel &gt;&gt; 16) &amp; 0xff;
+  52.              int red = (pixel &gt;&gt; 16) &amp; 0xff;
 
-53.                sum += red;
+  53.                sum += red;
 
-54.          }
+  54.          }
 
-55.        }
+  55.        }
 
-56.        return sum;
+  56.        return sum;
 
-57.    }
+  57.    }
 
-58.  
+  58.  
 
-59.   /**
+  59.   /**
 
-60.    * 对外开放的图像处理方法
+  60.    * 对外开放的图像处理方法
 
-61.      * @param yuv420sp
+  61.      * @param yuv420sp
 
-62.     * @param width
+  62.     * @param width
 
-63.    * @param height
+  63.    * @param height
 
-64.   * @return
+  64.   * @return
 
-65.     */
+  65.     */
 
-66.   public static int decodeYUV420SPtoRedAvg(byte[] yuv420sp, int width,
+  66.   public static int decodeYUV420SPtoRedAvg(byte[] yuv420sp, int width,
 
-67.           int height) {
+  67.           int height) {
 
-68.      if (yuv420sp == null)
+  68.      if (yuv420sp == null)
 
-69.            return 0;
+  69.            return 0;
 
-70.         final int frameSize = width * height;
+  70.         final int frameSize = width * height;
 
-71.        int sum = decodeYUV420SPtoRedSum(yuv420sp, width, height);
+  71.        int sum = decodeYUV420SPtoRedSum(yuv420sp, width, height);
 
-72.         return (sum / frameSize);
+  72.         return (sum / frameSize);
 
-73.  }
+  73.  }
 
-74. }
+  74. }
 </code></pre><h4 id="2、MainActivity实现"><a href="#2、MainActivity实现" class="headerlink" title="2、MainActivity实现"></a>2、MainActivity实现</h4><p>为了简单，我没有单独新建别的类来分解这些功能，我直接在MainActivity中实现了这些功能，那么我们就一起来看看是如何一步步实现的吧。</p>
 <h5 id="1-程序中用到的属性"><a href="#1-程序中用到的属性" class="headerlink" title="(1)程序中用到的属性"></a>(1)程序中用到的属性</h5><p>首先，我们来看看程序中定义了哪些属性字段，来实现这些功能吧。</p>
 <p>具体属性字段如下所示：</p>
-<pre><code>    1. //曲线
+<pre><code>      1. //曲线
 
-2. private Timer timer = new Timer();
+  2. private Timer timer = new Timer();
 
-3. //Timer任务，与Timer配套使用
+  3. //Timer任务，与Timer配套使用
 
-4. private TimerTask task;
+  4. private TimerTask task;
 
-5. private static int gx;
+  5. private static int gx;
 
-6. private static int j;
+  6. private static int j;
 
-7.  
+  7.  
 
-8. private static double flag=1;
+  8. private static double flag=1;
 
-9. private Handler handler;
+  9. private Handler handler;
 
-10. private String title = &quot;pulse&quot;;
+  10. private String title = &quot;pulse&quot;;
 
-11. private XYSeries series;
+  11. private XYSeries series;
 
-12. private XYMultipleSeriesDataset mDataset;
+  12. private XYMultipleSeriesDataset mDataset;
 
-13. private GraphicalView chart;
+  13. private GraphicalView chart;
 
-14. private XYMultipleSeriesRenderer renderer;
+  14. private XYMultipleSeriesRenderer renderer;
 
-15. private Context context;
+  15. private Context context;
 
-16. private int addX = -1;
+  16. private int addX = -1;
 
-17. double addY;
+  17. double addY;
 
-18. int[] xv = new int[300];
+  18. int[] xv = new int[300];
 
-19. int[] yv = new int[300];
+  19. int[] yv = new int[300];
 
-20. int[] hua=new int[]{9,10,11,12,13,14,13,12,11,10,9,8,7,6,7,8,9,10,11,10,10};
+  20. int[] hua=new int[]{9,10,11,12,13,14,13,12,11,10,9,8,7,6,7,8,9,10,11,10,10};
 
-21.  
+  21.  
 
-22. // private static final String TAG = &quot;HeartRateMonitor&quot;;
+  22. // private static final String TAG = &quot;HeartRateMonitor&quot;;
 
-23. private static final AtomicBoolean processing = new AtomicBoolean(false);
+  23. private static final AtomicBoolean processing = new AtomicBoolean(false);
 
-24. //Android手机预览控件
+  24. //Android手机预览控件
 
-25. private static SurfaceView preview = null;
+  25. private static SurfaceView preview = null;
 
-26. //预览设置信息
+  26. //预览设置信息
 
-27. private static SurfaceHolder previewHolder = null;
+  27. private static SurfaceHolder previewHolder = null;
 
-28. //Android手机相机句柄
+  28. //Android手机相机句柄
 
-29. private static Camera camera = null;
+  29. private static Camera camera = null;
 
-30. //private static View image = null;
+  30. //private static View image = null;
 
-31. private static TextView text = null;
+  31. private static TextView text = null;
 
-32. private static TextView text1 = null;
+  32. private static TextView text1 = null;
 
-33. private static TextView text2 = null;
+  33. private static TextView text2 = null;
 
-34. private static WakeLock wakeLock = null;
+  34. private static WakeLock wakeLock = null;
 
-35. private static int averageIndex = 0;
+  35. private static int averageIndex = 0;
 
-36. private static final int averageArraySize = 4;
+  36. private static final int averageArraySize = 4;
 
-37. private static final int[] averageArray = new int[averageArraySize];
+  37. private static final int[] averageArray = new int[averageArraySize];
 
-38. //设置默认类型
+  38. //设置默认类型
 
-39. private static TYPE currentType = TYPE.GREEN;
+  39. private static TYPE currentType = TYPE.GREEN;
 
-40. //获取当前类型
+  40. //获取当前类型
 
-41. public static TYPE getCurrent() {
+  41. public static TYPE getCurrent() {
 
-42.     return currentType;
+  42.     return currentType;
 
-43. }
+  43. }
 
-44. //心跳下标值
+  44. //心跳下标值
 
-45. private static int beatsIndex = 0;
+  45. private static int beatsIndex = 0;
 
-46. //心跳数组的大小
+  46. //心跳数组的大小
 
-47. private static final int beatsArraySize = 3;
+  47. private static final int beatsArraySize = 3;
 
-48. //心跳数组
+  48. //心跳数组
 
-49. private static final int[] beatsArray = new int[beatsArraySize];
+  49. private static final int[] beatsArray = new int[beatsArraySize];
 
-50. //心跳脉冲
+  50. //心跳脉冲
 
-51. private static double beats = 0;
+  51. private static double beats = 0;
 
-52. //开始时间
+  52. //开始时间
 
-53. private static long startTime = 0;
+  53. private static long startTime = 0;
 </code></pre><p>咋一看，是不是很多？有木有一种头晕乎乎的赶脚呢？没关系，通过后面具体的功能实现，相信大家能弄明白每个属性字段的作用与含义的。不要掉队，继续认真向下看哦。</p>
 <h5 id="2-定义枚举类型来标识当前颜色"><a href="#2-定义枚举类型来标识当前颜色" class="headerlink" title="(2)定义枚举类型来标识当前颜色"></a>(2)定义枚举类型来标识当前颜色</h5><p>颜色类型，我在这里用一个枚举类型来定义，这个枚举类型很简单，只有两种颜色，一种是绿色，一种是红色。默认颜色为绿色。</p>
 <p>具体实现的代码如下:</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.      * 类型枚举
+  2.      * 类型枚举
 
-3.      * @author liuyazhuang
+  3.      * @author liuyazhuang
 
-4.      *
+  4.      *
 
-5.   */
+  5.   */
 
-6.    public static enum TYPE {
+  6.    public static enum TYPE {
 
-7.       GREEN, RED
+  7.       GREEN, RED
 
-8.    };
+  8.    };
 
-9.    //设置默认类型
+  9.    //设置默认类型
 
-10.   private static TYPE currentType = TYPE.GREEN;
+  10.   private static TYPE currentType = TYPE.GREEN;
 
-11.    //获取当前类型
+  11.    //获取当前类型
 
-12.   public static TYPE getCurrent() {
+  12.   public static TYPE getCurrent() {
 
-13.        return currentType;
+  13.        return currentType;
 
-14.    }
+  14.    }
 </code></pre><h5 id="3-初始化配置方法initConfig"><a href="#3-初始化配置方法initConfig" class="headerlink" title="(3)初始化配置方法initConfig"></a>(3)初始化配置方法initConfig</h5><p>这个方法总体上的功能是初始化程序的各个配置，包括调用其他方法，例如页面图表的初始化，UI控件的初始化，应用程序启动后显示的样式，调用相机，通过Handler接收其他方法传递过来的消息信息来更新UI，，等等。主要是实现应用的配置功能，同时这个方法相当于一个应用程序的管家，它来直接或间接的调用其他方法，来使整个应用程序顺利运行起来。</p>
 <p>具体代码实现如下:</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.      * 初始化配置
+  2.      * 初始化配置
 
-3.     */
+  3.     */
 
-4.    private void initConfig() {
+  4.    private void initConfig() {
 
-5.       //曲线
+  5.       //曲线
 
-6.        context = getApplicationContext();
+  6.        context = getApplicationContext();
 
-7.  
+  7.  
 
-8.        //这里获得main界面上的布局，下面会把图表画在这个布局里面
+  8.        //这里获得main界面上的布局，下面会把图表画在这个布局里面
 
-9.         LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
+  9.         LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
 
-10.  
+  10.  
 
-11.       //这个类用来放置曲线上的所有点，是一个点的集合，根据这些点画出曲线
+  11.       //这个类用来放置曲线上的所有点，是一个点的集合，根据这些点画出曲线
 
-12.         series = new XYSeries(title);
+  12.         series = new XYSeries(title);
 
-13.  
+  13.  
 
-14.         //创建一个数据集的实例，这个数据集将被用来创建图表
+  14.         //创建一个数据集的实例，这个数据集将被用来创建图表
 
-15.         mDataset = new XYMultipleSeriesDataset();
+  15.         mDataset = new XYMultipleSeriesDataset();
 
-16.  
+  16.  
 
-17.         //将点集添加到这个数据集中
+  17.         //将点集添加到这个数据集中
 
-18.         mDataset.addSeries(series);
+  18.         mDataset.addSeries(series);
 
-19.  
+  19.  
 
-20.         //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄
+  20.         //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄
 
-21.       int color = Color.GREEN;
+  21.       int color = Color.GREEN;
 
-22.       PointStyle style = PointStyle.CIRCLE;
+  22.       PointStyle style = PointStyle.CIRCLE;
 
-23.        renderer = buildRenderer(color, style, true);
+  23.        renderer = buildRenderer(color, style, true);
 
-24.  
+  24.  
 
-25.         //设置好图表的样式
+  25.         //设置好图表的样式
 
-26.         setChartSettings(renderer, &quot;X&quot;, &quot;Y&quot;, 0, 300, 4, 16, Color.WHITE, Color.WHITE);
+  26.         setChartSettings(renderer, &quot;X&quot;, &quot;Y&quot;, 0, 300, 4, 16, Color.WHITE, Color.WHITE);
 
-27.  
+  27.  
 
-28.        //生成图表
+  28.        //生成图表
 
-29.         chart = ChartFactory.getLineChartView(context, mDataset, renderer);
+  29.         chart = ChartFactory.getLineChartView(context, mDataset, renderer);
 
-30.  
+  30.  
 
-31.         //将图表添加到布局中去
+  31.         //将图表添加到布局中去
 
-32.       layout.addView(chart, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+  32.       layout.addView(chart, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
-33.  
+  33.  
 
-34.      //这里的Handler实例将配合下面的Timer实例，完成定时更新图表的功能
+  34.      //这里的Handler实例将配合下面的Timer实例，完成定时更新图表的功能
 
-35.        handler = new Handler() {
+  35.        handler = new Handler() {
 
-36.          @Override
+  36.          @Override
 
-37.             public void handleMessage(Message msg) {
+  37.             public void handleMessage(Message msg) {
 
-38.                 //               刷新图表
+  38.                 //               刷新图表
 
-39.              updateChart();
+  39.              updateChart();
 
-40.               super.handleMessage(msg);
+  40.               super.handleMessage(msg);
 
-41.          }
+  41.          }
 
-42.        };
+  42.        };
 
-43.  
+  43.  
 
-44.      task = new TimerTask() {
+  44.      task = new TimerTask() {
 
-45.           @Override
+  45.           @Override
 
-46.             public void run() {
+  46.             public void run() {
 
-47.              Message message = new Message();
+  47.              Message message = new Message();
 
-48.               message.what = 1;
+  48.               message.what = 1;
 
-49.               handler.sendMessage(message);
+  49.               handler.sendMessage(message);
 
-50.            }
+  50.            }
 
-51.        };
+  51.        };
 
-52.  
+  52.  
 
-53.      timer.schedule(task, 1,20);           //曲线
+  53.      timer.schedule(task, 1,20);           //曲线
 
-54.       //获取SurfaceView控件
+  54.       //获取SurfaceView控件
 
-55.      preview = (SurfaceView) findViewById(R.id.preview);
+  55.      preview = (SurfaceView) findViewById(R.id.preview);
 
-56.      previewHolder = preview.getHolder();
+  56.      previewHolder = preview.getHolder();
 
-57.         previewHolder.addCallback(surfaceCallback);
+  57.         previewHolder.addCallback(surfaceCallback);
 
-58.      previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+  58.      previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-59.      //       image = findViewById(R.id.image);
+  59.      //       image = findViewById(R.id.image);
 
-60.         text = (TextView) findViewById(R.id.text);
+  60.         text = (TextView) findViewById(R.id.text);
 
-61.       text1 = (TextView) findViewById(R.id.text1);
+  61.       text1 = (TextView) findViewById(R.id.text1);
 
-62.         text2 = (TextView) findViewById(R.id.text2);
+  62.         text2 = (TextView) findViewById(R.id.text2);
 
-63.         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+  63.         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-64.        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, &quot;DoNotDimScreen&quot;);
+  64.        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, &quot;DoNotDimScreen&quot;);
 
-65.   }
+  65.   }
 </code></pre><h5 id="4-创建图表的方法buildRenderer"><a href="#4-创建图表的方法buildRenderer" class="headerlink" title="(4)创建图表的方法buildRenderer"></a>(4)创建图表的方法buildRenderer</h5><p>这个方法主要是利用了第三方的类库类实现创建图标的操作。</p>
 <p>具体代码实现如下</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.      * 创建图表
+  2.      * 创建图表
 
-3.      * @param color
+  3.      * @param color
 
-4.     * @param style
+  4.     * @param style
 
-5.     * @param fill
+  5.     * @param fill
 
-6.      * @return
+  6.      * @return
 
-7.      */
+  7.      */
 
-8.    protected XYMultipleSeriesRenderer buildRenderer(int color, PointStyle style, boolean fill) {
+  8.    protected XYMultipleSeriesRenderer buildRenderer(int color, PointStyle style, boolean fill) {
 
-9.       XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+  9.       XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 
-10.  
+  10.  
 
-11.       //设置图表中曲线本身的样式，包括颜色、点的大小以及线的粗细等
+  11.       //设置图表中曲线本身的样式，包括颜色、点的大小以及线的粗细等
 
-12.        XYSeriesRenderer r = new XYSeriesRenderer();
+  12.        XYSeriesRenderer r = new XYSeriesRenderer();
 
-13.       r.setColor(Color.RED);
+  13.       r.setColor(Color.RED);
 
-14. //     r.setPointStyle(null);
+  14. //     r.setPointStyle(null);
 
-15. //      r.setFillPoints(fill);
+  15. //      r.setFillPoints(fill);
 
-16.        r.setLineWidth(1);
+  16.        r.setLineWidth(1);
 
-17.      renderer.addSeriesRenderer(r);
+  17.      renderer.addSeriesRenderer(r);
 
-18.       return renderer;
+  18.       return renderer;
 
-19.   }
+  19.   }
 </code></pre><h5 id="5-设置图表的样式方法setChartSettings"><a href="#5-设置图表的样式方法setChartSettings" class="headerlink" title="(5)设置图表的样式方法setChartSettings"></a>(5)设置图表的样式方法setChartSettings</h5><p>这个方法主要是对(4)中创建的图表，进行样式的设置。</p>
 <p>具体代码如下：</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.      * 设置图标的样式
+  2.      * 设置图标的样式
 
-3.   * @param renderer
+  3.   * @param renderer
 
-4.      * @param xTitle：x标题
+  4.      * @param xTitle：x标题
 
-5.    * @param yTitle：y标题
+  5.    * @param yTitle：y标题
 
-6.    * @param xMin：x最小长度
+  6.    * @param xMin：x最小长度
 
-7.    * @param xMax：x最大长度
+  7.    * @param xMax：x最大长度
 
-8.    * @param yMin:y最小长度
+  8.    * @param yMin:y最小长度
 
-9.    * @param yMax：y最大长度
+  9.    * @param yMax：y最大长度
 
-10.   * @param axesColor：颜色
+  10.   * @param axesColor：颜色
 
-11.     * @param labelsColor：标签
+  11.     * @param labelsColor：标签
 
-12.   */
+  12.   */
 
-13.   protected void setChartSettings(XYMultipleSeriesRenderer renderer, String xTitle, String yTitle,
+  13.   protected void setChartSettings(XYMultipleSeriesRenderer renderer, String xTitle, String yTitle,
 
-14.             double xMin, double xMax, double yMin, double yMax, int axesColor, int labelsColor) {
+  14.             double xMin, double xMax, double yMin, double yMax, int axesColor, int labelsColor) {
 
-15.        //有关对图表的渲染可参看api文档
+  15.        //有关对图表的渲染可参看api文档
 
-16.         renderer.setChartTitle(title);
+  16.         renderer.setChartTitle(title);
 
-17.       renderer.setXTitle(xTitle);
+  17.       renderer.setXTitle(xTitle);
 
-18.      renderer.setYTitle(yTitle);
+  18.      renderer.setYTitle(yTitle);
 
-19.      renderer.setXAxisMin(xMin);
+  19.      renderer.setXAxisMin(xMin);
 
-20.      renderer.setXAxisMax(xMax);
+  20.      renderer.setXAxisMax(xMax);
 
-21.      renderer.setYAxisMin(yMin);
+  21.      renderer.setYAxisMin(yMin);
 
-22.      renderer.setYAxisMax(yMax);
+  22.      renderer.setYAxisMax(yMax);
 
-23.      renderer.setAxesColor(axesColor);
+  23.      renderer.setAxesColor(axesColor);
 
-24.        renderer.setLabelsColor(labelsColor);
+  24.        renderer.setLabelsColor(labelsColor);
 
-25.        renderer.setShowGrid(true);
+  25.        renderer.setShowGrid(true);
 
-26.        renderer.setGridColor(Color.GREEN);
+  26.        renderer.setGridColor(Color.GREEN);
 
-27.      renderer.setXLabels(20);
+  27.      renderer.setXLabels(20);
 
-28.        renderer.setYLabels(10);
+  28.        renderer.setYLabels(10);
 
-29.        renderer.setXTitle(&quot;Time&quot;);
+  29.        renderer.setXTitle(&quot;Time&quot;);
 
-30.         renderer.setYTitle(&quot;mmHg&quot;);
+  30.         renderer.setYTitle(&quot;mmHg&quot;);
 
-31.         renderer.setYLabelsAlign(Align.RIGHT);
+  31.         renderer.setYLabelsAlign(Align.RIGHT);
 
-32.       renderer.setPointSize((float) 3 );
+  32.       renderer.setPointSize((float) 3 );
 
-33.        renderer.setShowLegend(false);
+  33.        renderer.setShowLegend(false);
 
-34.     }
+  34.     }
 </code></pre><h5 id="6-更新图表updateChart"><a href="#6-更新图表updateChart" class="headerlink" title="(6)更新图表updateChart"></a>(6)更新图表updateChart</h5><p>这个方法主要实现了对图表中曲线图的更新绘制，同时检测手机摄像头感应的手指位置，如果手指位置不正确，则会提示“请用您的指尖盖住摄像头镜头”的信息来提示用户。动态的更新绘制曲线图来模拟用户心跳频率。</p>
 <p>具体代码实现如下：</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.     * 更新图标信息
+  2.     * 更新图标信息
 
-3.    */
+  3.    */
 
-4.    private void updateChart() {
+  4.    private void updateChart() {
 
-5.  
+  5.  
 
-6.      //设置好下一个需要增加的节点
+  6.      //设置好下一个需要增加的节点
 
-7.         if(flag==1)
+  7.         if(flag==1)
 
-8.            addY=10;
+  8.            addY=10;
 
-9.         else{
+  9.         else{
 
-10. //            addY=250;
+  10. //            addY=250;
 
-11.             flag=1;
+  11.             flag=1;
 
-12.             if(gx&lt;200){
+  12.             if(gx&lt;200){
 
-13.                if(hua[20]&gt;1){
+  13.                if(hua[20]&gt;1){
 
-14.                    Toast.makeText(MainActivity.this, &quot;请用您的指尖盖住摄像头镜头！&quot;, Toast.LENGTH_SHORT).show();
+  14.                    Toast.makeText(MainActivity.this, &quot;请用您的指尖盖住摄像头镜头！&quot;, Toast.LENGTH_SHORT).show();
 
-15.                   hua[20]=0;}
+  15.                   hua[20]=0;}
 
-16.                hua[20]++;
+  16.                hua[20]++;
 
-17.              return;}
+  17.              return;}
 
-18.           else
+  18.           else
 
-19.               hua[20]=10;
+  19.               hua[20]=10;
 
-20.            j=0;
+  20.            j=0;
 
-21.            
+  21.            
 
-22.         }
+  22.         }
 
-23.        if(j&lt;20){
+  23.        if(j&lt;20){
 
-24.          addY=hua[j];
+  24.          addY=hua[j];
 
-25.             j++;
+  25.             j++;
 
-26.         }
+  26.         }
 
-27.            
+  27.            
 
-28.         //移除数据集中旧的点集
+  28.         //移除数据集中旧的点集
 
-29.       mDataset.removeSeries(series);
+  29.       mDataset.removeSeries(series);
 
-30.  
+  30.  
 
-31.      //判断当前点集中到底有多少点，因为屏幕总共只能容纳100个，所以当点数超过100时，长度永远是100
+  31.      //判断当前点集中到底有多少点，因为屏幕总共只能容纳100个，所以当点数超过100时，长度永远是100
 
-32.        int length = series.getItemCount();
+  32.        int length = series.getItemCount();
 
-33.        int bz=0;
+  33.        int bz=0;
 
-34.         //addX = length;
+  34.         //addX = length;
 
-35.       if (length &gt; 300) {
+  35.       if (length &gt; 300) {
 
-36.            length = 300;
+  36.            length = 300;
 
-37.           bz=1;
+  37.           bz=1;
 
-38.       }
+  38.       }
 
-39.        addX = length;
+  39.        addX = length;
 
-40.       //将旧的点集中x和y的数值取出来放入backup中，并且将x的值加1，造成曲线向右平移的效果
+  40.       //将旧的点集中x和y的数值取出来放入backup中，并且将x的值加1，造成曲线向右平移的效果
 
-41.        for (int i = 0; i &lt; length; i++) {
+  41.        for (int i = 0; i &lt; length; i++) {
 
-42.           xv[i] = (int) series.getX(i) -bz;
+  42.           xv[i] = (int) series.getX(i) -bz;
 
-43.          yv[i] = (int) series.getY(i);
+  43.          yv[i] = (int) series.getY(i);
 
-44.      }
+  44.      }
 
-45.  
+  45.  
 
-46.       //点集先清空，为了做成新的点集而准备
+  46.       //点集先清空，为了做成新的点集而准备
 
-47.        series.clear();
+  47.        series.clear();
 
-48.      mDataset.addSeries(series);
+  48.      mDataset.addSeries(series);
 
-49.      //将新产生的点首先加入到点集中，然后在循环体中将坐标变换后的一系列点都重新加入到点集中
+  49.      //将新产生的点首先加入到点集中，然后在循环体中将坐标变换后的一系列点都重新加入到点集中
 
-50.       //这里可以试验一下把顺序颠倒过来是什么效果，即先运行循环体，再添加新产生的点
+  50.       //这里可以试验一下把顺序颠倒过来是什么效果，即先运行循环体，再添加新产生的点
 
-51.        series.add(addX, addY);
+  51.        series.add(addX, addY);
 
-52.      for (int k = 0; k &lt; length; k++) {
+  52.      for (int k = 0; k &lt; length; k++) {
 
-53.           series.add(xv[k], yv[k]);
+  53.           series.add(xv[k], yv[k]);
 
-54.        }
+  54.        }
 
-55.        //在数据集中添加新的点集
+  55.        //在数据集中添加新的点集
 
-56.      //mDataset.addSeries(series);
+  56.      //mDataset.addSeries(series);
 
-57.  
+  57.  
 
-58.         //视图更新，没有这一步，曲线不会呈现动态
+  58.         //视图更新，没有这一步，曲线不会呈现动态
 
-59.      //如果在非UI主线程中，需要调用postInvalidate()，具体参考api
+  59.      //如果在非UI主线程中，需要调用postInvalidate()，具体参考api
 
-60.      chart.invalidate();
+  60.      chart.invalidate();
 
-61.  } //曲线
+  61.  } //曲线
 </code></pre><h5 id="7-相机预览回调方法previewCallback"><a href="#7-相机预览回调方法previewCallback" class="headerlink" title="(7)相机预览回调方法previewCallback"></a>(7)相机预览回调方法previewCallback</h5><p>这个方法中实现动态更新界面UI的功能，通过获取手机摄像头的参数来实时动态计算平均像素值、脉冲数，从而实时动态计算心率值。</p>
 <p>具体代码实现如下：</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.     * 相机预览方法
+  2.     * 相机预览方法
 
-3.    * 这个方法中实现动态更新界面UI的功能，
+  3.    * 这个方法中实现动态更新界面UI的功能，
 
-4.   * 通过获取手机摄像头的参数来实时动态计算平均像素值、脉冲数，从而实时动态计算心率值。
+  4.   * 通过获取手机摄像头的参数来实时动态计算平均像素值、脉冲数，从而实时动态计算心率值。
 
-5.     */
+  5.     */
 
-6.    private static PreviewCallback previewCallback = new PreviewCallback() {
+  6.    private static PreviewCallback previewCallback = new PreviewCallback() {
 
-7.        public void onPreviewFrame(byte[] data, Camera cam) {
+  7.        public void onPreviewFrame(byte[] data, Camera cam) {
 
-8.           if (data == null)
+  8.           if (data == null)
 
-9.                 throw new NullPointerException();
+  9.                 throw new NullPointerException();
 
-10.            Camera.Size size = cam.getParameters().getPreviewSize();
+  10.            Camera.Size size = cam.getParameters().getPreviewSize();
 
-11.             if (size == null)
+  11.             if (size == null)
 
-12.                throw new NullPointerException();
+  12.                throw new NullPointerException();
 
-13.            if (!processing.compareAndSet(false, true))
+  13.            if (!processing.compareAndSet(false, true))
 
-14.                return;
+  14.                return;
 
-15.            int width = size.width;
+  15.            int width = size.width;
 
-16.            int height = size.height;
+  16.            int height = size.height;
 
-17.          //图像处理
+  17.          //图像处理
 
-18.             int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(),height,width);
+  18.             int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(),height,width);
 
-19.            gx=imgAvg;
+  19.            gx=imgAvg;
 
-20.           text1.setText(&quot;平均像素值是&quot;+String.valueOf(imgAvg));
+  20.           text1.setText(&quot;平均像素值是&quot;+String.valueOf(imgAvg));
 
-21.             //像素平均值imgAvg,日志
+  21.             //像素平均值imgAvg,日志
 
-22.           //Log.i(TAG, &quot;imgAvg=&quot; + imgAvg);
+  22.           //Log.i(TAG, &quot;imgAvg=&quot; + imgAvg);
 
-23.          if (imgAvg == 0 || imgAvg == 255) {
+  23.          if (imgAvg == 0 || imgAvg == 255) {
 
-24.              processing.set(false);
+  24.              processing.set(false);
 
-25.                 return;
+  25.                 return;
 
-26.            }
+  26.            }
 
-27.            //计算平均值
+  27.            //计算平均值
 
-28.            int averageArrayAvg = 0;
+  28.            int averageArrayAvg = 0;
 
-29.          int averageArrayCnt = 0;
+  29.          int averageArrayCnt = 0;
 
-30.          for (int i = 0; i &lt; averageArray.length; i++) {
+  30.          for (int i = 0; i &lt; averageArray.length; i++) {
 
-31.              if (averageArray[i] &gt; 0) {
+  31.              if (averageArray[i] &gt; 0) {
 
-32.                     averageArrayAvg += averageArray[i];
+  32.                     averageArrayAvg += averageArray[i];
 
-33.                  averageArrayCnt++;
+  33.                  averageArrayCnt++;
 
-34.               }
+  34.               }
 
-35.            }
+  35.            }
 
-36.            //计算平均值
+  36.            //计算平均值
 
-37.            int rollingAverage = (averageArrayCnt &gt; 0)?(averageArrayAvg/averageArrayCnt):0;
+  37.            int rollingAverage = (averageArrayCnt &gt; 0)?(averageArrayAvg/averageArrayCnt):0;
 
-38.           TYPE newType = currentType;
+  38.           TYPE newType = currentType;
 
-39.          if (imgAvg &lt; rollingAverage) {
+  39.          if (imgAvg &lt; rollingAverage) {
 
-40.              newType = TYPE.RED;
+  40.              newType = TYPE.RED;
 
-41.              if (newType != currentType) {
+  41.              if (newType != currentType) {
 
-42.                  beats++;
+  42.                  beats++;
 
-43.                     flag=0;
+  43.                     flag=0;
 
-44.                     text2.setText(&quot;脉冲数是&quot;+String.valueOf(beats));
+  44.                     text2.setText(&quot;脉冲数是&quot;+String.valueOf(beats));
 
-45.                    //Log.e(TAG, &quot;BEAT!! beats=&quot; + beats);
+  45.                    //Log.e(TAG, &quot;BEAT!! beats=&quot; + beats);
 
-46.                 }
+  46.                 }
 
-47.            } else if (imgAvg &gt; rollingAverage) {
+  47.            } else if (imgAvg &gt; rollingAverage) {
 
-48.                 newType = TYPE.GREEN;
+  48.                 newType = TYPE.GREEN;
 
-49.            }
+  49.            }
 
-50.  
+  50.  
 
-51.           if (averageIndex == averageArraySize)
+  51.           if (averageIndex == averageArraySize)
 
-52.              averageIndex = 0;
+  52.              averageIndex = 0;
 
-53.           averageArray[averageIndex] = imgAvg;
+  53.           averageArray[averageIndex] = imgAvg;
 
-54.             averageIndex++;
+  54.             averageIndex++;
 
-55.  
+  55.  
 
-56.             // Transitioned from one state to another to the same
+  56.             // Transitioned from one state to another to the same
 
-57.          if (newType != currentType) {
+  57.          if (newType != currentType) {
 
-58.              currentType = newType;
+  58.              currentType = newType;
 
-59.               //image.postInvalidate();
+  59.               //image.postInvalidate();
 
-60.          }
+  60.          }
 
-61.            //获取系统结束时间（ms）
+  61.            //获取系统结束时间（ms）
 
-62.             long endTime = System.currentTimeMillis();
+  62.             long endTime = System.currentTimeMillis();
 
-63.             double totalTimeInSecs = (endTime - startTime) / 1000d;
+  63.             double totalTimeInSecs = (endTime - startTime) / 1000d;
 
-64.           if (totalTimeInSecs &gt;= 2) {
+  64.           if (totalTimeInSecs &gt;= 2) {
 
-65.                double bps = (beats / totalTimeInSecs);
+  65.                double bps = (beats / totalTimeInSecs);
 
-66.                int dpm = (int) (bps * 60d);
+  66.                int dpm = (int) (bps * 60d);
 
-67.                if (dpm &lt; 30 || dpm &gt; 180||imgAvg&lt;200) {
+  67.                if (dpm &lt; 30 || dpm &gt; 180||imgAvg&lt;200) {
 
-68.                   //获取系统开始时间（ms）
+  68.                   //获取系统开始时间（ms）
 
-69.                     startTime = System.currentTimeMillis();
+  69.                     startTime = System.currentTimeMillis();
 
-70.                  //beats心跳总数
+  70.                  //beats心跳总数
 
-71.                    beats = 0;
+  71.                    beats = 0;
 
-72.                  processing.set(false);
+  72.                  processing.set(false);
 
-73.                     return;
+  73.                     return;
 
-74.                }
+  74.                }
 
-75.                //Log.e(TAG, &quot;totalTimeInSecs=&quot; + totalTimeInSecs + &quot; beats=&quot;+ beats);
+  75.                //Log.e(TAG, &quot;totalTimeInSecs=&quot; + totalTimeInSecs + &quot; beats=&quot;+ beats);
 
-76.                 if (beatsIndex == beatsArraySize)
+  76.                 if (beatsIndex == beatsArraySize)
 
-77.                  beatsIndex = 0;
+  77.                  beatsIndex = 0;
 
-78.                 beatsArray[beatsIndex] = dpm;
+  78.                 beatsArray[beatsIndex] = dpm;
 
-79.                beatsIndex++;
+  79.                beatsIndex++;
 
-80.                int beatsArrayAvg = 0;
+  80.                int beatsArrayAvg = 0;
 
-81.                int beatsArrayCnt = 0;
+  81.                int beatsArrayCnt = 0;
 
-82.                for (int i = 0; i &lt; beatsArray.length; i++) {
+  82.                for (int i = 0; i &lt; beatsArray.length; i++) {
 
-83.                    if (beatsArray[i] &gt; 0) {
+  83.                    if (beatsArray[i] &gt; 0) {
 
-84.                       beatsArrayAvg += beatsArray[i];
+  84.                       beatsArrayAvg += beatsArray[i];
 
-85.                      beatsArrayCnt++;
+  85.                      beatsArrayCnt++;
 
-86.                     }
+  86.                     }
 
-87.                }
+  87.                }
 
-88.                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
+  88.                int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
 
-89.                text.setText(&quot;您的的心率是&quot;+String.valueOf(beatsAvg)+&quot;  zhi:&quot;+String.valueOf(beatsArray.length)
+  89.                text.setText(&quot;您的的心率是&quot;+String.valueOf(beatsAvg)+&quot;  zhi:&quot;+String.valueOf(beatsArray.length)
 
-90.                      +&quot;    &quot;+String.valueOf(beatsIndex)+&quot;    &quot;+String.valueOf(beatsArrayAvg)+&quot;    &quot;+String.valueOf(beatsArrayCnt));
+  90.                      +&quot;    &quot;+String.valueOf(beatsIndex)+&quot;    &quot;+String.valueOf(beatsArrayAvg)+&quot;    &quot;+String.valueOf(beatsArrayCnt));
 
-91.                //获取系统时间（ms）
+  91.                //获取系统时间（ms）
 
-92.               startTime = System.currentTimeMillis();
+  92.               startTime = System.currentTimeMillis();
 
-93.              beats = 0;
+  93.              beats = 0;
 
-94.          }
+  94.          }
 
-95.            processing.set(false);
+  95.            processing.set(false);
 
-96.         }
+  96.         }
 
-97.    };
+  97.    };
 </code></pre><h5 id="8-SurfaceHolder-Callback"><a href="#8-SurfaceHolder-Callback" class="headerlink" title="(8)SurfaceHolder.Callback"></a>(8)SurfaceHolder.Callback</h5><p>这个方法主要是相机摄像头，捕捉信息改变时调用。</p>
 <p>具体代码实现如下：</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.     * 预览回调接口
+  2.     * 预览回调接口
 
-3.    */
+  3.    */
 
-4.    private static SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
+  4.    private static SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
 
-5.      //创建时调用
+  5.      //创建时调用
 
-6.         @Override
+  6.         @Override
 
-7.      public void surfaceCreated(SurfaceHolder holder) {
+  7.      public void surfaceCreated(SurfaceHolder holder) {
 
-8.            try {
+  8.            try {
 
-9.               camera.setPreviewDisplay(previewHolder);
+  9.               camera.setPreviewDisplay(previewHolder);
 
-10.                 camera.setPreviewCallback(previewCallback);
+  10.                 camera.setPreviewCallback(previewCallback);
 
-11.          } catch (Throwable t) {
+  11.          } catch (Throwable t) {
 
-12.                Log.e(&quot;PreviewDemo-surfaceCallback&quot;,&quot;Exception in setPreviewDisplay()&quot;, t);
+  12.                Log.e(&quot;PreviewDemo-surfaceCallback&quot;,&quot;Exception in setPreviewDisplay()&quot;, t);
 
-13.            }
+  13.            }
 
-14.        }
+  14.        }
 
-15.        //当预览改变的时候回调此方法
+  15.        //当预览改变的时候回调此方法
 
-16.        @Override
+  16.        @Override
 
-17.         public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
+  17.         public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
-18.           Camera.Parameters parameters = camera.getParameters();
+  18.           Camera.Parameters parameters = camera.getParameters();
 
-19.           parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+  19.           parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 
-20.             Camera.Size size = getSmallestPreviewSize(width, height, parameters);
+  20.             Camera.Size size = getSmallestPreviewSize(width, height, parameters);
 
-21.            if (size != null) {
+  21.            if (size != null) {
 
-22.              parameters.setPreviewSize(size.width, size.height);
+  22.              parameters.setPreviewSize(size.width, size.height);
 
-23.              //               Log.d(TAG, &quot;Using width=&quot; + size.width + &quot; height=&quot; + size.height);
+  23.              //               Log.d(TAG, &quot;Using width=&quot; + size.width + &quot; height=&quot; + size.height);
 
-24.           }
+  24.           }
 
-25.            camera.setParameters(parameters);
+  25.            camera.setParameters(parameters);
 
-26.            camera.startPreview();
+  26.            camera.startPreview();
 
-27.       }
+  27.       }
 
-28.        //销毁的时候调用
+  28.        //销毁的时候调用
 
-29.      @Override
+  29.      @Override
 
-30.         public void surfaceDestroyed(SurfaceHolder holder) {
+  30.         public void surfaceDestroyed(SurfaceHolder holder) {
 
-31.             // Ignore
+  31.             // Ignore
 
-32.      }
+  32.      }
 
-33.    };
+  33.    };
 </code></pre><h5 id="9-获取相机最小的预览尺寸方法getSmallestPreviewSize"><a href="#9-获取相机最小的预览尺寸方法getSmallestPreviewSize" class="headerlink" title="(9)获取相机最小的预览尺寸方法getSmallestPreviewSize"></a>(9)获取相机最小的预览尺寸方法getSmallestPreviewSize</h5><p>这个方法的功能是获取当前手机相机最小的预览尺寸。</p>
 <p>具体代码实现如下:</p>
-<pre><code>    1. /**
+<pre><code>      1. /**
 
-2.      * 获取相机最小的预览尺寸
+  2.      * 获取相机最小的预览尺寸
 
-3.   * @param width
+  3.   * @param width
 
-4.     * @param height
+  4.     * @param height
 
-5.    * @param parameters
+  5.    * @param parameters
 
-6.    * @return
+  6.    * @return
 
-7.      */
+  7.      */
 
-8.    private static Camera.Size getSmallestPreviewSize(int width, int height,
+  8.    private static Camera.Size getSmallestPreviewSize(int width, int height,
 
-9.           Camera.Parameters parameters) {
+  9.           Camera.Parameters parameters) {
 
-10.       Camera.Size result = null;
+  10.       Camera.Size result = null;
 
-11.         for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+  11.         for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
 
-12.           if (size.width &lt;= width &amp;&amp; size.height &lt;= height) {
+  12.           if (size.width &lt;= width &amp;&amp; size.height &lt;= height) {
 
-13.              if (result == null) {
+  13.              if (result == null) {
 
-14.                    result = size;
+  14.                    result = size;
 
-15.               } else {
+  15.               } else {
 
-16.                   int resultArea = result.width * result.height;
+  16.                   int resultArea = result.width * result.height;
 
-17.                     int newArea = size.width * size.height;
+  17.                     int newArea = size.width * size.height;
 
-18.                    if (newArea &lt; resultArea)
+  18.                    if (newArea &lt; resultArea)
 
-19.                       result = size;
+  19.                       result = size;
 
-20.               }
+  20.               }
 
-21.            }
+  21.            }
 
-22.        }
+  22.        }
 
-23.        return result;
+  23.        return result;
 
-24.     }
+  24.     }
 </code></pre><h5 id="10-onCreate方法"><a href="#10-onCreate方法" class="headerlink" title="(10)onCreate方法"></a>(10)onCreate方法</h5><p>这个方法是Android原生自带的方法，通常在这个方法中我们会实现页面控件的初始化以及一些数据的初始化工作。我们这个项目中，主要是设置要显示的UI和调用initConfig方法来启动应用程序的配置，从而实现应用程序的顺利运行。</p>
 <p>具体实现代码如下：</p>
-<pre><code>    1. @Override
+<pre><code>      1. @Override
 
-2.   public void onCreate(Bundle savedInstanceState) {
+  2.   public void onCreate(Bundle savedInstanceState) {
 
-3.         super.onCreate(savedInstanceState);
+  3.         super.onCreate(savedInstanceState);
 
-4.         setContentView(R.layout.activity_main);
+  4.         setContentView(R.layout.activity_main);
 
-5.       initConfig();
+  5.       initConfig();
 
-6.     }
-</code></pre><h5 id="11-其他一些Android原生自带方法"><a href="#11-其他一些Android原生自带方法" class="headerlink" title="(11)其他一些Android原生自带方法"></a>(11)其他一些Android原生自带方法</h5><pre><code>    1. @Override
+  6.     }
+</code></pre><h5 id="11-其他一些Android原生自带方法"><a href="#11-其他一些Android原生自带方法" class="headerlink" title="(11)其他一些Android原生自带方法"></a>(11)其他一些Android原生自带方法</h5><pre><code>      1. @Override
 
-2. public void onDestroy() {
+  2. public void onDestroy() {
 
-3.   //当结束程序时关掉Timer
+  3.   //当结束程序时关掉Timer
 
-4.     timer.cancel();
+  4.     timer.cancel();
 
-5.   super.onDestroy();
+  5.   super.onDestroy();
 
-6. };
+  6. };
 
-7. @Override
+  7. @Override
 
-8.  public void onConfigurationChanged(Configuration newConfig) {
+  8.  public void onConfigurationChanged(Configuration newConfig) {
 
-9.     super.onConfigurationChanged(newConfig);
+  9.     super.onConfigurationChanged(newConfig);
 
-10. }
+  10. }
 
-11.  
+  11.  
 
-12. @Override
+  12. @Override
 
-13. public void onResume() {
+  13. public void onResume() {
 
-14.     super.onResume();
+  14.     super.onResume();
 
-15.  wakeLock.acquire();
+  15.  wakeLock.acquire();
 
-16.  camera = Camera.open();
+  16.  camera = Camera.open();
 
-17.  startTime = System.currentTimeMillis();
+  17.  startTime = System.currentTimeMillis();
 
-18. }
+  18. }
 
-19.  
+  19.  
 
-20. @Override
+  20. @Override
 
-21. public void onPause() {
+  21. public void onPause() {
 
-22.     super.onPause();
+  22.     super.onPause();
 
-23.   wakeLock.release();
+  23.   wakeLock.release();
 
-24.  camera.setPreviewCallback(null);
+  24.  camera.setPreviewCallback(null);
 
-25.   camera.stopPreview();
+  25.   camera.stopPreview();
 
-26.    camera.release();
+  26.    camera.release();
 
-27.    camera = null;
+  27.    camera = null;
 
-28. }
+  28. }
 </code></pre><h5 id="12-MainActivity完整代码"><a href="#12-MainActivity完整代码" class="headerlink" title="(12)MainActivity完整代码"></a>(12)MainActivity完整代码</h5><p>最后我还是给出MainActivity的完整代码吧，大家根据上面的分析仔细阅读几遍，便会体会这其中的奥妙了。嘿嘿，加油哦！</p>
-<pre><code>    1. package com.lyz.xinlv.activity;
+<pre><code>      1. package com.lyz.xinlv.activity;
 
-2. import java.util.Timer;
+  2. import java.util.Timer;
 
-3. import java.util.TimerTask;
+  3. import java.util.TimerTask;
 
-4. import java.util.concurrent.atomic.AtomicBoolean;
+  4. import java.util.concurrent.atomic.AtomicBoolean;
 
-5.  
+  5.  
 
-6. import org.achartengine.ChartFactory;
+  6. import org.achartengine.ChartFactory;
 
-7. import org.achartengine.GraphicalView;
+  7. import org.achartengine.GraphicalView;
 
-8. import org.achartengine.chart.PointStyle;
+  8. import org.achartengine.chart.PointStyle;
 
-9. import org.achartengine.model.XYMultipleSeriesDataset;
+  9. import org.achartengine.model.XYMultipleSeriesDataset;
 
-10. import org.achartengine.model.XYSeries;
+  10. import org.achartengine.model.XYSeries;
 
-11. import org.achartengine.renderer.XYMultipleSeriesRenderer;
+  11. import org.achartengine.renderer.XYMultipleSeriesRenderer;
 
-12. import org.achartengine.renderer.XYSeriesRenderer;
+  12. import org.achartengine.renderer.XYSeriesRenderer;
 
-13.  
+  13.  
 
-14. import android.app.Activity;
+  14. import android.app.Activity;
 
-15. import android.content.Context;
+  15. import android.content.Context;
 
-16. import android.content.res.Configuration;
+  16. import android.content.res.Configuration;
 
-17. import android.graphics.Color;
+  17. import android.graphics.Color;
 
-18. import android.graphics.Paint.Align;
+  18. import android.graphics.Paint.Align;
 
-19. import android.hardware.Camera;
+  19. import android.hardware.Camera;
 
-20. import android.hardware.Camera.PreviewCallback;
+  20. import android.hardware.Camera.PreviewCallback;
 
-21. import android.os.Bundle;
+  21. import android.os.Bundle;
 
-22. import android.os.Handler;
+  22. import android.os.Handler;
 
-23. import android.os.Message;
+  23. import android.os.Message;
 
-24. import android.os.PowerManager;
+  24. import android.os.PowerManager;
 
-25. import android.os.PowerManager.WakeLock;
+  25. import android.os.PowerManager.WakeLock;
 
-26. import android.util.Log;
+  26. import android.util.Log;
 
-27. import android.view.SurfaceHolder;
+  27. import android.view.SurfaceHolder;
 
-28. import android.view.SurfaceView;
+  28. import android.view.SurfaceView;
 
-29. import android.view.ViewGroup.LayoutParams;
+  29. import android.view.ViewGroup.LayoutParams;
 
-30. import android.widget.LinearLayout;
+  30. import android.widget.LinearLayout;
 
-31. import android.widget.TextView;
+  31. import android.widget.TextView;
 
-32. import android.widget.Toast;
+  32. import android.widget.Toast;
 
-33.  
+  33.  
 
-34. import com.lyz.monitor.utils.ImageProcessing;
+  34. import com.lyz.monitor.utils.ImageProcessing;
 
-35.  
+  35.  
 
-36. /**
+  36. /**
 
-37.  * 程序的主入口
+  37.  * 程序的主入口
 
-38.  * @author liuyazhuang
+  38.  * @author liuyazhuang
 
-39.  *
+  39.  *
 
-40.  */
+  40.  */
 
-41. public class MainActivity extends Activity {
+  41. public class MainActivity extends Activity {
 
-42.  //曲线
+  42.  //曲线
 
-43.   private Timer timer = new Timer();
+  43.   private Timer timer = new Timer();
 
-44.   //Timer任务，与Timer配套使用
+  44.   //Timer任务，与Timer配套使用
 
-45.   private TimerTask task;
+  45.   private TimerTask task;
 
-46.    private static int gx;
+  46.    private static int gx;
 
-47.     private static int j;
+  47.     private static int j;
 
-48.  
+  48.  
 
-49.     private static double flag=1;
+  49.     private static double flag=1;
 
-50.     private Handler handler;
+  50.     private Handler handler;
 
-51.   private String title = &quot;pulse&quot;;
+  51.   private String title = &quot;pulse&quot;;
 
-52.   private XYSeries series;
+  52.   private XYSeries series;
 
-53.   private XYMultipleSeriesDataset mDataset;
+  53.   private XYMultipleSeriesDataset mDataset;
 
-54.  private GraphicalView chart;
+  54.  private GraphicalView chart;
 
-55.   private XYMultipleSeriesRenderer renderer;
+  55.   private XYMultipleSeriesRenderer renderer;
 
-56.     private Context context;
+  56.     private Context context;
 
-57.   private int addX = -1;
+  57.   private int addX = -1;
 
-58.  double addY;
+  58.  double addY;
 
-59.   int[] xv = new int[300];
+  59.   int[] xv = new int[300];
 
-60.  int[] yv = new int[300];
+  60.  int[] yv = new int[300];
 
-61.  int[] hua=new int[]{9,10,11,12,13,14,13,12,11,10,9,8,7,6,7,8,9,10,11,10,10};
+  61.  int[] hua=new int[]{9,10,11,12,13,14,13,12,11,10,9,8,7,6,7,8,9,10,11,10,10};
 
-62.  
+  62.  
 
-63.     //   private static final String TAG = &quot;HeartRateMonitor&quot;;
+  63.     //   private static final String TAG = &quot;HeartRateMonitor&quot;;
 
-64.     private static final AtomicBoolean processing = new AtomicBoolean(false);
+  64.     private static final AtomicBoolean processing = new AtomicBoolean(false);
 
-65.  //Android手机预览控件
+  65.  //Android手机预览控件
 
-66.    private static SurfaceView preview = null;
+  66.    private static SurfaceView preview = null;
 
-67.     //预览设置信息
+  67.     //预览设置信息
 
-68.   private static SurfaceHolder previewHolder = null;
+  68.   private static SurfaceHolder previewHolder = null;
 
-69.     //Android手机相机句柄
+  69.     //Android手机相机句柄
 
-70.    private static Camera camera = null;
+  70.    private static Camera camera = null;
 
-71.   //private static View image = null;
+  71.   //private static View image = null;
 
-72.    private static TextView text = null;
+  72.    private static TextView text = null;
 
-73.   private static TextView text1 = null;
+  73.   private static TextView text1 = null;
 
-74.  private static TextView text2 = null;
+  74.  private static TextView text2 = null;
 
-75.  private static WakeLock wakeLock = null;
+  75.  private static WakeLock wakeLock = null;
 
-76.   private static int averageIndex = 0;
+  76.   private static int averageIndex = 0;
 
-77.  private static final int averageArraySize = 4;
+  77.  private static final int averageArraySize = 4;
 
-78.  private static final int[] averageArray = new int[averageArraySize];
+  78.  private static final int[] averageArray = new int[averageArraySize];
 
-79.  
+  79.  
 
-80.    /**
+  80.    /**
 
-81.    * 类型枚举
+  81.    * 类型枚举
 
-82.     * @author liuyazhuang
+  82.     * @author liuyazhuang
 
-83.     *
+  83.     *
 
-84.      */
+  84.      */
 
-85.   public static enum TYPE {
+  85.   public static enum TYPE {
 
-86.      GREEN, RED
+  86.      GREEN, RED
 
-87.   };
+  87.   };
 
-88.   //设置默认类型
+  88.   //设置默认类型
 
-89.   private static TYPE currentType = TYPE.GREEN;
+  89.   private static TYPE currentType = TYPE.GREEN;
 
-90.    //获取当前类型
+  90.    //获取当前类型
 
-91.   public static TYPE getCurrent() {
+  91.   public static TYPE getCurrent() {
 
-92.        return currentType;
+  92.        return currentType;
 
-93.    }
+  93.    }
 
-94.    //心跳下标值
+  94.    //心跳下标值
 
-95.    private static int beatsIndex = 0;
+  95.    private static int beatsIndex = 0;
 
-96.    //心跳数组的大小
+  96.    //心跳数组的大小
 
-97.  private static final int beatsArraySize = 3;
+  97.  private static final int beatsArraySize = 3;
 
-98.    //心跳数组
+  98.    //心跳数组
 
-99.     private static final int[] beatsArray = new int[beatsArraySize];
+  99.     private static final int[] beatsArray = new int[beatsArraySize];
 
-100.    //心跳脉冲
+  100.    //心跳脉冲
 
-101.    private static double beats = 0;
+  101.    private static double beats = 0;
 
-102.     //开始时间
+  102.     //开始时间
 
-103.    private static long startTime = 0;
+  103.    private static long startTime = 0;
 
-104.  
+  104.  
 
-105.     @Override
+  105.     @Override
 
-106.    public void onCreate(Bundle savedInstanceState) {
+  106.    public void onCreate(Bundle savedInstanceState) {
 
-107.       super.onCreate(savedInstanceState);
+  107.       super.onCreate(savedInstanceState);
 
-108.       setContentView(R.layout.activity_main);
+  108.       setContentView(R.layout.activity_main);
 
-109.         initConfig();
+  109.         initConfig();
 
-110.   }
+  110.   }
 
-111.  
+  111.  
 
-112.     /**
+  112.     /**
 
-113.   * 初始化配置
+  113.   * 初始化配置
 
-114.   */
+  114.   */
 
-115.  private void initConfig() {
+  115.  private void initConfig() {
 
-116.         //曲线
+  116.         //曲线
 
-117.      context = getApplicationContext();
+  117.      context = getApplicationContext();
 
-118.  
+  118.  
 
-119.        //这里获得main界面上的布局，下面会把图表画在这个布局里面
+  119.        //这里获得main界面上的布局，下面会把图表画在这个布局里面
 
-120.       LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
+  120.       LinearLayout layout = (LinearLayout)findViewById(R.id.linearLayout1);
 
-121.  
+  121.  
 
-122.         //这个类用来放置曲线上的所有点，是一个点的集合，根据这些点画出曲线
+  122.         //这个类用来放置曲线上的所有点，是一个点的集合，根据这些点画出曲线
 
-123.        series = new XYSeries(title);
+  123.        series = new XYSeries(title);
 
-124.  
+  124.  
 
-125.       //创建一个数据集的实例，这个数据集将被用来创建图表
+  125.       //创建一个数据集的实例，这个数据集将被用来创建图表
 
-126.        mDataset = new XYMultipleSeriesDataset();
+  126.        mDataset = new XYMultipleSeriesDataset();
 
-127.  
+  127.  
 
-128.       //将点集添加到这个数据集中
+  128.       //将点集添加到这个数据集中
 
-129.        mDataset.addSeries(series);
+  129.        mDataset.addSeries(series);
 
-130.  
+  130.  
 
-131.       //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄
+  131.       //以下都是曲线的样式和属性等等的设置，renderer相当于一个用来给图表做渲染的句柄
 
-132.      int color = Color.GREEN;
+  132.      int color = Color.GREEN;
 
-133.      PointStyle style = PointStyle.CIRCLE;
+  133.      PointStyle style = PointStyle.CIRCLE;
 
-134.       renderer = buildRenderer(color, style, true);
+  134.       renderer = buildRenderer(color, style, true);
 
-135.  
+  135.  
 
-136.       //设置好图表的样式
+  136.       //设置好图表的样式
 
-137.        setChartSettings(renderer, &quot;X&quot;, &quot;Y&quot;, 0, 300, 4, 16, Color.WHITE, Color.WHITE);
+  137.        setChartSettings(renderer, &quot;X&quot;, &quot;Y&quot;, 0, 300, 4, 16, Color.WHITE, Color.WHITE);
 
-138.  
+  138.  
 
-139.      //生成图表
+  139.      //生成图表
 
-140.        chart = ChartFactory.getLineChartView(context, mDataset, renderer);
+  140.        chart = ChartFactory.getLineChartView(context, mDataset, renderer);
 
-141.  
+  141.  
 
-142.       //将图表添加到布局中去
+  142.       //将图表添加到布局中去
 
-143.      layout.addView(chart, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+  143.      layout.addView(chart, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
-144.  
+  144.  
 
-145.        //这里的Handler实例将配合下面的Timer实例，完成定时更新图表的功能
+  145.        //这里的Handler实例将配合下面的Timer实例，完成定时更新图表的功能
 
-146.       handler = new Handler() {
+  146.       handler = new Handler() {
 
-147.             @Override
+  147.             @Override
 
-148.            public void handleMessage(Message msg) {
+  148.            public void handleMessage(Message msg) {
 
-149.                //               刷新图表
+  149.                //               刷新图表
 
-150.                 updateChart();
+  150.                 updateChart();
 
-151.              super.handleMessage(msg);
+  151.              super.handleMessage(msg);
 
-152.             }
+  152.             }
 
-153.       };
+  153.       };
 
-154.  
+  154.  
 
-155.        task = new TimerTask() {
+  155.        task = new TimerTask() {
 
-156.          @Override
+  156.          @Override
 
-157.            public void run() {
+  157.            public void run() {
 
-158.                 Message message = new Message();
+  158.                 Message message = new Message();
 
-159.              message.what = 1;
+  159.              message.what = 1;
 
-160.              handler.sendMessage(message);
+  160.              handler.sendMessage(message);
 
-161.           }
+  161.           }
 
-162.       };
+  162.       };
 
-163.  
+  163.  
 
-164.        timer.schedule(task, 1,20);           //曲线
+  164.        timer.schedule(task, 1,20);           //曲线
 
-165.      //获取SurfaceView控件
+  165.      //获取SurfaceView控件
 
-166.         preview = (SurfaceView) findViewById(R.id.preview);
+  166.         preview = (SurfaceView) findViewById(R.id.preview);
 
-167.         previewHolder = preview.getHolder();
+  167.         previewHolder = preview.getHolder();
 
-168.        previewHolder.addCallback(surfaceCallback);
+  168.        previewHolder.addCallback(surfaceCallback);
 
-169.         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+  169.         previewHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-170.         //       image = findViewById(R.id.image);
+  170.         //       image = findViewById(R.id.image);
 
-171.        text = (TextView) findViewById(R.id.text);
+  171.        text = (TextView) findViewById(R.id.text);
 
-172.      text1 = (TextView) findViewById(R.id.text1);
+  172.      text1 = (TextView) findViewById(R.id.text1);
 
-173.        text2 = (TextView) findViewById(R.id.text2);
+  173.        text2 = (TextView) findViewById(R.id.text2);
 
-174.        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+  174.        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-175.       wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, &quot;DoNotDimScreen&quot;);
+  175.       wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, &quot;DoNotDimScreen&quot;);
 
-176.  }
+  176.  }
 
-177.  
+  177.  
 
-178.     //   曲线
+  178.     //   曲线
 
-179.   @Override
+  179.   @Override
 
-180.    public void onDestroy() {
+  180.    public void onDestroy() {
 
-181.       //当结束程序时关掉Timer
+  181.       //当结束程序时关掉Timer
 
-182.       timer.cancel();
+  182.       timer.cancel();
 
-183.         super.onDestroy();
+  183.         super.onDestroy();
 
-184.    };
+  184.    };
 
-185.  
+  185.  
 
-186.    /**
+  186.    /**
 
-187.   * 创建图表
+  187.   * 创建图表
 
-188.    * @param color
+  188.    * @param color
 
-189.   * @param style
+  189.   * @param style
 
-190.   * @param fill
+  190.   * @param fill
 
-191.    * @return
+  191.    * @return
 
-192.    */
+  192.    */
 
-193.  protected XYMultipleSeriesRenderer buildRenderer(int color, PointStyle style, boolean fill) {
+  193.  protected XYMultipleSeriesRenderer buildRenderer(int color, PointStyle style, boolean fill) {
 
-194.         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
+  194.         XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 
-195.  
+  195.  
 
-196.         //设置图表中曲线本身的样式，包括颜色、点的大小以及线的粗细等
+  196.         //设置图表中曲线本身的样式，包括颜色、点的大小以及线的粗细等
 
-197.       XYSeriesRenderer r = new XYSeriesRenderer();
+  197.       XYSeriesRenderer r = new XYSeriesRenderer();
 
-198.      r.setColor(Color.RED);
+  198.      r.setColor(Color.RED);
 
-199. //        r.setPointStyle(null);
+  199. //        r.setPointStyle(null);
 
-200. //     r.setFillPoints(fill);
+  200. //     r.setFillPoints(fill);
 
-201.       r.setLineWidth(1);
+  201.       r.setLineWidth(1);
 
-202.         renderer.addSeriesRenderer(r);
+  202.         renderer.addSeriesRenderer(r);
 
-203.      return renderer;
+  203.      return renderer;
 
-204.  }
+  204.  }
 
-205.  
+  205.  
 
-206.     /**
+  206.     /**
 
-207.   * 设置图标的样式
+  207.   * 设置图标的样式
 
-208.     * @param renderer
+  208.     * @param renderer
 
-209.    * @param xTitle：x标题
+  209.    * @param xTitle：x标题
 
-210.      * @param yTitle：y标题
+  210.      * @param yTitle：y标题
 
-211.      * @param xMin：x最小长度
+  211.      * @param xMin：x最小长度
 
-212.      * @param xMax：x最大长度
+  212.      * @param xMax：x最大长度
 
-213.      * @param yMin:y最小长度
+  213.      * @param yMin:y最小长度
 
-214.      * @param yMax：y最大长度
+  214.      * @param yMax：y最大长度
 
-215.      * @param axesColor：颜色
+  215.      * @param axesColor：颜色
 
-216.    * @param labelsColor：标签
+  216.    * @param labelsColor：标签
 
-217.      */
+  217.      */
 
-218.  protected void setChartSettings(XYMultipleSeriesRenderer renderer, String xTitle, String yTitle,
+  218.  protected void setChartSettings(XYMultipleSeriesRenderer renderer, String xTitle, String yTitle,
 
-219.            double xMin, double xMax, double yMin, double yMax, int axesColor, int labelsColor) {
+  219.            double xMin, double xMax, double yMin, double yMax, int axesColor, int labelsColor) {
 
-220.       //有关对图表的渲染可参看api文档
+  220.       //有关对图表的渲染可参看api文档
 
-221.        renderer.setChartTitle(title);
+  221.        renderer.setChartTitle(title);
 
-222.      renderer.setXTitle(xTitle);
+  222.      renderer.setXTitle(xTitle);
 
-223.         renderer.setYTitle(yTitle);
+  223.         renderer.setYTitle(yTitle);
 
-224.         renderer.setXAxisMin(xMin);
+  224.         renderer.setXAxisMin(xMin);
 
-225.         renderer.setXAxisMax(xMax);
+  225.         renderer.setXAxisMax(xMax);
 
-226.         renderer.setYAxisMin(yMin);
+  226.         renderer.setYAxisMin(yMin);
 
-227.         renderer.setYAxisMax(yMax);
+  227.         renderer.setYAxisMax(yMax);
 
-228.         renderer.setAxesColor(axesColor);
+  228.         renderer.setAxesColor(axesColor);
 
-229.       renderer.setLabelsColor(labelsColor);
+  229.       renderer.setLabelsColor(labelsColor);
 
-230.       renderer.setShowGrid(true);
+  230.       renderer.setShowGrid(true);
 
-231.       renderer.setGridColor(Color.GREEN);
+  231.       renderer.setGridColor(Color.GREEN);
 
-232.         renderer.setXLabels(20);
+  232.         renderer.setXLabels(20);
 
-233.       renderer.setYLabels(10);
+  233.       renderer.setYLabels(10);
 
-234.       renderer.setXTitle(&quot;Time&quot;);
+  234.       renderer.setXTitle(&quot;Time&quot;);
 
-235.        renderer.setYTitle(&quot;mmHg&quot;);
+  235.        renderer.setYTitle(&quot;mmHg&quot;);
 
-236.        renderer.setYLabelsAlign(Align.RIGHT);
+  236.        renderer.setYLabelsAlign(Align.RIGHT);
 
-237.      renderer.setPointSize((float) 3 );
+  237.      renderer.setPointSize((float) 3 );
 
-238.       renderer.setShowLegend(false);
+  238.       renderer.setShowLegend(false);
 
-239.    }
+  239.    }
 
-240.  
+  240.  
 
-241.     /**
+  241.     /**
 
-242.   * 更新图标信息
+  242.   * 更新图标信息
 
-243.      */
+  243.      */
 
-244.  private void updateChart() {
+  244.  private void updateChart() {
 
-245.  
+  245.  
 
-246.      //设置好下一个需要增加的节点
+  246.      //设置好下一个需要增加的节点
 
-247.       if(flag==1)
+  247.       if(flag==1)
 
-248.          addY=10;
+  248.          addY=10;
 
-249.       else{
+  249.       else{
 
-250. //           addY=250;
+  250. //           addY=250;
 
-251.            flag=1;
+  251.            flag=1;
 
-252.            if(gx&lt;200){
+  252.            if(gx&lt;200){
 
-253.               if(hua[20]&gt;1){
+  253.               if(hua[20]&gt;1){
 
-254.                   Toast.makeText(MainActivity.this, &quot;请用您的指尖盖住摄像头镜头！&quot;, Toast.LENGTH_SHORT).show();
+  254.                   Toast.makeText(MainActivity.this, &quot;请用您的指尖盖住摄像头镜头！&quot;, Toast.LENGTH_SHORT).show();
 
-255.                  hua[20]=0;}
+  255.                  hua[20]=0;}
 
-256.               hua[20]++;
+  256.               hua[20]++;
 
-257.                 return;}
+  257.                 return;}
 
-258.          else
+  258.          else
 
-259.              hua[20]=10;
+  259.              hua[20]=10;
 
-260.           j=0;
+  260.           j=0;
 
-261.           
+  261.           
 
-262.        }
+  262.        }
 
-263.       if(j&lt;20){
+  263.       if(j&lt;20){
 
-264.             addY=hua[j];
+  264.             addY=hua[j];
 
-265.            j++;
+  265.            j++;
 
-266.        }
+  266.        }
 
-267.           
+  267.           
 
-268.        //移除数据集中旧的点集
+  268.        //移除数据集中旧的点集
 
-269.      mDataset.removeSeries(series);
+  269.      mDataset.removeSeries(series);
 
-270.  
+  270.  
 
-271.        //判断当前点集中到底有多少点，因为屏幕总共只能容纳100个，所以当点数超过100时，长度永远是100
+  271.        //判断当前点集中到底有多少点，因为屏幕总共只能容纳100个，所以当点数超过100时，长度永远是100
 
-272.       int length = series.getItemCount();
+  272.       int length = series.getItemCount();
 
-273.       int bz=0;
+  273.       int bz=0;
 
-274.        //addX = length;
+  274.        //addX = length;
 
-275.      if (length &gt; 300) {
+  275.      if (length &gt; 300) {
 
-276.           length = 300;
+  276.           length = 300;
 
-277.          bz=1;
+  277.          bz=1;
 
-278.      }
+  278.      }
 
-279.       addX = length;
+  279.       addX = length;
 
-280.      //将旧的点集中x和y的数值取出来放入backup中，并且将x的值加1，造成曲线向右平移的效果
+  280.      //将旧的点集中x和y的数值取出来放入backup中，并且将x的值加1，造成曲线向右平移的效果
 
-281.       for (int i = 0; i &lt; length; i++) {
+  281.       for (int i = 0; i &lt; length; i++) {
 
-282.          xv[i] = (int) series.getX(i) -bz;
+  282.          xv[i] = (int) series.getX(i) -bz;
 
-283.             yv[i] = (int) series.getY(i);
+  283.             yv[i] = (int) series.getY(i);
 
-284.         }
+  284.         }
 
-285.  
+  285.  
 
-286.         //点集先清空，为了做成新的点集而准备
+  286.         //点集先清空，为了做成新的点集而准备
 
-287.       series.clear();
+  287.       series.clear();
 
-288.         mDataset.addSeries(series);
+  288.         mDataset.addSeries(series);
 
-289.         //将新产生的点首先加入到点集中，然后在循环体中将坐标变换后的一系列点都重新加入到点集中
+  289.         //将新产生的点首先加入到点集中，然后在循环体中将坐标变换后的一系列点都重新加入到点集中
 
-290.      //这里可以试验一下把顺序颠倒过来是什么效果，即先运行循环体，再添加新产生的点
+  290.      //这里可以试验一下把顺序颠倒过来是什么效果，即先运行循环体，再添加新产生的点
 
-291.       series.add(addX, addY);
+  291.       series.add(addX, addY);
 
-292.         for (int k = 0; k &lt; length; k++) {
+  292.         for (int k = 0; k &lt; length; k++) {
 
-293.          series.add(xv[k], yv[k]);
+  293.          series.add(xv[k], yv[k]);
 
-294.       }
+  294.       }
 
-295.       //在数据集中添加新的点集
+  295.       //在数据集中添加新的点集
 
-296.         //mDataset.addSeries(series);
+  296.         //mDataset.addSeries(series);
 
-297.  
+  297.  
 
-298.       //视图更新，没有这一步，曲线不会呈现动态
+  298.       //视图更新，没有这一步，曲线不会呈现动态
 
-299.         //如果在非UI主线程中，需要调用postInvalidate()，具体参考api
+  299.         //如果在非UI主线程中，需要调用postInvalidate()，具体参考api
 
-300.         chart.invalidate();
+  300.         chart.invalidate();
 
-301.     } //曲线
+  301.     } //曲线
 
-302.  
+  302.  
 
-303.  
+  303.  
 
-304.    @Override
+  304.    @Override
 
-305.    public void onConfigurationChanged(Configuration newConfig) {
+  305.    public void onConfigurationChanged(Configuration newConfig) {
 
-306.       super.onConfigurationChanged(newConfig);
+  306.       super.onConfigurationChanged(newConfig);
 
-307.  }
+  307.  }
 
-308.  
+  308.  
 
-309.     @Override
+  309.     @Override
 
-310.    public void onResume() {
+  310.    public void onResume() {
 
-311.        super.onResume();
+  311.        super.onResume();
 
-312.         wakeLock.acquire();
+  312.         wakeLock.acquire();
 
-313.         camera = Camera.open();
+  313.         camera = Camera.open();
 
-314.         startTime = System.currentTimeMillis();
+  314.         startTime = System.currentTimeMillis();
 
-315.     }
+  315.     }
 
-316.  
+  316.  
 
-317.     @Override
+  317.     @Override
 
-318.    public void onPause() {
+  318.    public void onPause() {
 
-319.         super.onPause();
+  319.         super.onPause();
 
-320.      wakeLock.release();
+  320.      wakeLock.release();
 
-321.         camera.setPreviewCallback(null);
+  321.         camera.setPreviewCallback(null);
 
-322.      camera.stopPreview();
+  322.      camera.stopPreview();
 
-323.       camera.release();
+  323.       camera.release();
 
-324.       camera = null;
+  324.       camera = null;
 
-325.    }
+  325.    }
 
-326.   
+  326.   
 
-327.    
+  327.    
 
-328.    /**
+  328.    /**
 
-329.   * 相机预览方法
+  329.   * 相机预览方法
 
-330.      * 这个方法中实现动态更新界面UI的功能，
+  330.      * 这个方法中实现动态更新界面UI的功能，
 
-331.     * 通过获取手机摄像头的参数来实时动态计算平均像素值、脉冲数，从而实时动态计算心率值。
+  331.     * 通过获取手机摄像头的参数来实时动态计算平均像素值、脉冲数，从而实时动态计算心率值。
 
-332.   */
+  332.   */
 
-333.  private static PreviewCallback previewCallback = new PreviewCallback() {
+  333.  private static PreviewCallback previewCallback = new PreviewCallback() {
 
-334.      public void onPreviewFrame(byte[] data, Camera cam) {
+  334.      public void onPreviewFrame(byte[] data, Camera cam) {
 
-335.             if (data == null)
+  335.             if (data == null)
 
-336.               throw new NullPointerException();
+  336.               throw new NullPointerException();
 
-337.           Camera.Size size = cam.getParameters().getPreviewSize();
+  337.           Camera.Size size = cam.getParameters().getPreviewSize();
 
-338.            if (size == null)
+  338.            if (size == null)
 
-339.               throw new NullPointerException();
+  339.               throw new NullPointerException();
 
-340.           if (!processing.compareAndSet(false, true))
+  340.           if (!processing.compareAndSet(false, true))
 
-341.               return;
+  341.               return;
 
-342.           int width = size.width;
+  342.           int width = size.width;
 
-343.           int height = size.height;
+  343.           int height = size.height;
 
-344.             //图像处理
+  344.             //图像处理
 
-345.            int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(),height,width);
+  345.            int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(),height,width);
 
-346.           gx=imgAvg;
+  346.           gx=imgAvg;
 
-347.          text1.setText(&quot;平均像素值是&quot;+String.valueOf(imgAvg));
+  347.          text1.setText(&quot;平均像素值是&quot;+String.valueOf(imgAvg));
 
-348.            //像素平均值imgAvg,日志
+  348.            //像素平均值imgAvg,日志
 
-349.          //Log.i(TAG, &quot;imgAvg=&quot; + imgAvg);
+  349.          //Log.i(TAG, &quot;imgAvg=&quot; + imgAvg);
 
-350.             if (imgAvg == 0 || imgAvg == 255) {
+  350.             if (imgAvg == 0 || imgAvg == 255) {
 
-351.                 processing.set(false);
+  351.                 processing.set(false);
 
-352.                return;
+  352.                return;
 
-353.           }
+  353.           }
 
-354.           //计算平均值
+  354.           //计算平均值
 
-355.           int averageArrayAvg = 0;
+  355.           int averageArrayAvg = 0;
 
-356.             int averageArrayCnt = 0;
+  356.             int averageArrayCnt = 0;
 
-357.             for (int i = 0; i &lt; averageArray.length; i++) {
+  357.             for (int i = 0; i &lt; averageArray.length; i++) {
 
-358.                 if (averageArray[i] &gt; 0) {
+  358.                 if (averageArray[i] &gt; 0) {
 
-359.                    averageArrayAvg += averageArray[i];
+  359.                    averageArrayAvg += averageArray[i];
 
-360.                     averageArrayCnt++;
+  360.                     averageArrayCnt++;
 
-361.              }
+  361.              }
 
-362.           }
+  362.           }
 
-363.           //计算平均值
+  363.           //计算平均值
 
-364.           int rollingAverage = (averageArrayCnt &gt; 0)?(averageArrayAvg/averageArrayCnt):0;
+  364.           int rollingAverage = (averageArrayCnt &gt; 0)?(averageArrayAvg/averageArrayCnt):0;
 
-365.          TYPE newType = currentType;
+  365.          TYPE newType = currentType;
 
-366.             if (imgAvg &lt; rollingAverage) {
+  366.             if (imgAvg &lt; rollingAverage) {
 
-367.                 newType = TYPE.RED;
+  367.                 newType = TYPE.RED;
 
-368.                 if (newType != currentType) {
+  368.                 if (newType != currentType) {
 
-369.                     beats++;
+  369.                     beats++;
 
-370.                    flag=0;
+  370.                    flag=0;
 
-371.                    text2.setText(&quot;脉冲数是&quot;+String.valueOf(beats));
+  371.                    text2.setText(&quot;脉冲数是&quot;+String.valueOf(beats));
 
-372.                   //Log.e(TAG, &quot;BEAT!! beats=&quot; + beats);
+  372.                   //Log.e(TAG, &quot;BEAT!! beats=&quot; + beats);
 
-373.                }
+  373.                }
 
-374.           } else if (imgAvg &gt; rollingAverage) {
+  374.           } else if (imgAvg &gt; rollingAverage) {
 
-375.                newType = TYPE.GREEN;
+  375.                newType = TYPE.GREEN;
 
-376.           }
+  376.           }
 
-377.  
+  377.  
 
-378.             if (averageIndex == averageArraySize)
+  378.             if (averageIndex == averageArraySize)
 
-379.                 averageIndex = 0;
+  379.                 averageIndex = 0;
 
-380.          averageArray[averageIndex] = imgAvg;
+  380.          averageArray[averageIndex] = imgAvg;
 
-381.            averageIndex++;
+  381.            averageIndex++;
 
-382.  
+  382.  
 
-383.           // Transitioned from one state to another to the same
+  383.           // Transitioned from one state to another to the same
 
-384.             if (newType != currentType) {
+  384.             if (newType != currentType) {
 
-385.                 currentType = newType;
+  385.                 currentType = newType;
 
-386.              //image.postInvalidate();
+  386.              //image.postInvalidate();
 
-387.             }
+  387.             }
 
-388.           //获取系统结束时间（ms）
+  388.           //获取系统结束时间（ms）
 
-389.            long endTime = System.currentTimeMillis();
+  389.            long endTime = System.currentTimeMillis();
 
-390.            double totalTimeInSecs = (endTime - startTime) / 1000d;
+  390.            double totalTimeInSecs = (endTime - startTime) / 1000d;
 
-391.          if (totalTimeInSecs &gt;= 2) {
+  391.          if (totalTimeInSecs &gt;= 2) {
 
-392.               double bps = (beats / totalTimeInSecs);
+  392.               double bps = (beats / totalTimeInSecs);
 
-393.               int dpm = (int) (bps * 60d);
+  393.               int dpm = (int) (bps * 60d);
 
-394.               if (dpm &lt; 30 || dpm &gt; 180||imgAvg&lt;200) {
+  394.               if (dpm &lt; 30 || dpm &gt; 180||imgAvg&lt;200) {
 
-395.                  //获取系统开始时间（ms）
+  395.                  //获取系统开始时间（ms）
 
-396.                    startTime = System.currentTimeMillis();
+  396.                    startTime = System.currentTimeMillis();
 
-397.                     //beats心跳总数
+  397.                     //beats心跳总数
 
-398.                   beats = 0;
+  398.                   beats = 0;
 
-399.                     processing.set(false);
+  399.                     processing.set(false);
 
-400.                    return;
+  400.                    return;
 
-401.               }
+  401.               }
 
-402.               //Log.e(TAG, &quot;totalTimeInSecs=&quot; + totalTimeInSecs + &quot; beats=&quot;+ beats);
+  402.               //Log.e(TAG, &quot;totalTimeInSecs=&quot; + totalTimeInSecs + &quot; beats=&quot;+ beats);
 
-403.                if (beatsIndex == beatsArraySize)
+  403.                if (beatsIndex == beatsArraySize)
 
-404.                     beatsIndex = 0;
+  404.                     beatsIndex = 0;
 
-405.                beatsArray[beatsIndex] = dpm;
+  405.                beatsArray[beatsIndex] = dpm;
 
-406.               beatsIndex++;
+  406.               beatsIndex++;
 
-407.               int beatsArrayAvg = 0;
+  407.               int beatsArrayAvg = 0;
 
-408.               int beatsArrayCnt = 0;
+  408.               int beatsArrayCnt = 0;
 
-409.               for (int i = 0; i &lt; beatsArray.length; i++) {
+  409.               for (int i = 0; i &lt; beatsArray.length; i++) {
 
-410.                   if (beatsArray[i] &gt; 0) {
+  410.                   if (beatsArray[i] &gt; 0) {
 
-411.                      beatsArrayAvg += beatsArray[i];
+  411.                      beatsArrayAvg += beatsArray[i];
 
-412.                         beatsArrayCnt++;
+  412.                         beatsArrayCnt++;
 
-413.                    }
+  413.                    }
 
-414.               }
+  414.               }
 
-415.               int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
+  415.               int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
 
-416.               text.setText(&quot;您的的心率是&quot;+String.valueOf(beatsAvg)+&quot;  zhi:&quot;+String.valueOf(beatsArray.length)
+  416.               text.setText(&quot;您的的心率是&quot;+String.valueOf(beatsAvg)+&quot;  zhi:&quot;+String.valueOf(beatsArray.length)
 
-417.                         +&quot;    &quot;+String.valueOf(beatsIndex)+&quot;    &quot;+String.valueOf(beatsArrayAvg)+&quot;    &quot;+String.valueOf(beatsArrayCnt));
+  417.                         +&quot;    &quot;+String.valueOf(beatsIndex)+&quot;    &quot;+String.valueOf(beatsArrayAvg)+&quot;    &quot;+String.valueOf(beatsArrayCnt));
 
-418.               //获取系统时间（ms）
+  418.               //获取系统时间（ms）
 
-419.              startTime = System.currentTimeMillis();
+  419.              startTime = System.currentTimeMillis();
 
-420.                 beats = 0;
+  420.                 beats = 0;
 
-421.             }
+  421.             }
 
-422.           processing.set(false);
+  422.           processing.set(false);
 
-423.        }
+  423.        }
 
-424.   };
+  424.   };
 
-425.  
+  425.  
 
-426.    /**
+  426.    /**
 
-427.   * 预览回调接口
+  427.   * 预览回调接口
 
-428.      */
+  428.      */
 
-429.  private static SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
+  429.  private static SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
 
-430.        //创建时调用
+  430.        //创建时调用
 
-431.       @Override
+  431.       @Override
 
-432.        public void surfaceCreated(SurfaceHolder holder) {
+  432.        public void surfaceCreated(SurfaceHolder holder) {
 
-433.          try {
+  433.          try {
 
-434.                 camera.setPreviewDisplay(previewHolder);
+  434.                 camera.setPreviewDisplay(previewHolder);
 
-435.                camera.setPreviewCallback(previewCallback);
+  435.                camera.setPreviewCallback(previewCallback);
 
-436.             } catch (Throwable t) {
+  436.             } catch (Throwable t) {
 
-437.               Log.e(&quot;PreviewDemo-surfaceCallback&quot;,&quot;Exception in setPreviewDisplay()&quot;, t);
+  437.               Log.e(&quot;PreviewDemo-surfaceCallback&quot;,&quot;Exception in setPreviewDisplay()&quot;, t);
 
-438.           }
+  438.           }
 
-439.       }
+  439.       }
 
-440.       //当预览改变的时候回调此方法
+  440.       //当预览改变的时候回调此方法
 
-441.       @Override
+  441.       @Override
 
-442.        public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
+  442.        public void surfaceChanged(SurfaceHolder holder, int format, int width,int height) {
 
-443.          Camera.Parameters parameters = camera.getParameters();
+  443.          Camera.Parameters parameters = camera.getParameters();
 
-444.          parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+  444.          parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
 
-445.            Camera.Size size = getSmallestPreviewSize(width, height, parameters);
+  445.            Camera.Size size = getSmallestPreviewSize(width, height, parameters);
 
-446.           if (size != null) {
+  446.           if (size != null) {
 
-447.                 parameters.setPreviewSize(size.width, size.height);
+  447.                 parameters.setPreviewSize(size.width, size.height);
 
-448.                 //               Log.d(TAG, &quot;Using width=&quot; + size.width + &quot; height=&quot; + size.height);
+  448.                 //               Log.d(TAG, &quot;Using width=&quot; + size.width + &quot; height=&quot; + size.height);
 
-449.          }
+  449.          }
 
-450.           camera.setParameters(parameters);
+  450.           camera.setParameters(parameters);
 
-451.           camera.startPreview();
+  451.           camera.startPreview();
 
-452.      }
+  452.      }
 
-453.       //销毁的时候调用
+  453.       //销毁的时候调用
 
-454.         @Override
+  454.         @Override
 
-455.        public void surfaceDestroyed(SurfaceHolder holder) {
+  455.        public void surfaceDestroyed(SurfaceHolder holder) {
 
-456.            // Ignore
+  456.            // Ignore
 
-457.         }
+  457.         }
 
-458.   };
+  458.   };
 
-459.  
+  459.  
 
-460.    /**
+  460.    /**
 
-461.   * 获取相机最小的预览尺寸
+  461.   * 获取相机最小的预览尺寸
 
-462.     * @param width
+  462.     * @param width
 
-463.   * @param height
+  463.   * @param height
 
-464.      * @param parameters
+  464.      * @param parameters
 
-465.      * @return
+  465.      * @return
 
-466.    */
+  466.    */
 
-467.  private static Camera.Size getSmallestPreviewSize(int width, int height,
+  467.  private static Camera.Size getSmallestPreviewSize(int width, int height,
 
-468.             Camera.Parameters parameters) {
+  468.             Camera.Parameters parameters) {
 
-469.      Camera.Size result = null;
+  469.      Camera.Size result = null;
 
-470.        for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
+  470.        for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
 
-471.          if (size.width &lt;= width &amp;&amp; size.height &lt;= height) {
+  471.          if (size.width &lt;= width &amp;&amp; size.height &lt;= height) {
 
-472.                 if (result == null) {
+  472.                 if (result == null) {
 
-473.                   result = size;
+  473.                   result = size;
 
-474.              } else {
+  474.              } else {
 
-475.                  int resultArea = result.width * result.height;
+  475.                  int resultArea = result.width * result.height;
 
-476.                    int newArea = size.width * size.height;
+  476.                    int newArea = size.width * size.height;
 
-477.                   if (newArea &lt; resultArea)
+  477.                   if (newArea &lt; resultArea)
 
-478.                      result = size;
+  478.                      result = size;
 
-479.              }
+  479.              }
 
-480.           }
+  480.           }
 
-481.       }
+  481.       }
 
-482.       return result;
+  482.       return result;
 
-483.    }
+  483.    }
 
-484. }
+  484. }
 </code></pre><h4 id="3、UI布局"><a href="#3、UI布局" class="headerlink" title="3、UI布局"></a>3、UI布局</h4><p>这里就不多说了，对于UI布局的实现，相信大家看了源码都懂得。</p>
 <p>具体代码实现如下：</p>
-<pre><code>    1. &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+<pre><code>      1. &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
 
-2.     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+  2.     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
 
-3.     android:layout_width=&quot;match_parent&quot;
+  3.     android:layout_width=&quot;match_parent&quot;
 
-4.     android:layout_height=&quot;match_parent&quot;
+  4.     android:layout_height=&quot;match_parent&quot;
 
-5.     android:orientation=&quot;vertical&quot; &gt;
+  5.     android:orientation=&quot;vertical&quot; &gt;
 
-6.  
+  6.  
 
-7.     &lt;SurfaceView
+  7.     &lt;SurfaceView
 
-8.         android:id=&quot;@+id/preview&quot;
+  8.         android:id=&quot;@+id/preview&quot;
 
-9.         android:layout_width=&quot;fill_parent&quot;
+  9.         android:layout_width=&quot;fill_parent&quot;
 
-10.         android:layout_height=&quot;200dp&quot;
+  10.         android:layout_height=&quot;200dp&quot;
 
-11.         android:layout_marginLeft=&quot;50dip&quot;
+  11.         android:layout_marginLeft=&quot;50dip&quot;
 
-12.         android:layout_marginRight=&quot;50dip&quot; /&gt;
+  12.         android:layout_marginRight=&quot;50dip&quot; /&gt;
 
-13.  
+  13.  
 
-14.     &lt;LinearLayout
+  14.     &lt;LinearLayout
 
-15.         android:id=&quot;@+id/linearLayout1&quot;
+  15.         android:id=&quot;@+id/linearLayout1&quot;
 
-16.         android:layout_width=&quot;match_parent&quot;
+  16.         android:layout_width=&quot;match_parent&quot;
 
-17.         android:layout_height=&quot;200dp&quot;
+  17.         android:layout_height=&quot;200dp&quot;
 
-18.         android:orientation=&quot;vertical&quot; &gt;
+  18.         android:orientation=&quot;vertical&quot; &gt;
 
-19.     &lt;/LinearLayout&gt;
+  19.     &lt;/LinearLayout&gt;
 
-20.  
+  20.  
 
-21.     &lt;TextView
+  21.     &lt;TextView
 
-22.         android:id=&quot;@+id/text&quot;
+  22.         android:id=&quot;@+id/text&quot;
 
-23.         android:layout_width=&quot;wrap_content&quot;
+  23.         android:layout_width=&quot;wrap_content&quot;
 
-24.         android:layout_height=&quot;wrap_content&quot;
+  24.         android:layout_height=&quot;wrap_content&quot;
 
-25.         android:layout_marginLeft=&quot;50dip&quot;
+  25.         android:layout_marginLeft=&quot;50dip&quot;
 
-26.         android:layout_weight=&quot;1&quot;
+  26.         android:layout_weight=&quot;1&quot;
 
-27.         android:text=&quot;@string/show&quot; &gt;
+  27.         android:text=&quot;@string/show&quot; &gt;
 
-28.     &lt;/TextView&gt;
+  28.     &lt;/TextView&gt;
 
-29.  
+  29.  
 
-30.     &lt;TextView
+  30.     &lt;TextView
 
-31.         android:id=&quot;@+id/text1&quot;
+  31.         android:id=&quot;@+id/text1&quot;
 
-32.         android:layout_width=&quot;wrap_content&quot;
+  32.         android:layout_width=&quot;wrap_content&quot;
 
-33.         android:layout_height=&quot;wrap_content&quot;
+  33.         android:layout_height=&quot;wrap_content&quot;
 
-34.         android:layout_marginLeft=&quot;50dip&quot;
+  34.         android:layout_marginLeft=&quot;50dip&quot;
 
-35.         android:layout_weight=&quot;1&quot;
+  35.         android:layout_weight=&quot;1&quot;
 
-36.         android:text=&quot;@string/show&quot; &gt;
+  36.         android:text=&quot;@string/show&quot; &gt;
 
-37.     &lt;/TextView&gt;
+  37.     &lt;/TextView&gt;
 
-38.  
+  38.  
 
-39.     &lt;TextView
+  39.     &lt;TextView
 
-40.         android:id=&quot;@+id/text2&quot;
+  40.         android:id=&quot;@+id/text2&quot;
 
-41.         android:layout_width=&quot;wrap_content&quot;
+  41.         android:layout_width=&quot;wrap_content&quot;
 
-42.         android:layout_height=&quot;wrap_content&quot;
+  42.         android:layout_height=&quot;wrap_content&quot;
 
-43.         android:layout_marginLeft=&quot;50dip&quot;
+  43.         android:layout_marginLeft=&quot;50dip&quot;
 
-44.         android:layout_weight=&quot;1&quot;
+  44.         android:layout_weight=&quot;1&quot;
 
-45.         android:text=&quot;@string/show&quot; &gt;
+  45.         android:text=&quot;@string/show&quot; &gt;
 
-46.     &lt;/TextView&gt;
+  46.     &lt;/TextView&gt;
 
-47.  
+  47.  
 
-48. &lt;/LinearLayout&gt;
-</code></pre><h4 id="4、strings-xml"><a href="#4、strings-xml" class="headerlink" title="4、strings.xml"></a>4、strings.xml</h4><pre><code>    1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+  48. &lt;/LinearLayout&gt;
+</code></pre><h4 id="4、strings-xml"><a href="#4、strings-xml" class="headerlink" title="4、strings.xml"></a>4、strings.xml</h4><pre><code>      1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-2. &lt;resources&gt;
+  2. &lt;resources&gt;
 
-3.  
+  3.  
 
-4.     &lt;string name=&quot;app_name&quot;&gt;心率检测&lt;/string&gt;
+  4.     &lt;string name=&quot;app_name&quot;&gt;心率检测&lt;/string&gt;
 
-5.     &lt;string name=&quot;action_settings&quot;&gt;Settings&lt;/string&gt;
+  5.     &lt;string name=&quot;action_settings&quot;&gt;Settings&lt;/string&gt;
 
-6.     &lt;string name=&quot;hello_world&quot;&gt;Hello world!&lt;/string&gt;
+  6.     &lt;string name=&quot;hello_world&quot;&gt;Hello world!&lt;/string&gt;
 
-7.     &lt;string name=&quot;show&quot;&gt;显示&lt;/string&gt;
+  7.     &lt;string name=&quot;show&quot;&gt;显示&lt;/string&gt;
 
-8. &lt;/resources&gt;
+  8. &lt;/resources&gt;
 </code></pre><h4 id="5、授权AndroidManifest-xml"><a href="#5、授权AndroidManifest-xml" class="headerlink" title="5、授权AndroidManifest.xml"></a>5、授权AndroidManifest.xml</h4><p>最后，我把授权文件贴出来吧。</p>
 <p>具体代码实现如下：</p>
-<pre><code>    1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code>      1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
-2. &lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+  2. &lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
 
-3.     package=&quot;com.lyz.xinlv.activity&quot;
+  3.     package=&quot;com.lyz.xinlv.activity&quot;
 
-4.     android:versionCode=&quot;1&quot;
+  4.     android:versionCode=&quot;1&quot;
 
-5.     android:versionName=&quot;1.0&quot; &gt;
+  5.     android:versionName=&quot;1.0&quot; &gt;
 
-6.  
+  6.  
 
-7.     &lt;uses-sdk
+  7.     &lt;uses-sdk
 
-8.         android:minSdkVersion=&quot;15&quot;
+  8.         android:minSdkVersion=&quot;15&quot;
 
-9.         android:targetSdkVersion=&quot;15&quot; /&gt;
+  9.         android:targetSdkVersion=&quot;15&quot; /&gt;
 
-10.     &lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot; /&gt;
+  10.     &lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot; /&gt;
 
-11.     &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
+  11.     &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
 
-12.     &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt;
+  12.     &lt;uses-feature android:name=&quot;android.hardware.camera&quot; /&gt;
 
-13.     &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot; /&gt;
+  13.     &lt;uses-feature android:name=&quot;android.hardware.camera.autofocus&quot; /&gt;
 
-14.  
+  14.  
 
-15.     &lt;application
+  15.     &lt;application
 
-16.         android:allowBackup=&quot;true&quot;
+  16.         android:allowBackup=&quot;true&quot;
 
-17.         android:icon=&quot;@drawable/ic_launcher&quot;
+  17.         android:icon=&quot;@drawable/ic_launcher&quot;
 
-18.         android:label=&quot;@string/app_name&quot;
+  18.         android:label=&quot;@string/app_name&quot;
 
-19.         android:theme=&quot;@style/AppTheme&quot; &gt;
+  19.         android:theme=&quot;@style/AppTheme&quot; &gt;
 
-20.         &lt;activity
+  20.         &lt;activity
 
-21.             android:name=&quot;com.lyz.xinlv.activity.MainActivity&quot;
+  21.             android:name=&quot;com.lyz.xinlv.activity.MainActivity&quot;
 
-22.             android:label=&quot;@string/app_name&quot; &gt;
+  22.             android:label=&quot;@string/app_name&quot; &gt;
 
-23.             &lt;intent-filter&gt;
+  23.             &lt;intent-filter&gt;
 
-24.                 &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+  24.                 &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
 
-25.  
+  25.  
 
-26.                 &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+  26.                 &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
 
-27.             &lt;/intent-filter&gt;
+  27.             &lt;/intent-filter&gt;
 
-28.         &lt;/activity&gt;
+  28.         &lt;/activity&gt;
 
-29.     &lt;/application&gt;
+  29.     &lt;/application&gt;
 
-30.  
+  30.  
 
-31. &lt;/manifest&gt;
+  31. &lt;/manifest&gt;
 </code></pre><p>至此，这个应用开发完成，亲们，是不是比想象的简单呢？  </p>
 <h3 id="三、运行效果"><a href="#三、运行效果" class="headerlink" title="三、运行效果"></a>三、运行效果</h3><p><img src="https://img-
 blog.csdn.net/20150731150731132?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
@@ -4644,6 +4470,227 @@ blog.csdn.net/20150731151739678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/fo
 <p>大家可以到链接 <a href="http://download.csdn.net/detail/l1028386804/8949597" target="_blank" rel="noopener"> http://download.csdn.net/detail/l1028386804/8949597
 </a> 获取完整模拟实现检测心率变化的应用源代码  </p>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/07/28/Gson自定义序列化与反序列化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/28/Gson自定义序列化与反序列化/" itemprop="url">Gson自定义序列化与反序列化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-28T12:49:42+08:00">
+                2018-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在使用Gson的时候我们经常需要根据自己的需求定义序列化和反序列化的规则，本文主要讲解如何优雅地进行Gson的序列化和反序列化。</p>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>实现 <code>JsonSerializer</code> 接口 </li>
+<li>注册自定义的序列化实现 </li>
+</ul>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><ul>
+<li>自定义UserInformationBeanSerializer并实现JsonSerializer接口 </li>
+</ul>
+<pre><code>public class UserInformationBeanSerializer implements JsonSerializer&lt;UserInformationBean&gt; {
+    @Override
+    public JsonElement serialize(UserInformationBean userInformationBean, Type type, JsonSerializationContext jsonSerializationContext) {
+        JsonObject Server = new JsonObject();
+        JsonObject data = new JsonObject();
+
+
+        data.addProperty(&quot;report&quot;, getReport(userInformationBean));
+        data.addProperty(&quot;time&quot;, getTimeStr());
+
+        JsonObject pollData = new JsonObject();
+        data.add(&quot;pollData&quot;, pollData);
+
+
+        JsonObject basicData = new JsonObject();
+        basicData.addProperty(&quot;gender&quot;, userInformationBean.getSex().ordinal() + &quot;&quot;);
+        basicData.addProperty(&quot;payWay&quot;, &quot;0&quot;);
+
+
+        data.add(&quot;basicData&quot;, basicData);
+        Server.add(&quot;data&quot;, data);
+
+        return Server;
+
+    }
+
+
+
+}
+</code></pre><ul>
+<li><p>注册自定义的UserInformationBeanSerializer </p>
+<pre><code>UserInformationBeanSerializer userInformationBeanSerializer = new                     UserInformationBeanSerializer();
+</code></pre><p>Type IntListType = new TypeToken<userinformationbean>() {}.getType();</userinformationbean></p>
+<p>GsonBuilder builder = new GsonBuilder();<br>builder.registerTypeAdapter(IntListType, userInformationBeanSerializer);</p>
+<p>Gson gson = builder.create();</p>
+<p>String datacontent = gson.toJson(userInformationBean);</p>
+</li>
+</ul>
+<h2 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h2><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><ul>
+<li>实现 <code>JsonDeserializer</code> 接口 </li>
+<li>注册自定义的反序列化实现 </li>
+</ul>
+<h3 id="demo-1"><a href="#demo-1" class="headerlink" title="demo"></a>demo</h3><ul>
+<li><p>自定义TcmJsonBeanDeserializer并实现JsonDeserializer接口 </p>
+<pre><code>public class TcmJsonBeanDeserializer implements JsonDeserializer&lt;TcmJsonBean&gt; {
+</code></pre><p>  @Override<br>  public TcmJsonBean deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {</p>
+</li>
+</ul>
+<pre><code>      JsonObject jsonObject = jsonElement.getAsJsonObject();
+      TcmJsonBean tcmJsonBean = new TcmJsonBean();
+
+      if (jsonObject.has(&quot;代茶饮&quot;)) {
+          tcmJsonBean.setDaiChaYin(jsonObject.get(&quot;代茶饮&quot;).getAsString());
+      }
+
+      if (jsonObject.has(&quot;体质类型&quot;)) {
+          tcmJsonBean.setDaiChaYin(jsonObject.get(&quot;体质类型&quot;).getAsString());
+      }
+
+      if (jsonObject.has(&quot;穴位按摩&quot;)) {
+          tcmJsonBean.setDaiChaYin(jsonObject.get(&quot;穴位按摩&quot;).getAsString());
+      }
+
+      if (jsonObject.has(&quot;运动&quot;)) {
+          tcmJsonBean.setDaiChaYin(jsonObject.get(&quot;运动&quot;).getAsString());
+      }
+
+      if (jsonObject.has(&quot;食疗&quot;)) {
+          tcmJsonBean.setDaiChaYin(jsonObject.get(&quot;食疗&quot;).getAsString());
+      }
+
+
+      return null;
+  }
+}
+</code></pre><ul>
+<li>注册自定义的反序列化实现 </li>
+</ul>
+<pre><code> String json = readFileToStringUtil.ReadJsonToString(filename);
+        Gson gson = new Gson();
+        List&lt;JsonElement&gt; list = new ArrayList();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement jsonElement = jsonParser.parse(json);  //将json字符串转换成JsonElement
+        JsonArray jsonArray = jsonElement.getAsJsonArray();  //将JsonElement转换成JsonArray
+        Iterator it = jsonArray.iterator();  //Iterator处理
+        tcmJsonBeans = new ArrayList&lt;TcmJsonBean&gt;();
+
+        while (it.hasNext()) {  //循环
+            jsonElement = (JsonElement) it.next(); //提取JsonElement
+            json = jsonElement.toString();  //JsonElement转换成String
+            TcmJsonBean questionInJsonBean = gson.fromJson(json, TcmJsonBean.class); //String转化成JavaBean
+            tcmJsonBeans.add(questionInJsonBean);
+        }
+        return tcmJsonBeans;
+</code></pre>
           
         
       
@@ -4728,7 +4775,7 @@ blog.csdn.net/20150731151739678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/fo
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -4750,7 +4797,7 @@ blog.csdn.net/20150731151739678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/fo
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -4989,7 +5036,7 @@ blog.csdn.net/20150731151739678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/fo
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

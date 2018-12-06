@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -129,7 +129,7 @@ blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
 
-  <title>使用python绘制混淆矩阵（confusion_matrix） | DmrfCoder的个人主页</title>
+  <title>使用python绘制混淆矩阵（confusion_matrix） | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -148,7 +148,7 @@ blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -332,29 +332,29 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #labels表示你不同类别的代号，比如这里的demo中有13个类别
-labels = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;, &apos;F&apos;, &apos;G&apos;, &apos;H&apos;, &apos;I&apos;, &apos;J&apos;, &apos;K&apos;, &apos;L&apos;, &apos;M&apos;, &apos;N&apos;, &apos;O&apos;]
+labels = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;O&#39;]
 
 #y_true代表真实的label值 y_pred代表预测得到的lavel值
-y_true = np.loadtxt(&apos;../Data/re_label.txt&apos;)
-y_pred = np.loadtxt(&apos;../Data/pr_label.txt&apos;)
+y_true = np.loadtxt(&#39;../Data/re_label.txt&#39;)
+y_pred = np.loadtxt(&#39;../Data/pr_label.txt&#39;)
 
 tick_marks = np.array(range(len(labels))) + 0.5
 
 
-def plot_confusion_matrix(cm, title=&apos;Confusion Matrix&apos;, cmap=plt.cm.binary):
-    plt.imshow(cm, interpolation=&apos;nearest&apos;, cmap=cmap)
+def plot_confusion_matrix(cm, title=&#39;Confusion Matrix&#39;, cmap=plt.cm.binary):
+    plt.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap)
     plt.title(title)
     plt.colorbar()
     xlocations = np.array(range(len(labels)))
     plt.xticks(xlocations, labels, rotation=90)
     plt.yticks(xlocations, labels)
-    plt.ylabel(&apos;True label&apos;)
-    plt.xlabel(&apos;Predicted label&apos;)
+    plt.ylabel(&#39;True label&#39;)
+    plt.xlabel(&#39;Predicted label&#39;)
 
 
 cm = confusion_matrix(y_true, y_pred)
 np.set_printoptions(precision=2)
-cm_normalized = cm.astype(&apos;float&apos;) / cm.sum(axis=1)[:, np.newaxis]
+cm_normalized = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis]
 print cm_normalized
 plt.figure(figsize=(12, 8), dpi=120)
 
@@ -364,18 +364,18 @@ x, y = np.meshgrid(ind_array, ind_array)
 for x_val, y_val in zip(x.flatten(), y.flatten()):
     c = cm_normalized[y_val][x_val]
     if c &gt; 0.01:
-        plt.text(x_val, y_val, &quot;%0.2f&quot; % (c,), color=&apos;red&apos;, fontsize=7, va=&apos;center&apos;, ha=&apos;center&apos;)
+        plt.text(x_val, y_val, &quot;%0.2f&quot; % (c,), color=&#39;red&#39;, fontsize=7, va=&#39;center&#39;, ha=&#39;center&#39;)
 # offset the tick
 plt.gca().set_xticks(tick_marks, minor=True)
 plt.gca().set_yticks(tick_marks, minor=True)
-plt.gca().xaxis.set_ticks_position(&apos;none&apos;)
-plt.gca().yaxis.set_ticks_position(&apos;none&apos;)
-plt.grid(True, which=&apos;minor&apos;, linestyle=&apos;-&apos;)
+plt.gca().xaxis.set_ticks_position(&#39;none&#39;)
+plt.gca().yaxis.set_ticks_position(&#39;none&#39;)
+plt.grid(True, which=&#39;minor&#39;, linestyle=&#39;-&#39;)
 plt.gcf().subplots_adjust(bottom=0.15)
 
-plot_confusion_matrix(cm_normalized, title=&apos;Normalized confusion matrix&apos;)
+plot_confusion_matrix(cm_normalized, title=&#39;Normalized confusion matrix&#39;)
 # show confusion matrix
-plt.savefig(&apos;../Data/confusion_matrix.png&apos;, format=&apos;png&apos;)
+plt.savefig(&#39;../Data/confusion_matrix.png&#39;, format=&#39;png&#39;)
 plt.show()
 </code></pre><h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><p><img src="https://img-
 blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
@@ -495,7 +495,7 @@ blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +517,7 @@ blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -704,7 +704,7 @@ blog.csdn.net/20180422134149170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

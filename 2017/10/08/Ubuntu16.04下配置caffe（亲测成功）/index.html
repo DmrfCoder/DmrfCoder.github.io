@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -144,7 +144,7 @@ blog.csdn.net/20171008174717457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
 
 
 
-  <title>Ubuntu16.04下配置caffe（亲测成功） | DmrfCoder的个人主页</title>
+  <title>Ubuntu16.04下配置caffe（亲测成功） | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -163,7 +163,7 @@ blog.csdn.net/20171008174717457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -368,23 +368,23 @@ blog.csdn.net/20171008174958111?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
 blog.csdn.net/20171008175030676?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <h2 id="下载安装CUDA8-0并验证是否安装成功"><a href="#下载安装CUDA8-0并验证是否安装成功" class="headerlink" title="下载安装CUDA8.0并验证是否安装成功"></a>下载安装CUDA8.0并验证是否安装成功</h2><h3 id="下载安装CUDA8-0"><a href="#下载安装CUDA8-0" class="headerlink" title="下载安装CUDA8.0"></a>下载安装CUDA8.0</h3><p>NVIDIA官网提供两种方式来安装CUDA，即run安装和deb安装，这里不建议初学者使用run安装，因为run安装对Linix版本和Linix<br>kernel版本以及GCC版本都有严格要求，稍有不符，可能就会导致失败，所以这里为大家介绍deb方式安装：</p>
 <p>首先下载CUDA8.0的deb包（可去官网下，也可至笔者的网盘下载，网盘链接见文末），下载好之后依次键入以下命令：</p>
-<pre><code>sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
-sudo apt-get update
-sudo apt-get install cuda
+<pre><code>    sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+    sudo apt-get update
+    sudo apt-get install cuda
 </code></pre><h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><p>命令：</p>
 <pre><code>sudo gedit /etc/profile
 </code></pre><p>在文件最后加上</p>
-<pre><code>PATH=/usr/local/cuda/bin:$PATH 
-export PATH
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64 
-export LD_ LIBRARY_PATH    
+<pre><code>     PATH=/usr/local/cuda/bin:$PATH 
+     export PATH
+     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64 
+     export LD_ LIBRARY_PATH    
 </code></pre><p>使用以下命令使其生效：</p>
 <pre><code>source /etc/profile
 </code></pre><p>安装完成以后一定要 <strong>重启电脑</strong> 使其生效。</p>
 <h3 id="验证CUDA8-0是否安装成功"><a href="#验证CUDA8-0是否安装成功" class="headerlink" title="验证CUDA8.0是否安装成功"></a>验证CUDA8.0是否安装成功</h3><p>重启电脑之后请读者可依次键入以下命令验证CUDA8.0是否安装成功：</p>
-<pre><code>cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery
-sudo make
-./deviceQuery
+<pre><code>    cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery
+    sudo make
+    ./deviceQuery
 </code></pre><p>如果看到类似以下信息就说明CUDA安装成功：<br><img src="https://img-
 blog.csdn.net/20171008175120021?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <h2 id="下载安装cudnn并验证是否安装成功"><a href="#下载安装cudnn并验证是否安装成功" class="headerlink" title="下载安装cudnn并验证是否安装成功"></a>下载安装cudnn并验证是否安装成功</h2><h3 id="下载安装cudnn"><a href="#下载安装cudnn" class="headerlink" title="下载安装cudnn"></a>下载安装cudnn</h3><p>读者可以登录官网： <a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener"> https://developer.nvidia.com/rdp/cudnn-download
@@ -425,15 +425,15 @@ make: *** [all] 错误 2
 CUDA_GENERATION=Kepler ..</code></p>
 <p>然后再make。</p>
 <p>sudo make时，也可能出现</p>
-<pre><code>make[2]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/src/graphcuts.cpp.o] Error 1
-   make[1]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/all] Error 2
-   make: *** [all] Error 2
+<pre><code>     make[2]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/src/graphcuts.cpp.o] Error 1
+        make[1]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/all] Error 2
+        make: *** [all] Error 2
 </code></pre><p>的错误。<br>那是因为 cuda-8.0与OpenCV 3.1.0发生了冲突。解决方法：修改openCV 3.1.0源码，使其兼容cuda-8.0</p>
-<pre><code>sudo gedit opencv-3.1.0/modules/cudalegacy/src/graphcuts.cpp
+<pre><code> sudo gedit opencv-3.1.0/modules/cudalegacy/src/graphcuts.cpp
 </code></pre><p>将第四十五行位置的</p>
-<pre><code>#if !defined (HAVE_CUDA) || defined (CUDA_DISABLER)
+<pre><code>    #if !defined (HAVE_CUDA) || defined (CUDA_DISABLER)
 </code></pre><p>改为</p>
-<pre><code>#if !defined(HAVE_CUDA)||defined(CUDA_DISABLER)||(CUDART_VERSION&gt;=8000)
+<pre><code> #if !defined(HAVE_CUDA)||defined(CUDA_DISABLER)||(CUDART_VERSION&gt;=8000)
 </code></pre><p>然后重新执行make.</p>
 <h3 id="验证opencv安装是否成功"><a href="#验证opencv安装是否成功" class="headerlink" title="验证opencv安装是否成功"></a>验证opencv安装是否成功</h3><p>在终端输入以下命令：</p>
 <pre><code>pkg-config --modversion opencv  
@@ -446,11 +446,11 @@ CUDA_GENERATION=Kepler ..</code></p>
 <pre><code>sudo gedit Makefile.config
 </code></pre><p>修改 Makefile.config 文件内容：</p>
 <p>将  </p>
-<p>#USE_CUDNN := 1<br>修改成：<br>USE_CUDNN := 1</p>
+<h1 id="USE-CUDNN-1"><a href="#USE-CUDNN-1" class="headerlink" title="USE_CUDNN := 1"></a>USE_CUDNN := 1</h1><p>修改成：<br>USE_CUDNN := 1</p>
 <p>将  </p>
-<p>#OPENCV_VERSION := 3<br>修改为：<br>OPENCV_VERSION := 3</p>
+<h1 id="OPENCV-VERSION-3"><a href="#OPENCV-VERSION-3" class="headerlink" title="OPENCV_VERSION := 3"></a>OPENCV_VERSION := 3</h1><p>修改为：<br>OPENCV_VERSION := 3</p>
 <p>将  </p>
-<p>#WITH_PYTHON_LAYER := 1<br>修改为<br>WITH_PYTHON_LAYER := 1</p>
+<h1 id="WITH-PYTHON-LAYER-1"><a href="#WITH-PYTHON-LAYER-1" class="headerlink" title="WITH_PYTHON_LAYER := 1"></a>WITH_PYTHON_LAYER := 1</h1><p>修改为<br>WITH_PYTHON_LAYER := 1</p>
 <p>将</p>
 <pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib 
@@ -475,7 +475,7 @@ LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu 
 <p>将</p>
 <pre><code>`#error-- unsupported GNU version! gcc versions later than 4.9 are not` supported!
 </code></pre><p>改为</p>
-<pre><code>//#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
+<pre><code>    //#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
 </code></pre><h3 id="编译caffe"><a href="#编译caffe" class="headerlink" title="编译caffe"></a>编译caffe</h3><p>键入以下命令：</p>
 <pre><code>make all -j8
 </code></pre><p>这里的-j后面的参数试你电脑的配置决定<br>PS:后期有几位小伙伴按照上面的配置之后在make这里报错，贴出几个常见的报错信息及解决方案：<br>1：</p>
@@ -621,7 +621,7 @@ blog.csdn.net/20171008175515060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -643,7 +643,7 @@ blog.csdn.net/20171008175515060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -676,7 +676,7 @@ blog.csdn.net/20171008175515060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装开发所需依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装开发所需依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装CUDA8-0并验证是否安装成功"><span class="nav-number">4.</span> <span class="nav-text">下载安装CUDA8.0并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装CUDA8-0"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装CUDA8.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境变量"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证CUDA8-0是否安装成功"><span class="nav-number">4.2.</span> <span class="nav-text">验证CUDA8.0是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装cudnn并验证是否安装成功"><span class="nav-number">5.</span> <span class="nav-text">下载安装cudnn并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装cudnn"><span class="nav-number">5.1.</span> <span class="nav-text">下载安装cudnn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证cudnn是否安装成功"><span class="nav-number">5.2.</span> <span class="nav-text">验证cudnn是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装opencv并验证是否安装成功"><span class="nav-number">6.</span> <span class="nav-text">下载安装opencv并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装opencv"><span class="nav-number">6.1.</span> <span class="nav-text">下载安装opencv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证opencv安装是否成功"><span class="nav-number">6.2.</span> <span class="nav-text">验证opencv安装是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载配置编译caffe"><span class="nav-number">7.</span> <span class="nav-text">下载配置编译caffe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载caffe"><span class="nav-number">7.1.</span> <span class="nav-text">下载caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置caffe（这部分引自大神的blog）"><span class="nav-number">7.2.</span> <span class="nav-text">配置caffe（这部分引自大神的blog）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译caffe"><span class="nav-number">7.3.</span> <span class="nav-text">编译caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试caffe"><span class="nav-number">7.4.</span> <span class="nav-text">测试caffe</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装开发所需依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装开发所需依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装CUDA8-0并验证是否安装成功"><span class="nav-number">4.</span> <span class="nav-text">下载安装CUDA8.0并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装CUDA8-0"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装CUDA8.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境变量"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证CUDA8-0是否安装成功"><span class="nav-number">4.2.</span> <span class="nav-text">验证CUDA8.0是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装cudnn并验证是否安装成功"><span class="nav-number">5.</span> <span class="nav-text">下载安装cudnn并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装cudnn"><span class="nav-number">5.1.</span> <span class="nav-text">下载安装cudnn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证cudnn是否安装成功"><span class="nav-number">5.2.</span> <span class="nav-text">验证cudnn是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装opencv并验证是否安装成功"><span class="nav-number">6.</span> <span class="nav-text">下载安装opencv并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装opencv"><span class="nav-number">6.1.</span> <span class="nav-text">下载安装opencv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证opencv安装是否成功"><span class="nav-number">6.2.</span> <span class="nav-text">验证opencv安装是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载配置编译caffe"><span class="nav-number">7.</span> <span class="nav-text">下载配置编译caffe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载caffe"><span class="nav-number">7.1.</span> <span class="nav-text">下载caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置caffe（这部分引自大神的blog）"><span class="nav-number">7.2.</span> <span class="nav-text">配置caffe（这部分引自大神的blog）</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#USE-CUDNN-1"><span class="nav-number"></span> <span class="nav-text">USE_CUDNN := 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OPENCV-VERSION-3"><span class="nav-number"></span> <span class="nav-text">OPENCV_VERSION := 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WITH-PYTHON-LAYER-1"><span class="nav-number"></span> <span class="nav-text">WITH_PYTHON_LAYER := 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译caffe"><span class="nav-number">0.1.</span> <span class="nav-text">编译caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试caffe"><span class="nav-number">0.2.</span> <span class="nav-text">测试caffe</span></a></li></ol></li></div>
             
 
           </div>
@@ -830,7 +830,7 @@ blog.csdn.net/20171008175515060?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

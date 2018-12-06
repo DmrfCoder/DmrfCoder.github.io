@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 
 
 
-  <title>Gson自定义序列化与反序列化 | DmrfCoder的个人主页</title>
+  <title>Gson自定义序列化与反序列化 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -385,22 +385,22 @@
 </code></pre><ul>
 <li>注册自定义的反序列化实现 </li>
 </ul>
-<pre><code>String json = readFileToStringUtil.ReadJsonToString(filename);
-       Gson gson = new Gson();
-       List&lt;JsonElement&gt; list = new ArrayList();
-       JsonParser jsonParser = new JsonParser();
-       JsonElement jsonElement = jsonParser.parse(json);  //将json字符串转换成JsonElement
-       JsonArray jsonArray = jsonElement.getAsJsonArray();  //将JsonElement转换成JsonArray
-       Iterator it = jsonArray.iterator();  //Iterator处理
-       tcmJsonBeans = new ArrayList&lt;TcmJsonBean&gt;();
+<pre><code> String json = readFileToStringUtil.ReadJsonToString(filename);
+        Gson gson = new Gson();
+        List&lt;JsonElement&gt; list = new ArrayList();
+        JsonParser jsonParser = new JsonParser();
+        JsonElement jsonElement = jsonParser.parse(json);  //将json字符串转换成JsonElement
+        JsonArray jsonArray = jsonElement.getAsJsonArray();  //将JsonElement转换成JsonArray
+        Iterator it = jsonArray.iterator();  //Iterator处理
+        tcmJsonBeans = new ArrayList&lt;TcmJsonBean&gt;();
 
-       while (it.hasNext()) {  //循环
-           jsonElement = (JsonElement) it.next(); //提取JsonElement
-           json = jsonElement.toString();  //JsonElement转换成String
-           TcmJsonBean questionInJsonBean = gson.fromJson(json, TcmJsonBean.class); //String转化成JavaBean
-           tcmJsonBeans.add(questionInJsonBean);
-       }
-       return tcmJsonBeans;
+        while (it.hasNext()) {  //循环
+            jsonElement = (JsonElement) it.next(); //提取JsonElement
+            json = jsonElement.toString();  //JsonElement转换成String
+            TcmJsonBean questionInJsonBean = gson.fromJson(json, TcmJsonBean.class); //String转化成JavaBean
+            tcmJsonBeans.add(questionInJsonBean);
+        }
+        return tcmJsonBeans;
 </code></pre>
       
     </div>
@@ -514,7 +514,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -536,7 +536,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -723,7 +723,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

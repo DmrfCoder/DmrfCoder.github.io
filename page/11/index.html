@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -121,7 +121,7 @@
 
 
 
-  <title>DmrfCoder的个人主页</title>
+  <title>DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -215,338 +215,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/03/10/创建型模式——抽象工厂模式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/10/创建型模式——抽象工厂模式/" itemprop="url">创建型模式——抽象工厂模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T10:40:27+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>抽象工厂模式（Abstract Factory<br>Pattern）是围绕一个超级工厂创建其他工厂。该超级工厂又称为其他工厂的工厂。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>在抽象工厂模式中，接口是负责创建一个相关对象的工厂，不需要显式指定它们的类。每个生成的工厂都能按照工厂模式提供对象。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</p>
-<h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>主要解决接口选择的问题。</p>
-<h2 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h2><p>系统的产品有多于一个的产品族，而系统只消费其中某一族的产品。</p>
-<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>在一个产品族里面，定义多个产品。</p>
-<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><p>在一个工厂里聚合多个同类产品。</p>
-<h2 id="应用实例"><a href="#应用实例" class="headerlink" title="应用实例"></a>应用实例</h2><p>工作了，为了参加一些聚会，肯定有两套或多套衣服吧，比如说有商务装（成套，一系列具体产品）、时尚装（成套，一系列具体产品），甚至对于一个家庭来说，可能有商务女装、商务男装、时尚女装、时尚男装，这些也都是成套的，即一系列具体产品。假设一种情况（现实中是不存在的，要不然，没法进入共产主义了，但有利于说明抽象工厂模式），在您的家中，某一个衣柜（具体工厂）只能存放某一种这样的衣服（成套，一系列具体产品），每次拿这种成套的衣服时也自然要从这个衣柜中取出了。用<br>OO<br>的思想去理解，所有的衣柜（具体工厂）都是衣柜类的（抽象工厂）某一个，而每一件成套的衣服又包括具体的上衣（某一具体产品），裤子（某一具体产品），这些具体的上衣其实也都是上衣（抽象产品），具体的裤子也都是裤子（另一个抽象产品）。</p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>当一个产品族中的多个对象被设计成一起工作时，它能保证客户端始终只使用同一个产品族中的对象。</p>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>产品族扩展非常困难，要增加一个系列的某一产品，既要在抽象的 Creator 里加代码，又要在具体的里面加代码。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
-<li>QQ 换皮肤，一整套一起换 </li>
-<li>生成不同操作系统的程序。 </li>
-</ul>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>产品族难扩展，产品等级易扩展。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们将创建 Shape 和 Color 接口和实现这些接口的实体类。下一步是创建抽象工厂类 AbstractFactory。接着定义工厂类<br>ShapeFactory 和 ColorFactory，这两个工厂类都是扩展了 AbstractFactory。然后创建一个工厂创造器/生成器类 :<br><img src="//img-
-blog.csdn.net/20180318154032560?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>我们的演示类使用 FactoryProducer 来获取 AbstractFactory 对象。它将向 AbstractFactory 传递形状信息<br>Shape（CIRCLE / RECTANGLE / SQUARE），以便获取它所需对象的类型。同时它还向 AbstractFactory 传递颜色信息<br>Color（RED / GREEN / BLUE），以便获取它所需对象的类型。</p>
-<h3 id="为形状创建一个接口"><a href="#为形状创建一个接口" class="headerlink" title="为形状创建一个接口"></a>为形状创建一个接口</h3><p>Shape.java</p>
-<pre><code>public interface Shape {
-   void draw();
-}
-</code></pre><h3 id="创建实现形状接口的实体类"><a href="#创建实现形状接口的实体类" class="headerlink" title="创建实现形状接口的实体类"></a>创建实现形状接口的实体类</h3><p>Rectangle.java</p>
-<pre><code>public class Rectangle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Rectangle-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><p>Square.java</p>
-<pre><code>public class Square implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Square-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><p>Circle.java</p>
-<pre><code>public class Circle implements Shape {
-
-   @Override
-   public void draw() {
-      System.out.println(&quot;Inside Circle-&gt;draw() method.&quot;);
-   }
-}
-</code></pre><h3 id="为颜色创建一个接口。"><a href="#为颜色创建一个接口。" class="headerlink" title="为颜色创建一个接口。"></a>为颜色创建一个接口。</h3><p>Color.java</p>
-<pre><code>public interface Color {
-   void fill();
-}
-</code></pre><h3 id="创建实现颜色接口的实体类"><a href="#创建实现颜色接口的实体类" class="headerlink" title="创建实现颜色接口的实体类"></a>创建实现颜色接口的实体类</h3><p>Red.java</p>
-<pre><code>public class Red implements Color {
-
-   @Override
-   public void fill() {
-      System.out.println(&quot;Inside Red-&gt;fill() method.&quot;);
-   }
-}
-</code></pre><p>Green.java</p>
-<pre><code>public class Green implements Color {
-
-   @Override
-   public void fill() {
-      System.out.println(&quot;Inside Green-&gt;fill() method.&quot;);
-   }
-}
-</code></pre><p>Blue.java</p>
-<pre><code>public class Blue implements Color {
-
-   @Override
-   public void fill() {
-      System.out.println(&quot;Inside Blue-&gt;fill() method.&quot;);
-   }
-}
-</code></pre><h3 id="为-Color-和-Shape-对象创建抽象类来获取工厂"><a href="#为-Color-和-Shape-对象创建抽象类来获取工厂" class="headerlink" title="为 Color 和 Shape 对象创建抽象类来获取工厂"></a>为 Color 和 Shape 对象创建抽象类来获取工厂</h3><p>AbstractFactory.java</p>
-<pre><code>public abstract class AbstractFactory {
-   abstract Color getColor(String color);
-   abstract Shape getShape(String shape) ;
-}
-</code></pre><h4 id="abstract复习"><a href="#abstract复习" class="headerlink" title="abstract复习"></a>abstract复习</h4><p>abstract修饰类，会使这个类成为一个抽象类，这个类将不能生成对象实例，但可以做为对象变量声明的类型（见下面代码），也就是编译时类型。抽象类就相当于一类的半成品，需要子类继承并覆盖其中的抽象方法。</p>
-<h2 id="创建扩展了-AbstractFactory-的工厂类，基于给定的信息生成实体类的对象"><a href="#创建扩展了-AbstractFactory-的工厂类，基于给定的信息生成实体类的对象" class="headerlink" title="创建扩展了 AbstractFactory 的工厂类，基于给定的信息生成实体类的对象"></a>创建扩展了 AbstractFactory 的工厂类，基于给定的信息生成实体类的对象</h2><p>ShapeFactory.java</p>
-<pre><code>public class ShapeFactory extends AbstractFactory {
-
-   @Override
-   public Shape getShape(String shapeType){
-      if(shapeType == null){
-         return null;
-      }        
-      if(shapeType.equalsIgnoreCase(&quot;CIRCLE&quot;)){
-         return new Circle();
-      } else if(shapeType.equalsIgnoreCase(&quot;RECTANGLE&quot;)){
-         return new Rectangle();
-      } else if(shapeType.equalsIgnoreCase(&quot;SQUARE&quot;)){
-         return new Square();
-      }
-      return null;
-   }
-
-   @Override
-   Color getColor(String color) {
-      return null;
-   }
-}
-</code></pre><p>ColorFactory.java</p>
-<pre><code>public class ColorFactory extends AbstractFactory {
-
-   @Override
-   public Shape getShape(String shapeType){
-      return null;
-   }
-
-   @Override
-   Color getColor(String color) {
-      if(color == null){
-         return null;
-      }        
-      if(color.equalsIgnoreCase(&quot;RED&quot;)){
-         return new Red();
-      } else if(color.equalsIgnoreCase(&quot;GREEN&quot;)){
-         return new Green();
-      } else if(color.equalsIgnoreCase(&quot;BLUE&quot;)){
-         return new Blue();
-      }
-      return null;
-   }
-}
-</code></pre><h3 id="创建一个工厂创造器-生成器类，通过传递形状或颜色信息来获取工厂"><a href="#创建一个工厂创造器-生成器类，通过传递形状或颜色信息来获取工厂" class="headerlink" title="创建一个工厂创造器/生成器类，通过传递形状或颜色信息来获取工厂"></a>创建一个工厂创造器/生成器类，通过传递形状或颜色信息来获取工厂</h3><p>FactoryProducer.java</p>
-<pre><code>public class FactoryProducer {
-   public static AbstractFactory getFactory(String choice){
-      if(choice.equalsIgnoreCase(&quot;SHAPE&quot;)){
-         return new ShapeFactory();
-      } else if(choice.equalsIgnoreCase(&quot;COLOR&quot;)){
-         return new ColorFactory();
-      }
-      return null;
-   }
-}
-</code></pre><h3 id="使用-FactoryProducer-来获取-AbstractFactory，通过传递类型信息来获取实体类的对象"><a href="#使用-FactoryProducer-来获取-AbstractFactory，通过传递类型信息来获取实体类的对象" class="headerlink" title="使用 FactoryProducer 来获取 AbstractFactory，通过传递类型信息来获取实体类的对象"></a>使用 FactoryProducer 来获取 AbstractFactory，通过传递类型信息来获取实体类的对象</h3><p>AbstractFactoryPatternDemo.java</p>
-<pre><code>public class AbstractFactoryPatternDemo {
-   public static void main(String[] args) {
-
-      //获取形状工厂
-      AbstractFactory shapeFactory = FactoryProducer.getFactory(&quot;SHAPE&quot;);
-
-      //获取形状为 Circle 的对象
-      Shape shape1 = shapeFactory.getShape(&quot;CIRCLE&quot;);
-
-      //调用 Circle 的 draw 方法
-      shape1.draw();
-
-      //获取形状为 Rectangle 的对象
-      Shape shape2 = shapeFactory.getShape(&quot;RECTANGLE&quot;);
-
-      //调用 Rectangle 的 draw 方法
-      shape2.draw();
-
-      //获取形状为 Square 的对象
-      Shape shape3 = shapeFactory.getShape(&quot;SQUARE&quot;);
-
-      //调用 Square 的 draw 方法
-      shape3.draw();
-
-      //获取颜色工厂
-      AbstractFactory colorFactory = FactoryProducer.getFactory(&quot;COLOR&quot;);
-
-      //获取颜色为 Red 的对象
-      Color color1 = colorFactory.getColor(&quot;RED&quot;);
-
-      //调用 Red 的 fill 方法
-      color1.fill();
-
-      //获取颜色为 Green 的对象
-      Color color2 = colorFactory.getColor(&quot;Green&quot;);
-
-      //调用 Green 的 fill 方法
-      color2.fill();
-
-      //获取颜色为 Blue 的对象
-      Color color3 = colorFactory.getColor(&quot;BLUE&quot;);
-
-      //调用 Blue 的 fill 方法
-      color3.fill();
-   }
-}
-</code></pre><h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><pre><code>Inside Circle-&gt;draw() method.
-Inside Rectangle-&gt;draw() method.
-Inside Square-&gt;draw() method.
-Inside Red-&gt;fill() method.
-Inside Green-&gt;fill() method.
-Inside Blue-&gt;fill() method.
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对比工厂方法模式，因为一个工厂只能生产一个产品，比如 <a href="http://blog.csdn.net/qq_36982160/article/details/79505390" target="_blank" rel="noopener"> 博客
-</a><br>中一个ShapeFactory只能根据不同情况实例化不同的Shape，那么当我们需要一整套的产品（比如形状和颜色形成了一套产品）时使用工厂方法显然就不能解决了，所以就需要抽象工厂模式，抽象工厂模式实际上是工厂的工厂，即其作用的目的是为了实例化不同的工厂，用户再通过不同的工厂实例化不同场景下成套的产品。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -1058,25 +726,25 @@ pattern/design-pattern-tutorial.html" target="_blank" rel="noopener"> http://www
 </code></pre><ul>
 <li>复制文件： </li>
 </ul>
-<pre><code>import shutil
-shutil.copyfile(path1, path2)#将path1下的文件复制到path2
+<pre><code> import shutil
+ shutil.copyfile(path1, path2)#将path1下的文件复制到path2
 </code></pre><ul>
 <li>从txt文件中获取数据到矩阵中： </li>
 </ul>
-<pre><code>import numpy as np
-datai = np.loadtxt(path1)
+<pre><code>  import numpy as np
+  datai = np.loadtxt(path1)
 </code></pre><ul>
 <li>新建文件夹： </li>
 </ul>
-<pre><code>os.mkdir(path3 ）#新建一个path3文件夹
+<pre><code> os.mkdir(path3 ）#新建一个path3文件夹
 </code></pre><ul>
 <li>将numpy矩阵保存到txt文件中： </li>
 </ul>
-<pre><code>np.savetxt(path, result)#将result（矩阵）保存到path路径
+<pre><code> np.savetxt(path, result)#将result（矩阵）保存到path路径
 </code></pre><ul>
 <li>重命名文件 </li>
 </ul>
-<pre><code>os.rename(path2, path2)#将path1重命名为path2
+<pre><code> os.rename(path2, path2)#将path1重命名为path2
 </code></pre>
           
         
@@ -1466,9 +1134,9 @@ datai = np.loadtxt(path1)
           
             <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。</p>
 <h1 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h1><p>AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。<br>通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：</p>
-<pre><code>read(byte[], int, int)
-read(short[], int, int)
-read(ByteBuffer, int).
+<pre><code>     read(byte[], int, int)
+     read(short[], int, int)
+     read(ByteBuffer, int).
 </code></pre><p>无论使用哪种音频格式，使用AudioRecord是最方便的。</p>
 <p>在创建AudioRecord对象时，AudioRecord会初始化，并和音频缓冲区连接，用来缓冲新的音频数据。<br>根据构造时指定的缓冲区大小，来决定AudioRecord能够记录多长的数据。 从硬件设备读取的数据，应小于整个记录缓冲区。</p>
 <h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><strong>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</strong></p>
@@ -1479,11 +1147,11 @@ read(ByteBuffer, int).
 <h2 id="public-int-getChannelCount"><a href="#public-int-getChannelCount" class="headerlink" title="public int getChannelCount ()"></a>public int getChannelCount ()</h2><p>返回设置的频道数目。</p>
 <h2 id="public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><a href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig" class="headerlink" title="public static int getMinBufferSize (int sampleRateInHz, int channelConfig,"></a>public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</h2><p>int audioFormat)</p>
 <p>返回成功创建AudioRecord对象所需要的最小缓冲区大小。<br>注意：这个大小并不保证在负荷下的流畅录制，应根据预期的频率来选择更高的值，AudioRecord实例在推送新数据时使用此值。</p>
-<h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>sampleRateInHz      默认采样率，单位Hz。
+<h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>    sampleRateInHz      默认采样率，单位Hz。
 
-channelConfig           描述音频通道设置。
+    channelConfig           描述音频通道设置。
 
-audioFormat             音频数据保证支持此格式
+    audioFormat             音频数据保证支持此格式
 </code></pre><h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>如果硬件不支持录制参数，或输入了一个无效的参数，则返回ERROR_BAD_VALUE，如果硬件查询到输出属性没有实现，或最小缓冲区用byte表示，则返回ERROR。</p>
 <h2 id="public-int-getNotificationMarkerPosition"><a href="#public-int-getNotificationMarkerPosition" class="headerlink" title="public int getNotificationMarkerPosition ()"></a>public int getNotificationMarkerPosition ()</h2><p>返回通知，标记框架中的位置。</p>
 <h2 id="public-int-getPositionNotificationPeriod"><a href="#public-int-getPositionNotificationPeriod" class="headerlink" title="public int getPositionNotificationPeriod ()"></a>public int getPositionNotificationPeriod ()</h2><p>返回通知，更新框架中的时间位置。</p>
@@ -1491,33 +1159,33 @@ audioFormat             音频数据保证支持此格式
 <h2 id="public-int-getSampleRate"><a href="#public-int-getSampleRate" class="headerlink" title="public int getSampleRate ()"></a>public int getSampleRate ()</h2><p>返回设置的音频数据样本采样率，单位Hz。</p>
 <h2 id="public-int-getState"><a href="#public-int-getState" class="headerlink" title="public int getState ()"></a>public int getState ()</h2><p>返回AudioRecord实例的状态。 这点非常有用，用在AudioRecord 实例创建成功后，检查初始化属性。 它能肯定请求到了合适的硬件资源。</p>
 <h2 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h2><p>从音频硬件录制缓冲区读取数据。</p>
-<h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioData        写入的音频录制数据。
+<h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>        audioData        写入的音频录制数据。
 
-offsetInShorts           目标数组 audioData 的起始偏移量。
+        offsetInShorts           目标数组 audioData 的起始偏移量。
 
-sizeInShorts              请求读取的数据大小。
+        sizeInShorts              请求读取的数据大小。
 </code></pre><h3 id="返回值：-1"><a href="#返回值：-1" class="headerlink" title="返回值："></a>返回值：</h3><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>返回数值不会超过sizeInShorts。</p>
 <h2 id="public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><a href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes" class="headerlink" title="public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)"></a>public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据。</p>
-<h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioData        写入的音频录制数据。
+<h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>       audioData        写入的音频录制数据。
 
-offsetInBytes            audioData的起始偏移值，单位byte。
+       offsetInBytes            audioData的起始偏移值，单位byte。
 
-sizeInBytes                读取的最大字节数。
+       sizeInBytes                读取的最大字节数。
 </code></pre><h3 id="返回值：-2"><a href="#返回值：-2" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。</p>
 <h2 id="public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><a href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes" class="headerlink" title="public int read (ByteBuffer audioBuffer, int sizeInBytes)"></a>public int read (ByteBuffer audioBuffer, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据，直接复制到指定缓冲区。 如果audioBuffer不是直接的缓冲区，此方法总是返回0。</p>
-<h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>audioBuffer               存储写入音频录制数据的缓冲区。
+<h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>     audioBuffer               存储写入音频录制数据的缓冲区。
 
-sizeInBytes                请求的最大字节数。
+     sizeInBytes                请求的最大字节数。
 </code></pre><h3 id="返回值：-3"><a href="#返回值：-3" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。<br>public void release ()：释放本地AudioRecord资源。<br>对象不能经常使用此方法，而且在调用release()后，必须设置引用为null。</p>
 <h2 id="public-int-setNotificationMarkerPosition-int-markerInFrames"><a href="#public-int-setNotificationMarkerPosition-int-markerInFrames" class="headerlink" title="public int setNotificationMarkerPosition (int markerInFrames)"></a>public int setNotificationMarkerPosition (int markerInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置位置标记。</p>
-<h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>markerInFrames      在框架中快速标记位置。
+<h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>      markerInFrames      在框架中快速标记位置。
 </code></pre><h3 id="返回值：-4"><a href="#返回值：-4" class="headerlink" title="返回值："></a>返回值：</h3><p>返回错误或成功代码，请见SUCCESS、ERROR_BAD_VALUE、ERROR_INVALID_OPERATION。</p>
 <h2 id="public-int-setPositionNotificationPeriod-int-periodInFrames"><a href="#public-int-setPositionNotificationPeriod-int-periodInFrames" class="headerlink" title="public int setPositionNotificationPeriod (int periodInFrames)"></a>public int setPositionNotificationPeriod (int periodInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置时间标记。</p>
-<h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>markerInFrames      在框架中快速更新时间标记。
+<h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>       markerInFrames      在框架中快速更新时间标记。
 </code></pre><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回错误或成功代码</p>
 <h2 id="public-void-setRecordPositionUpdateListener"><a href="#public-void-setRecordPositionUpdateListener" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener, Handler handler)</p>
 <p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。 使用此方法来将Handler 和别的线程联系起来，来接收AudioRecord<br>事件，比创建AudioTrack 实例更好一些。</p>
-<h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>handler    用来接收事件通知消息。
+<h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>          handler    用来接收事件通知消息。
 </code></pre><h2 id="public-void-setRecordPositionUpdateListener-1"><a href="#public-void-setRecordPositionUpdateListener-1" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener)</p>
 <p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。</p>
 <h2 id="public-void-startRecording"><a href="#public-void-startRecording" class="headerlink" title="public void startRecording ()"></a>public void startRecording ()</h2><p>AudioRecord实例开始进行录制。</p>
@@ -2036,9 +1704,156 @@ sizeInBytes                请求的最大字节数。
           
             <p>最近用python做数据可视化导入moviepy的时候报错imageio.core.fetching.NeedDownloadError: Need<br>ffmpeg exe. You can download it by calling:<br>imageio.plugins.ffmpeg.download()<br><img src="https://img-
 blog.csdn.net/20180212151002752?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>按照提示是要下载ffmpeg，所以只需import imaheio并download即可，即在程序的开始加上：</p>
-<pre><code>import imageio
-imageio.plugins.ffmpeg.download()
+<pre><code>  import imageio
+  imageio.plugins.ffmpeg.download()
 </code></pre><p>注意：这两行代码一定要加在import moviepy之前。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/01/25/Android动态权限申请/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/25/Android动态权限申请/" itemprop="url">Android动态权限申请</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T14:47:35+08:00">
+                2018-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题</p>
+<h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。</p>
+<h1 id="添加相关依赖"><a href="#添加相关依赖" class="headerlink" title="添加相关依赖"></a>添加相关依赖</h1><p>在你项目的app gradle的dependencies下添加下列语句：</p>
+<pre><code> implementation  &#39;com.github.dfqin:grantor:2.1.0&#39;
+</code></pre><p>添加后Sync，即可将相关工具代码导入</p>
+<h1 id="代码实现动态权限申请"><a href="#代码实现动态权限申请" class="headerlink" title="代码实现动态权限申请"></a>代码实现动态权限申请</h1><p>首先要保证在manifests里面加上你需要的权限，然后在MainActivity中添加如下方法：</p>
+<pre><code>private void RequestPermission() {
+        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (PermissionsUtil.hasPermission(MainActivity.this, permissions)) {
+            //已经获取相关权限
+        } else {
+            PermissionsUtil.requestPermission(MainActivity.this, new PermissionListener() {
+                @Override
+                public void permissionGranted(@NonNull String[] permission) {
+//用户授予了权限
+                }
+
+                @Override
+                public void permissionDenied(@NonNull String[] permission) {
+//用户拒绝了权限
+                    Toast.makeText(MainActivity.this, &quot;相关权限被拒绝，本应用将无法正常运行&quot;, Toast.LENGTH_SHORT).show();
+                }
+            }, permissions);
+        }
+    }
+</code></pre><p>然后在OnCreate中调用该方法即可，如果要申请其他的权限只需要把本文代码中permissions的内容改成你自己的即可。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/dfqin/article/details/55190073" target="_blank" rel="noopener"> http://blog.csdn.net/dfqin/article/details/55190073
+</a> 感谢博主提供的轮子。</p>
 
           
         
@@ -2124,7 +1939,7 @@ imageio.plugins.ffmpeg.download()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2146,7 +1961,7 @@ imageio.plugins.ffmpeg.download()
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2385,7 +2200,7 @@ imageio.plugins.ffmpeg.download()
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

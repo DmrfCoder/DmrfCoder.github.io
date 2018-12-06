@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下： Intent intent=new Intent();  in">
+<meta name="description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     Intent intent=new Intent();">
 <meta name="keywords" content="activity跳转">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android如何跳转至目标Activity后按返回键不返回前一个Activity">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android如何跳转至目标Activity后按返回键不返回前一个Activity/index.html">
 <meta property="og:site_name" content="DmrfCoder的个人主页">
-<meta property="og:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下： Intent intent=new Intent();  in">
+<meta property="og:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     Intent intent=new Intent();">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-05T14:39:24.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android如何跳转至目标Activity后按返回键不返回前一个Activity">
-<meta name="twitter:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下： Intent intent=new Intent();  in">
+<meta name="twitter:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     Intent intent=new Intent();">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>Android如何跳转至目标Activity后按返回键不返回前一个Activity | DmrfCoder的个人主页</title>
+  <title>Android如何跳转至目标Activity后按返回键不返回前一个Activity | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -145,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -323,13 +323,13 @@
 
       
         <p>有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activity<br>A中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：</p>
-<pre><code>Intent intent=new Intent();
+<pre><code>    Intent intent=new Intent();
 
-intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 
-intent.setClass(A.this,B.class);
+    intent.setClass(A.this,B.class);
 
-startActivity(intent);
+    startActivity(intent);
 </code></pre><p>即可实现该效果。</p>
 
       
@@ -441,7 +441,7 @@ startActivity(intent);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -463,7 +463,7 @@ startActivity(intent);
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -634,7 +634,7 @@ startActivity(intent);
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

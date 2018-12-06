@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 
 
 
-  <title>Activity 与 Fragment 通信方式总结 | DmrfCoder的个人主页</title>
+  <title>Activity 与 Fragment 通信方式总结 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -356,26 +356,26 @@
 </ul>
 <p>所以一般不建议使用这种方法。</p>
 <h2 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h2><p>在 Activity 中注册广播接收器，在 Fragment中发送广播：</p>
-<pre><code>private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
-        if (action.equals(ACTION_NAME)) {
-            String msg = intent.getStringExtra(&quot;msg&quot;);
-            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+<pre><code>    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(ACTION_NAME)) {
+                String msg = intent.getStringExtra(&quot;msg&quot;);
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
         }
+    };
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(ACTION_NAME);
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
-};
-public void registerBoradcastReceiver() {
-    IntentFilter myIntentFilter = new IntentFilter();
-    myIntentFilter.addAction(ACTION_NAME);
-    registerReceiver(mBroadcastReceiver, myIntentFilter);
-}
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    unregisterReceiver(mBroadcastReceiver);
-}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
+    }
 </code></pre><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h2><ul>
 <li><p>MainActivity </p>
 <pre><code>//注册订阅者
@@ -580,7 +580,7 @@ protected void onDestroy() {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -602,7 +602,7 @@ protected void onDestroy() {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -789,7 +789,7 @@ protected void onDestroy() {
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

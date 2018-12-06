@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 
 
 
-  <title>Android数据加密之AES加密 | DmrfCoder的个人主页</title>
+  <title>Android数据加密之AES加密 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -303,31 +303,31 @@
 <p>AES 与 DES<br>一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反馈模式（CFB）和输出反馈模式（OFB）。关于加密模式的介绍，推荐这篇文章：<br><a href="https://blog.poxiao.me/p/advanced-
 encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高级加密标准AES的工作模式（ECB、CBC、CFB、OFB） </a></p>
 <p>直接给代码：</p>
-<h2 id="加密-byte级别"><a href="#加密-byte级别" class="headerlink" title="加密(byte级别)"></a>加密(byte级别)</h2><pre><code>   /* 加密使用的 key */
-   private static final String AES_KEY = &quot;KUbHwTqBy6TBQ2gN&quot;;
-   /* 加密使用的 IV */
-   private static final String AES_IV = &quot;pIbF6GR3XEN1PG05&quot;;
+<h2 id="加密-byte级别"><a href="#加密-byte级别" class="headerlink" title="加密(byte级别)"></a>加密(byte级别)</h2><pre><code>    /* 加密使用的 key */
+    private static final String AES_KEY = &quot;KUbHwTqBy6TBQ2gN&quot;;
+    /* 加密使用的 IV */
+    private static final String AES_IV = &quot;pIbF6GR3XEN1PG05&quot;;
 
-/**
-    * AES 加密
-    *
-    * @param content 待加密内容
-    * @param key     密钥
-    * @return 加密的数据
-    */
-   public static byte[] encryptAES(byte[] content, byte[] key) {
-       try {
-           SecretKeySpec secretKeySpec = new SecretKeySpec(key, &quot;AES&quot;);
-           // AES 是加密方式, CBC 是工作模式, PKCS5Padding 是填充模式
-           Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-           // IV 是初始向量，可以增强密码的强度
-           cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(AES_IV.getBytes()));
-           return cipher.doFinal(content);
-       } catch (Exception e) {
-           logger.error(e);
-       }
-       return null;
-   }
+ /**
+     * AES 加密
+     *
+     * @param content 待加密内容
+     * @param key     密钥
+     * @return 加密的数据
+     */
+    public static byte[] encryptAES(byte[] content, byte[] key) {
+        try {
+            SecretKeySpec secretKeySpec = new SecretKeySpec(key, &quot;AES&quot;);
+            // AES 是加密方式, CBC 是工作模式, PKCS5Padding 是填充模式
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            // IV 是初始向量，可以增强密码的强度
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(AES_IV.getBytes()));
+            return cipher.doFinal(content);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return null;
+    }
 </code></pre><h2 id="解密-（byte级别）"><a href="#解密-（byte级别）" class="headerlink" title="解密 （byte级别）"></a>解密 （byte级别）</h2><pre><code>/**
      * AES 解密
      *
@@ -346,32 +346,32 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
         }
         return null;
     }
-</code></pre><h2 id="加密（String级别）"><a href="#加密（String级别）" class="headerlink" title="加密（String级别）"></a>加密（String级别）</h2><pre><code>private final static String TOKEN_KEY = &quot;91a29fa7w46d8x41&quot;;
+</code></pre><h2 id="加密（String级别）"><a href="#加密（String级别）" class="headerlink" title="加密（String级别）"></a>加密（String级别）</h2><pre><code>    private final static String TOKEN_KEY = &quot;91a29fa7w46d8x41&quot;;
 
-public static String encrypt(String plain) {
-    try {
-        Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-        AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
-        SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
-        cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
-        return new String(cipher.doFinal(plain.getBytes()));
-    } catch (Exception e) {
-        Ln.e(e);
-        return null;
+    public static String encrypt(String plain) {
+        try {
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
+            SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
+            cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
+            return new String(cipher.doFinal(plain.getBytes()));
+        } catch (Exception e) {
+            Ln.e(e);
+            return null;
+        }
     }
-}
-</code></pre><h2 id="解密（String级别）"><a href="#解密（String级别）" class="headerlink" title="解密（String级别）"></a>解密（String级别）</h2><pre><code>public static String decrypt(String encoded) {
-       try {
-           Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-           AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
-           SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
-           cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);
-           return new String(cipher.doFinal(encoded.getBytes()));
-       } catch (Exception e) {
-           Ln.e(e);
-           return null;
-       }
-   }
+</code></pre><h2 id="解密（String级别）"><a href="#解密（String级别）" class="headerlink" title="解密（String级别）"></a>解密（String级别）</h2><pre><code> public static String decrypt(String encoded) {
+        try {
+            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
+            AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
+            SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
+            cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);
+            return new String(cipher.doFinal(encoded.getBytes()));
+        } catch (Exception e) {
+            Ln.e(e);
+            return null;
+        }
+    }
 </code></pre>
       
     </div>
@@ -485,7 +485,7 @@ public static String encrypt(String plain) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -507,7 +507,7 @@ public static String encrypt(String plain) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -694,7 +694,7 @@ public static String encrypt(String plain) {
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

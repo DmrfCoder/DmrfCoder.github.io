@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -129,7 +129,7 @@ blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 
 
-  <title>归纳法 | DmrfCoder的个人主页</title>
+  <title>归纳法 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -148,7 +148,7 @@ blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -381,7 +381,7 @@ blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
     return y;
 }
-</code></pre><h2 id="迭代法实现思路"><a href="#迭代法实现思路" class="headerlink" title="迭代法实现思路"></a>迭代法实现思路</h2><p>上述归纳法实现求x^n的关键部分在于采用递归不断判断n/2的奇偶性，所以我们可以采用迭代的办法，因为一个数除以2的k次方后的奇偶性由其化为二进制数的第k低位决定的（因为除法除以2就相当于二进制的左移操作），所以我们可以将n化为二进制数字d_k,d_(k-1)……d_0，从y=1开始，从左到右扫描二进制数字，如果当前二进制数字为0，则对应递归情况下的偶数情况即应该y=y^2，否则即为y=y(y^m)^2</p>
+</code></pre><h2 id="迭代法实现思路"><a href="#迭代法实现思路" class="headerlink" title="迭代法实现思路"></a>迭代法实现思路</h2><p>上述归纳法实现求x^n的关键部分在于采用递归不断判断n/2的奇偶性，所以我们可以采用迭代的办法，因为一个数除以2的k次方后的奇偶性由其化为二进制数的第k低位决定的（因为除法除以2就相当于二进制的左移操作），所以我们可以将n化为二进制数字d<em>k,d</em>(k-1)……d_0，从y=1开始，从左到右扫描二进制数字，如果当前二进制数字为0，则对应递归情况下的偶数情况即应该y=y^2，否则即为y=y(y^m)^2</p>
 <h2 id="迭代法实现代码（Exp）"><a href="#迭代法实现代码（Exp）" class="headerlink" title="迭代法实现代码（Exp）"></a>迭代法实现代码（Exp）</h2><pre><code>int Exp(int x,int n){
     int d[10];//假设n化为2进制数字后存在d数组里面
     int y=1;
@@ -393,9 +393,9 @@ blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     }
 }
 </code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>假设每次乘法的时间是常数，那么这两种方法所需的运行时间都是 <strong>senta(lohn)</strong> ，他们对于输入大小来说都是 <strong>线性</strong> 的。</p>
-<h1 id="多项式求值（Horner规则）"><a href="#多项式求值（Horner规则）" class="headerlink" title="多项式求值（Horner规则）"></a>多项式求值（Horner规则）</h1><h2 id="场景介绍-1"><a href="#场景介绍-1" class="headerlink" title="场景介绍"></a>场景介绍</h2><p>假设有n+2个数a_0,a_1,……,a_n和x序列，要对多项式 <strong>P_n(x)=a_n<em>x^n+a_(n-1)</em>x^(n-1)+…+a_1*x</strong><br>求值，传统的办法是分别对每一个子项求值，然后再对整个式子求值，但是这种方法很低效，因为它需要n+（n-1）+（n-2）+…..+1=n(n+1)/2次乘法。</p>
+<h1 id="多项式求值（Horner规则）"><a href="#多项式求值（Horner规则）" class="headerlink" title="多项式求值（Horner规则）"></a>多项式求值（Horner规则）</h1><h2 id="场景介绍-1"><a href="#场景介绍-1" class="headerlink" title="场景介绍"></a>场景介绍</h2><p>假设有n+2个数a<em>0,a_1,……,a_n和x序列，要对多项式 <em>*P_n(x)=a_n</em>x^n+a</em>(n-1)<em>x^(n-1)+…+a_1</em>x**<br>求值，传统的办法是分别对每一个子项求值，然后再对整个式子求值，但是这种方法很低效，因为它需要n+（n-1）+（n-2）+…..+1=n(n+1)/2次乘法。</p>
 <h2 id="归纳法解决思路"><a href="#归纳法解决思路" class="headerlink" title="归纳法解决思路"></a>归纳法解决思路</h2><p>首先我们发现原式可进行如下化简：<br><img src="https://img-
-blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>化简之后我们可以发现如果我们假设已知P_(n-1)(x)，那么P_n(x)=x*P_(n-1)(x)+a_0,所以就有了算法HORNER。</p>
+blog.csdn.net/20180429163357184?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>化简之后我们可以发现如果我们假设已知P<em>(n-1)(x)，那么P_n(x)=x*P</em>(n-1)(x)+a_0,所以就有了算法HORNER。</p>
 <h2 id="HORNER算法代码实现"><a href="#HORNER算法代码实现" class="headerlink" title="HORNER算法代码实现"></a>HORNER算法代码实现</h2><pre><code>int Horner(int *A,int n,int x){//数组A的长度为n+2，从A[0]到A[n+1]代表了a_0到a_(n+1)
 
     int p=A[n+1];//p=a_(n+1)
@@ -557,7 +557,7 @@ int candidate(int *A, int m, int n) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -579,7 +579,7 @@ int candidate(int *A, int m, int n) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -766,7 +766,7 @@ int candidate(int *A, int m, int n) {
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

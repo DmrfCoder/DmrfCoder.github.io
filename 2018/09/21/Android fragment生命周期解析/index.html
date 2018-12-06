@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -128,7 +128,7 @@
 
 
 
-  <title>Android fragment生命周期解析 | DmrfCoder的个人主页</title>
+  <title>Android fragment生命周期解析 | DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -147,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -320,11 +320,11 @@
 <li>当这个fragment被销毁了（或者持有它的activity被销毁了），它会经历以下状态： </li>
 </ul>
 <p>onPause()<br>onStop()<br>onDestroyView()<br>onDestroy()<br>onDetach()</p>
-<ol start="5">
+<ol>
 <li>就像activitie一样，在以下的状态中，可以使用Bundle对象保存一个fragment的对象。 </li>
 </ol>
 <p>onCreate()<br>onCreateView()<br>onActivityCreated()</p>
-<ol start="6">
+<ol>
 <li>fragment的大部分状态都和activity很相似，但fragment有一些新的状态： </li>
 </ol>
 <p>onAttached() —— 当fragment被加入到activity时调用（在这个方法中可以获得所在的activity）。<br>onCreateView() ——<br>当activity要得到fragment的layout时，调用此方法，fragment在其中创建自己的layout(界面)。<br>onActivityCreated() —— 当activity的onCreated()方法返回后调用此方法<br>onDestroyView() —— 当fragment中的视图被移除的时候，调用这个方法。<br>onDetach() —— 当fragment和activity分离的时候，调用这个方法。</p>
@@ -442,7 +442,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +464,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,7 +651,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
