@@ -121,11 +121,20 @@
 
 
 
-  <title>DmrfCoder的个人主页</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>DmrfCoder的个人主页</title>
   
 
 
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -187,6 +196,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-news">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-hacker-news"></i> <br>
+            
+            news
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -215,8 +234,11 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+ 	
+     #   	
     
-      
+     #   	
+            		
 
   
 
@@ -234,7 +256,7 @@
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -300,6 +322,17 @@
 
           
           
+             <span id="/2018/11/15/汇编总结（5）——汇编语言/" class="leancloud_visitors" data-flag-title="汇编总结（5）——汇编语言">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -322,466 +355,19 @@
       
         
           
-            <h2 id="实地址执行环境"><a href="#实地址执行环境" class="headerlink" title="实地址执行环境"></a>实地址执行环境</h2><h3 id="寄存器和指令集"><a href="#寄存器和指令集" class="headerlink" title="寄存器和指令集"></a>寄存器和指令集</h3><ul>
-<li>32位寄存器EAX、EBX、ECX、EDX、ESP、EBP、ESI和EDI； </li>
-<li>16位寄存器AX、BX、CX、DX、SP、BP、SI和DI； </li>
-<li>8位寄存器AH、AL、BH、BL、CH、CL、DH和DL。 </li>
-<li>段寄存器CS、DS、SS和ES，以及段寄存器FS和GS。寄存器CS含有当前代码段的段值，寄存器DS含有当前数据段的段值，寄存器SS含有当前堆栈段的段值。 </li>
-<li>实方式下指令指针寄存器EIP中的高16位必须是0，相当于只有低16位的IP起作用。 </li>
-<li>实方式下堆栈指针寄存器ESP中的高16位必须是0，相当于只有低16位的SP起作用。 </li>
-</ul>
-<h3 id="存储器分段管理"><a href="#存储器分段管理" class="headerlink" title="存储器分段管理"></a>存储器分段管理</h3><p>IA-32系列处理器的物理地址空间规模达到4G，实地址方式下可访问的物理地址空间只有1M即00000H——FFFFFH，实方式下每个逻辑段必须满足如下两个条件：</p>
-<ul>
-<li>逻辑段的起始地址必须是16的倍数 </li>
-<li>逻辑段的最大长度为64K（2^16），所以后面用16位表示段值？ </li>
-</ul>
-<p>这两个条件是为了方便地计算1M地址空间中的20位地址。</p>
-<p>由于实方式下段的起始地址必须是16的倍数，所以段的起始地址有如下形式：xxxx0H，这种20位的段起始地址可以省略掉最后的0表示成16位的XXXXH形式，这16位就称为段值。这时候就有如下关系：</p>
-<blockquote>
-<p>段起始地址=段值*16</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>物理地址=段起始地址+偏移=段值*16+偏移</p>
-</blockquote>
-<p>注意存储段既可以相连，也可以重叠。所以一个物理地址可以对应多个逻辑地址，比如：</p>
-<pre><code>1002H:2325H=12345H
-1233H:0015H=12345H
-</code></pre><p>上面两个逻辑地址就表示的是一个物理地址。</p>
-<p>实地址方式下，段寄存器（CS、SS、DS…）中的内容是段值。</p>
-<p>这里需要注意的是给段寄存器赋值的时候只能通过别的寄存器来进行中转赋值，不能直接把立即数赋值给段寄存器，应该像这样：</p>
-<pre><code>MOV AX,0F0000H
-MOV DS,AX
-</code></pre><p>而不是：</p>
-<pre><code>MOV DS,0F0000H
-</code></pre><p>手动指定段寄存器的方法：</p>
-<pre><code>MOV [ES:EDI] ,EAX
-</code></pre><h4 id="16位存储器寻址方式"><a href="#16位存储器寻址方式" class="headerlink" title="16位存储器寻址方式"></a>16位存储器寻址方式</h4><p>16位的存储器寻址方式主要用于实地址，在实地址方式下，存储段的长度不超过64K（32位寻址方式的存储段长度也不超过64K），注意这里是 <strong>存储段</strong><br>的长度而不是上面的 <strong>逻辑段</strong> 长度，存储单元有效地址是16位。</p>
-<p>16位有效地址EA可以有多种表示形式：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx8rg4wl6xj30ii04ut9h.jpg" alt="image-20181115141706812"></p>
-<p>主要形式是 <strong>基址+变址+位移量</strong> ，其中：</p>
-<ul>
-<li>基址部分可以是寄存器 <strong>BX</strong> 或 <strong>BP</strong> ； </li>
-<li>变址部分可以是寄存器 <strong>SI</strong> 或 <strong>DI</strong> ； </li>
-<li>位移量采用补码形式表示，在计算有效地址时，如位移量是 <strong>8</strong> 位，则被带符号扩展成 <strong>16</strong> 位。 </li>
-</ul>
-<p>需要注意的是，像下面这种寻址方式就是错误的：</p>
-<pre><code>MOV EAX,[SI+DI]
-</code></pre><p>很明显SI不能作为基址部分。</p>
-<h2 id="源程序和语句"><a href="#源程序和语句" class="headerlink" title="源程序和语句"></a>源程序和语句</h2><p>首先再强调几点概念：</p>
-<ul>
-<li>汇编语言是一种 <strong>程序设计语言</strong> ，是 <strong>机器语言的符号化</strong> 。 </li>
-<li>汇编语言的语句主要是 <strong>汇编格式指令</strong> 和 <strong>伪指令</strong> 。 </li>
-<li>把用汇编语言编写的程序称为 <strong>汇编语言源程序</strong> ，或称为 <strong>汇编源程</strong> 序，或简称为 <strong>源程序</strong> 。 </li>
-<li>把汇编源程序翻译成目标程序的过程称为 <strong>汇编</strong> 。 </li>
-<li>完成汇编工作的工具或程序叫做 <strong>汇编程序</strong> 。 </li>
-</ul>
-<p>汇编过程示意图如下：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fx8rg5qujdj30sk0b2ach.jpg" alt="image-20181115142637461"></p>
-<h2 id=""><a href="#" class="headerlink" title="#"></a>#</h2><h3 id="汇编语言源程序"><a href="#汇编语言源程序" class="headerlink" title="汇编语言源程序"></a>汇编语言源程序</h3><h4 id="系统功能调用"><a href="#系统功能调用" class="headerlink" title="系统功能调用"></a>系统功能调用</h4><p>系统功能说白了就是操作系统提供的子程序，其也有入口参数和出口参数，只不过调用系统功能是采用编号的方式而不是采用程序名称的方式，DOS操作系统下：</p>
-<ul>
-<li>编号为9的系统功能是显示输出一个以‘$结尾的字符串，入口参数为 <strong>字符串首地址</strong> ， <strong>DS是首地址段值</strong> ， <strong>DX是首地址偏移</strong> 。 </li>
-<li>编号为0AH的系统功能是输入一个字符串到指定缓冲区，DS是缓冲区段地址，DX是首地址偏移 </li>
-<li>编号为1的系统功能是接受用户按键，用户按键之后的内容放在AL寄存器中 </li>
-<li>编号为2的系统功能是输出一个字符，字符放在DL中 </li>
-<li>编号为4CH的系统功能是结束程序运行，返回DOS </li>
-</ul>
-<p>调用系统功能的步骤：</p>
-<ul>
-<li>根据相应功能填好对应参数 </li>
-<li>将系统功能号放入寄存器AH中 </li>
-<li>执行指令INT 21H </li>
-</ul>
-<p>其中的INT 21H是一条软中断指令。</p>
-<p>比如：</p>
-<pre><code>     //显示字符串
-    MOV   DX, hello     ;准备参数
-    MOV   AH, 9         ;9号功能
-    INT   21H           ;调用
-    ;
-    //结束程序返回DOS
-    MOV   AH, 4CH       ;4CH号功能
-    INT   21H           ;调用
-</code></pre><h4 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h4><h5 id="使用NASM汇编器"><a href="#使用NASM汇编器" class="headerlink" title="使用NASM汇编器"></a>使用NASM汇编器</h5><p>使用NASM汇编器生成纯二进制代码文件（<strong><em>COM</em></strong>类型的可执行程序）的方法：</p>
-<pre><code>nasm demo.asm -f bin -o demo.com
-//命令名称-源程序文件名-格式项-纯二进制格式-目标文件名
-</code></pre><h3 id="语句及其格式"><a href="#语句及其格式" class="headerlink" title="语句及其格式"></a>语句及其格式</h3><h4 id="语句的种类"><a href="#语句的种类" class="headerlink" title="语句的种类"></a>语句的种类</h4><p>汇编语言（NASM）有四种类型的语句：</p>
-<h5 id="指令语句–指令"><a href="#指令语句–指令" class="headerlink" title="指令语句–指令"></a>指令语句–指令</h5><blockquote>
-<p><strong>指令语句</strong><br>就是表示汇编格式指令的语句，也就是表示符号化的机器指令的语句。用符号表示的机器指令被称为汇编格式的指令。汇编器在对源程序进行汇编时，把指令语句翻译成机器指令。</p>
-</blockquote>
-<h5 id="伪指令语句–伪指令"><a href="#伪指令语句–伪指令" class="headerlink" title="伪指令语句–伪指令"></a>伪指令语句–伪指令</h5><blockquote>
-<p><strong>伪指令语句</strong> 就是表示伪指令的语句。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>伪指令</strong> 并非真正符号化的机器指令。对处理器而言，伪指令不是指令，但对汇编器而言，它却是指令。伪指令主要用于定义变量，预留存储单元。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>也就是说，伪指令是为了汇编器存在的，而不是处理器。</strong></p>
-</blockquote>
-<p>比如伪指令可以用来定义数据，安排空间：</p>
-<pre><code>prompt    db      &quot;Press a key: &quot;, &#39;$&#39;
-newline   db     0DH, 0AH, &#39;$&#39;
-result    db     0, 0
-</code></pre><h5 id="宏指令语句—宏指令"><a href="#宏指令语句—宏指令" class="headerlink" title="宏指令语句—宏指令"></a>宏指令语句—宏指令</h5><blockquote>
-<p><strong>宏指令语句</strong> 表示宏指令。宏指令也被简称为宏，与高级语言中宏的概念相同，就是代表一个代码片段的标识符。 <strong>宏指令在使用之前要先声明</strong> 。</p>
-</blockquote>
-<h5 id="指示语句–指示"><a href="#指示语句–指示" class="headerlink" title="指示语句–指示"></a>指示语句–指示</h5><blockquote>
-<p><strong>指示</strong><br>（directive）也常被称为汇编器指令或汇编指令，它指示汇编器怎样进行汇编，如何生成目标代码。为了避免与汇编格式指令相混淆，所以把它称为“指示”。</p>
-</blockquote>
-<h2 id="操作数表示"><a href="#操作数表示" class="headerlink" title="操作数表示"></a>操作数表示</h2><h3 id="常数"><a href="#常数" class="headerlink" title="常数"></a>常数</h3><p>主要有4种不同类型的常数：整数、字符、字符串、浮点数。</p>
-<h4 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h4><ul>
-<li>在没有特别标记时，一个整数由十进制表示。 </li>
-<li>可以采用十六进制、八进制和二进制形式表示整数。 </li>
-<li>后缀 <strong>H</strong> 表示十六进制数，后缀 <strong>Q</strong> 或 <strong>O</strong> 表示八进制数，后缀 <strong>B</strong> 表示二进制数。当然也可以用后缀 <strong>D</strong> 表示十进制数。 </li>
-<li>为了避免与普通标识符混淆，十六进制数应以数字开头，如果以字母开头，应该再冠以数字 <strong>0</strong> 。还可以采用 <strong>C</strong> 风格的前缀 <strong>0x</strong> 表示十六进制数。 </li>
-</ul>
-<h4 id="字符"><a href="#字符" class="headerlink" title="字符"></a>字符</h4><ul>
-<li>字符常数是一对单引号（或双引号）之间的若干个字符。 </li>
-<li>每个字符表示一个字节（ <strong>8</strong> 个二进制位），可以认为字符的值是对应 <strong>ASCII</strong> 码值。 </li>
-<li>在表示 <strong>32</strong> 位数据时，包含在一对引号中的字符常数最多可以由 <strong>4</strong> 个字符组成。 </li>
-<li>对于由多个字符组成的字符常数，在存储时 <strong>出现在前面的字符占用低地址存储单元</strong> 。这样，按照<strong>“ </strong>高高低低<strong> ”</strong>存储规则， <strong>出现在前面的字符代表了数值的低位</strong> 。 </li>
-</ul>
-<p>示例：</p>
-<pre><code>     MOV   AL , &#39;a&#39;            //AL=61H
-    MOV   AX, &#39;a&#39;            //AX=0061H
-    MOV   AX, &#39;ab&#39;           //AX=6261H，注意看这里，a存储在了低位，b存储在了高位
-    MOV   EAX, &#39;abcd&#39;        //EAX=64636261H
-    MOV   BX, &#39;abcd&#39;         //BX=6261H,该字符常数过大，汇编器NASM会给出警告，并抛弃高位部分
-</code></pre><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串常数与字符常数很相近，但是字符串常数可以含有更多的字符。</p>
-<h3 id="数值表达式"><a href="#数值表达式" class="headerlink" title="数值表达式"></a>数值表达式</h3><ul>
-<li>由运算符和括号把常数、记号和标识符等连接起来的式子，被称为 <strong>表达式</strong> 。 </li>
-<li>所谓 <strong>数值表达式</strong> 是指在汇编过程中能够由汇编器计算出具体数值的表达式。 </li>
-<li>组成数值表达式的各部分必须在汇编时就能完全确定 </li>
-</ul>
-<p>常见运算符及其优先级：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fx8reapch3j30lm0hewlz.jpg" alt="image-20181115150353734"></p>
-<p>使用举例：</p>
-<pre><code>    MOV   AL , 01000111B | 00100000B     ;AL=67H
-    MOV   AL, 01101000B &amp; 11011111B       ;AL=48H
-    MOV   AL, 03H &lt;&lt; 4                     ;AL=30H
-    MOV   AL, 80H &gt;&gt; 6                    ;AL=02H
-    MOV   AL, ~ 00000001B                  ;AL=FEH
-    MOV   AL, ! 1                            ;AL=00H
-    MOV   AL, -1                            ;AL=FFH
-</code></pre><h3 id="数据类型说明"><a href="#数据类型说明" class="headerlink" title="数据类型说明"></a>数据类型说明</h3><p>大部分情况下，能够根据存放操作数的寄存器来确定操作数的类型（尺寸）。</p>
-<p>但类似如下指令，操作数类型不明确，NASM会报告错误：</p>
-<pre><code>   MOV   [BX], 1
-
-   ADD   [DI+3], 5
-
-   SUB   [ESI+ECX*4], 6
-</code></pre><p>汇编器NASM提供了BYTE、WORD、DWORD等关键字，用于说明操作数的类型（尺寸）。把这些关键词称之为 <strong>类型符</strong><br>。在VC2010的嵌入汇编或者生成的汇编格式目标代码中，对应的类型符后面要加一个‘PTR’。</p>
-<p>使用示例：</p>
-<pre><code>    MOV   DWORD  [BX], 1             ;双字
-    ADD   BYTE [DI+3], 5            ;字节
-    SUB   WORD [ESI+ECX*4], 6       ;字
-    ;
-    MOV   [BX], DWORD 1             ;双字
-    ADD   [DI+3], BYTE 5            ;字节
-    SUB   [ESI+ECX*4], WORD 6       ;字
-    PUSH  WORD   99H         
-</code></pre><p>对于把立即数压入堆栈的PUSH指令，在16位代码中默认的操作数是字，在32位代码中默认的操作数是双字，所以需要明确操作数类型。</p>
-<p>由于 <strong>PUSH指令的操作数至少是16位的</strong> ，所以不能使用类型符BYTE。</p>
-<h2 id="伪指令语句和变量"><a href="#伪指令语句和变量" class="headerlink" title="伪指令语句和变量"></a>伪指令语句和变量</h2><p><strong>伪指令语句</strong> 就是表示伪指令的语句。 <strong>伪指令</strong><br>并非真正符号化的机器指令。对处理器而言，伪指令不是指令，但对汇编器而言，它却是指令。伪指令主要用于定义变量，预留存储单元。</p>
-<p>伪指令语句主要有数据定义语句（定义初始化的数据项）和存储单元定义语句（定义未出初始化的数据项）。</p>
-<h3 id="数据定义语句"><a href="#数据定义语句" class="headerlink" title="数据定义语句"></a>数据定义语句</h3><p>格式：</p>
-<pre><code> [名字]  DB   参数表      ;定义字节数据项
-[名字]  DW   参数表      ;定义字数据项
-[名字]  DD   参数表      ;定义双字数据项
-</code></pre><p>DB、DW、DD分别是伪指令符，D代表define，名字是可选的，如果使用名字，那么它就代表存储单元的有效地址。确切地说，名字代表语句所定义的若干数据项中，<br><strong>第一个数据项对应存储单元的有效地址</strong> 。</p>
-<p>通过数据定义语句可为数据项分配存储单元，并根据需要设置其初值。还可 <strong>用名字（标识符）代表数据项</strong> 。</p>
-<p>举例：</p>
-<pre><code>wordvar    dw    1234H, 55H//定义了两个长度为word的数据，首地址/名字是wordvar
-dvar       dd   99H
-abcstr     db   &#39;A&#39;, &#39;B&#39;, 0DH, 0AH, &#39;$&#39;//定义了四个长度为byte的数据，首地址/名字是abcstr
-</code></pre><p>执行完之后的内存单元存储图如下：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fx8y3uvysoj308w0heq44.jpg" alt="屏幕快照 2018-11-15
-15.25.15"></p>
-<p>注意这里的存储原则也是“高高低低”。</p>
-<h3 id="存储单元定义语句"><a href="#存储单元定义语句" class="headerlink" title="存储单元定义语句"></a>存储单元定义语句</h3><p>格式：</p>
-<pre><code>[名字]  RESB   项数        ;预留字节存储单元
-[名字]  RESW   项数        ;预留字存储单元
-[名字]  RESD   项数        ;预留双字存储单元
-</code></pre><p>名字可选，代表预留存储单元的首地址。</p>
-<p><strong>“ </strong>项数<strong> ” </strong>表示要定义的存储单元个数，可以是一个数值表达式。 <strong>RESB</strong> 、 <strong>RESW</strong> 或 <strong> RESD </strong><br>分别是伪指令符。 <strong>RES</strong> 的含义是<strong>“ </strong>预留<strong> ”</strong>，其后字母代表存储单元类型，字节（ <strong>Byte</strong> ）、字（ <strong>Word</strong><br>）和双字（ <strong>DoubleWord</strong> ）。</p>
-<p>存储单元定义语句是伪指令语句。</p>
-<p>利用存储单元定义语句可以分配存储单元，但没有初始化。可用名字代表存储单元。如果把这样的存储单元视作为变量，那么就是 <strong>没有初始化的变量</strong> 。</p>
-<p>举例：</p>
-<pre><code>buffer    resb    128           //预留128个字节
-wordtab   resw   4             //预留4个字
-farptr    resd   1             //预留1个双字
-abuff     resb   32*2          //预留64个字节
-wtable    resw   3+5           //预留8个字
-</code></pre><p><strong>“ </strong>项数<strong><br>”</strong>可以是一个数值表达式，但必须是马上可以计算出结果的表达式，不能是类似于EAX+EBX这样的在汇编执行时才能算出来的，因为伪指令语句是汇编层面的，不是处理器层面的。</p>
-<h3 id="常数符号声明语句"><a href="#常数符号声明语句" class="headerlink" title="常数符号声明语句"></a>常数符号声明语句</h3><p>格式：</p>
-<pre><code> 符号名   EQU   数值表达式
-</code></pre><p>汇编过程中， <strong>NASM</strong> 会计算出数值表达式的值，然后符号就代表计算结果。在随后的程序中，就可以使用该符号代替这个表达式。</p>
-<p>举例：</p>
-<pre><code>COUNT  equ    5+3*2                  ;COUNT代表11
-MIN    equ    8                      ;MIN代表8
-MAX    equ    MIN + COUNT + 20       ;MAX代表39
-</code></pre><h4 id="两个特别的符号"><a href="#两个特别的符号" class="headerlink" title="两个特别的符号"></a>两个特别的符号</h4><p>汇编器NASM支持在表达式中出现两个特别的记号，即’  ′  和  ′  &#x27;和&#x27;  ′  和  ′  $’。</p>
-<p>利用这两个记号，可以方便地获得当前位置值。</p>
-<p>$代表它所在源代码行的指令或者数据在段内的偏移，或者就是当前位置在段内的偏移。</p>
-<p>比如：</p>
-<pre><code>jmp $
-</code></pre><p>代表在当前位置无限循环。</p>
-<h2 id="段声明和段间转移"><a href="#段声明和段间转移" class="headerlink" title="段声明和段间转移"></a>段声明和段间转移</h2><h3 id="段声明语句"><a href="#段声明语句" class="headerlink" title="段声明语句"></a>段声明语句</h3><p>段声明语句属于指示语句。它指示汇编器，开始一个新的段，或者从当前段切换到另一个段。</p>
-<p>格式1：</p>
-<pre><code>section 段名 [段属性] [；注释]
-</code></pre><p>格式2:</p>
-<pre><code>segment 段名 [段属性] [；注释]
-</code></pre><p>使用举例：</p>
-<pre><code>section   code//声明段code
-..start://开始地址
-    MOV   AX, data
-    MOV   DS, AX
-    MOV   DX, hello
-    CALL  Print_str
-    MOV   AH, 4CH
-    INT   21H
-over:
-    ;
-
-section   data//声明段data
-hello  db   &quot;Hello world!&quot;, 0DH, 0AH, 24H
-
-section   code//切换到段code
-Print_str:
-    MOV    AH, 9
-    INT    21H
-    RET
-</code></pre><p>上面的代码经过汇编和连接后可生成exe类型的可执行文件，在Windows控制台窗口利用以下汇编和链接命令即可生成exe的可执行程序：</p>
-<pre><code>NASM demo.asm -f obj -o demo.obj
-LINK demo
-</code></pre><p>-o表示目标文件是obj格式，LINK后的demo表示生成demo.exe。 </p>
-<h3 id="无条件段间转移指令"><a href="#无条件段间转移指令" class="headerlink" title="无条件段间转移指令"></a>无条件段间转移指令</h3><p>格式1：</p>
-<pre><code>JMP SNAME:LABEL//JMP 段名：标号
-</code></pre><p>格式2:</p>
-<pre><code>JMP FAR OPRD（LABEL）//JMP 类型说明符 标号/双字存储单元
-</code></pre><p>在实方式下，操作数 <strong>OPRD</strong> 应该是一个双字存储单元。 <strong>FAR</strong> 是类型符，明确表示段间转移（远转移）。</p>
-<p>指令把双字存储单元 <strong>OPRD</strong> 中的一个字（高地址的字）作为 <strong>16</strong> 位的段值送到代码段寄存器 <strong>CS</strong><br>，把双字中的另一个字（低地址的字）作为 <strong>16</strong> 位的偏移送到指令指针寄存器 <strong>IP</strong> ，从而实现转移。</p>
-<p>示例代码：</p>
-<pre><code>section   codeA
-.. start:
-    MOV   AX, data
-    MOV   DS, AX
-    MOV   DL, [flagch]
-    MOV   AH, 2
-    INT   21H
-
-    //1:
-    JMP   codeB:step2
-
- step4:
-    MOV   DL, [flagch]
-    MOV   AH, 2
-    INT   21H
-
-    MOV   AH, 4CH
-    INT   21H
-
-section   data   align=16
-    flagch   db     &quot;ABC&quot;
-
-section   codeC  align=16
-    step3:
-        MOV   DL, [flagch +2]
-        MOV   AH, 2
-        INT   21H
-
-        //2:
-        JMP   FAR  step4
-
- section   codeB  align=16
-    step2:
-        MOV   DL, [flagch +1]
-        MOV   AH, 2
-        INT   21H
-
-        //3:
-        JMP   codeC:step3
-</code></pre><h3 id="段间过程调用和返回指令"><a href="#段间过程调用和返回指令" class="headerlink" title="段间过程调用和返回指令"></a>段间过程调用和返回指令</h3><p><strong>IA-32</strong> 处理器支持存储器分段管理。</p>
-<p>通常一个程序可以含有多个段，不仅代码和数据可以各自独立，而且根据需要不同功能的代码也可以占用不同的段。</p>
-<h4 id="段间转移"><a href="#段间转移" class="headerlink" title="段间转移"></a>段间转移</h4><p>格式1：</p>
-<pre><code>CALL      SNAME : LABEL
-</code></pre><p>格式2：</p>
-<pre><code>CALL      FAR   LABEL/OPRD
-</code></pre><p>背后的步骤：</p>
-<ul>
-<li>首先把返回地址的 <strong>段值</strong> 和 <strong>偏移</strong> 压入堆栈，注意段内过程调用是只压了EIP值即偏移。 </li>
-<li>然后把双字存储单元 <strong>OPRD</strong> 中的一个字（高地址的字）作为 <strong>16</strong> 位的段值送到 <strong>CS</strong> ，把双字中的另一个字（低地址的字）作为 <strong>16</strong> 位的偏移送到 <strong>IP</strong> ，从而转移到子程序。 </li>
-</ul>
-<h4 id="段间返回"><a href="#段间返回" class="headerlink" title="段间返回"></a>段间返回</h4><p>格式1：</p>
-<pre><code>RETF
-</code></pre><p>在实方式下，指令从堆栈先后弹出返回地址的偏移和段值，分别送到 <strong>IP</strong> 和 <strong>CS</strong> ，从而实现子程序的段间返回。</p>
-<p>格式2：</p>
-<pre><code>RETF    count
-</code></pre><p>指令在实现段间返回的同时，再额外根据 <strong>count</strong> 值调整堆栈指针。在实方式下具体操作是，先从堆栈弹出返回地址的偏移和段值（当然，会调整堆栈指针<br><strong>SP</strong> ），再把 <strong>count</strong> 加到 <strong>SP</strong> 上。</p>
-<p>示例代码：</p>
-<pre><code>section   codeA  align =16
-..start:
-    MOV   AX, CS
-    MOV   DS, AX
-
-    MOV   AX, codeC
-    CALL  FAR  [ptsubr]//段间间接调用
-
-    MOV   DL, 0DH
-    CALL  codeC:PutChar//段间直接调用
-    MOV   DL, 0AH
-    CALL  codeC:PutChar//段间直接调用
-    MOV   SI, ptsubr
-    MOV   AX, codeB
-    CALL  FAR  [SI]//段间间接调用
-
-    MOV   AH, 4CH
-    INT   21H
-
-ptsubr   dw   echo4
-         dw   codeB
-
-section   codeB  align=16
-    ToASCII:
-        AND   DL, 0FH
-        ADD   DL, &#39;0&#39;
-        CMP   DL, &#39;9&#39;
-        JBE   lab1
-        ADD   DL, 7
-    lab1:
-        RET
-
-    echo4:
-        MOV   CX, 4
-        MOV   BX, AX
-    next:
-        ROL   BX, 4
-        MOV   DL, BL
-        CALL  ToASCII
-        CALL  codeC:PutChar//段间直接调用
-        LOOP  next
-        MOV   DL, &#39;H&#39;
-        CALL  codeC:PutChar
-        RETF//段间返回
-
-section  codeC  align=16
-    PutChar:
-        MOV   AH, 2
-        INT   21H
-        RETF//段间返回
-</code></pre><h2 id="目标文件和段模式"><a href="#目标文件和段模式" class="headerlink" title="目标文件和段模式"></a>目标文件和段模式</h2><h3 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h3><p>不同的操作系统，对可执行文件的格式有不同要求。为了满足不同要求，有多种不同格式的目标文件。这些不仅与操作系统有关，也与汇编器和链接器有关。</p>
-<h4 id="纯二进制目标文件"><a href="#纯二进制目标文件" class="headerlink" title="纯二进制目标文件"></a>纯二进制目标文件</h4><p><strong>纯二进制目标文件</strong> ，只含有对应源程序的二进制代码，也即 <strong>二进制形式的机器指令和数据</strong><br>，并不含有其他信息。纯二进制目标文件有时很有用，尤其在没有操作系统的场合。</p>
-<p>使用nasm生成纯二进制代码文件的方法：</p>
-<pre><code>nasm  xxx. asm  -f bin  -o xxx.com
-
-nasm  xxx.asm  -o xxx.com  //缺省bin（纯二进制）格式
-
-nasm  xxx.asm  -o yyy  //目标文件名可以没有后缀
-</code></pre><p>Windows（ <strong>32位版本</strong> ）仍然支持以纯二进制目标文件形式存在的可执行程序， <a href="http://xn--
-g6qq3dbdp28aj0hxzfj75e.com" target="_blank" rel="noopener"> 只要其扩展名是.com </a><br>。为了运行这样的可执行程序，操作系统（Windows中的DOS）总是把纯二进制文件加载到内存代码段的偏移 <strong>100H</strong> 开始处，执行起始点偏移也是<br><strong>100H</strong> 。</p>
-<p>这就是为什么：</p>
-<pre><code> section  code
- org    100H//指示段的起始偏移
-    begin:
-        MOV   AX, begin    ;把标号begin代表的偏移送到AX，AX=0100H
-        MOV   AX, $        ;把当前偏移送到AX，AX=0103H
-        。。。。
-</code></pre><p>这样的代码中org的值一般设为100H。</p>
-<h4 id="obj目标文件"><a href="#obj目标文件" class="headerlink" title="obj目标文件"></a>obj目标文件</h4><p>obj格式目标文件适用于生成EXE类型的可执行程序。早先的DOS操作系统下，可执行程序主要是EXE类型。由 <strong>汇编器</strong><br>对源程序汇编生成obj格式目标文件，由 <strong>链接器</strong> 对obj格式目标文件链接后，生成EXE类型的可执行程序。</p>
-<p>obj格式目标文件不仅含有对应源程序的 <strong>机器指令和数据</strong> ，而且还含有 <strong>其他重要信息</strong><br>。例如，支持引用段值的信息。又如，程序开始执行位置的信息。所以，obj格式目标文件要比纯二进制目标文件来得长。</p>
-<p>在用于生成obj格式目标文件的源程序中，段名代表段值，所以可以通过段名来引用段值。还可以利用运算符 <strong>seg</strong><br>，获取标号所在段的段值。但是，在这样的源程序中，不能安排起始偏移设定语句org。在多个由链接器链接到一起的目标文件中，<br><strong>有且只能有1个目标文件含有开始执行的位置</strong> 。就汇编器NASM而言，程序开始执行的位置，在源程序中由特定的标号<strong>…start</strong>给出。</p>
-<h3 id="段模式声明语句"><a href="#段模式声明语句" class="headerlink" title="段模式声明语句"></a>段模式声明语句</h3><p>无论是保护方式还是实方式，IA-32系列处理器都支持8位、16位和32位的操作数，都支持16位和32位的存储器寻址方式。</p>
-<p>为了保持兼容，同时保证效率，IA-32系列处理器支持两种段模式，也即32位段模式和16位段模式。在 <strong>保护方式</strong> 下，一般采用32位段；在<br><strong>实方式</strong> 下，只能使用16位段：</p>
-<ul>
-<li><p>对于32位段，缺省的操作数尺寸是8位和32位，缺省的存储器寻址方式是32位。 </p>
-</li>
-<li><p>对于16位段，缺省的操作数尺寸是8位和16位，缺省的存储器寻址方式是16位。 </p>
-</li>
-</ul>
-<h4 id="段模式声明语句的格式"><a href="#段模式声明语句的格式" class="headerlink" title="段模式声明语句的格式"></a>段模式声明语句的格式</h4><pre><code>BITS 32
-BITS 16
-</code></pre><p>第一条指示汇编器NASM按32位段模式来翻译随后的代码；</p>
-<p>第二条指示按16位段模式来翻译随后的代码。</p>
-<p>比如：</p>
-<pre><code>  segment   text
-    org    100H              ;设起始偏移100H
-    MOV   AX, CS
-    MOV   DS, AX
-
-    bits  16                            ;声明16位段模式
-    MOV   AL, 1             ;B0 01
-    MOV   AX, 1             ;B8 01 00
-
-    bits  32                            ;声明32位段模式
-    MOV   AL, 1             ;B0 01
-    MOV   AX, 1             ;66 B8 01 00
-</code></pre><h2 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h2><p><strong>宏</strong> 指用一个符号表示多个符号，或者代码片段。</p>
-<p>在源程序中使用宏的优点：</p>
-<ul>
-<li><p>可以减少重复书写，简化源程序 </p>
-</li>
-<li><p>可以实现整体替换，维护源程序 </p>
-</li>
-</ul>
-<p>汇编中的宏类似于高级语言中的宏。</p>
-<h3 id="宏指令的声明和使用"><a href="#宏指令的声明和使用" class="headerlink" title="宏指令的声明和使用"></a>宏指令的声明和使用</h3><p>宏指令的声明指，说明宏指令（宏）与由它代表的多个符号或代码片段之间的替代关系。</p>
-<p>格式1:</p>
-<pre><code> %macro   宏指令名    参数个数
-         ......
-%endmacro
-</code></pre><p>举例：</p>
-<p>声明一个宏，其接受从键盘输入一个键</p>
-<pre><code>%macro   GetChar   0
-    MOV   AH, 1
-    INT   21H
-%endmacro
-</code></pre><p>接收参数的举例：</p>
-<p>声明一个宏，其把一个双字存储单元的内容，送到另一个存储单元</p>
-<pre><code>%macro   MOVED   2
-    PUSH  EAX
-    MOV   EAX, %2
-    MOV   %1, EAX
-    POP   EAX
-%endmacro
-</code></pre><p>调用：</p>
-<pre><code>MOVED EAX，EBX
-</code></pre><h3 id="单行宏的声明和使用"><a href="#单行宏的声明和使用" class="headerlink" title="单行宏的声明和使用"></a>单行宏的声明和使用</h3><p>单行宏指，一个符号代表多个符号，由一行表示之。</p>
-<p>格式：</p>
-<pre><code>%define    宏名（参数表）   宏体
-</code></pre><p>可以没有参数表，如果没有参数表，那么也不需要圆括号。</p>
-<p>示例：</p>
-<pre><code>%define   count   12
-%define   array(a,i)   dword  [a+4*i]//注意这里加入了参数
-</code></pre><h3 id="宏相关方法"><a href="#宏相关方法" class="headerlink" title="宏相关方法"></a>宏相关方法</h3><h4 id="宏名的脱敏"><a href="#宏名的脱敏" class="headerlink" title="宏名的脱敏"></a>宏名的脱敏</h4><p>说白了就是想办法让宏名变为大小写不敏感 的，方法：</p>
-<p><code>%define ABC 123</code> –&gt; <code>%idefine ABC 123</code></p>
-<p>就是加了一个 <code>i</code> .</p>
-<p>没加之前只能如下引用：</p>
-<pre><code>MOV EAX,ABC
-</code></pre><p>加了之后：</p>
-<pre><code>MOV EAX,ABc
-MOV EBX，abc
-</code></pre><h4 id="宏体中的标号"><a href="#宏体中的标号" class="headerlink" title="宏体中的标号"></a>宏体中的标号</h4><p>这里主要介绍的是如下情况的解决：</p>
-<pre><code>%macro    TOASC   0
-    AND   AL, 0FH 
-    ADD   AL, &#39;0&#39;
-    CMP   AL, &#39;9&#39;
-    JBE   SHORT  OK
-    ADD   AL, 7
-OK:
-%endmacro
-</code></pre><p>由于这里为了跳过 <code>ADD AL,7</code> ，使用了 <code>JBE SHORT OK</code> 的方法，这就导致宏体里面有两个 <code>OK</code><br>,按照书上的意思是这是不合法的，所以为了巧妙跳过下面的一句指令，使用如下代码：</p>
-<pre><code>%macro    TOASC   0
-    AND   AL, 0FH 
-    ADD   AL, &#39;0&#39;
-    CMP   AL, &#39;9&#39;
-    JBE   SHORT  $+4
-    ADD   AL, 7
-%endmacro
-</code></pre><p>主要是 <code>$+4</code> 的使用，之所以 <code>+4</code> 是因为一条指令长度为4字节，如果想跳两条指令就 <code>+8</code><br>,实际上不仅是在宏里，在汇编代码的编写过程中如果遇到需要跳过紧跟某些指令时不妨使用这个方法（$代表的是当前代码行的位置，这在上文有介绍）。</p>
-
-          
+          实地址执行环境寄存器和指令集
+32位寄存器EAX、EBX、ECX、EDX、ESP、EBP、ESI和EDI； 
+16位寄存器AX、BX、CX、DX、SP、BP、SI和DI； 
+8位寄存器AH、AL、BH、BL、CH、CL、DH和DL。 
+段寄存器CS、DS、SS和ES，以及段寄存器FS和GS。寄存器C
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/15/汇编总结（5）——汇编语言/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -814,8 +400,10 @@ OK:
   </article>
 
 
+      # 	        
     
-      
+     #   	
+            		
 
   
 
@@ -833,7 +421,7 @@ OK:
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -877,6 +465,17 @@ OK:
 
           
           
+             <span id="/2018/11/14/汇编总结（4）——字符串操作和位操作/" class="leancloud_visitors" data-flag-title="汇编总结（4）——字符串操作和位操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -899,237 +498,23 @@ OK:
       
         
           
-            <h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p>首先明确什么是字符串：</p>
-<blockquote>
-<p>字符串是字符的一个序列，对字符串的操作处理包括复制、比较和检索等，为了有效地处理字符串，IA-32系列处理器有专门处理字符串的指令，称之为<br><strong>字符串操作指令</strong> ，简称为 <strong>串操作指令</strong> 。</p>
-</blockquote>
-<h3 id="字符串操作指令"><a href="#字符串操作指令" class="headerlink" title="字符串操作指令"></a>字符串操作指令</h3><p>主要有五种常见的串操作指令：</p>
-<ul>
-<li>串装入指令 </li>
-<li>串存储指令 </li>
-<li>串传送指令 </li>
-<li>串扫描指令 </li>
-<li>串比较指令 </li>
-</ul>
-<p>对于以上的五种常见操作指令，都对应三种字符尺寸：</p>
-<ul>
-<li>字节（8位） </li>
-<li>字（16位） </li>
-<li>双字（32位） </li>
-</ul>
-<p>串操作指令说明：</p>
-<ul>
-<li>源串 DS：ESI </li>
-<li>目的串 ES：EDI </li>
-</ul>
-<p>如果只有一个数据段，或者说源串与目的串在同一个数据段，那么可以简单地认为，ESI指向源串，EDI指向目的串。</p>
-<p>可以简单记忆位源串：Start（SI），目的串：End（DI）</p>
-<p>串操作指令执行时，会自动调整作为指针使用的寄存器ESI和EDI的值，使之指向下一个字符，每次调整的尺寸与字符串中字符的尺寸一致。</p>
-<p>字符串的操作方向一般是由低地址向高地址，但是也可以由高地址向低地址，这是由标志DF决定的：</p>
-<ul>
-<li>DF为0（复位）：由低到高，按递增方式调整 </li>
-<li>DF为1（置位）：由高到低，按递减方式调整 </li>
-</ul>
-<p>而对于DF的调整，有如下两个指令；</p>
-<ul>
-<li>CLD 清DF，DF=0（clear D） </li>
-<li>STD 置DF，DF=1（set D） </li>
-</ul>
-<h4 id="字符串装入指令（LOAD-String）"><a href="#字符串装入指令（LOAD-String）" class="headerlink" title="字符串装入指令（LOAD String）"></a>字符串装入指令（LOAD String）</h4><p>三种使用格式：</p>
-<blockquote>
-<p>LOADSB 装入字节（Byte），执行后ESI变化1</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>LOADSW 装入字（Word），执行后ESI变化2</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>LOADD 装入双字（Double Word），执行后ESI变化4</p>
-</blockquote>
-<p>字符串装入指令的作用是把 <strong>ESI</strong><br>指向的字符串中的一个字符装到累加器AL、AX、EAX中，分别对应字节、字、双字，然后根据字符尺寸及方向标志DF的值调整ESI的位置。</p>
-<h4 id="字符串存储指令（Store-String）"><a href="#字符串存储指令（Store-String）" class="headerlink" title="字符串存储指令（Store String）"></a>字符串存储指令（Store String）</h4><p>三种使用格式：</p>
-<blockquote>
-<p>STOSB 存储字节（Byte）</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>STOSW 存储字（Word），执行后ESI变化2</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>STOSD 存储双字（Double Word），执行后ESI变化4</p>
-</blockquote>
-<p>字符串装入指令的作用是把累加器AL、AX、EAX中的字符存到 <strong>EDI</strong><br>指向的字符串中，分别对应字节、字、双字的存储，然后根据字符尺寸及方向标志DF的值调整ESI的位置。</p>
-<h4 id="字符串传送指令（Moving-String）"><a href="#字符串传送指令（Moving-String）" class="headerlink" title="字符串传送指令（Moving String）"></a>字符串传送指令（Moving String）</h4><p>三种使用格式：</p>
-<blockquote>
-<p><strong>MOVSB</strong> <strong>;</strong>字节传送</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>MOVSW</strong> <strong>;</strong>字传送</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>MOVSD</strong> <strong>;</strong>双字传送</p>
-</blockquote>
-<p>作用：把ESI指向的字节/字/双字传送到EDI指向的存储单元中，然后根据操作大小及方向标志DF调整ESI和EDI的值，类似如下两句：</p>
-<pre><code>LOADSB
-STOSB
-</code></pre><p>但是并不会影响AL/AX/EAX的值。</p>
-<h4 id="字符串扫描指令（Scan-String）"><a href="#字符串扫描指令（Scan-String）" class="headerlink" title="字符串扫描指令（Scan String）"></a>字符串扫描指令（Scan String）</h4><p>三种格式：</p>
-<blockquote>
-<p><strong>SCASB</strong> <strong>;</strong>串字节扫描</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>SCASW</strong> <strong>;</strong>串字扫描</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>SCASD</strong> <strong>;</strong>串双字扫描</p>
-</blockquote>
-<p>把累加器AL/AX/EAX中的内容和由寄存器EDI所指向的一个字节/字/双字的目标数据采用相减的方式比较，相减结果反映到各状态标志，但不影响两个操作数，然后根据字符大小和方向标志DF调整EDI的值。</p>
-<h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><p>判断一个字符是否是十六进制字符：</p>
-<pre><code>     char  string[] =&quot;0123456789ABCDEFabcdef&quot;;
-    char  varch= &#39;%&#39;;       //用于保存其他方式输入的字符
-    int  flag;              /反映是否为十六进制数符号
-    _asm  {
-        MOV   AL, varch     ;把要判断的字符送AL
-        MOV   ECX, 22       ;合计22个十六进制数符号
-        LEA   EDI, string
-    NEXT:
-        SCASB             ;
-        LOOPNZ   NEXT      ;没有找遍，且没有找到，继续找
-        JNZ   NOT_FOUND     ;没有找到
-    FOUND:                   ;找到，字符是十六进制数符号
-        MOV   flag, 1
-        JMP   SHORT  OVER
-    NOT_FOUND:               ;字符不是十六进制数符号
-        MOV   flag, 0
-    OVER:
-    }
-    printf(&quot;flag=%d\n&quot;, flag);    //显示为flag=0
-    return  0;
-</code></pre><p>核心算法思想是将呆判断字符放在AL中，将EDI指向十六进制标准字符串的首地址，然后使用SCASB，如果执行SCASB后ZF标志位不为0，就说明待判断字符和十六进制标准字符串中的当前字符不等，然后进入下一个循环，注意此时EDI已经自动指向了十六进制标准字符串的下一位。如果此时ZF为0了，会进入JNZ<br>NOT_FOUND 这句，但是由于相等时ZF等于0，所以不会执行JNZ，会执行其下一句FOUND。</p>
-<p>这就是主要的逻辑。</p>
-<h4 id="字符串比较指令（CoMPare-String）"><a href="#字符串比较指令（CoMPare-String）" class="headerlink" title="字符串比较指令（CoMPare String）"></a>字符串比较指令（CoMPare String）</h4><p>三种格式：</p>
-<blockquote>
-<p><strong>CMPS**</strong>B<strong> </strong>;**串字节比较</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>CMPS**</strong>W<strong> </strong>;**串字比较</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p><strong>CMPS**</strong>D<strong> </strong>;**串双字比较</p>
-</blockquote>
-<p>把寄存器ESI指向的一个字节/字/双字与EDI所指向的一个字节/字/双字采用相减的方式比较，结果反映到各有关标志中，但不影响两个操作数，然后根据字符尺寸和方向标志DF的值调整ESI和EDI的值。</p>
-<h3 id="重复操作前缀"><a href="#重复操作前缀" class="headerlink" title="重复操作前缀"></a>重复操作前缀</h3><p>串操作指令每次只能处理一个字符，为了进一步提高效率，IA-32系列CPU提供重复操作前缀，重复操作前缀加在字符串操作指令之前，起到重复执行其后面一条字符串操作指令的作用。</p>
-<p>主要设计三个：</p>
-<ul>
-<li>REP </li>
-<li>REPZ/REPE </li>
-<li>REPNZ/REPNE </li>
-</ul>
-<h4 id="REP"><a href="#REP" class="headerlink" title="REP"></a>REP</h4><p>REP每一次先判断寄存器ECX是否为0，如果为0就结束对其后字符操作指令的重复，否则ECX减1，然后重复其后的串操作指令，所以当ECX值等于0时就不执行其后的串操作指令。</p>
-<p>它与LOOP指令差不多，但是LOOP指令时先给ECX减1再判断ECX是否为0，而REP是先判读是否为0，不是0的话再减1，二者的共性是操作过程中给ECX减1不影响标志位。</p>
-<p>REP只要用在MOVS和STOS之前。</p>
-<h5 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo"></a>Demo</h5><p>以下两段代码等价：</p>
-<p>使用LOOP：</p>
-<pre><code>MOV ECX ,8;
-MOVSD;
-DEC ECX;
-LOOP ECX;
-</code></pre><p>使用REP：</p>
-<pre><code>MOV ECX,8;
-REP MOVSD;
-</code></pre><h4 id="REPE-REPZ"><a href="#REPE-REPZ" class="headerlink" title="REPE/REPZ"></a>REPE/REPZ</h4><p>REPE和REPZ是一个前缀的两个助记符，说白了他们两功能一样：</p>
-<p>重复前，先判断ECX是否为0，每重复一次，ECX值减1（不影响标志位），一直重复到ECX为0或者串操作指令使ZF为0为止，<br><strong>只有ZF为1（相等）的时候才有可能继续重复。</strong></p>
-<p>主要用在CMPS和SCAS之前。</p>
-<h5 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo"></a>Demo</h5><p>跳过字符串前面的空格符：</p>
-<pre><code>MOV EDI ,string；
-MOV ECX,-1;
-MOV AL,20H;//空格符
-REPE SCASB;//SCASB会让当前EDI所指的值和AL（空格）比较，当相等时ZF为0，结束REPE的条件
-DEC EDI;//上面多调整了一次EDI的值，这里减1
-</code></pre><h4 id="REPNE-REPNZ"><a href="#REPNE-REPNZ" class="headerlink" title="REPNE/REPNZ"></a>REPNE/REPNZ</h4><p>每次重复前先判断ECX是否为0，不为0时进行重复，每重复一次ECX值减1，一直到ECX为0或者ZF为1，只有当不相等（ZF为0）时才有可能重复。</p>
-<p>REPNE/REPNZ主要用在SCAS之前。</p>
-<h5 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo"></a>Demo</h5><p>求字符串长度：</p>
-<pre><code>XOR    AL, AL          ;AL= 0（字符串结束标记值）
-MOV    ECX, -1         ;假设字符串足够长（0FFFFFFFFH）
-REPNZ  SCASB           ;寻找字符串结束标记
-NOT    ECX
-DEC    ECX             ;至此ECX含字符串长度
-</code></pre><h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><p>无论在表示、存储或者处理时，位（bit）是计算机系统中最基本的单位，为了提高位操作的效率，IA-32系列处理器提供专门的位操作指令，所谓的<br><strong>位操作指令</strong> ，就是以位（bit）为操作单位的指令。</p>
-<h3 id="位测试及设置指令组"><a href="#位测试及设置指令组" class="headerlink" title="位测试及设置指令组"></a>位测试及设置指令组</h3><p>位测试及设置指令组含有如下4条指令：</p>
-<ul>
-<li>BT 位测试指令（Bit test） </li>
-<li>BTC 位测试并取反指令（Bit test and complement） </li>
-<li>BTR 位测试并复位指令（Bit test and reset） </li>
-<li>BTS 位测试并置位指令（bit test and set） </li>
-</ul>
-<p>一般格式：</p>
-<pre><code>BT     OPRD1，OPRD2
-BTC    OPRD1，OPRD2
-BTR    OPRD1，OPRD2
-BTS    OPRD1，OPRD2
-</code></pre><p>操作数OPRD1指定位串，可以是16位或32位 <strong>通用寄存器</strong> ，可以是16位或32位 <strong>存储单元地址</strong> 。</p>
-<p>操作数OPRD2指定位号，可以是操作数OPRD1 <strong>尺寸相同的通用寄存器</strong> ，也可以是8位 <strong>立即数</strong> 。</p>
-<p>如果操作数OPRD1是32位（16位）寄存器，那么被测位串也就限于32位（16位），实际被测位号将是操作数OPRD2取32（或16）的 <strong>余数</strong> 。</p>
-<p>具体解释：</p>
-<ul>
-<li>BT：把被测试位的值送到进位标志CF </li>
-<li>BTC：把被测试位送到进位标志CF，并且把被测试位取反 </li>
-<li>BTR：把被测试位送到进位标志CF，并且把被测试位复位（清0） </li>
-<li>BTS：把被测试位送到进位标志CF，并且把被测试位置位（置1） </li>
-</ul>
-<p>需要注意的是：</p>
-<p>如果给出被测位串的操作数 <strong>OPRD1</strong> 是 <strong>32</strong> 位（或 <strong>16</strong><br>位）存储单元的地址，那么意味着被测的位串在存储器中。存储器中的被测位串可以足够长，可以是多个 <strong>32</strong> 位（或 <strong>16</strong> 位）假设由<br><strong>OPRD1</strong> 给出的存储单元有效地址是 <strong>EA</strong> ，由 <strong>OPRD2</strong> 给出的位号是 <strong>BitOffset</strong> 。</p>
-<p>​ 在 <strong>OPRD1</strong> 是 <strong>32</strong> 位存储单元的情况下：</p>
-<p>​ 实测存储单元 <strong>= EA + (4</strong> ∗ <strong>(BitOffset DIV 32))</strong> //4 ∗ (BitOffset DIV<br>32)表示第BitOffset DIV 32个存储单元，因为一个32位存储单元4个字节，所以乘4，下面的乘2是同样的道理</p>
-<p>​ 存储单元中的实测位号 <strong>= BitOffset MOD 32</strong></p>
-<p>​ 在 <strong>OPRD1</strong> 是 <strong>16</strong> 位存储单元的情况下：</p>
-<p>​ 实测存储单元 <strong>= EA + (2</strong> ∗ <strong>(BitOffset DIV 16))</strong></p>
-<p>​ 存储单元中的实测位号 <strong>= BitOffset MOD 16</strong></p>
-<p>在这种情况下，由于操作数OPRD2可以是有符号整数值，所以当OPRD2是32位时，可访问(-2G）至（2G-1）范围内的位串；当OPRD2为16位时，可访问(-32K)至(32K-1)范围内的位串，注意这里的正负是相对于EA为0点而言的。</p>
-<h3 id="位扫描指令组"><a href="#位扫描指令组" class="headerlink" title="位扫描指令组"></a>位扫描指令组</h3><p>包含两条指令：</p>
-<ul>
-<li>BSF：顺向位扫描（bit scan forward） </li>
-<li>BSR：逆向位扫描（bit scan reverse） </li>
-</ul>
-<p>一般格式：</p>
-<pre><code>BSF     OPRD1，OPRD2
-BSR     OPRD1，OPRD2
-</code></pre><p>操作数OPRD1是16或32位通用寄存器，操作数OPRD2可以是16位或32位通用寄存器或者存储单元；但操作数OPRD1和OPRD2的位数(长度)必须相同。</p>
-<p>功能如下：</p>
-<ul>
-<li>顺向位扫描指令BSF，从右向左（位0至位15或位31）扫描字或双字操作数OPRD2中第一个含“1”的位，并把扫描到的第一个含“1”的位的位号送操作数OPRD1。 </li>
-<li>逆向位扫描指令BSR，从左向右（位15或位31至位0）扫描字或双字操作数OPRD2中第一个含“1”的位，并把扫描到的第一个含“1”的位的位号送操作数OPRD1。 </li>
-<li>如果字或双字操作数OPRD2等于0，那么零标志ZF被置1，操作数OPRD1的值不确定；否则零标志ZF被清0。 </li>
-</ul>
-<h4 id="Demo-4"><a href="#Demo-4" class="headerlink" title="Demo"></a>Demo</h4><pre><code>    MOV   EBX , 12345678H//1在第28位
-    BSR   EAX, EBX                ;ZF=0, EAX=1CH=12+16=28
-    BSF   DX, AX                  ;AX=CH=1100B,ZF=0, DX=2=10B
-    BSF   CX, DX                  ;ZF=0, CX=1
-</code></pre><h2 id="条件设置字节指令"><a href="#条件设置字节指令" class="headerlink" title="条件设置字节指令"></a>条件设置字节指令</h2><p>一般格式：</p>
-<pre><code>SETcc OPRD
-</code></pre><p>符号cc是代表各种条件的缩写，是指令助记符的一部分；操作数OPRD只能是8位寄存器或者字节存储单元，用于存放设置结果。当条件满足时，那么将目的操作数OPRD设置成1，否则设置成0。这里的条件<br><strong>与条件转移指令中的条件一样</strong> 。</p>
-<p>应用场景：一般在使用条件转移指令且涉及到对1的操作时考虑使用条件设置指令代替条件转移指令，比如：</p>
-<p>设r1、r2、r3都代表通用寄存器，要计算r3=（r1 的值  &gt;=r2的值）?1:0:</p>
-<p>使用条件转移：</p>
-<pre><code>     CMP   r1, r2
-    MOV   r3, 1
-    Jae    NEXT
-    MOV   r3, 0
-NEXT:
-</code></pre><p>使用条件设置字节：</p>
-<pre><code>XOR    r3, r3
-CMP    r1, r2
-SETae   r3
-</code></pre>
-          
+          字符串操作首先明确什么是字符串：
+
+字符串是字符的一个序列，对字符串的操作处理包括复制、比较和检索等，为了有效地处理字符串，IA-32系列处理器有专门处理字符串的指令，称之为字符串操作指令 ，简称为 串操作指令 。
+
+字符串操作指令主要有五种常见的串操作指令：
+
+串装入指令 
+串存储指令 
+串传送指
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/14/汇编总结（4）——字符串操作和位操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1162,8 +547,10 @@ SETae   r3
   </article>
 
 
+      # 	        
     
-      
+     #   	
+            		
 
   
 
@@ -1181,7 +568,7 @@ SETae   r3
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -1225,6 +612,17 @@ SETae   r3
 
           
           
+             <span id="/2018/11/14/汇编总结（3）——程序设计初步/" class="leancloud_visitors" data-flag-title="汇编总结（3）——程序设计初步">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1247,450 +645,23 @@ SETae   r3
       
         
           
-            <h2 id="堆栈的作用"><a href="#堆栈的作用" class="headerlink" title="堆栈的作用"></a>堆栈的作用</h2><p>汇编语言中的堆栈就是高级语言中的栈。</p>
-<p>堆栈主在汇编程序设计中主要有三个作用：</p>
-<ul>
-<li>过程调用&amp;返回指令 </li>
-<li>参数传递 </li>
-<li>局部变量 </li>
-</ul>
-<h3 id="过程调用-amp-返回指令"><a href="#过程调用-amp-返回指令" class="headerlink" title="过程调用&amp;返回指令"></a>过程调用&amp;返回指令</h3><p>过程调用中的过程指什么？</p>
-<p>汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 <strong>调用子程序需要考虑返回</strong> 。</p>
-<p><strong>过程调用指令</strong> 用于由主程序转移到子程序；</p>
-<p><strong>过程返回指令</strong> 用于由子程序返回到主程序。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CALL</td>
-<td>过程调用指令</td>
-<td>CALL LABEL</td>
-<td>段内直接调用LABEL</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>与jmp的区别在于call指令会在调用label之前保存返回地址（call 中return之后主程序还可以继续执行，jmp<br>当label执行完毕后不能返回主程序继续执行）<br>RET  |  段内过程返回指令  |  RET  |  使子程序结束，继续执行主程序  |  </p>
-<h4 id="call指令的背后"><a href="#call指令的背后" class="headerlink" title="call指令的背后"></a>call指令的背后</h4><p>段内直接调用的背后操作其实是两步：</p>
-<p>（1）把返回地址（EIP内容）压入堆栈</p>
-<p>（2）使得EIP内容为目标地址偏移，从而实现转移</p>
-<p>返回地址：紧随过程调用指令的下一条指令的地址（有效地址）</p>
-<p>目标地址：子程序开始处的地址（有效地址）</p>
-<p>与无条件转移相比，过程调用指令call只是多了第一步（保护现场）。</p>
-<h4 id="ret指令的背后"><a href="#ret指令的背后" class="headerlink" title="ret指令的背后"></a>ret指令的背后</h4><p>过程返回指令的执行其实进行的是如下操作：</p>
-<p>从堆栈中弹出地址偏移，送到指令指针寄存器EIP中，这个返回地址通常就是在执行相应的调用指令时所压入堆栈的返回地址。</p>
-<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>入口参数：主程序传给子程序的参数</p>
-<p>出口参数：子程序传给主程序的参数</p>
-<p>参数传递的方法主要有： <strong>寄存器传递法</strong> 、 <strong>堆栈传递法</strong> 、约定内存单元传递法、call后续区传递法等。具体情况需要事先约定好。</p>
-<p>一般c语言的习惯是使用堆栈传递入口参数，使用寄存器传递出口参数，因为一般入口参数比较多，出口参数比较少。</p>
-<h3 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h3><p>这里就一个结论，堆栈可以用于安排动态局部变量。</p>
-<h2 id="算术逻辑运算指令"><a href="#算术逻辑运算指令" class="headerlink" title="算术逻辑运算指令"></a>算术逻辑运算指令</h2><h3 id="乘除指令"><a href="#乘除指令" class="headerlink" title="乘除指令"></a>乘除指令</h3><h4 id="无符号数乘法指令（MUL）"><a href="#无符号数乘法指令（MUL）" class="headerlink" title="无符号数乘法指令（MUL）"></a>无符号数乘法指令（MUL）</h4><p>指令格式：</p>
-<pre><code>MUL OPRD
-</code></pre><p>该指令实现两个无符号数的乘法运算，乘数是OPRD，被乘数位于AL、AX或EAX中（由OPRD的尺寸决定）。</p>
-<p>需要注意的是乘积之后尺寸翻倍，两个8位的数乘积为16位，结果存放在AX中，类似的，两个16位数的乘积结果为32位，放在DX：AX中，最后，64位的乘积放在EDX：EAX中。</p>
-<p>操作数OPRD可以是通用寄存器、存储单元，但是 <strong>不能是立即数</strong> 。</p>
-<h4 id="有符号数乘法指令（IMUL）"><a href="#有符号数乘法指令（IMUL）" class="headerlink" title="有符号数乘法指令（IMUL）"></a>有符号数乘法指令（IMUL）</h4><p>有符号乘法指令有三种使用形式：</p>
-<pre><code>IMUL OPRD ;
-IMUL DEST,SRC;
-IMUL DEST,SRC1,SEC2;
-</code></pre><p>具体解释如下：</p>
-<ul>
-<li>IMUL OPRD </li>
-</ul>
-<blockquote>
-<p>单操作数乘法指令和无符号数乘法的规则差不多，只是在乘的时候把乘数和被乘数都当成有符号数。</p>
-</blockquote>
-<ul>
-<li>IMUL DEST,SRC </li>
-</ul>
-<blockquote>
-<p>数据流方向是DEST&lt;=DEST*SRC</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>要求目的操作数DEST只能是16位或32位通用寄存器，源操作数SRC可以是通用寄存器或存储单元， <strong>需与目的操作数尺寸一致</strong><br>，可以是一个立即数（尺寸不能超过目的操作数）。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>乘数和被乘数均作为有符号数。</p>
-</blockquote>
-<ul>
-<li>IMUL DEST,SRC1,SEC2 </li>
-</ul>
-<blockquote>
-<p>数据流方向为DEST &lt;=SRC1*SRC2</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>目的操作数DEST只能是16位或32位通用寄存器。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>SRC1可以是通用寄存器或者存储单元，须 <strong>与目的操作数尺寸一致</strong> ，但 <strong>不能是立即数</strong> 。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>SRC2只能是一个立即数， <strong>尺寸不能超过目的操作数</strong> 。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>被乘数和乘数均为有符号数。</p>
-</blockquote>
-<h4 id="无符号数除法指令（DIV）"><a href="#无符号数除法指令（DIV）" class="headerlink" title="无符号数除法指令（DIV）"></a>无符号数除法指令（DIV）</h4><p>一般格式：</p>
-<pre><code>DIV OPRD
-</code></pre><p>OPRD是除数，被除数位于AX、DX：AX或EDX：EAX中，由OPRD的尺寸决定，被除数的尺寸翻倍，商在AL、AX或者EAX中，余数在AH、DX或者EDX中，商和余数的尺寸和OPRD相同。</p>
-<p>操作数OPRD可以是通用寄存器，可以是存储单元，但 <strong>不能是立即数</strong> 。</p>
-<p>注意使用DIV指令时要防止除溢出，比如：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6qzct1yyj30aa06i75l.jpg" alt="image-20181113211830792"></p>
-<p>比如上图，除完之后应该商300余0，可是300超出了AL的表示范围，这时候就产生了溢出情况，在实际使用中要注意防范类似情况。</p>
-<h4 id="有符号数除法指令（IDIV）"><a href="#有符号数除法指令（IDIV）" class="headerlink" title="有符号数除法指令（IDIV）"></a>有符号数除法指令（IDIV）</h4><p>指令格式：</p>
-<pre><code>IDIV OPRD
-</code></pre><p>基本原则和DIV一样，不同之处在于：</p>
-<ul>
-<li>除法时有符号的 </li>
-<li>如果不能整除，余数的符号与被除数符号一致，而且余数的绝对值小于除数的绝对值。 </li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MUL</td>
-<td>无符号数乘法指令  </td>
-</tr>
-<tr>
-<td>IMUL</td>
-<td>有符号数乘法指令  </td>
-</tr>
-<tr>
-<td>IMUL DEST，SRC</td>
-<td>有符号数乘法指令  </td>
-</tr>
-<tr>
-<td>IMUL DEST,SRC1,SRC2</td>
-<td>有符号数乘法指令  </td>
-</tr>
-<tr>
-<td>DIV</td>
-<td>无符号数除法指令  </td>
-</tr>
-<tr>
-<td>IDIV OPRD</td>
-<td>有符号数除法指令  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="符号拓展指令"><a href="#符号拓展指令" class="headerlink" title="符号拓展指令"></a>符号拓展指令</h4><p>符号拓展指令的实质是用被拓展寄存器的符号位占据目标拓展寄存器。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CBW</td>
-<td>字节转化为字指令</td>
-<td>CBW</td>
-<td>把寄存器AL中的符号拓展到寄存器AH；  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>如果AL最高有效位、为0，则AH=0，如果AL最高位为1，则AH=FFH<br>CWD  |  字转化为双字指令  |  CWD  |  把寄存器AX中的符号拓展到寄存器DX；<br>AX最高位0和1不同情况的拓展策略同CBW<br>CDQ  |  双字转化为四字指令  |  CDQ  |  把寄存器EAX中的符号拓展到EDX；<br>AX最高位0和1不同情况的拓展策略同CBW<br>CWDE  |  字转化为双字指令  |  CWDE  |  把AX中的符号拓展到EAX的高16位；<br>AX最高位0和1不同情况的拓展策略同CBW  </p>
-<p>使用举例：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6rdyo63xj30fo06iwgu.jpg" alt="image-20181113213232393"></p>
-<h4 id="符号拓展传送指令（MOVSX）"><a href="#符号拓展传送指令（MOVSX）" class="headerlink" title="符号拓展传送指令（MOVSX）"></a>符号拓展传送指令（MOVSX）</h4><p>一般格式：</p>
-<pre><code>MOVSX DEST,SRC
-</code></pre><p>把SRC符号拓展后送到DEST。</p>
-<p>目的操作数的尺寸必须大于源操作数的尺寸。源操作数的尺寸可以是8位或16位，目的操作数的尺寸可以是8位或16位。</p>
-<p>使用举例：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx6rgiexu4j30j803awg0.jpg" alt="image-20181113213459899"></p>
-<h4 id="零拓展传送指令（MOVZX）"><a href="#零拓展传送指令（MOVZX）" class="headerlink" title="零拓展传送指令（MOVZX）"></a>零拓展传送指令（MOVZX）</h4><p>一般格式：</p>
-<pre><code>MOVZX DEST,SRC
-</code></pre><p>把SRC零拓展后送到DEST。</p>
-<p>源操作数可以是8位或16位，目的操作数可以是16位或32位。</p>
-<p>使用举例：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fx6ri86sndj30j803ataf.jpg" alt="image-20181113213639331"></p>
-<h3 id="逻辑运算指令"><a href="#逻辑运算指令" class="headerlink" title="逻辑运算指令"></a>逻辑运算指令</h3><p>需要注意：</p>
-<p>只有通用寄存器或者存储单元可作为目的操作数，用于存放运算结果。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NOT</td>
-<td>否运算指令</td>
-<td>NOT OPRD</td>
-<td>把操作数OPRD按位取反，然后送回OPRD</td>
-<td></td>
-</tr>
-<tr>
-<td>AND</td>
-<td>与运算指令</td>
-<td>AND DEST，SRC</td>
-<td>把两个操作数进行与运算之后结果送回DEST</td>
-<td>同1得1，否则得0  </td>
-</tr>
-<tr>
-<td>OR</td>
-<td>或运算指令</td>
-<td>OR DEST，SRC</td>
-<td>把两个操作数进行或运算之后结果送回DEST</td>
-<td>同0得0，否则得1  </td>
-</tr>
-<tr>
-<td>XOR</td>
-<td>异或运算</td>
-<td>XOR DEST，SRC</td>
-<td>把两个操作数进行异或运算之后结果送回DEST</td>
-<td>相同得0不同得1  </td>
-</tr>
-<tr>
-<td>TEST</td>
-<td>测试指令</td>
-<td>TEST DEST，SRC</td>
-<td></td>
-</tr>
-<tr>
-<td>与AND指令类似，将各位相与，但是结果不送回DEST，仅影响状态位标志，指令执行后，ZF、PF、SF反映运算结果，CF和OF被清零</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通常用于检测某些位是否为1，但又不希望改变操作数的值  </p>
-<p>test使用举例：</p>
-<p>判断AL中的位6和位2是否有一位为1:</p>
-<pre><code>test al ,01000100B;
-</code></pre><p>随后，判断标志位ZF，如果ZF为0，说明al第6位和第2位都为0，否则说明二者有一个为1.</p>
-<h3 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h3><h4 id="一般移位指令"><a href="#一般移位指令" class="headerlink" title="一般移位指令"></a>一般移位指令</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SAL</td>
-<td>算术左移</td>
-<td>SAL OPRD，count</td>
-<td>把操作数oprd左移count位，右边补0</td>
-<td>与shl指令一样</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SHL  |  逻辑左移  |  SHL OPRD，count  |  把操作数oprd左移count位，右边补0  |  与sal指令一样<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SAR  |  算术右移  |  SAR OPRD，count  |<br>把操作数oprd右移count位，同时每右移一位，左边补符号位，移出的最低位进入标志位CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SHR  |  逻辑右移  |  SHR OPRD，count  |  把操作数oprd右移count位，左边补0，移出的最低位进入标志位CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
-<h4 id="循环移位指令"><a href="#循环移位指令" class="headerlink" title="循环移位指令"></a>循环移位指令</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ROL</td>
-<td>左循环移位指令</td>
-<td>ROL OPRD,count</td>
-<td>左循环移一位之后最高位移到最低位的同时也进入CF</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>ROR  |  右循环移位指令  |  ROR OPRD,count  |  右循环移一位之后最低位移到最高位的同时也进入CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCL  |  带进位左循环移位  |  RCL OPRD,count  |  相当于CF在最高位直接参与循环移位  |  大循环左移<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCR  |  带进位右循环移位  |  RCR OPRD,count  |  相当于CF在最高位直接参与循环移位  |  大循环右移<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
-<p>使用实例：</p>
-<p>实现把al的最低位送到bl的最低位，仍保持al不变。</p>
-<pre><code>ror bl,1;//bl循环右移一位
-ror al,1;//al循环右移一位，最低位进入cf
-rcl bl,1;//bl带进位左移，带进了来自al的最低位（cf）
-rol al,1;//恢复al
-</code></pre><h4 id="双精度移位指令"><a href="#双精度移位指令" class="headerlink" title="双精度移位指令"></a>双精度移位指令</h4><p>双精度移位指令是为了方便地把一个操作数的部分内容通过移位复制到另一个操作数。</p>
-<p>格式：</p>
-<ul>
-<li>双精度左移：SHLD OPRD1,OPRD2,count </li>
-<li>双精度右移：SHRD OPRD1,OPRD2,count </li>
-</ul>
-<p>解释：</p>
-<ul>
-<li>SHLD OPRD1,OPRD2,count </li>
-</ul>
-<p>&gt;<br>将OPRD1左移指定的count位，在低端空出的位用操作数OPRD2高端的count位填补，但是OPRD2内容保持不变，操作数OPRD1中最后移出的位保留在进位标志CF中。</p>
-<ul>
-<li>SHRD OPRD1,OPRD2,count </li>
-</ul>
-<p>&gt;<br>将OPRD1右移指定的count位，空出的位用OPRD2低端的count位填补，但是OPRD2内容保持不变，操作数OPRD1中最后移出的位保留在进位标志CF中。</p>
-<h2 id="分支程序设计"><a href="#分支程序设计" class="headerlink" title="分支程序设计"></a>分支程序设计</h2><h3 id="无条件和条件转移指令"><a href="#无条件和条件转移指令" class="headerlink" title="无条件和条件转移指令"></a>无条件和条件转移指令</h3><h4 id="段内转移和段间转移"><a href="#段内转移和段间转移" class="headerlink" title="段内转移和段间转移"></a>段内转移和段间转移</h4><ul>
-<li><strong>段内转移（近转移）</strong> ：仅仅重新设置指令指针寄存器EIP的转移，由于没有调整CS，所以转移后继续执行的指令仍在同一代码段中。 </li>
-<li><strong>段间转移（远转移）</strong> ：不仅重新设置EIP，而且重新设置代码段寄存器CS的转移，由于重置了CS，转移后继续执行的指令在另一代码段中。 </li>
-</ul>
-<p>对于段内转移和段间转移需要注意：</p>
-<ul>
-<li><strong>条件转移指令</strong> 和 <strong>循环指令</strong> 只能实现 <strong>段内转移</strong> ； </li>
-<li><strong>无条件转移指令</strong> 和 <strong>过程调用指令</strong> 以及 <strong>返回指令</strong> ，既可以是 <strong>段内转移</strong> ，也可以是 <strong>段间转移</strong> ； </li>
-<li><strong>软中断指令</strong> 和 <strong>中断返回指令</strong> 一定是 <strong>段间转移</strong> ； </li>
-</ul>
-<h4 id="直接转移和间接转移"><a href="#直接转移和间接转移" class="headerlink" title="直接转移和间接转移"></a>直接转移和间接转移</h4><ul>
-<li>直接转移：转移指令中直接给出转移目标地址的转移； </li>
-<li>间接转移：转移指令中给出包含转移目标地址的寄存器或者存储单元的转移； </li>
-</ul>
-<p>需要注意无条件转移指令和过程调用指令集可以是直接转移也可以是间接转移。</p>
-<h4 id="无条件转移指令"><a href="#无条件转移指令" class="headerlink" title="无条件转移指令"></a>无条件转移指令</h4><p>无条件转移指令分为4种：</p>
-<ul>
-<li>段内直接转移 </li>
-<li>段内间接转移 </li>
-<li>段间直接转移 </li>
-<li>段间间接转移 </li>
-</ul>
-<p>需要说明的是无条件转移指令均不影响标志寄存器的状态标志。</p>
-<h5 id="无条件段内直接转移"><a href="#无条件段内直接转移" class="headerlink" title="无条件段内直接转移"></a>无条件段内直接转移</h5><pre><code>JMP LABEL；
-</code></pre><p>标号LABEL表示要转移的目标位置（转移目的地）。</p>
-<p>无条件段内直接转移的机器码构成如下：</p>
-<pre><code>操作码OP  地址差rel
-</code></pre><p>地址差rel实际上是LABEL所指定的指令的地址偏移与紧跟JMP指令的下一条指令的地址偏移之间的差值，rel可正可负，这样才可以实现前后的跳转。地址差rel可以用一个字节表示，也可用4个字节或2字节表示，如果只用一个字节表示，就称之为<br><strong>短（short）转移</strong> ，否则称为 <strong>近（near）转移</strong><br>。一般如果当汇编器汇编到某条转移指令时可以计算出地址差rel，汇编器会自动判断出应该用1字节表示rel还是4字节或2字节，否则汇编器会使用较多的位数来表示地址差。所以，当程序员在写程序时能顾及出用8位就可以表示出地址差，那么可以在标号前加一个汇编器操作符<strong>“SHORT”</strong>来指定用一个字节表示地址差，表示转移的目的地就在附近。</p>
-<h5 id="无条件段内间接转移"><a href="#无条件段内间接转移" class="headerlink" title="无条件段内间接转移"></a>无条件段内间接转移</h5><pre><code>JMP OPRD
-</code></pre><p>OPRD是32位通用寄存器或者双字存储单元，比如：</p>
-<pre><code>JMP ECX;
-JMP DWORD PTR [EBX];
-</code></pre><h5 id="无条件段间转移指令JMP"><a href="#无条件段间转移指令JMP" class="headerlink" title="无条件段间转移指令JMP"></a>无条件段间转移指令JMP</h5><p>段间转移指令和段内转移指令差不多，只是涉及到改变代码段寄存器CS的内容，情况较为复杂，在之后的文章中介绍。</p>
-<h4 id="条件转移指令"><a href="#条件转移指令" class="headerlink" title="条件转移指令"></a>条件转移指令</h4><p>条件转移指令在前一篇文章已经介绍，这里不再赘述，只是需要特别明确一下rel偏移量的概念。</p>
-<h3 id="多路分支的实现"><a href="#多路分支的实现" class="headerlink" title="多路分支的实现"></a>多路分支的实现</h3><p>多路分支实际上指的就是switch-case的汇编实现，这里的实现原理主要是通过无条件间接转移指令和目标地址表来实现多路分支，举个例子：</p>
-<p>考虑一下多路分支程序：</p>
-<pre><code> int  cf319(int x,  int operation)
-{
-    int  y;
-    //多路分支
-    switch ( operation ) {
-        case 1:
-            y = 3*x;
-            break;
-        case 2:
-            y = 5*x+6;
-            break;
-        case 4:
-        case 5:
-            y = x*x ;
-            break;
-        case 8:
-            y = x*x+4*x;
-            break;
-        default:
-            y = x ;
-    }
-    if ( y &gt; 1000 )
-        y = 1000;
-    return  y;
-}
-</code></pre><p>上面的程序为了更加具有一般性，刻意没有安排连续的case值，其汇编的实现如下：</p>
-<pre><code> push  ebp
- mov   ebp, esp
-                                   ; switch ( operation ) {
- mov   eax, DWORD PTR [ebp+12]  ;取得参数operation（case值）
- dec   eax                      ;从0开始计算，所以先减去1
- cmp   eax, 7                   ;从0开始计算，最多就是7
- ja    SHORT LN2cf319           ;超过，则转default（LN2cf319对应defalut处理语句）
- ;
- jmp   DWORD  PTR  LN12cf319[ eax*4 ]     ;这句是关键，这里实现了多路分支
- ;
+          堆栈的作用汇编语言中的堆栈就是高级语言中的栈。
+堆栈主在汇编程序设计中主要有三个作用：
 
+过程调用&amp;返回指令 
+参数传递 
+局部变量 
 
-LN12cf319:                           ;多向分支目标地址表
-    DD    LN6cf319                   ; case 1
-    DD    LN5cf319                   ; case 2
-    DD    LN2cf319                   ; default
-    DD    LN4cf319                   ; case 4
-    DD    LN4cf319                   ; case 5
-    DD    LN2cf319                   ; default
-    DD    LN2cf319                   ; default
-    DD    LN3cf319                   ; case 8
-</code></pre><p>看上面的汇编实现，其核心思想是巧妙地运用了无条件段内间接转移和目标地址表，因为 <strong>目标地址表每项占4个字节</strong><br>，所以跳转的地址是目标地址表的起始地址加case对象（这里是operation）乘以4，如果operation为0，跳到目标地址表的首地址，即就是LN6c，如果operation为1，跳到LN5c，以此类推就实现了多路分支的巧妙跳转。</p>
-<p>使用该方法的一般建议是：当多路分支数超过5时，考虑无条件间接转移方式和目标地址表结合实现多路分支会更高效。</p>
-<h2 id="循环程序设计"><a href="#循环程序设计" class="headerlink" title="循环程序设计"></a>循环程序设计</h2><h3 id="循环指令"><a href="#循环指令" class="headerlink" title="循环指令"></a>循环指令</h3><p>循环指令类似于条件转移指令，其采用的是段内相对转移的方式，是通过在指令指针寄存器EIP上加一个地址差的方式实现的转移，需要注意的是循环指令中的这个地址差只用了一个字节（8位）来表示，所以转移范围仅在-128-127之间。在保护方式（32位代码段）下，ECX作为循环计数器，实方式下，以CX为循环计数器，循环指令不影响各标志位。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LOOP</td>
-<td>计数循环指令</td>
-<td>LOOP LABEL</td>
-<td>使ECX的值减1，当ECX的值不为0的时候跳转至LABEL，否则执行LOOP之后的语句</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>LOOPE</td>
-<td>等于循环指令</td>
-<td>LOOPE LABEL</td>
-<td></td>
-</tr>
-<tr>
-<td>使ECX的值减1，如果结果不等于0并且零标志ZF等于1（表示相等），那么就转移到LABEL，否则执行LOOPE之后的语句</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>LOOPZ  |  零循环指令  |  LOOPZ LABEL  |<br>使ECX的值减1，如果结果不等于0并且零标志ZF等于1（表示相等），那么就转移到LABEL，否则执行LOOPZ之后的语句  |<br>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>LOOPNE  |  不等于循环指令  |  LOOPE LABEL  |<br>使ECX的值减1，如果结果不等于0并且零标志ZF等于0（表示不相等），那么就转移到LABEL，否则执行LOOPNE之后的语句  |<br>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>LOOPNZ  |  非零循环指令  |  LOOPNZ LABEL  |<br>使ECX的值减1，如果结果不等于0并且零标志ZF等于0（表示不相等），那么9就转移到LABEL，否则执行LOOPNZ之后的语句  |<br>ECX的减1并不影响标志位，ZF是否为1取决于循环指令之前指令对其的影响。<br>JECXZ  |  计数转移指令  |  JECXZ LABEL  |  当寄存器ECX的值为0时转移到LABEL，否则顺序执行  |<br>注意与LOOP的关系是JECXZ是直接判断ECX，没有先减ECX<br>通常在循环开始之前使用该指令，所以循环次数为0时，就可以跳过循环体  </p>
-<h2 id="子程序设计"><a href="#子程序设计" class="headerlink" title="子程序设计"></a>子程序设计</h2><h3 id="调用约定"><a href="#调用约定" class="headerlink" title="调用约定"></a>调用约定</h3><ul>
-<li><p><strong>-_cdecl</strong> 被称为 <strong>C</strong> 调用约定。缺省调用约定。参数按照从右至左的顺序入堆栈，函数本身不清理堆栈。 </p>
-</li>
-<li><p><strong>_stdcall</strong> 被称为 <strong>pascal</strong> 调用约定。参数按照从右至左的顺序入堆栈，函数自身清理堆栈。 </p>
-</li>
-<li><p><strong>_fastcall</strong> 是快速调用约定。通过 寄存器传递参数。前两个参数由 <strong>ECX</strong> 和 <strong>EDX</strong> 传送，其他参数按照从右至左的顺序入堆栈，函数自身清理堆栈。 </p>
-</li>
-</ul>
-
-          
+过程调用&amp;返回指令过程调用中的过程指什么？
+汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/14/汇编总结（3）——程序设计初步/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1723,8 +694,10 @@ LN12cf319:                           ;多向分支目标地址表
   </article>
 
 
+      # 	        
     
-      
+     #   	
+            		
 
   
 
@@ -1742,7 +715,7 @@ LN12cf319:                           ;多向分支目标地址表
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -1786,6 +759,17 @@ LN12cf319:                           ;多向分支目标地址表
 
           
           
+             <span id="/2018/11/13/汇编总结（1）——基础知识/" class="leancloud_visitors" data-flag-title="汇编总结（1）——基础知识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1808,52 +792,18 @@ LN12cf319:                           ;多向分支目标地址表
       
         
           
-            <h2 id="CPU简介"><a href="#CPU简介" class="headerlink" title="CPU简介"></a>CPU简介</h2><p>这部分主要介绍CPU的基本功能、汇编语言的概念、数据的表示和存储。</p>
-<h3 id="CPU的基本功能"><a href="#CPU的基本功能" class="headerlink" title="CPU的基本功能"></a>CPU的基本功能</h3><p><strong>目标代码</strong> ：</p>
-<p>&gt;<br>计算机系统中的cpu只能执行机器指令，而由机器指令组成的程序就叫目标程序（目标代码），事实上无论你用什么语言编程，计算机系统最终运行的都是目标程序（目标代码）。</p>
-<p>cpu的基本功能主要有三：执行机器指令、暂存少量数据、访问存储器</p>
-<h4 id="执行机器指令"><a href="#执行机器指令" class="headerlink" title="执行机器指令"></a>执行机器指令</h4><p><strong>机器器指令</strong> ：CPU能够直接识别并遵照执行的指令；</p>
-<p><strong>CPU的指令集</strong> ：CPU能够执行的全部机器指令；</p>
-<p>CPU一条接一条地依次执行存放在存储器中的机器指令，每一条机器指令的功能通常很有限。</p>
-<p>按指令的功能来划分，通常机器指令可分为以下几大类: <strong>数据传送指令</strong> 、 <strong>算术逻辑运算指令</strong> 、 <strong>转移指令</strong> 、 <strong>处理器控制指令</strong> 、<br><strong>其他指令</strong> 等</p>
-<h4 id="暂存少量数据"><a href="#暂存少量数据" class="headerlink" title="暂存少量数据"></a>暂存少量数据</h4><p>这个功能主要指的是cpu的寄存器中可以暂存少量数据，因为利用寄存器存放数据和运算结果，其效率是最高的，但是寄存器的数量是有限的。</p>
-<h4 id="访问存储器"><a href="#访问存储器" class="headerlink" title="访问存储器"></a>访问存储器</h4><p>既然最有效的寄存器存放数据法只能使用于少量数据的暂存，那么cpu应该从哪里读取数据以进行运算，运算完成之后又应该把数据送到哪里呢？自然是内存（存储器）：</p>
-<blockquote>
-<p>CPU要执行目标程序，就要访问存储器。目标程序在存储器中，待处理的数据也在存储器中。这里存储器是指CPU能够直接访问的计算机系统的物理内存.</p>
-</blockquote>
-<p>存储器(内存)由一系列存储单元线性地组成， 最基本的存储单元为一个字节。为了标识和存取每一个存储单元，给每一个存储单元规定一个编号，也就是存储单元地 址.</p>
-<p>CPU支持以多种形式表示存储单元的地址。一些功能较强的CPU还支持以多种方式组织管理存储器</p>
-<h2 id="汇编语言概念"><a href="#汇编语言概念" class="headerlink" title="汇编语言概念"></a>汇编语言概念</h2><p>主要介绍三部分：机器指令、汇编格式指令、汇编语言及其优缺点：</p>
-<h4 id="机器指令"><a href="#机器指令" class="headerlink" title="机器指令"></a>机器指令</h4><p>CPU能够直接识别并遵照执行的指令称为 <strong>机器指令</strong> 。</p>
-<p>机器指令的构成：操作码、操作数，其中：</p>
-<p><strong>操作码</strong> ：指出要进行的操作或运算，比如加、减、传送</p>
-<p><strong>操作数</strong> ：指出参与操作或运算的对象，也指出操作或运算结果存放的位置，例如，寄存器、存储单元和数据等</p>
-<h4 id="汇编格式指令"><a href="#汇编格式指令" class="headerlink" title="汇编格式指令"></a>汇编格式指令</h4><p>由指令助记符、操作符号和常量等表示的指令被称为 <strong>汇编格式指令</strong> ，其中：</p>
-<p><strong>指令助记符</strong> ：人们为了表示指令的操作码而采用的便于记忆、并能描述指令功能的符号 。</p>
-<p><strong>操作符号</strong> ：表示操作数的符号，比如寄存器、存储单元地址等。</p>
-<h4 id="汇编语言的优缺点"><a href="#汇编语言的优缺点" class="headerlink" title="汇编语言的优缺点"></a>汇编语言的优缺点</h4><p>明确几个概念：</p>
-<ul>
-<li>把用汇编语言编写的程序称为汇编语⾔言源程序，或称为 <strong>汇编源程序</strong> ，或简称为 <strong>源程序</strong> 。 </li>
-<li>把汇编源程序翻译成目标程序的过程称为 <strong>汇编</strong> 。 </li>
-<li>把完成汇编工作的工具或程序叫做 <strong>汇编程序(汇编器)</strong> 。 </li>
-</ul>
-<p>他们之间的关系如下：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5e4j0d6xj310m0hgmzm.jpg" alt=""></p>
-<p><em>优点</em> ：效率高、与机器关系密切</p>
-<p><em>缺点</em> ：汇编语言源程序繁琐、汇编语言程序调试困难</p>
-<p>综上，汇编语言适合的场景：</p>
-<ul>
-<li>执行时间/存储容量有较高要求 </li>
-<li>需要提高大型软件效率 </li>
-<li>软件要直接和有效控制硬件 </li>
-<li>没有合适的高级语言 </li>
-</ul>
-<h2 id="数据的表示和存储"><a href="#数据的表示和存储" class="headerlink" title="数据的表示和存储"></a>数据的表示和存储</h2><h4 id="数据的表示"><a href="#数据的表示" class="headerlink" title="数据的表示"></a>数据的表示</h4><p>这部分主要为数的二进制表示、有符号数的补码表示、符号拓展等。</p>
-<h4 id="数据的存储"><a href="#数据的存储" class="headerlink" title="数据的存储"></a>数据的存储</h4><p>首先明确数据是以二进制形式表示的数据和代码存放在存储器(内存)之中。</p>
-<p>内存由一系列基本存储单元线性地组成，每一个基本存储单元有一个唯一的地址。通常，基本存储单元由 8<br>个连续的位构成，可用于存储一个字节的数据。所以，基本存储单元也被称为字节存储单元。</p>
-<p>可以把内存看作为一个很大的一维字符数组，把地址看作为标识数组元素的下标。</p>
-
-          
+          CPU简介这部分主要介绍CPU的基本功能、汇编语言的概念、数据的表示和存储。
+CPU的基本功能目标代码 ：
+&gt;计算机系统中的cpu只能执行机器指令，而由机器指令组成的程序就叫目标程序（目标代码），事实上无论你用什么语言编程，计算机系统最终运行的都是目标程序（目标代码）。
+cpu的基本功能主要有
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/13/汇编总结（1）——基础知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1886,8 +836,10 @@ LN12cf319:                           ;多向分支目标地址表
   </article>
 
 
+      # 	        
     
-      
+     #   	
+            		
 
   
 
@@ -1905,7 +857,7 @@ LN12cf319:                           ;多向分支目标地址表
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -1949,6 +901,17 @@ LN12cf319:                           ;多向分支目标地址表
 
           
           
+             <span id="/2018/11/13/汇编总结（2）——IA-32处理器基本功能/" class="leancloud_visitors" data-flag-title="汇编总结（2）——IA-32处理器基本功能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1971,585 +934,22 @@ LN12cf319:                           ;多向分支目标地址表
       
         
           
-            <h2 id="IA-32处理器简介"><a href="#IA-32处理器简介" class="headerlink" title="IA-32处理器简介"></a>IA-32处理器简介</h2><p>这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。</p>
-<h3 id="IA-32系列处理器"><a href="#IA-32系列处理器" class="headerlink" title="IA-32系列处理器"></a>IA-32系列处理器</h3><h4 id="IA-32系列处理器指什么"><a href="#IA-32系列处理器指什么" class="headerlink" title="IA-32系列处理器指什么"></a>IA-32系列处理器指什么</h4><p>首先明确IA-32系列处理器是什么：</p>
-<blockquote>
-<p>IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器</p>
-</blockquote>
-<p>代表的型号比如：</p>
-<ul>
-<li>Intel 80386/80486 </li>
-<li>Intel Pentium(奔腾) </li>
-<li>Intel Xeon(至强) </li>
-<li>Intel Core(酷睿) </li>
-</ul>
-<p>其最大特点是保持了与先前处理器的兼容。</p>
-<h4 id="处理器的主要指标"><a href="#处理器的主要指标" class="headerlink" title="处理器的主要指标"></a>处理器的主要指标</h4><ul>
-<li>处理器的位数 <ul>
-<li>16位 </li>
-<li>32位 </li>
-<li>64位 </li>
-</ul>
-</li>
-<li>主频 </li>
-<li>平行化程度 <ul>
-<li>流水线 </li>
-<li>多核 </li>
-</ul>
-</li>
-</ul>
-<h3 id="保护方式和实地址方式"><a href="#保护方式和实地址方式" class="headerlink" title="保护方式和实地址方式"></a>保护方式和实地址方式</h3><h4 id="保护方式"><a href="#保护方式" class="headerlink" title="保护方式"></a>保护方式</h4><p>保护方式是IA-32系列处理器的常态工作方式，只有在保护方式下， IA-32系列处理器才能发挥出其全部性能和特点 。</p>
-<p>windows和Linux都运行于保护方式。</p>
-<p><strong>保护方式的主要特点：</strong></p>
-<ul>
-<li>全部32根地址线有效，可寻址高达4G字节的物理地址空间 </li>
-<li>支持存储器分段管理和可选的存储器分页管理机制 </li>
-<li>支持虚拟存储器的实现 </li>
-<li>提供完善的保护机制 </li>
-<li>支持操作系统实现多任务管理 </li>
-</ul>
-<h4 id="实地址方式（实方式）"><a href="#实地址方式（实方式）" class="headerlink" title="实地址方式（实方式）"></a>实地址方式（实方式）</h4><p>实地址方式(Real-address mode)是最初的工作方式，是处理器重新开始运行后的最初工作方式。</p>
-<p>实地址方式是IA-32系列处理器中最初的处理器的工作方式（最早的8086/8088只能工作在实地址方式，因为其没有保护方式）。</p>
-<p><strong>实地址方式的特点：</strong></p>
-<ul>
-<li>只能访问最低端的1M字节的物理地址空间。地址空间的范围是00000H至FFFFFH 。 </li>
-<li>只支持存储器的分段管理，而且每个存储段的大小限于 64K字节 。 </li>
-<li>实地址对应保护方式下的虚地址。这应该是实地址方式 的名称由来。实地址方式常常被简称为实⽅方式 。 </li>
-<li>在实方式下，IA-32系列处理器不能发挥其全部性能。 </li>
-</ul>
-<h2 id="通用寄存器及使用"><a href="#通用寄存器及使用" class="headerlink" title="通用寄存器及使用"></a>通用寄存器及使用</h2><p>关于寄存器的几点注意点：</p>
-<blockquote>
-<p>寄存器是处理器内的特殊存储单元。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>处理器内有多种不同用途的寄存器。</p>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>寄存器分别有各自的名称，以便表示及访问。</p>
-</blockquote>
-<p>IA-32系列CPU有8个32位通用寄存器：EAX、 EBX、 ECX、 EDX、 ESI、 EDI、 EBP、 ESP</p>
-<p>主要功能：存储数据、参与算术逻辑运算、给出存储单元的地址。</p>
-<p><strong>注意：</strong><br>可以单独直接访问这些通用寄存器的低16位，他们是8个16位通用寄存器，名称分别是：AX、BX、CX、DX、SI、DI、BP、SP，对应16位处理器Intel<br>8086的8个通用寄存器。</p>
-<p>还可以单独直接访问AX、BX、CX、DX的高8位和低8位，示意图如下：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg" alt=""></p>
-<p>带H的寄存器（比如AH、BH）代表的是X寄存器（AX、BX）的High（高）字节，对应的，AL代表的就是AX的Low（低）字节。</p>
-<h3 id="简单传送指令"><a href="#简单传送指令" class="headerlink" title="简单传送指令"></a>简单传送指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MOV</td>
-<td>传送指令</td>
-<td>MOV DEST,SRC</td>
-<td>DEST &lt;=SRC</td>
-<td>源和目标的尺寸必须一致，不能同时是存储单元。  </td>
-</tr>
-<tr>
-<td>XCHG</td>
-<td>交换指令</td>
-<td>XCHG OPER1,OPER2</td>
-<td>把操作数oper1的内容与操作数oper2的内容交换</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>oper1和oper2可以是通用寄存器或存储单元，但不能同时是操作单元，也不能是立即数，也不能同时是存储单元。  </p>
-<h3 id="简单加减指令"><a href="#简单加减指令" class="headerlink" title="简单加减指令"></a>简单加减指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ADD</td>
-<td>加法指令</td>
-<td>ADD DEST,SRC</td>
-<td>DEST&lt;=DEST+SRC</td>
-<td>两数相加  </td>
-</tr>
-<tr>
-<td>SUB</td>
-<td>减法指令</td>
-<td>SUB DEST,SRC</td>
-<td>DEST&lt;=DEST-SRC</td>
-<td>两数相减  </td>
-</tr>
-<tr>
-<td>INC</td>
-<td>加1指令</td>
-<td>INC DEST</td>
-<td>DEST&lt;=DEST+1</td>
-<td></td>
-</tr>
-<tr>
-<td>DEC</td>
-<td>减1指令</td>
-<td>DEC DEST</td>
-<td>DEST&lt;=DEST-1</td>
-<td></td>
-</tr>
-<tr>
-<td>NEG</td>
-<td>取补指令</td>
-<td>NEG OPRD</td>
-<td>OPRD=0-OPRD</td>
-<td>对操作数取补（相反数）  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="标志寄存器及使用"><a href="#标志寄存器及使用" class="headerlink" title="标志寄存器及使用"></a>标志寄存器及使用</h2><h3 id="标志寄存器（FLAGS-register）"><a href="#标志寄存器（FLAGS-register）" class="headerlink" title="标志寄存器（FLAGS register）"></a>标志寄存器（FLAGS register）</h3><p><strong>标志寄存器</strong> 是一个32位的寄存器，主要反映处理器的状态和运算结果的某些特征，认为主要是 <strong>状态标志</strong> 和 <strong>控制标志</strong> 以及<br><strong>系统标志</strong> 三部分。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fx6ibcljdgj31kw0bs42z.jpg" alt="qq_pic_merged_1542097086949"></p>
-<p>如上图所示，标两个字母的是状态标志位，标着X的是系统标志位，标着字母C的是控制标志位，阴影部分是不使用的保留位。</p>
-<h3 id="状态标志"><a href="#状态标志" class="headerlink" title="状态标志"></a>状态标志</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>标志</th>
-<th>标志名</th>
-<th>主要功能  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CF</td>
-<td>进位标志（Carry flag）</td>
-<td>当算术运算产生进位或者借位时，置标志（1），否则清标志（0）。  </td>
-</tr>
-<tr>
-<td>SF</td>
-<td>符号标志（Sign flag）</td>
-<td>反映运算结果的符号位(符号位为1，置标志;否则清)，与运算结果的最高位相同。  </td>
-</tr>
-<tr>
-<td>ZF</td>
-<td>零标志（Zero flag）</td>
-<td>当运算结果为0时，置标志;否则清标志。  </td>
-</tr>
-<tr>
-<td>OF</td>
-<td>溢出标志（Overflow flag）</td>
-<td>反映有符号数的加减运算是否引起溢出，如果溢出，置标志，否则清标志。  </td>
-</tr>
-<tr>
-<td>PF</td>
-<td>奇偶标志（Parity flag）</td>
-<td></td>
-</tr>
-<tr>
-<td>AF</td>
-<td>辅助进位标志（Auxiliary Carry flag）</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="状态标志操作指令"><a href="#状态标志操作指令" class="headerlink" title="状态标志操作指令"></a>状态标志操作指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CLC（clear carry flag）</td>
-<td>清进位标志指令</td>
-<td>CLC</td>
-<td>使进位标志CF为0  </td>
-</tr>
-<tr>
-<td>STC(set carry flag)</td>
-<td>置进位标志指令</td>
-<td>STC</td>
-<td>使进位标志CF为1  </td>
-</tr>
-<tr>
-<td>CMC（complement carry flag）</td>
-<td>进位标志取反指令</td>
-<td>CMC</td>
-<td>使进位标志CF取反  </td>
-</tr>
-<tr>
-<td>LAHF（load status flags into AH register）</td>
-<td>获取状态标志操作指令</td>
-<td>LAHF</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>把位于标志寄存器低端的8位同时送到寄存器AH的对应位<br>SAHF（store AH into Flags）  |  设置状态标志操作指令  |  SAHF  |<br>对标志寄存器中的低8位产生影响，使得状态标志位SF、ZF、AF、PF和CF分别成为来自寄存器AH中对应位的值，但保留位（位1、位3、位5）不受影响  </p>
-<h3 id="带进位加减指令"><a href="#带进位加减指令" class="headerlink" title="带进位加减指令"></a>带进位加减指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ADC（add with carry）</td>
-<td>带进位加法指令</td>
-<td>ADC DEST,SRC</td>
-<td>DEST &lt;=DEST+SRC+CF</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>与add指令不同之处是要再加上进位标志cf的值<br>SBB(substraction with borrow)  |  带借位减法  |  SBB DEST,SRC  |<br>DEST&lt;=DEST-(SRC+CF)  |  与sub指令不同之处是要再减上借位标志cf的值  </p>
-<h2 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h2><h3 id="存储器分段"><a href="#存储器分段" class="headerlink" title="存储器分段"></a>存储器分段</h3><p>CPU能够通过其总线直接寻址访问的 <em>存储器</em> 被称为 <strong>内存</strong> ，每一个字节存储单元有一个唯一的地址，称之为 <strong>物理地址</strong> 。<br>CPU的地址线数量决定了可产生的最大物理地址， n根地址线，可形成的最大物理地址是  2  n  2^n  2  n<br>-1,所有可形成的物理地址的集合被称为物理地址空间.</p>
-<p>物理地址空间大小不等于实际安装的物理内存大小。</p>
-<p>为了有效地管理存储器，常常把地址空间划分为若干逻辑段， 对应存储空间被划分为若干存储段。逻辑段和存储段是一致的。<br>一般说来，运行着的程序在存储器中映像有三部分组成:</p>
-<ul>
-<li><p>代码，代码是要执行的指令序列； </p>
-</li>
-<li><p>数据，数据是要处理加工的内容； </p>
-</li>
-<li><p>堆栈，堆栈是按“先进后出”规则存取的区域。 </p>
-</li>
-</ul>
-<p>通常，代码、数据和堆栈分别占用不同的存储器段，相应的段也就被称为 <strong>代码段</strong> 、 <strong>数据段</strong> 和 <strong>堆栈段</strong> 。</p>
-<p>在分段之后，程序中使用的某个存储单元总是属于某个段。 所以，可以采用某某段某某单元的方式来表示存储单元。</p>
-<h3 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h3><p>在程序中用于表示存储单元的地址被称为 <strong>逻辑地址</strong> 。</p>
-<p>由于采用分段存储管理方式，程序中使用的逻辑地址是二维的，第一维给出某某段，第二维给出段内的某某单元。</p>
-<p>二维的逻辑地址: 段号∶偏移</p>
-<p>在实方式和保护方式下，都通过偏移指定段内的某某单元。在实方式下，段号是 <strong>段值</strong> ;在保护方式下，段号则是 <strong>段选择子</strong> 。</p>
-<p>逻辑地址转换为物理地址的过程为由段号得到段起始地址，再加上偏移。</p>
-<p>需要注意的是；</p>
-<ul>
-<li><p>保护方式下，物理地址是32位，段起始地址是32位，偏移是32位; </p>
-</li>
-<li><p>在实方式下，物理地址是20位，段起始地址是20位，偏移是16位。 </p>
-</li>
-</ul>
-<p>逻辑地址中的段号(段值或者段选择子)存放在哪里呢?<br>答案是，当前使用段的段号存放在段寄存器(Segment Registers)中。</p>
-<h3 id="段寄存器-1"><a href="#段寄存器-1" class="headerlink" title="段寄存器"></a>段寄存器</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>段寄存器名称</th>
-<th>中文名</th>
-<th>解释</th>
-<th>出现时期  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CS（Code Segment）</td>
-<td>代码段寄存器</td>
-<td>当前代码段</td>
-<td>Intel 8060处理器  </td>
-</tr>
-<tr>
-<td>SS（Stack Segment）</td>
-<td>堆栈段寄存器</td>
-<td>当前堆栈段</td>
-<td>Intel 8060处理器  </td>
-</tr>
-<tr>
-<td>DS（Data Segment）</td>
-<td>数据段寄存器</td>
-<td>当前数据段</td>
-<td>Intel 8060处理器  </td>
-</tr>
-<tr>
-<td>ES（Extra Segment）</td>
-<td>附加段寄存器</td>
-<td>可用于指定数据段</td>
-<td>Intel 8060处理器  </td>
-</tr>
-<tr>
-<td>FS</td>
-<td>附加段寄存器</td>
-<td>可用于指定数据段</td>
-<td>80386开始  </td>
-</tr>
-<tr>
-<td>GS</td>
-<td>附加段寄存器</td>
-<td>可用于指定数据段</td>
-<td>80386开始  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><p>表示指令中操作数所在的方法称为寻址方式，主要分为三大类：</p>
-<ul>
-<li>立即寻址 </li>
-<li>寄存器寻址 </li>
-<li>存储器寻址 </li>
-</ul>
-<p>此外还有固定寻址和I/O端口寻址等</p>
-<h3 id="立即寻址方式和寄存器寻址方式"><a href="#立即寻址方式和寄存器寻址方式" class="headerlink" title="立即寻址方式和寄存器寻址方式"></a>立即寻址方式和寄存器寻址方式</h3><h4 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h4><p>说白了当操作数是立即数的时候就是立即寻址方式，比如：</p>
-<pre><code>mov eax,12345678H
-</code></pre><p>所以：</p>
-<ul>
-<li>立即数作为指令的一部分，跟在操作码后面存放在代码段 </li>
-<li>如果立即数由多个字节构成，那么作为指令的一部分存储时，也采用“高高低低”规则 </li>
-<li>只有源操作数才可采用立即寻址方式， <strong>目的操作数不能采用立即寻址方式</strong></li>
-</ul>
-<h4 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h4><p>就是操作数在CPU内部的寄存器中，指令中指定寄存器，不需要通过访问存储器来取得操作数，所以采用寄存器寻址方式的指令执行速度较快。</p>
-<h3 id="32位的存储器寻址方式"><a href="#32位的存储器寻址方式" class="headerlink" title="32位的存储器寻址方式"></a>32位的存储器寻址方式</h3><p>当指令的操作数在存储单元时，指定存储单元就指定了操作数。</p>
-<p>为了灵活地访问存储器，IA-32系列CPU提供了多种表示存储单元偏移的方式，即有多种存储器寻址方式：</p>
-<ul>
-<li>直接寻址 </li>
-<li>寄存器间接 </li>
-<li>寄存器相对 </li>
-<li>基址加变址 </li>
-<li>通用 </li>
-</ul>
-<h4 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h4><p>操作数在存储器中，指令直接包含操作数所在存储单元的有效地址。</p>
-<pre><code>mov ecx,[95480H]
-</code></pre><h4 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h4><p>操作数在存储器中，由八个32位通用寄存器之一给出操作数所在存储单元的有效地址。</p>
-<p>寄存器间接寻址方式中，给出操作数所在存储单元有效地址的寄存器相当于c语言中的指针变量，它含有要访问存储单元的地址。</p>
-<pre><code>mov ecx,[esi]
-</code></pre><h4 id="32位寄存器寻址方式的通用表示"><a href="#32位寄存器寻址方式的通用表示" class="headerlink" title="32位寄存器寻址方式的通用表示"></a>32位寄存器寻址方式的通用表示</h4><p>存储单元的有效地址可以由三部分内容相加构成:</p>
-<ul>
-<li>一个32位的基地址寄存器 </li>
-<li>一个可乘上比例因子1、2、4或8的32位的变址寄存器 </li>
-<li>一个8位、16位或32位的位移量 </li>
-</ul>
-<p>这三部分可省去任意的两部分。</p>
-<pre><code>add dx ,[ecx+5328H]//寄存器相对寻址方式
-xchg [ebx,esi],dx//基址加变址寻址方式
-mov ebx,[edi+eax*4+300H]//基址加放大因子的变址寻址方式
-</code></pre><p>在某条具体的指令中，如果有存储器操作数，那么其尺寸是确定的。在大多数情况下，存储器操作数的尺寸是一 目了然的，因为通常要求一条指令中的多个操作数的尺寸<br>一致，所以指令中的寄存器操作数的尺寸就决定了存储器操作数的尺寸。 <strong>在少数情况下，需要显式地指定存储器操作数的尺寸。</strong></p>
-<pre><code>LEA EBX , bufi 
-MOV DWORD PTR [EBX], 5 // 双字
-MOV WORD PTR [EBX+4], 5 //字
-MOV BYTE PTR [EBX+8], 5 //字节
-</code></pre><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果 <strong>基址寄存器</strong> 不是 <strong>EBP</strong> 或者 <strong>ESP</strong> ，那么缺省引用的段寄存器是 <strong>DS</strong> ;</p>
-<p>如果 <strong>基址寄存器</strong> 是EBP或者ESP，那么缺省引 用的段寄存器是 <strong>SS</strong> 。</p>
-<p>当EBP作为 <strong>变址寄存器</strong> 使用( <strong>ESP不 能作为变址寄存器使用</strong> )时，缺省引用的段寄存器仍然是 <strong>DS</strong> 。</p>
-<p>无论存储器寻址方式简单或者复杂，如果由基址寄存器、 带比例因子的变址寄存器和位移量这三部分相加所得 <strong>超过 32位，那么有效地址仅为低32位</strong> 。</p>
-<h3 id="取有效地址指令"><a href="#取有效地址指令" class="headerlink" title="取有效地址指令"></a>取有效地址指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LEA（load effective address）</td>
-<td>取有效地址指令</td>
-<td>LEA REC,OPRD</td>
-<td></td>
-</tr>
-<tr>
-<td>把操作数oprd的有效地址传送到操作数rec，源操作数oprd必须是一个存储器操作数，目的操作数rec必须是一个16位或32位的通用寄存器</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>与mov指令的区别：mov：移动地址中的值lea：将地址进行移动  </p>
-<p>lea指令的妙用：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6k1ugd6nj31220hswlu.jpg" alt=""></p>
-<h2 id="指令寄存器和简单控制转移指令"><a href="#指令寄存器和简单控制转移指令" class="headerlink" title="指令寄存器和简单控制转移指令"></a>指令寄存器和简单控制转移指令</h2><h3 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h3><p>IA-32系列CPU有一个32位的指令指针寄存器EIP，由CS和EIP确定所取指令的存储单元地址。段寄存器CS给出当前代码段的段号，指令指针寄存器EIP给出偏移。</p>
-<p>实方式下，段的最大范围是64K，EIP中高16位必须是0，相当于只有低16位的IP起作用。</p>
-<p>CPU 执行代码(程序)就是一条接一条地执行机器指<br>令。可以把CPU执行指令的过程看作一条处理指令的流水线，其第一步是从存储器中取出指令。在取出一条指令后，会根据所取指令的长度，自动调整指令指针寄存器 E I<br>P 的值，使其指向下一条指令。这样，就实现了顺序执⾏指令。</p>
-<p>那么如果我们不想顺序执行指令，而想非自动顺序调整EIP的内容，这就是所谓的 <strong>转移</strong> 。</p>
-<p>衍生出的 <strong>控制转移指令</strong> 就是专门用于改变EIP内容的指令，主要包括：</p>
-<ul>
-<li>条件转移指令 </li>
-<li>无条件转移指令 </li>
-<li>循环指令 </li>
-<li>函数调用及返回指令 </li>
-<li>等 </li>
-</ul>
-<p>这些控制转移指令的实质就是根据不同的情形改变EIP的内容以实现转移。</p>
-<h3 id="常用条件转移指令"><a href="#常用条件转移指令" class="headerlink" title="常用条件转移指令"></a>常用条件转移指令</h3><h4 id="条件转移"><a href="#条件转移" class="headerlink" title="条件转移"></a>条件转移</h4><p>所谓条件转移指，当某一条件满足时，发生转移，否则继续顺序执行。换句话说，当某一条件满足时，就改变 EIP的内容，从而实施转移，否则顺序执行 。</p>
-<p>标志寄存器中的 <strong>状态标志</strong> 被用于表示条件。绝大部分条件转移指令 <strong>根据某个标志或者某几个标志</strong> 来判断条件是否满足。</p>
-<p>条件转移类似于高级语言的分支。</p>
-<h4 id="条件转移指令"><a href="#条件转移指令" class="headerlink" title="条件转移指令"></a>条件转移指令</h4><p>主要可以分为三类：</p>
-<ul>
-<li>根据一个标志判别 </li>
-<li>根据两个标志判别 </li>
-<li>根据三个标志判别 </li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令格式</th>
-<th>转移条件</th>
-<th>转移说明</th>
-<th>其他说明  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>JZ 标号 JE 标号</td>
-<td>ZF=1 同上</td>
-<td>等于0转移(Jump if zero) 相等转移(Jump if equal)</td>
-<td>单个标志  </td>
-</tr>
-<tr>
-<td>JNZ 标号 JNE 标号</td>
-<td>ZF=0 同上</td>
-<td>不等于0转移(Jump if not zero) 不相等转移(Jump if not</td>
-</tr>
-<tr>
-<td>equal)</td>
-<td>单个标志  </td>
-</tr>
-<tr>
-<td>JB 标号 JNAE 标号 JC 标号</td>
-<td>CF=1 同上 同上</td>
-<td><code>低于转移 不高于等于转移 进位位被置转移</code></td>
-<td>单个标志 (无符号数)  </td>
-</tr>
-<tr>
-<td>JNBE 标号 JA 标号</td>
-<td>(CF或ZF)=0 同上</td>
-<td>不低于等于转移 高于转移</td>
-<td>两个标志 (无符号数)  </td>
-</tr>
-<tr>
-<td>JLE 标号 JNG 标号</td>
-<td>((SF异或OF)或ZF)=1 同上</td>
-<td>小于等于转移 不大于转移</td>
-<td>三个标志 (有符号数)  </td>
-</tr>
-<tr>
-<td>JNLE 标号 JG 标号</td>
-<td>((SF异或OF)或ZF)=1 同上</td>
-<td>不小于等于转移 大于转移</td>
-<td>三个符号（有符号数）  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h4><p>条件转移指令本身不影响标志。</p>
-<p>条件转移指令在条件满足的情况下， <strong>只改变指令指针寄存器EIP</strong> 。也就是说，条件转移的转移目的地仅限于 <strong>同一个代码段内</strong><br>。这种不改变代码段寄存器CS，仅改变EIP的 转移被称为 <strong>段内转移</strong> 。</p>
-<p>条件转移指令可以实现向前方转移，也可以实现向后方 转移。</p>
-<h3 id="比较指令和数值大小比较"><a href="#比较指令和数值大小比较" class="headerlink" title="比较指令和数值大小比较"></a>比较指令和数值大小比较</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CMP</td>
-<td>比较指令</td>
-<td>CMP DEST,SRC</td>
-<td>根据dest-src的差影响各状态标志寄存器</td>
-<td>不把dest-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>src的结果送入dest  </p>
-<p>比较指令是根据DEST-SRC的差影响标志寄存器的各状态标志（但不把结果送到DEST中）来判断两个数的大小关系的，判断的准则如下：</p>
-<ul>
-<li><p>根据零标志ZF是否置位，判断两者是否相等; </p>
-</li>
-<li><p>如果两者是无符号数，可根据进位标志CF判断大小; </p>
-</li>
-<li><p>如果两者是有符号数，要同时根据符号标志SF和溢出标志OF判断大小。 </p>
-</li>
-</ul>
-<p>为了方便进行数值大小比较，IA-32系列CPU提供两套以数值大小为条件的条件转移指令，一套适用于无符号数之间的比较，另一套适用于有符号数之间的比较：</p>
-<ul>
-<li><p>有符号数间的次序关系称为大于(G)、等于(E) 和小于（L）； </p>
-</li>
-<li><p>无符号数间的次序关系称为高于（A）、等于（E）和低于（B）； </p>
-</li>
-</ul>
-<h3 id="简单无条件转移指令"><a href="#简单无条件转移指令" class="headerlink" title="简单无条件转移指令"></a>简单无条件转移指令</h3><p>类似于高级语言中的goto语句，就是jmp语句：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>JMP</td>
-<td>无条件段内直接转移指令</td>
-<td>JMP LABEL</td>
-<td>使控制无条件地转移到标号为label的位置</td>
-<td>无条件转移指令本身不影响标志  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="堆栈和堆栈操作"><a href="#堆栈和堆栈操作" class="headerlink" title="堆栈和堆栈操作"></a>堆栈和堆栈操作</h2><p>所谓堆栈其实就是一段内存区域，只是对它的访问操作仅限于一端进行，地址较 <strong>小</strong> 的一端被称为 <strong>栈顶</strong> ，地址较 <strong>大</strong> 的一端被称为<br><strong>栈底</strong> 。</p>
-<p>堆栈段寄存器 <strong>SS</strong> 含有当前堆栈段的 <strong>段号</strong> ，SS指示堆栈所在内存区域的位置。 堆栈指针寄存器 <strong>ESP</strong><br>含有栈顶的偏移（有效地址），ESP指向 <strong>栈顶</strong> 。</p>
-<p>堆栈的主要用途：</p>
-<ul>
-<li>保护寄存器内容或者保护现场; </li>
-<li>保存返回地址; </li>
-<li>传递参数; </li>
-<li>安排局部变量或者临时变量。 </li>
-</ul>
-<h3 id="堆栈操作"><a href="#堆栈操作" class="headerlink" title="堆栈操作"></a>堆栈操作</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PUSH</td>
-<td>进栈指令</td>
-<td>PUSH SRC</td>
-<td>把源操作数src压入堆栈</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>源操作数src可以是32位通用寄存器、16位通用寄存器和段寄存器，也可以是双字存储单元或者字符存储单元，还可以是立即数<br>POP  |  出栈指令  |  POP DEST  |  从栈顶弹出一个双字或字数据到目的操作数  |<br>如果目的操作数是双字的，那么就从栈顶弹出一个双字数据，否则，从栈顶弹出一个字数据，出栈至少弹出一个字（16位）<br>PUSHA  |  16位通用寄存器全进栈指令  |  PUSHA  |  将所有8个16位通用寄存器的内容压入堆栈  |  压入顺序是AX CX DX<br>BX SP BP SI DI，然后对战指针寄存器SP的值减16，所以SP进栈的内容是PUSHA指令执行之前的值<br>POPA  |  16位通用寄存器全出栈指令  |  POPA  |  以PUSHA相反的顺序从堆栈中弹出内容，从而恢复PUSHA之前的寄存器状态  |<br>SP的值不是由堆栈弹出的，而是通过增加16来恢复<br>PUSHAD  |  32位通用寄存器全进栈指令  |  PUSHAD  |  将所有8个32位通用寄存器的内容压入堆栈  |  压入顺序是EAX ECX<br>EDX EBX ESP EBP ESI EDI，然后对战指针寄存器SP的值减32，所以SP进栈的内容是PUSHAD指令执行之前的值<br>POPAD  |  32位通用寄存器全出栈指令  |  POPAD  |  以PUSHAD相反的顺序从堆栈中弹出内容，从而恢复PUSHAD之前的寄存器状态<br>|  ESP的值不是由堆栈弹出的，而是通过增加32来恢复</p>
+          IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。
+IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：
 
-          
+IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器
+
+代表的型号比如：
+
+Intel 8038
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/13/汇编总结（2）——IA-32处理器基本功能/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2582,8 +982,288 @@ MOV BYTE PTR [EBX+8], 5 //字节
   </article>
 
 
+      # 	        
     
+     #   	
+            		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/13/Planar data classification with one hidden layer/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/13/Planar data classification with one hidden layer/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T08:46:30+08:00">
+                2018-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/13/Planar data classification with one hidden layer/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
+      
+
+      
+        
+          
+          Planar data classification with one hidden layerFrom Logistic Regression with a Neural Network mindset, we achieved the Neural Network which use Logis
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/13/Planar data classification with one hidden layer/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      # 	        
+    
+     #   	
+            		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/10/Logistic Regression with a Neural Network mindset/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder的个人主页">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/10/Logistic Regression with a Neural Network mindset/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T23:23:45+08:00">
+                2018-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/10/Logistic Regression with a Neural Network mindset/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Logistic Regression with a Neural Network mindsetGeneral Architecture of the learning algorithmIt’s time to design a simple algorithm to distinguish c
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/10/Logistic Regression with a Neural Network mindset/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      # 	        
+    
+     #   	
+            		
 
   
 
@@ -2601,7 +1281,7 @@ MOV BYTE PTR [EBX+8], 5 //字节
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -2645,6 +1325,17 @@ MOV BYTE PTR [EBX+8], 5 //字节
 
           
           
+             <span id="/2018/11/09/Normalizing rows with Python/" class="leancloud_visitors" data-flag-title="Normalizing rows with Python">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -2667,40 +1358,15 @@ MOV BYTE PTR [EBX+8], 5 //字节
       
         
           
-            <p>A common technique we use in Machine Learning and Deep Learning is to<br>normalize our data. It often leads to a better performance because gradient<br>descent converges faster after normalization. Here, by normalization we mean<br>changing x to :<br><img src="https://img-blog.csdnimg.cn/20181109000849389.png" alt="在这里插入图片描述"><br>(dividing each row vector of x by its norm).</p>
-<p>For example, if  (3)  x  =  [  0  3  4  2  6  4  ]  x = \begin{bmatrix} 0<br>&amp; 3 &amp; 4 \\ 2 &amp; 6 &amp; 4 \\ \end{bmatrix}\tag{3}  x  =  [  0  2<br>​  3  6  ​  4  4  ​  ]  (  3  )  then  (4)  ∥  x  ∥  =  n  p  .  l  i  n  a  l<br>g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e  e  p  d  i  m  s  =  T<br>r  u  e  )  =  [  5  56  ]  | x| = np.linalg.norm(x, axis = 1, keepdims =<br>True) = \begin{bmatrix} 5 \\ \sqrt{56} \\ \end{bmatrix}\tag{4}  ∥  x  ∥  =<br>n  p  .  l  i  n  a  l  g  .  n  o  r  m  (  x  ,  a  x  i  s  =  1  ,  k  e<br>e  p  d  i  m  s  =  T  r  u  e  )  =  [  5  5  6  ​  ​  ]  (  4  )  and  (5)<br>x  <em>  n  o  r  m  a  l  i  z  e  d  =  x  ∥  x  ∥  =  [  0  3  5  4  5  2  56<br>6  56  4  56  ]  x\_normalized = \frac{x}{| x|} = \begin{bmatrix} 0 &amp;<br>\frac{3}{5} &amp; \frac{4}{5} \\ \frac{2}{\sqrt{56}} &amp;<br>\frac{6}{\sqrt{56}} &amp; \frac{4}{\sqrt{56}} \\ \end{bmatrix}\tag{5}  x  </em><br>n  o  r  m  a  l  i  z  e  d  =  ∥  x  ∥  x  ​  =  [  0  5  6  ​  2  ​  ​  5<br>3  ​  5  6  ​  6  ​  ​  5  4  ​  5  6  ​  4  ​  ​  ]  (  5  )<br><strong>Exercise</strong> : Implement normalizeRows() to normalize the rows of a matrix.<br>After applying this function to an input matrix x, each row of x should be a<br>vector of unit length (meaning length 1).</p>
-<h2 id="implement"><a href="#implement" class="headerlink" title="implement"></a>implement</h2><pre><code># GRADED FUNCTION: normalizeRows
-
-def normalizeRows(x):
-    &quot;&quot;&quot;
-    Implement a function that normalizes each row of the matrix x (to have unit length).
-
-    Argument:
-    x -- A numpy matrix of shape (n, m)
-
-    Returns:
-    x -- The normalized (by row) numpy matrix. You are allowed to modify x.
-    &quot;&quot;&quot;
-
-    ### START CODE HERE ### (≈ 2 lines of code)
-    # Compute x_norm as the norm 2 of x. Use np.linalg.norm(..., ord = 2, axis = ..., keepdims = True)
-    x_norm = np.linalg.norm(x,axis=1,keepdims=True)
-
-    # Divide x by its norm.
-    x = x/x_norm
-    ### END CODE HERE ###
-
-    return x
-
-
-
-x = np.array([
-    [0, 3, 4],
-    [1, 6, 4]])
-print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
-</code></pre><p>output:<br><img src="https://img-blog.csdnimg.cn/20181109001059672.png" alt="在这里插入图片描述"></p>
-
-          
+          A common technique we use in Machine Learning and Deep Learning is tonormalize our data. It often leads to a better performance because gradientdescen
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/09/Normalizing rows with Python/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2733,8 +1399,10 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
   </article>
 
 
+      # 	        
     
-      
+     #   	
+            		
 
   
 
@@ -2752,7 +1420,7 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="DmrfCoder">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/photo.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -2796,6 +1464,17 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
 
           
           
+             <span id="/2018/10/06/汇编常用指令/" class="leancloud_visitors" data-flag-title="汇编常用指令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -2818,576 +1497,39 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
       
         
           
-            <h2 id="通用寄存器及使用"><a href="#通用寄存器及使用" class="headerlink" title="通用寄存器及使用"></a>通用寄存器及使用</h2><p>IA-32系列有8个32位通用寄存器，名称分别为：EAX,EBX,ECX,EDX,ESP,EBP,ESI,EDI，如图：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvx9rqlkatj31ae0tz7wh.jpg" alt="image-20181005131233985"></p>
-<h4 id="简单传送指令"><a href="#简单传送指令" class="headerlink" title="简单传送指令"></a>简单传送指令</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MOV</td>
-<td>传送指令</td>
-<td>MOV DEST,SRC</td>
-<td>DEST&lt;=SRC</td>
-<td></td>
-</tr>
-<tr>
-<td>XCHG</td>
-<td>交换指令</td>
-<td>XCHG OPER1,OPER2</td>
-<td>把操作数oper1的内容与操作数oper2的内容交换</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>oper1和oper2可以是通用寄存器或存储单元，但不能同时是操作单元，也不能是立即数。  </p>
-<h4 id="简单加减指令"><a href="#简单加减指令" class="headerlink" title="简单加减指令"></a>简单加减指令</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ADD</td>
-<td>加法指令</td>
-<td>ADD DEST,SRC</td>
-<td>DEST&lt;=DEST+SRC</td>
-<td>两数相加  </td>
-</tr>
-<tr>
-<td>SUB</td>
-<td>减法指令</td>
-<td>SUB DEST,SRC</td>
-<td>DEST&lt;=DEST-SRC</td>
-<td>两数相减  </td>
-</tr>
-<tr>
-<td>INC</td>
-<td>加1指令</td>
-<td>INC DEST</td>
-<td>DEST&lt;=DEST+1</td>
-<td></td>
-</tr>
-<tr>
-<td>DEC</td>
-<td>减1指令</td>
-<td>DEC DEST</td>
-<td>DEST&lt;=DEST-1</td>
-<td></td>
-</tr>
-<tr>
-<td>NEG</td>
-<td>取补指令</td>
-<td>NEG OPRD</td>
-<td>OPRD=0-OPRD</td>
-<td>对操作数取补（相反数）  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="标志寄存器及其使用"><a href="#标志寄存器及其使用" class="headerlink" title="标志寄存器及其使用"></a>标志寄存器及其使用</h2><h3 id="状态标志"><a href="#状态标志" class="headerlink" title="状态标志"></a>状态标志</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>标志</th>
-<th>中文名</th>
-<th>解释  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CF（carry flag）</td>
-<td>进位标志</td>
-<td>主要反映算术运算是否产生进位或借位，若产生，则CF=1，否则CF=0  </td>
-</tr>
-<tr>
-<td>ZF</td>
-<td>零标志</td>
-<td>反映运算结果是否为0  </td>
-</tr>
-<tr>
-<td>SF（sign flag）</td>
-<td>符号标志</td>
-<td>根据运算结果的最高位，若最高位为1则SF为1，否则为0，反映了有符号数运算结果的正负（0正1负）  </td>
-</tr>
-<tr>
-<td>OF（overflow flag）</td>
-<td>溢出标志</td>
-<td>反映有符号数运算结果是否产生溢出，是置1，否置0  </td>
-</tr>
-<tr>
-<td>PF（parity flag）</td>
-<td>奇偶标志</td>
-<td>偶数置1奇数置0  </td>
-</tr>
-<tr>
-<td>AF</td>
-<td>辅助进位标志</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="状态标志操作指令"><a href="#状态标志操作指令" class="headerlink" title="状态标志操作指令"></a>状态标志操作指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CLC（clear carry flag）</td>
-<td>清进位标志指令</td>
-<td>CLC</td>
-<td>使进位标志CF为0  </td>
-</tr>
-<tr>
-<td>STC(set carry flag)</td>
-<td>置进位标志指令</td>
-<td>STC</td>
-<td>使进位标志CF为1  </td>
-</tr>
-<tr>
-<td>CMC（complement carry flag）</td>
-<td>进位标志取反指令</td>
-<td>CMC</td>
-<td>使进位标志CF取反  </td>
-</tr>
-<tr>
-<td>LAHF（load status flags into AH register）</td>
-<td>获取状态标志操作指令</td>
-<td>LAHF</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>把位于标志寄存器低端的5个状态标志位（p26图2.3）信息同时送到寄存器AH的对应位<br>SAHF（store AH into Flags）  |  设置状态标志操作指令  |  SAHF  |<br>对标志寄存器中的低8位产生影响，使得状态标志位SF、ZF、AF、PF和CF分别成为来自寄存器AH中对应位的值，但保留位（位1、位3、位5）不受影响  </p>
-<h3 id="带进位加减指令"><a href="#带进位加减指令" class="headerlink" title="带进位加减指令"></a>带进位加减指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ADC（add with carry）</td>
-<td>带进位加法指令</td>
-<td>ADC DEST,SRC</td>
-<td>DEST&lt;=DEST+SRC+CF</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>与add指令不同之处是要再加上进位标志cf的值<br>SBB(substraction with borrow)  |  带借位减法  |  SBB DEST,SRC  |<br>DEST&lt;=DEST-(SRC+CF)  |  与sub指令不同之处是要再减上借位标志cf的值  </p>
-<h3 id="取有效地址指令"><a href="#取有效地址指令" class="headerlink" title="取有效地址指令"></a>取有效地址指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LEA（load effective address）</td>
-<td>取有效地址指令</td>
-<td>LEA REC,OPRD</td>
-<td></td>
-</tr>
-<tr>
-<td>把操作数oprd的有效地址传送到操作数rec，源操作数oprd必须是一个存储器操作数，目的操作数rec必须是一个16位或32位的通用寄存器</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>与mov指令的区别：mov：移动地址中的值lea：将地址进行移动  </p>
-<h3 id="指令指针寄存器和简单控制转移指令"><a href="#指令指针寄存器和简单控制转移指令" class="headerlink" title="指令指针寄存器和简单控制转移指令"></a>指令指针寄存器和简单控制转移指令</h3><h4 id="常用条件转移指令"><a href="#常用条件转移指令" class="headerlink" title="常用条件转移指令"></a>常用条件转移指令</h4><p>location：p45</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvxm0ya707j30vo0ychdt.jpg" alt="image-20181005201637040"></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CMP</td>
-<td>比较指令</td>
-<td>CMP DEST,SRC</td>
-<td>根据dest-src的差影响各状态标志寄存器</td>
-<td>不把dest-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>src的结果送入dest<br>JMP  |  无条件段内直接转移指令  |  JMP LABEL  |  使控制无条件地转移到标号为label的位置  |  无条件转移指令本身不影响标志  </p>
-<h3 id="堆栈和堆栈操作"><a href="#堆栈和堆栈操作" class="headerlink" title="堆栈和堆栈操作"></a>堆栈和堆栈操作</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>PUSH</td>
-<td>进栈指令</td>
-<td>PUSH SRC</td>
-<td>把源操作数src压入堆栈</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>源操作数src可以是32位通用寄存器、16位通用寄存器和段寄存器，也可以是双字存储单元或者字符存储单元，还可以是立即数<br>POP  |  出栈指令  |  POP DEST  |  从栈顶弹出一个双字或字数据到目的操作数  |<br>如果目的操作数是双字的，那么就从栈顶弹出一个双字数据，否则，从栈顶弹出一个字数据，出栈至少弹出一个字（16位）<br>PUSHA  |  16位通用寄存器全进栈指令  |  PUSHA  |  将所有8个16位通用寄存器的内容压入堆栈  |  压入顺序是AX CX DX<br>BX SP BP SI DI，然后对战指针寄存器SP的值减16，所以SP进栈的内容是PUSHA指令执行之前的值<br>POPA  |  16位通用寄存器全出栈指令  |  POPA  |  以PUSHA相反的顺序从堆栈中弹出内容，从而恢复PUSHA之前的寄存器状态  |<br>SP的值不是由堆栈弹出的，而是通过增加16来恢复<br>PUSHAD  |  32位通用寄存器全进栈指令  |  PUSHAD  |  将所有8个32位通用寄存器的内容压入堆栈  |  压入顺序是EAX ECX<br>EDX EBX ESP EBP ESI EDI，然后对战指针寄存器SP的值减32，所以SP进栈的内容是PUSHAD指令执行之前的值<br>POPAD  |  32位通用寄存器全出栈指令  |  POPAD  |  以PUSHAD相反的顺序从堆栈中弹出内容，从而恢复PUSHAD之前的寄存器状态<br>|  ESP的值不是由堆栈弹出的，而是通过增加32来恢复  </p>
-<h2 id="过程调用和返回指令"><a href="#过程调用和返回指令" class="headerlink" title="过程调用和返回指令"></a>过程调用和返回指令</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CALL</td>
-<td>过程调用指令</td>
-<td>CALL LABEL</td>
-<td>段内直接调用LABEL</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>与jmp的区别在于call指令会在调用label之前保存返回地址（call 中return之后主程序还可以继续执行，jmp<br>当label执行完毕后不能返回主程序继续执行）<br>RET  |  段内过程返回指令  |  RET  |  使子程序结束，继续执行主程序  |  </p>
-<h2 id="算术逻辑运算指令"><a href="#算术逻辑运算指令" class="headerlink" title="算术逻辑运算指令"></a>算术逻辑运算指令</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MUL</td>
-<td>无符号数乘法指令  </td>
-</tr>
-<tr>
-<td>IMUL</td>
-<td>有符号数乘法指令  </td>
-</tr>
-<tr>
-<td>IMUL DEST，SRC</td>
-<td>有符号数乘法指令  </td>
-</tr>
-<tr>
-<td>IMUL DEST,SRC1,SRC2</td>
-<td>有符号数乘法指令  </td>
-</tr>
-<tr>
-<td>DIV</td>
-<td>无符号数除法指令  </td>
-</tr>
-<tr>
-<td>IDIV OPRD</td>
-<td>有符号数除法指令  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="符号拓展指令"><a href="#符号拓展指令" class="headerlink" title="符号拓展指令"></a>符号拓展指令</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CBW</td>
-<td>字节转化为字指令</td>
-<td>CBW</td>
-<td>把寄存器AL中的值符号拓展到寄存器AH  </td>
-</tr>
-<tr>
-<td>CWD</td>
-<td>字转化为双字指令</td>
-<td>CWD</td>
-<td>把寄存器AX中的值符号拓展到寄存器DX  </td>
-</tr>
-<tr>
-<td>CDQ</td>
-<td>双字转化为四字指令</td>
-<td>CDQ</td>
-<td>把寄存器EAX中的值符号拓展到EDX  </td>
-</tr>
-<tr>
-<td>CWDE</td>
-<td>字转化为双字指令</td>
-<td>CWDE</td>
-<td>把AX中的值符号拓展到EAX的高16位  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="拓展传送指令"><a href="#拓展传送指令" class="headerlink" title="拓展传送指令"></a>拓展传送指令</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MOVSX</td>
-<td>符号拓展传送指令</td>
-<td>MOVSX DEST,SRC</td>
-<td>把源操作数SRC符号拓展后送至目的操作数DEST</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>src可以是通用寄存器或者存储单元，但是dest只能是通用寄存器（零拓展传送指令不会改变源操作数，也不影响标志寄存器的状态）<br>MOVZX  |  |  MOVZX DEST,SRC  |  把源操作数SRC零拓展后送至目的操作数DEST  |<br>零拓展传送指令不会改变源操作数，也不影响标志寄存器的状态  </p>
-<h2 id="逻辑运算指令"><a href="#逻辑运算指令" class="headerlink" title="逻辑运算指令"></a>逻辑运算指令</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NOT</td>
-<td>否运算指令</td>
-<td>NOT OPRD</td>
-<td>把操作数OPRD按位取反，然后送回OPRD</td>
-<td></td>
-</tr>
-<tr>
-<td>AND</td>
-<td>与运算指令</td>
-<td>AND DEST，SRC</td>
-<td>把两个操作数进行与运算之后结果送回DEST</td>
-<td>同1得1，否则得0  </td>
-</tr>
-<tr>
-<td>OR</td>
-<td>或运算指令</td>
-<td>OR DEST，SRC</td>
-<td>把两个操作数进行或运算之后结果送回DEST</td>
-<td>同0得0，否则得1  </td>
-</tr>
-<tr>
-<td>XOR</td>
-<td>异或运算</td>
-<td>XOR DEST，SRC</td>
-<td>把两个操作数进行异或运算之后结果送回DEST</td>
-<td>相同得0不同得1  </td>
-</tr>
-<tr>
-<td>TEST</td>
-<td>测试指令</td>
-<td>TEST DEST，SRC</td>
-<td></td>
-</tr>
-<tr>
-<td>与AND指令类似，将各位相与，但是结果不送回DEST，仅影响状态位标志，指令执行后，ZF、PF、SF反映运算结果，CF和OF被清零</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通常用于检测某些位是否为1，但又不希望改变操作数的值  </p>
-<h2 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h2><h4 id="一般移位指令"><a href="#一般移位指令" class="headerlink" title="一般移位指令"></a>一般移位指令</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SAL</td>
-<td>算术左移</td>
-<td>SAL OPRD，count</td>
-<td>把操作数oprd左移count位，右边补0</td>
-<td>与shl指令一样  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SHL  |  逻辑左移  |  SHL OPRD，count  |  把操作数oprd左移count位，右边补0  |  与sal指令一样<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SAR  |  算术右移  |  SAR OPRD，count  |<br>把操作数oprd右移count位，同时每右移一位，左边补符号位，移出的最低位进入标志位CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>SHR  |  逻辑右移  |  SHR OPRD，count  |  把操作数oprd右移count位，左边补0，移出的最低位进入标志位CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
-<h4 id="循环移位指令"><a href="#循环移位指令" class="headerlink" title="循环移位指令"></a>循环移位指令</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ROL</td>
-<td>左循环移位指令</td>
-<td>ROL OPRD,count</td>
-<td></td>
-<td>通过截取count的低5位，实际的移位数被限于0到31之间。  </td>
-</tr>
-<tr>
-<td>ROR</td>
-<td>右循环移位指令</td>
-<td>ROR OPRD,count</td>
-<td></td>
-<td>通过截取count的低5位，实际的移位数被限于0到31之间。  </td>
-</tr>
-<tr>
-<td>RCL</td>
-<td>带进位左循环移位</td>
-<td>RCL OPRD,count</td>
-<td>相当于CF在最高位参与循环移位</td>
-<td>大循环左移  </td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCR  |  带进位右循环移位  |  RCR OPRD,count  |  相当于CF在最高位参与循环移位  |  大循环右移<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
-<h3 id="循环指令"><a href="#循环指令" class="headerlink" title="循环指令"></a>循环指令</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>中文名</th>
-<th>格式</th>
-<th>解释</th>
-<th>备注  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LOOP</td>
-<td>计数循环指令</td>
-<td>LOOP LABEL</td>
-<td>使ECX的值减1，当ECX的值不为0的时候跳转至LABEL，否则执行LOOP之后的语句</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>LOOPE</td>
-<td>等于循环指令</td>
-<td>LOOPE LABEL</td>
-<td></td>
-</tr>
-<tr>
-<td>使ECX的值减1，如果结果不等于0并且零标志ZF等于1（表示相等），那么就转移到LABEL，否则执行LOOPE之后的语句</td>
-<td></td>
-</tr>
-<tr>
-<td>LOOPZ</td>
-<td>零循环指令</td>
-<td>LOOPZ LABEL</td>
-<td></td>
-</tr>
-<tr>
-<td>使ECX的值减1，如果结果不等于0并且零标志ZF等于1（表示相等），那么就转移到LABEL，否则执行LOOPZ之后的语句</td>
-<td></td>
-</tr>
-<tr>
-<td>LOOPNE</td>
-<td>不等于循环指令</td>
-<td>LOOPE LABEL</td>
-<td></td>
-</tr>
-<tr>
-<td>使ECX的值减1，如果结果不等于0并且零标志ZF等于0（表示不相等），那么就转移到LABEL，否则执行LOOPNE之后的语句</td>
-<td></td>
-</tr>
-<tr>
-<td>LOOPNZ</td>
-<td>非零循环指令</td>
-<td>LOOPNZ LABEL</td>
-<td></td>
-</tr>
-<tr>
-<td>使ECX的值减1，如果结果不等于0并且零标志ZF等于0（表示不相等），那么9就转移到LABEL，否则执行LOOPNZ之后的语句</td>
-<td></td>
-</tr>
-<tr>
-<td>JECXZ</td>
-<td>计数转移指令</td>
-<td>JECXZ LABEL</td>
-<td>当寄存器ECX的值为0时转移到LABEL，否则顺序执行</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>通常在循环开始之前使用该指令，所以循环次数为0时，就可以跳过循环体</p>
+          通用寄存器及使用IA-32系列有8个32位通用寄存器，名称分别为：EAX,EBX,ECX,EDX,ESP,EBP,ESI,EDI，如图：
 
-          
+简单传送指令
+
+
+
+指令
+中文名
+格式
+解释
+备注  
+
+
+
+
+MOV
+传送指令
+MOV DEST,SRC
+DEST&lt;=SRC
+
+
+
+XCHG
+交换指令
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/06/汇编常用指令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3420,656 +1562,13 @@ print(&quot;normalizeRows(x) = &quot; + str(normalizeRows(x)))
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/26/iTerm2常用快捷键/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/26/iTerm2常用快捷键/" itemprop="url">iTerm2常用快捷键</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-26T23:13:47+08:00">
-                2018-09-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><ul>
-<li>control + a: 到行首 </li>
-<li>control + e: 行末 </li>
-<li>control + f/b: 前进后退，相当于左右方向键，但是显然比移开手按方向键更快 </li>
-<li>control + p: 上一条命令，相当于方向键上 </li>
-<li>control + r: 搜索命令历史，这个大家都应该很熟悉了 </li>
-<li>control + d: 删除当前字符 </li>
-<li>control + h: 删除之前的字符 </li>
-<li>control + w: 删除光标前的单词 </li>
-<li>control + k: 删除到文本末尾 </li>
-<li>control + t: 交换光标处文本 </li>
-<li>control + u: 删除一行 </li>
-<li>⌘ + —/+/0: 调整字体大小 </li>
-<li>⌘ + r:清屏，其实是滚到新的一屏，并没有清空。ctrl + l 也可以做到 </li>
-<li>command + t： 新建标签 </li>
-<li>command + w： 关闭标签 </li>
-<li>command + 数字 command + 左右方向键： 切换标签 </li>
-<li>command + enter： 切换全屏 </li>
-<li>command + d 垂直分屏 </li>
-<li>command + shift + d 水平分屏 </li>
-<li>command + option + 方向键 command + [ 或 command + ]： 切换屏幕 </li>
-<li>command + shift + h 查看剪贴板历史 </li>
-<li>ctrl + r 搜索命令历史 </li>
-</ul>
-<h2 id="高效功能"><a href="#高效功能" class="headerlink" title="高效功能"></a>高效功能</h2><ul>
-<li>粘贴历史：使用Command + Shift + h 可以呼出粘贴历史，支持模糊检索。 </li>
-<li>全屏模式：command+enter </li>
-<li>command+; 根据上下文呼出自动完成窗口，上下键选择 </li>
-<li>即时回放：Command + Opt + b 打开即时回放，按Esc退出。即时回放可以记录终端输出的状态，看看你以前都干了啥。 </li>
-<li>历史信息查找和粘贴：command + f，呼出查找功能，找到后 tab 键可以选中找到的文本，通过option + 回车粘贴 </li>
-<li>Expose Tabs：option + command + e </li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/24/如何在云服务器上部署gitblit/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/如何在云服务器上部署gitblit/" itemprop="url">如何在云服务器上部署gitblit</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-24T17:24:12+08:00">
-                2018-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>本机：macOs 10.13.6</p>
-<p>服务器端：Ucloud CentOS 6.5 64位</p>
-<h2 id="服务器端部署"><a href="#服务器端部署" class="headerlink" title="服务器端部署"></a>服务器端部署</h2><p>首先保证ssh连接上服务器，然后：</p>
-<h3 id="安装Java环境"><a href="#安装Java环境" class="headerlink" title="安装Java环境"></a>安装Java环境</h3><p>首先查看自带JDK是否安装：</p>
-<pre><code>yum list installed | grep java
-</code></pre><p>如果没有任何输出，就说明没有安装好jdk，输入以下命令进行安装：</p>
-<pre><code>yum -y list java* # 查看yum库中java安装包
-
-yum -y install java-1.8.0-openjdk*   # 安装java-1.8.0相关java库
-</code></pre><p>执行完毕后即成功安装jdk</p>
-<h3 id="下载GitBlit"><a href="#下载GitBlit" class="headerlink" title="下载GitBlit"></a>下载GitBlit</h3><p>依次执行以下命令：</p>
-<pre><code>mkdir -p /opt/gitblit   
-cd /opt/gitblit
-wget http://dl.bintray.com/gitblit/releases/gitblit-1.8.0.tar.gz
-</code></pre><p>如果下载过程中出现提示</p>
-<pre><code>-bash: wget: command not foundls
-</code></pre><p>说明没有安装wget程序，用yum库装一个即可</p>
-<pre><code>yum install wget
-</code></pre><h3 id="解压GitBlit"><a href="#解压GitBlit" class="headerlink" title="解压GitBlit"></a>解压GitBlit</h3><p>在/opt/gitblit下执行：</p>
-<pre><code>sudo tar -zxvf gitblit-1.8.0.tar.gz
-</code></pre><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><h4 id="修改data-defaults-properties"><a href="#修改data-defaults-properties" class="headerlink" title="修改data/defaults.properties"></a>修改data/defaults.properties</h4><pre><code>sudo vim data/defaults.properties
-</code></pre><p>主要修改：</p>
-<pre><code>server.httpPort = xxxx
-server.httpsPort = localhost
-</code></pre><p>这里的端口有两种设置方法：</p>
-<ul>
-<li><p>根据自己的喜好指定，然后在云服务器的打开防火墙，登录你云服务器的控制台，进入安全组配置xxxx端口（http访问） </p>
-</li>
-<li><p>一般你建好云服务器之后，它会给你自动分配一个外网防火墙，外网防火墙里面默认开放了几个可直接访问的端口，比如我的： </p>
-</li>
-</ul>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fvkr6xk0jvj31340c8400.jpg" alt="image-20180924163912987"></p>
-<p>这个时候你可以把xxxx设置为上面的端口，比如22或者3389，但是这么做有个风险，就是有可能这几个端口被其他service占用了，所以最好在设置之前先查看一下对应端口是否被占用：</p>
-<pre><code>    lsof -i :xxxx
-</code></pre><p>如果什么都没有输出，就说明该端口未被占用（如果已经被占用可以杀死该端口对应的service，具体方法自行google，不建议这样）。</p>
-<p>修改完成后保存退出。</p>
-<h4 id="修改service-centos-sh"><a href="#修改service-centos-sh" class="headerlink" title=" 修改service-centos.sh "></a><a href="http://xn--service-centos-u82w550w.sh" target="_blank" rel="noopener"> 修改service-centos.sh </a></h4><p>在/opt/gitblib下：</p>
-<pre><code>    sudo vim service-centos.sh
-</code></pre><p>主要修改：</p>
-<pre><code>    GITBLIT_HTTP_PORT = xxxx
-</code></pre><p>这里的xxxx是你刚才在defaults.properties设置的httpPort的值。</p>
-<h3 id="启动GitBlit"><a href="#启动GitBlit" class="headerlink" title="启动GitBlit"></a>启动GitBlit</h3><p>这里提供有两种方法启动GitBlit：</p>
-<p>1:</p>
-<pre><code>java -jar gitblit.jar --baseFolder data
-</code></pre><p>启动成功后应有类似输出：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fvkr6y67sdj31kw0gigqu.jpg" alt="image-20180924165308489"></p>
-<p>这种方法启动的缺点是服务器重启后就死了，需要重复手动启动。</p>
-<p>2: 直接在/opt/gitblit下执行：</p>
-<pre><code>./service-centos.sh start
-</code></pre><p>成功后：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvkr6w9t0tj30ms036q37.jpg" alt="image-20180924170414138"></p>
-<p>还有其他启动方法，这里不再一一赘述，需要的自行google。</p>
-<p>这里只介绍http访问的设置方法，https的类似，不再赘述。</p>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>这里的客户端其实浏览器，确保你服务器端启动了gitblit，然后在你的chrome地址栏输入： <a href="http://ip" target="_blank" rel="noopener"> http://ip </a> :port<br>,这里的ip是你服务器的公网ip，port是你刚才设置的http的ip，如果你设置的是https，则进行对应变化即可。</p>
-<p>成功的话应该可以看到：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvkr6z9de4j31kw0t5gpq.jpg" alt="image-20180924170907085"></p>
-<p>在右上角输入username和password，默认是admin和admin，然后就登陆成功了：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvkr700c11j31kw0g7jug.jpg" alt="image-20180924171105837"></p>
-<h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>看图：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvkr70ft3sj31kw0gd0w3.jpg" alt="image-20180924171305895"></p>
-<p>然后点击：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fvkr6worrjj31kw0bedi5.jpg" alt="image-20180924171347059"></p>
-<p>然后进入：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fvkr6x90yaj30ys0uodj8.jpg" alt="image-20180924171400941"></p>
-<p>然后就可以自由发挥了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/09/21/Activity 与 Fragment 通信方式总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="DmrfCoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder的个人主页">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/21/Activity 与 Fragment 通信方式总结/" itemprop="url">Activity 与 Fragment 通信方式总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T15:52:32+08:00">
-                2018-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>通常，Fragment 与 Activity 通信存在三种情形：</p>
-<ul>
-<li><p>Activity 操作内嵌的 Fragment </p>
-</li>
-<li><p>Fragment 操作宿主 Activity </p>
-</li>
-<li><p>Fragment 操作同属 Activity中的其他 Fragment </p>
-</li>
-</ul>
-<p>在Android中我们可以通过以下几种方式优雅地实现Activity和fragment之间的通信：</p>
-<ul>
-<li><p>Handler </p>
-</li>
-<li><p>广播 </p>
-</li>
-<li><p>EventBus </p>
-</li>
-<li><p>接口回调 </p>
-</li>
-<li><p>Bundle和setArguments(bundle) </p>
-</li>
-</ul>
-<h2 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h2><pre><code>public class MainActivity extends FragmentActivity{ 
-      //声明一个Handler 
-      public Handler mHandler = new Handler(){       
-          @Override
-           public void handleMessage(Message msg) { 
-                super.handleMessage(msg);
-                 //相应的逻辑处理代码
-           }
-     }
-
-   } 
-    public class MainFragment extends Fragment{ 
-          //保存Activity传递的handler
-           private Handler mHandler;
-           @Override
-           public void onAttach(Activity activity) { 
-                super.onAttach(activity);
-
-                if(activity instance MainActivity){ 
-                      mHandler =  ((MainActivity)activity).mHandler; 
-                }
-           }
-
-     }
-</code></pre><p>这种方式的缺点：</p>
-<ul>
-<li><p>Fragment对具体的Activity存在耦合，不利于Fragment复用 </p>
-</li>
-<li><p>不利于维护，若想删除相应的Activity，Fragment也得改动 </p>
-</li>
-<li><p>没法获取Activity的返回数据 </p>
-</li>
-</ul>
-<p>所以一般不建议使用这种方法。</p>
-<h2 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h2><p>在 Activity 中注册广播接收器，在 Fragment中发送广播：</p>
-<pre><code>    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(ACTION_NAME)) {
-                String msg = intent.getStringExtra(&quot;msg&quot;);
-                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-    public void registerBoradcastReceiver() {
-        IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction(ACTION_NAME);
-        registerReceiver(mBroadcastReceiver, myIntentFilter);
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver);
-    }
-</code></pre><h2 id="EventBus"><a href="#EventBus" class="headerlink" title="EventBus"></a>EventBus</h2><ul>
-<li><p>MainActivity </p>
-<pre><code>//注册订阅者
-</code></pre><p>EventBus.getDefault().register(this);<br>//定义接收信息的方法<br>@Subscribe</p>
-<pre><code>public void onEventMainThread(UserEvent event) {
-    btn.setText(event.getUserName());
-    service_tv.setText(event.getUserName());
-}
-</code></pre></li>
-</ul>
-<pre><code>* Fragment发送信息 
-
-            UserEvent event=new UserEvent();
-    EventBus.getDefault().post(event);
-</code></pre><h3 id="接口回调"><a href="#接口回调" class="headerlink" title="接口回调"></a>接口回调</h3><ul>
-<li><p>在 Fragment 中定义一个接口 </p>
-</li>
-<li><p>调用接口中的抽象方法 </p>
-</li>
-<li><p>在 Activity 中实现接口，并具体实现接口中的方法，完成通信。 </p>
-</li>
-</ul>
-<h3 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h3><pre><code>public class MainFragment extends Fragment{
-       public FragmentListener mListener; 
-
-      //MainFragment开放的接口 
-      public static interface FragmentListener{ 
-
-          //跳到h5页面
-         void toH5Page();
-
-         //展示消息
-         void showMsg(String str);
-       }
-       @Override 
-      public void onAttach(Activity activity) { 
-            super.onAttach(activity); 
-            //对传递进来的Activity进行接口转换
-             if(activity instance FragmentListener){
-
-                 mListener = ((FragmentListener)activity); 
-
-            }
-       }
-       ...其他处理代码省略 
-
-       mButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              msgListener.showMsg(&quot;Hello 传递数据给Activity展示&quot;);
-          }
-      });
-}
-</code></pre><h3 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h3><pre><code>// MainActivity 实现 MainFragment开放的接口 
-  public class MainActivity extends FragmentActivity implements FragmentListener{ 
-        @override
-         public void toH5Page(){... }
-
-        @Override
-         public void showMsg(String str) {
-            Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
-        }
-
-       ...其他处理代码省略
-   }
-</code></pre><h3 id="Bundle和setArguments-bundle"><a href="#Bundle和setArguments-bundle" class="headerlink" title="Bundle和setArguments(bundle)"></a>Bundle和setArguments(bundle)</h3><p>参见 <a href="https://blog.csdn.net/qq_36982160/article/details/82422365" target="_blank" rel="noopener"> Android如何优雅地向Fragment传递参数
-</a></p>
-<h2 id="Fragment-amp-amp-Fragment-数据交互"><a href="#Fragment-amp-amp-Fragment-数据交互" class="headerlink" title="Fragment &amp;&amp; Fragment 数据交互"></a>Fragment &amp;&amp; Fragment 数据交互</h2><p>Fragment和Fragment间数据交互，应该也是会经常用到的。我们可以使用宿主Activity做传递媒介。原理其实也是通过使用onActivityResult回调，完成Fragment<br>&amp;&amp; Fragment<br>的数据交互，这其中有两个比较重要的方法：Fragment.setTargetFragment、getTargetFragment()。</p>
-<p>在 FirstFragment 中，通过setTargetFragment来连接需要交互的Fragment：</p>
-<pre><code>secondFragment.setTargetFragment(FirstFragment.this, REQUEST_CODE);
-</code></pre><p>接着实现onActivityResult,处理传递过来的数据：</p>
-<pre><code>@Override  
-   public void onActivityResult(int requestCode, int resultCode, Intent data) {  
-       super.onActivityResult(requestCode, resultCode, data);  
-       if(resultCode != Activity.RESULT_OK){  
-           return;  
-       }else{  
-           Integer str = data.getIntExtra(&quot;key&quot;,-1);  
-           //处理数据...
-       }  
-   }
-</code></pre><p>在 SecondFragment 中调用sendResult（）方法，回传数据给 FirstFragment:</p>
-<pre><code>private void sendResult(int resultOk) {  
-        if(getTargetFragment() == null){  
-            return;  
-        }else{  
-            Intent intent = new Intent();  
-            intent.putExtra(&quot;key&quot;, 520); 
-                           getTargetFragment().onActivityResult(FirstFragment.REQUEST_CODE,resultOk,intent);  
-        }  
-    }
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
+      # 	        
     
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -4104,6 +1603,8 @@ server.httpsPort = localhost
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder">
+            
               <p class="site-author-name" itemprop="name">DmrfCoder</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -4115,7 +1616,7 @@ server.httpsPort = localhost
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">127</span>
+                  <span class="site-state-item-count">137</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -4126,7 +1627,7 @@ server.httpsPort = localhost
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -4147,6 +1648,34 @@ server.httpsPort = localhost
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
           
 
           
@@ -4239,11 +1768,19 @@ server.httpsPort = localhost
   
 
 
+  
 
 
 
 
 
+  
+  
+
+
+
+  
+  
 
 
 
@@ -4277,6 +1814,26 @@ server.httpsPort = localhost
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
   
 
 
@@ -4350,6 +1907,113 @@ server.httpsPort = localhost
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
 
   
 
@@ -4376,7 +2040,24 @@ server.httpsPort = localhost
         }
       });
     </script>
-    <script type="text/javascript" src=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
