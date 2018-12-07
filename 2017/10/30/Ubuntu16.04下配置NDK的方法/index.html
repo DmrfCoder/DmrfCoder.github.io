@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="android,studio,ubuntu,ndk,">
+  <meta name="keywords" content="ubuntu,NDK,">
 
 
 
@@ -98,27 +98,22 @@
 
 
 <meta name="description" content="引言：前段时间因为要做百度的mobile-deep-learning，在build其github上的项目时提示要安装配置NDK，网上有很多教程，但是大多不完善（至少我是没找到一个能完整解决我的问题的），历经坎坷终于配置成功，所以将我的配置方法记录下来，希望可以帮到有需要的同学。 下载NDK这里提供一种比较好用的下载方法，就是我们可以使用androidstudio进行NDK的下载（如果没有as的同学">
-<meta name="keywords" content="android,studio,ubuntu,ndk">
+<meta name="keywords" content="ubuntu,NDK">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu16.04下配置NDK的方法">
+<meta property="og:title" content="Ubuntu16.04下配置Android NDK的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2017/10/30/Ubuntu16.04下配置NDK的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="引言：前段时间因为要做百度的mobile-deep-learning，在build其github上的项目时提示要安装配置NDK，网上有很多教程，但是大多不完善（至少我是没找到一个能完整解决我的问题的），历经坎坷终于配置成功，所以将我的配置方法记录下来，希望可以帮到有需要的同学。 下载NDK这里提供一种比较好用的下载方法，就是我们可以使用androidstudio进行NDK的下载（如果没有as的同学">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20171030113432007?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20171030113606747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-12-05T14:40:20.446Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxxzzeche7j30sv0j6781.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxxzzn7atmj30sv0j6gp5.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy009oillj311y0kogrp.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy00w6houj30j0041jsw.jpg">
+<meta property="og:updated_time" content="2018-12-07T03:01:40.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu16.04下配置NDK的方法">
+<meta name="twitter:title" content="Ubuntu16.04下配置Android NDK的方法">
 <meta name="twitter:description" content="引言：前段时间因为要做百度的mobile-deep-learning，在build其github上的项目时提示要安装配置NDK，网上有很多教程，但是大多不完善（至少我是没找到一个能完整解决我的问题的），历经坎坷终于配置成功，所以将我的配置方法记录下来，希望可以帮到有需要的同学。 下载NDK这里提供一种比较好用的下载方法，就是我们可以使用androidstudio进行NDK的下载（如果没有as的同学">
-<meta name="twitter:image" content="https://img-
-blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxxzzeche7j30sv0j6781.jpg">
 
 
 
@@ -154,7 +149,7 @@ blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
 
 
 
-  <title>Ubuntu16.04下配置NDK的方法 | DmrfCoder's page</title>
+  <title>Ubuntu16.04下配置Android NDK的方法 | DmrfCoder's page</title>
   
 
 
@@ -363,7 +358,7 @@ blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
 
         
         
-          <h1 class="post-title" itemprop="name headline">Ubuntu16.04下配置NDK的方法</h1>
+          <h1 class="post-title" itemprop="name headline">Ubuntu16.04下配置Android NDK的方法</h1>
         
 
         <div class="post-meta">
@@ -398,8 +393,8 @@ blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/ndk/" itemprop="url" rel="index">
-                    <span itemprop="name">ndk</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -415,7 +410,7 @@ blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
 
           
           
-             <span id="/2017/10/30/Ubuntu16.04下配置NDK的方法/" class="leancloud_visitors" data-flag-title="Ubuntu16.04下配置NDK的方法">
+             <span id="/2017/10/30/Ubuntu16.04下配置NDK的方法/" class="leancloud_visitors" data-flag-title="Ubuntu16.04下配置Android NDK的方法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -440,7 +435,7 @@ blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  429
+                  428
                 </span>
               
 
@@ -477,23 +472,19 @@ blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
       
 
       
-        <p>引言：前段时间因为要做百度的mobile-deep-<br>learning，在build其github上的项目时提示要安装配置NDK，网上有很多教程，但是大多不完善（至少我是没找到一个能完整解决我的问题的），历经坎坷终于配置成功，所以将我的配置方法记录下来，希望可以帮到有需要的同学。</p>
-<h2 id="下载NDK"><a href="#下载NDK" class="headerlink" title="下载NDK"></a>下载NDK</h2><p>这里提供一种比较好用的下载方法，就是我们可以使用android<br>studio进行NDK的下载（如果没有as的同学也可以到网上手动下载，资源很多的），具体方法如下：<br>打开android studio的settings，然后在搜索框输入NDK，这时会出现如下界面：<br><img src="https://img-
-blog.csdn.net/20171030113410346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>点击SDK Tools会看到：<br><img src="https://img-
-blog.csdn.net/20171030113432007?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>在这个列表里你会找到NDK，勾选之后点击Apply即可下载，另外如果正在看此文的你也打算研究一下百度的mobile-deep-<br>learning，你也可以通过相同的下载方式下载Cmake。</p>
+        <h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><p>前段时间因为要做百度的mobile-deep-learning，在build其github上的项目时提示要安装配置NDK，网上有很多教程，但是大多不完善（至少我是没找到一个能完整解决我的问题的），历经坎坷终于配置成功，所以将我的配置方法记录下来，希望可以帮到有需要的同学。</p>
+<h2 id="下载NDK"><a href="#下载NDK" class="headerlink" title="下载NDK"></a>下载NDK</h2><p>这里提供一种比较好用的下载方法，就是我们可以使用android<br>studio进行NDK的下载（如果没有as的同学也可以到网上手动下载，资源很多的），具体方法如下：<br>打开android studio的settings，然后在搜索框输入NDK，这时会出现如下界面：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxxzzeche7j30sv0j6781.jpg" alt="9"><br>点击SDK Tools会看到：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxxzzn7atmj30sv0j6gp5.jpg" alt="10"><br>在这个列表里你会找到NDK，勾选之后点击Apply即可下载，另外如果正在看此文的你也打算研究一下百度的mobile-deep-learning，你也可以通过相同的下载方式下载Cmake。</p>
 <h2 id="配置NDK"><a href="#配置NDK" class="headerlink" title="配置NDK"></a>配置NDK</h2><p>通过android studio下载的NDK默认会放在你的SDK目录下，文件名应为ndk-bundle，接下来介绍如何通过终端配置ndk的环境变量：</p>
 <h3 id="首先打开profile："><a href="#首先打开profile：" class="headerlink" title="首先打开profile："></a>首先打开profile：</h3><pre><code>sudo vim /etc/profile
-</code></pre><p>没有安装vim的同学也可以使用gedit打开：</p>
+</code></pre><p>没有安装vim的同学也可以使用gedit打开：    </p>
 <pre><code>sudo gedit /etc/profile
-</code></pre><p>打开后在profile文件的末尾加上：</p>
+</code></pre><p>打开后在profile文件的末尾加上：  </p>
 <pre><code>export NDK_HOME=sdkroot/ndk-bundle
 PATH=$NDK_HOME:$PATH
-</code></pre><p>sdkroot是你的sdk目录，每个人的不一样，视情况而定，下面是我的配置截图：<br><img src="https://img-
-blog.csdn.net/20171030113606747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>添加完成后保存退出，使用以下命令使配置的环境变量生效：</p>
+</code></pre><p>sdkroot是你的sdk目录，每个人的不一样，视情况而定，下面是我的配置截图：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy009oillj311y0kogrp.jpg" alt="11"><br>添加完成后保存退出，使用以下命令使配置的环境变量生效：   </p>
 <pre><code>source /etc/profile
 </code></pre><h2 id="验证ndk是否配置成功："><a href="#验证ndk是否配置成功：" class="headerlink" title="验证ndk是否配置成功："></a>验证ndk是否配置成功：</h2><pre><code>ndk-build -v
-</code></pre><p>出现类似以下输出即说明ndk配置成功：<br><img src="https://img-
-blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY5ODIxNjA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>End…</p>
+</code></pre><p>出现类似以下输出即说明ndk配置成功：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy00w6houj30j0041jsw.jpg" alt="12"></p>
 
       
     </div>
@@ -540,21 +531,13 @@ blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"><i class="fa fa-tag"></i>
-
- android</a>
-          
-            <a href="/tags/studio/" rel="tag"><i class="fa fa-tag"></i>
-
- studio</a>
-          
             <a href="/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i>
 
  ubuntu</a>
           
-            <a href="/tags/ndk/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/NDK/" rel="tag"><i class="fa fa-tag"></i>
 
- ndk</a>
+ NDK</a>
           
         </div>
       
@@ -690,7 +673,7 @@ blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +684,7 @@ blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -712,7 +695,7 @@ blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -773,7 +756,7 @@ blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载NDK"><span class="nav-number">1.</span> <span class="nav-text">下载NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NDK"><span class="nav-number">2.</span> <span class="nav-text">配置NDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先打开profile："><span class="nav-number">2.1.</span> <span class="nav-text">首先打开profile：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证ndk是否配置成功："><span class="nav-number">3.</span> <span class="nav-text">验证ndk是否配置成功：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言："><span class="nav-number">1.</span> <span class="nav-text">引言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载NDK"><span class="nav-number">2.</span> <span class="nav-text">下载NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NDK"><span class="nav-number">3.</span> <span class="nav-text">配置NDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先打开profile："><span class="nav-number">3.1.</span> <span class="nav-text">首先打开profile：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证ndk是否配置成功："><span class="nav-number">4.</span> <span class="nav-text">验证ndk是否配置成功：</span></a></li></ol></div>
             
 
           </div>
@@ -818,7 +801,7 @@ blog.csdn.net/20171030113528511?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXF
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

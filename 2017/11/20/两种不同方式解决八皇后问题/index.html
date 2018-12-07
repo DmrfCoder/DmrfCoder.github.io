@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="八皇后,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="问题描述八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。 解决思路这个问题可以有两种解决方法，一种是使用递归，比较简单易懂，另一种是使用栈，利用栈的特性避免了递归的使用，从而提高了效率（递归的虽然简单易写，但是其效率往往较低）。 具体实现首先将节点的坐标定义">
+<meta name="keywords" content="八皇后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="两种不同方式解决八皇后问题">
 <meta property="og:url" content="http://www.mashangxue123.com/2017/11/20/两种不同方式解决八皇后问题/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="问题描述八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。 解决思路这个问题可以有两种解决方法，一种是使用递归，比较简单易懂，另一种是使用栈，利用栈的特性避免了递归的使用，从而提高了效率（递归的虽然简单易写，但是其效率往往较低）。 具体实现首先将节点的坐标定义">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:16.514Z">
+<meta property="og:updated_time" content="2018-12-07T12:23:54.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="两种不同方式解决八皇后问题">
 <meta name="twitter:description" content="问题描述八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。 解决思路这个问题可以有两种解决方法，一种是使用递归，比较简单易懂，另一种是使用栈，利用栈的特性避免了递归的使用，从而提高了效率（递归的虽然简单易写，但是其效率往往较低）。 具体实现首先将节点的坐标定义">
@@ -387,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  481
+                  517
                 </span>
               
 
@@ -469,104 +470,14 @@
         <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。</p>
 <h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>这个问题可以有两种解决方法，一种是使用递归，比较简单易懂，另一种是使用栈，利用栈的特性避免了递归的使用，从而提高了效率（递归的虽然简单易写，但是其效率往往较低）。</p>
 <h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>首先将节点的坐标定义为结构体：</p>
-<pre><code>typedef struct {
- int x;
- int y;
-} Coord;
-</code></pre><p>定义好judge函数（用于判断对应点坐标是否可以放置皇后）：</p>
-<pre><code>bool judge(SqStack S, int x, int y) {
-    SqStack m = S;
-    while (!StackEmpty(m)) {
-        Coord e;
-        e = Pop(m);
-        if ((e.x == x) || (abs(e.x - x) == abs(e.y - y))) {
-            return false;//如果不行返回false
-        }
-    }
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line"> <span class="keyword">int</span> x;</span><br><span class="line"> <span class="keyword">int</span> y;</span><br><span class="line">&#125; Coord;</span><br></pre></td></tr></table></figure></p>
+<p>定义好judge函数（用于判断对应点坐标是否可以放置皇后）：</p>
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(SqStack S, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    SqStack m = S;</span><br><span class="line">    <span class="keyword">while</span> (!StackEmpty(m)) &#123;</span><br><span class="line">        Coord e;</span><br><span class="line">        e = Pop(m);</span><br><span class="line">        <span class="keyword">if</span> ((e.x == x) || (<span class="built_in">abs</span>(e.x - x) == <span class="built_in">abs</span>(e.y - y))) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//如果不行返回false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//如果可以返回true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Recursive</span><span class="params">(SqStack &amp;S, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (StackEmpty(S)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">            Coord e;</span><br><span class="line">            e.x = i;</span><br><span class="line">            e.y = <span class="number">1</span>;</span><br><span class="line">            Push(S, e);</span><br><span class="line">            Recursive(S, <span class="number">2</span>);</span><br><span class="line">            Pop(S);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Full(S)) &#123;</span><br><span class="line">        StackTraverse(S);</span><br><span class="line">        n++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (judge(S, i, y)) &#123;</span><br><span class="line">                Coord e;</span><br><span class="line">                e.x = i;</span><br><span class="line">                e.y = y;</span><br><span class="line">                Push(S, e);</span><br><span class="line">                Recursive(S, y + <span class="number">1</span>);</span><br><span class="line">                Pop(S);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里要注意递归调用Recurive之后要pop出递归之前push进去的，有进就要有出～</p>
+<h3 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Search</span><span class="params">(SqStack s)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">bool</span> flag;</span><br><span class="line"></span><br><span class="line">    Coord e;</span><br><span class="line">    e.x = <span class="number">0</span>;</span><br><span class="line">    e.y = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (i &lt;= <span class="number">8</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            e.x = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (Full(s)) &#123;</span><br><span class="line">            e = Pop(s);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = e.x + <span class="number">1</span>; j &lt;= <span class="number">8</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (judge(s, j, i)) &#123;</span><br><span class="line">                Coord e2;</span><br><span class="line">                e2.x = j;</span><br><span class="line">                e2.y = i;</span><br><span class="line">                Push(s, e2);</span><br><span class="line">                <span class="comment">//  cout &lt;&lt; "a" &lt;&lt; i &lt;&lt; "(" &lt;&lt; e.y &lt;&lt; "," &lt;&lt; e.x &lt;&lt; ") ";</span></span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">8</span>) &#123;</span><br><span class="line">                StackTraverse(s);</span><br><span class="line">                num++;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            i--;</span><br><span class="line">            e = Pop(s);</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
 
-    return true;//如果可以返回true
-}
-</code></pre><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><pre><code>void Recursive(SqStack &amp;S, int y) {
-
-    if (StackEmpty(S)) {
-        for (int i = 1; i &lt;= N; ++i) {
-            Coord e;
-            e.x = i;
-            e.y = 1;
-            Push(S, e);
-            Recursive(S, 2);
-            Pop(S);
-        }
-    } else if (Full(S)) {
-        StackTraverse(S);
-        n++;
-        return;
-    } else {
-        for (int i = 1; i &lt;= N; ++i) {
-            if (judge(S, i, y)) {
-                Coord e;
-                e.x = i;
-                e.y = y;
-                Push(S, e);
-                Recursive(S, y + 1);
-                Pop(S);
-            }
-        }
-    }
-}
-</code></pre><p>这里要注意递归调用Recurive之后要pop出递归之前push进去的，有进就要有出～</p>
-<h3 id="非递归"><a href="#非递归" class="headerlink" title="非递归"></a>非递归</h3><pre><code>void Search(SqStack s) {
-
-    int i = 1;
-    bool flag;
-
-    Coord e;
-    e.x = 0;
-    e.y = 1;
-
-    while (i &lt;= 8) {
-
-        if (flag) {
-            e.x = 0;
-        }
-        if (Full(s)) {
-            e = Pop(s);
-
-        }
-        flag = false;
-
-        for (int j = e.x + 1; j &lt;= 8; j++) {
-            if (judge(s, j, i)) {
-                Coord e2;
-                e2.x = j;
-                e2.y = i;
-                Push(s, e2);
-                //  cout &lt;&lt; &quot;a&quot; &lt;&lt; i &lt;&lt; &quot;(&quot; &lt;&lt; e.y &lt;&lt; &quot;,&quot; &lt;&lt; e.x &lt;&lt; &quot;) &quot;;
-                flag = true;
-                break;
-            }
-        }
-
-
-        if (flag) {
-            if (i == 8) {
-                StackTraverse(s);
-                num++;
-
-            } else {
-                i++;
-            }
-        } else {
-            i--;
-            e = Pop(s);
-            if (i == 0) {
-                break;
-            }
-        }
-
-    }
-}
-</code></pre>
       
     </div>
     
@@ -609,6 +520,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/八皇后/" rel="tag"><i class="fa fa-tag"></i>
+
+ 八皇后</a>
+          
+        </div>
       
 
       
@@ -742,7 +661,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -753,7 +672,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -764,7 +683,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -870,7 +789,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

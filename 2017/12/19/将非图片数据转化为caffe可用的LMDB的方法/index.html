@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="caffe,LMDB,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="摘要：最近有需求要使用caffe训练一套文本文件的数据，数据格式是若干个txt文件，每个txt文件里面包含了880个浮点型数据，因为之前一直用caffe进行图片的相关训练，直接使用caffe自带的脚本将图片转化为LMDB即可作为数据源，但是没有遇到过将txt中的文本数字转化为LMDB的情况，查了很多资料终于解决，记录下来希望可以帮助到有需要的同学们。本文不讲原理，直接给大家一份转换的相关代码，请大">
+<meta name="keywords" content="caffe,LMDB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将非图片数据转化为caffe可用的LMDB的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2017/12/19/将非图片数据转化为caffe可用的LMDB的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="摘要：最近有需求要使用caffe训练一套文本文件的数据，数据格式是若干个txt文件，每个txt文件里面包含了880个浮点型数据，因为之前一直用caffe进行图片的相关训练，直接使用caffe自带的脚本将图片转化为LMDB即可作为数据源，但是没有遇到过将txt中的文本数字转化为LMDB的情况，查了很多资料终于解决，记录下来希望可以帮助到有需要的同学们。本文不讲原理，直接给大家一份转换的相关代码，请大">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:13.037Z">
+<meta property="og:updated_time" content="2018-12-07T12:27:07.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将非图片数据转化为caffe可用的LMDB的方法">
 <meta name="twitter:description" content="摘要：最近有需求要使用caffe训练一套文本文件的数据，数据格式是若干个txt文件，每个txt文件里面包含了880个浮点型数据，因为之前一直用caffe进行图片的相关训练，直接使用caffe自带的脚本将图片转化为LMDB即可作为数据源，但是没有遇到过将txt中的文本数字转化为LMDB的情况，查了很多资料终于解决，记录下来希望可以帮助到有需要的同学们。本文不讲原理，直接给大家一份转换的相关代码，请大">
@@ -387,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  748
+                  721
                 </span>
               
 
@@ -468,87 +469,8 @@
       
         <p>摘要：最近有需求要使用caffe训练一套文本文件的数据，数据格式是若干个txt文件，每个txt文件里面包含了880个浮点型数据，因为之前一直用caffe进行图片的相关训练，直接使用caffe自带的脚本将图片转化为LMDB即可作为数据源，但是没有遇到过将txt中的文本数字转化为LMDB的情况，查了很多资料终于解决，记录下来希望可以帮助到有需要的同学们。<br>本文不讲原理，直接给大家一份转换的相关代码，请大家静下心来阅读一遍代码相信就可以搞懂，然后举一反三解决自己的问题。想要了解详细原理的同学可参考： <a href="http://blog.csdn.net/haluoluo211/article/details/54427421" target="_blank" rel="noopener"><br>http://blog.csdn.net/haluoluo211/article/details/54427421
 </a></p>
-<pre><code># -*-coding:utf-8-*-
-import numpy as np
-import random
-
-import lmdb
-import caffe
-import os
-
-
-def load_data(fileI, fileQ):
-    # dadai和dataq是（8,110）的二维数组，这是我的数据，可以理解为一张图片的两个通道
-    datai = np.loadtxt(fileI)
-    dataq = np.loadtxt(fileQ)
-
-
-    datai=datai.reshape(8,110)
-    dataq=dataq.reshape(8,110)
-
-    data = np.zeros((2, 8, 110))  # 初始化data，需要注意的是如果数据是1×n维的也需要np.zeros((2,1,110))初始化而不是np.zeros((2,110))
-    data[0] = datai
-    data[1] = dataq
-    datum = caffe.proto.caffe_pb2.Datum()
-    datum.channels = 2  # 设置channels，因为我的数据是I和Q相当于一张图片的两个通道，即我的“图片”有两个通道，所以这里设置为2
-    datum.height = 8  # 设置height，表示数据矩阵的高
-    datum.width = 110  # 设置width，表示数据矩阵的宽
-    a=data.tostring()
-    datum.data = a # data
-
-    #因为我的label隐含在txt文件的文件名里，所以这里根据txt文件的名字来给数据设置label，你也可以根据你的情况导入label
-    if fileI[4]==&#39;B&#39;:
-        datum.label = int(0)  # label
-    else:
-        datum.label = int(1)  # label
-
-    str_id = fileI[:-4]  #顺序+图片名字作为key，你可以根据你的想法设置key
-    final_data = {&quot;datum&quot;: datum, &quot;key&quot;: str_id}
-    return final_data
-
-
-def get_lmdb(lmdb_name):
-    num=0
-    env = lmdb.open(lmdb_name,map_size=int(1e9))  # 打开lmdb，这里可以不设置map_size，但是根据经验建议大家设置上，而且不要设置的太小
-    #path1和path2分别代表我的I.txt和Q.txt文件的来源（我的一份数据是一个I.txt和一个Q.txt，可以理解为一张图片的两个通道）
-    path1 = &quot;/home/dmrf/Data/I_TEST&quot;
-    path2 = &quot;/home/dmrf/Data/Q_TEST&quot;
-    files1=os.listdir(path1)
-    files2=os.listdir(path2)
-
-
-    f1=[]
-    f2=[]
-    for a in files1:
-        for b in files2:
-            if a[8:]==b[8:]:
-                f1.append(a)
-                f2.append(b)
-                files2.remove(b)
-            else:continue
-
-
-
-    random.shuffle(zip(f1,f2))
-
-    for (file1, file2) in zip(f1,f2):
-        if file1[8:]==file2[8:]:
-            dataget = load_data(path1+&quot;/&quot;+file1, path2+&quot;/&quot;+file2)
-            if dataget!=0:
-                datum = dataget[&quot;datum&quot;]
-                key = dataget[&quot;key&quot;]
-                with env.begin(write=True) as txn:
-                    txn.put(key, datum.SerializeToString())
-                    num=num+1
-                    print(&quot;转换中：&quot;+str(num))
-
-
-
-    print(&quot;success:&quot;+str(num))
-
-#函数入口
-get_lmdb(&quot;test_lmdb&quot;)
-</code></pre><p>以上就是大概原理，其实很简单，希望可以帮助到大家。</p>
+<p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*-coding:utf-8-*-</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lmdb</span><br><span class="line"><span class="keyword">import</span> caffe</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(fileI, fileQ)</span>:</span></span><br><span class="line">    <span class="comment"># dadai和dataq是（8,110）的二维数组，这是我的数据，可以理解为一张图片的两个通道</span></span><br><span class="line">    datai = np.loadtxt(fileI)</span><br><span class="line">    dataq = np.loadtxt(fileQ)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    datai=datai.reshape(<span class="number">8</span>,<span class="number">110</span>)</span><br><span class="line">    dataq=dataq.reshape(<span class="number">8</span>,<span class="number">110</span>)</span><br><span class="line"></span><br><span class="line">    data = np.zeros((<span class="number">2</span>, <span class="number">8</span>, <span class="number">110</span>))  <span class="comment"># 初始化data，需要注意的是如果数据是1×n维的也需要np.zeros((2,1,110))初始化而不是np.zeros((2,110))</span></span><br><span class="line">    data[<span class="number">0</span>] = datai</span><br><span class="line">    data[<span class="number">1</span>] = dataq</span><br><span class="line">    datum = caffe.proto.caffe_pb2.Datum()</span><br><span class="line">    datum.channels = <span class="number">2</span>  <span class="comment"># 设置channels，因为我的数据是I和Q相当于一张图片的两个通道，即我的“图片”有两个通道，所以这里设置为2</span></span><br><span class="line">    datum.height = <span class="number">8</span>  <span class="comment"># 设置height，表示数据矩阵的高</span></span><br><span class="line">    datum.width = <span class="number">110</span>  <span class="comment"># 设置width，表示数据矩阵的宽</span></span><br><span class="line">    a=data.tostring()</span><br><span class="line">    datum.data = a <span class="comment"># data</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#因为我的label隐含在txt文件的文件名里，所以这里根据txt文件的名字来给数据设置label，你也可以根据你的情况导入label</span></span><br><span class="line">    <span class="keyword">if</span> fileI[<span class="number">4</span>]==<span class="string">'B'</span>:</span><br><span class="line">        datum.label = int(<span class="number">0</span>)  <span class="comment"># label</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        datum.label = int(<span class="number">1</span>)  <span class="comment"># label</span></span><br><span class="line"></span><br><span class="line">    str_id = fileI[:<span class="number">-4</span>]  <span class="comment">#顺序+图片名字作为key，你可以根据你的想法设置key</span></span><br><span class="line">    final_data = &#123;<span class="string">"datum"</span>: datum, <span class="string">"key"</span>: str_id&#125;</span><br><span class="line">    <span class="keyword">return</span> final_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_lmdb</span><span class="params">(lmdb_name)</span>:</span></span><br><span class="line">    num=<span class="number">0</span></span><br><span class="line">    env = lmdb.open(lmdb_name,map_size=int(<span class="number">1e9</span>))  <span class="comment"># 打开lmdb，这里可以不设置map_size，但是根据经验建议大家设置上，而且不要设置的太小</span></span><br><span class="line">    <span class="comment">#path1和path2分别代表我的I.txt和Q.txt文件的来源（我的一份数据是一个I.txt和一个Q.txt，可以理解为一张图片的两个通道）</span></span><br><span class="line">    path1 = <span class="string">"/home/dmrf/Data/I_TEST"</span></span><br><span class="line">    path2 = <span class="string">"/home/dmrf/Data/Q_TEST"</span></span><br><span class="line">    files1=os.listdir(path1)</span><br><span class="line">    files2=os.listdir(path2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    f1=[]</span><br><span class="line">    f2=[]</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> files1:</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> files2:</span><br><span class="line">            <span class="keyword">if</span> a[<span class="number">8</span>:]==b[<span class="number">8</span>:]:</span><br><span class="line">                f1.append(a)</span><br><span class="line">                f2.append(b)</span><br><span class="line">                files2.remove(b)</span><br><span class="line">            <span class="keyword">else</span>:<span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    random.shuffle(zip(f1,f2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (file1, file2) <span class="keyword">in</span> zip(f1,f2):</span><br><span class="line">        <span class="keyword">if</span> file1[<span class="number">8</span>:]==file2[<span class="number">8</span>:]:</span><br><span class="line">            dataget = load_data(path1+<span class="string">"/"</span>+file1, path2+<span class="string">"/"</span>+file2)</span><br><span class="line">            <span class="keyword">if</span> dataget!=<span class="number">0</span>:</span><br><span class="line">                datum = dataget[<span class="string">"datum"</span>]</span><br><span class="line">                key = dataget[<span class="string">"key"</span>]</span><br><span class="line">                <span class="keyword">with</span> env.begin(write=<span class="keyword">True</span>) <span class="keyword">as</span> txn:</span><br><span class="line">                    txn.put(key, datum.SerializeToString())</span><br><span class="line">                    num=num+<span class="number">1</span></span><br><span class="line">                    print(<span class="string">"转换中："</span>+str(num))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    print(<span class="string">"success:"</span>+str(num))</span><br><span class="line"></span><br><span class="line"><span class="comment">#函数入口</span></span><br><span class="line">get_lmdb(<span class="string">"test_lmdb"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>以上就是大概原理，其实很简单，希望可以帮助到大家。</p>
 
       
     </div>
@@ -592,6 +514,18 @@ get_lmdb(&quot;test_lmdb&quot;)
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/caffe/" rel="tag"><i class="fa fa-tag"></i>
+
+ caffe</a>
+          
+            <a href="/tags/LMDB/" rel="tag"><i class="fa fa-tag"></i>
+
+ LMDB</a>
+          
+        </div>
       
 
       
@@ -716,7 +650,7 @@ get_lmdb(&quot;test_lmdb&quot;)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -727,7 +661,7 @@ get_lmdb(&quot;test_lmdb&quot;)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -738,7 +672,7 @@ get_lmdb(&quot;test_lmdb&quot;)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -828,7 +762,7 @@ get_lmdb(&quot;test_lmdb&quot;)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

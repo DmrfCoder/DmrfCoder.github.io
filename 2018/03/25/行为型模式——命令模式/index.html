@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="概述命令模式（CommandPattern）是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。 介绍意图将一个请求封装成一个对象 ，从而使您可以用不同的请求对客户进行参数化。 主要解决在软件系统中，行为请求者与行为实现者通常是一种紧耦合的关系，但某些场合，比如需要对行为进行记录">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:56.564Z">
+<meta property="og:updated_time" content="2018-12-07T10:04:28.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行为型模式——命令模式">
 <meta name="twitter:description" content="概述命令模式（CommandPattern）是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。 介绍意图将一个请求封装成一个对象 ，从而使您可以用不同的请求对客户进行参数化。 主要解决在软件系统中，行为请求者与行为实现者通常是一种紧耦合的关系，但某些场合，比如需要对行为进行记录">
@@ -493,94 +493,31 @@
 <h2 id="创建一个命令接口"><a href="#创建一个命令接口" class="headerlink" title="创建一个命令接口"></a>创建一个命令接口</h2><ul>
 <li>Order.java </li>
 </ul>
-<pre><code> public interface Order {
-   void execute();
-}
-</code></pre><h2 id="创建一个请求类"><a href="#创建一个请求类" class="headerlink" title="创建一个请求类"></a>创建一个请求类</h2><ul>
+<pre><code> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ ##  创建一个请求类
+</code></pre><ul>
 <li>Stock.java </li>
 </ul>
-<pre><code>public class Stock {
-
-   private String name = &quot;ABC&quot;;
-   private int quantity = 10;
-
-   public void buy(){
-      System.out.println(&quot;Stock [ Name: &quot;+name+&quot;, 
-         Quantity: &quot; + quantity +&quot; ] bought&quot;);
-   }
-   public void sell(){
-      System.out.println(&quot;Stock [ Name: &quot;+name+&quot;, 
-         Quantity: &quot; + quantity +&quot; ] sold&quot;);
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stock</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> String name = <span class="string">"ABC"</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> quantity = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Stock [ Name: "</span>+name+<span class="string">", </span></span><br><span class="line"><span class="string">         Quantity: "</span> + quantity +<span class="string">" ] bought"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sell</span><span class="params">()</span></span>&#123;</span><br><span class="line">      System.out.println(<span class="string">"Stock [ Name: "</span>+name+<span class="string">", </span></span><br><span class="line"><span class="string">         Quantity: "</span> + quantity +<span class="string">" ] sold"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="创建实现了-Order-接口的实体类"><a href="#创建实现了-Order-接口的实体类" class="headerlink" title="创建实现了 Order 接口的实体类"></a>创建实现了 Order 接口的实体类</h2><ul>
 <li>BuyStock.java </li>
 </ul>
-<pre><code>public class BuyStock implements Order {
-   private Stock abcStock;
-
-   public BuyStock(Stock abcStock){
-      this.abcStock = abcStock;
-   }
-
-   public void execute() {
-      abcStock.buy();
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuyStock</span> <span class="keyword">implements</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Stock abcStock;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">BuyStock</span><span class="params">(Stock abcStock)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.abcStock = abcStock;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      abcStock.buy();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>SellStock.java </li>
 </ul>
-<pre><code>public class SellStock implements Order {
-   private Stock abcStock;
-
-   public SellStock(Stock abcStock){
-      this.abcStock = abcStock;
-   }
-
-   public void execute() {
-      abcStock.sell();
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SellStock</span> <span class="keyword">implements</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Stock abcStock;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">SellStock</span><span class="params">(Stock abcStock)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.abcStock = abcStock;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      abcStock.sell();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="创建命令调用类"><a href="#创建命令调用类" class="headerlink" title="创建命令调用类"></a>创建命令调用类</h2><ul>
 <li>Broker.java </li>
 </ul>
-<pre><code>import java.util.ArrayList;
-import java.util.List;
-
-   public class Broker {
-   private List&lt;Order&gt; orderList = new ArrayList&lt;Order&gt;(); 
-
-   public void takeOrder(Order order){
-      orderList.add(order);        
-   }
-
-   public void placeOrders(){
-      for (Order order : orderList) {
-         order.execute();
-      }
-      orderList.clear();
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Broker</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> List&lt;Order&gt; orderList = <span class="keyword">new</span> ArrayList&lt;Order&gt;(); </span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">takeOrder</span><span class="params">(Order order)</span></span>&#123;</span><br><span class="line">      orderList.add(order);        </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">placeOrders</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (Order order : orderList) &#123;</span><br><span class="line">         order.execute();</span><br><span class="line">      &#125;</span><br><span class="line">      orderList.clear();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="使用-Broker-类来接受并执行命令"><a href="#使用-Broker-类来接受并执行命令" class="headerlink" title="使用 Broker 类来接受并执行命令"></a>使用 Broker 类来接受并执行命令</h2><ul>
 <li>CommandPatternDemo.java </li>
 </ul>
-<pre><code>public class CommandPatternDemo {
-   public static void main(String[] args) {
-      Stock abcStock = new Stock();
-
-      BuyStock buyStockOrder = new BuyStock(abcStock);
-      SellStock sellStockOrder = new SellStock(abcStock);
-
-      Broker broker = new Broker();
-      broker.takeOrder(buyStockOrder);
-      broker.takeOrder(sellStockOrder);
-
-      broker.placeOrders();
-   }
-}
-</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><pre><code>Stock [ Name: ABC, Quantity: 10 ] bought
-Stock [ Name: ABC, Quantity: 10 ] sold
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>命令模式实质上就是将命令抽象到一个具体的类中，即这个类是专门去执行某个命令的，比如demo中，SellStock就是专门执行sell这个命令的，当用户需要sell的时候只要实例化SellStock然后excute就可以完成sell，还有一个比较常用的例子是GUI开发中按钮（button）的作用，每一个按钮都是一个对象，当用户点击某个按钮后就会触发一个相应的命令，用户看到的是点击按钮产生效果，而代码层面上是实例化的按钮对象执行类似于demo中的excute方法完成自己的“命令”。</p>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommandPatternDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">​      Stock abcStock = <span class="keyword">new</span> Stock();</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line">  BuyStock buyStockOrder = <span class="keyword">new</span> BuyStock(abcStock);</span><br><span class="line">  SellStock sellStockOrder = <span class="keyword">new</span> SellStock(abcStock);</span><br><span class="line"></span><br><span class="line">  Broker broker = <span class="keyword">new</span> Broker();</span><br><span class="line">  broker.takeOrder(buyStockOrder);</span><br><span class="line">  broker.takeOrder(sellStockOrder);</span><br><span class="line"></span><br><span class="line">  broker.placeOrders();</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><p>​<br>    Stock [ Name: ABC, Quantity: 10 ] bought<br>    Stock [ Name: ABC, Quantity: 10 ] sold</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>命令模式实质上就是将命令抽象到一个具体的类中，即这个类是专门去执行某个命令的，比如demo中，SellStock就是专门执行sell这个命令的，当用户需要sell的时候只要实例化SellStock然后excute就可以完成sell，还有一个比较常用的例子是GUI开发中按钮（button）的作用，每一个按钮都是一个对象，当用户点击某个按钮后就会触发一个相应的命令，用户看到的是点击按钮产生效果，而代码层面上是实例化的按钮对象执行类似于demo中的excute方法完成自己的“命令”。</p>
 
       
     </div>
@@ -757,7 +694,7 @@ Stock [ Name: ABC, Quantity: 10 ] sold
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -768,7 +705,7 @@ Stock [ Name: ABC, Quantity: 10 ] sold
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -779,7 +716,7 @@ Stock [ Name: ABC, Quantity: 10 ] sold
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -840,7 +777,7 @@ Stock [ Name: ABC, Quantity: 10 ] sold
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#意图"><span class="nav-number">2.1.</span> <span class="nav-text">意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要解决"><span class="nav-number">2.2.</span> <span class="nav-text">主要解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用"><span class="nav-number">2.3.</span> <span class="nav-text">何时使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-number">2.4.</span> <span class="nav-text">如何解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键代码"><span class="nav-number">2.5.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">2.6.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.7.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">2.8.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">2.9.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">2.10.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个命令接口"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个命令接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个请求类"><span class="nav-number">3.2.</span> <span class="nav-text">创建一个请求类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实现了-Order-接口的实体类"><span class="nav-number">3.3.</span> <span class="nav-text">创建实现了 Order 接口的实体类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建命令调用类"><span class="nav-number">3.4.</span> <span class="nav-text">创建命令调用类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Broker-类来接受并执行命令"><span class="nav-number">3.5.</span> <span class="nav-text">使用 Broker 类来接受并执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证输出"><span class="nav-number">3.6.</span> <span class="nav-text">验证输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#意图"><span class="nav-number">2.1.</span> <span class="nav-text">意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要解决"><span class="nav-number">2.2.</span> <span class="nav-text">主要解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用"><span class="nav-number">2.3.</span> <span class="nav-text">何时使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-number">2.4.</span> <span class="nav-text">如何解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键代码"><span class="nav-number">2.5.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">2.6.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.7.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">2.8.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">2.9.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">2.10.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个命令接口"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个命令接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实现了-Order-接口的实体类"><span class="nav-number">3.2.</span> <span class="nav-text">创建实现了 Order 接口的实体类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建命令调用类"><span class="nav-number">3.3.</span> <span class="nav-text">创建命令调用类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Broker-类来接受并执行命令"><span class="nav-number">3.4.</span> <span class="nav-text">使用 Broker 类来接受并执行命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证输出"><span class="nav-number">3.5.</span> <span class="nav-text">验证输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -885,7 +822,7 @@ Stock [ Name: ABC, Quantity: 10 ] sold
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

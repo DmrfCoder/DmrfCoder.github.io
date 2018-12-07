@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="排序算法,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="直接插入排序算法思想首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；接下来将第三个数与前两个数对比，发现有比第三个数大的数即将第三个数插入到对应数的前面，这样一次插入可保证前三个数是有序的；以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。 时间空间复杂度及稳定性 T(n">
+<meta name="keywords" content="排序算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="八大常见排序算法介绍">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/01/13/八大常见排序算法介绍/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="直接插入排序算法思想首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；接下来将第三个数与前两个数对比，发现有比第三个数大的数即将第三个数插入到对应数的前面，这样一次插入可保证前三个数是有序的；以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。 时间空间复杂度及稳定性 T(n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:12.636Z">
+<meta property="og:updated_time" content="2018-12-07T12:43:48.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="八大常见排序算法介绍">
 <meta name="twitter:description" content="直接插入排序算法思想首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；接下来将第三个数与前两个数对比，发现有比第三个数大的数即将第三个数插入到对应数的前面，这样一次插入可保证前三个数是有序的；以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。 时间空间复杂度及稳定性 T(n">
@@ -387,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k
+                  2.1k
                 </span>
               
 
@@ -472,273 +473,59 @@
 <li>S(n)=O(1) </li>
 <li>稳定 </li>
 </ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>void InsertSort(vector&lt;int&gt; v) {
-
-    for (int i = 1; i &lt; v.size(); ++i) {
-        for (int j = 0; j &lt; i; ++j) {
-            if (v[j] &gt; v[i]) {
-                int t = v[i];
-                for (int k = i; k &gt; j; --k) {
-                    v[k] = v[k - 1];
-                }
-                v[j] = t;
-            }
-        }
-    }
-}
-</code></pre><h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><h2 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h2><p>希尔排序又称缩小增量排序，也属于一种插入排序算法，其基本思想是将要被排序的数列分成若干个子序列然后分别进行插入排序，待这些子序列排序完成后大序列就会基本有序，这时再对整个大序列进行一次直接插入排序；<br>其分散数列的原则一般是5-3-1，即先将大数列每隔5个取一个数，这样最终会形成5个子数列，将这5个子数列分别进行插入排序，然后将排序好的数列每隔3个取一个形成3个子数列，再对这三个子数列进行三次插入排序，最后，对整个基本有序的大数列进行一次插入排序达到排序整个数列的目的。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; v.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (v[j] &gt; v[i]) &#123;</span><br><span class="line">                <span class="keyword">int</span> t = v[i];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &gt; j; --k) &#123;</span><br><span class="line">                    v[k] = v[k - <span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                v[j] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><h2 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h2><p>希尔排序又称缩小增量排序，也属于一种插入排序算法，其基本思想是将要被排序的数列分成若干个子序列然后分别进行插入排序，待这些子序列排序完成后大序列就会基本有序，这时再对整个大序列进行一次直接插入排序；<br>其分散数列的原则一般是5-3-1，即先将大数列每隔5个取一个数，这样最终会形成5个子数列，将这5个子数列分别进行插入排序，然后将排序好的数列每隔3个取一个形成3个子数列，再对这三个子数列进行三次插入排序，最后，对整个基本有序的大数列进行一次插入排序达到排序整个数列的目的。</p>
 <h2 id="时间空间复杂度即稳定性"><a href="#时间空间复杂度即稳定性" class="headerlink" title="时间空间复杂度即稳定性"></a>时间空间复杂度即稳定性</h2><ul>
 <li>T(n)=O(n^1.5) </li>
 <li>S(n)=O(1) </li>
 <li>不稳定 </li>
 </ul>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code>void ShellSort(vector&lt;int&gt; v) {
-    int d[3] = {5, 3, 1};
-    for (int i = 0; i &lt; 3; ++i) {
-        ShellInsert(v, d[i]);
-    }
-    show(v);
-}
-
-
-void ShellInsert(vector&lt;int&gt; &amp;v, int d) {
-    for (int l = 0; l &lt; d; ++l) {
-        for (int i = l + 1; i &lt; v.size(); i += d) {
-            for (int j = l; j &lt; i; j += d) {
-                if (v[i] &lt; v[j]) {
-                   int t=v[i];
-                   for(int k=i;k&gt;j;i-=d){
-                      v[k]=v[k-d];
-                      }
-                    v[j]=t;
-                }
-            }
-        }
-    }
-}
-</code></pre><h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><h2 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a>算法思想</h2><p>冒泡排序的主要思想是将大的数向下“沉”，将小的数向上“气泡”，具体过程：<br>首先将第一个数与第二个数进行对比，若第二个数小于第一个数，则将第一个数与第二个数交换，然后比较第二个数和第三个数，如果第二个数大于第三个数，则将其对换，最后的结果是将数列中最大的一个数换到数列的最后一位。<br>然后再对前n-1个数进行相同的过程，结果是将倒数第二大的数放在倒数第二位。<br>以此类推，经历n-1次后所有数列将会有序。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d[<span class="number">3</span>] = &#123;<span class="number">5</span>, <span class="number">3</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i) &#123;</span><br><span class="line">        ShellInsert(v, d[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    show(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellInsert</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; d; ++l) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = l + <span class="number">1</span>; i &lt; v.size(); i += d) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = l; j &lt; i; j += d) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v[i] &lt; v[j]) &#123;</span><br><span class="line">                   <span class="keyword">int</span> t=v[i];</span><br><span class="line">                   <span class="keyword">for</span>(<span class="keyword">int</span> k=i;k&gt;j;i-=d)&#123;</span><br><span class="line">                      v[k]=v[k-d];</span><br><span class="line">                      &#125;</span><br><span class="line">                    v[j]=t;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><h2 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a>算法思想</h2><p>冒泡排序的主要思想是将大的数向下“沉”，将小的数向上“气泡”，具体过程：<br>首先将第一个数与第二个数进行对比，若第二个数小于第一个数，则将第一个数与第二个数交换，然后比较第二个数和第三个数，如果第二个数大于第三个数，则将其对换，最后的结果是将数列中最大的一个数换到数列的最后一位。<br>然后再对前n-1个数进行相同的过程，结果是将倒数第二大的数放在倒数第二位。<br>以此类推，经历n-1次后所有数列将会有序。</p>
 <h2 id="时间空间复杂度及稳定性-1"><a href="#时间空间复杂度及稳定性-1" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h2><ul>
 <li>T(n)=O(n^2) </li>
 <li>S(n)=O(1) </li>
 <li>稳定 </li>
 </ul>
-<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><pre><code>void BubbleSort(vector&lt;int&gt; v) {
-
-    for (int i = 0; i &lt; v.size(); ++i) {
-        int flag = 1;
-        for (int j = 0; j &lt; v.size() - i &amp;&amp; j &lt; v.size() - 1; ++j) {
-            if (v[j] &gt; v[j + 1]) {
-                int t;
-                t = v[j];
-                v[j] = v[j + 1];
-                v[j + 1] = t;
-                flag = 0;
-            }
-        }
-
-        if (flag == 1) {//说明已经有序了
-            break;
-        }
-
-
-    show(v);
-}
-</code></pre><h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h2 id="算法思想-3"><a href="#算法思想-3" class="headerlink" title="算法思想"></a>算法思想</h2><p>快速排序是对冒泡排序的一种改进，其基本思路是通过一趟排序将待排记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。</p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BubbleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v.size() - i &amp;&amp; j &lt; v.size() - <span class="number">1</span>; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (v[j] &gt; v[j + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> t;</span><br><span class="line">                t = v[j];</span><br><span class="line">                v[j] = v[j + <span class="number">1</span>];</span><br><span class="line">                v[j + <span class="number">1</span>] = t;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (flag == <span class="number">1</span>) &#123;<span class="comment">//说明已经有序了</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">         show(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
+<h1 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h1><h2 id="算法思想-3"><a href="#算法思想-3" class="headerlink" title="算法思想"></a>算法思想</h2><p>快速排序是对冒泡排序的一种改进，其基本思路是通过一趟排序将待排记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。</p>
 <h2 id="时间空间复杂度及稳定性-2"><a href="#时间空间复杂度及稳定性-2" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h2><ul>
 <li>T(n)=O(nlog2-&gt;n) </li>
 <li>S(n)=O(log2-&gt;n) </li>
 <li>不稳定 </li>
 </ul>
-<h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><pre><code>void QuickSort(vector&lt;int&gt; v) {
-    QSort(v, 0, v.size() - 1);
-    show(v);
-}
-
-void QSort(vector&lt;int&gt; &amp;v, int low, int high) {
-
-    if (low &gt;= high) {
-        return;
-    }
-    int t = Partition(v, low, high);
-    QSort(v, low, t - 1);
-    QSort(v, t + 1, high);
-}
-
-int Partition(vector&lt;int&gt; &amp;v, int low, int high) {
-    int pivotkey;
-    pivotkey = v[low];
-
-    while (low &lt; high) {
-        while (low &lt; high &amp;&amp; v[high] &gt;= pivotkey) {
-            --high;
-        }
-        int t;
-        t = v[low];
-        v[low] = v[high];
-        v[high] = t;
-
-        while (low &lt; high &amp;&amp; v[low] &lt;= pivotkey) {
-            ++low;
-        }
-        t = v[low];
-        v[low] = v[high];
-        v[high] = t;
-    }
-
-    return low;
-}
-</code></pre><h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><h2 id="算法思想-4"><a href="#算法思想-4" class="headerlink" title="算法思想"></a>算法思想</h2><p>选择排序的思路是首先找到序列中的最小数，将其放在第一位，然后找到第二小的数将其放在第二位，以此类推，最终将所有第i小的数放在第i位从而达到排序目的。</p>
+<h2 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line">    QSort(v, <span class="number">0</span>, v.size() - <span class="number">1</span>);</span><br><span class="line">    show(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (low &gt;= high) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> t = Partition(v, low, high);</span><br><span class="line">    QSort(v, low, t - <span class="number">1</span>);</span><br><span class="line">    QSort(v, t + <span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivotkey;</span><br><span class="line">    pivotkey = v[low];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; v[high] &gt;= pivotkey) &#123;</span><br><span class="line">            --high;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> t;</span><br><span class="line">        t = v[low];</span><br><span class="line">        v[low] = v[high];</span><br><span class="line">        v[high] = t;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; v[low] &lt;= pivotkey) &#123;</span><br><span class="line">            ++low;</span><br><span class="line">        &#125;</span><br><span class="line">        t = v[low];</span><br><span class="line">        v[low] = v[high];</span><br><span class="line">        v[high] = t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><h2 id="算法思想-4"><a href="#算法思想-4" class="headerlink" title="算法思想"></a>算法思想</h2><p>选择排序的思路是首先找到序列中的最小数，将其放在第一位，然后找到第二小的数将其放在第二位，以此类推，最终将所有第i小的数放在第i位从而达到排序目的。</p>
 <h2 id="时间空间复杂度及稳定性-3"><a href="#时间空间复杂度及稳定性-3" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h2><ul>
 <li>S(n)=O(1) </li>
 <li>T(n)=O(n^2) </li>
 <li>不稳定 </li>
 </ul>
-<h2 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h2><pre><code>void SelectSort(vector&lt;int&gt; v) {
-    for (int i = 0; i &lt; v.size(); ++i) {
-        int min;
-        min = i;
-        for (int j = i + 1; j &lt; v.size(); ++j) {
-            if (v[j] &lt; v[min]) {
-                min = j;
-            }
-        }
-        int t;
-        t = v[min];
-        v[min] = v[i];
-        v[i] = t;
-    }
-    show(v);
-}
-</code></pre><h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><h2 id="算法思想-5"><a href="#算法思想-5" class="headerlink" title="算法思想"></a>算法思想</h2><p>堆排序的主要思路是先将所要排序的数列看做是一颗完全二叉树并建立大顶堆，然后将堆顶元素放在堆的最后一位，然后再调整该二叉树为大顶堆，然后再将堆顶放在二叉树的最后一位，调整二叉树为大顶堆，重复这一过程直至完成排序。</p>
+<h2 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SelectSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> min;</span><br><span class="line">        min = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; v.size(); ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (v[j] &lt; v[min]) &#123;</span><br><span class="line">                min = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> t;</span><br><span class="line">        t = v[min];</span><br><span class="line">        v[min] = v[i];</span><br><span class="line">        v[i] = t;</span><br><span class="line">    &#125;</span><br><span class="line">    show(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h1><h2 id="算法思想-5"><a href="#算法思想-5" class="headerlink" title="算法思想"></a>算法思想</h2><p>堆排序的主要思路是先将所要排序的数列看做是一颗完全二叉树并建立大顶堆，然后将堆顶元素放在堆的最后一位，然后再调整该二叉树为大顶堆，然后再将堆顶放在二叉树的最后一位，调整二叉树为大顶堆，重复这一过程直至完成排序。</p>
 <h2 id="时间空间复杂度及稳定性-4"><a href="#时间空间复杂度及稳定性-4" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h2><ul>
 <li>T(n)=O(nlog2–&gt;n) </li>
 <li>S(n)=O(1) </li>
 <li>不稳定 </li>
 </ul>
-<h2 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h2><pre><code>void HeapSort(vector&lt;int&gt; v) {
-
-    int size = v.size();
-    v.push_back(0);
-    for (int k = v.size(); k &gt; 0; --k) {
-        v[k] = v[k - 1];
-    }
-    //建堆
-    for (int i = size / 2; i &gt; 0; --i) {
-        HeapAdjust(v, i, size);
-    }
-
-    for (int j = size; j &gt; 1; --j) {
-        int t;
-        t = v[1];
-        v[1] = v[j];
-        v[j] = t;
-        HeapAdjust(v, 1, j - 1);
-    }
-    for (int i = 1; i &lt; v.size(); ++i) {
-        cout &lt;&lt; v[i] &lt;&lt; &quot; &quot;;
-    }
-    cout &lt;&lt; endl;
-}
-
-void HeapAdjust(vector&lt;int&gt; &amp;v, int s, int m) {
-    /*
-     * 已知v[s..m]除v[s]之外均满足堆的定义，本函数调整v[s]，使得v[s..m]成为一个小顶堆
-     */
-
-    int rc;
-    rc = v[s];
-    for (int i = 2 * s; i &lt;= m; i = 2 * i) {
-        if (i &lt; m &amp;&amp; v[i] &lt; v[i + 1]) {
-            i++;//i为较大数据的下标
-        }
-        if (rc &gt;= v[i]) {
-            break;
-        }
-
-        v[s] = v[i];
-        s = i;
-    }
-    v[s] = rc;
-}
-</code></pre><h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><h2 id="算法思想-6"><a href="#算法思想-6" class="headerlink" title="算法思想"></a>算法思想</h2><p>归并排序的主要思路是将索要排序数列看做若干个有序的小数列，因为将两个有序数列合并之后所得数列还是有序数列，所以经过不断合并，最后可将数列排为有序。</p>
+<h2 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> size = v.size();</span><br><span class="line">    v.push_back(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = v.size(); k &gt; <span class="number">0</span>; --k) &#123;</span><br><span class="line">        v[k] = v[k - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//建堆</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = size / <span class="number">2</span>; i &gt; <span class="number">0</span>; --i) &#123;</span><br><span class="line">        HeapAdjust(v, i, size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = size; j &gt; <span class="number">1</span>; --j) &#123;</span><br><span class="line">        <span class="keyword">int</span> t;</span><br><span class="line">        t = v[<span class="number">1</span>];</span><br><span class="line">        v[<span class="number">1</span>] = v[j];</span><br><span class="line">        v[j] = t;</span><br><span class="line">        HeapAdjust(v, <span class="number">1</span>, j - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; v.size(); ++i) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapAdjust</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;v, <span class="keyword">int</span> s, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 已知v[s..m]除v[s]之外均满足堆的定义，本函数调整v[s]，使得v[s..m]成为一个小顶堆</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> rc;</span><br><span class="line">    rc = v[s];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span> * s; i &lt;= m; i = <span class="number">2</span> * i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; m &amp;&amp; v[i] &lt; v[i + <span class="number">1</span>]) &#123;</span><br><span class="line">            i++;<span class="comment">//i为较大数据的下标</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rc &gt;= v[i]) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        v[s] = v[i];</span><br><span class="line">        s = i;</span><br><span class="line">    &#125;</span><br><span class="line">    v[s] = rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h1><h2 id="算法思想-6"><a href="#算法思想-6" class="headerlink" title="算法思想"></a>算法思想</h2><p>归并排序的主要思路是将索要排序数列看做若干个有序的小数列，因为将两个有序数列合并之后所得数列还是有序数列，所以经过不断合并，最后可将数列排为有序。</p>
 <h2 id="时间空间复杂度及稳定性-5"><a href="#时间空间复杂度及稳定性-5" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h2><ul>
 <li>T(n)=O(nlog2–&gt;n) </li>
 <li>S(n)=O(n) </li>
 <li>稳定 </li>
 </ul>
-<h2 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h2><pre><code>void MSort(vector&lt;int&gt; v) {
-
-
-    vector&lt;int&gt; h;
-    h = v;
-
-    int start, seg;
-
-
-    for (seg = 1; seg &lt; v.size(); seg *= 2) {
-        int k = 0;
-        for (start = 0; start &lt; v.size(); start = start + seg * 2) {
-            int end;
-            end = start + seg;
-            int low = start;
-            while (low &lt; start + seg &amp;&amp; end &lt; start + seg + seg &amp;&amp; low &lt; v.size() &amp;&amp; end &lt; v.size()) {
-                if (v[low] &lt;= v[end]) {
-                    h[k++] = v[low];
-                    low++;
-                } else {
-                    h[k++] = v[end];
-                    end++;
-                }
-            }
-
-            while (low &lt; start + seg &amp;&amp; low &lt; v.size()) {
-                h[k++] = v[low++];
-            }
-            while (end &lt; start + seg + seg &amp;&amp; end &lt; v.size()) {
-                h[k++] = v[end++];
-            }
-
-        }
-
-        v = h;
-    }
-    show(v);
-
-}
-</code></pre><h1 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h1><h2 id="算法思想-7"><a href="#算法思想-7" class="headerlink" title="算法思想"></a>算法思想</h2><p>基数排序需要经历d次，d为所要排序数列中位数最多的数的位数，其过程是首先根据数列中数的个位的数值将所有数入0~9这10个队列，然后从0~9将元素依次出队，然后再根据十位元素的数值再次入队，然后出队，以此类推重复d次，最终即可完成排序。</p>
+<h2 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">MSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line">   <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; h;</span><br><span class="line">    h = v;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> start, seg;  </span><br><span class="line">   </span><br><span class="line">   <span class="keyword">for</span> (seg = <span class="number">1</span>; seg &lt; v.size(); seg *= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (start = <span class="number">0</span>; start &lt; v.size(); start = start + seg * <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> end;</span><br><span class="line">            end = start + seg;</span><br><span class="line">            <span class="keyword">int</span> low = start;</span><br><span class="line">            <span class="keyword">while</span> (low &lt; start + seg &amp;&amp; end &lt; start + seg + seg &amp;&amp; low &lt; v.size() &amp;&amp; end &lt; v.size()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v[low] &lt;= v[end]) &#123;</span><br><span class="line">                    h[k++] = v[low];</span><br><span class="line">                    low++;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    h[k++] = v[end];</span><br><span class="line">                    end++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (low &lt; start + seg &amp;&amp; low &lt; v.size()) &#123;</span><br><span class="line">                h[k++] = v[low++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (end &lt; start + seg + seg &amp;&amp; end &lt; v.size()) &#123;</span><br><span class="line">                h[k++] = v[end++];</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        v = h;</span><br><span class="line">    &#125;</span><br><span class="line">    show(v);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h1><h2 id="算法思想-7"><a href="#算法思想-7" class="headerlink" title="算法思想"></a>算法思想</h2><p>基数排序需要经历d次，d为所要排序数列中位数最多的数的位数，其过程是首先根据数列中数的个位的数值将所有数入0~9这10个队列，然后从0~9将元素依次出队，然后再根据十位元素的数值再次入队，然后出队，以此类推重复d次，最终即可完成排序。</p>
 <h2 id="时间空间复杂度及稳定性-6"><a href="#时间空间复杂度及稳定性-6" class="headerlink" title="时间空间复杂度及稳定性"></a>时间空间复杂度及稳定性</h2><ul>
 <li>T(n)=O(d*n) d为排序数中最大数的位数 </li>
 <li>S(n)=O(n) </li>
 <li>稳定 </li>
 </ul>
-<h2 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h2><pre><code>void radixSort(vector&lt;int&gt; v) {
+<h2 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">radixSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> d = GetMaxBit(v);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> *count = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> radix = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; d; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v.size(); ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> t;</span><br><span class="line">            t = (v[j] / radix) % <span class="number">10</span>;</span><br><span class="line">            q[t].push(v[j]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> p = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">10</span>; ++k) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!q[k].empty()) &#123;</span><br><span class="line">                v[p++] = q[k].front();</span><br><span class="line">                q[k].pop();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        radix *= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    show(v);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-    int d = GetMaxBit(v);
-
-    int *count = new int[10];
-    queue&lt;int&gt; q[10];
-
-    int radix = 1;
-    for (int i = 0; i &lt; d; ++i) {
-        for (int j = 0; j &lt; v.size(); ++j) {
-            int t;
-            t = (v[j] / radix) % 10;
-            q[t].push(v[j]);
-        }
-
-        int p = 0;
-        for (int k = 0; k &lt; 10; ++k) {
-            while (!q[k].empty()) {
-                v[p++] = q[k].front();
-                q[k].pop();
-            }
-        }
-        radix *= 10;
-    }
-    show(v);
-
-}
-</code></pre>
       
     </div>
     
@@ -781,6 +568,14 @@ void HeapAdjust(vector&lt;int&gt; &amp;v, int s, int m) {
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/排序算法/" rel="tag"><i class="fa fa-tag"></i>
+
+ 排序算法</a>
+          
+        </div>
       
 
       
@@ -914,7 +709,7 @@ void HeapAdjust(vector&lt;int&gt; &amp;v, int s, int m) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -925,7 +720,7 @@ void HeapAdjust(vector&lt;int&gt; &amp;v, int s, int m) {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -936,7 +731,7 @@ void HeapAdjust(vector&lt;int&gt; &amp;v, int s, int m) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1042,7 +837,7 @@ void HeapAdjust(vector&lt;int&gt; &amp;v, int s, int m) {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="指纹加密,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="之前有给应用加上指纹解锁的需求，在这里记录一下相关方法： 说明Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23. 流程判断当前手机是否支持指纹识别if (Build.VERSION.SDK_INT &amp;gt;= Build.VERSION_CODES.M) {             Log.i(&amp;quot;info&amp;quot;, &amp;quot;手机支持指纹识别&amp;quot;)">
+<meta name="description" content="之前有给应用加上指纹解锁的需求，在这里记录一下相关方法： 说明Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23. 流程判断当前手机是否支持指纹识别12345if (Build.VERSION.SDK_INT &amp;gt;= Build.VERSION_CODES.M) &amp;#123;            Log.i(&quot;info&quot;, &quot;手机支持指纹识别&quot;);        &amp;#">
+<meta name="keywords" content="指纹加密">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android使用系统指纹对应用进行解锁加密的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android使用系统指纹对应用进行解锁加密的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="之前有给应用加上指纹解锁的需求，在这里记录一下相关方法： 说明Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23. 流程判断当前手机是否支持指纹识别if (Build.VERSION.SDK_INT &amp;gt;= Build.VERSION_CODES.M) {             Log.i(&amp;quot;info&amp;quot;, &amp;quot;手机支持指纹识别&amp;quot;)">
+<meta property="og:description" content="之前有给应用加上指纹解锁的需求，在这里记录一下相关方法： 说明Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23. 流程判断当前手机是否支持指纹识别12345if (Build.VERSION.SDK_INT &amp;gt;= Build.VERSION_CODES.M) &amp;#123;            Log.i(&quot;info&quot;, &quot;手机支持指纹识别&quot;);        &amp;#">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:23.946Z">
+<meta property="og:updated_time" content="2018-12-07T08:55:32.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android使用系统指纹对应用进行解锁加密的方法">
-<meta name="twitter:description" content="之前有给应用加上指纹解锁的需求，在这里记录一下相关方法： 说明Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23. 流程判断当前手机是否支持指纹识别if (Build.VERSION.SDK_INT &amp;gt;= Build.VERSION_CODES.M) {             Log.i(&amp;quot;info&amp;quot;, &amp;quot;手机支持指纹识别&amp;quot;)">
+<meta name="twitter:description" content="之前有给应用加上指纹解锁的需求，在这里记录一下相关方法： 说明Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23. 流程判断当前手机是否支持指纹识别12345if (Build.VERSION.SDK_INT &amp;gt;= Build.VERSION_CODES.M) &amp;#123;            Log.i(&quot;info&quot;, &quot;手机支持指纹识别&quot;);        &amp;#">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  296
+                  306
                 </span>
               
 
@@ -446,60 +469,13 @@
       
         <p>之前有给应用加上指纹解锁的需求，在这里记录一下相关方法：</p>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>Android的指纹支持是在6.0以后才引入的，所以要求api必须大于23.</p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="判断当前手机是否支持指纹识别"><a href="#判断当前手机是否支持指纹识别" class="headerlink" title="判断当前手机是否支持指纹识别"></a>判断当前手机是否支持指纹识别</h3><pre><code>if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) {
-            Log.i(&quot;info&quot;, &quot;手机支持指纹识别&quot;);
-        } else {
-            Log.i(&quot;info&quot;, &quot;手机不支持指纹识别&quot;);
-        }
-</code></pre><h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><p>首先声明并实例化指纹管理类：</p>
-<pre><code>private FingerprintManagerCompat fingerprintManagerCompat;
-    //用于取消指纹识别器监听的对象
-private CancellationSignal cancellationSignal;
-
-fingerprintManagerCompat = FingerprintManagerCompat.from(getActivity());
-cancellationSignal = new CancellationSignal();
-
-
- fingerprintManagerCompat.authenticate(null, 0, cancellationSignal, new FingerDiscentListener(), null);
-</code></pre><p>编写FingerDiscentListener继承自 FingerprintManagerCompat.AuthenticationCallback：</p>
-<pre><code>private class FingerDiscentListener extends FingerprintManagerCompat.AuthenticationCallback {
-        @Override
-        public void onAuthenticationError(int errMsgId, CharSequence errString) {
-            super.onAuthenticationError(errMsgId, errString);
-            if (errMsgId == 5) {
-                //取消识别
-
-            } else if (errMsgId == 7) {
-                //tvHint.setText(&quot;操作过于频繁，请稍后重试&quot;);
-                if (cancellationSignal != null) {
-                    cancellationSignal.cancel();
-                    cancellationSignal = null;
-                }
-            }
-        }
-
-        @Override
-        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-            super.onAuthenticationSucceeded(result);
-            //指纹识别成功
-            cancellationSignal.cancel();//取消指纹的监听
-
-        }
-
-        @Override
-        public void onAuthenticationFailed() {
-            super.onAuthenticationFailed();
-            //指纹识别失败
-
-        }
-
-        @Override
-        public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-            super.onAuthenticationHelp(helpMsgId, helpString);
-
-        }
-    }
-</code></pre><p>结合上面的代码，加上你自己的逻辑调用，基本上就可以满足日常使用了。</p>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><h3 id="判断当前手机是否支持指纹识别"><a href="#判断当前手机是否支持指纹识别" class="headerlink" title="判断当前手机是否支持指纹识别"></a>判断当前手机是否支持指纹识别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">            Log.i(<span class="string">"info"</span>, <span class="string">"手机支持指纹识别"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Log.i(<span class="string">"info"</span>, <span class="string">"手机不支持指纹识别"</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><p>首先声明并实例化指纹管理类：    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> FingerprintManagerCompat fingerprintManagerCompat;</span><br><span class="line">    <span class="comment">//用于取消指纹识别器监听的对象</span></span><br><span class="line"><span class="keyword">private</span> CancellationSignal cancellationSignal;</span><br><span class="line"></span><br><span class="line">fingerprintManagerCompat = FingerprintManagerCompat.from(getActivity());</span><br><span class="line">cancellationSignal = <span class="keyword">new</span> CancellationSignal();</span><br><span class="line"> fingerprintManagerCompat.authenticate(<span class="keyword">null</span>, <span class="number">0</span>, cancellationSignal, <span class="keyword">new</span> FingerDiscentListener(), <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+<p>编写FingerDiscentListener继承自 FingerprintManagerCompat.AuthenticationCallback：</p>
+<p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">FingerDiscentListener</span> <span class="keyword">extends</span> <span class="title">FingerprintManagerCompat</span>.<span class="title">AuthenticationCallback</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAuthenticationError</span><span class="params">(<span class="keyword">int</span> errMsgId, CharSequence errString)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onAuthenticationError(errMsgId, errString);</span><br><span class="line">            <span class="keyword">if</span> (errMsgId == <span class="number">5</span>) &#123;</span><br><span class="line">                <span class="comment">//取消识别</span></span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (errMsgId == <span class="number">7</span>) &#123;</span><br><span class="line">                <span class="comment">//tvHint.setText("操作过于频繁，请稍后重试");</span></span><br><span class="line">                <span class="keyword">if</span> (cancellationSignal != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    cancellationSignal.cancel();</span><br><span class="line">                    cancellationSignal = <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAuthenticationSucceeded</span><span class="params">(FingerprintManagerCompat.AuthenticationResult result)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onAuthenticationSucceeded(result);</span><br><span class="line">            <span class="comment">//指纹识别成功</span></span><br><span class="line">            cancellationSignal.cancel();<span class="comment">//取消指纹的监听</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAuthenticationFailed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onAuthenticationFailed();</span><br><span class="line">            <span class="comment">//指纹识别失败</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAuthenticationHelp</span><span class="params">(<span class="keyword">int</span> helpMsgId, CharSequence helpString)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onAuthenticationHelp(helpMsgId, helpString);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
+<p>结合上面的代码，加上你自己的逻辑调用，基本上就可以满足日常使用了。</p>
 
       
     </div>
@@ -543,6 +519,14 @@ cancellationSignal = new CancellationSignal();
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/指纹加密/" rel="tag"><i class="fa fa-tag"></i>
+
+ 指纹加密</a>
+          
+        </div>
       
 
       
@@ -676,7 +660,7 @@ cancellationSignal = new CancellationSignal();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -687,7 +671,7 @@ cancellationSignal = new CancellationSignal();
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -698,7 +682,7 @@ cancellationSignal = new CancellationSignal();
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -804,7 +788,7 @@ cancellationSignal = new CancellationSignal();
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

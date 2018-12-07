@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="报错解决方案,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="在Android子线程中使用Toast时会报错：  代码：   Toast.makeText(this, &amp;quot;&amp;quot;, Toast.LENGTH_LONG) .show()；  报错：   java.lang.RuntimeException: Can&amp;#39;t create handler inside thread that has not called Looper.prep">
+<meta name="description" content="在Android子线程中使用Toast时会报错：  代码：  1Toast.makeText(this, &quot;&quot;, Toast.LENGTH_LONG) .show()；  报错：  1java.lang.RuntimeException: Can&apos;t create handler inside thread that has not called Looper.prepare()  解决方案：">
+<meta name="keywords" content="报错解决方案">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android解决Can&#39;t create handler inside thread that has not called Looper.prepare()">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/03/Android解决Can't create handler inside thread that has not called Looper.prepare()/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="在Android子线程中使用Toast时会报错：  代码：   Toast.makeText(this, &amp;quot;&amp;quot;, Toast.LENGTH_LONG) .show()；  报错：   java.lang.RuntimeException: Can&amp;#39;t create handler inside thread that has not called Looper.prep">
+<meta property="og:description" content="在Android子线程中使用Toast时会报错：  代码：  1Toast.makeText(this, &quot;&quot;, Toast.LENGTH_LONG) .show()；  报错：  1java.lang.RuntimeException: Can&apos;t create handler inside thread that has not called Looper.prepare()  解决方案：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:25.501Z">
+<meta property="og:updated_time" content="2018-12-07T09:08:42.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android解决Can&#39;t create handler inside thread that has not called Looper.prepare()">
-<meta name="twitter:description" content="在Android子线程中使用Toast时会报错：  代码：   Toast.makeText(this, &amp;quot;&amp;quot;, Toast.LENGTH_LONG) .show()；  报错：   java.lang.RuntimeException: Can&amp;#39;t create handler inside thread that has not called Looper.prep">
+<meta name="twitter:description" content="在Android子线程中使用Toast时会报错：  代码：  1Toast.makeText(this, &quot;&quot;, Toast.LENGTH_LONG) .show()；  报错：  1java.lang.RuntimeException: Can&apos;t create handler inside thread that has not called Looper.prepare()  解决方案：">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  115
+                  116
                 </span>
               
 
@@ -446,34 +469,20 @@
       
         <p>在Android子线程中使用Toast时会报错：</p>
 <ul>
-<li>代码： </li>
-</ul>
-<pre><code>Toast.makeText(this, &quot;&quot;, Toast.LENGTH_LONG) .show()；
-</code></pre><ul>
-<li>报错： </li>
-</ul>
-<pre><code>java.lang.RuntimeException: Can&#39;t create handler inside thread that has not called Looper.prepare()
-</code></pre><ul>
-<li>解决方案： </li>
+<li><p>代码： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Toast.makeText(<span class="keyword">this</span>, <span class="string">""</span>, Toast.LENGTH_LONG) .show()；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>报错： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.RuntimeException: Can<span class="string">'t create handler inside thread that has not called Looper.prepare()</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决方案： </p>
+</li>
 </ul>
 <p>方案一：增加Looper.prepare();</p>
-<pre><code>    Looper.prepare();
-Toast.makeText(this, &quot;&quot;, Toast.LENGTH_LONG) .show()；
-Looper.loop();// 进入loop中的循环，查看消息队列
-</code></pre><p>方案二：post 给主线程去处理</p>
-<pre><code>    mainHandler.post(new Runnable() {
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> Looper.prepare();</span><br><span class="line">Toast.makeText(<span class="keyword">this</span>, <span class="string">""</span>, Toast.LENGTH_LONG) .show()；</span><br><span class="line">Looper.loop();<span class="comment">// 进入loop中的循环，查看消息队列</span></span><br></pre></td></tr></table></figure>
+<p>方案二：post 给主线程去处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    mainHandler.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (toast == <span class="keyword">null</span>) &#123;</span><br><span class="line">       toast = Toast.makeText(context, <span class="string">""</span>,     Toast.LENGTH_SHORT);</span><br><span class="line">&#125;</span><br><span class="line">toast.setText(msg);</span><br><span class="line">toast.setDuration(Toast.LENGTH_SHORT);</span><br><span class="line">toast.show();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
- @Override
- public void run() {
-    if (toast == null) {
-       toast = Toast.makeText(context, &quot;&quot;,     Toast.LENGTH_SHORT);
-}
-toast.setText(msg);
-toast.setDuration(Toast.LENGTH_SHORT);
-toast.show();
- }
-});
-</code></pre>
       
     </div>
     
@@ -516,6 +525,14 @@ toast.show();
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/报错解决方案/" rel="tag"><i class="fa fa-tag"></i>
+
+ 报错解决方案</a>
+          
+        </div>
       
 
       
@@ -640,7 +657,7 @@ toast.show();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -651,7 +668,7 @@ toast.show();
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -662,7 +679,7 @@ toast.show();
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -752,7 +769,7 @@ toast.show();
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

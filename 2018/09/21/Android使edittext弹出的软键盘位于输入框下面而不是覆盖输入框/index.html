@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="EditText,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="提供三个方法： 1:在你的activity中的oncreate中setContentView之前写上这个代码 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)； 2:在项目的AndroidManifest.xml文件中界面对应的里加入: android:windowSoftInputMode">
+<meta name="description" content="提供三个方法： 1:在你的activity中的oncreate中setContentView之前写上这个代码     1getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)； 2:在项目的AndroidManifest.xml文件中界面对应的里加入:     1android:windowSof">
+<meta name="keywords" content="EditText">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android使edittext弹出的软键盘位于输入框下面而不是覆盖输入框">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/21/Android使edittext弹出的软键盘位于输入框下面而不是覆盖输入框/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="提供三个方法： 1:在你的activity中的oncreate中setContentView之前写上这个代码 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)； 2:在项目的AndroidManifest.xml文件中界面对应的里加入: android:windowSoftInputMode">
+<meta property="og:description" content="提供三个方法： 1:在你的activity中的oncreate中setContentView之前写上这个代码     1getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)； 2:在项目的AndroidManifest.xml文件中界面对应的里加入:     1android:windowSof">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:20.858Z">
+<meta property="og:updated_time" content="2018-12-07T08:54:37.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android使edittext弹出的软键盘位于输入框下面而不是覆盖输入框">
-<meta name="twitter:description" content="提供三个方法： 1:在你的activity中的oncreate中setContentView之前写上这个代码 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)； 2:在项目的AndroidManifest.xml文件中界面对应的里加入: android:windowSoftInputMode">
+<meta name="twitter:description" content="提供三个方法： 1:在你的activity中的oncreate中setContentView之前写上这个代码     1getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)； 2:在项目的AndroidManifest.xml文件中界面对应的里加入:     1android:windowSof">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  128
+                  124
                 </span>
               
 
@@ -445,11 +468,11 @@
 
       
         <p>提供三个方法：</p>
-<p>1:在你的activity中的oncreate中setContentView之前写上这个代码</p>
-<pre><code>getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)；
-</code></pre><p>2:在项目的AndroidManifest.xml文件中界面对应的里加入:</p>
-<pre><code>android:windowSoftInputMode=&quot;stateVisible|adjustResize&quot; //这样会让屏幕整体上移android:windowSoftInputMode=&quot;adjustPan&quot; //这样键盘会覆盖屏幕
-</code></pre><p>3:把顶级的layout替换成ScrollView，或者说在顶级的Layout上面再加一层ScrollView的封装。这样就会把软键盘和输入框一起滚动了，软键盘会一直处于底部。</p>
+<p>1:在你的activity中的oncreate中setContentView之前写上这个代码    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)；</span><br></pre></td></tr></table></figure>
+<p>2:在项目的AndroidManifest.xml文件中界面对应的里加入:    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:windowSoftInputMode=<span class="string">"stateVisible|adjustResize"</span> <span class="comment">//这样会让屏幕整体上移android:windowSoftInputMode="adjustPan" //这样键盘会覆盖屏幕</span></span><br></pre></td></tr></table></figure>
+<p>3:把顶级的layout替换成ScrollView，或者说在顶级的Layout上面再加一层ScrollView的封装。这样就会把软键盘和输入框一起滚动了，软键盘会一直处于底部。</p>
 
       
     </div>
@@ -493,6 +516,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/EditText/" rel="tag"><i class="fa fa-tag"></i>
+
+ EditText</a>
+          
+        </div>
       
 
       
@@ -617,7 +648,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -628,7 +659,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -639,7 +670,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -729,7 +760,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

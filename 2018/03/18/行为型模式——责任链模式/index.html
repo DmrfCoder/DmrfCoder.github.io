@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="概述顾名思义，责任链模式（Chain of Responsibility Pattern）为请求创建了一个 接收者对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。在这种模式中，通常 每个接收者都包含对另一个接收者的引用 。 如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推(感觉有点像链表？)。 介绍意图避免请求发送者与接">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:57.717Z">
+<meta property="og:updated_time" content="2018-12-07T09:50:23.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行为型模式——责任链模式">
 <meta name="twitter:description" content="概述顾名思义，责任链模式（Chain of Responsibility Pattern）为请求创建了一个 接收者对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。在这种模式中，通常 每个接收者都包含对另一个接收者的引用 。 如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者，依此类推(感觉有点像链表？)。 介绍意图避免请求发送者与接">
@@ -445,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -466,7 +466,7 @@
       
 
       
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>顾名思义，责任链模式（Chain of Responsibility Pattern）为请求创建了一个 <strong>接收者对象的链</strong><br>。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。<br>在这种模式中，通常 <strong>每个接收者都包含对另一个接收者的引用</strong> 。 <strong>如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者</strong><br>，依此类推(感觉有点像链表？)。</p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>顾名思义，责任链模式（Chain of Responsibility Pattern）为请求创建了一个 <strong>接收者对象的链</strong><br>。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。<br>在这种模式中，通常 <strong>每个接收者都包含对另一个接收者的引用</strong> 。 <strong>如果一个对象不能处理该请求，那么它会把相同的请求传给下一个接收者</strong>，依此类推(感觉有点像链表？)。</p>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>避免请求发送者与接收者耦合在一起，让多个对象都有可能接收请求，将这些对象连接成一条链，并且沿着这条链传递请求，直到有对象处理它为止。</p>
 <h2 id="主要解决"><a href="#主要解决" class="headerlink" title="主要解决"></a>主要解决</h2><p>职责链上的处理者负责处理请求，客户只需要将请求发送到职责链上即可，无须关心请求的处理细节和请求的传递，所以职责链将请求的发送者和请求的处理者解耦了。<br>何时使用：在处理消息的时候以过滤很多道。</p>
 <h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>拦截的类都实现统一接口。</p>
@@ -495,80 +495,25 @@
 <h2 id="创建抽象的记录器类"><a href="#创建抽象的记录器类" class="headerlink" title="创建抽象的记录器类"></a>创建抽象的记录器类</h2><ul>
 <li>AbstractLogger.java </li>
 </ul>
-<pre><code> public abstract class AbstractLogger {
-   public static int INFO = 1;
-   public static int DEBUG = 2;
-   public static int ERROR = 3;
-
-   protected int level;
-
-   //责任链中的下一个元素
-   protected AbstractLogger nextLogger;
-
-   public void setNextLogger(AbstractLogger nextLogger){
-      this.nextLogger = nextLogger;
-   }
-
-   public void logMessage(int level, String message){
-      if(this.level &lt;= level){
-         write(message);
-      }
-      if(nextLogger !=null){
-         nextLogger.logMessage(level, message);
-      }
-   }
-
-   abstract protected void write(String message);
-
-}
-</code></pre><h2 id="创建扩展了该记录器类的实体类"><a href="#创建扩展了该记录器类的实体类" class="headerlink" title="创建扩展了该记录器类的实体类"></a>创建扩展了该记录器类的实体类</h2><ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractLogger</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> INFO = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> DEBUG = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> ERROR = <span class="number">3</span>;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">int</span> level;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">//责任链中的下一个元素</span></span><br><span class="line">  <span class="keyword">protected</span> AbstractLogger nextLogger;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextLogger</span><span class="params">(AbstractLogger nextLogger)</span></span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.nextLogger = nextLogger;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logMessage</span><span class="params">(<span class="keyword">int</span> level, String message)</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(<span class="keyword">this</span>.level &lt;= level)&#123;</span><br><span class="line">        write(message);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">if</span>(nextLogger !=<span class="keyword">null</span>)&#123;</span><br><span class="line">        nextLogger.logMessage(level, message);</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(String message)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建扩展了该记录器类的实体类"><a href="#创建扩展了该记录器类的实体类" class="headerlink" title="创建扩展了该记录器类的实体类"></a>创建扩展了该记录器类的实体类</h2><ul>
 <li>ConsoleLogger.java </li>
 </ul>
-<pre><code>public class ConsoleLogger extends AbstractLogger {
-
-   public ConsoleLogger(int level){
-      this.level = level;
-   }
-
-   @Override
-   protected void write(String message) {        
-      System.out.println(&quot;Standard Console::Logger: &quot; + message);
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsoleLogger</span> <span class="keyword">extends</span> <span class="title">AbstractLogger</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">ConsoleLogger</span><span class="params">(<span class="keyword">int</span> level)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.level = level;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(String message)</span> </span>&#123;        </span><br><span class="line">      System.out.println(<span class="string">"Standard Console::Logger: "</span> + message);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>ErrorLogger.java </li>
 </ul>
-<pre><code>public class ErrorLogger extends AbstractLogger {
-
-   public ErrorLogger(int level){
-      this.level = level;
-   }
-
-   @Override
-   protected void write(String message) {        
-      System.out.println(&quot;Error Console::Logger: &quot; + message);
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ErrorLogger</span> <span class="keyword">extends</span> <span class="title">AbstractLogger</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">ErrorLogger</span><span class="params">(<span class="keyword">int</span> level)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.level = level;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(String message)</span> </span>&#123;        </span><br><span class="line">      System.out.println(<span class="string">"Error Console::Logger: "</span> + message);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>FileLogger.java </li>
 </ul>
-<pre><code>public class FileLogger extends AbstractLogger {
-
-   public FileLogger(int level){
-      this.level = level;
-   }
-
-   @Override
-   protected void write(String message) {        
-      System.out.println(&quot;File::Logger: &quot; + message);
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileLogger</span> <span class="keyword">extends</span> <span class="title">AbstractLogger</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">FileLogger</span><span class="params">(<span class="keyword">int</span> level)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.level = level;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(String message)</span> </span>&#123;        </span><br><span class="line">      System.out.println(<span class="string">"File::Logger: "</span> + message);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="创建不同类型的记录器，赋予它们不同的错误级别，并在每个记录器中设置下一个记录器，每个记录器中的下一个记录器代表的是链的一部分"><a href="#创建不同类型的记录器，赋予它们不同的错误级别，并在每个记录器中设置下一个记录器，每个记录器中的下一个记录器代表的是链的一部分" class="headerlink" title="创建不同类型的记录器，赋予它们不同的错误级别，并在每个记录器中设置下一个记录器，每个记录器中的下一个记录器代表的是链的一部分"></a>创建不同类型的记录器，赋予它们不同的错误级别，并在每个记录器中设置下一个记录器，每个记录器中的下一个记录器代表的是链的一部分</h2><ul>
 <li>ChainPatternDemo.java </li>
 </ul>
-<pre><code>public class ChainPatternDemo {
+<pre><code>      public class ChainPatternDemo {
 
-   private static AbstractLogger getChainOfLoggers(){
+       private static AbstractLogger getChainOfLoggers(){
 
       AbstractLogger errorLogger = new ErrorLogger(AbstractLogger.ERROR);
       AbstractLogger fileLogger = new FileLogger(AbstractLogger.DEBUG);
@@ -578,10 +523,13 @@
       fileLogger.setNextLogger(consoleLogger);
 
       return errorLogger;    
-   }
+        }
 
-   public static void main(String[] args) {
-      AbstractLogger loggerChain = getChainOfLoggers();
+           public static void main(String[] args) {
+          AbstractLogger loggerChain = getChainOfLoggers();
+
+
+
 
       loggerChain.logMessage(AbstractLogger.INFO, 
          &quot;This is an information.&quot;);
@@ -593,13 +541,8 @@
          &quot;This is an error information.&quot;);
    }
 }
-</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><pre><code>Standard Console::Logger: This is an information.
-File::Logger: This is an debug level information.
-Standard Console::Logger: This is an debug level information.
-Error Console::Logger: This is an error information.
-File::Logger: This is an error information.
-Standard Console::Logger: This is an error information.
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>责任链模式的本质就是一条链，通过demo可以发现其实现方式和数据结构中的链表有很相似的地方，思想就是形成一条链，如果当前节点处理不了某些行为，则把这个行为请求转移到其下一级，以此类推，比较常见的实例就是java或者python中经常用到的try<br>catch机制，当某个方法有可能抛出异常而当前方法无法处理的时候我们就会可能抛出的这个异常throw到外层，即责任链中的下一级。</p>
+</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><p>​<br>    Standard Console::Logger: This is an information.<br>    File::Logger: This is an debug level information.<br>    Standard Console::Logger: This is an debug level information.<br>    Error Console::Logger: This is an error information.<br>    File::Logger: This is an error information.<br>    Standard Console::Logger: This is an error information.</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>责任链模式的本质就是一条链，通过demo可以发现其实现方式和数据结构中的链表有很相似的地方，思想就是形成一条链，如果当前节点处理不了某些行为，则把这个行为请求转移到其下一级，以此类推，比较常见的实例就是java或者python中经常用到的try<br>catch机制，当某个方法有可能抛出异常而当前方法无法处理的时候我们就会可能抛出的这个异常throw到外层，即责任链中的下一级。</p>
 
       
     </div>
@@ -776,7 +719,7 @@ Standard Console::Logger: This is an error information.
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -787,7 +730,7 @@ Standard Console::Logger: This is an error information.
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -798,7 +741,7 @@ Standard Console::Logger: This is an error information.
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -904,7 +847,7 @@ Standard Console::Logger: This is an error information.
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

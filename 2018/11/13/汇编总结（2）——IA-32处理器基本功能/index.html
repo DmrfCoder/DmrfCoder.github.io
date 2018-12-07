@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="汇编,">
 
 
 
@@ -98,6 +98,7 @@
 
 
 <meta name="description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编总结（2）——IA-32处理器基本功能">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/index.html">
@@ -107,7 +108,7 @@
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fx6ibcljdgj31kw0bs42z.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6k1ugd6nj31220hswlu.jpg">
-<meta property="og:updated_time" content="2018-12-05T14:39:17.160Z">
+<meta property="og:updated_time" content="2018-12-07T12:30:01.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编总结（2）——IA-32处理器基本功能">
 <meta name="twitter:description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel">
@@ -378,6 +379,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -784,8 +807,8 @@
 </ul>
 <p>此外还有固定寻址和I/O端口寻址等</p>
 <h3 id="立即寻址方式和寄存器寻址方式"><a href="#立即寻址方式和寄存器寻址方式" class="headerlink" title="立即寻址方式和寄存器寻址方式"></a>立即寻址方式和寄存器寻址方式</h3><h4 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h4><p>说白了当操作数是立即数的时候就是立即寻址方式，比如：</p>
-<pre><code>mov eax,12345678H
-</code></pre><p>所以：</p>
+<p>​<br>    mov eax,12345678H</p>
+<p>所以：</p>
 <ul>
 <li>立即数作为指令的一部分，跟在操作码后面存放在代码段 </li>
 <li>如果立即数由多个字节构成，那么作为指令的一部分存储时，也采用“高高低低”规则 </li>
@@ -802,26 +825,21 @@
 <li>通用 </li>
 </ul>
 <h4 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h4><p>操作数在存储器中，指令直接包含操作数所在存储单元的有效地址。</p>
-<pre><code>mov ecx,[95480H]
-</code></pre><h4 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h4><p>操作数在存储器中，由八个32位通用寄存器之一给出操作数所在存储单元的有效地址。</p>
+<p>​<br>    mov ecx,[95480H]</p>
+<h4 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h4><p>操作数在存储器中，由八个32位通用寄存器之一给出操作数所在存储单元的有效地址。</p>
 <p>寄存器间接寻址方式中，给出操作数所在存储单元有效地址的寄存器相当于c语言中的指针变量，它含有要访问存储单元的地址。</p>
-<pre><code>mov ecx,[esi]
-</code></pre><h4 id="32位寄存器寻址方式的通用表示"><a href="#32位寄存器寻址方式的通用表示" class="headerlink" title="32位寄存器寻址方式的通用表示"></a>32位寄存器寻址方式的通用表示</h4><p>存储单元的有效地址可以由三部分内容相加构成:</p>
+<p>​<br>    mov ecx,[esi]</p>
+<h4 id="32位寄存器寻址方式的通用表示"><a href="#32位寄存器寻址方式的通用表示" class="headerlink" title="32位寄存器寻址方式的通用表示"></a>32位寄存器寻址方式的通用表示</h4><p>存储单元的有效地址可以由三部分内容相加构成:</p>
 <ul>
 <li>一个32位的基地址寄存器 </li>
 <li>一个可乘上比例因子1、2、4或8的32位的变址寄存器 </li>
 <li>一个8位、16位或32位的位移量 </li>
 </ul>
 <p>这三部分可省去任意的两部分。</p>
-<pre><code>add dx ,[ecx+5328H]//寄存器相对寻址方式
-xchg [ebx,esi],dx//基址加变址寻址方式
-mov ebx,[edi+eax*4+300H]//基址加放大因子的变址寻址方式
-</code></pre><p>在某条具体的指令中，如果有存储器操作数，那么其尺寸是确定的。在大多数情况下，存储器操作数的尺寸是一 目了然的，因为通常要求一条指令中的多个操作数的尺寸<br>一致，所以指令中的寄存器操作数的尺寸就决定了存储器操作数的尺寸。 <strong>在少数情况下，需要显式地指定存储器操作数的尺寸。</strong></p>
-<pre><code>LEA EBX , bufi 
-MOV DWORD PTR [EBX], 5 // 双字
-MOV WORD PTR [EBX+4], 5 //字
-MOV BYTE PTR [EBX+8], 5 //字节
-</code></pre><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果 <strong>基址寄存器</strong> 不是 <strong>EBP</strong> 或者 <strong>ESP</strong> ，那么缺省引用的段寄存器是 <strong>DS</strong> ;</p>
+<p>​<br>    add dx ,[ecx+5328H]//寄存器相对寻址方式<br>    xchg [ebx,esi],dx//基址加变址寻址方式<br>    mov ebx,[edi+eax*4+300H]//基址加放大因子的变址寻址方式</p>
+<p>在某条具体的指令中，如果有存储器操作数，那么其尺寸是确定的。在大多数情况下，存储器操作数的尺寸是一 目了然的，因为通常要求一条指令中的多个操作数的尺寸<br>一致，所以指令中的寄存器操作数的尺寸就决定了存储器操作数的尺寸。 <strong>在少数情况下，需要显式地指定存储器操作数的尺寸。</strong></p>
+<p>​<br>    LEA EBX , bufi<br>    MOV DWORD PTR [EBX], 5 // 双字<br>    MOV WORD PTR [EBX+4], 5 //字<br>    MOV BYTE PTR [EBX+8], 5 //字节</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果 <strong>基址寄存器</strong> 不是 <strong>EBP</strong> 或者 <strong>ESP</strong> ，那么缺省引用的段寄存器是 <strong>DS</strong> ;</p>
 <p>如果 <strong>基址寄存器</strong> 是EBP或者ESP，那么缺省引 用的段寄存器是 <strong>SS</strong> 。</p>
 <p>当EBP作为 <strong>变址寄存器</strong> 使用( <strong>ESP不 能作为变址寄存器使用</strong> )时，缺省引用的段寄存器仍然是 <strong>DS</strong> 。</p>
 <p>无论存储器寻址方式简单或者复杂，如果由基址寄存器、 带比例因子的变址寄存器和位移量这三部分相加所得 <strong>超过 32位，那么有效地址仅为低32位</strong> 。</p>
@@ -1069,6 +1087,14 @@ MOV BYTE PTR [EBX+8], 5 //字节
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"><i class="fa fa-tag"></i>
+
+ 汇编</a>
+          
+        </div>
+      
 
       
       
@@ -1078,8 +1104,8 @@ MOV BYTE PTR [EBX+8], 5 //字节
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/13/Planar data classification with one hidden layer/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/11/09/Normalizing rows with Python/" rel="next" title="Normalizing rows with Python">
+                <i class="fa fa-chevron-left"></i> Normalizing rows with Python
               </a>
             
           </div>
@@ -1201,7 +1227,7 @@ MOV BYTE PTR [EBX+8], 5 //字节
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1212,7 +1238,7 @@ MOV BYTE PTR [EBX+8], 5 //字节
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1223,7 +1249,7 @@ MOV BYTE PTR [EBX+8], 5 //字节
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1329,7 +1355,7 @@ MOV BYTE PTR [EBX+8], 5 //字节
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

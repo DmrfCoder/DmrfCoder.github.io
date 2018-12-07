@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Python,归一化,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="直接上代码：C语言： #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;algorithm&amp;gt; void mean(float *data,int len,float &amp;amp;mean,float &amp;amp;max,float &amp;amp;min){      float sum=data[0];      max=data[0];      min=data[0];">
+<meta name="description" content="直接上代码：C语言： ​123456789101112131415161718192021222324252627#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;algorithm&amp;gt;void mean(float *data,int len,float &amp;amp;mean,float &amp;amp;max,float &amp;amp;min)&amp;#123;     float">
+<meta name="keywords" content="Python,归一化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分别使用C语言和Python实现矩阵归一化">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/03/29/分别使用C语言和Python实现矩阵归一化/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="直接上代码：C语言： #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;algorithm&amp;gt; void mean(float *data,int len,float &amp;amp;mean,float &amp;amp;max,float &amp;amp;min){      float sum=data[0];      max=data[0];      min=data[0];">
+<meta property="og:description" content="直接上代码：C语言： ​123456789101112131415161718192021222324252627#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;algorithm&amp;gt;void mean(float *data,int len,float &amp;amp;mean,float &amp;amp;max,float &amp;amp;min)&amp;#123;     float">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:50.900Z">
+<meta property="og:updated_time" content="2018-12-07T12:38:43.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分别使用C语言和Python实现矩阵归一化">
-<meta name="twitter:description" content="直接上代码：C语言： #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;algorithm&amp;gt; void mean(float *data,int len,float &amp;amp;mean,float &amp;amp;max,float &amp;amp;min){      float sum=data[0];      max=data[0];      min=data[0];">
+<meta name="twitter:description" content="直接上代码：C语言： ​123456789101112131415161718192021222324252627#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;algorithm&amp;gt;void mean(float *data,int len,float &amp;amp;mean,float &amp;amp;max,float &amp;amp;min)&amp;#123;     float">
 
 
 
@@ -387,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/深度学习/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  148
+                  155
                 </span>
               
 
@@ -467,40 +468,10 @@
 
       
         <p>直接上代码：<br>C语言：</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;algorithm&gt;
-void mean(float *data,int len,float &amp;mean,float &amp;max,float &amp;min){
-     float sum=data[0];
-     max=data[0];
-     min=data[0];
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mean</span><span class="params">(<span class="keyword">float</span> *data,<span class="keyword">int</span> len,<span class="keyword">float</span> &amp;mean,<span class="keyword">float</span> &amp;max,<span class="keyword">float</span> &amp;min)</span></span>&#123;</span><br><span class="line">     <span class="keyword">float</span> sum=data[<span class="number">0</span>];</span><br><span class="line">     max=data[<span class="number">0</span>];</span><br><span class="line">     min=data[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        sum+=data[i];</span><br><span class="line">        <span class="keyword">if</span>(data[i]&gt;max)max=data[i];</span><br><span class="line">        <span class="keyword">if</span>(data[i]&lt;min)min=data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    mean=sum/len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">normalize</span><span class="params">(<span class="keyword">float</span> *data,<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> m=<span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">float</span> mx=<span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">float</span> mn=<span class="number">0.0</span>;</span><br><span class="line">    mean(data,len,m,mx,mn);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"mean:%f\nmax:%f\nmin:%f\n"</span>,m,mx,mn );</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        data[i]=(data[i]-m)/(mx-mn);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Python：</p>
+<p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Normalize</span><span class="params">(data)</span>:</span></span><br><span class="line">    m = np.mean(data)</span><br><span class="line">    mx = max(data)</span><br><span class="line">    mn = min(data)</span><br><span class="line">    <span class="keyword">return</span> [(float(i) - m) / (mx - mn) <span class="keyword">for</span> i <span class="keyword">in</span> data]</span><br></pre></td></tr></table></figure></p>
 
-    for (int i = 1; i &lt; len; ++i)
-    {
-        sum+=data[i];
-        if(data[i]&gt;max)max=data[i];
-        if(data[i]&lt;min)min=data[i];
-    }
-    mean=sum/len;
-}
-
-void normalize(float *data,int len){
-    float m=0.0;
-    float mx=0.0;
-    float mn=0.0;
-    mean(data,len,m,mx,mn);
-    printf(&quot;mean:%f\nmax:%f\nmin:%f\n&quot;,m,mx,mn );
-    for (int i = 0; i &lt; len; ++i)
-    {
-        data[i]=(data[i]-m)/(mx-mn);
-    }
-}
-</code></pre><p>Python：</p>
-<pre><code>def Normalize(data):
-    m = np.mean(data)
-    mx = max(data)
-    mn = min(data)
-    return [(float(i) - m) / (mx - mn) for i in data]
-</code></pre>
       
     </div>
     
@@ -543,6 +514,18 @@ void normalize(float *data,int len){
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i>
+
+ Python</a>
+          
+            <a href="/tags/归一化/" rel="tag"><i class="fa fa-tag"></i>
+
+ 归一化</a>
+          
+        </div>
       
 
       
@@ -667,7 +650,7 @@ void normalize(float *data,int len){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +661,7 @@ void normalize(float *data,int len){
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -689,7 +672,7 @@ void normalize(float *data,int len){
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -779,7 +762,7 @@ void normalize(float *data,int len){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

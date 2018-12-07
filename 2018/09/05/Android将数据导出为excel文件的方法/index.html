@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Android,excel生成,数据导出,">
+  <meta name="keywords" content="Excel导出,">
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;#39;net.sourceforge.jexcelapi&amp;#39;, name: &amp;#39;jxl&amp;#39;, version: &amp;#39;2.6.12&amp;#39; 编写excel工具类package cn.xiaojii.cashgift.">
-<meta name="keywords" content="Android,excel生成,数据导出">
+<meta name="description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包:     1implementation group: &apos;net.sourceforge.jexcelapi&apos;, name: &apos;jxl&apos;, version: &apos;2.6.12&apos; 编写excel工具类12345678910111213141516171819202122232425262728">
+<meta name="keywords" content="Excel导出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android将数据导出为excel文件的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android将数据导出为excel文件的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;#39;net.sourceforge.jexcelapi&amp;#39;, name: &amp;#39;jxl&amp;#39;, version: &amp;#39;2.6.12&amp;#39; 编写excel工具类package cn.xiaojii.cashgift.">
+<meta property="og:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包:     1implementation group: &apos;net.sourceforge.jexcelapi&apos;, name: &apos;jxl&apos;, version: &apos;2.6.12&apos; 编写excel工具类12345678910111213141516171819202122232425262728">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:23.500Z">
+<meta property="og:updated_time" content="2018-12-07T09:11:32.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android将数据导出为excel文件的方法">
-<meta name="twitter:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包: implementation group: &amp;#39;net.sourceforge.jexcelapi&amp;#39;, name: &amp;#39;jxl&amp;#39;, version: &amp;#39;2.6.12&amp;#39; 编写excel工具类package cn.xiaojii.cashgift.">
+<meta name="twitter:description" content="需求描述将应用内的数据导出为excel表格。 实现添加依赖包在app的build.gradle里面添加依赖包:     1implementation group: &apos;net.sourceforge.jexcelapi&apos;, name: &apos;jxl&apos;, version: &apos;2.6.12&apos; 编写excel工具类12345678910111213141516171819202122232425262728">
 
 
 
@@ -388,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  703
+                  733
                 </span>
               
 
@@ -446,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -468,179 +468,11 @@
 
       
         <h2 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h2><p>将应用内的数据导出为excel表格。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="添加依赖包"><a href="#添加依赖包" class="headerlink" title="添加依赖包"></a>添加依赖包</h3><p>在app的build.gradle里面添加依赖包:</p>
-<pre><code>implementation group: &#39;net.sourceforge.jexcelapi&#39;, name: &#39;jxl&#39;, version: &#39;2.6.12&#39;
-</code></pre><h3 id="编写excel工具类"><a href="#编写excel工具类" class="headerlink" title="编写excel工具类"></a>编写excel工具类</h3><pre><code>package cn.xiaojii.cashgift.util.io;
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="添加依赖包"><a href="#添加依赖包" class="headerlink" title="添加依赖包"></a>添加依赖包</h3><p>在app的build.gradle里面添加依赖包:    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation group: <span class="string">'net.sourceforge.jexcelapi'</span>, name: <span class="string">'jxl'</span>, version: <span class="string">'2.6.12'</span></span><br></pre></td></tr></table></figure>
+<h3 id="编写excel工具类"><a href="#编写excel工具类" class="headerlink" title="编写excel工具类"></a>编写excel工具类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.xiaojii.cashgift.util.io;</span><br><span class="line"><span class="keyword">import</span> jxl.Workbook;</span><br><span class="line"><span class="keyword">import</span> jxl.WorkbookSettings;</span><br><span class="line"><span class="keyword">import</span> jxl.format.Colour;</span><br><span class="line"><span class="keyword">import</span> jxl.write.Label;</span><br><span class="line"><span class="keyword">import</span> jxl.write.WritableCell;</span><br><span class="line"><span class="keyword">import</span> jxl.write.WritableCellFormat;</span><br><span class="line"><span class="keyword">import</span> jxl.write.WritableFont;</span><br><span class="line"><span class="keyword">import</span> jxl.write.WritableSheet;</span><br><span class="line"><span class="keyword">import</span> jxl.write.WritableWorkbook;</span><br><span class="line"><span class="keyword">import</span> jxl.write.WriteException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/8/9</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExcelUtil</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WritableFont arial14font = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WritableCellFormat arial14format = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WritableFont arial10font = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WritableCellFormat arial10format = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WritableFont arial12font = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> WritableCellFormat arial12format = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String UTF8_ENCODING = <span class="string">"UTF-8"</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单元格的格式设置 字体大小 颜色 对齐方式、背景颜色等...</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">format</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            arial14font = <span class="keyword">new</span> WritableFont(WritableFont.ARIAL, <span class="number">14</span>, WritableFont.BOLD);</span><br><span class="line">            arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);</span><br><span class="line">            arial14format = <span class="keyword">new</span> WritableCellFormat(arial14font);</span><br><span class="line">            arial14format.setAlignment(jxl.format.Alignment.CENTRE);</span><br><span class="line">            arial14format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);</span><br><span class="line">            arial14format.setBackground(jxl.format.Colour.VERY_LIGHT_YELLOW);</span><br><span class="line"></span><br><span class="line">            arial10font = <span class="keyword">new</span> WritableFont(WritableFont.ARIAL, <span class="number">10</span>, WritableFont.BOLD);</span><br><span class="line">            arial10format = <span class="keyword">new</span> WritableCellFormat(arial10font);</span><br><span class="line">            arial10format.setAlignment(jxl.format.Alignment.CENTRE);</span><br><span class="line">            arial10format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);</span><br><span class="line">            arial10format.setBackground(Colour.GRAY_25);</span><br><span class="line"></span><br><span class="line">            arial12font = <span class="keyword">new</span> WritableFont(WritableFont.ARIAL, <span class="number">10</span>);</span><br><span class="line">            arial12format = <span class="keyword">new</span> WritableCellFormat(arial12font);</span><br><span class="line">            <span class="comment">//对齐格式</span></span><br><span class="line">            arial10format.setAlignment(jxl.format.Alignment.CENTRE);</span><br><span class="line">            <span class="comment">//设置边框</span></span><br><span class="line">            arial12format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (WriteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 初始化Excel</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName 导出excel存放的地址（目录）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> colName excel中包含的列名（可以有多个）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initExcel</span><span class="params">(String fileName, String[] colName)</span> </span>&#123;</span><br><span class="line">        format();</span><br><span class="line">        WritableWorkbook workbook = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            File file = <span class="keyword">new</span> File(fileName);</span><br><span class="line">            <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">                file.createNewFile();</span><br><span class="line">            &#125;</span><br><span class="line">            workbook = Workbook.createWorkbook(file);</span><br><span class="line">           <span class="comment">//设置表格的名字</span></span><br><span class="line">            WritableSheet sheet = workbook.createSheet(<span class="string">"账单"</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="comment">//创建标题栏</span></span><br><span class="line">            sheet.addCell((WritableCell) <span class="keyword">new</span> Label(<span class="number">0</span>, <span class="number">0</span>, fileName, arial14format));</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> col = <span class="number">0</span>; col &lt; colName.length; col++) &#123;</span><br><span class="line">                sheet.addCell(<span class="keyword">new</span> Label(col, <span class="number">0</span>, colName[col], arial10format));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//设置行高</span></span><br><span class="line">            sheet.setRowView(<span class="number">0</span>, <span class="number">340</span>);</span><br><span class="line">            workbook.write();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (workbook != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    workbook.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">writeObjListToExcel</span><span class="params">(List&lt;T&gt; objList, String fileName, Context c)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (objList != <span class="keyword">null</span> &amp;&amp; objList.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            WritableWorkbook writebook = <span class="keyword">null</span>;</span><br><span class="line">            InputStream in = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                WorkbookSettings setEncode = <span class="keyword">new</span> WorkbookSettings();</span><br><span class="line">                setEncode.setEncoding(UTF8_ENCODING);</span><br><span class="line">                in = <span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(fileName));</span><br><span class="line">                Workbook workbook = Workbook.getWorkbook(in);</span><br><span class="line">                writebook = Workbook.createWorkbook(<span class="keyword">new</span> File(fileName), workbook);</span><br><span class="line">                WritableSheet sheet = writebook.getSheet(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; objList.size(); j++) &#123;</span><br><span class="line">                    ProjectBean projectBean = (ProjectBean) objList.get(j);</span><br><span class="line">                    List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">                    list.add(projectBean.getName());</span><br><span class="line">                    list.add(projectBean.getProject());</span><br><span class="line">                    list.add(projectBean.getMoney());</span><br><span class="line">                    list.add(projectBean.getYear() + <span class="string">" "</span> + projectBean.getMonth()+<span class="string">" "</span>+projectBean.getDay());</span><br><span class="line">                    list.add(projectBean.getBeizhu());</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">                        sheet.addCell(<span class="keyword">new</span> Label(i, j + <span class="number">1</span>, list.get(i), arial12format));</span><br><span class="line">                        <span class="keyword">if</span> (list.get(i).length() &lt;= <span class="number">4</span>) &#123;</span><br><span class="line">                            <span class="comment">//设置列宽</span></span><br><span class="line">                            sheet.setColumnView(i, list.get(i).length() + <span class="number">8</span>);</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="comment">//设置列宽</span></span><br><span class="line">                            sheet.setColumnView(i, list.get(i).length() + <span class="number">5</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//设置行高</span></span><br><span class="line">                    sheet.setRowView(j + <span class="number">1</span>, <span class="number">350</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                writebook.write();</span><br><span class="line">                Toast.makeText(c, <span class="string">"导出Excel成功"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (writebook != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        writebook.close();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (in != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        in.close();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(path);</span><br><span class="line">     <span class="comment">//文件夹是否已经存在</span></span><br><span class="line">     <span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">         file.mkdirs();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     String[] title = &#123;<span class="string">"姓名"</span>, <span class="string">"项目"</span>, <span class="string">"收支"</span>, <span class="string">"日期"</span>, <span class="string">"备注"</span>&#125;;</span><br><span class="line">     String fileName = file.toString() + <span class="string">"/"</span> + excelname.xls;</span><br><span class="line">     ExcelUtil.initExcel(fileName, title);</span><br><span class="line">     ExcelUtil.writeObjListToExcel(list, fileName, (MainActivity) mainView);</span><br></pre></td></tr></table></figure></p>
 
-
-import jxl.Workbook;
-import jxl.WorkbookSettings;
-import jxl.format.Colour;
-import jxl.write.Label;
-import jxl.write.WritableCell;
-import jxl.write.WritableCellFormat;
-import jxl.write.WritableFont;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-
-/**
- * @author dmrfcoder
- * @date 2018/8/9
- */
-public class ExcelUtil {
-    private static WritableFont arial14font = null;
-
-    private static WritableCellFormat arial14format = null;
-    private static WritableFont arial10font = null;
-    private static WritableCellFormat arial10format = null;
-    private static WritableFont arial12font = null;
-    private static WritableCellFormat arial12format = null;
-    private final static String UTF8_ENCODING = &quot;UTF-8&quot;;
-
-
-    /**
-     * 单元格的格式设置 字体大小 颜色 对齐方式、背景颜色等...
-     */
-    private static void format() {
-        try {
-            arial14font = new WritableFont(WritableFont.ARIAL, 14, WritableFont.BOLD);
-            arial14font.setColour(jxl.format.Colour.LIGHT_BLUE);
-            arial14format = new WritableCellFormat(arial14font);
-            arial14format.setAlignment(jxl.format.Alignment.CENTRE);
-            arial14format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
-            arial14format.setBackground(jxl.format.Colour.VERY_LIGHT_YELLOW);
-
-            arial10font = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
-            arial10format = new WritableCellFormat(arial10font);
-            arial10format.setAlignment(jxl.format.Alignment.CENTRE);
-            arial10format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
-            arial10format.setBackground(Colour.GRAY_25);
-
-            arial12font = new WritableFont(WritableFont.ARIAL, 10);
-            arial12format = new WritableCellFormat(arial12font);
-            //对齐格式
-            arial10format.setAlignment(jxl.format.Alignment.CENTRE);
-            //设置边框
-            arial12format.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
-
-        } catch (WriteException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 初始化Excel
-     *
-     * @param fileName 导出excel存放的地址（目录）
-     * @param colName excel中包含的列名（可以有多个）
-     */
-    public static void initExcel(String fileName, String[] colName) {
-        format();
-        WritableWorkbook workbook = null;
-        try {
-            File file = new File(fileName);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            workbook = Workbook.createWorkbook(file);
-           //设置表格的名字
-            WritableSheet sheet = workbook.createSheet(&quot;账单&quot;, 0);
-            //创建标题栏
-            sheet.addCell((WritableCell) new Label(0, 0, fileName, arial14format));
-            for (int col = 0; col &lt; colName.length; col++) {
-                sheet.addCell(new Label(col, 0, colName[col], arial10format));
-            }
-            //设置行高
-            sheet.setRowView(0, 340);
-            workbook.write();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (workbook != null) {
-                try {
-                    workbook.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    @SuppressWarnings(&quot;unchecked&quot;)
-    public static &lt;T&gt; void writeObjListToExcel(List&lt;T&gt; objList, String fileName, Context c) {
-
-
-        if (objList != null &amp;&amp; objList.size() &gt; 0) {
-            WritableWorkbook writebook = null;
-            InputStream in = null;
-            try {
-                WorkbookSettings setEncode = new WorkbookSettings();
-                setEncode.setEncoding(UTF8_ENCODING);
-                in = new FileInputStream(new File(fileName));
-                Workbook workbook = Workbook.getWorkbook(in);
-                writebook = Workbook.createWorkbook(new File(fileName), workbook);
-                WritableSheet sheet = writebook.getSheet(0);
-
-                for (int j = 0; j &lt; objList.size(); j++) {
-                    ProjectBean projectBean = (ProjectBean) objList.get(j);
-                    List&lt;String&gt; list = new ArrayList&lt;&gt;();
-                    list.add(projectBean.getName());
-                    list.add(projectBean.getProject());
-                    list.add(projectBean.getMoney());
-                    list.add(projectBean.getYear() + &quot; &quot; + projectBean.getMonth()+&quot; &quot;+projectBean.getDay());
-                    list.add(projectBean.getBeizhu());
-
-                    for (int i = 0; i &lt; list.size(); i++) {
-                        sheet.addCell(new Label(i, j + 1, list.get(i), arial12format));
-                        if (list.get(i).length() &lt;= 4) {
-                            //设置列宽
-                            sheet.setColumnView(i, list.get(i).length() + 8);
-                        } else {
-                            //设置列宽
-                            sheet.setColumnView(i, list.get(i).length() + 5);
-                        }
-                    }
-                    //设置行高
-                    sheet.setRowView(j + 1, 350);
-                }
-
-                writebook.write();
-                Toast.makeText(c, &quot;导出Excel成功&quot;, Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (writebook != null) {
-                    try {
-                        writebook.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-        }
-    }
-}
-</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code>   File file = new File(path);
-        //文件夹是否已经存在
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-
-        String[] title = {&quot;姓名&quot;, &quot;项目&quot;, &quot;收支&quot;, &quot;日期&quot;, &quot;备注&quot;};
-        String fileName = file.toString() + &quot;/&quot; + excelname.xls;
-        ExcelUtil.initExcel(fileName, title);
-        ExcelUtil.writeObjListToExcel(list, fileName, (MainActivity) mainView);
-</code></pre>
       
     </div>
     
@@ -686,17 +518,9 @@ public class ExcelUtil {
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/Excel导出/" rel="tag"><i class="fa fa-tag"></i>
 
- Android</a>
-          
-            <a href="/tags/excel生成/" rel="tag"><i class="fa fa-tag"></i>
-
- excel生成</a>
-          
-            <a href="/tags/数据导出/" rel="tag"><i class="fa fa-tag"></i>
-
- 数据导出</a>
+ Excel导出</a>
           
         </div>
       
@@ -832,7 +656,7 @@ public class ExcelUtil {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -843,7 +667,7 @@ public class ExcelUtil {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -854,7 +678,7 @@ public class ExcelUtil {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -960,7 +784,7 @@ public class ExcelUtil {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

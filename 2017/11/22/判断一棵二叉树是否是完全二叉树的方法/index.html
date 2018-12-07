@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="完全二叉树,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="主要思路利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。 代码实现bool is_complete(BiTree biTree) {     queue&amp;lt;BiNode *&amp;gt; q;     BiNode *biNode;">
+<meta name="description" content="主要思路利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。 代码实现​12345678910111213141516171819202122232425bool is_complete(BiTree biTree) &amp;#123;    q">
+<meta name="keywords" content="完全二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="判断一棵二叉树是否是完全二叉树的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2017/11/22/判断一棵二叉树是否是完全二叉树的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="主要思路利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。 代码实现bool is_complete(BiTree biTree) {     queue&amp;lt;BiNode *&amp;gt; q;     BiNode *biNode;">
+<meta property="og:description" content="主要思路利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。 代码实现​12345678910111213141516171819202122232425bool is_complete(BiTree biTree) &amp;#123;    q">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:14.431Z">
+<meta property="og:updated_time" content="2018-12-07T12:06:00.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="判断一棵二叉树是否是完全二叉树的方法">
-<meta name="twitter:description" content="主要思路利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。 代码实现bool is_complete(BiTree biTree) {     queue&amp;lt;BiNode *&amp;gt; q;     BiNode *biNode;">
+<meta name="twitter:description" content="主要思路利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。 代码实现​12345678910111213141516171819202122232425bool is_complete(BiTree biTree) &amp;#123;    q">
 
 
 
@@ -387,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  234
+                  238
                 </span>
               
 
@@ -467,34 +468,9 @@
 
       
         <h1 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h1><p>利用二叉树层次遍历的原理开始对二叉树进行层次遍历，特殊点在于遍历的时候将NULL也入队作为标记，如果当遍历到NULL的时候队列中仍然后非NULL元素未被遍历，说明该二叉树中有非空点在空点的右边，即不是完全二叉树。</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><pre><code>bool is_complete(BiTree biTree) {
-    queue&lt;BiNode *&gt; q;
-    BiNode *biNode;
-    // 进行广度优先遍历（层次遍历），并把NULL节点也放入队列
-    q.push(biTree);
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">is_complete</span><span class="params">(BiTree biTree)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;BiNode *&gt; q;</span><br><span class="line">    BiNode *biNode;</span><br><span class="line">    <span class="comment">// 进行广度优先遍历（层次遍历），并把NULL节点也放入队列</span></span><br><span class="line">    q.push(biTree);</span><br><span class="line">     <span class="keyword">while</span> ((biNode = q.front()) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        q.pop();</span><br><span class="line">        q.push(biNode-&gt;lchild);</span><br><span class="line">        q.push(biNode-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否还有未被访问到的节点</span></span><br><span class="line">    <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">        biNode = q.front();</span><br><span class="line">        q.pop();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 有未访问到的的非NULL节点，则树存在空洞，为非完全二叉树</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="literal">NULL</span> != biNode) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"不是完全二叉树～"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"是完全二叉树～"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
 
-
-    while ((biNode = q.front()) != NULL) {
-        q.pop();
-        q.push(biNode-&gt;lchild);
-        q.push(biNode-&gt;rchild);
-    }
-
-    // 判断是否还有未被访问到的节点
-    while (!q.empty()) {
-        biNode = q.front();
-        q.pop();
-
-        // 有未访问到的的非NULL节点，则树存在空洞，为非完全二叉树
-        if (NULL != biNode) {
-            cout &lt;&lt; &quot;不是完全二叉树～&quot; &lt;&lt; endl;
-            return false;
-        }
-    }
-    cout &lt;&lt; &quot;是完全二叉树～&quot; &lt;&lt; endl;
-    return true;
-}
-</code></pre>
       
     </div>
     
@@ -537,6 +513,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/完全二叉树/" rel="tag"><i class="fa fa-tag"></i>
+
+ 完全二叉树</a>
+          
+        </div>
       
 
       
@@ -670,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +665,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -692,7 +676,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -798,7 +782,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

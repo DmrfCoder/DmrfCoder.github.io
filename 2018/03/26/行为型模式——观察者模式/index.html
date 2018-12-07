@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="概述当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如， 当一个对象被修改时，则会自动通知依赖它的对象。观察者模式属于行为型模式。 介绍意图定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。 主要解决一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。 何时使用一个对象（目标对象）的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:54.029Z">
+<meta property="og:updated_time" content="2018-12-07T10:06:04.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行为型模式——观察者模式">
 <meta name="twitter:description" content="概述当对象间存在一对多关系时，则使用观察者模式（Observer Pattern）。比如， 当一个对象被修改时，则会自动通知依赖它的对象。观察者模式属于行为型模式。 介绍意图定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。 主要解决一个对象状态改变给其他对象通知的问题，而且要考虑到易用和低耦合，保证高度的协作。 何时使用一个对象（目标对象）的">
@@ -495,115 +495,29 @@
 <h2 id="创建-Subject-类"><a href="#创建-Subject-类" class="headerlink" title="创建 Subject 类"></a>创建 Subject 类</h2><ul>
 <li>Subject.java </li>
 </ul>
-<pre><code> import java.util.ArrayList;
-import java.util.List;
-
-public class Subject {
-
-   private List&lt;Observer&gt; observers 
-      = new ArrayList&lt;Observer&gt;();
-   private int state;
-
-   public int getState() {
-      return state;
-   }
-
-   public void setState(int state) {
-      this.state = state;
-      notifyAllObservers();
-   }
-
-   public void attach(Observer observer){
-      observers.add(observer);        
-   }
-
-   public void notifyAllObservers(){
-      for (Observer observer : observers) {
-         observer.update();
-      }
-   }     
-}
-</code></pre><h2 id="创建-Observer-类"><a href="#创建-Observer-类" class="headerlink" title="创建 Observer 类"></a>创建 Observer 类</h2><ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> List&lt;Observer&gt; observers </span><br><span class="line">      = <span class="keyword">new</span> ArrayList&lt;Observer&gt;();</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> state;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> state;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setState</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.state = state;</span><br><span class="line">      notifyAllObservers();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Observer observer)</span></span>&#123;</span><br><span class="line">      observers.add(observer);        </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyAllObservers</span><span class="params">()</span></span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (Observer observer : observers) &#123;</span><br><span class="line">         observer.update();</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建-Observer-类"><a href="#创建-Observer-类" class="headerlink" title="创建 Observer 类"></a>创建 Observer 类</h2><ul>
 <li>Observer.java </li>
 </ul>
-<pre><code>public abstract class Observer {
-   protected Subject subject;
-   public abstract void update();
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">   <span class="keyword">protected</span> Subject subject;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="创建实体观察者类"><a href="#创建实体观察者类" class="headerlink" title="创建实体观察者类"></a>创建实体观察者类</h2><ul>
 <li>BinaryObserver.java </li>
 </ul>
-<pre><code>public class BinaryObserver extends Observer{
-
-   public BinaryObserver(Subject subject){
-      this.subject = subject;
-      this.subject.attach(this);
-   }
-
-   @Override
-   public void update() {
-      System.out.println( &quot;Binary String: &quot; 
-      + Integer.toBinaryString( subject.getState() ) ); 
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinaryObserver</span> <span class="keyword">extends</span> <span class="title">Observer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">BinaryObserver</span><span class="params">(Subject subject)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.subject = subject;</span><br><span class="line">      <span class="keyword">this</span>.subject.attach(<span class="keyword">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println( <span class="string">"Binary String: "</span> </span><br><span class="line">      + Integer.toBinaryString( subject.getState() ) ); </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>OctalObserver.java </li>
 </ul>
-<pre><code>public class OctalObserver extends Observer{
-
-   public OctalObserver(Subject subject){
-      this.subject = subject;
-      this.subject.attach(this);
-   }
-
-   @Override
-   public void update() {
-     System.out.println( &quot;Octal String: &quot; 
-     + Integer.toOctalString( subject.getState() ) ); 
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OctalObserver</span> <span class="keyword">extends</span> <span class="title">Observer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">OctalObserver</span><span class="params">(Subject subject)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.subject = subject;</span><br><span class="line">      <span class="keyword">this</span>.subject.attach(<span class="keyword">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     System.out.println( <span class="string">"Octal String: "</span> </span><br><span class="line">     + Integer.toOctalString( subject.getState() ) ); </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>HexaObserver.java </li>
 </ul>
-<pre><code>public class HexaObserver extends Observer{
-
-   public HexaObserver(Subject subject){
-      this.subject = subject;
-      this.subject.attach(this);
-   }
-
-   @Override
-   public void update() {
-      System.out.println( &quot;Hex String: &quot; 
-      + Integer.toHexString( subject.getState() ).toUpperCase() ); 
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HexaObserver</span> <span class="keyword">extends</span> <span class="title">Observer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HexaObserver</span><span class="params">(Subject subject)</span></span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.subject = subject;</span><br><span class="line">      <span class="keyword">this</span>.subject.attach(<span class="keyword">this</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      System.out.println( <span class="string">"Hex String: "</span> </span><br><span class="line">      + Integer.toHexString( subject.getState() ).toUpperCase() ); </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="使用-Subject-和实体观察者对象"><a href="#使用-Subject-和实体观察者对象" class="headerlink" title="使用 Subject 和实体观察者对象"></a>使用 Subject 和实体观察者对象</h2><ul>
 <li>ObserverPatternDemo.java </li>
 </ul>
-<pre><code>public class ObserverPatternDemo {
-   public static void main(String[] args) {
-      Subject subject = new Subject();
-
-      new HexaObserver(subject);
-      new OctalObserver(subject);
-      new BinaryObserver(subject);
-
-      System.out.println(&quot;First state change: 15&quot;);    
-      subject.setState(15);
-      System.out.println(&quot;Second state change: 10&quot;);    
-      subject.setState(10);
-   }
-}
-</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><pre><code>First state change: 15
-Hex String: F
-Octal String: 17
-Binary String: 1111
-Second state change: 10
-Hex String: A
-Octal String: 12
-Binary String: 1010
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>观察者模式用一句话描述就是当一个类的对象（被观察者）的状态发生改变时同时其他依赖于它的对象（观察者）的状态也做相应的改变（做相应的动作）。</p>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObserverPatternDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">​      Subject subject = <span class="keyword">new</span> Subject();</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line">  <span class="keyword">new</span> HexaObserver(subject);</span><br><span class="line">  <span class="keyword">new</span> OctalObserver(subject);</span><br><span class="line">  <span class="keyword">new</span> BinaryObserver(subject);</span><br><span class="line"></span><br><span class="line">  System.out.println(<span class="string">"First state change: 15"</span>);    </span><br><span class="line">  subject.setState(<span class="number">15</span>);</span><br><span class="line">  System.out.println(<span class="string">"Second state change: 10"</span>);    </span><br><span class="line">  subject.setState(<span class="number">10</span>);</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><p>​<br>    First state change: 15<br>    Hex String: F<br>    Octal String: 17<br>    Binary String: 1111<br>    Second state change: 10<br>    Hex String: A<br>    Octal String: 12<br>    Binary String: 1010</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>观察者模式用一句话描述就是当一个类的对象（被观察者）的状态发生改变时同时其他依赖于它的对象（观察者）的状态也做相应的改变（做相应的动作）。</p>
 
       
     </div>
@@ -780,7 +694,7 @@ Binary String: 1010
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -791,7 +705,7 @@ Binary String: 1010
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -802,7 +716,7 @@ Binary String: 1010
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -908,7 +822,7 @@ Binary String: 1010
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

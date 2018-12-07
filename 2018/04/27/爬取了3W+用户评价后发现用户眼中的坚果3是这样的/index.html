@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="坚果3,锤子,爬虫,用户评论,">
+  <meta name="keywords" content="爬虫,">
 
 
 
@@ -98,43 +98,30 @@
 
 
 <meta name="description" content="实现过程介绍从网页爬取数据思路首先我们打开京东商城坚果3 的购买页面：然后按F12进入开发者控制台（审查元素）：发现什么都没有，不要紧，点开评论区，你就会发现控制台出现类似这些信息：控制台从刚才的没有信息到现在获取到当前信息，唯一的变化就是你打开了评论，所以网页返回的评论区内容一定在当前控制台的某个位置，从Name字段一个一个分析，就可以发现很明显的一行：很明显这里就是我们需要的评论区数据，然后仔">
-<meta name="keywords" content="坚果3,锤子,爬虫,用户评论">
+<meta name="keywords" content="爬虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="爬取了3W+用户评价后发现用户眼中的坚果3是这样的">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/04/27/爬取了3W+用户评价后发现用户眼中的坚果3是这样的/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="实现过程介绍从网页爬取数据思路首先我们打开京东商城坚果3 的购买页面：然后按F12进入开发者控制台（审查元素）：发现什么都没有，不要紧，点开评论区，你就会发现控制台出现类似这些信息：控制台从刚才的没有信息到现在获取到当前信息，唯一的变化就是你打开了评论，所以网页返回的评论区内容一定在当前控制台的某个位置，从Name字段一个一个分析，就可以发现很明显的一行：很明显这里就是我们需要的评论区数据，然后仔">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131508694?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131732633?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131757161?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131809302?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131818464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131827248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131847405?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131913305?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131924220?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131931868?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:39:46.388Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxyfsrsxnnj311v0jvthl.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyfsxb5k7j311w0jswm1.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyft1bvcij311s0j2thx.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyft5y2l4j30ui0iejwg.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyftaeck2j30xr0eutbs.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfucudb0j30uu07nwfl.jpg">
+<meta property="og:image" content="http://www.mashangxue123.com/Users/dmrfcoder/Desktop/3.png">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyfx0fw1lj30m80b4dg1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyfx4nys8j30m80b4jrh.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfx8tm1dj30m80b4q37.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfxddw6gj30u014014t.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfxhr56uj30m80m8ad5.jpg">
+<meta property="og:updated_time" content="2018-12-07T12:12:00.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="爬取了3W+用户评价后发现用户眼中的坚果3是这样的">
 <meta name="twitter:description" content="实现过程介绍从网页爬取数据思路首先我们打开京东商城坚果3 的购买页面：然后按F12进入开发者控制台（审查元素）：发现什么都没有，不要紧，点开评论区，你就会发现控制台出现类似这些信息：控制台从刚才的没有信息到现在获取到当前信息，唯一的变化就是你打开了评论，所以网页返回的评论区内容一定在当前控制台的某个位置，从Name字段一个一个分析，就可以发现很明显的一行：很明显这里就是我们需要的评论区数据，然后仔">
-<meta name="twitter:image" content="https://img-
-blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxyfsrsxnnj311v0jvthl.jpg">
 
 
 
@@ -414,8 +401,8 @@ blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -493,18 +480,11 @@ blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
       
 
       
-        <h1 id="实现过程介绍"><a href="#实现过程介绍" class="headerlink" title="实现过程介绍"></a>实现过程介绍</h1><h2 id="从网页爬取数据"><a href="#从网页爬取数据" class="headerlink" title="从网页爬取数据"></a>从网页爬取数据</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先我们打开京东商城坚果3 的购买页面：<br><img src="https://img-
-blog.csdn.net/20180427131455676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后按F12进入开发者控制台（审查元素）：<br><img src="https://img-
-blog.csdn.net/20180427131508694?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>发现什么都没有，不要紧，点开评论区，你就会发现控制台出现类似这些信息：<br><img src="https://img-
-blog.csdn.net/20180427131732633?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>控制台从刚才的没有信息到现在获取到当前信息，唯一的变化就是你打开了评论，所以网页返回的评论区内容一定在当前控制台的某个位置，从Name字段一个一个分析，就可以发现很明显的一行：<br><img src="https://img-
-blog.csdn.net/20180427131757161?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>很明显这里就是我们需要的评论区数据，然后仔细分析其对应的Headers，就会发现我们获取数据需要的基本信息：<br><img src="https://img-
-blog.csdn.net/20180427131809302?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后点开preview，就会发现返回数据转化为json格式后的内容：<br><img src="https://img-
-blog.csdn.net/20180427131818464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>进一步打开Response，看到网页返回的原始数据：<br><img src="https://img-
-blog.csdn.net/20180427131827248?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>可以看到，网页返回的原始数据是用一个fetchJSON_comment98vv1587包裹着的json字符串，到这里，我们的思路就很清晰了：<br><strong>首先用URL和对应的Query String<br>Parameters模仿网页发送请求，收到的Response将会是一份由fetchJSON_comment98vv1587（）包裹着的包含json数据的String，我们用正则表达式将json数据提取出来，然后对json数据进行解析并获取想要字段的数据即可。</strong></p>
+        <h1 id="实现过程介绍"><a href="#实现过程介绍" class="headerlink" title="实现过程介绍"></a>实现过程介绍</h1><h2 id="从网页爬取数据"><a href="#从网页爬取数据" class="headerlink" title="从网页爬取数据"></a>从网页爬取数据</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先我们打开京东商城坚果3 的购买页面：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxyfsrsxnnj311v0jvthl.jpg" alt="1"><br>然后按F12进入开发者控制台（审查元素）：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyfsxb5k7j311w0jswm1.jpg" alt="2"><br>发现什么都没有，不要紧，点开评论区，你就会发现控制台出现类似这些信息：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyft1bvcij311s0j2thx.jpg" alt="3"><br>控制台从刚才的没有信息到现在获取到当前信息，唯一的变化就是你打开了评论，所以网页返回的评论区内容一定在当前控制台的某个位置，从Name字段一个一个分析，就可以发现很明显的一行：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyft5y2l4j30ui0iejwg.jpg" alt="4"><br>很明显这里就是我们需要的评论区数据，然后仔细分析其对应的Headers，就会发现我们获取数据需要的基本信息：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyftaeck2j30xr0eutbs.jpg" alt="5"><br>然后点开preview，就会发现返回数据转化为json格式后的内容：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfucudb0j30uu07nwfl.jpg" alt="2"><br>进一步打开Response，看到网页返回的原始数据：  </p>
+<p><img src="/Users/dmrfcoder/Desktop/3.png" alt="3"><br>可以看到，网页返回的原始数据是用一个fetchJSON_comment98vv1587包裹着的json字符串，到这里，我们的思路就很清晰了：<br><strong>首先用URL和对应的Query String<br>Parameters模仿网页发送请求，收到的Response将会是一份由fetchJSON_comment98vv1587（）包裹着的包含json数据的String，我们用正则表达式将json数据提取出来，然后对json数据进行解析并获取想要字段的数据即可。</strong></p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>首先根据网页控制台的信息定义相关必要的变量：</p>
-<pre><code>url=&#39;https://club.jd.com/comment/productPageComments.action&#39;
-
-QueryStringParameters={ &#39;callback&#39;:&#39;fetchJSON_comment98vv1587&#39;,
+<p>​<br>    url=’<a href="https://club.jd.com/comment/productPageComments.action" target="_blank" rel="noopener">https://club.jd.com/comment/productPageComments.action</a>‘</p>
+<pre><code>QueryStringParameters={ &#39;callback&#39;:&#39;fetchJSON_comment98vv1587&#39;,
        &#39;productId&#39;:&#39;7029545&#39;,
        &#39;score&#39;:0,
        &#39;sortType&#39;:5,
@@ -513,11 +493,8 @@ QueryStringParameters={ &#39;callback&#39;:&#39;fetchJSON_comment98vv1587&#39;,
        &#39;isShadowSku&#39;:0,
        &#39;fold&#39;:1 }
 </code></pre><p>需要注意的是这里的url并不是直接将控制台显示的url全部拿过来，而是只要其前一部分，因为如果用控制台上的url，则只能获取到当前页面的评论，我们想要获取全部的评论，所以必须动态变化url，这里我们将url分为两部分写，这样方便后面调整page以获取不同页面的评论。<br>然后实现爬取数据的逻辑代码：</p>
-<pre><code>hotcomments = []
-while(True):
-    t=s.get(url,params=data).text #模拟网页发送请求并接收返回数据
-
-    try:
+<p>​<br>    hotcomments = []<br>    while(True):<br>        t=s.get(url,params=data).text #模拟网页发送请求并接收返回数据</p>
+<pre><code>    try:
         t=re.search(r&#39;(?&lt;=fetchJSON_comment98vv1587\().*(?=\);)&#39;,t).group(0)#使用正则表达式匹配‘fetchJSON_comment98vv1587’
     except Exception as e:
         break
@@ -540,65 +517,13 @@ while(True):
         break
     data[&#39;page&#39;]+=1  #改变page字段，下一次循环爬取下一页评论
 </code></pre><p>当以上当以上代码执行完成之后就可以将所有评论信息放在 hotcomments中，然后就可以从中拿取数据进行分析了。</p>
-<h2 id="使用Bar进行各项指标柱状图可视化"><a href="#使用Bar进行各项指标柱状图可视化" class="headerlink" title="使用Bar进行各项指标柱状图可视化"></a>使用Bar进行各项指标柱状图可视化</h2><h3 id="三种不同颜色评论数量所占百分比"><a href="#三种不同颜色评论数量所占百分比" class="headerlink" title="三种不同颜色评论数量所占百分比"></a>三种不同颜色评论数量所占百分比</h3><pre><code>a= productColor.count(u&#39;碳黑色&#39;)
-b=productColor.count(u&#39;酒红色&#39;)
-c=productColor.count(u&#39;浅金色&#39;)
-d=float(a+b+c)
-a=float(a/d)
-b=float(b/d)
-c=float(c/d)
-
-ds = tablib.Dataset()
-ds.headers = [&#39;颜色&#39;, &#39;评论数&#39;]
-
-ds.append([&#39;碳黑色&#39;,a])
-ds.append([&#39;酒红色&#39;, b])
-ds.append([&#39;浅金色&#39;, c])
-
-bar = Bar(&#39;颜色&#39;)
-bar.add(&#39;评论数量(%)&#39;, ds.get_col(0), ds.get_col(1))
-bar.render(&#39;color_bar.html&#39;)
-</code></pre><h3 id="从9号到26号单天评价数量所占百分比"><a href="#从9号到26号单天评价数量所占百分比" class="headerlink" title="从9号到26号单天评价数量所占百分比"></a>从9号到26号单天评价数量所占百分比</h3><pre><code>ds2 = tablib.Dataset()
-ds2.headers = [&#39;评价时间&#39;, &#39;评论数&#39;]
-f=0.0
-for i in range(9,27):
-    f=f+creationTime.count(i)
-
-for i in range(9,27):
-    ds2.append([str(i), creationTime.count(i)/f])
-
-bar2 = Bar(&#39;评价时间（购买时间）&#39;)
-bar2.add(&#39;评论数量(%)&#39;, ds2.get_col(0), ds2.get_col(1))
-bar2.render(&#39;time_bar.html&#39;)
-</code></pre><h3 id="不同评分所占百分比"><a href="#不同评分所占百分比" class="headerlink" title="不同评分所占百分比"></a>不同评分所占百分比</h3><pre><code>ds3 = tablib.Dataset()
-ds3.headers = [&#39;评分&#39;, &#39;评论数&#39;]
-e=0.0
-for i in range(0,6):
-    j=5-i
-    e+=score.count(j)
-
-
-for i in range(0,6):
-    j=5-i
-    ds3.append([str(j), score.count(j)/e])
-
-bar3 = Bar(&#39;评分&#39;)
-bar3.add(&#39;评论数量(%)&#39;, ds3.get_col(0), ds3.get_col(1))
-bar3.render(&#39;score_bar.html&#39;)
-</code></pre><h2 id="使用WordCloud进行评论词云可视化"><a href="#使用WordCloud进行评论词云可视化" class="headerlink" title="使用WordCloud进行评论词云可视化"></a>使用WordCloud进行评论词云可视化</h2><pre><code>content_text = &quot; &quot;.join(content_list)
-bg_pic = imread(&#39;../WoMen_EasonChen/eason2.png&#39;)
-wordcloud = WordCloud(mask=bg_pic,font_path=&#39;../Font/SourceHanSansSC-Heavy.otf&#39;,background_color=&#39;white&#39;,max_words=200).generate(content_text)
-plt.figure()
-plt.imshow(wordcloud,interpolation=&#39;bilinear&#39;)
-plt.axis(&#39;off&#39;)
-plt.show()
-</code></pre><h2 id="可视化结果"><a href="#可视化结果" class="headerlink" title="可视化结果"></a>可视化结果</h2><p><img src="https://img-
-blog.csdn.net/20180427131847405?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>从图中可以看出，大部分用户比较喜欢碳黑色（74.38%），购买浅金色的用户最少，约占5%<br><img src="https://img-
-blog.csdn.net/20180427131913305?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>可以看到95%的用户都给出了5分好评<br><img src="https://img-
-blog.csdn.net/20180427131924220?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
-<h4 id="最后看一下词云显示的内容"><a href="#最后看一下词云显示的内容" class="headerlink" title="最后看一下词云显示的内容"></a>最后看一下词云显示的内容</h4><p><img src="https://img-
-blog.csdn.net/20180427131931868?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>在给一张：<br><img src="https://img-
-blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h2 id="使用Bar进行各项指标柱状图可视化"><a href="#使用Bar进行各项指标柱状图可视化" class="headerlink" title="使用Bar进行各项指标柱状图可视化"></a>使用Bar进行各项指标柱状图可视化</h2><h3 id="三种不同颜色评论数量所占百分比"><a href="#三种不同颜色评论数量所占百分比" class="headerlink" title="三种不同颜色评论数量所占百分比"></a>三种不同颜色评论数量所占百分比</h3><p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a= productColor.count(<span class="string">u'碳黑色'</span>)</span><br><span class="line">b=productColor.count(<span class="string">u'酒红色'</span>)</span><br><span class="line">c=productColor.count(<span class="string">u'浅金色'</span>)</span><br><span class="line">d=float(a+b+c)</span><br><span class="line">a=float(a/d)</span><br><span class="line">b=float(b/d)</span><br><span class="line">c=float(c/d)</span><br><span class="line"></span><br><span class="line">ds = tablib.Dataset()</span><br><span class="line">ds.headers = [<span class="string">'颜色'</span>, <span class="string">'评论数'</span>]</span><br><span class="line"></span><br><span class="line">ds.append([<span class="string">'碳黑色'</span>,a])</span><br><span class="line">ds.append([<span class="string">'酒红色'</span>, b])</span><br><span class="line">ds.append([<span class="string">'浅金色'</span>, c])</span><br><span class="line"></span><br><span class="line">bar = Bar(<span class="string">'颜色'</span>)</span><br><span class="line">bar.add(<span class="string">'评论数量(%)'</span>, ds.get_col(<span class="number">0</span>), ds.get_col(<span class="number">1</span>))</span><br><span class="line">bar.render(<span class="string">'color_bar.html'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="从9号到26号单天评价数量所占百分比"><a href="#从9号到26号单天评价数量所占百分比" class="headerlink" title="从9号到26号单天评价数量所占百分比"></a>从9号到26号单天评价数量所占百分比</h3><p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ds2 = tablib.Dataset()</span><br><span class="line">ds2.headers = [<span class="string">'评价时间'</span>, <span class="string">'评论数'</span>]</span><br><span class="line">f=<span class="number">0.0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>,<span class="number">27</span>):</span><br><span class="line">    f=f+creationTime.count(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>,<span class="number">27</span>):</span><br><span class="line">    ds2.append([str(i), creationTime.count(i)/f])</span><br><span class="line"></span><br><span class="line">bar2 = Bar(<span class="string">'评价时间（购买时间）'</span>)</span><br><span class="line">bar2.add(<span class="string">'评论数量(%)'</span>, ds2.get_col(<span class="number">0</span>), ds2.get_col(<span class="number">1</span>))</span><br><span class="line">bar2.render(<span class="string">'time_bar.html'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="不同评分所占百分比"><a href="#不同评分所占百分比" class="headerlink" title="不同评分所占百分比"></a>不同评分所占百分比</h3><p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ds3 = tablib.Dataset()</span><br><span class="line">ds3.headers = [<span class="string">'评分'</span>, <span class="string">'评论数'</span>]</span><br><span class="line">e=<span class="number">0.0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">6</span>):</span><br><span class="line">    j=<span class="number">5</span>-i</span><br><span class="line">    e+=score.count(j)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">6</span>):</span><br><span class="line">    j=<span class="number">5</span>-i</span><br><span class="line">    ds3.append([str(j), score.count(j)/e])</span><br><span class="line"></span><br><span class="line">bar3 = Bar(<span class="string">'评分'</span>)</span><br><span class="line">bar3.add(<span class="string">'评论数量(%)'</span>, ds3.get_col(<span class="number">0</span>), ds3.get_col(<span class="number">1</span>))</span><br><span class="line">bar3.render(<span class="string">'score_bar.html'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
+<h2 id="使用WordCloud进行评论词云可视化"><a href="#使用WordCloud进行评论词云可视化" class="headerlink" title="使用WordCloud进行评论词云可视化"></a>使用WordCloud进行评论词云可视化</h2><p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">content_text = <span class="string">" "</span>.join(content_list)</span><br><span class="line">bg_pic = imread(<span class="string">'../WoMen_EasonChen/eason2.png'</span>)</span><br><span class="line">wordcloud = WordCloud(mask=bg_pic,font_path=<span class="string">'../Font/SourceHanSansSC-Heavy.otf'</span>,background_color=<span class="string">'white'</span>,max_words=<span class="number">200</span>).generate(content_text)</span><br><span class="line">plt.figure()</span><br><span class="line">plt.imshow(wordcloud,interpolation=<span class="string">'bilinear'</span>)</span><br><span class="line">plt.axis(<span class="string">'off'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<h2 id="可视化结果"><a href="#可视化结果" class="headerlink" title="可视化结果"></a>可视化结果</h2><p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyfx0fw1lj30m80b4dg1.jpg" alt="4"><br>从图中可以看出，大部分用户比较喜欢碳黑色（74.38%），购买浅金色的用户最少，约占5%<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyfx4nys8j30m80b4jrh.jpg" alt="5"><br>可以看到95%的用户都给出了5分好评<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfx8tm1dj30m80b4q37.jpg" alt="6"></p>
+<h4 id="最后看一下词云显示的内容"><a href="#最后看一下词云显示的内容" class="headerlink" title="最后看一下词云显示的内容"></a>最后看一下词云显示的内容</h4><p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfxddw6gj30u014014t.jpg" alt="7"><br>在给一张：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxyfxhr56uj30m80m8ad5.jpg" alt="8"></p>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>坚果3刚发布的时候在网上可以看到很多人在黑他，罗老师也毫不客气地表示“拉黑”这些锤黑，本人不是锤粉也不是锤黑，只是觉得中国像罗老师这样天生骄傲的企业家不多了，就像罗振宇老师说的希望罗永浩成功那样，我也希望罗老师成功，因为中国需要这么一个天生骄傲的企业家，希望罗老师会是下一个乔布斯甚至超越乔布斯，期待锤子科技515可以创造传奇。</p>
 
       
@@ -646,21 +571,9 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
       
         <div class="post-tags">
           
-            <a href="/tags/坚果3/" rel="tag"><i class="fa fa-tag"></i>
-
- 坚果3</a>
-          
-            <a href="/tags/锤子/" rel="tag"><i class="fa fa-tag"></i>
-
- 锤子</a>
-          
             <a href="/tags/爬虫/" rel="tag"><i class="fa fa-tag"></i>
 
  爬虫</a>
-          
-            <a href="/tags/用户评论/" rel="tag"><i class="fa fa-tag"></i>
-
- 用户评论</a>
           
         </div>
       
@@ -796,7 +709,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -807,7 +720,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -818,7 +731,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -924,7 +837,7 @@ blog.csdn.net/20180427131939309?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

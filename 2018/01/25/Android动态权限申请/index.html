@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="动态权限申请,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句：  implementation  &amp;#39;com.github.dfqin:grantor:2.1.0&amp;#39;">
+<meta name="description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句： ​1implementation  &apos;com.github.dfqin:grantor:2.1.0&apos; 添加后Sync">
+<meta name="keywords" content="动态权限申请">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android动态权限申请">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/01/25/Android动态权限申请/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句：  implementation  &amp;#39;com.github.dfqin:grantor:2.1.0&amp;#39;">
+<meta property="og:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句： ​1implementation  &apos;com.github.dfqin:grantor:2.1.0&apos; 添加后Sync">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:11.976Z">
+<meta property="og:updated_time" content="2018-12-07T09:12:13.693Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动态权限申请">
-<meta name="twitter:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句：  implementation  &amp;#39;com.github.dfqin:grantor:2.1.0&amp;#39;">
+<meta name="twitter:description" content="摘要本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题 说明：本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。 添加相关依赖在你项目的app gradle的dependencies下添加下列语句： ​1implementation  &apos;com.github.dfqin:grantor:2.1.0&apos; 添加后Sync">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  320
+                  328
                 </span>
               
 
@@ -447,30 +470,12 @@
         <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了如何用最短的代码解决Android 6.0以上的动态权限申请问题</p>
 <h1 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h1><p>本文不讲原理不讲过程只讲如何用最简单的方法使用，如想了解具体原理可深入工具类的源码进行学习，或者去找其他资源。</p>
 <h1 id="添加相关依赖"><a href="#添加相关依赖" class="headerlink" title="添加相关依赖"></a>添加相关依赖</h1><p>在你项目的app gradle的dependencies下添加下列语句：</p>
-<pre><code> implementation  &#39;com.github.dfqin:grantor:2.1.0&#39;
-</code></pre><p>添加后Sync，即可将相关工具代码导入</p>
+<p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation  <span class="string">'com.github.dfqin:grantor:2.1.0'</span></span><br></pre></td></tr></table></figure></p>
+<p>添加后Sync，即可将相关工具代码导入</p>
 <h1 id="代码实现动态权限申请"><a href="#代码实现动态权限申请" class="headerlink" title="代码实现动态权限申请"></a>代码实现动态权限申请</h1><p>首先要保证在manifests里面加上你需要的权限，然后在MainActivity中添加如下方法：</p>
-<pre><code>private void RequestPermission() {
-        String[] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        if (PermissionsUtil.hasPermission(MainActivity.this, permissions)) {
-            //已经获取相关权限
-        } else {
-            PermissionsUtil.requestPermission(MainActivity.this, new PermissionListener() {
-                @Override
-                public void permissionGranted(@NonNull String[] permission) {
-//用户授予了权限
-                }
-
-                @Override
-                public void permissionDenied(@NonNull String[] permission) {
-//用户拒绝了权限
-                    Toast.makeText(MainActivity.this, &quot;相关权限被拒绝，本应用将无法正常运行&quot;, Toast.LENGTH_SHORT).show();
-                }
-            }, permissions);
-        }
-    }
-</code></pre><p>然后在OnCreate中调用该方法即可，如果要申请其他的权限只需要把本文代码中permissions的内容改成你自己的即可。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/dfqin/article/details/55190073" target="_blank" rel="noopener"> http://blog.csdn.net/dfqin/article/details/55190073
+<p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">RequestPermission</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String[] permissions = &#123;Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE&#125;;</span><br><span class="line">        <span class="keyword">if</span> (PermissionsUtil.hasPermission(MainActivity.<span class="keyword">this</span>, permissions)) &#123;</span><br><span class="line">            <span class="comment">//已经获取相关权限</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            PermissionsUtil.requestPermission(MainActivity.<span class="keyword">this</span>, <span class="keyword">new</span> PermissionListener() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">permissionGranted</span><span class="params">(@NonNull String[] permission)</span> </span>&#123;</span><br><span class="line"><span class="comment">//用户授予了权限</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">permissionDenied</span><span class="params">(@NonNull String[] permission)</span> </span>&#123;</span><br><span class="line"><span class="comment">//用户拒绝了权限</span></span><br><span class="line">                    Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"相关权限被拒绝，本应用将无法正常运行"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, permissions);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在OnCreate中调用该方法即可，如果要申请其他的权限只需要把本文代码中permissions的内容改成你自己的即可。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://blog.csdn.net/dfqin/article/details/55190073" target="_blank" rel="noopener"> http://blog.csdn.net/dfqin/article/details/55190073
 </a> 感谢博主提供的轮子。</p>
 
       
@@ -516,6 +521,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/动态权限申请/" rel="tag"><i class="fa fa-tag"></i>
+
+ 动态权限申请</a>
+          
+        </div>
+      
 
       
       
@@ -535,8 +548,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/12/使用gdb调试程序完全教程/" rel="prev" title="使用gdb调试程序完全教程">
-                使用gdb调试程序完全教程 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/15/2017年度总结/" rel="prev" title="2017年度总结">
+                2017年度总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,7 +661,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -659,7 +672,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -670,7 +683,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -731,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说明："><span class="nav-number">2.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加相关依赖"><span class="nav-number">3.</span> <span class="nav-text">添加相关依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现动态权限申请"><span class="nav-number">4.</span> <span class="nav-text">代码实现动态权限申请</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#说明："><span class="nav-number">2.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加相关依赖"><span class="nav-number">3.</span> <span class="nav-text">添加相关依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现动态权限申请"><span class="nav-number">4.</span> <span class="nav-text">代码实现动态权限申请</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -776,7 +789,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

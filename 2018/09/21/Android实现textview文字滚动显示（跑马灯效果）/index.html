@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="TextView,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来  public class MyTextView extends android.support.v7.widget.AppCompatTextView { public MarqueeTextView(Context context) {     super(context); }  public">
+<meta name="description" content="自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来    123456789101112131415161718public class MyTextView extends android.support.v7.widget.AppCompatTextView &amp;#123;	public MarqueeTextView(Context contex">
+<meta name="keywords" content="TextView">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android实现textview文字滚动显示（跑马灯效果）">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/21/Android实现textview文字滚动显示（跑马灯效果）/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来  public class MyTextView extends android.support.v7.widget.AppCompatTextView { public MarqueeTextView(Context context) {     super(context); }  public">
+<meta property="og:description" content="自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来    123456789101112131415161718public class MyTextView extends android.support.v7.widget.AppCompatTextView &amp;#123;	public MarqueeTextView(Context contex">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:22.163Z">
+<meta property="og:updated_time" content="2018-12-07T08:57:13.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android实现textview文字滚动显示（跑马灯效果）">
-<meta name="twitter:description" content="自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来  public class MyTextView extends android.support.v7.widget.AppCompatTextView { public MarqueeTextView(Context context) {     super(context); }  public">
+<meta name="twitter:description" content="自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来    123456789101112131415161718public class MyTextView extends android.support.v7.widget.AppCompatTextView &amp;#123;	public MarqueeTextView(Context contex">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  176
+                  171
                 </span>
               
 
@@ -446,41 +469,15 @@
       
         <ul>
 <li><p>自定义Textview并对其进行改造,主要目的是让textview获取焦点，这样文字才能滚动起来 </p>
-<pre><code>public class MyTextView extends android.support.v7.widget.AppCompatTextView {
-public MarqueeTextView(Context context) {
-    super(context);
-}
-
-public MarqueeTextView(Context context, AttributeSet attrs) {
-    super(context, attrs);
-}
-
-public MarqueeTextView(Context context, AttributeSet attrs, int defStyle) {
-    super(context, attrs, defStyle);
-}
-
-@Override
-public boolean isFocused() {//必须重写，且返回值是true，表示始终获取焦点
-    return true;
-}
-</code></pre><p>}</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTextView</span> <span class="keyword">extends</span> <span class="title">android</span>.<span class="title">support</span>.<span class="title">v7</span>.<span class="title">widget</span>.<span class="title">AppCompatTextView</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MarqueeTextView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context);</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MarqueeTextView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context, attrs);</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">MarqueeTextView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context, attrs, defStyle);</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFocused</span><span class="params">()</span> </span>&#123;<span class="comment">//必须重写，且返回值是true，表示始终获取焦点</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
 <li><p>xml文件中设置必要属性 </p>
-<pre><code>&lt;MyTextView
-android:layout_width=&quot;match_parent&quot;
-android:layout_height=&quot;match_parent&quot;
-android:ellipsize=&quot;marquee&quot; //设置跑马灯效果
-android:focusable=&quot;true&quot; //需要有焦点才会滚动
-android:focusableInTouchMode=&quot;true&quot;
-android:marqueeRepeatLimit=&quot;marquee_forever&quot; //设置循环滚动为无限循环
-android:scrollHorizontally=&quot;true&quot;
-android:singleLine=&quot;true&quot; //单行显示
-</code></pre><p>   /&gt;</p>
 </li>
 </ul>
+<pre><code>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">MyTextView</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:ellipsize</span>=<span class="string">"marquee"</span> //设置跑马灯效果</span></span><br><span class="line"><span class="tag">   <span class="attr">android:focusable</span>=<span class="string">"true"</span> //需要有焦点才会滚动</span></span><br><span class="line"><span class="tag">   <span class="attr">android:focusableInTouchMode</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:marqueeRepeatLimit</span>=<span class="string">"marquee_forever"</span> //设置循环滚动为无限循环</span></span><br><span class="line"><span class="tag">   <span class="attr">android:scrollHorizontally</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:singleLine</span>=<span class="string">"true"</span> //单行显示</span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br></pre></td></tr></table></figure>
 
+  ​    
+</code></pre>
       
     </div>
     
@@ -523,6 +520,14 @@ android:singleLine=&quot;true&quot; //单行显示
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TextView/" rel="tag"><i class="fa fa-tag"></i>
+
+ TextView</a>
+          
+        </div>
       
 
       
@@ -647,7 +652,7 @@ android:singleLine=&quot;true&quot; //单行显示
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -658,7 +663,7 @@ android:singleLine=&quot;true&quot; //单行显示
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -669,7 +674,7 @@ android:singleLine=&quot;true&quot; //单行显示
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -759,7 +764,7 @@ android:singleLine=&quot;true&quot; //单行显示
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

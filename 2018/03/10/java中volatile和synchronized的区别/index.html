@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Java,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="概述java中volatile和synchronized关键字都是伴随着多线程经常使用的关键字，很多然搞不清楚二者的区别，这篇文章记录下来笔者的一点认识，若有不正确的地方欢迎大家在评论区指出。 区别 volatile本质是在告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取；synchronized则是锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞住。  volat">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java中volatile和synchronized的区别">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/03/10/java中volatile和synchronized的区别/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="概述java中volatile和synchronized关键字都是伴随着多线程经常使用的关键字，很多然搞不清楚二者的区别，这篇文章记录下来笔者的一点认识，若有不正确的地方欢迎大家在评论区指出。 区别 volatile本质是在告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取；synchronized则是锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞住。  volat">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:06.121Z">
+<meta property="og:updated_time" content="2018-12-07T08:29:22.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java中volatile和synchronized的区别">
 <meta name="twitter:description" content="概述java中volatile和synchronized关键字都是伴随着多线程经常使用的关键字，很多然搞不清楚二者的区别，这篇文章记录下来笔者的一点认识，若有不正确的地方欢迎大家在评论区指出。 区别 volatile本质是在告诉jvm当前变量在寄存器（工作内存）中的值是不确定的，需要从主存中读取；synchronized则是锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞住。  volat">
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -453,7 +476,7 @@
 <li>volatile标记的变量不会被编译器优化；synchronized标记的变量可以被编译器优化 </li>
 </ul>
 <p>加粗字体部分的原因如下：<br>线程A修改了变量还没结束时,另外的线程B可以看到已修改的值,而且可以修改这个变量,而不用等待A释放锁,因为Volatile 变量没上锁。</p>
-<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><p>用在多线程，同步变量。<br>线程为了提高效率，将某成员变量(如A)拷贝了一份（如B），线程中对A的访问其实访问的是B。只在某些动作时才进行A和B的同步。因此存在A和B不一致的情况。volatile就是用来避免这种情况的。volatile告诉jvm，<br>它所修饰的变量不保留拷贝，直接访问主内存中的（也就是上面说的A)</p>
+<h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><p>用在多线程，同步变量。<br>线程为了提高效率，将某成员变量(如A)拷贝了一份（如B），线程中对A的访问其实访问的是B。只在某些动作时才进行A和B的同步。因此存在A和B不一致的情况。volatile就是用来避免这种情况的。volatile告诉jvm，它所修饰的变量不保留拷贝，直接访问主内存中的（也就是上面说的A)</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>synchronized关键字很好理解，就是保证所修饰的变量、方法、和类同时只能被一个xx调用（这里没想好修饰词），而volatile是为了保证变量可以同时被多个线程调用，而且没有上锁，即上面提到的线程A修改了变量还没结束时,另外的线程B可以看到已修改的值，这种机制有利有弊，希望大家使用的时候一定要慎重。</p>
 
       
@@ -498,6 +521,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i>
+
+ Java</a>
+          
+        </div>
       
 
       
@@ -631,7 +662,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -642,7 +673,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -653,7 +684,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -759,7 +790,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

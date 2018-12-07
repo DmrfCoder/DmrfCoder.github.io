@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="二叉树,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～ 先序遍历递归实现void PreOrderTraverse(BiTree biTree) {//先序遍历     if (biTree == NULL) {         cout &amp;lt;&amp;lt; &amp;quot;该树为空，无法遍历！&amp;quot; &amp;lt;&amp;lt; endl;     }">
+<meta name="description" content="摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～ 先序遍历递归实现​1234567891011121314void PreOrderTraverse(BiTree biTree) &amp;#123;//先序遍历    if (biTree == NULL) &amp;#123;        cout &amp;lt;&amp;lt; &quot;该树为空，无法遍历！&quot; &amp;lt">
+<meta name="keywords" content="二叉树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构之二叉树的遍历算法合集">
 <meta property="og:url" content="http://www.mashangxue123.com/2017/11/22/数据结构之二叉树的遍历算法合集/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～ 先序遍历递归实现void PreOrderTraverse(BiTree biTree) {//先序遍历     if (biTree == NULL) {         cout &amp;lt;&amp;lt; &amp;quot;该树为空，无法遍历！&amp;quot; &amp;lt;&amp;lt; endl;     }">
+<meta property="og:description" content="摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～ 先序遍历递归实现​1234567891011121314void PreOrderTraverse(BiTree biTree) &amp;#123;//先序遍历    if (biTree == NULL) &amp;#123;        cout &amp;lt;&amp;lt; &quot;该树为空，无法遍历！&quot; &amp;lt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:40:15.000Z">
+<meta property="og:updated_time" content="2018-12-07T10:15:02.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构之二叉树的遍历算法合集">
-<meta name="twitter:description" content="摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～ 先序遍历递归实现void PreOrderTraverse(BiTree biTree) {//先序遍历     if (biTree == NULL) {         cout &amp;lt;&amp;lt; &amp;quot;该树为空，无法遍历！&amp;quot; &amp;lt;&amp;lt; endl;     }">
+<meta name="twitter:description" content="摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～ 先序遍历递归实现​1234567891011121314void PreOrderTraverse(BiTree biTree) &amp;#123;//先序遍历    if (biTree == NULL) &amp;#123;        cout &amp;lt;&amp;lt; &quot;该树为空，无法遍历！&quot; &amp;lt">
 
 
 
@@ -387,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -429,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  577
+                  620
                 </span>
               
 
@@ -445,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -467,130 +468,15 @@
 
       
         <p>摘要：今天用C撸了一遍数据中二叉树常见操作的实现，将实现过程中感觉有意思的几个功能实现记录下来方便以后复习～</p>
-<h1 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h1><h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><pre><code>void PreOrderTraverse(BiTree biTree) {//先序遍历
-    if (biTree == NULL) {
-        cout &lt;&lt; &quot;该树为空，无法遍历！&quot; &lt;&lt; endl;
-    }
-    cout &lt;&lt; biTree-&gt;data &lt;&lt; &quot; &quot;;
-    if (biTree-&gt;lchild != NULL) {
-        PreOrderTraverse(biTree-&gt;lchild);
-    }
-
-    if (biTree-&gt;rchild != NULL) {
-        PreOrderTraverse(biTree-&gt;rchild);
-    }
-
-}
-</code></pre><h2 id="非递归实现"><a href="#非递归实现" class="headerlink" title="非递归实现"></a>非递归实现</h2><pre><code>void PreOrderTraverse2(BiTree biTree) {//先序遍历
-    stack&lt;BiNode *&gt; stack1;
-    BiNode *biNode = biTree;
-
-    stack1.push(biNode);
-
-
-    while (biNode != NULL &amp;&amp; !stack1.empty()) {
-        biNode = stack1.top();
-        stack1.pop();
-        cout &lt;&lt; biNode-&gt;data &lt;&lt; &quot; &quot;;
-
-        if (biNode-&gt;rchild != NULL) {
-            stack1.push(biNode-&gt;rchild);
-        }
-
-        if (biNode-&gt;lchild != NULL) {
-            stack1.push(biNode-&gt;lchild);
-        }
-    }
-}
-</code></pre><h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><h2 id="递归实现-1"><a href="#递归实现-1" class="headerlink" title="递归实现"></a>递归实现</h2><pre><code>void InOrderTraverse(BiTree biTree) {
-    if (biTree == NULL) {
-        cout &lt;&lt; &quot;该树为空，无法遍历！&quot; &lt;&lt; endl;
-    }
-
-    if (biTree-&gt;lchild != NULL) {
-        InOrderTraverse(biTree-&gt;lchild);
-    }
-    cout &lt;&lt; biTree-&gt;data &lt;&lt; &quot; &quot;;
-    if (biTree-&gt;rchild != NULL) {
-        InOrderTraverse(biTree-&gt;rchild);
-    }
-}
-</code></pre><h2 id="非递归实现-1"><a href="#非递归实现-1" class="headerlink" title="非递归实现"></a>非递归实现</h2><pre><code>void InOrderTraverse2(BiTree biTree) {
-    if (biTree == NULL) {
-        cout &lt;&lt; &quot;该树为空，无法遍历！&quot; &lt;&lt; endl;
-    }
-
-    stack&lt;BiNode *&gt; stack1;
-    BiNode *biNode = biTree;
-
-    while (biNode != NULL || !stack1.empty()) {
-        if (biNode != NULL) {
-            stack1.push(biNode);
-            biNode = biNode-&gt;lchild;
-        } else {
-            biNode = stack1.top();
-            stack1.pop();
-            cout &lt;&lt; biNode-&gt;data &lt;&lt; &quot; &quot;;
-            biNode = biNode-&gt;rchild;
-        }
-    }
-}
-</code></pre><h1 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h1><h2 id="递归实现-2"><a href="#递归实现-2" class="headerlink" title="递归实现"></a>递归实现</h2><h3 id="二叉树Depth（）的实现"><a href="#二叉树Depth（）的实现" class="headerlink" title="二叉树Depth（）的实现"></a>二叉树Depth（）的实现</h3><pre><code>int Depth(BiTree biTree) {
-
-    if (biTree == NULL) {
-        return 0;
-    }
-
-    int u = Depth(biTree-&gt;lchild);
-    int v = Depth(biTree-&gt;rchild);
-
-    return u &gt; v ? u + 1 : v + 1;
-}
-</code></pre><h3 id="遍历实现"><a href="#遍历实现" class="headerlink" title="遍历实现"></a>遍历实现</h3><pre><code>void LevelOrderTraverse(BiTree biTree) {
-    for (int i = 1; i &lt;= Depth(biTree); ++i) {
-        LevelOrderTraversePrint(biTree, i);
-    }
-}
-
-void LevelOrderTraversePrint(BiTree biTree, int depth) {
-    if (biTree == NULL) {
-        cout &lt;&lt; &quot;该树为空，无法遍历！&quot; &lt;&lt; endl;
-    }
-    if (depth == 1) {
-        cout &lt;&lt; biTree-&gt;data &lt;&lt; &quot; &quot;;
-        return;
-    } else {
-        if (biTree-&gt;lchild != NULL) {
-            LevelOrderTraversePrint(biTree-&gt;lchild, depth - 1);
-        }
-
-
-        if (biTree-&gt;rchild != NULL) {
-            LevelOrderTraversePrint(biTree-&gt;rchild, depth - 1);
-        }
-    }
-}
-</code></pre><h2 id="非递归实现-2"><a href="#非递归实现-2" class="headerlink" title="非递归实现"></a>非递归实现</h2><pre><code>void PreOrderTraverse2(BiTree biTree) {//先序遍历
-
-    stack&lt;BiNode *&gt; stack1;
-    BiNode *biNode = biTree;
-
-    stack1.push(biNode);
-
-    while (biNode != NULL &amp;&amp; !stack1.empty()) {
-        biNode = stack1.top();
-        stack1.pop();
-        cout &lt;&lt; biNode-&gt;data &lt;&lt; &quot; &quot;;
-
-        if (biNode-&gt;rchild != NULL) {
-            stack1.push(biNode-&gt;rchild);
-        }
-        if (biNode-&gt;lchild != NULL) {
-            stack1.push(biNode-&gt;lchild);
-        }
-    }
-}
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>遍历的时候使用非递归算法比采用递归算法的效率高效，但是同时非递归的算法实现比递归算法更难（除了层次遍历，个人觉得层次遍历的非递归实现反而比递归实现更简单）。</p>
+<h1 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h1><h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraverse</span><span class="params">(BiTree biTree)</span> </span>&#123;<span class="comment">//先序遍历</span></span><br><span class="line">    <span class="keyword">if</span> (biTree == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"该树为空，无法遍历！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; biTree-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="keyword">if</span> (biTree-&gt;lchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        PreOrderTraverse(biTree-&gt;lchild);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (biTree-&gt;rchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        PreOrderTraverse(biTree-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="非递归实现"><a href="#非递归实现" class="headerlink" title="非递归实现"></a>非递归实现</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraverse2</span><span class="params">(BiTree biTree)</span> </span>&#123;<span class="comment">//先序遍历</span></span><br><span class="line">    <span class="built_in">stack</span>&lt;BiNode *&gt; stack1;</span><br><span class="line">    BiNode *biNode = biTree;</span><br><span class="line"></span><br><span class="line">    stack1.push(biNode);</span><br><span class="line">    </span><br><span class="line">   <span class="keyword">while</span> (biNode != <span class="literal">NULL</span> &amp;&amp; !stack1.empty()) &#123;</span><br><span class="line">        biNode = stack1.top();</span><br><span class="line">        stack1.pop();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; biNode-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (biNode-&gt;rchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            stack1.push(biNode-&gt;rchild);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (biNode-&gt;lchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            stack1.push(biNode-&gt;lchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h1><h2 id="递归实现-1"><a href="#递归实现-1" class="headerlink" title="递归实现"></a>递归实现</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraverse</span><span class="params">(BiTree biTree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (biTree == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"该树为空，无法遍历！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (biTree-&gt;lchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        InOrderTraverse(biTree-&gt;lchild);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; biTree-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    <span class="keyword">if</span> (biTree-&gt;rchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        InOrderTraverse(biTree-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="非递归实现-1"><a href="#非递归实现-1" class="headerlink" title="非递归实现"></a>非递归实现</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraverse2</span><span class="params">(BiTree biTree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (biTree == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"该树为空，无法遍历！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">stack</span>&lt;BiNode *&gt; stack1;</span><br><span class="line">    BiNode *biNode = biTree;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (biNode != <span class="literal">NULL</span> || !stack1.empty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (biNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            stack1.push(biNode);</span><br><span class="line">            biNode = biNode-&gt;lchild;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            biNode = stack1.top();</span><br><span class="line">            stack1.pop();</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; biNode-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">            biNode = biNode-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="层次遍历"><a href="#层次遍历" class="headerlink" title="层次遍历"></a>层次遍历</h1><h2 id="递归实现-2"><a href="#递归实现-2" class="headerlink" title="递归实现"></a>递归实现</h2><h3 id="二叉树Depth（）的实现"><a href="#二叉树Depth（）的实现" class="headerlink" title="二叉树Depth（）的实现"></a>二叉树Depth（）的实现</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Depth</span><span class="params">(BiTree biTree)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (biTree == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> u = Depth(biTree-&gt;lchild);</span><br><span class="line">    <span class="keyword">int</span> v = Depth(biTree-&gt;rchild);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> u &gt; v ? u + <span class="number">1</span> : v + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="遍历实现"><a href="#遍历实现" class="headerlink" title="遍历实现"></a>遍历实现</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LevelOrderTraverse</span><span class="params">(BiTree biTree)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= Depth(biTree); ++i) &#123;</span><br><span class="line">        LevelOrderTraversePrint(biTree, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LevelOrderTraversePrint</span><span class="params">(BiTree biTree, <span class="keyword">int</span> depth)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (biTree == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"该树为空，无法遍历！"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (depth == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; biTree-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (biTree-&gt;lchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            LevelOrderTraversePrint(biTree-&gt;lchild, depth - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (biTree-&gt;rchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            LevelOrderTraversePrint(biTree-&gt;rchild, depth - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
+<h2 id="非递归实现-2"><a href="#非递归实现-2" class="headerlink" title="非递归实现"></a>非递归实现</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraverse2</span><span class="params">(BiTree biTree)</span> </span>&#123;<span class="comment">//先序遍历</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">stack</span>&lt;BiNode *&gt; stack1;</span><br><span class="line">    BiNode *biNode = biTree;</span><br><span class="line"></span><br><span class="line">    stack1.push(biNode);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (biNode != <span class="literal">NULL</span> &amp;&amp; !stack1.empty()) &#123;</span><br><span class="line">        biNode = stack1.top();</span><br><span class="line">        stack1.pop();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; biNode-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (biNode-&gt;rchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            stack1.push(biNode-&gt;rchild);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (biNode-&gt;lchild != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            stack1.push(biNode-&gt;lchild);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>遍历的时候使用非递归算法比采用递归算法的效率高效，但是同时非递归的算法实现比递归算法更难（除了层次遍历，个人觉得层次遍历的非递归实现反而比递归实现更简单）。</p>
 
       
     </div>
@@ -634,6 +520,14 @@ void LevelOrderTraversePrint(BiTree biTree, int depth) {
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/二叉树/" rel="tag"><i class="fa fa-tag"></i>
+
+ 二叉树</a>
+          
+        </div>
       
 
       
@@ -767,7 +661,7 @@ void LevelOrderTraversePrint(BiTree biTree, int depth) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -778,7 +672,7 @@ void LevelOrderTraversePrint(BiTree biTree, int depth) {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -789,7 +683,7 @@ void LevelOrderTraversePrint(BiTree biTree, int depth) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -895,7 +789,7 @@ void LevelOrderTraversePrint(BiTree biTree, int depth) {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="AES加密,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的 DES，已经被多方分析且广为全世界所使用。简单说就是 DES 的增强版，比 DES的加密强度更高。 AES 与 DES一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反">
+<meta name="keywords" content="AES加密">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android数据加密之AES加密">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/03/Android数据加密之AES加密/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的 DES，已经被多方分析且广为全世界所使用。简单说就是 DES 的增强版，比 DES的加密强度更高。 AES 与 DES一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:27.395Z">
+<meta property="og:updated_time" content="2018-12-07T08:53:52.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android数据加密之AES加密">
 <meta name="twitter:description" content="高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的 DES，已经被多方分析且广为全世界所使用。简单说就是 DES 的增强版，比 DES的加密强度更高。 AES 与 DES一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反">
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  501
+                  505
                 </span>
               
 
@@ -444,80 +467,19 @@
       
 
       
-        <p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael<br>加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的 DES，已经被多方分析且广为全世界所使用。简单说就是 DES 的增强版，比 DES<br>的加密强度更高。</p>
-<p>AES 与 DES<br>一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反馈模式（CFB）和输出反馈模式（OFB）。关于加密模式的介绍，推荐这篇文章：<br><a href="https://blog.poxiao.me/p/advanced-
+        <p>高级加密标准（英语：Advanced Encryption Standard，缩写：AES），在密码学中又称 Rijndael<br>加密法，是美国联邦政府采用的一种区块加密标准。这个标准用来替代原先的 DES，已经被多方分析且广为全世界所使用。简单说就是 DES 的增强版，比 DES的加密强度更高。</p>
+<p>AES 与 DES一样，一共有四种加密模式：电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反馈模式（CFB）和输出反馈模式（OFB）。关于加密模式的介绍，推荐这篇文章：<br><a href="https://blog.poxiao.me/p/advanced-
 encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高级加密标准AES的工作模式（ECB、CBC、CFB、OFB） </a></p>
 <p>直接给代码：</p>
-<h2 id="加密-byte级别"><a href="#加密-byte级别" class="headerlink" title="加密(byte级别)"></a>加密(byte级别)</h2><pre><code>    /* 加密使用的 key */
-    private static final String AES_KEY = &quot;KUbHwTqBy6TBQ2gN&quot;;
-    /* 加密使用的 IV */
-    private static final String AES_IV = &quot;pIbF6GR3XEN1PG05&quot;;
+<h2 id="加密-byte级别"><a href="#加密-byte级别" class="headerlink" title="加密(byte级别)"></a>加密(byte级别)</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">/* 加密使用的 key */</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AES_KEY = <span class="string">"KUbHwTqBy6TBQ2gN"</span>;</span><br><span class="line">   <span class="comment">/* 加密使用的 IV */</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AES_IV = <span class="string">"pIbF6GR3XEN1PG05"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * AES 加密</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> content 待加密内容</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> key     密钥</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> 加密的数据</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] encryptAES(<span class="keyword">byte</span>[] content, <span class="keyword">byte</span>[] key) &#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           SecretKeySpec secretKeySpec = <span class="keyword">new</span> SecretKeySpec(key, <span class="string">"AES"</span>);</span><br><span class="line">           <span class="comment">// AES 是加密方式, CBC 是工作模式, PKCS5Padding 是填充模式</span></span><br><span class="line">           Cipher cipher = Cipher.getInstance(<span class="string">"AES/CBC/PKCS5Padding"</span>);</span><br><span class="line">           <span class="comment">// IV 是初始向量，可以增强密码的强度</span></span><br><span class="line">           cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, <span class="keyword">new</span> IvParameterSpec(AES_IV.getBytes()));</span><br><span class="line">           <span class="keyword">return</span> cipher.doFinal(content);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           logger.error(e);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
+<h2 id="解密-（byte级别）"><a href="#解密-（byte级别）" class="headerlink" title="解密 （byte级别）"></a>解密 （byte级别）</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * AES 解密</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> content 待解密内容</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key     密钥</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 解密的数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] decryptAES(<span class="keyword">byte</span>[] content, <span class="keyword">byte</span>[] key) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            SecretKeySpec secretKeySpec = <span class="keyword">new</span> SecretKeySpec(key, <span class="string">"AES"</span>);</span><br><span class="line">            Cipher cipher = Cipher.getInstance(<span class="string">"AES/CBC/PKCS5Padding"</span>);</span><br><span class="line">            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, <span class="keyword">new</span> IvParameterSpec(AES_IV.getBytes()));</span><br><span class="line">            <span class="keyword">return</span> cipher.doFinal(content);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
+<h2 id="加密（String级别）"><a href="#加密（String级别）" class="headerlink" title="加密（String级别）"></a>加密（String级别）</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TOKEN_KEY = <span class="string">"91a29fa7w46d8x41"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encrypt</span><span class="params">(String plain)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Cipher cipher = Cipher.getInstance(<span class="string">"AES/CBC/PKCS5Padding"</span>);</span><br><span class="line">        AlgorithmParameterSpec ivSpec = <span class="keyword">new</span> IvParameterSpec(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">16</span>]);</span><br><span class="line">        SecretKeySpec newKey = <span class="keyword">new</span> SecretKeySpec(TOKEN_KEY.getBytes(), <span class="string">"AES"</span>);</span><br><span class="line">        cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(cipher.doFinal(plain.getBytes()));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        Ln.e(e);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​<br>​    </p>
+<h2 id="解密（String级别）"><a href="#解密（String级别）" class="headerlink" title="解密（String级别）"></a>解密（String级别）</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">decrypt</span><span class="params">(String encoded)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           Cipher cipher = Cipher.getInstance(<span class="string">"AES/CBC/PKCS5Padding"</span>);</span><br><span class="line">           AlgorithmParameterSpec ivSpec = <span class="keyword">new</span> IvParameterSpec(<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">16</span>]);</span><br><span class="line">           SecretKeySpec newKey = <span class="keyword">new</span> SecretKeySpec(TOKEN_KEY.getBytes(), <span class="string">"AES"</span>);</span><br><span class="line">           cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> String(cipher.doFinal(encoded.getBytes()));</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           Ln.e(e);</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
 
- /**
-     * AES 加密
-     *
-     * @param content 待加密内容
-     * @param key     密钥
-     * @return 加密的数据
-     */
-    public static byte[] encryptAES(byte[] content, byte[] key) {
-        try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key, &quot;AES&quot;);
-            // AES 是加密方式, CBC 是工作模式, PKCS5Padding 是填充模式
-            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-            // IV 是初始向量，可以增强密码的强度
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(AES_IV.getBytes()));
-            return cipher.doFinal(content);
-        } catch (Exception e) {
-            logger.error(e);
-        }
-        return null;
-    }
-</code></pre><h2 id="解密-（byte级别）"><a href="#解密-（byte级别）" class="headerlink" title="解密 （byte级别）"></a>解密 （byte级别）</h2><pre><code>/**
-     * AES 解密
-     *
-     * @param content 待解密内容
-     * @param key     密钥
-     * @return 解密的数据
-     */
-    public static byte[] decryptAES(byte[] content, byte[] key) {
-        try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key, &quot;AES&quot;);
-            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-            cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, new IvParameterSpec(AES_IV.getBytes()));
-            return cipher.doFinal(content);
-        } catch (Exception e) {
-            logger.error(e);
-        }
-        return null;
-    }
-</code></pre><h2 id="加密（String级别）"><a href="#加密（String级别）" class="headerlink" title="加密（String级别）"></a>加密（String级别）</h2><pre><code>    private final static String TOKEN_KEY = &quot;91a29fa7w46d8x41&quot;;
-
-    public static String encrypt(String plain) {
-        try {
-            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-            AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
-            SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
-            cipher.init(Cipher.ENCRYPT_MODE, newKey, ivSpec);
-            return new String(cipher.doFinal(plain.getBytes()));
-        } catch (Exception e) {
-            Ln.e(e);
-            return null;
-        }
-    }
-</code></pre><h2 id="解密（String级别）"><a href="#解密（String级别）" class="headerlink" title="解密（String级别）"></a>解密（String级别）</h2><pre><code> public static String decrypt(String encoded) {
-        try {
-            Cipher cipher = Cipher.getInstance(&quot;AES/CBC/PKCS5Padding&quot;);
-            AlgorithmParameterSpec ivSpec = new IvParameterSpec(new byte[16]);
-            SecretKeySpec newKey = new SecretKeySpec(TOKEN_KEY.getBytes(), &quot;AES&quot;);
-            cipher.init(Cipher.DECRYPT_MODE, newKey, ivSpec);
-            return new String(cipher.doFinal(encoded.getBytes()));
-        } catch (Exception e) {
-            Ln.e(e);
-            return null;
-        }
-    }
-</code></pre>
       
     </div>
     
@@ -560,6 +522,14 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AES加密/" rel="tag"><i class="fa fa-tag"></i>
+
+ AES加密</a>
+          
+        </div>
       
 
       
@@ -693,7 +663,7 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -704,7 +674,7 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -715,7 +685,7 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -821,7 +791,7 @@ encryption-standard-and-block-cipher-mode/" target="_blank" rel="noopener"> 高�
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

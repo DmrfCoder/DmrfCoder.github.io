@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="cookie,okhttp,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="cookie的作用当app需要保持用户登陆状态等，这个时候我们通常就要进行对cookie的管理来实现。如果你使用的是okhttp网络请求，那么就可以直接对cookie进行持久化管理。 使用okhttp3进行cookie的持久化处理主要原理是使用okhttp3中新增的Cookiejar这个接口，通过这个接口我们可以直接进行cookie的持久化管理，代码如下：  首先实现cookieJar，里面有一个">
+<meta name="keywords" content="cookie,okhttp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android okhttp cookie持久化方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/03/Android okhttp cookie持久化方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="cookie的作用当app需要保持用户登陆状态等，这个时候我们通常就要进行对cookie的管理来实现。如果你使用的是okhttp网络请求，那么就可以直接对cookie进行持久化管理。 使用okhttp3进行cookie的持久化处理主要原理是使用okhttp3中新增的Cookiejar这个接口，通过这个接口我们可以直接进行cookie的持久化管理，代码如下：  首先实现cookieJar，里面有一个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:25.995Z">
+<meta property="og:updated_time" content="2018-12-07T09:21:07.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android okhttp cookie持久化方法">
 <meta name="twitter:description" content="cookie的作用当app需要保持用户登陆状态等，这个时候我们通常就要进行对cookie的管理来实现。如果你使用的是okhttp网络请求，那么就可以直接对cookie进行持久化管理。 使用okhttp3进行cookie的持久化处理主要原理是使用okhttp3中新增的Cookiejar这个接口，通过这个接口我们可以直接进行cookie的持久化管理，代码如下：  首先实现cookieJar，里面有一个">
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  2.4k
                 </span>
               
 
@@ -423,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  13
                 </span>
               
             </div>
@@ -447,513 +470,28 @@
         <h2 id="cookie的作用"><a href="#cookie的作用" class="headerlink" title="cookie的作用"></a>cookie的作用</h2><p>当app需要保持用户登陆状态等，这个时候我们通常就要进行对cookie的管理来实现。如果你使用的是okhttp网络请求，那么就可以直接对cookie进行持久化管理。</p>
 <h2 id="使用okhttp3进行cookie的持久化处理"><a href="#使用okhttp3进行cookie的持久化处理" class="headerlink" title="使用okhttp3进行cookie的持久化处理"></a>使用okhttp3进行cookie的持久化处理</h2><p>主要原理是使用okhttp3中新增的Cookiejar这个接口，通过这个接口我们可以直接进行cookie的持久化管理，代码如下：</p>
 <ul>
-<li><p>首先实现cookieJar，里面有一个管理cookie的公共接口CookieStore，代码如下： </p>
-<pre><code>import java.net.CookieStore;
-</code></pre><p>import java.util.List;</p>
-<p>import okhttp3.Cookie;<br>import okhttp3.CookieJar;<br>import okhttp3.HttpUrl;</p>
-<p>/**</p>
+<li>首先实现cookieJar，里面有一个管理cookie的公共接口CookieStore，代码如下： </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.CookieStore;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> okhttp3.Cookie;</span><br><span class="line"><span class="keyword">import</span> okhttp3.CookieJar;</span><br><span class="line"><span class="keyword">import</span> okhttp3.HttpUrl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2018/8/28</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieJarImpl</span> <span class="keyword">implements</span> <span class="title">CookieJar</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CookieStore</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 保存url对应所有cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">saveCookie</span><span class="params">(HttpUrl url, List&lt;Cookie&gt; cookie)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 保存url对应所有cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">saveCookie</span><span class="params">(HttpUrl url, Cookie cookie)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 加载url所有的cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function">List&lt;Cookie&gt; <span class="title">loadCookie</span><span class="params">(HttpUrl url)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 获取当前所有保存的cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function">List&lt;Cookie&gt; <span class="title">getAllCookie</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 获取当前url对应的所有的cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function">List&lt;Cookie&gt; <span class="title">getCookie</span><span class="params">(HttpUrl url)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 根据url和cookie移除对应的cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">removeCookie</span><span class="params">(HttpUrl url, Cookie cookie)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 根据url移除所有的cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">removeCookie</span><span class="params">(HttpUrl url)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * 移除所有的cookie</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">removeAllCookie</span><span class="params">()</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> CookieStore cookieStore;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">CookieJarImpl</span><span class="params">(CookieStore cookieStore)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (cookieStore == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"cookieStore can not be null!"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.cookieStore = cookieStore;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">saveFromResponse</span><span class="params">(HttpUrl url, List&lt;Cookie&gt; cookies)</span> </span>&#123;</span><br><span class="line">      cookieStore.saveCookie(url, cookies);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> List&lt;Cookie&gt; <span class="title">loadForRequest</span><span class="params">(HttpUrl url)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> cookieStore.loadCookie(url);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> CookieStore <span class="title">getCookieStore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> cookieStore;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>@author dmrfcoder</li>
-<li>@date 2018/8/28<br>*/</li>
+<li>实现cookie的序列化： </li>
 </ul>
-<p>public class CookieJarImpl implements CookieJar {</p>
-</li>
-</ul>
-<pre><code>  public interface CookieStore {
-
-      /**
-       * 保存url对应所有cookie
-       */
-      void saveCookie(HttpUrl url, List&lt;Cookie&gt; cookie);
-
-      /**
-       * 保存url对应所有cookie
-       */
-      void saveCookie(HttpUrl url, Cookie cookie);
-
-      /**
-       * 加载url所有的cookie
-       */
-      List&lt;Cookie&gt; loadCookie(HttpUrl url);
-
-      /**
-       * 获取当前所有保存的cookie
-       */
-      List&lt;Cookie&gt; getAllCookie();
-
-      /**
-       * 获取当前url对应的所有的cookie
-       */
-      List&lt;Cookie&gt; getCookie(HttpUrl url);
-
-      /**
-       * 根据url和cookie移除对应的cookie
-       */
-      boolean removeCookie(HttpUrl url, Cookie cookie);
-
-      /**
-       * 根据url移除所有的cookie
-       */
-      boolean removeCookie(HttpUrl url);
-
-      /**
-       * 移除所有的cookie
-       */
-      boolean removeAllCookie();
-  }
-
-
-  private CookieStore cookieStore;
-
-  public CookieJarImpl(CookieStore cookieStore) {
-      if (cookieStore == null) {
-          throw new IllegalArgumentException(&quot;cookieStore can not be null!&quot;);
-      }
-      this.cookieStore = cookieStore;
-  }
-
-  @Override
-  public synchronized void saveFromResponse(HttpUrl url, List&lt;Cookie&gt; cookies) {
-      cookieStore.saveCookie(url, cookies);
-  }
-
-  @Override
-  public synchronized List&lt;Cookie&gt; loadForRequest(HttpUrl url) {
-      return cookieStore.loadCookie(url);
-  }
-
-  public CookieStore getCookieStore() {
-      return cookieStore;
-  }
-}
-</code></pre><ul>
-<li><p>实现cookie的序列化： </p>
-<pre><code>import android.content.ContentValues;
-</code></pre><p>import android.database.Cursor;<br>import android.util.Log;</p>
-<p>import java.io.ByteArrayInputStream;<br>import java.io.ByteArrayOutputStream;<br>import java.io.IOException;<br>import java.io.ObjectInputStream;<br>import java.io.ObjectOutputStream;<br>import java.io.Serializable;<br>import java.util.Locale;</p>
-<p>import okhttp3.Cookie;</p>
-<p>/**</p>
-<ul>
-<li>@author dmrfcoder</li>
-<li>@date 2018/8/28<br>*/</li>
-</ul>
-<p>public class SerializableCookie implements Serializable {<br>  private static final long serialVersionUID = 6374381323722046732L;</p>
-<p>  public static final String HOST = “host”;<br>  public static final String NAME = “name”;<br>  public static final String DOMAIN = “domain”;<br>  public static final String COOKIE = “cookie”;</p>
-<p>  public String host;<br>  public String name;<br>  public String domain;<br>  private transient Cookie cookie;<br>  private transient Cookie clientCookie;</p>
-<p>  public SerializableCookie(String host, Cookie cookie) {</p>
-<pre><code>  this.cookie = cookie;
-  this.host = host;
-  this.name = cookie.name();
-  this.domain = cookie.domain();
-</code></pre><p>  }</p>
-<p>  public Cookie getCookie() {</p>
-<pre><code>  Cookie bestCookie = cookie;
-  if (clientCookie != null) {
-      bestCookie = clientCookie;
-  }
-  return bestCookie;
-</code></pre><p>  }</p>
-<p>  private void writeObject(ObjectOutputStream out) throws IOException {</p>
-<pre><code>  out.defaultWriteObject();
-  out.writeObject(cookie.name());
-  out.writeObject(cookie.value());
-  out.writeLong(cookie.expiresAt());
-  out.writeObject(cookie.domain());
-  out.writeObject(cookie.path());
-  out.writeBoolean(cookie.secure());
-  out.writeBoolean(cookie.httpOnly());
-  out.writeBoolean(cookie.hostOnly());
-  out.writeBoolean(cookie.persistent());
-</code></pre><p>  }</p>
-<p>  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {</p>
-<pre><code>  in.defaultReadObject();
-  String name = (String) in.readObject();
-  String value = (String) in.readObject();
-  long expiresAt = in.readLong();
-  String domain = (String) in.readObject();
-  String path = (String) in.readObject();
-  boolean secure = in.readBoolean();
-  boolean httpOnly = in.readBoolean();
-  boolean hostOnly = in.readBoolean();
-  boolean persistent = in.readBoolean();
-  Cookie.Builder builder = new Cookie.Builder();
-  builder = builder.name(name);
-  builder = builder.value(value);
-  builder = builder.expiresAt(expiresAt);
-  builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);
-  builder = builder.path(path);
-  builder = secure ? builder.secure() : builder;
-  builder = httpOnly ? builder.httpOnly() : builder;
-  clientCookie = builder.build();
-</code></pre><p>  }</p>
-<p>  public static SerializableCookie parseCursorToBean(Cursor cursor) {</p>
-<pre><code>  String host = cursor.getString(cursor.getColumnIndex(HOST));
-  byte[] cookieBytes = cursor.getBlob(cursor.getColumnIndex(COOKIE));
-  Cookie cookie = bytesToCookie(cookieBytes);
-  return new SerializableCookie(host, cookie);
-</code></pre><p>  }</p>
-<p>  public static ContentValues getContentValues(SerializableCookie serializableCookie) {</p>
-<pre><code>  ContentValues values = new ContentValues();
-  values.put(SerializableCookie.HOST, serializableCookie.host);
-  values.put(SerializableCookie.NAME, serializableCookie.name);
-  values.put(SerializableCookie.DOMAIN, serializableCookie.domain);
-  values.put(SerializableCookie.COOKIE, cookieToBytes(serializableCookie.host, serializableCookie.getCookie()));
-  return values;
-</code></pre><p>  }</p>
-<p>  /**</p>
-<ul>
-<li>cookies 序列化成 string<br>*</li>
-<li>@param cookie 要序列化</li>
-<li><p>@return 序列化之后的string<br>*/<br>public static String encodeCookie(String host, Cookie cookie) {<br> if (cookie == null) {</p>
-<pre><code> return null;
-</code></pre><p> }<br> byte[] cookieBytes = cookieToBytes(host, cookie);<br> return byteArrayToHexString(cookieBytes);<br>}</p>
-<p>public static byte[] cookieToBytes(String host, Cookie cookie) {<br> SerializableCookie serializableCookie = new SerializableCookie(host, cookie);<br> ByteArrayOutputStream os = new ByteArrayOutputStream();<br> try {</p>
-<pre><code> ObjectOutputStream outputStream = new ObjectOutputStream(os);
- outputStream.writeObject(serializableCookie);
-</code></pre><p> } catch (IOException e) {</p>
-<pre><code> Log.e(&quot;cookieToBytes: &quot;, e.toString());
- return null;
-</code></pre><p> }<br> return os.toByteArray();<br>}</p>
-<p>/**</p>
-</li>
-<li>将字符串反序列化成cookies<br>*</li>
-<li>@param cookieString cookies string</li>
-<li><p>@return cookie object<br>*/<br>public static Cookie decodeCookie(String cookieString) {<br> byte[] bytes = hexStringToByteArray(cookieString);<br> return bytesToCookie(bytes);<br>}</p>
-<p>public static Cookie bytesToCookie(byte[] bytes) {<br> ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);<br> Cookie cookie = null;<br> try {</p>
-<pre><code> ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
- cookie = ((SerializableCookie) objectInputStream.readObject()).getCookie();
-</code></pre><p> } catch (Exception e) {</p>
-<pre><code> Log.e(&quot;bytesToCookie: &quot;, e.toString());
-</code></pre><p> }<br> return cookie;<br>}</p>
-<p>/**</p>
-</li>
-<li>二进制数组转十六进制字符串<br>*</li>
-<li>@param bytes byte array to be converted</li>
-<li><p>@return string containing hex values<br><em>/<br>private static String byteArrayToHexString(byte[] bytes) {<br> StringBuilder sb = new StringBuilder(bytes.length </em> 2);<br> for (byte element : bytes) {</p>
-<pre><code> int v = element &amp; 0xff;
- if (v &lt; 16) {
-     sb.append(&#39;0&#39;);
- }
- sb.append(Integer.toHexString(v));
-</code></pre><p> }<br> return sb.toString().toUpperCase(Locale.US);<br>}</p>
-<p>/**</p>
-</li>
-<li>十六进制字符串转二进制数组<br>*</li>
-<li>@param hexString string of hex-encoded values</li>
-<li><p>@return decoded byte array<br>*/<br>private static byte[] hexStringToByteArray(String hexString) {<br> int len = hexString.length();<br> byte[] data = new byte[len / 2];<br> for (int i = 0; i &lt; len; i += 2) {</p>
-<pre><code> data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) &lt;&lt; 4) + Character.digit(hexString.charAt(i + 1), 16));
-</code></pre><p> }<br> return data;<br>}</p>
-<p>/**</p>
-</li>
-<li><p>host, name, domain 标识一个cookie是否唯一<br>*/<br>@Override<br>public boolean equals(Object o) {<br> if (this == o) {</p>
-<pre><code> return true;
-</code></pre><p> }<br> if (o == null || getClass() != o.getClass()) {</p>
-<pre><code> return false;
-</code></pre><p> }</p>
-<p> SerializableCookie that = (SerializableCookie) o;</p>
-<p> if (host != null ? !host.equals(that.host) : that.host != null) {</p>
-<pre><code> return false;
-</code></pre><p> }<br> return (name != null ? name.equals(that.name) : that.name == null) &amp;&amp; (domain != null ? domain.equals(that.domain) : that.domain == null);<br>}</p>
-<p>@Override<br>public int hashCode() {<br> int result = host != null ? host.hashCode() : 0;<br> result = 31 <em> result + (name != null ? name.hashCode() : 0);<br> result = 31 </em> result + (domain != null ? domain.hashCode() : 0);<br> return result;<br>}<br>}</p>
-</li>
-</ul>
-</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.content.ContentValues;</span><br><span class="line"><span class="keyword">import</span> android.database.Cursor;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.Locale;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> okhttp3.Cookie;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2018/8/28</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializableCookie</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">6374381323722046732L</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String HOST = <span class="string">"host"</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NAME = <span class="string">"name"</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DOMAIN = <span class="string">"domain"</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String COOKIE = <span class="string">"cookie"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> String host;</span><br><span class="line">  <span class="keyword">public</span> String name;</span><br><span class="line">  <span class="keyword">public</span> String domain;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> Cookie cookie;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">transient</span> Cookie clientCookie;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SerializableCookie</span><span class="params">(String host, Cookie cookie)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.cookie = cookie;</span><br><span class="line">      <span class="keyword">this</span>.host = host;</span><br><span class="line">      <span class="keyword">this</span>.name = cookie.name();</span><br><span class="line">      <span class="keyword">this</span>.domain = cookie.domain();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Cookie <span class="title">getCookie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      Cookie bestCookie = cookie;</span><br><span class="line">      <span class="keyword">if</span> (clientCookie != <span class="keyword">null</span>) &#123;</span><br><span class="line">          bestCookie = clientCookie;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> bestCookie;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(ObjectOutputStream out)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">      out.defaultWriteObject();</span><br><span class="line">      out.writeObject(cookie.name());</span><br><span class="line">      out.writeObject(cookie.value());</span><br><span class="line">      out.writeLong(cookie.expiresAt());</span><br><span class="line">      out.writeObject(cookie.domain());</span><br><span class="line">      out.writeObject(cookie.path());</span><br><span class="line">      out.writeBoolean(cookie.secure());</span><br><span class="line">      out.writeBoolean(cookie.httpOnly());</span><br><span class="line">      out.writeBoolean(cookie.hostOnly());</span><br><span class="line">      out.writeBoolean(cookie.persistent());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(ObjectInputStream in)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">      in.defaultReadObject();</span><br><span class="line">      String name = (String) in.readObject();</span><br><span class="line">      String value = (String) in.readObject();</span><br><span class="line">      <span class="keyword">long</span> expiresAt = in.readLong();</span><br><span class="line">      String domain = (String) in.readObject();</span><br><span class="line">      String path = (String) in.readObject();</span><br><span class="line">      <span class="keyword">boolean</span> secure = in.readBoolean();</span><br><span class="line">      <span class="keyword">boolean</span> httpOnly = in.readBoolean();</span><br><span class="line">      <span class="keyword">boolean</span> hostOnly = in.readBoolean();</span><br><span class="line">      <span class="keyword">boolean</span> persistent = in.readBoolean();</span><br><span class="line">      Cookie.Builder builder = <span class="keyword">new</span> Cookie.Builder();</span><br><span class="line">      builder = builder.name(name);</span><br><span class="line">      builder = builder.value(value);</span><br><span class="line">      builder = builder.expiresAt(expiresAt);</span><br><span class="line">      builder = hostOnly ? builder.hostOnlyDomain(domain) : builder.domain(domain);</span><br><span class="line">      builder = builder.path(path);</span><br><span class="line">      builder = secure ? builder.secure() : builder;</span><br><span class="line">      builder = httpOnly ? builder.httpOnly() : builder;</span><br><span class="line">      clientCookie = builder.build();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SerializableCookie <span class="title">parseCursorToBean</span><span class="params">(Cursor cursor)</span> </span>&#123;</span><br><span class="line">      String host = cursor.getString(cursor.getColumnIndex(HOST));</span><br><span class="line">      <span class="keyword">byte</span>[] cookieBytes = cursor.getBlob(cursor.getColumnIndex(COOKIE));</span><br><span class="line">      Cookie cookie = bytesToCookie(cookieBytes);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> SerializableCookie(host, cookie);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ContentValues <span class="title">getContentValues</span><span class="params">(SerializableCookie serializableCookie)</span> </span>&#123;</span><br><span class="line">      ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">      values.put(SerializableCookie.HOST, serializableCookie.host);</span><br><span class="line">      values.put(SerializableCookie.NAME, serializableCookie.name);</span><br><span class="line">      values.put(SerializableCookie.DOMAIN, serializableCookie.domain);</span><br><span class="line">      values.put(SerializableCookie.COOKIE, cookieToBytes(serializableCookie.host, serializableCookie.getCookie()));</span><br><span class="line">      <span class="keyword">return</span> values;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * cookies 序列化成 string</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> cookie 要序列化</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> 序列化之后的string</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeCookie</span><span class="params">(String host, Cookie cookie)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (cookie == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">byte</span>[] cookieBytes = cookieToBytes(host, cookie);</span><br><span class="line">      <span class="keyword">return</span> byteArrayToHexString(cookieBytes);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] cookieToBytes(String host, Cookie cookie) &#123;</span><br><span class="line">      SerializableCookie serializableCookie = <span class="keyword">new</span> SerializableCookie(host, cookie);</span><br><span class="line">      ByteArrayOutputStream os = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ObjectOutputStream outputStream = <span class="keyword">new</span> ObjectOutputStream(os);</span><br><span class="line">          outputStream.writeObject(serializableCookie);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">          Log.e(<span class="string">"cookieToBytes: "</span>, e.toString());</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> os.toByteArray();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 将字符串反序列化成cookies</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> cookieString cookies string</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> cookie object</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Cookie <span class="title">decodeCookie</span><span class="params">(String cookieString)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">byte</span>[] bytes = hexStringToByteArray(cookieString);</span><br><span class="line">      <span class="keyword">return</span> bytesToCookie(bytes);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Cookie <span class="title">bytesToCookie</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">      ByteArrayInputStream byteArrayInputStream = <span class="keyword">new</span> ByteArrayInputStream(bytes);</span><br><span class="line">      Cookie cookie = <span class="keyword">null</span>;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          ObjectInputStream objectInputStream = <span class="keyword">new</span> ObjectInputStream(byteArrayInputStream);</span><br><span class="line">          cookie = ((SerializableCookie) objectInputStream.readObject()).getCookie();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">          Log.e(<span class="string">"bytesToCookie: "</span>, e.toString());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> cookie;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 二进制数组转十六进制字符串</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> bytes byte array to be converted</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> string containing hex values</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">byteArrayToHexString</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">      StringBuilder sb = <span class="keyword">new</span> StringBuilder(bytes.length * <span class="number">2</span>);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">byte</span> element : bytes) &#123;</span><br><span class="line">          <span class="keyword">int</span> v = element &amp; <span class="number">0xff</span>;</span><br><span class="line">          <span class="keyword">if</span> (v &lt; <span class="number">16</span>) &#123;</span><br><span class="line">              sb.append(<span class="string">'0'</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          sb.append(Integer.toHexString(v));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> sb.toString().toUpperCase(Locale.US);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 十六进制字符串转二进制数组</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> hexString string of hex-encoded values</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> decoded byte array</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] hexStringToByteArray(String hexString) &#123;</span><br><span class="line">      <span class="keyword">int</span> len = hexString.length();</span><br><span class="line">      <span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[len / <span class="number">2</span>];</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i += <span class="number">2</span>) &#123;</span><br><span class="line">          data[i / <span class="number">2</span>] = (<span class="keyword">byte</span>) ((Character.digit(hexString.charAt(i), <span class="number">16</span>) &lt;&lt; <span class="number">4</span>) + Character.digit(hexString.charAt(i + <span class="number">1</span>), <span class="number">16</span>));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> data;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * host, name, domain 标识一个cookie是否唯一</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span> == o) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      SerializableCookie that = (SerializableCookie) o;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (host != <span class="keyword">null</span> ? !host.equals(that.host) : that.host != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> (name != <span class="keyword">null</span> ? name.equals(that.name) : that.name == <span class="keyword">null</span>) &amp;&amp; (domain != <span class="keyword">null</span> ? domain.equals(that.domain) : that.domain == <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> result = host != <span class="keyword">null</span> ? host.hashCode() : <span class="number">0</span>;</span><br><span class="line">      result = <span class="number">31</span> * result + (name != <span class="keyword">null</span> ? name.hashCode() : <span class="number">0</span>);</span><br><span class="line">      result = <span class="number">31</span> * result + (domain != <span class="keyword">null</span> ? domain.hashCode() : <span class="number">0</span>);</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>使用 SharedPreferences 持久化存储 cookie： </p>
-<pre><code>package cn.xiaojii.cashgift.bean.net;
-</code></pre><p>import android.content.Context;<br>import android.content.SharedPreferences;<br>import android.text.TextUtils;</p>
-<p>import java.util.ArrayList;<br>import java.util.Collection;<br>import java.util.HashMap;<br>import java.util.List;<br>import java.util.Map;<br>import java.util.Set;<br>import java.util.concurrent.ConcurrentHashMap;</p>
-<p>import okhttp3.Cookie;<br>import okhttp3.HttpUrl;</p>
-<p>/**</p>
-<ul>
-<li>@author dmrfcoder</li>
-<li>@date 2018/8/28<br>*/</li>
-</ul>
-<p>public class SPCookieStore implements CookieJarImpl.CookieStore {</p>
-<p>  private static final String COOKIE<em>PREFS = “sp_cookie”;           //cookie使用prefs保存<br>  private static final String COOKIE_NAME_PREFIX = “cookie</em>“;         //cookie持久化的统一前缀</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.xiaojii.cashgift.bean.net;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.SharedPreferences;</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> okhttp3.Cookie;</span><br><span class="line"><span class="keyword">import</span> okhttp3.HttpUrl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2018/8/28</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SPCookieStore</span> <span class="keyword">implements</span> <span class="title">CookieJarImpl</span>.<span class="title">CookieStore</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String COOKIE_PREFS = <span class="string">"sp_cookie"</span>;           <span class="comment">//cookie使用prefs保存</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String COOKIE_NAME_PREFIX = <span class="string">"cookie_"</span>;         <span class="comment">//cookie持久化的统一前缀</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, ConcurrentHashMap&lt;String, Cookie&gt;&gt; cookies;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> SharedPreferences cookiePrefs;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">SPCookieStore</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">      cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE);</span><br><span class="line">      cookies = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">      <span class="comment">//将持久化的cookies缓存到内存中,数据结构为 Map&lt;Url.host, Map&lt;CookieToken, Cookie&gt;&gt;</span></span><br><span class="line">      Map&lt;String, ?&gt; prefsMap = cookiePrefs.getAll();</span><br><span class="line">      <span class="keyword">for</span> (Map.Entry&lt;String, ?&gt; entry : prefsMap.entrySet()) &#123;</span><br><span class="line">          <span class="keyword">if</span> ((entry.getValue()) != <span class="keyword">null</span> &amp;&amp; !entry.getKey().startsWith(COOKIE_NAME_PREFIX)) &#123;</span><br><span class="line">              <span class="comment">//获取url对应的所有cookie的key,用","分割</span></span><br><span class="line">              String[] cookieNames = TextUtils.split((String) entry.getValue(), <span class="string">","</span>);</span><br><span class="line">              <span class="keyword">for</span> (String name : cookieNames) &#123;</span><br><span class="line">                  <span class="comment">//根据对应cookie的Key,从xml中获取cookie的真实值</span></span><br><span class="line">                  String encodedCookie = cookiePrefs.getString(COOKIE_NAME_PREFIX + name, <span class="keyword">null</span>);</span><br><span class="line">                  <span class="keyword">if</span> (encodedCookie != <span class="keyword">null</span>) &#123;</span><br><span class="line">                      Cookie decodedCookie = SerializableCookie.decodeCookie(encodedCookie);</span><br><span class="line">                      <span class="keyword">if</span> (decodedCookie != <span class="keyword">null</span>) &#123;</span><br><span class="line">                          <span class="keyword">if</span> (!cookies.containsKey(entry.getKey())) &#123;</span><br><span class="line">                              cookies.put(entry.getKey(), <span class="keyword">new</span> ConcurrentHashMap&lt;String, Cookie&gt;());</span><br><span class="line">                          &#125;</span><br><span class="line">                          cookies.get(entry.getKey()).put(name, decodedCookie);</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> String <span class="title">getCookieToken</span><span class="params">(Cookie cookie)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> cookie.name() + <span class="string">"@"</span> + cookie.domain();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 当前cookie是否过期</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isCookieExpired</span><span class="params">(Cookie cookie)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> cookie.expiresAt() &lt; System.currentTimeMillis();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 将url的所有Cookie保存在本地</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">saveCookie</span><span class="params">(HttpUrl url, List&lt;Cookie&gt; urlCookies)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (Cookie cookie : urlCookies) &#123;</span><br><span class="line">          saveCookie(url, cookie);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">saveCookie</span><span class="params">(HttpUrl url, Cookie cookie)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!cookies.containsKey(url.host())) &#123;</span><br><span class="line">          cookies.put(url.host(), <span class="keyword">new</span> ConcurrentHashMap&lt;String, Cookie&gt;());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//当前cookie是否过期</span></span><br><span class="line">      <span class="keyword">if</span> (isCookieExpired(cookie)) &#123;</span><br><span class="line">          removeCookie(url, cookie);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          saveCookie(url, cookie, getCookieToken(cookie));</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 保存cookie，并将cookies持久化到本地</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">saveCookie</span><span class="params">(HttpUrl url, Cookie cookie, String cookieToken)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//内存缓存</span></span><br><span class="line">      cookies.get(url.host()).put(cookieToken, cookie);</span><br><span class="line">      <span class="comment">//文件缓存</span></span><br><span class="line">      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();</span><br><span class="line">      prefsWriter.putString(url.host(), TextUtils.join(<span class="string">","</span>, cookies.get(url.host()).keySet()));</span><br><span class="line">      prefsWriter.putString(COOKIE_NAME_PREFIX + cookieToken, SerializableCookie.encodeCookie(url.host(), cookie));</span><br><span class="line">      prefsWriter.apply();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 根据当前url获取所有需要的cookie,只返回没有过期的cookie</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> List&lt;Cookie&gt; <span class="title">loadCookie</span><span class="params">(HttpUrl url)</span> </span>&#123;</span><br><span class="line">      List&lt;Cookie&gt; ret = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">if</span> (!cookies.containsKey(url.host())) &#123;</span><br><span class="line">          <span class="keyword">return</span> ret;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      Collection&lt;Cookie&gt; urlCookies = cookies.get(url.host()).values();</span><br><span class="line">      <span class="keyword">for</span> (Cookie cookie : urlCookies) &#123;</span><br><span class="line">          <span class="keyword">if</span> (isCookieExpired(cookie)) &#123;</span><br><span class="line">              removeCookie(url, cookie);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              ret.add(cookie);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 根据url移除当前的cookie</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">removeCookie</span><span class="params">(HttpUrl url, Cookie cookie)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!cookies.containsKey(url.host())) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      String cookieToken = getCookieToken(cookie);</span><br><span class="line">      <span class="keyword">if</span> (!cookies.get(url.host()).containsKey(cookieToken)) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//内存移除</span></span><br><span class="line">      cookies.get(url.host()).remove(cookieToken);</span><br><span class="line">      <span class="comment">//文件移除</span></span><br><span class="line">      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();</span><br><span class="line">      <span class="keyword">if</span> (cookiePrefs.contains(COOKIE_NAME_PREFIX + cookieToken)) &#123;</span><br><span class="line">          prefsWriter.remove(COOKIE_NAME_PREFIX + cookieToken);</span><br><span class="line">      &#125;</span><br><span class="line">      prefsWriter.putString(url.host(), TextUtils.join(<span class="string">","</span>, cookies.get(url.host()).keySet()));</span><br><span class="line">      prefsWriter.apply();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">removeCookie</span><span class="params">(HttpUrl url)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!cookies.containsKey(url.host())) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//内存移除</span></span><br><span class="line">      ConcurrentHashMap&lt;String, Cookie&gt; urlCookie = cookies.remove(url.host());</span><br><span class="line">      <span class="comment">//文件移除</span></span><br><span class="line">      Set&lt;String&gt; cookieTokens = urlCookie.keySet();</span><br><span class="line">      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();</span><br><span class="line">      <span class="keyword">for</span> (String cookieToken : cookieTokens) &#123;</span><br><span class="line">          <span class="keyword">if</span> (cookiePrefs.contains(COOKIE_NAME_PREFIX + cookieToken)) &#123;</span><br><span class="line">              prefsWriter.remove(COOKIE_NAME_PREFIX + cookieToken);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      prefsWriter.remove(url.host());</span><br><span class="line">      prefsWriter.apply();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">removeAllCookie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">//内存移除</span></span><br><span class="line">      cookies.clear();</span><br><span class="line">      <span class="comment">//文件移除</span></span><br><span class="line">      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();</span><br><span class="line">      prefsWriter.clear();</span><br><span class="line">      prefsWriter.apply();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取所有的cookie</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> List&lt;Cookie&gt; <span class="title">getAllCookie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      List&lt;Cookie&gt; ret = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      <span class="keyword">for</span> (String key : cookies.keySet()) &#123;</span><br><span class="line">          ret.addAll(cookies.get(key).values());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> List&lt;Cookie&gt; <span class="title">getCookie</span><span class="params">(HttpUrl url)</span> </span>&#123;</span><br><span class="line">      List&lt;Cookie&gt; ret = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">      Map&lt;String, Cookie&gt; mapCookie = cookies.get(url.host());</span><br><span class="line">      <span class="keyword">if</span> (mapCookie != <span class="keyword">null</span>) &#123;</span><br><span class="line">          ret.addAll(mapCookie.values());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<pre><code>  private final Map&lt;String, ConcurrentHashMap&lt;String, Cookie&gt;&gt; cookies;
-  private final SharedPreferences cookiePrefs;
-
-  public SPCookieStore(Context context) {
-      cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE);
-      cookies = new HashMap&lt;&gt;();
-
-      //将持久化的cookies缓存到内存中,数据结构为 Map&lt;Url.host, Map&lt;CookieToken, Cookie&gt;&gt;
-      Map&lt;String, ?&gt; prefsMap = cookiePrefs.getAll();
-      for (Map.Entry&lt;String, ?&gt; entry : prefsMap.entrySet()) {
-          if ((entry.getValue()) != null &amp;&amp; !entry.getKey().startsWith(COOKIE_NAME_PREFIX)) {
-              //获取url对应的所有cookie的key,用&quot;,&quot;分割
-              String[] cookieNames = TextUtils.split((String) entry.getValue(), &quot;,&quot;);
-              for (String name : cookieNames) {
-                  //根据对应cookie的Key,从xml中获取cookie的真实值
-                  String encodedCookie = cookiePrefs.getString(COOKIE_NAME_PREFIX + name, null);
-                  if (encodedCookie != null) {
-                      Cookie decodedCookie = SerializableCookie.decodeCookie(encodedCookie);
-                      if (decodedCookie != null) {
-                          if (!cookies.containsKey(entry.getKey())) {
-                              cookies.put(entry.getKey(), new ConcurrentHashMap&lt;String, Cookie&gt;());
-                          }
-                          cookies.get(entry.getKey()).put(name, decodedCookie);
-                      }
-                  }
-              }
-          }
-      }
-  }
-
-  private String getCookieToken(Cookie cookie) {
-      return cookie.name() + &quot;@&quot; + cookie.domain();
-  }
-
-  /**
-   * 当前cookie是否过期
-   */
-  private static boolean isCookieExpired(Cookie cookie) {
-      return cookie.expiresAt() &lt; System.currentTimeMillis();
-  }
-
-  /**
-   * 将url的所有Cookie保存在本地
-   */
-  @Override
-  public synchronized void saveCookie(HttpUrl url, List&lt;Cookie&gt; urlCookies) {
-      for (Cookie cookie : urlCookies) {
-          saveCookie(url, cookie);
-      }
-  }
-
-  @Override
-  public synchronized void saveCookie(HttpUrl url, Cookie cookie) {
-      if (!cookies.containsKey(url.host())) {
-          cookies.put(url.host(), new ConcurrentHashMap&lt;String, Cookie&gt;());
-      }
-      //当前cookie是否过期
-      if (isCookieExpired(cookie)) {
-          removeCookie(url, cookie);
-      } else {
-          saveCookie(url, cookie, getCookieToken(cookie));
-      }
-  }
-
-  /**
-   * 保存cookie，并将cookies持久化到本地
-   */
-  private void saveCookie(HttpUrl url, Cookie cookie, String cookieToken) {
-      //内存缓存
-      cookies.get(url.host()).put(cookieToken, cookie);
-      //文件缓存
-      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-      prefsWriter.putString(url.host(), TextUtils.join(&quot;,&quot;, cookies.get(url.host()).keySet()));
-      prefsWriter.putString(COOKIE_NAME_PREFIX + cookieToken, SerializableCookie.encodeCookie(url.host(), cookie));
-      prefsWriter.apply();
-  }
-
-  /**
-   * 根据当前url获取所有需要的cookie,只返回没有过期的cookie
-   */
-  @Override
-  public synchronized List&lt;Cookie&gt; loadCookie(HttpUrl url) {
-      List&lt;Cookie&gt; ret = new ArrayList&lt;&gt;();
-      if (!cookies.containsKey(url.host())) {
-          return ret;
-      }
-
-      Collection&lt;Cookie&gt; urlCookies = cookies.get(url.host()).values();
-      for (Cookie cookie : urlCookies) {
-          if (isCookieExpired(cookie)) {
-              removeCookie(url, cookie);
-          } else {
-              ret.add(cookie);
-          }
-      }
-      return ret;
-  }
-
-  /**
-   * 根据url移除当前的cookie
-   */
-  @Override
-  public synchronized boolean removeCookie(HttpUrl url, Cookie cookie) {
-      if (!cookies.containsKey(url.host())) {
-          return false;
-      }
-      String cookieToken = getCookieToken(cookie);
-      if (!cookies.get(url.host()).containsKey(cookieToken)) {
-          return false;
-      }
-
-      //内存移除
-      cookies.get(url.host()).remove(cookieToken);
-      //文件移除
-      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-      if (cookiePrefs.contains(COOKIE_NAME_PREFIX + cookieToken)) {
-          prefsWriter.remove(COOKIE_NAME_PREFIX + cookieToken);
-      }
-      prefsWriter.putString(url.host(), TextUtils.join(&quot;,&quot;, cookies.get(url.host()).keySet()));
-      prefsWriter.apply();
-      return true;
-  }
-
-  @Override
-  public synchronized boolean removeCookie(HttpUrl url) {
-      if (!cookies.containsKey(url.host())) {
-          return false;
-      }
-
-      //内存移除
-      ConcurrentHashMap&lt;String, Cookie&gt; urlCookie = cookies.remove(url.host());
-      //文件移除
-      Set&lt;String&gt; cookieTokens = urlCookie.keySet();
-      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-      for (String cookieToken : cookieTokens) {
-          if (cookiePrefs.contains(COOKIE_NAME_PREFIX + cookieToken)) {
-              prefsWriter.remove(COOKIE_NAME_PREFIX + cookieToken);
-          }
-      }
-      prefsWriter.remove(url.host());
-      prefsWriter.apply();
-
-      return true;
-  }
-
-  @Override
-  public synchronized boolean removeAllCookie() {
-      //内存移除
-      cookies.clear();
-      //文件移除
-      SharedPreferences.Editor prefsWriter = cookiePrefs.edit();
-      prefsWriter.clear();
-      prefsWriter.apply();
-      return true;
-  }
-
-  /**
-   * 获取所有的cookie
-   */
-  @Override
-  public synchronized List&lt;Cookie&gt; getAllCookie() {
-      List&lt;Cookie&gt; ret = new ArrayList&lt;&gt;();
-      for (String key : cookies.keySet()) {
-          ret.addAll(cookies.get(key).values());
-      }
-      return ret;
-  }
-
-  @Override
-  public synchronized List&lt;Cookie&gt; getCookie(HttpUrl url) {
-      List&lt;Cookie&gt; ret = new ArrayList&lt;&gt;();
-      Map&lt;String, Cookie&gt; mapCookie = cookies.get(url.host());
-      if (mapCookie != null) {
-          ret.addAll(mapCookie.values());
-      }
-      return ret;
-  }
-}
-</code></pre><ul>
 <li><p>进行取出cookie和删除cookie等公共类的封装： </p>
-<pre><code>/**
-</code></pre><ul>
-<li>@author dmrfcoder</li>
-<li>@date 2018/8/28<br>*/</li>
-</ul>
-<p>import android.util.Log;</p>
-<p>import java.util.List;</p>
-<p>import cn.xiaojii.cashgift.bean.net.CookieJarImpl;<br>import cn.xiaojii.cashgift.bean.net.OkManager;<br>import okhttp3.Cookie;<br>import okhttp3.HttpUrl;</p>
-<p>/**</p>
-<ul>
-<li>cookie管理工具类</li>
-<li><p>@author dmrfcoder<br><em>/<br>public class CookieUtil {<br>/*</em></p>
-<ul>
-<li>获取指定URL对应的cookie<br>*</li>
-<li>@param baseUrl</li>
-<li>@param url</li>
-<li>@return<br>*/<br>public static List<cookie> cookies(String baseUrl, String url) {<br> //一般手动取出cookie的目的只是交给 webview 等等，非必要情况不要自己操作<br> CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();<br> HttpUrl httpUrl = HttpUrl.parse(baseUrl + url);<br> List<cookie> cookies = cookieStore.getCookie(httpUrl);<br> Log.e(“cookies: “, httpUrl.host() + “对应的cookie如下：” + cookies.toString());<br> return cookies;<br>}</cookie></cookie></li>
-</ul>
-<p>/**</p>
-<ul>
-<li>获取所有的cookie<br>*</li>
-<li>@return<br>*/<br>public static List<cookie> cookieList() {<br> CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();<br> List<cookie> allCookie = cookieStore.getAllCookie();<br> Log.e(“所有cookie如下: “, allCookie.toString());<br> return allCookie;<br>}</cookie></cookie></li>
-</ul>
-<p>public static String getCookie() {</p>
-<pre><code>CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();
-List&lt;Cookie&gt; allCookie = cookieStore.getAllCookie();
-for (int i = 0; i &lt; allCookie.size(); i++) {
-    return allCookie.get(i).toString();
-}
-return null;
-</code></pre><p>}</p>
-<p>/**</p>
-<ul>
-<li>删除cookie（这里是全部删除，也可指定的地址删除）<br>*/<br>public static void removeCookie() {<br> CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();<br> cookieStore.removeAllCookie();</li>
-</ul>
-<p>}<br>}</p>
-</li>
-</ul>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2018/8/28</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.xiaojii.cashgift.bean.net.CookieJarImpl;</span><br><span class="line"><span class="keyword">import</span> cn.xiaojii.cashgift.bean.net.OkManager;</span><br><span class="line"><span class="keyword">import</span> okhttp3.Cookie;</span><br><span class="line"><span class="keyword">import</span> okhttp3.HttpUrl;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* cookie管理工具类</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieUtil</span> </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取指定URL对应的cookie</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> baseUrl</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Cookie&gt; <span class="title">cookies</span><span class="params">(String baseUrl, String url)</span> </span>&#123;</span><br><span class="line">      <span class="comment">//一般手动取出cookie的目的只是交给 webview 等等，非必要情况不要自己操作</span></span><br><span class="line">      CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();</span><br><span class="line">      HttpUrl httpUrl = HttpUrl.parse(baseUrl + url);</span><br><span class="line">      List&lt;Cookie&gt; cookies = cookieStore.getCookie(httpUrl);</span><br><span class="line">      Log.e(<span class="string">"cookies: "</span>, httpUrl.host() + <span class="string">"对应的cookie如下："</span> + cookies.toString());</span><br><span class="line">      <span class="keyword">return</span> cookies;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取所有的cookie</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Cookie&gt; <span class="title">cookieList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();</span><br><span class="line">      List&lt;Cookie&gt; allCookie = cookieStore.getAllCookie();</span><br><span class="line">      Log.e(<span class="string">"所有cookie如下: "</span>, allCookie.toString());</span><br><span class="line">      <span class="keyword">return</span> allCookie;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getCookie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();</span><br><span class="line">      List&lt;Cookie&gt; allCookie = cookieStore.getAllCookie();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; allCookie.size(); i++) &#123;</span><br><span class="line">          <span class="keyword">return</span> allCookie.get(i).toString();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 删除cookie（这里是全部删除，也可指定的地址删除）</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">removeCookie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      CookieJarImpl.CookieStore cookieStore = OkManager.getInstance().getCookieJar().getCookieStore();</span><br><span class="line">      cookieStore.removeAllCookie();</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
 <li><p>最终的Okmanager类： </p>
-<pre><code>import java.util.concurrent.TimeUnit;
-</code></pre></li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> okhttp3.OkHttpClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> dmrfcoder</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2018/8/28</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OkManager</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> OkHttpClient <span class="title">getClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> client;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> OkHttpClient client;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> OkManager okManager;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> String TAG = OkManager.class.getSimpleName();</span><br><span class="line"></span><br><span class="line">  OkHttpClient.Builder httpBuilder;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">OkManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      <span class="comment">//需要设置请求超时调用下面两行</span></span><br><span class="line">      httpBuilder = <span class="keyword">new</span> OkHttpClient.Builder();</span><br><span class="line">      client = httpBuilder.readTimeout(<span class="number">10</span>, TimeUnit.SECONDS)</span><br><span class="line">              .connectTimeout(<span class="number">10</span>, TimeUnit.SECONDS).writeTimeout(<span class="number">15</span>, TimeUnit.SECONDS) <span class="comment">//设置超时</span></span><br><span class="line">              .cookieJar(<span class="keyword">new</span> CookieJarImpl(<span class="keyword">new</span> SPCookieStore(CashApplication.getContextObject())))</span><br><span class="line">              .build();</span><br><span class="line">      <span class="comment">//将上面的CashApplication换成你自己的Application或者传入同样性质的参数</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取全局的cookie实例</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> CookieJarImpl <span class="title">getCookieJar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> (CookieJarImpl) client.cookieJar();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 采用单例获取对象</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> OkManager <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (okManager == <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">synchronized</span> (OkManager.class) &#123;</span><br><span class="line">              <span class="keyword">if</span> (okManager == <span class="keyword">null</span>) &#123;</span><br><span class="line">                  okManager = <span class="keyword">new</span> OkManager();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> okManager;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<pre><code>import okhttp3.OkHttpClient;
-
-/**
-* @author dmrfcoder
-* @date 2018/8/28
-*/
-
-public class OkManager {
-  public OkHttpClient getClient() {
-      return client;
-  }
-
-  private OkHttpClient client;
-  private volatile static OkManager okManager;
-  private final String TAG = OkManager.class.getSimpleName();
-
-  OkHttpClient.Builder httpBuilder;
-
-  public OkManager() {
-
-
-      //需要设置请求超时调用下面两行
-      httpBuilder = new OkHttpClient.Builder();
-      client = httpBuilder.readTimeout(10, TimeUnit.SECONDS)
-              .connectTimeout(10, TimeUnit.SECONDS).writeTimeout(15, TimeUnit.SECONDS) //设置超时
-              .cookieJar(new CookieJarImpl(new SPCookieStore(CashApplication.getContextObject())))
-              .build();
-      //将上面的CashApplication换成你自己的Application或者传入同样性质的参数
-  }
-
-  /**
-   * 获取全局的cookie实例
-   */
-  public CookieJarImpl getCookieJar() {
-      return (CookieJarImpl) client.cookieJar();
-  }
-
-  /**
-   * 采用单例获取对象
-   *
-   * @return
-   */
-  public static OkManager getInstance() {
-      if (okManager == null) {
-          synchronized (OkManager.class) {
-              if (okManager == null) {
-                  okManager = new OkManager();
-              }
-          }
-      }
-      return okManager;
-  }
-}
-</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code>    private OkHttpClient okHttpClient = OkManager.getInstance().getClient();
-</code></pre><p>然后就实现了cookie的持久化。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> OkHttpClient okHttpClient = OkManager.getInstance().getClient();</span><br></pre></td></tr></table></figure>
+<p>然后就实现了cookie的持久化。</p>
 
       
     </div>
@@ -997,6 +535,18 @@ public class OkManager {
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cookie/" rel="tag"><i class="fa fa-tag"></i>
+
+ cookie</a>
+          
+            <a href="/tags/okhttp/" rel="tag"><i class="fa fa-tag"></i>
+
+ okhttp</a>
+          
+        </div>
       
 
       
@@ -1130,7 +680,7 @@ public class OkManager {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1141,7 +691,7 @@ public class OkManager {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1152,7 +702,7 @@ public class OkManager {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1258,7 +808,7 @@ public class OkManager {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

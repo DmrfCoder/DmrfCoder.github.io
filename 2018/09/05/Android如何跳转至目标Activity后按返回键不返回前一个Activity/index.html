@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="activity跳转,">
+  <meta name="keywords" content="Activity,">
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     Intent intent=new Intent();">
-<meta name="keywords" content="activity跳转">
+<meta name="description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     1234567Intent intent=new In">
+<meta name="keywords" content="Activity">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android如何跳转至目标Activity后按返回键不返回前一个Activity">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android如何跳转至目标Activity后按返回键不返回前一个Activity/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     Intent intent=new Intent();">
+<meta property="og:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     1234567Intent intent=new In">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:24.588Z">
+<meta property="og:updated_time" content="2018-12-07T08:59:39.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android如何跳转至目标Activity后按返回键不返回前一个Activity">
-<meta name="twitter:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     Intent intent=new Intent();">
+<meta name="twitter:description" content="有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activityA中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：     1234567Intent intent=new In">
 
 
 
@@ -388,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -467,15 +467,9 @@
       
 
       
-        <p>有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activity<br>A中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：</p>
-<pre><code>    Intent intent=new Intent();
-
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-
-    intent.setClass(A.this,B.class);
-
-    startActivity(intent);
-</code></pre><p>即可实现该效果。</p>
+        <p>有时候我们希望从一个activity离开后，按返回键不要再回去（比如点击退出登陆后跳转至登陆界面，这是点击返回键不希望返回到之前的退出登陆界面），那么我们需要把这个activity从栈区中去除。考虑在activity<br>A中调用 activity B，不允许从activity B中返回activity A，只要将原来的跳转代码替换为如下：    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Intent intent=<span class="keyword">new</span> Intent();</span><br><span class="line"></span><br><span class="line">intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line"></span><br><span class="line">intent.setClass(A.<span class="keyword">this</span>,B.class);</span><br><span class="line"></span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+<p>即可实现该效果。</p>
 
       
     </div>
@@ -522,9 +516,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/activity跳转/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/Activity/" rel="tag"><i class="fa fa-tag"></i>
 
- activity跳转</a>
+ Activity</a>
           
         </div>
       
@@ -651,7 +645,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -662,7 +656,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -673,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -763,7 +757,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

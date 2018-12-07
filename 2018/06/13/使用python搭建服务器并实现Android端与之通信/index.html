@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Android,">
 
 
 
@@ -97,29 +97,24 @@
 
 
 
-<meta name="description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用PythonFlask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实这">
+<meta name="description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用python搭建服务器并实现Android端与之通信">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/06/13/使用python搭建服务器并实现Android端与之通信/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用PythonFlask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实这">
+<meta property="og:description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180613162927862?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180613163243652?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180613163325335?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:39:35.749Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycnxft12j30ll0dmjry.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyco208v8j30zj0nj3zt.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyco68wndj30yz062t9f.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxycoax35cj311r08at8s.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycou5o5yj310b0df75l.jpg">
+<meta property="og:updated_time" content="2018-12-07T10:20:19.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用python搭建服务器并实现Android端与之通信">
-<meta name="twitter:description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用PythonFlask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实这">
-<meta name="twitter:image" content="https://img-
-blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:description" content="前言好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。 服务端环境：服务端使用Python3.5+PyCharm 新建Flask项目看图：然后create，初始化完成之后项目结构应该类似如下：其实">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycnxft12j30ll0dmjry.jpg">
 
 
 
@@ -387,6 +382,28 @@ blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -419,7 +436,7 @@ blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  836
+                  858
                 </span>
               
 
@@ -456,116 +473,20 @@ blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python<br>Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>好久没有更技术文了，再不写怕是博客要废掉了，今天更一篇关于搭建服务端并与Android端通信的文章，为了节省代码量，服务端使用Python Flask，Android端使用Okhttp，还是老样子，文章不讲原理只给具体实现，想要了解原理可至官网详细研究。</p>
 <h1 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h1><p>环境：服务端使用Python3.5+PyCharm</p>
-<h2 id="新建Flask项目"><a href="#新建Flask项目" class="headerlink" title="新建Flask项目"></a>新建Flask项目</h2><p>看图：<br><img src="https://img-
-blog.csdn.net/20180613162741557?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后create，初始化完成之后项目结构应该类似如下：<br><img src="https://img-
-blog.csdn.net/20180613162927862?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>其实这时候直接启动项目就可以在浏览器访问到：<br><img src="https://img-
-blog.csdn.net/20180613163243652?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-
-blog.csdn.net/20180613163325335?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>这就是使用现成框架的好处hhh，但是我们希望实现与客户端的通信，自然需要再做进一步code.</p>
+<h2 id="新建Flask项目"><a href="#新建Flask项目" class="headerlink" title="新建Flask项目"></a>新建Flask项目</h2><p>看图：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycnxft12j30ll0dmjry.jpg" alt="2"><br>然后create，初始化完成之后项目结构应该类似如下：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyco208v8j30zj0nj3zt.jpg" alt="3"><br>其实这时候直接启动项目就可以在浏览器访问到：  <img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxyco68wndj30yz062t9f.jpg" alt="4"><br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxycoax35cj311r08at8s.jpg" alt="5"><br>这就是使用现成框架的好处hhh，但是我们希望实现与客户端的通信，自然需要再做进一步code.</p>
 <h2 id="编写代码接受来自客户端的数据"><a href="#编写代码接受来自客户端的数据" class="headerlink" title="编写代码接受来自客户端的数据"></a>编写代码接受来自客户端的数据</h2><p>首先我们看一下hello_world的代码：</p>
-<pre><code>@app.route(&#39;/&#39;)
-def hello_world():
-    return &#39;Hello World!&#39;
-</code></pre><p>这里@app.route(‘/’)意思就是访问你服务端地址时调用这个方法，所以我们可以通过这种方式实现自己的需求，比如：</p>
-<pre><code>@app.route(&#39;/demo&#39;, methods=[&#39;POST&#39;])
-def demo():
-    value = request.form[&#39;demo_tag&#39;]
-    print(value)
-    return &quot;ok&quot;
-</code></pre><p>上面代码的意思就是你可以通过 <a href="http://127.0.0.1:5000/demo" target="_blank" rel="noopener"> http://127.0.0.1:5000/demo </a><br>访问到demo方法，request.form[‘demo_tag’]的返回值是你客户端发送的tag为demo_tag的数据，下文会详细介绍如何发送数据，最后返回值你可以自己指定，这里随便给了一个。到这里服务端已经ok了，我们看看客户端如何实现.</p>
-<h1 id="Android端"><a href="#Android端" class="headerlink" title="Android端"></a>Android端</h1><p>客户端使用Okhttp，需要导入两个jar包，地址<br>jar包下载地址： <a href="http://square.github.io/okhttp/" target="_blank" rel="noopener"> http://square.github.io/okhttp/ </a><br><img src="https://img-
-blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>注意2个jar包都要，图中3个圈点完就ok了，下载到本地自己导入，这部分就不详细写了，不会导入的可以Google一下。</p>
+<p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World!'</span></span><br></pre></td></tr></table></figure></p>
+<p>这里@app.route(‘/’)意思就是访问你服务端地址时调用这个方法，所以我们可以通过这种方式实现自己的需求，比如：</p>
+<p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/demo', methods=['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo</span><span class="params">()</span>:</span></span><br><span class="line">    value = request.form[<span class="string">'demo_tag'</span>]</span><br><span class="line">    print(value)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"ok"</span></span><br></pre></td></tr></table></figure></p>
+<p>上面代码的意思就是你可以通过 <a href="http://127.0.0.1:5000/demo" target="_blank" rel="noopener"> http://127.0.0.1:5000/demo </a><br>访问到demo方法，request.form[‘demo_tag’]的返回值是你客户端发送的tag为demo_tag的数据，下文会详细介绍如何发送数据，最后返回值你可以自己指定，这里随便给了一个。到这里服务端已经ok了，我们看看客户端如何实现.</p>
+<h1 id="Android端"><a href="#Android端" class="headerlink" title="Android端"></a>Android端</h1><p>客户端使用Okhttp，需要导入两个jar包，地址<br>jar包下载地址： <a href="http://square.github.io/okhttp/" target="_blank" rel="noopener"> http://square.github.io/okhttp/ </a><br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycou5o5yj310b0df75l.jpg" alt="6"><br>注意2个jar包都要，图中3个圈点完就ok了，下载到本地自己导入，这部分就不详细写了，不会导入的可以Google一下。</p>
 <p>如果不想手动导入jar包可以:</p>
-<pre><code>implementation &#39;com.squareup.okhttp3:okhttp:3.11.0&#39;
-</code></pre><p>导入之后直接看代码：</p>
-<pre><code>    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ok = findViewById(R.id.ok);
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-
-
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = String.valueOf(username.getText());
-                String pass = String.valueOf(password.getText());
-                String url = &quot;http://112.86.199.151:5000/gesture&quot;;//替换成自己的服务器地址
-                SendMessage(url, name, pass);
-            }
-        });
-    }
-
-
-    private void SendMessage(String url, final String userName, String passWord) {
-
-        value = new float[550];
-        Random random = new Random();
-        for (int i = 0; i &lt; 550; i++) {
-            if (i % 2 == 0) {
-                value[i] = random.nextFloat();
-            } else {
-                value[i] = -random.nextFloat();
-            }
-
-        }
-        String str_value = FloatArrayToString(value);
-
-        OkHttpClient client = new OkHttpClient();
-        FormBody.Builder formBuilder = new FormBody.Builder();
-        formBuilder.add(&quot;demo&quot;, str_value);
-
-        Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this, &quot;服务器错误&quot;, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                final String res = response.body().string();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (res.equals(&quot;0&quot;)) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(MainActivity.this, &quot;失败&quot;, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } else {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(MainActivity.this, &quot;成功&quot;+res, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-
-                        }
-
-                    }
-                });
-            }
-        });
-
-    }
-</code></pre><p>我这里随机生成了一个数组并将其发送到了服务器端，核心代码很简单，有框架真的可以为所欲为，写不动了吃饭去了，也许有心情会再更的详细点，给份现成代码自己研究研究吧：<br><a href="https://github.com/DmrfCoder/OkHttpDemo" target="_blank" rel="noopener"> https://github.com/DmrfCoder/OkHttpDemo
+<p>​<br>    implementation ‘com.squareup.okhttp3:okhttp:3.11.0’</p>
+<p>导入之后直接看代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">       setContentView(R.layout.activity_main);</span><br><span class="line">       ok = findViewById(R.id.ok);</span><br><span class="line">       username = findViewById(R.id.username);</span><br><span class="line">       password = findViewById(R.id.password);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       ok.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">               String name = String.valueOf(username.getText());</span><br><span class="line">               String pass = String.valueOf(password.getText());</span><br><span class="line">               String url = <span class="string">"http://112.86.199.151:5000/gesture"</span>;<span class="comment">//替换成自己的服务器地址</span></span><br><span class="line">               SendMessage(url, name, pass);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">SendMessage</span><span class="params">(String url, <span class="keyword">final</span> String userName, String passWord)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       value = <span class="keyword">new</span> <span class="keyword">float</span>[<span class="number">550</span>];</span><br><span class="line">       Random random = <span class="keyword">new</span> Random();</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">550</span>; i++) &#123;</span><br><span class="line">           <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">               value[i] = random.nextFloat();</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               value[i] = -random.nextFloat();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">       String str_value = FloatArrayToString(value);</span><br><span class="line"></span><br><span class="line">       OkHttpClient client = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line">       FormBody.Builder formBuilder = <span class="keyword">new</span> FormBody.Builder();</span><br><span class="line">       formBuilder.add(<span class="string">"demo"</span>, str_value);</span><br><span class="line"></span><br><span class="line">       Request request = <span class="keyword">new</span> Request.Builder().url(url).post(formBuilder.build()).build();</span><br><span class="line">       Call call = client.newCall(request);</span><br><span class="line">       call.enqueue(<span class="keyword">new</span> Callback() &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Call call, IOException e)</span> </span>&#123;</span><br><span class="line">               runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                       runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                           <span class="meta">@Override</span></span><br><span class="line">                           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                               Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"服务器错误"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(Call call, <span class="keyword">final</span> Response response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">               <span class="keyword">final</span> String res = response.body().string();</span><br><span class="line">               runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                   <span class="meta">@Override</span></span><br><span class="line">                   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                       <span class="keyword">if</span> (res.equals(<span class="string">"0"</span>)) &#123;</span><br><span class="line">                           runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                               <span class="meta">@Override</span></span><br><span class="line">                               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                                   Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"失败"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;);</span><br><span class="line">                       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                           runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                               <span class="meta">@Override</span></span><br><span class="line">                               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                                   Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"成功"</span>+res, Toast.LENGTH_SHORT).show();</span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;);</span><br><span class="line"></span><br><span class="line">                       &#125;</span><br><span class="line"></span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>我这里随机生成了一个数组并将其发送到了服务器端，核心代码很简单，有框架真的可以为所欲为，写不动了吃饭去了，也许有心情会再更的详细点，给份现成代码自己研究研究吧：<br><a href="https://github.com/DmrfCoder/OkHttpDemo" target="_blank" rel="noopener"> https://github.com/DmrfCoder/OkHttpDemo
 </a></p>
 
       
@@ -610,6 +531,14 @@ blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i>
+
+ Android</a>
+          
+        </div>
       
 
       
@@ -743,7 +672,7 @@ blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -754,7 +683,7 @@ blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -765,7 +694,7 @@ blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -871,7 +800,7 @@ blog.csdn.net/20180613164120732?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Android,深度学习,ncnn,caffe,">
+  <meta name="keywords" content="Android,caffe,Deep Learning,">
 
 
 
@@ -98,27 +98,22 @@
 
 
 <meta name="description" content="写在前面本系列文章的内容关于ncnn会有两篇文章（一篇介绍pc端使用，一篇介绍android端使用），主要是因为之前在使用ncnn的时候网上的资料比较少，可能是大佬们的主要精力都放在了算法优化上，所以相关的基础实践资料就感觉比较少，本系列文章将详细介绍ncnn从源码编译到最终在Android端的应用流程，希望可以帮到有需要的同仁。 相关链接（主要参考）ncnn主页：  https://github">
-<meta name="keywords" content="Android,深度学习,ncnn,caffe">
+<meta name="keywords" content="Android,caffe,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ncnn使用详解(1)——PC端">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/04/13/Ncnn使用详解(1)——PC端/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="写在前面本系列文章的内容关于ncnn会有两篇文章（一篇介绍pc端使用，一篇介绍android端使用），主要是因为之前在使用ncnn的时候网上的资料比较少，可能是大佬们的主要精力都放在了算法优化上，所以相关的基础实践资料就感觉比较少，本系列文章将详细介绍ncnn从源码编译到最终在Android端的应用流程，希望可以帮到有需要的同仁。 相关链接（主要参考）ncnn主页：  https://github">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180413144216551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180413144754479?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180413144806220?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:39:49.730Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9amaugsj310h08btar.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy9b5g51aj311x0h3jx2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy9b9qxt7j311x0efgrz.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9er6dn4j30qw0a00u3.jpg">
+<meta property="og:updated_time" content="2018-12-07T08:26:31.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ncnn使用详解(1)——PC端">
 <meta name="twitter:description" content="写在前面本系列文章的内容关于ncnn会有两篇文章（一篇介绍pc端使用，一篇介绍android端使用），主要是因为之前在使用ncnn的时候网上的资料比较少，可能是大佬们的主要精力都放在了算法优化上，所以相关的基础实践资料就感觉比较少，本系列文章将详细介绍ncnn从源码编译到最终在Android端的应用流程，希望可以帮到有需要的同仁。 相关链接（主要参考）ncnn主页：  https://github">
-<meta name="twitter:image" content="https://img-
-blog.csdn.net/20180413144216551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9amaugsj310h08btar.jpg">
 
 
 
@@ -398,8 +393,8 @@ blog.csdn.net/20180413144216551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/ncnn/" itemprop="url" rel="index">
-                    <span itemprop="name">ncnn</span>
+                  <a href="/categories/Ncnn/" itemprop="url" rel="index">
+                    <span itemprop="name">Ncnn</span>
                   </a>
                 </span>
 
@@ -456,7 +451,7 @@ blog.csdn.net/20180413144216551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  7
                 </span>
               
             </div>
@@ -481,140 +476,45 @@ blog.csdn.net/20180413144216551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 <h2 id="相关链接（主要参考）"><a href="#相关链接（主要参考）" class="headerlink" title="相关链接（主要参考）"></a>相关链接（主要参考）</h2><p>ncnn主页： <a href="https://github.com/Tencent/ncnn" target="_blank" rel="noopener"> https://github.com/Tencent/ncnn </a></p>
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>系统：Ubuntu16.04</p>
 <h1 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h1><h2 id="从github下载源码"><a href="#从github下载源码" class="headerlink" title="从github下载源码"></a>从github下载源码</h2><pre><code>git clone https://github.com/Tencent/ncnn
-</code></pre><p>下载完后的目录结构应该是这样：<br><img src="https://img-
-blog.csdn.net/20180413144216551?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后对ncnn源码进行编译(在ncnn根目录下执行)：</p>
+</code></pre><p>下载完后的目录结构应该是这样：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9amaugsj310h08btar.jpg" alt="9"><br>然后对ncnn源码进行编译(在ncnn根目录下执行)：  </p>
 <pre><code>mkdir build
 cd build
 cmake ..
 make -j4    
-</code></pre><p>然后就可以编译成功了，相关截图：<br><img src="https://img-
-blog.csdn.net/20180413144754479?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-
-blog.csdn.net/20180413144806220?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+</code></pre><p>然后就可以编译成功了，相关截图：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy9b5g51aj311x0h3jx2.jpg" alt="1"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy9b9qxt7j311x0efgrz.jpg" alt="2"></p>
 <h1 id="在电脑上实现ncnn加载caffe模型对目标进行分类"><a href="#在电脑上实现ncnn加载caffe模型对目标进行分类" class="headerlink" title="在电脑上实现ncnn加载caffe模型对目标进行分类"></a>在电脑上实现ncnn加载caffe模型对目标进行分类</h1><p>参考 <a href="https://github.com/Tencent/ncnn/wiki/ncnn-%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97-alexnet" target="_blank" rel="noopener"> 这里
 </a></p>
-<h2 id="准备caffe网络和模型"><a href="#准备caffe网络和模型" class="headerlink" title="准备caffe网络和模型"></a>准备caffe网络和模型</h2><p>caffe 的网络和模型通常是搞深度学习的研究者训练出来的，一般来说训练完会有</p>
+<h2 id="准备caffe网络和模型"><a href="#准备caffe网络和模型" class="headerlink" title="准备caffe网络和模型"></a>准备caffe网络和模型</h2><p>caffe 的网络和模型通常是搞深度学习的研究者训练出来的，一般来说训练完会有    </p>
 <pre><code>train.prototxt
 deploy.prototxt
 snapshot_10000.caffemodel
 </code></pre><p>部署的时候只需要 TEST 过程，所以有 deploy.prototxt 和 caffemodel 就足够了</p>
-<p>alexnet 的 deploy.prototxt 可以在 <a href="https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet" target="_blank" rel="noopener"> 这里
-</a> 下载</p>
-<p>alexnet 的 caffemodel 可以在 <a href="http://dl.caffe.berkeleyvision.org/bvlc_alexnet.caffemodel" target="_blank" rel="noopener"> 这里
-</a> 下载</p>
+<p>alexnet 的 deploy.prototxt 可以在 <a href="https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet" target="_blank" rel="noopener"> 这里</a>下载</p>
+<p>alexnet 的 caffemodel 可以在 <a href="http://dl.caffe.berkeleyvision.org/bvlc_alexnet.caffemodel" target="_blank" rel="noopener"> 这里</a>下载</p>
 <h2 id="转换ncnn网络和模型"><a href="#转换ncnn网络和模型" class="headerlink" title="转换ncnn网络和模型"></a>转换ncnn网络和模型</h2><p>caffe 自带了工具可以把老版本的 caffe 网络和模型转换为新版（ncnn的工具只认识新版），这里介绍一种比较笨但是比较快捷的方法：<br>首先将你需要转换的prototxt和caffemodel放在你电脑的caffe/build/tools目录下，然后终端进入caffe/build/tools，执行命令：</p>
 <pre><code>./upgrade_net_proto_text old_deploy.prototxt new_deploy.prototxt
 ./upgrade_net_proto_binary old.caffemodel new.caffemodel
-</code></pre><p>执行完成之后你就可以在caffe/build/tools下找到你的new_deploy.prototxt和new.caffemodel文件了。<br>注意完成之后打开你的new_deploy.prototxt文件看一下，因为一般每次只需要做一个数据样本的识别，所以如果第一个 dim 不为1，要将其设为<br>1，类似于这样：</p>
+</code></pre><p>执行完成之后你就可以在caffe/build/tools下找到你的new_deploy.prototxt和new.caffemodel文件了。<br>注意完成之后打开你的new_deploy.prototxt文件看一下，因为一般每次只需要做一个数据样本的识别，所以如果第一个 dim 不为1，要将其设为<br>1，类似于这样：    </p>
 <pre><code>layer {
   name: &quot;data&quot;
   type: &quot;Input&quot;
   top: &quot;data&quot;
   input_param { shape: { dim: 1 dim: 3 dim: 227 dim: 227 } }
 }
-</code></pre><h2 id="使用-caffe2ncnn-工具转换为-ncnn-的网络描述和模型"><a href="#使用-caffe2ncnn-工具转换为-ncnn-的网络描述和模型" class="headerlink" title="使用 caffe2ncnn 工具转换为 ncnn 的网络描述和模型"></a>使用 caffe2ncnn 工具转换为 ncnn 的网络描述和模型</h2><p>终端进入ncnn/build/toos/caffe（需要提前把上面转化的new_deploy.prototxt和new.caffemodel放到ncnn/build/tools/caffe下），执行如下命令：</p>
+</code></pre><h2 id="使用-caffe2ncnn-工具转换为-ncnn-的网络描述和模型"><a href="#使用-caffe2ncnn-工具转换为-ncnn-的网络描述和模型" class="headerlink" title="使用 caffe2ncnn 工具转换为 ncnn 的网络描述和模型"></a>使用 caffe2ncnn 工具转换为 ncnn 的网络描述和模型</h2><p>终端进入ncnn/build/toos/caffe（需要提前把上面转化的new_deploy.prototxt和new.caffemodel放到ncnn/build/tools/caffe下），执行如下命令：    </p>
 <pre><code>caffe2ncnn new_deploy.prototxt new.caffemodel demo.param demo.bin
 </code></pre><p>执行完成之后在ncnn/build/tools下就可以看到生成的param和bin文件了，文件名你可以根据你的需要设置。</p>
-<h2 id="去除可见字符串（可选）"><a href="#去除可见字符串（可选）" class="headerlink" title="去除可见字符串（可选）"></a>去除可见字符串（可选）</h2><p>用nihui大神的原文介绍：<br>有 param 和 bin 文件其实已经可以用了，但是 param 描述文件是明文的，如果放在 APP<br>分发出去容易被窥探到网络结构（说得好像不明文就看不到一样 使用 ncnn2mem 工具转换为二进制描述文件和内存模型，生成<br>alexnet.param.bin 和两个静态数组的代码文件：</p>
+<h2 id="去除可见字符串（可选）"><a href="#去除可见字符串（可选）" class="headerlink" title="去除可见字符串（可选）"></a>去除可见字符串（可选）</h2><p>用nihui大神的原文介绍：<br>有 param 和 bin 文件其实已经可以用了，但是 param 描述文件是明文的，如果放在 APP分发出去容易被窥探到网络结构（说得好像不明文就看不到一样) 使用 ncnn2mem 工具转换为二进制描述文件和内存模型，生成<br>alexnet.param.bin 和两个静态数组的代码文件：    </p>
 <pre><code>ncnn2mem demo.param demo.bin demo.id.h demo.mem.h
 </code></pre><p>我下面的所有使用为了方便都使用的是没有去除可见字符串的param和bin，如果你有去除可见字符串的需求，可以在ncnn的examples中找到相应去除了可见字符串文件的使用方法。</p>
-<h2 id="实现在电脑上使用ncnn"><a href="#实现在电脑上使用ncnn" class="headerlink" title="实现在电脑上使用ncnn"></a>实现在电脑上使用ncnn</h2><h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><p>使用你喜欢的编辑器编写c语言代码，我这里不做过多语言介绍，直接给一个demo代码，我会在代码中给出关键代码的注释（保证你认真看完代码和注释就会懂ncnn的大概原理），请大家从main函数入口开始阅读，相信更多的读者喜欢这种直接show<br>code的方式：</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include &lt;algorithm&gt;
-#include &lt;vector&gt;
-#include&quot;gesture.id.h&quot;
-
-
-#include &quot;net.h&quot;
-
-//使用ncnn，传入的参数第一个是你需要预测的数据，第二个参数是各个类别的得分vector，注意传入的是地址，这样才能在这个函数中改变其值
-static int detect_squeezenet( float *data, std::vector&lt;float&gt;&amp; cls_scores)
-{
-    //实例化ncnn：Net，注意include &quot;net.h&quot;，不要在意这时候因为找不到net.h文件而include&lt;net.h&gt;报错，后文会介绍正确的打开方式
-    ncnn::Net squeezenet;
-    //加载二进制文件，也是照写，后面会介绍对应文件应该放的正确位置
-    int a=squeezenet.load_param(&quot;demo.param&quot;);
-    int b=squeezenet.load_param_bin(&quot;demo.bin&quot;);
-    //实例化Mat，前三个参数是维度，第四个参数是传入的data，维度的设置根据你自己的数据进行设置，顺序是w、h、c
-    ncnn::Mat in = ncnn::Mat(550,  8, 2, data);
-
-    //实例化Extractor
-    ncnn::Extractor ex = squeezenet.create_extractor();
-    ex.set_light_mode(true);
-    //注意把&quot;data&quot;换成你deploy中的数据层名字
-    int d= ex.input(&quot;data&quot;, in);
-
-    ncnn::Mat out;
-    //这里是真正的终点，不多说了，只能仰天膜拜nihui大牛，重点是将prob换成你deploy中最后一层的名字
-    int c=ex.extract(&quot;prob&quot;, out);
-
-    //将out中的值转化为我们的cls_scores，这样就可以返回不同类别的得分了
-    cls_scores.resize(out.w);
-    for (int j=0; j&lt;out.w; j++)
-    {
-
-        cls_scores[j] = out[j];
-    }
-
-    return 0;
-}
-int main(int argc, char** argv)
-{
-    //注意，这里的argv是之后从终端输入的参数，我这里是数据源的路径,因为我是从两个文件中生成一个总的数据，所以用了argv[1]和argv[2]，你也可以自己根据需求改变
-    const char* imagepath1 = argv[1];
-    const char* imagepath2=argv[2];
-
-    FILE *fopeni=NULL;
-    FILE *fopenq=NULL;
-
-    fopeni=fopen(imagepath1,&quot;r&quot;);
-    fopenq=fopen(imagepath2,&quot;r&quot;);
-
-    //这是我的数据，i和q相当于图片的两个通道
-    float i[4400];
-    float q[4400];
-    float data[8800];
-
-
-
-    int count=4400;
-    for (int j = 0; j &lt; count; ++j)
-    {
-      fscanf(fopeni,&quot;%f&quot;,&amp;i[j]);
-      fscanf(fopenq,&quot;%f&quot;,&amp;q[j]);
-    }   
-    //这是将iq（相当于图片的两个通道的数据）转化为一个一维向量，需要特别注意的是数据维度的顺序
-    for (int j = 0; j &lt; 8800; ++j)
-    {
-        if (j&lt;4400)
-        {
-            data[j]=i[j];
-        }else{
-            data[j]=q[j-4400];
-        }
-
-    }
-
-
-
-    char a[13]={&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;J&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;};
-
-    //注意，这里是调用ncnn的代码
-    std::vector&lt;float&gt; cls_scores;//用来存储最终各类别的得分
-    //这个函数的实现在上面，快去看
-    detect_squeezenet(data, cls_scores);
-    for (int i = 0; i &lt; cls_scores.size(); ++i)
-    {
-         printf(&quot;%c : %f\n&quot;, a[i],cls_scores[i]);
-    }
-
-
-    return 0;
-}
-</code></pre><p>代码中我展示了最简单的ncnn使用场景，你可以根据自己的需要加入不同的其他代码</p>
+<h2 id="实现在电脑上使用ncnn"><a href="#实现在电脑上使用ncnn" class="headerlink" title="实现在电脑上使用ncnn"></a>实现在电脑上使用ncnn</h2><h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><p>使用你喜欢的编辑器编写c语言代码，我这里不做过多语言介绍，直接给一个demo代码，我会在代码中给出关键代码的注释（保证你认真看完代码和注释就会懂ncnn的大概原理），请大家从main函数入口开始阅读，相信更多的读者喜欢这种直接show<br>code的方式：    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"gesture.id.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"net.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用ncnn，传入的参数第一个是你需要预测的数据，第二个参数是各个类别的得分vector，注意传入的是地址，这样才能在这个函数中改变其值</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">detect_squeezenet</span><span class="params">( <span class="keyword">float</span> *data, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt;&amp; cls_scores)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//实例化ncnn：Net，注意include "net.h"，不要在意这时候因为找不到net.h文件而include&lt;net.h&gt;报错，后文会介绍正确的打开方式</span></span><br><span class="line">    ncnn::Net squeezenet;</span><br><span class="line">    <span class="comment">//加载二进制文件，也是照写，后面会介绍对应文件应该放的正确位置</span></span><br><span class="line">    <span class="keyword">int</span> a=squeezenet.load_param(<span class="string">"demo.param"</span>);</span><br><span class="line">    <span class="keyword">int</span> b=squeezenet.load_param_bin(<span class="string">"demo.bin"</span>);</span><br><span class="line">    <span class="comment">//实例化Mat，前三个参数是维度，第四个参数是传入的data，维度的设置根据你自己的数据进行设置，顺序是w、h、c</span></span><br><span class="line">    ncnn::Mat in = ncnn::Mat(<span class="number">550</span>,  <span class="number">8</span>, <span class="number">2</span>, data);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//实例化Extractor</span></span><br><span class="line">    ncnn::Extractor ex = squeezenet.create_extractor();</span><br><span class="line">    ex.set_light_mode(<span class="literal">true</span>);</span><br><span class="line">    <span class="comment">//注意把"data"换成你deploy中的数据层名字</span></span><br><span class="line">    <span class="keyword">int</span> d= ex.input(<span class="string">"data"</span>, in);</span><br><span class="line"></span><br><span class="line">    ncnn::Mat out;</span><br><span class="line">    <span class="comment">//这里是真正的终点，不多说了，只能仰天膜拜nihui大牛，重点是将prob换成你deploy中最后一层的名字</span></span><br><span class="line">    <span class="keyword">int</span> c=ex.extract(<span class="string">"prob"</span>, out);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将out中的值转化为我们的cls_scores，这样就可以返回不同类别的得分了</span></span><br><span class="line">    cls_scores.resize(out.w);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;out.w; j++)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        cls_scores[j] = out[j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//注意，这里的argv是之后从终端输入的参数，我这里是数据源的路径,因为我是从两个文件中生成一个总的数据，所以用了argv[1]和argv[2]，你也可以自己根据需求改变</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* imagepath1 = argv[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* imagepath2=argv[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">    FILE *fopeni=<span class="literal">NULL</span>;</span><br><span class="line">    FILE *fopenq=<span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    fopeni=fopen(imagepath1,<span class="string">"r"</span>);</span><br><span class="line">    fopenq=fopen(imagepath2,<span class="string">"r"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这是我的数据，i和q相当于图片的两个通道</span></span><br><span class="line">    <span class="keyword">float</span> i[<span class="number">4400</span>];</span><br><span class="line">    <span class="keyword">float</span> q[<span class="number">4400</span>];</span><br><span class="line">    <span class="keyword">float</span> data[<span class="number">8800</span>];</span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">4400</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; count; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">fscanf</span>(fopeni,<span class="string">"%f"</span>,&amp;i[j]);</span><br><span class="line">      <span class="built_in">fscanf</span>(fopenq,<span class="string">"%f"</span>,&amp;q[j]);</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="comment">//这是将iq（相当于图片的两个通道的数据）转化为一个一维向量，需要特别注意的是数据维度的顺序</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8800</span>; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (j&lt;<span class="number">4400</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            data[j]=i[j];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            data[j]=q[j<span class="number">-4400</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> a[<span class="number">13</span>]=&#123;<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'F'</span>,<span class="string">'G'</span>,<span class="string">'H'</span>,<span class="string">'I'</span>,<span class="string">'J'</span>,<span class="string">'K'</span>,<span class="string">'L'</span>,<span class="string">'M'</span>,<span class="string">'N'</span>,<span class="string">'O'</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注意，这里是调用ncnn的代码</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt; cls_scores;<span class="comment">//用来存储最终各类别的得分</span></span><br><span class="line">    <span class="comment">//这个函数的实现在上面，快去看</span></span><br><span class="line">    detect_squeezenet(data, cls_scores);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cls_scores.size(); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">"%c : %f\n"</span>, a[i],cls_scores[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码中我展示了最简单的ncnn使用场景，你可以根据自己的需要加入不同的其他代码</p>
 <h3 id="编译并运行我们写的代码"><a href="#编译并运行我们写的代码" class="headerlink" title="编译并运行我们写的代码"></a>编译并运行我们写的代码</h3><p>首先将你刚才写好的代码文件（假设命名为demo.cpp）放在ncnn/examples目录下，然后打开ncnn/examples目录下的CMakeLists.txt文件，增加这两行：</p>
 <pre><code>add_executable(demo demo.cpp)
 target_link_libraries(demo ncnn)
-</code></pre><p>最终的CMakeLists.txt文件类似这样：</p>
+</code></pre><p>最终的CMakeLists.txt文件类似这样： </p>
 <pre><code>find_package(OpenCV QUIET COMPONENTS core highgui imgproc imgcodecs)
 if(NOT OpenCV_FOUND)
     find_package(OpenCV REQUIRED COMPONENTS core highgui imgproc)
@@ -622,8 +522,6 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../src)
-
-
 add_executable(squeezenet squeezenet.cpp)
 
 target_link_libraries(squeezenet ncnn ${OpenCV_LIBS})
@@ -635,11 +533,10 @@ add_executable(demo demo.cpp)
 target_link_libraries(demo ncnn)
 
 add_subdirectory(ssd)
-</code></pre><p>然后打开ncnn根目录下的CMakeLists.txt文件，将编译examples语句的注释打开（默认是被注释掉的），如图：<br><img src="https://img-
-blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>更改后保存退出，现在就可以终端进入ncnn/build后执行：</p>
+</code></pre><p>然后打开ncnn根目录下的CMakeLists.txt文件，将编译examples语句的注释打开（默认是被注释掉的），如图：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9er6dn4j30qw0a00u3.jpg" alt="3"><br>更改后保存退出，现在就可以终端进入ncnn/build后执行：   </p>
 <pre><code>make
 </code></pre><p>执行完毕后你就可以在ncnn/build/examples下找到你的可执行文件了（demo）</p>
-<h3 id="执行可执行文件"><a href="#执行可执行文件" class="headerlink" title="执行可执行文件"></a>执行可执行文件</h3><p>首先将你之前生成的.param和.bin文件复制到ncnn/build/examples目录下，然后终端cd到ncnn/build/examples，执行：</p>
+<h3 id="执行可执行文件"><a href="#执行可执行文件" class="headerlink" title="执行可执行文件"></a>执行可执行文件</h3><p>首先将你之前生成的.param和.bin文件复制到ncnn/build/examples目录下，然后终端cd到ncnn/build/examples，执行：    </p>
 <pre><code>./demo data_path1 data_path2
 </code></pre><p>然后你就可以看到奇迹了～</p>
 
@@ -692,17 +589,13 @@ blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
  Android</a>
           
-            <a href="/tags/深度学习/" rel="tag"><i class="fa fa-tag"></i>
-
- 深度学习</a>
-          
-            <a href="/tags/ncnn/" rel="tag"><i class="fa fa-tag"></i>
-
- ncnn</a>
-          
             <a href="/tags/caffe/" rel="tag"><i class="fa fa-tag"></i>
 
  caffe</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i>
+
+ Deep Learning</a>
           
         </div>
       
@@ -838,7 +731,7 @@ blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -849,7 +742,7 @@ blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -860,7 +753,7 @@ blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -966,7 +859,7 @@ blog.csdn.net/20180413153255464?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

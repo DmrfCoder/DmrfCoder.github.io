@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="设计模式,适配器模式,类适配器,对象适配器,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -98,14 +98,13 @@
 
 
 <meta name="description" content="什么是适配器模式？适配器模式（Adapter）：直观理解就是使原来不能一起相互工作（接口不兼容）的两个功能通过Adapter兼容在一起。 类适配器和对象适配器类适配器Adapter 类继承Adaptee （被适配类），同时实现Target 接口（因为 Java 不支持多继承，所以只能通过接口的方法来实现多继承），在Client 类中我们可以根据需要选择并创建任一种符合需求的子类，来实现具体功能。">
-<meta name="keywords" content="设计模式,适配器模式,类适配器,对象适配器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="适配器模式之类适配器与对象适配器的区别及代码实现">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/04/16/适配器模式之类适配器与对象适配器的区别及代码实现/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="什么是适配器模式？适配器模式（Adapter）：直观理解就是使原来不能一起相互工作（接口不兼容）的两个功能通过Adapter兼容在一起。 类适配器和对象适配器类适配器Adapter 类继承Adaptee （被适配类），同时实现Target 接口（因为 Java 不支持多继承，所以只能通过接口的方法来实现多继承），在Client 类中我们可以根据需要选择并创建任一种符合需求的子类，来实现具体功能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:48.329Z">
+<meta property="og:updated_time" content="2018-12-07T10:15:39.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="适配器模式之类适配器与对象适配器的区别及代码实现">
 <meta name="twitter:description" content="什么是适配器模式？适配器模式（Adapter）：直观理解就是使原来不能一起相互工作（接口不兼容）的两个功能通过Adapter兼容在一起。 类适配器和对象适配器类适配器Adapter 类继承Adaptee （被适配类），同时实现Target 接口（因为 Java 不支持多继承，所以只能通过接口的方法来实现多继承），在Client 类中我们可以根据需要选择并创建任一种符合需求的子类，来实现具体功能。">
@@ -430,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  647
+                  673
                 </span>
               
 
@@ -471,75 +470,10 @@
 <h1 id="类适配器和对象适配器"><a href="#类适配器和对象适配器" class="headerlink" title="类适配器和对象适配器"></a>类适配器和对象适配器</h1><h2 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h2><p>Adapter 类继承Adaptee （被适配类），同时实现Target 接口（因为 Java 不支持多继承，所以只能通过接口的方法来实现多继承），在<br>Client 类中我们可以根据需要选择并创建任一种符合需求的子类，来实现具体功能。</p>
 <h2 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h2><p>不使用多继承或继承的方式，而是使用直接关联，或者称为委托的方式。</p>
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>类适配器的重点在于类，是通过构造一个继承Adaptee类来实现适配器的功能；<br>对象适配器的重点在于对象，是通过在直接包含Adaptee类来实现的，当需要调用特殊功能的时候直接使用Adapter中包含的那个Adaptee对象来调用特殊功能的方法即可。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="类适配器-1"><a href="#类适配器-1" class="headerlink" title="类适配器"></a>类适配器</h2><pre><code>// 已存在的、具有特殊功能、但不符合我们既有的标准接口的类
-class Adaptee {
-    public void specificRequest() {
-        System.out.println(&quot;被适配类 具有特殊功能...&quot;);
-    }
-}
-
-// 目标接口，或称为标准接口
-interface Target {
-    public void request();
-}
-
-// 具体目标类，只提供普通功能
-class ConcreteTarget implements Target {
-    public void request() {
-        System.out.println(&quot;普通类 具有普通功能...&quot;);
-    }
-}
-
-// 适配器类，继承了被适配类，同时实现标准接口
-class Adapter extends Adaptee implements Target{
-    public void request() {
-        super.specificRequest();
-    }
-}
-
-// 测试类
-public class Client {
-    public static void main(String[] args) {
-        // 使用普通功能类
-        Target concreteTarget = new ConcreteTarget();//实例化一个普通类
-        concreteTarget.request();
-
-        // 使用特殊功能类，即适配类
-        Target adapter = new Adapter();
-        adapter.request();
-    }
-}
-</code></pre><p>测试结果：<br>普通类 具有普通功能…<br>被适配类 具有特殊功能…</p>
-<h2 id="对象适配器-1"><a href="#对象适配器-1" class="headerlink" title="对象适配器"></a>对象适配器</h2><pre><code>// 适配器类，直接关联被适配类，同时实现标准接口
-class Adapter implements Target{
-    // 直接关联被适配类
-    private Adaptee adaptee;
-
-    // 可以通过构造函数传入具体需要适配的被适配类对象
-    public Adapter (Adaptee adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void request() {
-        // 这里是使用委托的方式完成特殊功能
-        this.adaptee.specificRequest();
-    }
-}
-
-// 测试类
-public class Client {
-    public static void main(String[] args) {
-        // 使用普通功能类
-        Target concreteTarget = new ConcreteTarget();
-        concreteTarget.request();
-
-        // 使用特殊功能类，即适配类，
-        // 需要先创建一个被适配类的对象作为参数
-        Target adapter = new Adapter(new Adaptee());
-        adapter.request();
-    }
-}
-</code></pre><p>测试结果：<br>普通类 具有普通功能…<br>被适配类 具有特殊功能…</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><h2 id="类适配器-1"><a href="#类适配器-1" class="headerlink" title="类适配器"></a>类适配器</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 已存在的、具有特殊功能、但不符合我们既有的标准接口的类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"被适配类 具有特殊功能..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 目标接口，或称为标准接口</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体目标类，只提供普通功能</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteTarget</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"普通类 具有普通功能..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 适配器类，继承了被适配类，同时实现标准接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">extends</span> <span class="title">Adaptee</span> <span class="keyword">implements</span> <span class="title">Target</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用普通功能类</span></span><br><span class="line">        Target concreteTarget = <span class="keyword">new</span> ConcreteTarget();<span class="comment">//实例化一个普通类</span></span><br><span class="line">        concreteTarget.request();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用特殊功能类，即适配类</span></span><br><span class="line">        Target adapter = <span class="keyword">new</span> Adapter();</span><br><span class="line">        adapter.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试结果：<br>普通类 具有普通功能…<br>被适配类 具有特殊功能…</p>
+<h2 id="对象适配器-1"><a href="#对象适配器-1" class="headerlink" title="对象适配器"></a>对象适配器</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 适配器类，直接关联被适配类，同时实现标准接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span></span>&#123;</span><br><span class="line">    <span class="comment">// 直接关联被适配类</span></span><br><span class="line">    <span class="keyword">private</span> Adaptee adaptee;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以通过构造函数传入具体需要适配的被适配类对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span> <span class="params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.adaptee = adaptee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 这里是使用委托的方式完成特殊功能</span></span><br><span class="line">        <span class="keyword">this</span>.adaptee.specificRequest();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用普通功能类</span></span><br><span class="line">        Target concreteTarget = <span class="keyword">new</span> ConcreteTarget();</span><br><span class="line">        concreteTarget.request();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用特殊功能类，即适配类，</span></span><br><span class="line">        <span class="comment">// 需要先创建一个被适配类的对象作为参数</span></span><br><span class="line">        Target adapter = <span class="keyword">new</span> Adapter(<span class="keyword">new</span> Adaptee());</span><br><span class="line">        adapter.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试结果：<br>普通类 具有普通功能…<br>被适配类 具有特殊功能…</p>
 
       
     </div>
@@ -583,26 +517,6 @@ public class Client {
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/设计模式/" rel="tag"><i class="fa fa-tag"></i>
-
- 设计模式</a>
-          
-            <a href="/tags/适配器模式/" rel="tag"><i class="fa fa-tag"></i>
-
- 适配器模式</a>
-          
-            <a href="/tags/类适配器/" rel="tag"><i class="fa fa-tag"></i>
-
- 类适配器</a>
-          
-            <a href="/tags/对象适配器/" rel="tag"><i class="fa fa-tag"></i>
-
- 对象适配器</a>
-          
-        </div>
       
 
       
@@ -736,7 +650,7 @@ public class Client {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -747,7 +661,7 @@ public class Client {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -758,7 +672,7 @@ public class Client {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -864,7 +778,7 @@ public class Client {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

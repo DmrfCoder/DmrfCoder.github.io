@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="汇编,">
 
 
 
@@ -98,6 +98,7 @@
 
 
 <meta name="description" content="堆栈的作用汇编语言中的堆栈就是高级语言中的栈。 堆栈主在汇编程序设计中主要有三个作用：  过程调用&amp;amp;返回指令  参数传递  局部变量   过程调用&amp;amp;返回指令过程调用中的过程指什么？ 汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 调用子程序需要考虑返回 。 过程调用指令 用于由主程序转移到子程序； 过程返回指令 用于由">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编总结（3）——程序设计初步">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/11/14/汇编总结（3）——程序设计初步/index.html">
@@ -108,7 +109,7 @@
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6rdyo63xj30fo06iwgu.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx6rgiexu4j30j803awg0.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fx6ri86sndj30j803ataf.jpg">
-<meta property="og:updated_time" content="2018-12-05T14:39:15.133Z">
+<meta property="og:updated_time" content="2018-12-07T12:29:54.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编总结（3）——程序设计初步">
 <meta name="twitter:description" content="堆栈的作用汇编语言中的堆栈就是高级语言中的栈。 堆栈主在汇编程序设计中主要有三个作用：  过程调用&amp;amp;返回指令  参数传递  局部变量   过程调用&amp;amp;返回指令过程调用中的过程指什么？ 汇编语言中的过程就是高级语言里面说的子程序，调用子程序（过程、函数）的本质就是控制转移，它与无条件转移的区别是 调用子程序需要考虑返回 。 过程调用指令 用于由主程序转移到子程序； 过程返回指令 用于由">
@@ -380,6 +381,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -497,15 +520,13 @@
 <p>一般c语言的习惯是使用堆栈传递入口参数，使用寄存器传递出口参数，因为一般入口参数比较多，出口参数比较少。</p>
 <h3 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h3><p>这里就一个结论，堆栈可以用于安排动态局部变量。</p>
 <h2 id="算术逻辑运算指令"><a href="#算术逻辑运算指令" class="headerlink" title="算术逻辑运算指令"></a>算术逻辑运算指令</h2><h3 id="乘除指令"><a href="#乘除指令" class="headerlink" title="乘除指令"></a>乘除指令</h3><h4 id="无符号数乘法指令（MUL）"><a href="#无符号数乘法指令（MUL）" class="headerlink" title="无符号数乘法指令（MUL）"></a>无符号数乘法指令（MUL）</h4><p>指令格式：</p>
-<pre><code>MUL OPRD
-</code></pre><p>该指令实现两个无符号数的乘法运算，乘数是OPRD，被乘数位于AL、AX或EAX中（由OPRD的尺寸决定）。</p>
+<p>​<br>    MUL OPRD</p>
+<p>该指令实现两个无符号数的乘法运算，乘数是OPRD，被乘数位于AL、AX或EAX中（由OPRD的尺寸决定）。</p>
 <p>需要注意的是乘积之后尺寸翻倍，两个8位的数乘积为16位，结果存放在AX中，类似的，两个16位数的乘积结果为32位，放在DX：AX中，最后，64位的乘积放在EDX：EAX中。</p>
 <p>操作数OPRD可以是通用寄存器、存储单元，但是 <strong>不能是立即数</strong> 。</p>
 <h4 id="有符号数乘法指令（IMUL）"><a href="#有符号数乘法指令（IMUL）" class="headerlink" title="有符号数乘法指令（IMUL）"></a>有符号数乘法指令（IMUL）</h4><p>有符号乘法指令有三种使用形式：</p>
-<pre><code>IMUL OPRD ;
-IMUL DEST,SRC;
-IMUL DEST,SRC1,SEC2;
-</code></pre><p>具体解释如下：</p>
+<p>​<br>    IMUL OPRD ;<br>    IMUL DEST,SRC;<br>    IMUL DEST,SRC1,SEC2;</p>
+<p>具体解释如下：</p>
 <ul>
 <li>IMUL OPRD </li>
 </ul>
@@ -549,15 +570,15 @@ IMUL DEST,SRC1,SEC2;
 <p>被乘数和乘数均为有符号数。</p>
 </blockquote>
 <h4 id="无符号数除法指令（DIV）"><a href="#无符号数除法指令（DIV）" class="headerlink" title="无符号数除法指令（DIV）"></a>无符号数除法指令（DIV）</h4><p>一般格式：</p>
-<pre><code>DIV OPRD
-</code></pre><p>OPRD是除数，被除数位于AX、DX：AX或EDX：EAX中，由OPRD的尺寸决定，被除数的尺寸翻倍，商在AL、AX或者EAX中，余数在AH、DX或者EDX中，商和余数的尺寸和OPRD相同。</p>
+<p>​<br>    DIV OPRD</p>
+<p>OPRD是除数，被除数位于AX、DX：AX或EDX：EAX中，由OPRD的尺寸决定，被除数的尺寸翻倍，商在AL、AX或者EAX中，余数在AH、DX或者EDX中，商和余数的尺寸和OPRD相同。</p>
 <p>操作数OPRD可以是通用寄存器，可以是存储单元，但 <strong>不能是立即数</strong> 。</p>
 <p>注意使用DIV指令时要防止除溢出，比如：</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6qzct1yyj30aa06i75l.jpg" alt="image-20181113211830792"></p>
 <p>比如上图，除完之后应该商300余0，可是300超出了AL的表示范围，这时候就产生了溢出情况，在实际使用中要注意防范类似情况。</p>
 <h4 id="有符号数除法指令（IDIV）"><a href="#有符号数除法指令（IDIV）" class="headerlink" title="有符号数除法指令（IDIV）"></a>有符号数除法指令（IDIV）</h4><p>指令格式：</p>
-<pre><code>IDIV OPRD
-</code></pre><p>基本原则和DIV一样，不同之处在于：</p>
+<p>​<br>    IDIV OPRD</p>
+<p>基本原则和DIV一样，不同之处在于：</p>
 <ul>
 <li>除法时有符号的 </li>
 <li>如果不能整除，余数的符号与被除数符号一致，而且余数的绝对值小于除数的绝对值。 </li>
@@ -623,14 +644,14 @@ IMUL DEST,SRC1,SEC2;
 <p>使用举例：</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6rdyo63xj30fo06iwgu.jpg" alt="image-20181113213232393"></p>
 <h4 id="符号拓展传送指令（MOVSX）"><a href="#符号拓展传送指令（MOVSX）" class="headerlink" title="符号拓展传送指令（MOVSX）"></a>符号拓展传送指令（MOVSX）</h4><p>一般格式：</p>
-<pre><code>MOVSX DEST,SRC
-</code></pre><p>把SRC符号拓展后送到DEST。</p>
+<p>​<br>    MOVSX DEST,SRC</p>
+<p>把SRC符号拓展后送到DEST。</p>
 <p>目的操作数的尺寸必须大于源操作数的尺寸。源操作数的尺寸可以是8位或16位，目的操作数的尺寸可以是8位或16位。</p>
 <p>使用举例：</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx6rgiexu4j30j803awg0.jpg" alt="image-20181113213459899"></p>
 <h4 id="零拓展传送指令（MOVZX）"><a href="#零拓展传送指令（MOVZX）" class="headerlink" title="零拓展传送指令（MOVZX）"></a>零拓展传送指令（MOVZX）</h4><p>一般格式：</p>
-<pre><code>MOVZX DEST,SRC
-</code></pre><p>把SRC零拓展后送到DEST。</p>
+<p>​<br>    MOVZX DEST,SRC</p>
+<p>把SRC零拓展后送到DEST。</p>
 <p>源操作数可以是8位或16位，目的操作数可以是16位或32位。</p>
 <p>使用举例：</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fx6ri86sndj30j803ataf.jpg" alt="image-20181113213639331"></p>
@@ -692,8 +713,8 @@ IMUL DEST,SRC1,SEC2;
 <p>通常用于检测某些位是否为1，但又不希望改变操作数的值  </p>
 <p>test使用举例：</p>
 <p>判断AL中的位6和位2是否有一位为1:</p>
-<pre><code>test al ,01000100B;
-</code></pre><p>随后，判断标志位ZF，如果ZF为0，说明al第6位和第2位都为0，否则说明二者有一个为1.</p>
+<p>​<br>    test al ,01000100B;</p>
+<p>随后，判断标志位ZF，如果ZF为0，说明al第6位和第2位都为0，否则说明二者有一个为1.</p>
 <h3 id="移位指令"><a href="#移位指令" class="headerlink" title="移位指令"></a>移位指令</h3><h4 id="一般移位指令"><a href="#一般移位指令" class="headerlink" title="一般移位指令"></a>一般移位指令</h4><div class="table-container">
 <table>
 <thead>
@@ -742,11 +763,8 @@ IMUL DEST,SRC1,SEC2;
 <p>通过截取count的低5位，实际的移位数被限于0到31之间。<br>ROR  |  右循环移位指令  |  ROR OPRD,count  |  右循环移一位之后最低位移到最高位的同时也进入CF  |<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCL  |  带进位左循环移位  |  RCL OPRD,count  |  相当于CF在最高位直接参与循环移位  |  大循环左移<br>通过截取count的低5位，实际的移位数被限于0到31之间。<br>RCR  |  带进位右循环移位  |  RCR OPRD,count  |  相当于CF在最高位直接参与循环移位  |  大循环右移<br>通过截取count的低5位，实际的移位数被限于0到31之间。  </p>
 <p>使用实例：</p>
 <p>实现把al的最低位送到bl的最低位，仍保持al不变。</p>
-<pre><code>ror bl,1;//bl循环右移一位
-ror al,1;//al循环右移一位，最低位进入cf
-rcl bl,1;//bl带进位左移，带进了来自al的最低位（cf）
-rol al,1;//恢复al
-</code></pre><h4 id="双精度移位指令"><a href="#双精度移位指令" class="headerlink" title="双精度移位指令"></a>双精度移位指令</h4><p>双精度移位指令是为了方便地把一个操作数的部分内容通过移位复制到另一个操作数。</p>
+<p>​<br>    ror bl,1;//bl循环右移一位<br>    ror al,1;//al循环右移一位，最低位进入cf<br>    rcl bl,1;//bl带进位左移，带进了来自al的最低位（cf）<br>    rol al,1;//恢复al</p>
+<h4 id="双精度移位指令"><a href="#双精度移位指令" class="headerlink" title="双精度移位指令"></a>双精度移位指令</h4><p>双精度移位指令是为了方便地把一个操作数的部分内容通过移位复制到另一个操作数。</p>
 <p>格式：</p>
 <ul>
 <li>双精度左移：SHLD OPRD1,OPRD2,count </li>
@@ -784,67 +802,23 @@ rol al,1;//恢复al
 <li>段间间接转移 </li>
 </ul>
 <p>需要说明的是无条件转移指令均不影响标志寄存器的状态标志。</p>
-<h5 id="无条件段内直接转移"><a href="#无条件段内直接转移" class="headerlink" title="无条件段内直接转移"></a>无条件段内直接转移</h5><pre><code>JMP LABEL；
-</code></pre><p>标号LABEL表示要转移的目标位置（转移目的地）。</p>
+<h5 id="无条件段内直接转移"><a href="#无条件段内直接转移" class="headerlink" title="无条件段内直接转移"></a>无条件段内直接转移</h5><p>​<br>    JMP LABEL；</p>
+<p>标号LABEL表示要转移的目标位置（转移目的地）。</p>
 <p>无条件段内直接转移的机器码构成如下：</p>
-<pre><code>操作码OP  地址差rel
-</code></pre><p>地址差rel实际上是LABEL所指定的指令的地址偏移与紧跟JMP指令的下一条指令的地址偏移之间的差值，rel可正可负，这样才可以实现前后的跳转。地址差rel可以用一个字节表示，也可用4个字节或2字节表示，如果只用一个字节表示，就称之为<br><strong>短（short）转移</strong> ，否则称为 <strong>近（near）转移</strong><br>。一般如果当汇编器汇编到某条转移指令时可以计算出地址差rel，汇编器会自动判断出应该用1字节表示rel还是4字节或2字节，否则汇编器会使用较多的位数来表示地址差。所以，当程序员在写程序时能顾及出用8位就可以表示出地址差，那么可以在标号前加一个汇编器操作符<strong>“SHORT”</strong>来指定用一个字节表示地址差，表示转移的目的地就在附近。</p>
-<h5 id="无条件段内间接转移"><a href="#无条件段内间接转移" class="headerlink" title="无条件段内间接转移"></a>无条件段内间接转移</h5><pre><code>JMP OPRD
-</code></pre><p>OPRD是32位通用寄存器或者双字存储单元，比如：</p>
-<pre><code>JMP ECX;
-JMP DWORD PTR [EBX];
-</code></pre><h5 id="无条件段间转移指令JMP"><a href="#无条件段间转移指令JMP" class="headerlink" title="无条件段间转移指令JMP"></a>无条件段间转移指令JMP</h5><p>段间转移指令和段内转移指令差不多，只是涉及到改变代码段寄存器CS的内容，情况较为复杂，在之后的文章中介绍。</p>
+<p>​<br>    操作码OP  地址差rel</p>
+<p>地址差rel实际上是LABEL所指定的指令的地址偏移与紧跟JMP指令的下一条指令的地址偏移之间的差值，rel可正可负，这样才可以实现前后的跳转。地址差rel可以用一个字节表示，也可用4个字节或2字节表示，如果只用一个字节表示，就称之为<br><strong>短（short）转移</strong> ，否则称为 <strong>近（near）转移</strong><br>。一般如果当汇编器汇编到某条转移指令时可以计算出地址差rel，汇编器会自动判断出应该用1字节表示rel还是4字节或2字节，否则汇编器会使用较多的位数来表示地址差。所以，当程序员在写程序时能顾及出用8位就可以表示出地址差，那么可以在标号前加一个汇编器操作符<strong>“SHORT”</strong>来指定用一个字节表示地址差，表示转移的目的地就在附近。</p>
+<h5 id="无条件段内间接转移"><a href="#无条件段内间接转移" class="headerlink" title="无条件段内间接转移"></a>无条件段内间接转移</h5><p>​<br>    JMP OPRD</p>
+<p>OPRD是32位通用寄存器或者双字存储单元，比如：</p>
+<p>​<br>    JMP ECX;<br>    JMP DWORD PTR [EBX];</p>
+<h5 id="无条件段间转移指令JMP"><a href="#无条件段间转移指令JMP" class="headerlink" title="无条件段间转移指令JMP"></a>无条件段间转移指令JMP</h5><p>段间转移指令和段内转移指令差不多，只是涉及到改变代码段寄存器CS的内容，情况较为复杂，在之后的文章中介绍。</p>
 <h4 id="条件转移指令"><a href="#条件转移指令" class="headerlink" title="条件转移指令"></a>条件转移指令</h4><p>条件转移指令在前一篇文章已经介绍，这里不再赘述，只是需要特别明确一下rel偏移量的概念。</p>
 <h3 id="多路分支的实现"><a href="#多路分支的实现" class="headerlink" title="多路分支的实现"></a>多路分支的实现</h3><p>多路分支实际上指的就是switch-case的汇编实现，这里的实现原理主要是通过无条件间接转移指令和目标地址表来实现多路分支，举个例子：</p>
 <p>考虑一下多路分支程序：</p>
-<pre><code> int  cf319(int x,  int operation)
-{
-    int  y;
-    //多路分支
-    switch ( operation ) {
-        case 1:
-            y = 3*x;
-            break;
-        case 2:
-            y = 5*x+6;
-            break;
-        case 4:
-        case 5:
-            y = x*x ;
-            break;
-        case 8:
-            y = x*x+4*x;
-            break;
-        default:
-            y = x ;
-    }
-    if ( y &gt; 1000 )
-        y = 1000;
-    return  y;
-}
-</code></pre><p>上面的程序为了更加具有一般性，刻意没有安排连续的case值，其汇编的实现如下：</p>
-<pre><code> push  ebp
- mov   ebp, esp
-                                   ; switch ( operation ) {
- mov   eax, DWORD PTR [ebp+12]  ;取得参数operation（case值）
- dec   eax                      ;从0开始计算，所以先减去1
- cmp   eax, 7                   ;从0开始计算，最多就是7
- ja    SHORT LN2cf319           ;超过，则转default（LN2cf319对应defalut处理语句）
- ;
- jmp   DWORD  PTR  LN12cf319[ eax*4 ]     ;这句是关键，这里实现了多路分支
- ;
-
-
-LN12cf319:                           ;多向分支目标地址表
-    DD    LN6cf319                   ; case 1
-    DD    LN5cf319                   ; case 2
-    DD    LN2cf319                   ; default
-    DD    LN4cf319                   ; case 4
-    DD    LN4cf319                   ; case 5
-    DD    LN2cf319                   ; default
-    DD    LN2cf319                   ; default
-    DD    LN3cf319                   ; case 8
-</code></pre><p>看上面的汇编实现，其核心思想是巧妙地运用了无条件段内间接转移和目标地址表，因为 <strong>目标地址表每项占4个字节</strong><br>，所以跳转的地址是目标地址表的起始地址加case对象（这里是operation）乘以4，如果operation为0，跳到目标地址表的首地址，即就是LN6c，如果operation为1，跳到LN5c，以此类推就实现了多路分支的巧妙跳转。</p>
+<p>​<br>     int  cf319(int x,  int operation)<br>    {<br>        int  y;<br>        //多路分支<br>        switch ( operation ) {<br>            case 1:<br>                y = 3<em>x;<br>                break;<br>            case 2:<br>                y = 5</em>x+6;<br>                break;<br>            case 4:<br>            case 5:<br>                y = x<em>x ;<br>                break;<br>            case 8:<br>                y = x</em>x+4*x;<br>                break;<br>            default:<br>                y = x ;<br>        }<br>        if ( y &gt; 1000 )<br>            y = 1000;<br>        return  y;<br>    }</p>
+<p>上面的程序为了更加具有一般性，刻意没有安排连续的case值，其汇编的实现如下：</p>
+<p>​<br>     push  ebp<br>     mov   ebp, esp<br>                                       ; switch ( operation ) {<br>     mov   eax, DWORD PTR [ebp+12]  ;取得参数operation（case值）<br>     dec   eax                      ;从0开始计算，所以先减去1<br>     cmp   eax, 7                   ;从0开始计算，最多就是7<br>     ja    SHORT LN2cf319           ;超过，则转default（LN2cf319对应defalut处理语句）<br>     ;<br>     jmp   DWORD  PTR  LN12cf319[ eax*4 ]     ;这句是关键，这里实现了多路分支<br>     ;</p>
+<p>​<br>    LN12cf319:                           ;多向分支目标地址表<br>        DD    LN6cf319                   ; case 1<br>        DD    LN5cf319                   ; case 2<br>        DD    LN2cf319                   ; default<br>        DD    LN4cf319                   ; case 4<br>        DD    LN4cf319                   ; case 5<br>        DD    LN2cf319                   ; default<br>        DD    LN2cf319                   ; default<br>        DD    LN3cf319                   ; case 8</p>
+<p>看上面的汇编实现，其核心思想是巧妙地运用了无条件段内间接转移和目标地址表，因为 <strong>目标地址表每项占4个字节</strong><br>，所以跳转的地址是目标地址表的起始地址加case对象（这里是operation）乘以4，如果operation为0，跳到目标地址表的首地址，即就是LN6c，如果operation为1，跳到LN5c，以此类推就实现了多路分支的巧妙跳转。</p>
 <p>使用该方法的一般建议是：当多路分支数超过5时，考虑无条件间接转移方式和目标地址表结合实现多路分支会更高效。</p>
 <h2 id="循环程序设计"><a href="#循环程序设计" class="headerlink" title="循环程序设计"></a>循环程序设计</h2><h3 id="循环指令"><a href="#循环指令" class="headerlink" title="循环指令"></a>循环指令</h3><p>循环指令类似于条件转移指令，其采用的是段内相对转移的方式，是通过在指令指针寄存器EIP上加一个地址差的方式实现的转移，需要注意的是循环指令中的这个地址差只用了一个字节（8位）来表示，所以转移范围仅在-128-127之间。在保护方式（32位代码段）下，ECX作为循环计数器，实方式下，以CX为循环计数器，循环指令不影响各标志位。</p>
 <div class="table-container">
@@ -934,6 +908,14 @@ LN12cf319:                           ;多向分支目标地址表
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"><i class="fa fa-tag"></i>
+
+ 汇编</a>
+          
+        </div>
       
 
       
@@ -1067,7 +1049,7 @@ LN12cf319:                           ;多向分支目标地址表
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1078,7 +1060,7 @@ LN12cf319:                           ;多向分支目标地址表
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1089,7 +1071,7 @@ LN12cf319:                           ;多向分支目标地址表
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1195,7 +1177,7 @@ LN12cf319:                           ;多向分支目标地址表
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

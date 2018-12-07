@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="gradle,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;#39;libs/sdk.jar&amp;#39;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
+<meta name="description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件​123456789101112131415161718task clearJar(type: Delete) &amp;#123;     delete &apos;libs/sdk.jar&apos; &amp;#125; task makeJar(type:org.gradle.api.tasks.bundling.J">
+<meta name="keywords" content="gradle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用gradle打包指定类为jar包的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/07/27/使用gradle打包指定类为jar包的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;#39;libs/sdk.jar&amp;#39;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
+<meta property="og:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件​123456789101112131415161718task clearJar(type: Delete) &amp;#123;     delete &apos;libs/sdk.jar&apos; &amp;#125; task makeJar(type:org.gradle.api.tasks.bundling.J">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:30.680Z">
+<meta property="og:updated_time" content="2018-12-07T10:25:30.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用gradle打包指定类为jar包的方法">
-<meta name="twitter:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件task clearJar(type: Delete) {      delete &amp;#39;libs/sdk.jar&amp;#39;  }   task makeJar(type:org.gradle.api.tasks.bundling.Jar) {     //指定生成的jar名">
+<meta name="twitter:description" content="在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本： 打包某个包下的所有文件​123456789101112131415161718task clearJar(type: Delete) &amp;#123;     delete &apos;libs/sdk.jar&apos; &amp;#125; task makeJar(type:org.gradle.api.tasks.bundling.J">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  281
+                  265
                 </span>
               
 
@@ -445,36 +468,11 @@
 
       
         <p>在Android studio中通过gralde脚本打包指定类的为jar包的示例脚本：</p>
-<h2 id="打包某个包下的所有文件"><a href="#打包某个包下的所有文件" class="headerlink" title="打包某个包下的所有文件"></a>打包某个包下的所有文件</h2><pre><code>task clearJar(type: Delete) { 
-    delete &#39;libs/sdk.jar&#39; 
-} 
-
-task makeJar(type:org.gradle.api.tasks.bundling.Jar) {
-    //指定生成的jar名
-    baseName &#39;sdk&#39;
-    //从哪里打包class文件
-    from(&#39;build/intermediates/classes/debug/org/cmdmac/cloud/pluginsdk/&#39;)
-    //打包到jar后的目录结构 
-    into(&#39;org/cmdmac/cloud/pluginsdk/&#39;)
-    //去掉不需要打包的目录和文件 
-    exclude(&#39;test/&#39;, &#39;BuildConfig.class&#39;, &#39;R.class&#39;)
-    //去掉R$开头的文件 
-    exclude{ it.name.startsWith(&#39;R$&#39;);} 
-} 
-
-makeJar.dependsOn(clearJar, build)
-</code></pre><p>在build.gradle写上后，只要在命令行执行gradle makeJar就可以在build/libs目录下找到这个jar。</p>
+<h2 id="打包某个包下的所有文件"><a href="#打包某个包下的所有文件" class="headerlink" title="打包某个包下的所有文件"></a>打包某个包下的所有文件</h2><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">task <span class="title">clearJar</span><span class="params">(type: Delete)</span> </span>&#123; </span><br><span class="line">    delete <span class="string">'libs/sdk.jar'</span> </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function">task <span class="title">makeJar</span><span class="params">(type:org.gradle.api.tasks.bundling.Jar)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//指定生成的jar名</span></span><br><span class="line">    baseName <span class="string">'sdk'</span></span><br><span class="line">    <span class="comment">//从哪里打包class文件</span></span><br><span class="line">    from(<span class="string">'build/intermediates/classes/debug/org/cmdmac/cloud/pluginsdk/'</span>)</span><br><span class="line">    <span class="comment">//打包到jar后的目录结构 </span></span><br><span class="line">    into(<span class="string">'org/cmdmac/cloud/pluginsdk/'</span>)</span><br><span class="line">    <span class="comment">//去掉不需要打包的目录和文件 </span></span><br><span class="line">    exclude(<span class="string">'test/'</span>, <span class="string">'BuildConfig.class'</span>, <span class="string">'R.class'</span>)</span><br><span class="line">    <span class="comment">//去掉R$开头的文件 </span></span><br><span class="line">    exclude&#123; it.name.startsWith(<span class="string">'R$'</span>);&#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">makeJar.dependsOn(clearJar, build)</span><br></pre></td></tr></table></figure></p>
+<p>在build.gradle写上后，只要在命令行执行gradle makeJar就可以在build/libs目录下找到这个jar。</p>
 <p>上面是个简单的例子，只能打包某个包下面的所有文件，如果要实现只打某个包下面的某些子包或者文件可参考如下示例</p>
-<pre><code>task makeSdkJar(type:org.gradle.api.tasks.bundling.Jar) {
-    baseName &#39;pluginsdk&#39;
-    //只打包org.cmdmac下的org.cmdmac.pluginsdk.impl和org.cmdmac.gamecenter,其他子包不会被打包进去
-    from(&#39;build/intermediates/classes/debug/org/cmdmac/&#39;) {
-        include &#39;pluginsdk/impl&#39;
-        include &#39;gamecenter&#39;
-    }
-    into(&#39;org/cmdmac/&#39;)
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">task <span class="title">makeSdkJar</span><span class="params">(type:org.gradle.api.tasks.bundling.Jar)</span> </span>&#123;</span><br><span class="line">    baseName <span class="string">'pluginsdk'</span></span><br><span class="line">    <span class="comment">//只打包org.cmdmac下的org.cmdmac.pluginsdk.impl和org.cmdmac.gamecenter,其他子包不会被打包进去</span></span><br><span class="line">    from(<span class="string">'build/intermediates/classes/debug/org/cmdmac/'</span>) &#123;</span><br><span class="line">        include <span class="string">'pluginsdk/impl'</span></span><br><span class="line">        include <span class="string">'gamecenter'</span></span><br><span class="line">    &#125;</span><br><span class="line">    into(<span class="string">'org/cmdmac/'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -517,6 +515,14 @@ makeJar.dependsOn(clearJar, build)
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gradle/" rel="tag"><i class="fa fa-tag"></i>
+
+ gradle</a>
+          
+        </div>
       
 
       
@@ -650,7 +656,7 @@ makeJar.dependsOn(clearJar, build)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +667,7 @@ makeJar.dependsOn(clearJar, build)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -672,7 +678,7 @@ makeJar.dependsOn(clearJar, build)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -778,7 +784,7 @@ makeJar.dependsOn(clearJar, build)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

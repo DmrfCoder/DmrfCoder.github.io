@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="概述在策略模式（Strategy Pattern）中，一个类的 行为或其算法可以在运行时更改 。这种类型的设计模式属于行为型模式。在策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的 context 对象。策略对象改变 context 对象的执行算法。 介绍意图定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。 主要解决在有多种算法相似的情况下，使用 if…el">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:52.535Z">
+<meta property="og:updated_time" content="2018-12-07T10:09:11.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行为型模式——策略模式">
 <meta name="twitter:description" content="概述在策略模式（Strategy Pattern）中，一个类的 行为或其算法可以在运行时更改 。这种类型的设计模式属于行为型模式。在策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的 context 对象。策略对象改变 context 对象的执行算法。 介绍意图定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。 主要解决在有多种算法相似的情况下，使用 if…el">
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  900
+                  920
                 </span>
               
 
@@ -496,69 +496,31 @@
 <h2 id="创建一个接口"><a href="#创建一个接口" class="headerlink" title="创建一个接口"></a>创建一个接口</h2><ul>
 <li>Strategy.java </li>
 </ul>
-<pre><code> public interface Strategy {
-   public int doOperation(int num1, int num2);
-}
-</code></pre><h2 id="创建实现接口的实体类"><a href="#创建实现接口的实体类" class="headerlink" title="创建实现接口的实体类"></a>创建实现接口的实体类</h2><ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Strategy</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doOperation</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建实现接口的实体类"><a href="#创建实现接口的实体类" class="headerlink" title="创建实现接口的实体类"></a>创建实现接口的实体类</h2><ul>
 <li>OperationAdd.java </li>
 </ul>
-<pre><code>public class OperationAdd implements Strategy{
-   @Override
-   public int doOperation(int num1, int num2) {
-      return num1 + num2;
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OperationAdd</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doOperation</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> num1 + num2;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>OperationSubstract.java </li>
 </ul>
-<pre><code>public class OperationSubstract implements Strategy{
-   @Override
-   public int doOperation(int num1, int num2) {
-      return num1 - num2;
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OperationSubstract</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doOperation</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> num1 - num2;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><ul>
 <li>OperationMultiply.java </li>
 </ul>
-<pre><code>public class OperationMultiply implements Strategy{
-   @Override
-   public int doOperation(int num1, int num2) {
-      return num1 * num2;
-   }
-}
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OperationMultiply</span> <span class="keyword">implements</span> <span class="title">Strategy</span></span>&#123;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">doOperation</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> num1 * num2;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><h2 id="创建-Context-类"><a href="#创建-Context-类" class="headerlink" title="创建 Context 类"></a>创建 Context 类</h2><ul>
 <li>Context.java </li>
 </ul>
-<pre><code>public class Context {
-   private Strategy strategy;
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> Strategy strategy;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Context</span><span class="params">(Strategy strategy)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.strategy = strategy;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">executeStrategy</span><span class="params">(<span class="keyword">int</span> num1, <span class="keyword">int</span> num2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> strategy.doOperation(num1, num2);</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-   public Context(Strategy strategy){
-      this.strategy = strategy;
-   }
-
-   public int executeStrategy(int num1, int num2){
-      return strategy.doOperation(num1, num2);
-   }
-}
-</code></pre><h2 id="使用-Context-来查看当它改变策略-Strategy-时的行为变化"><a href="#使用-Context-来查看当它改变策略-Strategy-时的行为变化" class="headerlink" title="使用 Context 来查看当它改变策略 Strategy 时的行为变化"></a>使用 Context 来查看当它改变策略 Strategy 时的行为变化</h2><ul>
+## 使用 Context 来查看当它改变策略 Strategy 时的行为变化
+</code></pre><ul>
 <li>StrategyPatternDemo.java </li>
 </ul>
-<pre><code>public class StrategyPatternDemo {
-   public static void main(String[] args) {
-      Context context = new Context(new OperationAdd());        
-      System.out.println(&quot;10 + 5 = &quot; + context.executeStrategy(10, 5));
-
-      context = new Context(new OperationSubstract());        
-      System.out.println(&quot;10 - 5 = &quot; + context.executeStrategy(10, 5));
-
-      context = new Context(new OperationMultiply());        
-      System.out.println(&quot;10 * 5 = &quot; + context.executeStrategy(10, 5));
-   }
-}
-</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><pre><code>10 + 5 = 15
-10 - 5 = 5
-10 * 5 = 5
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当一个类的行为需要根据不同的状态改变时就需要使用策略模式，比如demo中Context类的executeStrategy方法执行的逻辑需要根据Context的Strategy成员的状态的变化而变化，传统地可以通过if<br>else语句来实现对Strategy状态的判断进而实现不同的算法，但是如果采用策略模式，Context类就不必关心当前Strategy的状态，而将这种执行不同算法的控制权交给了客户端。</p>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StrategyPatternDemo</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      Context context = <span class="keyword">new</span> Context(<span class="keyword">new</span> OperationAdd());        </span><br><span class="line">      System.out.println(<span class="string">"10 + 5 = "</span> + context.executeStrategy(<span class="number">10</span>, <span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line">  context = <span class="keyword">new</span> Context(<span class="keyword">new</span> OperationSubstract());        </span><br><span class="line">  System.out.println(<span class="string">"10 - 5 = "</span> + context.executeStrategy(<span class="number">10</span>, <span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">  context = <span class="keyword">new</span> Context(<span class="keyword">new</span> OperationMultiply());        </span><br><span class="line">  System.out.println(<span class="string">"10 * 5 = "</span> + context.executeStrategy(<span class="number">10</span>, <span class="number">5</span>));</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="验证输出"><a href="#验证输出" class="headerlink" title="验证输出"></a>验证输出</h2><p>​<br>    10 + 5 = 15<br>    10 - 5 = 5<br>    10 * 5 = 5</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>当一个类的行为需要根据不同的状态改变时就需要使用策略模式，比如demo中Context类的executeStrategy方法执行的逻辑需要根据Context的Strategy成员的状态的变化而变化，传统地可以通过if else语句来实现对Strategy状态的判断进而实现不同的算法，但是如果采用策略模式，Context类就不必关心当前Strategy的状态，而将这种执行不同算法的控制权交给了客户端。</p>
 
       
     </div>
@@ -735,7 +697,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -746,7 +708,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -757,7 +719,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -818,7 +780,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#意图"><span class="nav-number">2.1.</span> <span class="nav-text">意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要解决"><span class="nav-number">2.2.</span> <span class="nav-text">主要解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用"><span class="nav-number">2.3.</span> <span class="nav-text">何时使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-number">2.4.</span> <span class="nav-text">如何解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键代码"><span class="nav-number">2.5.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">2.6.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.7.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">2.8.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">2.9.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">2.10.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个接口"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实现接口的实体类"><span class="nav-number">3.2.</span> <span class="nav-text">创建实现接口的实体类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Context-类"><span class="nav-number">3.3.</span> <span class="nav-text">创建 Context 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-Context-来查看当它改变策略-Strategy-时的行为变化"><span class="nav-number">3.4.</span> <span class="nav-text">使用 Context 来查看当它改变策略 Strategy 时的行为变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证输出"><span class="nav-number">3.5.</span> <span class="nav-text">验证输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#意图"><span class="nav-number">2.1.</span> <span class="nav-text">意图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要解决"><span class="nav-number">2.2.</span> <span class="nav-text">主要解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用"><span class="nav-number">2.3.</span> <span class="nav-text">何时使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-number">2.4.</span> <span class="nav-text">如何解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键代码"><span class="nav-number">2.5.</span> <span class="nav-text">关键代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用实例"><span class="nav-number">2.6.</span> <span class="nav-text">应用实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.7.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">2.8.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">2.9.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">2.10.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个接口"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建实现接口的实体类"><span class="nav-number">3.2.</span> <span class="nav-text">创建实现接口的实体类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Context-类"><span class="nav-number">3.3.</span> <span class="nav-text">创建 Context 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证输出"><span class="nav-number">3.4.</span> <span class="nav-text">验证输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -863,7 +825,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

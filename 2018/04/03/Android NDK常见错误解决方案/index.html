@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="NDK报错,Android,">
+  <meta name="keywords" content="报错解决方案,NDK,">
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="clang++: error: linker command failed with exit code 1 (use -v to seeinvocation) 这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：在app的defaultConfig中的ndk节点中添加： stl &amp;quot;gnustl_static&amp;quot; 即可 Tried exten">
-<meta name="keywords" content="NDK报错,Android">
+<meta name="description" content="clang++: error: linker command failed with exit code 1 (use -v to see invocation)这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：在app的defaultConfig中的ndk节点中添加：  1stl &quot;gnustl_static&quot; 即可 Tried extensions .c">
+<meta name="keywords" content="报错解决方案,NDK">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android NDK常见错误解决方案">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/04/03/Android NDK常见错误解决方案/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="clang++: error: linker command failed with exit code 1 (use -v to seeinvocation) 这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：在app的defaultConfig中的ndk节点中添加： stl &amp;quot;gnustl_static&amp;quot; 即可 Tried exten">
+<meta property="og:description" content="clang++: error: linker command failed with exit code 1 (use -v to see invocation)这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：在app的defaultConfig中的ndk节点中添加：  1stl &quot;gnustl_static&quot; 即可 Tried extensions .c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:50.088Z">
+<meta property="og:updated_time" content="2018-12-07T09:22:00.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android NDK常见错误解决方案">
-<meta name="twitter:description" content="clang++: error: linker command failed with exit code 1 (use -v to seeinvocation) 这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：在app的defaultConfig中的ndk节点中添加： stl &amp;quot;gnustl_static&amp;quot; 即可 Tried exten">
+<meta name="twitter:description" content="clang++: error: linker command failed with exit code 1 (use -v to see invocation)这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：在app的defaultConfig中的ndk节点中添加：  1stl &quot;gnustl_static&quot; 即可 Tried extensions .c">
 
 
 
@@ -388,8 +388,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -430,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  148
+                  149
                 </span>
               
 
@@ -467,16 +467,14 @@
       
 
       
-        <h1 id="clang-error-linker-command-failed-with-exit-code-1-use-v-to-see"><a href="#clang-error-linker-command-failed-with-exit-code-1-use-v-to-see" class="headerlink" title="clang++: error: linker command failed with exit code 1 (use -v to see"></a>clang++: error: linker command failed with exit code 1 (use -v to see</h1><p>invocation)</p>
-<p>这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：<br>在app的defaultConfig中的ndk节点中添加：</p>
-<pre><code>stl &quot;gnustl_static&quot;
-</code></pre><p>即可</p>
-<h1 id="Tried-extensions-c-C-c-cc-cpp-cxx-m-M-mm-h-hh-h-hm-hpp"><a href="#Tried-extensions-c-C-c-cc-cpp-cxx-m-M-mm-h-hh-h-hm-hpp" class="headerlink" title="Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp"></a>Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp</h1><p>.hxx .in .txx</p>
-<p>这种错误大多数情况下是因为编译器找不到对应的c文件，解决方案是在cmakelist中用全路径代替简略路径，比如：</p>
-<pre><code>file(GLOB SignalNative_SRC ${CMAKE_SOURCE_DIR}/src/main/cpp/Signal/*.cpp)
-</code></pre><p>而不是</p>
-<pre><code>file(GLOB SignalNative_SRC ${src/main/cpp/Signal/*.cpp)
-</code></pre>
+        <h1 id="clang-error-linker-command-failed-with-exit-code-1-use-v-to-see-invocation"><a href="#clang-error-linker-command-failed-with-exit-code-1-use-v-to-see-invocation" class="headerlink" title="clang++: error: linker command failed with exit code 1 (use -v to see invocation)"></a>clang++: error: linker command failed with exit code 1 (use -v to see invocation)</h1><p>这种错误最常见的出现形式是sync的时候没错，但是build的时候就报这个错误，解决方案：<br>在app的defaultConfig中的ndk节点中添加： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stl <span class="string">"gnustl_static"</span></span><br></pre></td></tr></table></figure>
+<p>即可</p>
+<h1 id="Tried-extensions-c-C-c-cc-cpp-cxx-m-M-mm-h-hh-h-hm-hpp-hxx-in-txx"><a href="#Tried-extensions-c-C-c-cc-cpp-cxx-m-M-mm-h-hh-h-hm-hpp-hxx-in-txx" class="headerlink" title="Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp.hxx .in .txx"></a>Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp.hxx .in .txx</h1><p>这种错误大多数情况下是因为编译器找不到对应的c文件，解决方案是在cmakelist中用全路径代替简略路径，比如：    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file(GLOB SignalNative_SRC $&#123;CMAKE_SOURCE_DIR&#125;/src/main/cpp/Signal<span class="comment">/*.cpp)</span></span><br></pre></td></tr></table></figure>
+<p>而不是    </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file(GLOB SignalNative_SRC $&#123;src/main/cpp/Signal<span class="comment">/*.cpp)</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -522,13 +520,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NDK报错/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/报错解决方案/" rel="tag"><i class="fa fa-tag"></i>
 
- NDK报错</a>
+ 报错解决方案</a>
           
-            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/NDK/" rel="tag"><i class="fa fa-tag"></i>
 
- Android</a>
+ NDK</a>
           
         </div>
       
@@ -664,7 +662,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -675,7 +673,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -686,7 +684,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -747,7 +745,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#clang-error-linker-command-failed-with-exit-code-1-use-v-to-see"><span class="nav-number">1.</span> <span class="nav-text">clang++: error: linker command failed with exit code 1 (use -v to see</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tried-extensions-c-C-c-cc-cpp-cxx-m-M-mm-h-hh-h-hm-hpp"><span class="nav-number">2.</span> <span class="nav-text">Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#clang-error-linker-command-failed-with-exit-code-1-use-v-to-see-invocation"><span class="nav-number">1.</span> <span class="nav-text">clang++: error: linker command failed with exit code 1 (use -v to see invocation)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tried-extensions-c-C-c-cc-cpp-cxx-m-M-mm-h-hh-h-hm-hpp-hxx-in-txx"><span class="nav-number">2.</span> <span class="nav-text">Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp.hxx .in .txx</span></a></li></ol></div>
             
 
           </div>
@@ -792,7 +790,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

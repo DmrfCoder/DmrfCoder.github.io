@@ -97,17 +97,17 @@
 
 
 
-<meta name="description" content="二分搜索Linearsearch/*  * 输入：n个元素的数组A[1...n]、x  * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0  */  int Linearsearch(int *A,int x, int n){     int j=0;     while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j]){         j++;">
+<meta name="description" content="二分搜索Linearsearch​1234567891011121314/* * 输入：n个元素的数组A[1...n]、x * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0 */int Linearsearch(int *A,int x, int n)&amp;#123;    int j=0;    while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法分析基本概念">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/05/14/算法分析基本概念/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="二分搜索Linearsearch/*  * 输入：n个元素的数组A[1...n]、x  * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0  */  int Linearsearch(int *A,int x, int n){     int j=0;     while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j]){         j++;">
+<meta property="og:description" content="二分搜索Linearsearch​1234567891011121314/* * 输入：n个元素的数组A[1...n]、x * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0 */int Linearsearch(int *A,int x, int n)&amp;#123;    int j=0;    while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:42.040Z">
+<meta property="og:updated_time" content="2018-12-07T10:13:55.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法分析基本概念">
-<meta name="twitter:description" content="二分搜索Linearsearch/*  * 输入：n个元素的数组A[1...n]、x  * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0  */  int Linearsearch(int *A,int x, int n){     int j=0;     while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j]){         j++;">
+<meta name="twitter:description" content="二分搜索Linearsearch​1234567891011121314/* * 输入：n个元素的数组A[1...n]、x * 输出：如果x=A[j]&amp;amp;&amp;amp;1&amp;lt;=j&amp;lt;=n，则输出j，否则输出0 */int Linearsearch(int *A,int x, int n)&amp;#123;    int j=0;    while (j&amp;lt;n&amp;amp;&amp;amp;x!=A[j">
 
 
 
@@ -387,8 +387,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法与数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">算法与数据结构</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -445,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -466,133 +466,19 @@
       
 
       
-        <h2 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="Linearsearch"><a href="#Linearsearch" class="headerlink" title="Linearsearch"></a>Linearsearch</h3><pre><code>/*
- * 输入：n个元素的数组A[1...n]、x
- * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
- */
-
-int Linearsearch(int *A,int x, int n){
-    int j=0;
-    while (j&lt;n&amp;&amp;x!=A[j]){
-        j++;
-    }
-
-    if(x==A[j])return j;
-    return 0;
-}
-</code></pre><h3 id="Binarysearch"><a href="#Binarysearch" class="headerlink" title="Binarysearch"></a>Binarysearch</h3><pre><code>/*
- * 输入：n个元素的升序数组A[1...n]、x
- * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0
- */
-
-int Binarysearch(int *A, int x, int n) {
-    int low = 1, high = n, j = 0;
-    while (low &lt;= high &amp;&amp; j == 0) {
-        int mid = (int) ((low + high) / 2);
-        if (x == A[mid])j = mid;
-        else if (x &lt; A[mid])high = mid - 1;
-        else low = mid + 1;
-    }
-
-    return j;
-}
-</code></pre><p>要注意二分搜索的输入一定是一个 <strong>升序</strong><br>的数组，实质就是一个二叉搜索树（所以也把二分搜索的执行描述为决策树），对于一个大小为n的排序数组，算法Binarysearch执行比较的最大次数为int（logn）+1（如果输入数组不是递增排好序的，则可在nlogn内对其进行排序后再进行二分搜索）。</p>
-<h2 id="合并两个已排序的表"><a href="#合并两个已排序的表" class="headerlink" title="合并两个已排序的表"></a>合并两个已排序的表</h2><pre><code>/*
- * 输入：数组A[1...m]和它的三个索引p，q，r，1&lt;=p&lt;=q&lt;r&lt;=m，p、q、r满足A[p...q]、A[q+1...r]分别按照升序排列
- * 输出：合并两个子数组A[p...q]和A[q+1...r]的数组A[p...r]
- */
-
-void Merge(int *A, int p, int q, int r) {
-    int B[r + 1];//B[p...r]是辅助数组
-    int s = p, t = q + 1, k = p;//s指向A[p...q]子数组，t指向A[q+1...r]子数组，k指向B数组
-    while (s &lt;= q &amp;&amp; t &lt;= r) {
-        if (A[s] &lt;= A[t]) {
-            B[k] = A[s];
-            s++;
-        } else {
-            B[k] = A[t];
-            t++;
-        }
-
-        k++;
-    }
-
-    if (s = q + 1) {//说明s指向的数组已经遍历完了
-        for (int i = t; i &lt;= r; ++i) {
-            B[k++] = A[i];
-        }
-    } else {
-        for (int i = s; i &lt;= r; ++i) {
-            B[k++] = A[i];
-        }
-    }
-
-    for (int j = p; j &lt;= r; ++j) {
-        A[j] = B[j];
-
-    }
-}
-</code></pre><p>设Merge算法要合并两个大小分别为n1和n2的数组（n1</p>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-void SelectionSort(int *A, int n) {
-
-    for (int i = 0; i &lt; n; ++i) {
-
-        for (int j = i + 1; j &lt;= n; ++j) {
-            if (A[i] &gt; A[j]) {
-                int t = A[i];
-                A[i] = A[i];
-                A[i] = t;
-            }
-        }
-    }
-
-}
-</code></pre><p>算法SelectionSort所需的元素比较次数为n(n-1)/2（n-1+n-2+n-3+…+2+1=n(n-1)/2），因为每次交换需要3次赋值，所以元素的赋值次数介于0到3(n-1)之间。</p>
+        <h2 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h2><h3 id="Linearsearch"><a href="#Linearsearch" class="headerlink" title="Linearsearch"></a>Linearsearch</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：n个元素的数组A[1...n]、x</span></span><br><span class="line"><span class="comment"> * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Linearsearch</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> x, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (j&lt;n&amp;&amp;x!=A[j])&#123;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(x==A[j])<span class="keyword">return</span> j;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Binarysearch"><a href="#Binarysearch" class="headerlink" title="Binarysearch"></a>Binarysearch</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：n个元素的升序数组A[1...n]、x</span></span><br><span class="line"><span class="comment"> * 输出：如果x=A[j]&amp;&amp;1&lt;=j&lt;=n，则输出j，否则输出0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Binarysearch</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">1</span>, high = n, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high &amp;&amp; j == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (<span class="keyword">int</span>) ((low + high) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (x == A[mid])j = mid;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (x &lt; A[mid])high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要注意二分搜索的输入一定是一个 <strong>升序</strong><br>的数组，实质就是一个二叉搜索树（所以也把二分搜索的执行描述为决策树），对于一个大小为n的排序数组，算法Binarysearch执行比较的最大次数为int（logn）+1（如果输入数组不是递增排好序的，则可在nlogn内对其进行排序后再进行二分搜索）。</p>
+<h2 id="合并两个已排序的表"><a href="#合并两个已排序的表" class="headerlink" title="合并两个已排序的表"></a>合并两个已排序的表</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：数组A[1...m]和它的三个索引p，q，r，1&lt;=p&lt;=q&lt;r&lt;=m，p、q、r满足A[p...q]、A[q+1...r]分别按照升序排列</span></span><br><span class="line"><span class="comment"> * 输出：合并两个子数组A[p...q]和A[q+1...r]的数组A[p...r]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> p, <span class="keyword">int</span> q, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> B[r + <span class="number">1</span>];<span class="comment">//B[p...r]是辅助数组</span></span><br><span class="line">    <span class="keyword">int</span> s = p, t = q + <span class="number">1</span>, k = p;<span class="comment">//s指向A[p...q]子数组，t指向A[q+1...r]子数组，k指向B数组</span></span><br><span class="line">    <span class="keyword">while</span> (s &lt;= q &amp;&amp; t &lt;= r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (A[s] &lt;= A[t]) &#123;</span><br><span class="line">            B[k] = A[s];</span><br><span class="line">            s++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            B[k] = A[t];</span><br><span class="line">            t++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (s = q + <span class="number">1</span>) &#123;<span class="comment">//说明s指向的数组已经遍历完了</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = t; i &lt;= r; ++i) &#123;</span><br><span class="line">            B[k++] = A[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = s; i &lt;= r; ++i) &#123;</span><br><span class="line">            B[k++] = A[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = p; j &lt;= r; ++j) &#123;</span><br><span class="line">        A[j] = B[j];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>设Merge算法要合并两个大小分别为n1和n2的数组（n1</p>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：n个元素的数组A[1...n]</span></span><br><span class="line"><span class="comment"> * 输出：按非降序排列的数组A[1...n]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SelectionSort</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &gt; A[j]) &#123;</span><br><span class="line">                <span class="keyword">int</span> t = A[i];</span><br><span class="line">                A[i] = A[i];</span><br><span class="line">                A[i] = t;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>算法SelectionSort所需的元素比较次数为n(n-1)/2（n-1+n-2+n-3+…+2+1=n(n-1)/2），因为每次交换需要3次赋值，所以元素的赋值次数介于0到3(n-1)之间。</p>
 <h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先将第二个数与第一个数进行对比，如果第二个数比第一个数小，则将第二个数插入到第一个数之前，这样保证前两个数是有序的；<br>接下来将第三个数与前两个数对比，比较的思路是先将第三个数存下来（记为x），然后将第三个数与第二个数比较，如果第二个数比第三个数大，则直接将第二个数向后移动一位，如果第二个数不比第三个数大，则说明此时前三个数都是有序的，因为之前前两个数是有序的，比较到最后，将x放到第三个数比较的终止位置即可。以此类推，将后面的i个数分别其前面的i-1个数进行对比，并将其插入到第一个比其大的数前面，最后即可完成排序。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-void InsertionSort(int *A, int n) {
-    for (int i = 2; i &lt;= n; ++i) {
-        int x = A[i];
-        int j = i - 1;
-        while (j &gt; 0 &amp;&amp; A[j] &gt; x) {
-            A[j + 1] = A[j];
-            j--;
-        }
-        A[j + 1] = x;
-    }
-}
-</code></pre><p>执行算法SelectionSort的元素比较次数在n-1到n(n-1)/2之间，元素赋值次数等于元素比较次数加上n-1.</p>
-<h2 id="自底向上合并排序"><a href="#自底向上合并排序" class="headerlink" title="自底向上合并排序"></a>自底向上合并排序</h2><pre><code>/*
- * 输入：n个元素的数组A[1...n]
- * 输出：按非降序排列的数组A[1...n]
- */
-
-
-void Merge(int *A, int p, int q, int r);
-
-void BottomUpSort(int *A, int n) {
-    int t = 1;
-    while (t &lt; n) {
-        int s = t, t = 2 * s, i = 0;
-        while (i + t &lt;= n) {
-            Merge(A, i + 1, i + s, i + t);
-            i = i + t;
-        }
-        if (i + s &lt; n) {
-            Merge(A, i + 1, i + s, n);
-        }
-    }
-}
-</code></pre><p>用算法BottomUpSort对n个元素的数组进行排序，当n为2的幂时，元素比较次数在(nlogn)/2到nlogn-n+1之间。执行该算法的元素赋值次数为2nlogn。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：n个元素的数组A[1...n]</span></span><br><span class="line"><span class="comment"> * 输出：按非降序排列的数组A[1...n]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertionSort</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = A[i];</span><br><span class="line">        <span class="keyword">int</span> j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; A[j] &gt; x) &#123;</span><br><span class="line">            A[j + <span class="number">1</span>] = A[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        A[j + <span class="number">1</span>] = x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>执行算法SelectionSort的元素比较次数在n-1到n(n-1)/2之间，元素赋值次数等于元素比较次数加上n-1.</p>
+<h2 id="自底向上合并排序"><a href="#自底向上合并排序" class="headerlink" title="自底向上合并排序"></a>自底向上合并排序</h2><p>​    </p>
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：n个元素的数组A[1...n]</span></span><br><span class="line"><span class="comment"> * 输出：按非降序排列的数组A[1...n]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> p, <span class="keyword">int</span> q, <span class="keyword">int</span> r)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BottomUpSort</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (t &lt; n) &#123;</span><br><span class="line">        <span class="keyword">int</span> s = t, t = <span class="number">2</span> * s, i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i + t &lt;= n) &#123;</span><br><span class="line">            Merge(A, i + <span class="number">1</span>, i + s, i + t);</span><br><span class="line">            i = i + t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i + s &lt; n) &#123;</span><br><span class="line">            Merge(A, i + <span class="number">1</span>, i + s, n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用算法BottomUpSort对n个元素的数组进行排序，当n为2的幂时，元素比较次数在(nlogn)/2到nlogn-n+1之间。执行该算法的元素赋值次数为2nlogn。</p>
 <h2 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h2><h3 id="O"><a href="#O" class="headerlink" title="O"></a>O</h3><p>前文提到算法InsertionSort执行的运算次数至多为cn^2，其中c为某个适当选择的正常数。这时我们说算法InsertionSort的运行时间是O(n^2)，说明当排序元素的个数等于或超过某个阈值n0时，对于某个常亮c，运行时间是cn^2，<br><strong>O符号描述的是一个上界但不一定是算法的实际执行时间</strong><br>，比如当排序一个已经排序好的数组时InsertionSort的运行时间就不是O(n^2)而是O(n)了。</p>
 <h3 id="Ω"><a href="#Ω" class="headerlink" title="Ω"></a>Ω</h3><p>相比于O，Ω描述的是算法执行的 <strong>下界</strong><br>，比如算法InsertionSort的运算时间至少是cn，则称算法InsertionSort的运行时间是Ω（n），即无论何时，当被排序的元素个数等于或超过某一个阈值n0时，对于某个常数c，算法的运行时间至少是cn。</p>
 <h3 id="Senta"><a href="#Senta" class="headerlink" title="Senta"></a>Senta</h3><p>Senta描述的是一个确切界限，如果对于任意大小等于或超过某一阈值n0的输入，如果运行时间在c1g(n)和c2g(n)之间，则称算法的运行时间是Senta(g(n))。</p>
@@ -793,7 +679,7 @@ void BottomUpSort(int *A, int n) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -804,7 +690,7 @@ void BottomUpSort(int *A, int n) {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -815,7 +701,7 @@ void BottomUpSort(int *A, int n) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -921,7 +807,7 @@ void BottomUpSort(int *A, int n) {
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

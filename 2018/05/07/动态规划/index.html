@@ -105,14 +105,12 @@
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="什么是动态规划基本概念动态规划过程是：每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生出来的，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。动态规划是一种被广泛用于求解组合最优化问题的算法。 算法思想算法思想与分治法类似，也是 将待求解的问题分解为若干个子问题 （阶段），按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180508082542596?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:39:43.535Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxygr684o9j303s02wglh.jpg">
+<meta property="og:updated_time" content="2018-12-07T12:40:52.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划">
 <meta name="twitter:description" content="什么是动态规划基本概念动态规划过程是：每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生出来的，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。动态规划是一种被广泛用于求解组合最优化问题的算法。 算法思想算法思想与分治法类似，也是 将待求解的问题分解为若干个子问题 （阶段），按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题">
-<meta name="twitter:image" content="https://img-
-blog.csdn.net/20180508082542596?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxygr684o9j303s02wglh.jpg">
 
 
 
@@ -392,8 +390,8 @@ blog.csdn.net/20180508082542596?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/Algorithm-and-data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm and data structure</span>
                   </a>
                 </span>
 
@@ -496,25 +494,8 @@ L[i,j]=L[i-1,j-1]+1 i,j&gt;0&amp;&amp;a_i==b_j
 
 L[i,j]=max(L[i-1,j],L[i,j-1]) i,j&gt;0&amp;&amp;a_i=b_j
 </code></pre><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>输入A和B字符串，返回二者的最长子序列长度</p>
-<pre><code>int Lcs(char *A, int n, char *B, int m) {//A[0...n] B[0...m]
-    int L[n + 1][m + 1];
-    for (int i = 0; i &lt;= n; ++i) {
-        L[i][0] = 0;
-    }
-    for (int j = 0; j &lt;= m; ++j) {
-        L[0][j] = 0;
-    }
-
-    for (int k = 1; k &lt;= n; ++k) {
-        for (int i = 1; i &lt;= m; ++i) {
-            if (A[k] == B[i])L[k][i] = L[k - 1][i - 1] + 1;
-            else L[k][i] = L[k][i - 1] &gt; L[k - 1][i] ? L[k][i - 1] : L[k - 1][i];
-        }
-    }
-
-    return L[n][m];
-}
-</code></pre><p>注意，以上算法需要的空间复杂度是senta(mn)，但是因为计算表中每一项的计算仅仅需要其上一行和上一列的元素，所以对算法进行改进可以使得空间复杂度降为senta(min(m,n))<br>（准确来说是需要2min(m,n)的空间，仅仅将前一行和当前行存储下来即可）。</p>
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Lcs</span><span class="params">(<span class="keyword">char</span> *A, <span class="keyword">int</span> n, <span class="keyword">char</span> *B, <span class="keyword">int</span> m)</span> </span>&#123;<span class="comment">//A[0...n] B[0...m]</span></span><br><span class="line">    <span class="keyword">int</span> L[n + <span class="number">1</span>][m + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        L[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        L[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; ++k) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[k] == B[i])L[k][i] = L[k - <span class="number">1</span>][i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> L[k][i] = L[k][i - <span class="number">1</span>] &gt; L[k - <span class="number">1</span>][i] ? L[k][i - <span class="number">1</span>] : L[k - <span class="number">1</span>][i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> L[n][m];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意，以上算法需要的空间复杂度是senta(mn)，但是因为计算表中每一项的计算仅仅需要其上一行和上一列的元素，所以对算法进行改进可以使得空间复杂度降为senta(min(m,n))<br>（准确来说是需要2min(m,n)的空间，仅仅将前一行和当前行存储下来即可）。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>最长公共子序列问题的最优解能够在senta(mn)时间和senta(min(m,n))空间内计算得到。</p>
 <h1 id="矩阵链相乘"><a href="#矩阵链相乘" class="headerlink" title="矩阵链相乘"></a>矩阵链相乘</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个n个矩阵的序列⟨A1,A2,A3…An⟩,我们要计算他们的乘积：A1A2A3…AnA1A2A3…An，由于矩阵乘法满足结合律，加括号不会影响结果，但是不同的加括号方法，算法复杂度有很大的差别：<br>考虑矩阵链⟨A1,A2,A3⟩，三个矩阵规模分别为10×100、100×5、5×50：</p>
 <ul>
@@ -526,47 +507,23 @@ L[i,j]=max(L[i-1,j],L[i,j-1]) i,j&gt;0&amp;&amp;a_i=b_j
 <p>用于存储最少乘法执行次数和最佳分段方式的结构是两个二维数组m和s，都是从1~n取值。m[i][j]记录矩阵链&lt; Ai,Ai+1,…,Aj&gt;的<br><strong>最少乘法执行次数</strong> ，而s[i][j]则记录 最优质m[i][j]的分割点k。</p>
 <p>需要注意的一点是当i=j时，m[i][j]=m[i][i]=0，因为一个矩阵不需要任何乘法。</p>
 <p>假设矩阵链从Ai到Aj，有j-i+1个矩阵，我们从k处分开，将矩阵链分为Ai~Ak和Ak+1到Aj两块，那么我们可以比较容易的给出m[i][j]从k处分隔的公式：</p>
-<pre><code>   m[i][j]=m[i][k]+m[k+1][j]+p[i-1]*p[k]*p[j]；
-</code></pre><p>在一组确定的i和j值的情况下，要使m[i][j]的值最小，我们只要在所有的k取值中（i &lt;=k&lt; j)，寻找一个让m[i][j]最小的值即可。</p>
+<p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m[i][j]=m[i][k]+m[k+<span class="number">1</span>][j]+p[i<span class="number">-1</span>]*p[k]*p[j]；</span><br></pre></td></tr></table></figure></p>
+<p>在一组确定的i和j值的情况下，要使m[i][j]的值最小，我们只要在所有的k取值中（i &lt;=k&lt; j)，寻找一个让m[i][j]最小的值即可。</p>
 <p>假设L为矩阵链的长度，那么L=j-i+1。当L=1时，只有一个矩阵，不需要计算。那么我们可以从L=2到n进行循环，对每个合理的i和j值的组合，遍历所有k值对应的m[i][j]值，将最小的一个记录下来，存储到m[i][j]中，并将对应的k存储到s[i][j]中，就得到了我们想要的结果。</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code>/*
- * 输入：ms[1...n+1],ms[i]表示第i个矩阵的行数，ms[i+1]表示第i个矩阵的列数
- * 输出：n个矩阵的数量乘法的最小次数
- */
-
-int dp[1024][1024] = { 0 };
-
-struct Matrix {
-    int row;
-    int column;
-};
-
-int matrixChainCost(Matrix *ms, int n) {
-    for (int scale = 2; scale &lt;= n; scale++) {
-        for (int i = 0; i &lt;= n - scale; i++) {
-            int j = i + scale - 1;
-            dp[i][j] = INT_MAX;
-            for (int k = i; k &lt; j; k++) {
-                dp[i][j] = std::min(dp[i][j], dp[i][k] + dp[k+1][j] + (ms[i].row*ms[k].column*ms[j].column));
-            }
-        }
-    }
-    return dp[0][n - 1];
-}
-</code></pre><h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：ms[1...n+1],ms[i]表示第i个矩阵的行数，ms[i+1]表示第i个矩阵的列数</span></span><br><span class="line"><span class="comment"> * 输出：n个矩阵的数量乘法的最小次数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1024</span>][<span class="number">1024</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> row;</span><br><span class="line">    <span class="keyword">int</span> column;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">matrixChainCost</span><span class="params">(Matrix *ms, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> scale = <span class="number">2</span>; scale &lt;= n; scale++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - scale; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + scale - <span class="number">1</span>;</span><br><span class="line">            dp[i][j] = INT_MAX;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt; j; k++) &#123;</span><br><span class="line">                dp[i][j] = <span class="built_in">std</span>::min(dp[i][j], dp[i][k] + dp[k+<span class="number">1</span>][j] + (ms[i].row*ms[k].column*ms[j].column));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][n - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><ul>
 <li>时间复杂度：senta(n^3) </li>
 <li>空间复杂度：senta(n^2) </li>
 </ul>
-<h1 id="所有点对的最短路径问题"><a href="#所有点对的最短路径问题" class="headerlink" title="所有点对的最短路径问题"></a>所有点对的最短路径问题</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>设G是一个有向图，其中每条边(i, j)都有一个非负的长度L[i, j]，若点i 到点j 没有边相连，则设L[i, j] = ∞.<br>找出每个顶点到其他所有顶点的最短路径所对应的长度。<br>例如：<br><img src="https://img-
-blog.csdn.net/20180508082542596?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h1 id="所有点对的最短路径问题"><a href="#所有点对的最短路径问题" class="headerlink" title="所有点对的最短路径问题"></a>所有点对的最短路径问题</h1><h2 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h2><p>设G是一个有向图，其中每条边(i, j)都有一个非负的长度L[i, j]，若点i 到点j 没有边相连，则设L[i, j] = ∞.<br>找出每个顶点到其他所有顶点的最短路径所对应的长度。<br>例如：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxygr684o9j303s02wglh.jpg" alt="1"></p>
 <p>则 L： 0 2 9</p>
 <p>8 0 6</p>
 <p>1 ∞ 0</p>
 <h2 id="解决思路（Floyd算法）"><a href="#解决思路（Floyd算法）" class="headerlink" title="解决思路（Floyd算法）"></a>解决思路（Floyd算法）</h2><p>Floyd算法（所有点对最短路径）就是每对可以联通的顶点之间总存在一个借助于其他顶点作为媒介而达到路径最短的最短路径值（这个值通过不断增添的媒介顶点而得到更新，也可能不更新——通过媒介的路径并不比其原路径更短），所有的值存储于邻接矩阵中，这是典型的动态规划思想。</p>
 <p>值得注意的是，Floyd算法本次的状态的获取 <strong>只用到了上个阶段的状态</strong> ，而没有用到其他阶段的状态，这就为 <strong>压缩空间</strong> 奠定了条件。</p>
 <p>Floyd算法能够成功的关键之一就是D0(初始矩阵，即权重矩阵)的初始化，凡是不相连接的边必须其dij必须等于正无穷且dii=0(矩阵对角线上的元素！)</p>
-<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code> /*
- * 输入：n×n维矩阵l[1...n,1...n]，对于有向图G=({1,2,...n},E)中的边(i,j)的长度为l[i,j]
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><p>​<br>     /*</p>
+<pre><code> * 输入：n×n维矩阵l[1...n,1...n]，对于有向图G=({1,2,...n},E)中的边(i,j)的长度为l[i,j]
  * 输出：矩阵D，使得D[i,j]等于i到j的距离
  * l矩阵需要满足：l[i,i]=0，对于m--&gt;n没有直接连接的有向边（因为是有向图，只考虑单边），应有l[m,n]=INT.MAX（即无穷）
  *
@@ -618,31 +575,8 @@ void Floyd(int **l,int n){
 </table>
 </div>
 <p>那么只能在前 x-1 件物品里选了<br>当 v[x] &lt;= y 时，mp[x][y] = max{ mp[x-1][y], p[x] + mp[x-1][y-v[x]] }  |  x<br>这件物品可能放入背包也可能不放入背包，所以取前两者的最大值就好了， 这样就将前两种情况都包括进来了  </p>
-<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code>/*
- * 输入：物品集合U={u1,u2,u3...un}，体积为s1,s2,s3...sn，价值为v1,v2,v3...vn，容量为C的背包
- * 输出：满足条件的最大价值
- *
- */
-int Knapsack(int *s,int *v,int C,int n){
-    int V[n+1][C+1];//V[i][j]表示从前i项找出的装入体积为j背包的最大值
-    for (int i = 0; i &lt;=n ; ++i) {
-        V[i][0]=0;
-    }
-    for (int j = 0; j &lt;=C ; ++j) {
-        V[0][j]=0;
-    }
-
-    for (int k = 1; k &lt;=n ; ++k) {
-        for (int i = 1; i &lt;=C ; ++i) {
-            if(s[k]&lt;=i){
-                V[k][i]=max(V[k-1][i],V[k-1][i-s[k]]+v[k]);
-            }
-        }
-    }
-
-    return V[n][C];
-}
-</code></pre><h2 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h2><p>背包问题的最优解可以在senta(nC)时间内和senta(C)空间内解得。<br>注意，上述算法的时间复杂性对输入不是多项式的，但是它的运行时间关于输入值是多项式的（时间复杂性+其他耗费时间），故认为它是伪多项式时间算法。</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 输入：物品集合U=&#123;u1,u2,u3...un&#125;，体积为s1,s2,s3...sn，价值为v1,v2,v3...vn，容量为C的背包</span></span><br><span class="line"><span class="comment"> * 输出：满足条件的最大价值</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Knapsack</span><span class="params">(<span class="keyword">int</span> *s,<span class="keyword">int</span> *v,<span class="keyword">int</span> C,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> V[n+<span class="number">1</span>][C+<span class="number">1</span>];<span class="comment">//V[i][j]表示从前i项找出的装入体积为j背包的最大值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;=n ; ++i) &#123;</span><br><span class="line">        V[i][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;=C ; ++j) &#123;</span><br><span class="line">        V[<span class="number">0</span>][j]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;=n ; ++k) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;=C ; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[k]&lt;=i)&#123;</span><br><span class="line">                V[k][i]=max(V[k<span class="number">-1</span>][i],V[k<span class="number">-1</span>][i-s[k]]+v[k]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> V[n][C];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h2><p>背包问题的最优解可以在senta(nC)时间内和senta(C)空间内解得。<br>注意，上述算法的时间复杂性对输入不是多项式的，但是它的运行时间关于输入值是多项式的（时间复杂性+其他耗费时间），故认为它是伪多项式时间算法。</p>
 
       
     </div>
@@ -827,7 +761,7 @@ int Knapsack(int *s,int *v,int C,int n){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -838,7 +772,7 @@ int Knapsack(int *s,int *v,int C,int n){
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -849,7 +783,7 @@ int Knapsack(int *s,int *v,int C,int n){
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -955,7 +889,7 @@ int Knapsack(int *s,int *v,int C,int n){
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

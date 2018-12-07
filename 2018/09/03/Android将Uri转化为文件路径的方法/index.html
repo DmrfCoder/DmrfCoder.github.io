@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Url,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="直接贴代码：  @RequiresApi(api = Build.VERSION_CODES.KITKAT)     public static String getpath(Context context, Uri uri){         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {             if">
+<meta name="description" content="直接贴代码： ​123456789101112131415161718192021222324252627282930313233343536373839404142@RequiresApi(api = Build.VERSION_CODES.KITKAT)   public static String getpath(Context context, Uri uri)&amp;#123;       i">
+<meta name="keywords" content="Url">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android将Uri转化为文件路径的方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/03/Android将Uri转化为文件路径的方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="直接贴代码：  @RequiresApi(api = Build.VERSION_CODES.KITKAT)     public static String getpath(Context context, Uri uri){         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {             if">
+<meta property="og:description" content="直接贴代码： ​123456789101112131415161718192021222324252627282930313233343536373839404142@RequiresApi(api = Build.VERSION_CODES.KITKAT)   public static String getpath(Context context, Uri uri)&amp;#123;       i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:26.903Z">
+<meta property="og:updated_time" content="2018-12-07T09:09:52.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android将Uri转化为文件路径的方法">
-<meta name="twitter:description" content="直接贴代码：  @RequiresApi(api = Build.VERSION_CODES.KITKAT)     public static String getpath(Context context, Uri uri){         if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {             if">
+<meta name="twitter:description" content="直接贴代码： ​123456789101112131415161718192021222324252627282930313233343536373839404142@RequiresApi(api = Build.VERSION_CODES.KITKAT)   public static String getpath(Context context, Uri uri)&amp;#123;       i">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  297
+                  310
                 </span>
               
 
@@ -445,79 +468,10 @@
 
       
         <p>直接贴代码：</p>
-<pre><code> @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static String getpath(Context context, Uri uri){
-        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-            if (DocumentsContract.isDocumentUri(context, uri)) {
-                if (isExternalStorageDocument(uri)) {
-                    // ExternalStorageProvider
-                    final String docId = DocumentsContract.getDocumentId(uri);
-                    final String[] split = docId.split(&quot;:&quot;);
-                    final String type = split[0];
-                    if (&quot;primary&quot;.equalsIgnoreCase(type)) {
-                        String path = Environment.getExternalStorageDirectory() + &quot;/&quot; + split[1];
-                        return path;
-                    }
-                } else if (isDownloadsDocument(uri)) {
-                    // DownloadsProvider
-                    final String id = DocumentsContract.getDocumentId(uri);
-                    final Uri contentUri = ContentUris.withAppendedId(Uri.parse(&quot;content://downloads/public_downloads&quot;),
-                            Long.valueOf(id));
-                    String path = getDataColumn(context, contentUri, null, null);
-                    return path;
-                } else if (isMediaDocument(uri)) {
-                    // MediaProvider
-                    final String docId = DocumentsContract.getDocumentId(uri);
-                    final String[] split = docId.split(&quot;:&quot;);
-                    final String type = split[0];
-                    Uri contentUri = null;
-                    if (&quot;image&quot;.equals(type)) {
-                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                    } else if (&quot;video&quot;.equals(type)) {
-                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                    } else if (&quot;audio&quot;.equals(type)) {
-                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                    }
-                    final String selection = &quot;_id=?&quot;;
-                    final String[] selectionArgs = new String[]{split[1]};
-                    String path = getDataColumn(context, contentUri, selection, selectionArgs);
-                    return path;
-                }
-            }
-        }
-        return null;
-    }
+<p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresApi</span>(api = Build.VERSION_CODES.KITKAT)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getpath</span><span class="params">(Context context, Uri uri)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) &#123;</span><br><span class="line">           <span class="keyword">if</span> (DocumentsContract.isDocumentUri(context, uri)) &#123;</span><br><span class="line">               <span class="keyword">if</span> (isExternalStorageDocument(uri)) &#123;</span><br><span class="line">                   <span class="comment">// ExternalStorageProvider</span></span><br><span class="line">                   <span class="keyword">final</span> String docId = DocumentsContract.getDocumentId(uri);</span><br><span class="line">                   <span class="keyword">final</span> String[] split = docId.split(<span class="string">":"</span>);</span><br><span class="line">                   <span class="keyword">final</span> String type = split[<span class="number">0</span>];</span><br><span class="line">                   <span class="keyword">if</span> (<span class="string">"primary"</span>.equalsIgnoreCase(type)) &#123;</span><br><span class="line">                       String path = Environment.getExternalStorageDirectory() + <span class="string">"/"</span> + split[<span class="number">1</span>];</span><br><span class="line">                       <span class="keyword">return</span> path;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isDownloadsDocument(uri)) &#123;</span><br><span class="line">                   <span class="comment">// DownloadsProvider</span></span><br><span class="line">                   <span class="keyword">final</span> String id = DocumentsContract.getDocumentId(uri);</span><br><span class="line">                   <span class="keyword">final</span> Uri contentUri = ContentUris.withAppendedId(Uri.parse(<span class="string">"content://downloads/public_downloads"</span>),</span><br><span class="line">                           Long.valueOf(id));</span><br><span class="line">                   String path = getDataColumn(context, contentUri, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">                   <span class="keyword">return</span> path;</span><br><span class="line">               &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isMediaDocument(uri)) &#123;</span><br><span class="line">                   <span class="comment">// MediaProvider</span></span><br><span class="line">                   <span class="keyword">final</span> String docId = DocumentsContract.getDocumentId(uri);</span><br><span class="line">                   <span class="keyword">final</span> String[] split = docId.split(<span class="string">":"</span>);</span><br><span class="line">                   <span class="keyword">final</span> String type = split[<span class="number">0</span>];</span><br><span class="line">                   Uri contentUri = <span class="keyword">null</span>;</span><br><span class="line">                   <span class="keyword">if</span> (<span class="string">"image"</span>.equals(type)) &#123;</span><br><span class="line">                       contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;</span><br><span class="line">                   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"video"</span>.equals(type)) &#123;</span><br><span class="line">                       contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;</span><br><span class="line">                   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"audio"</span>.equals(type)) &#123;</span><br><span class="line">                       contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;</span><br><span class="line">                   &#125;</span><br><span class="line">                   <span class="keyword">final</span> String selection = <span class="string">"_id=?"</span>;</span><br><span class="line">                   <span class="keyword">final</span> String[] selectionArgs = <span class="keyword">new</span> String[]&#123;split[<span class="number">1</span>]&#125;;</span><br><span class="line">                   String path = getDataColumn(context, contentUri, selection, selectionArgs);</span><br><span class="line">                   <span class="keyword">return</span> path;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getDataColumn</span><span class="params">(Context context, Uri uri, String selection, String[] selectionArgs)</span> </span>&#123;</span><br><span class="line">    Cursor cursor = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">final</span> String column = <span class="string">"_data"</span>;</span><br><span class="line">    <span class="keyword">final</span> String[] projection = &#123;column&#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, <span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">if</span> (cursor != <span class="keyword">null</span> &amp;&amp; cursor.moveToFirst()) &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> column_index = cursor.getColumnIndexOrThrow(column);</span><br><span class="line">            <span class="keyword">return</span> cursor.getString(column_index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (cursor != <span class="keyword">null</span>)</span><br><span class="line">            cursor.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isExternalStorageDocument</span><span class="params">(Uri uri)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"com.android.externalstorage.documents"</span>.equals(uri.getAuthority());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isDownloadsDocument</span><span class="params">(Uri uri)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"com.android.providers.downloads.documents"</span>.equals(uri.getAuthority());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMediaDocument</span><span class="params">(Uri uri)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"com.android.providers.media.documents"</span>.equals(uri.getAuthority());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​    </p>
 
-
-    private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-        Cursor cursor = null;
-        final String column = &quot;_data&quot;;
-        final String[] projection = {column};
-        try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-            if (cursor != null &amp;&amp; cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        return null;
-    }
-
-    private static boolean isExternalStorageDocument(Uri uri) {
-        return &quot;com.android.externalstorage.documents&quot;.equals(uri.getAuthority());
-    }
-
-    private static boolean isDownloadsDocument(Uri uri) {
-        return &quot;com.android.providers.downloads.documents&quot;.equals(uri.getAuthority());
-    }
-
-    private static boolean isMediaDocument(Uri uri) {
-        return &quot;com.android.providers.media.documents&quot;.equals(uri.getAuthority());
-    }
-</code></pre>
       
     </div>
     
@@ -560,6 +514,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Url/" rel="tag"><i class="fa fa-tag"></i>
+
+ Url</a>
+          
+        </div>
       
 
       
@@ -684,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -695,7 +657,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -706,7 +668,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -796,7 +758,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="汇编,">
 
 
 
@@ -98,13 +98,14 @@
 
 
 <meta name="description" content="字符串操作首先明确什么是字符串：  字符串是字符的一个序列，对字符串的操作处理包括复制、比较和检索等，为了有效地处理字符串，IA-32系列处理器有专门处理字符串的指令，称之为字符串操作指令 ，简称为 串操作指令 。  字符串操作指令主要有五种常见的串操作指令：  串装入指令  串存储指令  串传送指令  串扫描指令  串比较指令   对于以上的五种常见操作指令，都对应三种字符尺寸：  字节（8位）">
+<meta name="keywords" content="汇编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编总结（4）——字符串操作和位操作">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/11/14/汇编总结（4）——字符串操作和位操作/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
 <meta property="og:description" content="字符串操作首先明确什么是字符串：  字符串是字符的一个序列，对字符串的操作处理包括复制、比较和检索等，为了有效地处理字符串，IA-32系列处理器有专门处理字符串的指令，称之为字符串操作指令 ，简称为 串操作指令 。  字符串操作指令主要有五种常见的串操作指令：  串装入指令  串存储指令  串传送指令  串扫描指令  串比较指令   对于以上的五种常见操作指令，都对应三种字符尺寸：  字节（8位）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:14.550Z">
+<meta property="og:updated_time" content="2018-12-07T12:29:45.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="汇编总结（4）——字符串操作和位操作">
 <meta name="twitter:description" content="字符串操作首先明确什么是字符串：  字符串是字符的一个序列，对字符串的操作处理包括复制、比较和检索等，为了有效地处理字符串，IA-32系列处理器有专门处理字符串的指令，称之为字符串操作指令 ，简称为 串操作指令 。  字符串操作指令主要有五种常见的串操作指令：  串装入指令  串存储指令  串传送指令  串扫描指令  串比较指令   对于以上的五种常见操作指令，都对应三种字符尺寸：  字节（8位）">
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -519,9 +542,8 @@
 <p><strong>MOVSD</strong> <strong>;</strong>双字传送</p>
 </blockquote>
 <p>作用：把ESI指向的字节/字/双字传送到EDI指向的存储单元中，然后根据操作大小及方向标志DF调整ESI和EDI的值，类似如下两句：</p>
-<pre><code>LOADSB
-STOSB
-</code></pre><p>但是并不会影响AL/AX/EAX的值。</p>
+<p>​<br>    LOADSB<br>    STOSB</p>
+<p>但是并不会影响AL/AX/EAX的值。</p>
 <h4 id="字符串扫描指令（Scan-String）"><a href="#字符串扫描指令（Scan-String）" class="headerlink" title="字符串扫描指令（Scan String）"></a>字符串扫描指令（Scan String）</h4><p>三种格式：</p>
 <blockquote>
 <p><strong>SCASB</strong> <strong>;</strong>串字节扫描</p>
@@ -536,27 +558,9 @@ STOSB
 </blockquote>
 <p>把累加器AL/AX/EAX中的内容和由寄存器EDI所指向的一个字节/字/双字的目标数据采用相减的方式比较，相减结果反映到各状态标志，但不影响两个操作数，然后根据字符大小和方向标志DF调整EDI的值。</p>
 <h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><p>判断一个字符是否是十六进制字符：</p>
-<pre><code>     char  string[] =&quot;0123456789ABCDEFabcdef&quot;;
-    char  varch= &#39;%&#39;;       //用于保存其他方式输入的字符
-    int  flag;              /反映是否为十六进制数符号
-    _asm  {
-        MOV   AL, varch     ;把要判断的字符送AL
-        MOV   ECX, 22       ;合计22个十六进制数符号
-        LEA   EDI, string
-    NEXT:
-        SCASB             ;
-        LOOPNZ   NEXT      ;没有找遍，且没有找到，继续找
-        JNZ   NOT_FOUND     ;没有找到
-    FOUND:                   ;找到，字符是十六进制数符号
-        MOV   flag, 1
-        JMP   SHORT  OVER
-    NOT_FOUND:               ;字符不是十六进制数符号
-        MOV   flag, 0
-    OVER:
-    }
-    printf(&quot;flag=%d\n&quot;, flag);    //显示为flag=0
-    return  0;
-</code></pre><p>核心算法思想是将呆判断字符放在AL中，将EDI指向十六进制标准字符串的首地址，然后使用SCASB，如果执行SCASB后ZF标志位不为0，就说明待判断字符和十六进制标准字符串中的当前字符不等，然后进入下一个循环，注意此时EDI已经自动指向了十六进制标准字符串的下一位。如果此时ZF为0了，会进入JNZ<br>NOT_FOUND 这句，但是由于相等时ZF等于0，所以不会执行JNZ，会执行其下一句FOUND。</p>
+<p>​<br>         char  string[] =”0123456789ABCDEFabcdef”;<br>        char  varch= ‘%’;       //用于保存其他方式输入的字符<br>        int  flag;              /反映是否为十六进制数符号<br>        _asm  {<br>            MOV   AL, varch     ;把要判断的字符送AL<br>            MOV   ECX, 22       ;合计22个十六进制数符号<br>            LEA   EDI, string<br>        NEXT:<br>            SCASB             ;<br>            LOOPNZ   NEXT      ;没有找遍，且没有找到，继续找<br>            JNZ   NOT_FOUND     ;没有找到<br>        FOUND:                   ;找到，字符是十六进制数符号<br>            MOV   flag, 1<br>            JMP   SHORT  OVER<br>        NOT_FOUND:               ;字符不是十六进制数符号<br>            MOV   flag, 0<br>        OVER:<br>        }<br>        printf(“flag=%d\n”, flag);    //显示为flag=0<br>        return  0;</p>
+<p>​<br>​    </p>
+<p>核心算法思想是将呆判断字符放在AL中，将EDI指向十六进制标准字符串的首地址，然后使用SCASB，如果执行SCASB后ZF标志位不为0，就说明待判断字符和十六进制标准字符串中的当前字符不等，然后进入下一个循环，注意此时EDI已经自动指向了十六进制标准字符串的下一位。如果此时ZF为0了，会进入JNZ<br>NOT_FOUND 这句，但是由于相等时ZF等于0，所以不会执行JNZ，会执行其下一句FOUND。</p>
 <p>这就是主要的逻辑。</p>
 <h4 id="字符串比较指令（CoMPare-String）"><a href="#字符串比较指令（CoMPare-String）" class="headerlink" title="字符串比较指令（CoMPare String）"></a>字符串比较指令（CoMPare String）</h4><p>三种格式：</p>
 <blockquote>
@@ -583,31 +587,20 @@ STOSB
 <p>REP只要用在MOVS和STOS之前。</p>
 <h5 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo"></a>Demo</h5><p>以下两段代码等价：</p>
 <p>使用LOOP：</p>
-<pre><code>MOV ECX ,8;
-MOVSD;
-DEC ECX;
-LOOP ECX;
-</code></pre><p>使用REP：</p>
-<pre><code>MOV ECX,8;
-REP MOVSD;
-</code></pre><h4 id="REPE-REPZ"><a href="#REPE-REPZ" class="headerlink" title="REPE/REPZ"></a>REPE/REPZ</h4><p>REPE和REPZ是一个前缀的两个助记符，说白了他们两功能一样：</p>
+<p>​<br>    MOV ECX ,8;<br>    MOVSD;<br>    DEC ECX;<br>    LOOP ECX;</p>
+<p>使用REP：</p>
+<p>​<br>    MOV ECX,8;<br>    REP MOVSD;</p>
+<h4 id="REPE-REPZ"><a href="#REPE-REPZ" class="headerlink" title="REPE/REPZ"></a>REPE/REPZ</h4><p>REPE和REPZ是一个前缀的两个助记符，说白了他们两功能一样：</p>
 <p>重复前，先判断ECX是否为0，每重复一次，ECX值减1（不影响标志位），一直重复到ECX为0或者串操作指令使ZF为0为止，<br><strong>只有ZF为1（相等）的时候才有可能继续重复。</strong></p>
 <p>主要用在CMPS和SCAS之前。</p>
 <h5 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo"></a>Demo</h5><p>跳过字符串前面的空格符：</p>
-<pre><code>MOV EDI ,string；
-MOV ECX,-1;
-MOV AL,20H;//空格符
-REPE SCASB;//SCASB会让当前EDI所指的值和AL（空格）比较，当相等时ZF为0，结束REPE的条件
-DEC EDI;//上面多调整了一次EDI的值，这里减1
-</code></pre><h4 id="REPNE-REPNZ"><a href="#REPNE-REPNZ" class="headerlink" title="REPNE/REPNZ"></a>REPNE/REPNZ</h4><p>每次重复前先判断ECX是否为0，不为0时进行重复，每重复一次ECX值减1，一直到ECX为0或者ZF为1，只有当不相等（ZF为0）时才有可能重复。</p>
+<p>​<br>    MOV EDI ,string；<br>    MOV ECX,-1;<br>    MOV AL,20H;//空格符<br>    REPE SCASB;//SCASB会让当前EDI所指的值和AL（空格）比较，当相等时ZF为0，结束REPE的条件<br>    DEC EDI;//上面多调整了一次EDI的值，这里减1</p>
+<h4 id="REPNE-REPNZ"><a href="#REPNE-REPNZ" class="headerlink" title="REPNE/REPNZ"></a>REPNE/REPNZ</h4><p>每次重复前先判断ECX是否为0，不为0时进行重复，每重复一次ECX值减1，一直到ECX为0或者ZF为1，只有当不相等（ZF为0）时才有可能重复。</p>
 <p>REPNE/REPNZ主要用在SCAS之前。</p>
 <h5 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo"></a>Demo</h5><p>求字符串长度：</p>
-<pre><code>XOR    AL, AL          ;AL= 0（字符串结束标记值）
-MOV    ECX, -1         ;假设字符串足够长（0FFFFFFFFH）
-REPNZ  SCASB           ;寻找字符串结束标记
-NOT    ECX
-DEC    ECX             ;至此ECX含字符串长度
-</code></pre><h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><p>无论在表示、存储或者处理时，位（bit）是计算机系统中最基本的单位，为了提高位操作的效率，IA-32系列处理器提供专门的位操作指令，所谓的<br><strong>位操作指令</strong> ，就是以位（bit）为操作单位的指令。</p>
+<p>​<br>    XOR    AL, AL          ;AL= 0（字符串结束标记值）<br>    MOV    ECX, -1         ;假设字符串足够长（0FFFFFFFFH）<br>    REPNZ  SCASB           ;寻找字符串结束标记<br>    NOT    ECX<br>    DEC    ECX             ;至此ECX含字符串长度</p>
+<p>​    </p>
+<h2 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h2><p>无论在表示、存储或者处理时，位（bit）是计算机系统中最基本的单位，为了提高位操作的效率，IA-32系列处理器提供专门的位操作指令，所谓的<br><strong>位操作指令</strong> ，就是以位（bit）为操作单位的指令。</p>
 <h3 id="位测试及设置指令组"><a href="#位测试及设置指令组" class="headerlink" title="位测试及设置指令组"></a>位测试及设置指令组</h3><p>位测试及设置指令组含有如下4条指令：</p>
 <ul>
 <li>BT 位测试指令（Bit test） </li>
@@ -616,11 +609,8 @@ DEC    ECX             ;至此ECX含字符串长度
 <li>BTS 位测试并置位指令（bit test and set） </li>
 </ul>
 <p>一般格式：</p>
-<pre><code>BT     OPRD1，OPRD2
-BTC    OPRD1，OPRD2
-BTR    OPRD1，OPRD2
-BTS    OPRD1，OPRD2
-</code></pre><p>操作数OPRD1指定位串，可以是16位或32位 <strong>通用寄存器</strong> ，可以是16位或32位 <strong>存储单元地址</strong> 。</p>
+<p>​<br>    BT     OPRD1，OPRD2<br>    BTC    OPRD1，OPRD2<br>    BTR    OPRD1，OPRD2<br>    BTS    OPRD1，OPRD2</p>
+<p>操作数OPRD1指定位串，可以是16位或32位 <strong>通用寄存器</strong> ，可以是16位或32位 <strong>存储单元地址</strong> 。</p>
 <p>操作数OPRD2指定位号，可以是操作数OPRD1 <strong>尺寸相同的通用寄存器</strong> ，也可以是8位 <strong>立即数</strong> 。</p>
 <p>如果操作数OPRD1是32位（16位）寄存器，那么被测位串也就限于32位（16位），实际被测位号将是操作数OPRD2取32（或16）的 <strong>余数</strong> 。</p>
 <p>具体解释：</p>
@@ -645,35 +635,25 @@ BTS    OPRD1，OPRD2
 <li>BSR：逆向位扫描（bit scan reverse） </li>
 </ul>
 <p>一般格式：</p>
-<pre><code>BSF     OPRD1，OPRD2
-BSR     OPRD1，OPRD2
-</code></pre><p>操作数OPRD1是16或32位通用寄存器，操作数OPRD2可以是16位或32位通用寄存器或者存储单元；但操作数OPRD1和OPRD2的位数(长度)必须相同。</p>
+<p>​<br>    BSF     OPRD1，OPRD2<br>    BSR     OPRD1，OPRD2</p>
+<p>操作数OPRD1是16或32位通用寄存器，操作数OPRD2可以是16位或32位通用寄存器或者存储单元；但操作数OPRD1和OPRD2的位数(长度)必须相同。</p>
 <p>功能如下：</p>
 <ul>
 <li>顺向位扫描指令BSF，从右向左（位0至位15或位31）扫描字或双字操作数OPRD2中第一个含“1”的位，并把扫描到的第一个含“1”的位的位号送操作数OPRD1。 </li>
 <li>逆向位扫描指令BSR，从左向右（位15或位31至位0）扫描字或双字操作数OPRD2中第一个含“1”的位，并把扫描到的第一个含“1”的位的位号送操作数OPRD1。 </li>
 <li>如果字或双字操作数OPRD2等于0，那么零标志ZF被置1，操作数OPRD1的值不确定；否则零标志ZF被清0。 </li>
 </ul>
-<h4 id="Demo-4"><a href="#Demo-4" class="headerlink" title="Demo"></a>Demo</h4><pre><code>    MOV   EBX , 12345678H//1在第28位
-    BSR   EAX, EBX                ;ZF=0, EAX=1CH=12+16=28
-    BSF   DX, AX                  ;AX=CH=1100B,ZF=0, DX=2=10B
-    BSF   CX, DX                  ;ZF=0, CX=1
-</code></pre><h2 id="条件设置字节指令"><a href="#条件设置字节指令" class="headerlink" title="条件设置字节指令"></a>条件设置字节指令</h2><p>一般格式：</p>
-<pre><code>SETcc OPRD
-</code></pre><p>符号cc是代表各种条件的缩写，是指令助记符的一部分；操作数OPRD只能是8位寄存器或者字节存储单元，用于存放设置结果。当条件满足时，那么将目的操作数OPRD设置成1，否则设置成0。这里的条件<br><strong>与条件转移指令中的条件一样</strong> 。</p>
+<h4 id="Demo-4"><a href="#Demo-4" class="headerlink" title="Demo"></a>Demo</h4><p>​<br>        MOV   EBX , 12345678H//1在第28位<br>        BSR   EAX, EBX                ;ZF=0, EAX=1CH=12+16=28<br>        BSF   DX, AX                  ;AX=CH=1100B,ZF=0, DX=2=10B<br>        BSF   CX, DX                  ;ZF=0, CX=1</p>
+<h2 id="条件设置字节指令"><a href="#条件设置字节指令" class="headerlink" title="条件设置字节指令"></a>条件设置字节指令</h2><p>一般格式：</p>
+<p>​<br>    SETcc OPRD</p>
+<p>符号cc是代表各种条件的缩写，是指令助记符的一部分；操作数OPRD只能是8位寄存器或者字节存储单元，用于存放设置结果。当条件满足时，那么将目的操作数OPRD设置成1，否则设置成0。这里的条件<br><strong>与条件转移指令中的条件一样</strong> 。</p>
 <p>应用场景：一般在使用条件转移指令且涉及到对1的操作时考虑使用条件设置指令代替条件转移指令，比如：</p>
 <p>设r1、r2、r3都代表通用寄存器，要计算r3=（r1 的值  &gt;=r2的值）?1:0:</p>
 <p>使用条件转移：</p>
-<pre><code>     CMP   r1, r2
-    MOV   r3, 1
-    Jae    NEXT
-    MOV   r3, 0
-NEXT:
-</code></pre><p>使用条件设置字节：</p>
-<pre><code>XOR    r3, r3
-CMP    r1, r2
-SETae   r3
-</code></pre>
+<p>​<br>         CMP   r1, r2<br>        MOV   r3, 1<br>        Jae    NEXT<br>        MOV   r3, 0<br>    NEXT:</p>
+<p>使用条件设置字节：</p>
+<p>​<br>    XOR    r3, r3<br>    CMP    r1, r2<br>    SETae   r3</p>
+
       
     </div>
     
@@ -716,6 +696,14 @@ SETae   r3
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"><i class="fa fa-tag"></i>
+
+ 汇编</a>
+          
+        </div>
       
 
       
@@ -849,7 +837,7 @@ SETae   r3
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -860,7 +848,7 @@ SETae   r3
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -871,7 +859,7 @@ SETae   r3
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -977,7 +965,7 @@ SETae   r3
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

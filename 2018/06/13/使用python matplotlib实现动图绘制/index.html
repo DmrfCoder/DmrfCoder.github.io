@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="matplotlib,动图,">
 
 
 
@@ -97,21 +97,20 @@
 
 
 
-<meta name="description" content="前言想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。 思路动图的核心函数是matplotlib.animation.FuncAnimation，基本用法： anim = animation.funcanimation(fig, animate, init_func=init, frames=100">
+<meta name="description" content="前言想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。 思路动图的核心函数是matplotlib.animation.FuncAnimation，基本用法： ​123456789anim = animation.funcanimation(fig, animate, init_func=init,">
+<meta name="keywords" content="matplotlib,动图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用python matplotlib实现动图绘制">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/06/13/使用python matplotlib实现动图绘制/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="前言想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。 思路动图的核心函数是matplotlib.animation.FuncAnimation，基本用法： anim = animation.funcanimation(fig, animate, init_func=init, frames=100">
+<meta property="og:description" content="前言想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。 思路动图的核心函数是matplotlib.animation.FuncAnimation，基本用法： ​123456789anim = animation.funcanimation(fig, animate, init_func=init,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-
-blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:39:35.241Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycs1ei39j30x60kjnpd.jpg">
+<meta property="og:updated_time" content="2018-12-07T10:22:57.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用python matplotlib实现动图绘制">
-<meta name="twitter:description" content="前言想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。 思路动图的核心函数是matplotlib.animation.FuncAnimation，基本用法： anim = animation.funcanimation(fig, animate, init_func=init, frames=100">
-<meta name="twitter:image" content="https://img-
-blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:description" content="前言想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。 思路动图的核心函数是matplotlib.animation.FuncAnimation，基本用法： ​123456789anim = animation.funcanimation(fig, animate, init_func=init,">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycs1ei39j30x60kjnpd.jpg">
 
 
 
@@ -379,6 +378,28 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -411,7 +432,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  965
+                  900
                 </span>
               
 
@@ -427,7 +448,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  3
                 </span>
               
             </div>
@@ -450,163 +471,11 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想写数据动态可视化很久了，但是网上竟然没有一份能直接用的代码，昨天终于狠下心来死啃了一波开发者文档搞定了这部分，贴一篇blog记录一下希望可以帮到你。</p>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>动图的核心函数是matplotlib.animation.FuncAnimation，基本用法：</p>
-<pre><code>anim = animation.funcanimation(fig, animate, init_func=init, frames=100, interval=20, blit=true)
-# fig: 是我们创建的画布
-# animat: 是重点，是我们每个时刻要更新图形对象的函数，返回值和init_func相同
-# init_func: 初始化函数，其返回值就是每次都要更新的对象，
-#    告诉FuncAnimation在不同时刻要更新哪些图形对象
-# frames: 相当于时刻t，要模拟多少帧图画，不同时刻的t相当于animat的参数
-# interval: 刷新频率，毫秒
-# blit: blit是一个非常重要的关键字，它告诉动画只重绘修改的部分，结合上面保存的时间，
-#    blit=true会使动画显示得会非常非常快
-</code></pre><p>动图绘制的关键是动态更新数据并刷新图像，更新数据需要写一个animat函数，看具体实现：</p>
+<p>​<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">anim = animation.funcanimation(fig, animate, init_func=init, frames=<span class="number">100</span>, interval=<span class="number">20</span>, blit=true)</span><br><span class="line"><span class="comment"># fig: 是我们创建的画布</span></span><br><span class="line"><span class="comment"># animat: 是重点，是我们每个时刻要更新图形对象的函数，返回值和init_func相同</span></span><br><span class="line"><span class="comment"># init_func: 初始化函数，其返回值就是每次都要更新的对象，</span></span><br><span class="line"><span class="comment">#    告诉FuncAnimation在不同时刻要更新哪些图形对象</span></span><br><span class="line"><span class="comment"># frames: 相当于时刻t，要模拟多少帧图画，不同时刻的t相当于animat的参数</span></span><br><span class="line"><span class="comment"># interval: 刷新频率，毫秒</span></span><br><span class="line"><span class="comment"># blit: blit是一个非常重要的关键字，它告诉动画只重绘修改的部分，结合上面保存的时间，</span></span><br><span class="line"><span class="comment">#    blit=true会使动画显示得会非常非常快</span></span><br></pre></td></tr></table></figure></p>
+<p>动图绘制的关键是动态更新数据并刷新图像，更新数据需要写一个animat函数，看具体实现：</p>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>给出代码及对应注释，你应该会秒懂：</p>
-<pre><code># -*-coding:utf-8-*-
-import random
-from matplotlib.backends.backend_agg import FigureCanvas
-
-
-
-
-from matplotlib import pyplot as plt
-from matplotlib import animation
-import numpy as np
-import seaborn as sns
-from matplotlib.image import imread
-
-
-
-
-
-
-
-
-
-
-
-gesture_i = [0] * 2200
-gesture_q = [0] * 2200
-acc_first = [0] * 6
-acc_second = [0] * 6
-
-acc_first_max_index = 0
-acc_second_max_index = 0
-acc_first_max = 0
-acc_second_max = 0
-
-cur_data_count = 0
-
-update_first_flag = False
-update_second_flag = False
-
-
-
-
-
-
-
-
-name_list = [&quot;Static&quot;, &quot;Approach&quot;, &quot;Apart&quot;, &quot;Click&quot;, &quot;Flip&quot;, &quot;Circle&quot;]
-
-# 创建画布，包含4个子图
-fig = plt.figure(figsize=(15, 10))
-
-bgimg=imread(&quot;bac2.jpg&quot;)#设置背景图片
-fig.figimage(bgimg,resize=True)#设置窗口自适应（背景图片）
-
-
-
-ax1 = fig.add_subplot(2, 2, 1)
-ax1.set_facecolor(&#39;none&#39;)#设置该子图背景透明，其他子图同理
-
-
-ax2 = fig.add_subplot(2, 2, 3)
-ax2.set_facecolor(&#39;none&#39;)
-
-
-
-ax3 = fig.add_subplot(2, 2, 2)
-ax3.set_facecolor(&#39;none&#39;)
-
-ax4 = fig.add_subplot(2, 2, 4)
-ax4.set_facecolor(&#39;none&#39;)
-
-# 绘制初始图形
-bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
-
-
-bar2 = ax4.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
-
-
-x = np.arange(0, 2200, 1)  # x轴
-
-ax1.set_ylim(-1, 1)#设置y轴范围为-1到1
-line1, = ax1.plot(x, gesture_i,color=&#39;coral&#39;)
-
-ax2.set_ylim(-1, 1)
-line2, = ax2.plot(x, gesture_q,color=&#39;coral&#39;)
-
-#初始化函数
-def init():
-    # 构造开始帧函数init
-    # 改变y轴数据，x轴不需要改
-    line1.set_ydata(gesture_i)
-    line2.set_ydata(gesture_q)
-    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
-    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&#39;rgb&#39;, tick_label=name_list)
-
-    ax1.set_xlabel(&quot;I&quot;)
-    ax2.set_xlabel(&quot;Q&quot;)
-
-    return line1, line2, ax1  # 注意返回值，我们要更新的就是这些数据
-
-#更新图像的函数
-def animate(i):
-    #注意这里必须要用global声明，不然可能出现无法动态更新数据的情况
-    global gesture_i
-    global gesture_q
-    global update_first_flag
-    global update_second_flag
-
-    line1.set_ydata(gesture_i)
-
-    ax3.cla()
-    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=&#39;rgb&#39;, tick_label=name_list)
-    ax3.legend()
-
-    ax4.cla()
-    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=&#39;rgb&#39;, tick_label=name_list)
-    ax4.legend
-
-
-
-    return line1, line2, ax1
-
-
-
-
-
-def draw_view():
-# 调用FuncAnimation函数生成动画。参数说明：
-# fig 进行动画绘制的figure
-# func 自定义动画函数，即传入刚定义的函数animate
-# frames 动画长度，一次循环包含的帧数
-# init_func 自定义开始帧，即传入刚定义的函数init
-# interval 更新频率，以ms计
-# blit 选择更新所有点，还是仅更新产生变化的点。应选择True，但mac用户请选择False，否则无法显示动画
-    ani = animation.FuncAnimation(fig=fig,
-                                  func=animate,
-                                  frames=100,
-                                  init_func=init,
-                                  interval=100,
-                                  blit=False)
-    plt.show()
-
-
-if __name__ == &#39;__main__&#39;:
-    draw_view()
-</code></pre><p>说明：实现动态数据可视化的思路是将绘制图像所用的数据写成全局变量，然后动态更新你的数据，UI层会一帧一帧地刷新图像，这样只要你的数据在变，图像就会是变化的，给一张效果图：<br><img src="https://img-
-blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*-coding:utf-8-*-</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> matplotlib.backends.backend_agg <span class="keyword">import</span> FigureCanvas</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> matplotlib.image <span class="keyword">import</span> imread</span><br><span class="line"></span><br><span class="line">gesture_i = [<span class="number">0</span>] * <span class="number">2200</span></span><br><span class="line">gesture_q = [<span class="number">0</span>] * <span class="number">2200</span></span><br><span class="line">acc_first = [<span class="number">0</span>] * <span class="number">6</span></span><br><span class="line">acc_second = [<span class="number">0</span>] * <span class="number">6</span></span><br><span class="line"></span><br><span class="line">acc_first_max_index = <span class="number">0</span></span><br><span class="line">acc_second_max_index = <span class="number">0</span></span><br><span class="line">acc_first_max = <span class="number">0</span></span><br><span class="line">acc_second_max = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">cur_data_count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">update_first_flag = <span class="keyword">False</span></span><br><span class="line">update_second_flag = <span class="keyword">False</span></span><br><span class="line">name_list = [<span class="string">"Static"</span>, <span class="string">"Approach"</span>, <span class="string">"Apart"</span>, <span class="string">"Click"</span>, <span class="string">"Flip"</span>, <span class="string">"Circle"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建画布，包含4个子图</span></span><br><span class="line">fig = plt.figure(figsize=(<span class="number">15</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">bgimg=imread(<span class="string">"bac2.jpg"</span>)<span class="comment">#设置背景图片</span></span><br><span class="line">fig.figimage(bgimg,resize=<span class="keyword">True</span>)<span class="comment">#设置窗口自适应（背景图片）</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ax1 = fig.add_subplot(<span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">ax1.set_facecolor(<span class="string">'none'</span>)<span class="comment">#设置该子图背景透明，其他子图同理</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ax2 = fig.add_subplot(<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">ax2.set_facecolor(<span class="string">'none'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ax3 = fig.add_subplot(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">ax3.set_facecolor(<span class="string">'none'</span>)</span><br><span class="line"></span><br><span class="line">ax4 = fig.add_subplot(<span class="number">2</span>, <span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line">ax4.set_facecolor(<span class="string">'none'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制初始图形</span></span><br><span class="line">bar1 = ax3.bar(range(len(acc_first)), acc_first, color=<span class="string">'rgb'</span>, tick_label=name_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bar2 = ax4.bar(range(len(acc_first)), acc_first, color=<span class="string">'rgb'</span>, tick_label=name_list)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = np.arange(<span class="number">0</span>, <span class="number">2200</span>, <span class="number">1</span>)  <span class="comment"># x轴</span></span><br><span class="line"></span><br><span class="line">ax1.set_ylim(<span class="number">-1</span>, <span class="number">1</span>)<span class="comment">#设置y轴范围为-1到1</span></span><br><span class="line">line1, = ax1.plot(x, gesture_i,color=<span class="string">'coral'</span>)</span><br><span class="line"></span><br><span class="line">ax2.set_ylim(<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">line2, = ax2.plot(x, gesture_q,color=<span class="string">'coral'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#初始化函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 构造开始帧函数init</span></span><br><span class="line">    <span class="comment"># 改变y轴数据，x轴不需要改</span></span><br><span class="line">    line1.set_ydata(gesture_i)</span><br><span class="line">    line2.set_ydata(gesture_q)</span><br><span class="line">    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=<span class="string">'rgb'</span>, tick_label=name_list)</span><br><span class="line">    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=<span class="string">'rgb'</span>, tick_label=name_list)</span><br><span class="line"></span><br><span class="line">    ax1.set_xlabel(<span class="string">"I"</span>)</span><br><span class="line">    ax2.set_xlabel(<span class="string">"Q"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> line1, line2, ax1  <span class="comment"># 注意返回值，我们要更新的就是这些数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#更新图像的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">animate</span><span class="params">(i)</span>:</span></span><br><span class="line">    <span class="comment">#注意这里必须要用global声明，不然可能出现无法动态更新数据的情况</span></span><br><span class="line">    <span class="keyword">global</span> gesture_i</span><br><span class="line">    <span class="keyword">global</span> gesture_q</span><br><span class="line">    <span class="keyword">global</span> update_first_flag</span><br><span class="line">    <span class="keyword">global</span> update_second_flag</span><br><span class="line"></span><br><span class="line">    line1.set_ydata(gesture_i)</span><br><span class="line"></span><br><span class="line">    ax3.cla()</span><br><span class="line">    bar1 = ax3.bar(range(len(acc_first)), acc_first, color=<span class="string">'rgb'</span>, tick_label=name_list)</span><br><span class="line">    ax3.legend()</span><br><span class="line"></span><br><span class="line">    ax4.cla()</span><br><span class="line">    bar2 = ax4.bar(range(len(acc_second)), acc_second, color=<span class="string">'rgb'</span>, tick_label=name_list)</span><br><span class="line">    ax4.legend</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> line1, line2, ax1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_view</span><span class="params">()</span>:</span></span><br><span class="line"><span class="comment"># 调用FuncAnimation函数生成动画。参数说明：</span></span><br><span class="line"><span class="comment"># fig 进行动画绘制的figure</span></span><br><span class="line"><span class="comment"># func 自定义动画函数，即传入刚定义的函数animate</span></span><br><span class="line"><span class="comment"># frames 动画长度，一次循环包含的帧数</span></span><br><span class="line"><span class="comment"># init_func 自定义开始帧，即传入刚定义的函数init</span></span><br><span class="line"><span class="comment"># interval 更新频率，以ms计</span></span><br><span class="line"><span class="comment"># blit 选择更新所有点，还是仅更新产生变化的点。应选择True，但mac用户请选择False，否则无法显示动画</span></span><br><span class="line">    ani = animation.FuncAnimation(fig=fig,</span><br><span class="line">                                  func=animate,</span><br><span class="line">                                  frames=<span class="number">100</span>,</span><br><span class="line">                                  init_func=init,</span><br><span class="line">                                  interval=<span class="number">100</span>,</span><br><span class="line">                                  blit=<span class="keyword">False</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    draw_view()</span><br></pre></td></tr></table></figure>
+<p>说明：实现动态数据可视化的思路是将绘制图像所用的数据写成全局变量，然后动态更新你的数据，UI层会一帧一帧地刷新图像，这样只要你的数据在变，图像就会是变化的，给一张效果图：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxycs1ei39j30x60kjnpd.jpg" alt="7"></p>
 
       
     </div>
@@ -650,6 +519,18 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/matplotlib/" rel="tag"><i class="fa fa-tag"></i>
+
+ matplotlib</a>
+          
+            <a href="/tags/动图/" rel="tag"><i class="fa fa-tag"></i>
+
+ 动图</a>
+          
+        </div>
       
 
       
@@ -783,7 +664,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -794,7 +675,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -805,7 +686,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -911,7 +792,7 @@ blog.csdn.net/20180613171619931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

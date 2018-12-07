@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="报错解决方案,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     private FragmentManager fragmentManager;     private FragmentTransaction fragmentTransaction;      @Override     protected">
+<meta name="description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     12345678910111213141516171819202122private FragmentManager fragmentManager;private FragmentTransaction fragmentTransaction">
+<meta name="keywords" content="报错解决方案">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android FragmentTransaction commit already called解决方案">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/09/05/Android FragmentTransaction commit already called解决方案/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     private FragmentManager fragmentManager;     private FragmentTransaction fragmentTransaction;      @Override     protected">
+<meta property="og:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     12345678910111213141516171819202122private FragmentManager fragmentManager;private FragmentTransaction fragmentTransaction">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:23.112Z">
+<meta property="og:updated_time" content="2018-12-07T09:23:29.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android FragmentTransaction commit already called解决方案">
-<meta name="twitter:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     private FragmentManager fragmentManager;     private FragmentTransaction fragmentTransaction;      @Override     protected">
+<meta name="twitter:description" content="原因这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转 解决方案将：     12345678910111213141516171819202122private FragmentManager fragmentManager;private FragmentTransaction fragmentTransaction">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  137
+                  150
                 </span>
               
 
@@ -445,49 +468,11 @@
 
       
         <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>这种情况一般是因为你在全局范围实例化了一个FragmentTransaction，然后多次使用同一个实例进行fragment跳转</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>将：</p>
-<pre><code>    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
-     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>将：    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> FragmentManager fragmentManager;</span><br><span class="line"><span class="keyword">private</span> FragmentTransaction fragmentTransaction;</span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(@Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line">    fragmentManager = getSupportFragmentManager();</span><br><span class="line">    fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line"></span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br><span class="line"> <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startfragment</span><span class="params">(Fragment targetFragment, <span class="keyword">boolean</span> addToBackStack)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());</span><br><span class="line">    <span class="keyword">if</span> (addToBackStack) &#123;</span><br><span class="line">        fragmentTransaction.addToBackStack(<span class="keyword">null</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        mainPresenter.initActivityData();</span><br><span class="line">    &#125;</span><br><span class="line">    fragmentTransaction.commitAllowingStateLoss();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">private</span> FragmentManager fragmentManager;</span><br><span class="line"><span class="keyword">private</span> FragmentTransaction fragmentTransaction;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startfragment</span><span class="params">(Fragment targetFragment, <span class="keyword">boolean</span> addToBackStack)</span> </span>&#123;</span><br><span class="line">       fragmentManager = getSupportFragmentManager();</span><br><span class="line">      fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">      fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());</span><br><span class="line">      <span class="keyword">if</span> (addToBackStack) &#123;</span><br><span class="line">          fragmentTransaction.addToBackStack(<span class="keyword">null</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          mainPresenter.initActivityData();</span><br><span class="line">      &#125;</span><br><span class="line">      fragmentTransaction.commitAllowingStateLoss();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-        .....
-    }
-
-
-    @Override
-    public void startfragment(Fragment targetFragment, boolean addToBackStack) {
-
-        fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());
-        if (addToBackStack) {
-            fragmentTransaction.addToBackStack(null);
-        } else {
-            mainPresenter.initActivityData();
-        }
-        fragmentTransaction.commitAllowingStateLoss();
-    }
-</code></pre><p>改为：</p>
-<pre><code>  private FragmentManager fragmentManager;
-  private FragmentTransaction fragmentTransaction;
-
-
-    @Override
-    public void startfragment(Fragment targetFragment, boolean addToBackStack) {
-         fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.id_fragment_layout, targetFragment, targetFragment.getClass().getName());
-        if (addToBackStack) {
-            fragmentTransaction.addToBackStack(null);
-        } else {
-            mainPresenter.initActivityData();
-        }
-        fragmentTransaction.commitAllowingStateLoss();
-    }
-</code></pre>
       
     </div>
     
@@ -530,6 +515,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/报错解决方案/" rel="tag"><i class="fa fa-tag"></i>
+
+ 报错解决方案</a>
+          
+        </div>
       
 
       
@@ -663,7 +656,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -674,7 +667,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -685,7 +678,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -791,7 +784,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="控件透明度,">
 
 
 
@@ -97,17 +97,18 @@
 
 
 
-<meta name="description" content="需求有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。 实现方法java代码实现text = (TextView) findViewById(R.id.text); text.getBackground().setAlpha(12); setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。 注意点：在5.0以上系统时，有些机型会出现">
+<meta name="description" content="需求有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。 实现方法java代码实现​12text = (TextView) findViewById(R.id.text);text.getBackground().setAlpha(12); setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。 注意点：在5.0以上系统时，有些机型会">
+<meta name="keywords" content="控件透明度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android控件设置透明度的三种方法">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/07/27/Android控件设置透明度的三种方法/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="需求有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。 实现方法java代码实现text = (TextView) findViewById(R.id.text); text.getBackground().setAlpha(12); setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。 注意点：在5.0以上系统时，有些机型会出现">
+<meta property="og:description" content="需求有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。 实现方法java代码实现​12text = (TextView) findViewById(R.id.text);text.getBackground().setAlpha(12); setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。 注意点：在5.0以上系统时，有些机型会">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-05T14:39:31.141Z">
+<meta property="og:updated_time" content="2018-12-07T09:02:01.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android控件设置透明度的三种方法">
-<meta name="twitter:description" content="需求有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。 实现方法java代码实现text = (TextView) findViewById(R.id.text); text.getBackground().setAlpha(12); setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。 注意点：在5.0以上系统时，有些机型会出现">
+<meta name="twitter:description" content="需求有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。 实现方法java代码实现​12text = (TextView) findViewById(R.id.text);text.getBackground().setAlpha(12); setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。 注意点：在5.0以上系统时，有些机型会">
 
 
 
@@ -375,6 +376,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -407,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  533
+                  512
                 </span>
               
 
@@ -445,26 +468,14 @@
 
       
         <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>有时会需要改变布局颜色透明度，比如设置控件（如View,Button等）的透明度，有3种方法。</p>
-<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><h3 id="java代码实现"><a href="#java代码实现" class="headerlink" title="java代码实现"></a>java代码实现</h3><pre><code>text = (TextView) findViewById(R.id.text);
-text.getBackground().setAlpha(12);
-</code></pre><p>setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><h3 id="java代码实现"><a href="#java代码实现" class="headerlink" title="java代码实现"></a>java代码实现</h3><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = (TextView) findViewById(R.id.text);</span><br><span class="line">text.getBackground().setAlpha(<span class="number">12</span>);</span><br></pre></td></tr></table></figure></p>
+<p>setAlpha()的括号中可以填0–255之间的数字。数字越大，越不透明。</p>
 <p>注意点：在5.0以上系统时，有些机型会出现莫名其妙的颜色值不起作用，变成透明了，也就是用此方法会导致其他共用一个资源的布局（例如：@color/white）透明度也跟着改变。<br>比如text用上述方法设置成透明后，项目中，其他用到text颜色值的控件，都变成透明了。<br>原因：在布局中多个控件同时使用一个资源的时候，这些控件会共用一个状态，例如ColorState，如果你改变了一个控件的状态，其他的控件都会接收到相同的通知。这时我们可以使用mutate()方法使该控件状态不定，这样不定状态的控件就不会共享自己的状态了。</p>
-<pre><code>text.getBackground().mutate().setAlpha(12);
-</code></pre><h3 id="在xml布局中进行设置"><a href="#在xml布局中进行设置" class="headerlink" title="在xml布局中进行设置"></a>在xml布局中进行设置</h3><pre><code>  &lt;TextView
-        android:id=&quot;@+id/text&quot;
-        android:text=&quot;Hello World!&quot;
-        android:background=&quot;#987654&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:alpha=&quot;0.5&quot;
-        android:layout_height=&quot;100dp&quot; /&gt;
-</code></pre><p>android:alpha的值为0~1之间的数。数字越大，越不透明。1表示完全不透明，0表示完全透明。</p>
-<h3 id="在xml布局中通过android-background设置"><a href="#在xml布局中通过android-background设置" class="headerlink" title="在xml布局中通过android:background设置"></a>在xml布局中通过android:background设置</h3><pre><code>&lt;TextView
-        android:id=&quot;@+id/text&quot;
-        android:text=&quot;Hello World!&quot;
-        android:background=&quot;#80987654&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;100dp&quot; /&gt;123456
-</code></pre><p>颜色和不透明度 (alpha) 值以十六进制表示法表示。任何一种颜色的值范围都是 0 到 255(00 到 ff)。对于 alpha，00<br>表示完全透明，ff<br>表示完全不透明。android:background的值的格式为”#AARRGGBB”。AA即透明度，R、G、B是红绿蓝三色。每一位均为0–F的十六位数。其中透明度的数值越大，越不透明。因此这里如果想设置透明度为50%的白色的话，可以如上设置。</p>
+<p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.getBackground().mutate().setAlpha(<span class="number">12</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="在xml布局中进行设置"><a href="#在xml布局中进行设置" class="headerlink" title="在xml布局中进行设置"></a>在xml布局中进行设置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:text</span>=<span class="string">"Hello World!"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:background</span>=<span class="string">"#987654"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:alpha</span>=<span class="string">"0.5"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">android:layout_height</span>=<span class="string">"100dp"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>android:alpha的值为0~1之间的数。数字越大，越不透明。1表示完全不透明，0表示完全透明。</p>
+<h3 id="在xml布局中通过android-background设置"><a href="#在xml布局中通过android-background设置" class="headerlink" title="在xml布局中通过android:background设置"></a>在xml布局中通过android:background设置</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Hello World!"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">"#80987654"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"100dp"</span> /&gt;</span>123456</span><br></pre></td></tr></table></figure>
+<p>颜色和不透明度 (alpha) 值以十六进制表示法表示。任何一种颜色的值范围都是 0 到 255(00 到 ff)。对于 alpha，00表示完全透明，ff表示完全不透明。android:background的值的格式为”#AARRGGBB”。AA即透明度，R、G、B是红绿蓝三色。每一位均为0–F的十六位数。其中透明度的数值越大，越不透明。因此这里如果想设置透明度为50%的白色的话，可以如上设置。</p>
 
       
     </div>
@@ -508,6 +519,14 @@ text.getBackground().setAlpha(12);
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/控件透明度/" rel="tag"><i class="fa fa-tag"></i>
+
+ 控件透明度</a>
+          
+        </div>
       
 
       
@@ -641,7 +660,7 @@ text.getBackground().setAlpha(12);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -652,7 +671,7 @@ text.getBackground().setAlpha(12);
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -663,7 +682,7 @@ text.getBackground().setAlpha(12);
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -769,7 +788,7 @@ text.getBackground().setAlpha(12);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         

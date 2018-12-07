@@ -86,7 +86,7 @@
 
 
 
-  <meta name="keywords" content="ｔｅｎｓｏｒｆｌｏｗ,ｐｙｃｈａｒｍ,">
+  <meta name="keywords" content="ubuntu,tensorflow,pycharm,">
 
 
 
@@ -97,20 +97,20 @@
 
 
 
-<meta name="description" content="摘要按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下importtensorflow 的时候却会发现报错no this module，以下是解决方案： 原因分析其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用p">
-<meta name="keywords" content="ｔｅｎｓｏｒｆｌｏｗ,ｐｙｃｈａｒｍ">
+<meta name="description" content="摘要按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下import tensorflow 的时候却会发现报错no this module，以下是解决方案： 原因分析其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用">
+<meta name="keywords" content="ubuntu,tensorflow,pycharm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu下如何在pycharm中导入tensorflow">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/03/18/ubuntu下如何在pycharm中导入tensorflow/index.html">
 <meta property="og:site_name" content="DmrfCoder&#39;s page">
-<meta property="og:description" content="摘要按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下importtensorflow 的时候却会发现报错no this module，以下是解决方案： 原因分析其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用p">
+<meta property="og:description" content="摘要按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下import tensorflow 的时候却会发现报错no this module，以下是解决方案： 原因分析其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img-/%0Ablog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:39:56.942Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxxzrmqjmgj309801naa0.jpg">
+<meta property="og:updated_time" content="2018-12-07T02:53:08.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu下如何在pycharm中导入tensorflow">
-<meta name="twitter:description" content="摘要按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下importtensorflow 的时候却会发现报错no this module，以下是解决方案： 原因分析其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用p">
-<meta name="twitter:image" content="http://img-/%0Ablog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:description" content="摘要按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下import tensorflow 的时候却会发现报错no this module，以下是解决方案： 原因分析其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxxzrmqjmgj309801naa0.jpg">
 
 
 
@@ -390,8 +390,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tensorflow/" itemprop="url" rel="index">
-                    <span itemprop="name">Tensorflow</span>
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -432,7 +432,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  384
+                  388
                 </span>
               
 
@@ -469,16 +469,16 @@
       
 
       
-        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下import<br>tensorflow 的时候却会发现报错no this module，以下是解决方案：</p>
-<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用pycharm创建一个项目时它会默认给你新建一个python虚拟环境，而不会去使用你本地默认的（这就是为什么在终端下可以import<br>tensorflow<br>而在pycharm中却报错的原因），所以解决这个问题的方法就是在你pycharm的项目中将python环境和你终端默认的python环境设置为同一个：</p>
+        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>按照tensorflow的官方文档安装完成tensorflow之后可以再终端（Terminal）下激活python环境并使用，但是当你在pycharm下import tensorflow 的时候却会发现报错no this module，以下是解决方案：</p>
+<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>其实无法在pycharm下导入tensorflow的原因是你是将tensorflow安装在了你终端默认的python路径下，而当你使用pycharm创建一个项目时它会默认给你新建一个python虚拟环境，而不会去使用你本地默认的（这就是为什么在终端下可以import tensorflow 而在pycharm中却报错的原因），所以解决这个问题的方法就是在你pycharm的项目中将python环境和你终端默认的python环境设置为同一个：</p>
 <h2 id="查看终端python环境所在目录"><a href="#查看终端python环境所在目录" class="headerlink" title="查看终端python环境所在目录"></a>查看终端python环境所在目录</h2><p>直接在终端输入：</p>
 <pre><code>$ which python
 </code></pre><p>即可打印出来终端默认的python环境：</p>
-<p><img src="//img-
-blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>＃＃设置pycharm中的Project Interpreter<br>步骤如下：<br>File–&gt;setting–&gt;Project:**–&gt;Project Interpreter<br>然后在选择框中选中你终端下查询出来的那一个python路径即可。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxxzrmqjmgj309801naa0.jpg" alt="7">  </p>
+<h2 id="设置pycharm中的Project-Interpreter"><a href="#设置pycharm中的Project-Interpreter" class="headerlink" title="设置pycharm中的Project Interpreter"></a>设置pycharm中的Project Interpreter</h2><p>步骤如下：<br>File–&gt;setting–&gt;Project:**–&gt;Project Interpreter<br>然后在选择框中选中你终端下查询出来的那一个python路径即可。</p>
 <h2 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><p>在Project Interpreter中选中正确的Python环境后可能会报如下错误：</p>
-<pre><code>pycharm please specify a different SDK name
-</code></pre><p>这个的原因是你当前列表存在与你选中的python环境重名的python环境（一般是你pycharm之前项目建立的python环境），解决方法是删除列表里现有的python环境，直接show<br>all,，然后点击－删除就好，删除后再添加你的本地python环境即可import成功。</p>
+<p>​<br>    pycharm please specify a different SDK name</p>
+<p>这个的原因是你当前列表存在与你选中的python环境重名的python环境（一般是你pycharm之前项目建立的python环境），解决方法是删除列表里现有的python环境，直接show all,，然后点击删除就好，删除后再添加你的本地python环境即可import成功。</p>
 
       
     </div>
@@ -525,13 +525,17 @@ blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
       
         <div class="post-tags">
           
+            <a href="/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i>
+
+ ubuntu</a>
+          
             <a href="/tags/tensorflow/" rel="tag"><i class="fa fa-tag"></i>
 
- ｔｅｎｓｏｒｆｌｏｗ</a>
+ tensorflow</a>
           
             <a href="/tags/pycharm/" rel="tag"><i class="fa fa-tag"></i>
 
- ｐｙｃｈａｒｍ</a>
+ pycharm</a>
           
         </div>
       
@@ -667,7 +671,7 @@ blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">137</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +682,7 @@ blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -689,7 +693,7 @@ blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">133</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -750,7 +754,7 @@ blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因分析"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看终端python环境所在目录"><span class="nav-number">2.1.</span> <span class="nav-text">查看终端python环境所在目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能遇到的问题"><span class="nav-number">2.2.</span> <span class="nav-text">可能遇到的问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因分析"><span class="nav-number">2.</span> <span class="nav-text">原因分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看终端python环境所在目录"><span class="nav-number">2.1.</span> <span class="nav-text">查看终端python环境所在目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置pycharm中的Project-Interpreter"><span class="nav-number">2.2.</span> <span class="nav-text">设置pycharm中的Project Interpreter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可能遇到的问题"><span class="nav-number">2.3.</span> <span class="nav-text">可能遇到的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -795,7 +799,7 @@ blog.csdn.net/20180318201852465?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共212.5k字</span>
+  <span class="post-count">博客全站共211.8k字</span>
 </div>
 
         
