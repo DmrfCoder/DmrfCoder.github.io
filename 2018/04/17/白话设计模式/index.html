@@ -1,4 +1,995 @@
-<!DOCTYPE html><html class="theme-next gemini" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script></script><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"e32cdd0f"}),daovoice("update")</script><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222"><meta name="keywords" content="Hexo, NexT"><meta name="description" content="创建型设计模式对象怎么来 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。 工厂方法重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的"><meta property="og:type" content="article"><meta property="og:title" content="白话设计模式"><meta property="og:url" content="http://www.mashangxue123.com/2018/04/17/白话设计模式/index.html"><meta property="og:site_name" content="DmrfCoder&#39;s page"><meta property="og:description" content="创建型设计模式对象怎么来 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。 工厂方法重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2018-12-05T14:39:47.928Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="白话设计模式"><meta name="twitter:description" content="创建型设计模式对象怎么来 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。 工厂方法重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://www.mashangxue123.com/2018/04/17/白话设计模式/"><title>白话设计模式 | DmrfCoder's page</title><script>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-130602831-1","auto"),ga("send","pageview")</script></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">DmrfCoder's page</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> Archives</a></li><li class="menu-item menu-item-moments"><a href="/news/" rel="section"><i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i><br> Moments</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> Tags</a></li><li class="menu-item menu-item-about"><a href="/user/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> About me</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/04/17/白话设计模式/"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="DmrfCoder"><meta itemprop="description" content=""><meta itemprop="image" content="/images/photo.png"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="DmrfCoder's page"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">白话设计模式</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T22:37:34+08:00">2018-04-17</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a></span></span> <span id="/2018/04/17/白话设计模式/" class="leancloud_visitors" data-flag-title="白话设计模式"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span><div class="post-wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">字数统计&#58;</span> <span title="字数统计">4.6k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">15</span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="创建型设计模式"><a href="#创建型设计模式" class="headerlink" title="创建型设计模式"></a>创建型设计模式</h2><p><strong>对象怎么来</strong> 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new<br>运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</p><h3 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h3><p>重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的实现细节隐藏起来，用户只需要告诉工厂类自己需要什么情况下的产品，工厂就可以自动调用自己内部对应场景的代码从而返回一个用户需要的“产品”。</p><h3 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h3><p>抽象工厂可以理解为工厂的工厂，比如demo中，首先有两个工厂Factory，分别用来实例化不同场景下的shape和color，然后再有过一个工厂的工厂即FactoryProducer，其根据用户的需求（shape或者color）返回shape工厂或者color工厂，然后用户再用返回的工厂去实例化自己需要的shape或者color。<br>对比工厂方法模式，因为一个工厂只能生产一个产品，比如一个ShapeFactory只能根据不同情况实例化一个不同的Shape，那么当我们需要一整套的产品（比如形状和颜色形成了一套产品）时使用工厂方法显然就不能解决了，所以就需要抽象工厂模式，抽象工厂模式实际上是工厂的工厂，即其作用的目的是为了实例化不同的工厂，用户再通过不同的工厂实例化不同场景下成套的产品。</p><h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>通俗来讲就是替用户实现对象的实例化，用户需要使用类的时候不需要实例化，直接通过getInstance就可以拿到需要使用的对象，进而调用对象的方法即可，这个设计模式平时用到的比较多，也比较容易理解。</p><h3 id="生成器（建造者）模式"><a href="#生成器（建造者）模式" class="headerlink" title="生成器（建造者）模式"></a>生成器（建造者）模式</h3><p>生成器模式的目的是使用多个简单的对象一步一步构建成一个复杂的对象，比如在一个快餐店的商业案例中，一个典型的套餐可以是一个汉堡（Burger）和一杯冷饮（Cold<br>drink）。汉堡（Burger）可以是素食汉堡（Veg Burger）或鸡肉汉堡（Chicken Burger），它们是包在纸盒中。冷饮（Cold<br>drink）可以是可口可乐（coke）或百事可乐（pepsi），它们是装在瓶子中。<br>那么，生成器（MealBuilder）的作用就是实现不同类型汉堡（Burger）与不同类型冷饮（Cold<br>drink）的搭配，即通过MealBuilder这个生成器可以通过组合不同汉堡和冷饮这样简单的类从而狗仔出一个复杂的套餐（Meal）类，这就体现了生成器模式“使用多个简单的对象一步一步构建成一个复杂的对象”的要点，需要注意的是建造者模式与工厂方法模式有类似的地方，但是建造者模式更加关注零件装配的顺序而且生成的对象内部属性本身具有相互依赖性，比如Demo中的食物和对应的容器具有很强的相互依赖性。</p><h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>原型模式实现的功能就是对象的拷贝，只不过这种拷贝的功能是在类中定义好的，即在定义类的时候就定义好了一个clone的接口，当这个类对应的对象在某一时刻需要拷贝出另一个对象时，只需调用这个对象的clone方法即可返回一个本对象的克隆体，那么为什么不直接实例化一个新的对象而要采用这种克隆的机制呢？想象一下如果一个类的某些属性的值需要从数据库中查询，这样每实例化一个新类就需要做查询的耗时操作，这时候如果直接用一个已有的对象去clone出一个新的对象就可以避免诸如数据库查询之类的耗时操作，提高了软件的执行效率。</p><h2 id="结构型设计模式"><a href="#结构型设计模式" class="headerlink" title="结构型设计模式"></a>结构型设计模式</h2><p><strong>对象和谁有关</strong> 关注类和对象的组合，继承的概念被用来组合接口和定义组合对象获得新功能的方式。</p><h3 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h3><p>组合模式的要点在于组合和结构，通俗来讲就是通过不同的组合来形成一个体系结构，实现要点是list的使用，以上述demo为例，CEO的下属包含headSales和headMarketing，即CEO这个对象的下属list里面只要添加headSales和headMarketing即可，所以如果把CEO理解为一个东西的话它是由headSales和headMarketing组合而成的（如果没有这两者真不知道CEO存在的意义是什么，一自己当自己的CEO？），而headSales又有若干个salesExecutive下属，所以headSales对象的下属list里面应该添加若干个salesExecutive对象，以此类推（headMarketing由若干个clerk组成）。至此，通过不断的组合，我们就可以由salesExecutive和clerk一路不断组合直到CEO，这就是“组合”的含义，同时也体现了很强的层级关系。</p><h3 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h3><p>装饰者模式（Decorator<br>Pattern）的目的是向一个现有的对象添加新的功能，同时又不改变其结构，这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供额外的功能。</p><p>装饰者模式的主要思路是通过一个新类（Decorator ）将原来的类包装起来，在Decorator 中给原来的类添加新的功能。</p><p>装饰者模式顾名思义就是起到一个装饰的作用，即在不改变原来类结构的前提下增加一些新的功能，这种模式一般会产生一个专门的装饰类，联想结构型设计模式的定义（描述不同类之间的关系），装饰者模式实际上描述的就是一个装饰与被装饰的关系，结合上面的demo，被装饰类是实现了shape接口的Rectangle类和Circle类，而装饰类ShapeDecorator是一个抽象装饰类，在其内部定义了装饰shape的方法draw，事实上是一种方法重写（准确来说是增加方法功能），然后在ShapeDecorator的子类RedShapeDecorator中的draw调用了起装饰作用的setRedBorder方法最终达到装饰实现shape子类的目的，从最终的输出也可以看出，装饰类的作用实际上就是在原有类的基础上新增加新的东西，还有一个比较接近现实的例子是玩游戏时开局一个英雄，玩着玩着英雄的装备越来越多、英雄的技能越来越多、英雄的皮肤越来越多，这些效果实际上都是在原来开局裸体（额实在不知道用什么形容词，懂我意思就好～）英雄的基础上装饰进去的，很好地体现了装饰的精髓。</p><h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><p>现实生活中代理的例子其实很多，比如大家搭建服务器从而实现访问某些xx的网址的访问，其原理其实就是在云端搭建一台云主机，这台主机的地址一般是在可以访问你当前计算机不能访问的xx网址的地域（比如东亚的计算机可以访问很多nj访问不到的xx网址），所以当你想要从xx网址获取信息的时候就可以先把请求发给你搭建的云主机，让它去访问xx，然后再把信息返回给你，这样就像你直接访问了xx一样，这就是代理的意思。回到设计模式，代理模式实际上讲的就是一种“代理访问”的概念，当A类不能暴露给B类而B类又想调用A类的方法的时候必须通过一种折中的方法，即B类通过向可以调用A类的C类发送请求从而让C类调用A类干同样的事情，就是这个意思……<br>具先实现其实也很简单，就是一个代理类将被代理类包裹起来，只对外界暴露调用被代理类方法的方法，从而实现代理模式，需要特别注意的是代理模式和适配器模式的区别：<br><strong>适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口</strong> ，和装饰器模式的区别：<br><strong>装饰器模式为了增强功能，而代理模式是为了加以控制</strong> 。</p><h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>顾名思义，享元模式体现的就是一种“分享”的实质，即当很多地方都需要用到一个类的对象而实例化这个类又需要耗费很多资源的时候我们就可以把这个类的对象抽取出来，仅仅实例化一次，当以后需要实例化这个类的对象的时候直接把之前实例化的对象返回即可，比如demo中需要实例化不同颜色不同形状的shape对象，而这些对象的存在状态就那么几种，所以使用一个Factory类，当第一次接收到实例化shape类的请求时进行一次实例化并将实例化得到的结果存下来，以后再接收到实例化的请求时直接把之前实例化的同类型的对象返回即可，这样可以大大提高程序执行的效率。</p><h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><p>当一个抽象类有多个实现时，通常用集成来协调他们。抽象类定义对该抽象的接口，而具体子类则用不同方式加以实现。但是此方法的缺点是将子类的抽象部分和实现部分固定在了一起，使得难以对抽象部分和实现部分进行修改、扩充和重用。<br>实现抽象化和实现化之间的解耦，具体到上述demo，抽象化指的是 draw redCircle和draw<br>greenCircle，如果不使用桥接模式，一般的实现方法是根据用户指令的不同（以参数的形式体现），实现不同的draw方法，而使用桥接模式，Circle类不用关心具体如何根据用户传入参数的不同实现不同的draw方法（即实现化部分），Circle类只需要根据用户传入接口的不同调用draw方法即可，具体的实现全都交给了DrawAPI（GreenCircle、ReadCircle）来做，即将draw这个功能的抽象化放在Circle类，实现化放在DrawAPI（GreenCircle、ReadCircle），从而实现了抽象化和实例化的分离。</p><h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>（这个模式描述的不是很好，感觉还是demo更容易理解一点）<br>作为两个不兼容的接口之间的桥梁，它结合了两个独立接口的功能。<br>这种模式涉及到一个单一的类，该类负责加入独立的或不兼容的接口功能。<br>注意，要点是要在原来类的基础上使原本不兼容的功能变得兼容。<br>Adapter类一般是用来实现与原有类不兼容的功能，比如demo中的MediaAdapter实现了MediaPlayer没有的特殊功能，用户只要调用AudioPlayer中的play方法，AudioPlayer会自动根据音频的类型选择不同的play方式，当音频类型不符合传统player的能力时AudioPlayer会使用adapter去调用之前不兼容的方法（功能），这样就实现了所谓的适配。</p><p>类适配器和对象适配器的区别：<br>类适配器的重点在于类，是通过构造一个继承Adaptee类来实现适配器的功能；<br>对象适配器的重点在于对象，是通过在直接包含Adaptee类来实现的，当需要调用特殊功能的时候直接使用Adapter中包含的那个Adaptee对象来调用特殊功能的方法即可。</p><h2 id="行为型设计模式"><a href="#行为型设计模式" class="headerlink" title="行为型设计模式"></a>行为型设计模式</h2><p>对象与对象在干嘛<br>这些设计模式特别关注对象之间的通信</p><h3 id="模板模式"><a href="#模板模式" class="headerlink" title="模板模式"></a>模板模式</h3><p>模板方法模式顾名思义就是定义了一个特殊的方法，这个方法的大体框架是写死的，比如demo中抽象类Game的play方法，它规定了所有实现类的play方法有且仅能有模板方法中定义中的行为，但是这些行为具体如何实现则不是模板方法所关心的，说白了就是模板方法规定了如果调用这个方法会干嘛，但是怎么去干就不是它所关心的重点了。</p><h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式用一句话描述就是当一个类的对象（被观察者）的状态发生改变时同时其他依赖于它的对象（观察者）的状态也做相应的改变（做相应的动作）。</p><h3 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h3><p>迭代器模式本质上就是一种遍历聚合对象的方式，这里的聚合对象一般具有较多的实例，比如java中的list等，也就是说对于有些对象，我们更加偏向于它的属性而不是行为，而迭代器模式提供了一种较为隐蔽的遍历这些对象属性的方法，通过经典的hasnext方法和next方法的配合使用，从而实现顺序访问聚合对象中各个元素,<br>而又无须暴露该对象的内部表示。</p><h3 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h3><p>责任链模式的本质就是一条链，通过demo可以发现其实现方式和数据结构中的链表有很相似的地方，思想就是形成一条链，如果当前节点处理不了某些行为，则把这个行为请求转移到其下一级，以此类推，比较常见的实例就是java或者python中经常用到的try<br>catch机制，当某个方法有可能抛出异常而当前方法无法处理的时候我们就会可能将这个异常throw到外层，即责任链中的下一级。</p><h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><p>备忘录模式的本质就是一种备份机制，其思路是将对象的状态在用户需要的时候备份下来，当需要状态回滚的时候直接将将对象的状态恢复到之前备份的状态，我们经常用的git版本控制管理系统其实就是一个特殊的备忘录模式，其在你需要的时候将你的仓库备份下来，这样你就可以在后期的开发中随时找到你之前备份的仓库状态，但是需要注意的是备忘录模式的重点是对象，其真正的目的是将单个对象的状态保存下来，至于其他的状态备份则不是它所侧重的。</p><h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>命令模式实质上就是将命令抽象到一个具体的类中，即这个类是专门去执行某个命令的，比如demo中，SellStock就是专门执行sell这个命令的，当用户需要sell的时候只要实例化SellStock然后excute就可以完成sell，还有一个比较常用的例子是GUI开发中按钮（button）的作用，每一个按钮都是一个对象，当用户点击某个按钮后就会触发一个相应的命令，用户看到的是点击按钮产生效果，而代码层面上是实例化的按钮对象执行类似于demo中的excute方法完成自己的“命令”。</p><h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>状态模式将各个状态所对应的操作分离开来,即对于不同的状态,由不同的子类实现具体操作,不同状态的切换由子类实现，比如上面的demo，同样是实现doAction根据不同的状态执行不同的逻辑，按照传统的方法需要使用if<br>else进行判断，但是使用状态模式则可以将不同的状态实例化为不同的子类，然后在不同的子类（实际上是不同的状态）中实现不同的逻辑，客户端使用的时候只需要实例化不同的状态的子类就可以调用不同状态下的同名方法。</p><h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><p>访问者模式解决的是根据访问者的不同而执行不同的行为，即同样一个方法（方法名相同），但是当A调用这个方法时执行的是逻辑A，B调用这个方法时执行逻辑B，这种情况下就需要使用访问者模式来实现。具体到demo，我们想要实现不同的ComputerPart调用accept的时候执行不同的逻辑，只需要构造一个访问者类ComputerPartDisplayVisitor，它根据accept的调用者的不用执行不同的逻辑，而调用者只需要将this传入accept方法即可，accept方法会根据传入的参数类型的不同调用不同的逻辑（visit）。</p><h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>当一个类的行为需要根据不同的状态改变时就需要使用策略模式，比如demo中Context类的executeStrategy方法执行的逻辑需要根据Context的Strategy成员的状态的变化而变化，传统地可以通过if<br>else语句来实现对Strategy状态的判断进而实现不同的算法，但是如果采用策略模式，Context类就不必关心当前Strategy的状态，而将这种执行不同算法的控制权交给了客户端。</p></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2018/04/16/适配器模式之类适配器与对象适配器的区别及代码实现/" rel="next" title="适配器模式之类适配器与对象适配器的区别及代码实现"><i class="fa fa-chevron-left"></i> 适配器模式之类适配器与对象适配器的区别及代码实现</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2018/04/22/使用python绘制混淆矩阵（confusion_matrix）/" rel="prev" title="使用python绘制混淆矩阵（confusion_matrix）">使用python绘制混淆矩阵（confusion_matrix）<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"><script>window._bd_share_config={common:{bdText:"",bdMini:"1",bdMiniList:!1,bdPic:""},image:{viewList:["tsina","douban","sqq","qzone","weixin","twi","fbook"],viewText:"分享到：",viewSize:"16"},slide:{bdImg:"5",bdPos:"left",bdTop:"100"}}</script><script>with(document)(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="//bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)</script></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder"><p class="site-author-name" itemprop="name">DmrfCoder</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">135</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">12</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">75</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/DmrfCoder" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i> CSDN</a></span><span class="links-of-author-item"><a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i> Google</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建型设计模式"><span class="nav-number">1.</span> <span class="nav-text">创建型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">1.1.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂"><span class="nav-number">1.2.</span> <span class="nav-text">抽象工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">1.3.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器（建造者）模式"><span class="nav-number">1.4.</span> <span class="nav-text">生成器（建造者）模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.5.</span> <span class="nav-text">原型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构型设计模式"><span class="nav-number">2.</span> <span class="nav-text">结构型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合模式"><span class="nav-number">2.1.</span> <span class="nav-text">组合模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰者模式"><span class="nav-number">2.2.</span> <span class="nav-text">装饰者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式"><span class="nav-number">2.3.</span> <span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#享元模式"><span class="nav-number">2.4.</span> <span class="nav-text">享元模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桥接模式"><span class="nav-number">2.5.</span> <span class="nav-text">桥接模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式"><span class="nav-number">2.6.</span> <span class="nav-text">适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行为型设计模式"><span class="nav-number">3.</span> <span class="nav-text">行为型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模板模式"><span class="nav-number">3.1.</span> <span class="nav-text">模板模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式"><span class="nav-number">3.2.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器模式"><span class="nav-number">3.3.</span> <span class="nav-text">迭代器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#责任链模式"><span class="nav-number">3.4.</span> <span class="nav-text">责任链模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备忘录模式"><span class="nav-number">4.</span> <span class="nav-text">备忘录模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式"><span class="nav-number">5.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态模式"><span class="nav-number">6.</span> <span class="nav-text">状态模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问者模式"><span class="nav-number">7.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式"><span class="nav-number">8.</span> <span class="nav-text">策略模式</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2018</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">DmrfCoder</span></div><div class="theme-info"><div class="powered-by"></div> <span class="post-count">博客全站共211.8k字</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/three/three.min.js"></script><script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script><script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script type="text/javascript">
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="创建型设计模式对象怎么来 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。 工厂方法重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="白话设计模式">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/04/17/白话设计模式/index.html">
+<meta property="og:site_name" content="DmrfCoder&#39;s page">
+<meta property="og:description" content="创建型设计模式对象怎么来 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。 工厂方法重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-05T14:39:47.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="白话设计模式">
+<meta name="twitter:description" content="创建型设计模式对象怎么来 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。 工厂方法重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/04/17/白话设计模式/">
+
+
+
+
+
+  <title>白话设计模式 | DmrfCoder's page</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder's page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/04/17/白话设计模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder's page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">白话设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T22:37:34+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/17/白话设计模式/" class="leancloud_visitors" data-flag-title="白话设计模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="创建型设计模式"><a href="#创建型设计模式" class="headerlink" title="创建型设计模式"></a>创建型设计模式</h2><p><strong>对象怎么来</strong> 提供一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new<br>运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</p>
+<h3 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h3><p>重点在于Factory类，当一个类的实例化依赖于不同场景时需要使用的，比如根据形状不同实例化不同形状类并返回的demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的实现细节隐藏起来，用户只需要告诉工厂类自己需要什么情况下的产品，工厂就可以自动调用自己内部对应场景的代码从而返回一个用户需要的“产品”。</p>
+<h3 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h3><p>抽象工厂可以理解为工厂的工厂，比如demo中，首先有两个工厂Factory，分别用来实例化不同场景下的shape和color，然后再有过一个工厂的工厂即FactoryProducer，其根据用户的需求（shape或者color）返回shape工厂或者color工厂，然后用户再用返回的工厂去实例化自己需要的shape或者color。<br>对比工厂方法模式，因为一个工厂只能生产一个产品，比如一个ShapeFactory只能根据不同情况实例化一个不同的Shape，那么当我们需要一整套的产品（比如形状和颜色形成了一套产品）时使用工厂方法显然就不能解决了，所以就需要抽象工厂模式，抽象工厂模式实际上是工厂的工厂，即其作用的目的是为了实例化不同的工厂，用户再通过不同的工厂实例化不同场景下成套的产品。</p>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>通俗来讲就是替用户实现对象的实例化，用户需要使用类的时候不需要实例化，直接通过getInstance就可以拿到需要使用的对象，进而调用对象的方法即可，这个设计模式平时用到的比较多，也比较容易理解。</p>
+<h3 id="生成器（建造者）模式"><a href="#生成器（建造者）模式" class="headerlink" title="生成器（建造者）模式"></a>生成器（建造者）模式</h3><p>生成器模式的目的是使用多个简单的对象一步一步构建成一个复杂的对象，比如在一个快餐店的商业案例中，一个典型的套餐可以是一个汉堡（Burger）和一杯冷饮（Cold<br>drink）。汉堡（Burger）可以是素食汉堡（Veg Burger）或鸡肉汉堡（Chicken Burger），它们是包在纸盒中。冷饮（Cold<br>drink）可以是可口可乐（coke）或百事可乐（pepsi），它们是装在瓶子中。<br>那么，生成器（MealBuilder）的作用就是实现不同类型汉堡（Burger）与不同类型冷饮（Cold<br>drink）的搭配，即通过MealBuilder这个生成器可以通过组合不同汉堡和冷饮这样简单的类从而狗仔出一个复杂的套餐（Meal）类，这就体现了生成器模式“使用多个简单的对象一步一步构建成一个复杂的对象”的要点，需要注意的是建造者模式与工厂方法模式有类似的地方，但是建造者模式更加关注零件装配的顺序而且生成的对象内部属性本身具有相互依赖性，比如Demo中的食物和对应的容器具有很强的相互依赖性。</p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>原型模式实现的功能就是对象的拷贝，只不过这种拷贝的功能是在类中定义好的，即在定义类的时候就定义好了一个clone的接口，当这个类对应的对象在某一时刻需要拷贝出另一个对象时，只需调用这个对象的clone方法即可返回一个本对象的克隆体，那么为什么不直接实例化一个新的对象而要采用这种克隆的机制呢？想象一下如果一个类的某些属性的值需要从数据库中查询，这样每实例化一个新类就需要做查询的耗时操作，这时候如果直接用一个已有的对象去clone出一个新的对象就可以避免诸如数据库查询之类的耗时操作，提高了软件的执行效率。</p>
+<h2 id="结构型设计模式"><a href="#结构型设计模式" class="headerlink" title="结构型设计模式"></a>结构型设计模式</h2><p><strong>对象和谁有关</strong> 关注类和对象的组合，继承的概念被用来组合接口和定义组合对象获得新功能的方式。</p>
+<h3 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h3><p>组合模式的要点在于组合和结构，通俗来讲就是通过不同的组合来形成一个体系结构，实现要点是list的使用，以上述demo为例，CEO的下属包含headSales和headMarketing，即CEO这个对象的下属list里面只要添加headSales和headMarketing即可，所以如果把CEO理解为一个东西的话它是由headSales和headMarketing组合而成的（如果没有这两者真不知道CEO存在的意义是什么，一自己当自己的CEO？），而headSales又有若干个salesExecutive下属，所以headSales对象的下属list里面应该添加若干个salesExecutive对象，以此类推（headMarketing由若干个clerk组成）。至此，通过不断的组合，我们就可以由salesExecutive和clerk一路不断组合直到CEO，这就是“组合”的含义，同时也体现了很强的层级关系。</p>
+<h3 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h3><p>装饰者模式（Decorator<br>Pattern）的目的是向一个现有的对象添加新的功能，同时又不改变其结构，这种模式创建了一个装饰类，用来包装原有的类，并在保持类方法签名完整性的前提下，提供额外的功能。</p>
+<p>装饰者模式的主要思路是通过一个新类（Decorator ）将原来的类包装起来，在Decorator 中给原来的类添加新的功能。</p>
+<p>装饰者模式顾名思义就是起到一个装饰的作用，即在不改变原来类结构的前提下增加一些新的功能，这种模式一般会产生一个专门的装饰类，联想结构型设计模式的定义（描述不同类之间的关系），装饰者模式实际上描述的就是一个装饰与被装饰的关系，结合上面的demo，被装饰类是实现了shape接口的Rectangle类和Circle类，而装饰类ShapeDecorator是一个抽象装饰类，在其内部定义了装饰shape的方法draw，事实上是一种方法重写（准确来说是增加方法功能），然后在ShapeDecorator的子类RedShapeDecorator中的draw调用了起装饰作用的setRedBorder方法最终达到装饰实现shape子类的目的，从最终的输出也可以看出，装饰类的作用实际上就是在原有类的基础上新增加新的东西，还有一个比较接近现实的例子是玩游戏时开局一个英雄，玩着玩着英雄的装备越来越多、英雄的技能越来越多、英雄的皮肤越来越多，这些效果实际上都是在原来开局裸体（额实在不知道用什么形容词，懂我意思就好～）英雄的基础上装饰进去的，很好地体现了装饰的精髓。</p>
+<h3 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h3><p>现实生活中代理的例子其实很多，比如大家搭建服务器从而实现访问某些xx的网址的访问，其原理其实就是在云端搭建一台云主机，这台主机的地址一般是在可以访问你当前计算机不能访问的xx网址的地域（比如东亚的计算机可以访问很多nj访问不到的xx网址），所以当你想要从xx网址获取信息的时候就可以先把请求发给你搭建的云主机，让它去访问xx，然后再把信息返回给你，这样就像你直接访问了xx一样，这就是代理的意思。回到设计模式，代理模式实际上讲的就是一种“代理访问”的概念，当A类不能暴露给B类而B类又想调用A类的方法的时候必须通过一种折中的方法，即B类通过向可以调用A类的C类发送请求从而让C类调用A类干同样的事情，就是这个意思……<br>具先实现其实也很简单，就是一个代理类将被代理类包裹起来，只对外界暴露调用被代理类方法的方法，从而实现代理模式，需要特别注意的是代理模式和适配器模式的区别：<br><strong>适配器模式主要改变所考虑对象的接口，而代理模式不能改变所代理类的接口</strong> ，和装饰器模式的区别：<br><strong>装饰器模式为了增强功能，而代理模式是为了加以控制</strong> 。</p>
+<h3 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h3><p>顾名思义，享元模式体现的就是一种“分享”的实质，即当很多地方都需要用到一个类的对象而实例化这个类又需要耗费很多资源的时候我们就可以把这个类的对象抽取出来，仅仅实例化一次，当以后需要实例化这个类的对象的时候直接把之前实例化的对象返回即可，比如demo中需要实例化不同颜色不同形状的shape对象，而这些对象的存在状态就那么几种，所以使用一个Factory类，当第一次接收到实例化shape类的请求时进行一次实例化并将实例化得到的结果存下来，以后再接收到实例化的请求时直接把之前实例化的同类型的对象返回即可，这样可以大大提高程序执行的效率。</p>
+<h3 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h3><p>当一个抽象类有多个实现时，通常用集成来协调他们。抽象类定义对该抽象的接口，而具体子类则用不同方式加以实现。但是此方法的缺点是将子类的抽象部分和实现部分固定在了一起，使得难以对抽象部分和实现部分进行修改、扩充和重用。<br>实现抽象化和实现化之间的解耦，具体到上述demo，抽象化指的是 draw redCircle和draw<br>greenCircle，如果不使用桥接模式，一般的实现方法是根据用户指令的不同（以参数的形式体现），实现不同的draw方法，而使用桥接模式，Circle类不用关心具体如何根据用户传入参数的不同实现不同的draw方法（即实现化部分），Circle类只需要根据用户传入接口的不同调用draw方法即可，具体的实现全都交给了DrawAPI（GreenCircle、ReadCircle）来做，即将draw这个功能的抽象化放在Circle类，实现化放在DrawAPI（GreenCircle、ReadCircle），从而实现了抽象化和实例化的分离。</p>
+<h3 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h3><p>（这个模式描述的不是很好，感觉还是demo更容易理解一点）<br>作为两个不兼容的接口之间的桥梁，它结合了两个独立接口的功能。<br>这种模式涉及到一个单一的类，该类负责加入独立的或不兼容的接口功能。<br>注意，要点是要在原来类的基础上使原本不兼容的功能变得兼容。<br>Adapter类一般是用来实现与原有类不兼容的功能，比如demo中的MediaAdapter实现了MediaPlayer没有的特殊功能，用户只要调用AudioPlayer中的play方法，AudioPlayer会自动根据音频的类型选择不同的play方式，当音频类型不符合传统player的能力时AudioPlayer会使用adapter去调用之前不兼容的方法（功能），这样就实现了所谓的适配。</p>
+<p>类适配器和对象适配器的区别：<br>类适配器的重点在于类，是通过构造一个继承Adaptee类来实现适配器的功能；<br>对象适配器的重点在于对象，是通过在直接包含Adaptee类来实现的，当需要调用特殊功能的时候直接使用Adapter中包含的那个Adaptee对象来调用特殊功能的方法即可。</p>
+<h2 id="行为型设计模式"><a href="#行为型设计模式" class="headerlink" title="行为型设计模式"></a>行为型设计模式</h2><p>对象与对象在干嘛<br>这些设计模式特别关注对象之间的通信</p>
+<h3 id="模板模式"><a href="#模板模式" class="headerlink" title="模板模式"></a>模板模式</h3><p>模板方法模式顾名思义就是定义了一个特殊的方法，这个方法的大体框架是写死的，比如demo中抽象类Game的play方法，它规定了所有实现类的play方法有且仅能有模板方法中定义中的行为，但是这些行为具体如何实现则不是模板方法所关心的，说白了就是模板方法规定了如果调用这个方法会干嘛，但是怎么去干就不是它所关心的重点了。</p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式用一句话描述就是当一个类的对象（被观察者）的状态发生改变时同时其他依赖于它的对象（观察者）的状态也做相应的改变（做相应的动作）。</p>
+<h3 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h3><p>迭代器模式本质上就是一种遍历聚合对象的方式，这里的聚合对象一般具有较多的实例，比如java中的list等，也就是说对于有些对象，我们更加偏向于它的属性而不是行为，而迭代器模式提供了一种较为隐蔽的遍历这些对象属性的方法，通过经典的hasnext方法和next方法的配合使用，从而实现顺序访问聚合对象中各个元素,<br>而又无须暴露该对象的内部表示。</p>
+<h3 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h3><p>责任链模式的本质就是一条链，通过demo可以发现其实现方式和数据结构中的链表有很相似的地方，思想就是形成一条链，如果当前节点处理不了某些行为，则把这个行为请求转移到其下一级，以此类推，比较常见的实例就是java或者python中经常用到的try<br>catch机制，当某个方法有可能抛出异常而当前方法无法处理的时候我们就会可能将这个异常throw到外层，即责任链中的下一级。</p>
+<h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><p>备忘录模式的本质就是一种备份机制，其思路是将对象的状态在用户需要的时候备份下来，当需要状态回滚的时候直接将将对象的状态恢复到之前备份的状态，我们经常用的git版本控制管理系统其实就是一个特殊的备忘录模式，其在你需要的时候将你的仓库备份下来，这样你就可以在后期的开发中随时找到你之前备份的仓库状态，但是需要注意的是备忘录模式的重点是对象，其真正的目的是将单个对象的状态保存下来，至于其他的状态备份则不是它所侧重的。</p>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>命令模式实质上就是将命令抽象到一个具体的类中，即这个类是专门去执行某个命令的，比如demo中，SellStock就是专门执行sell这个命令的，当用户需要sell的时候只要实例化SellStock然后excute就可以完成sell，还有一个比较常用的例子是GUI开发中按钮（button）的作用，每一个按钮都是一个对象，当用户点击某个按钮后就会触发一个相应的命令，用户看到的是点击按钮产生效果，而代码层面上是实例化的按钮对象执行类似于demo中的excute方法完成自己的“命令”。</p>
+<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>状态模式将各个状态所对应的操作分离开来,即对于不同的状态,由不同的子类实现具体操作,不同状态的切换由子类实现，比如上面的demo，同样是实现doAction根据不同的状态执行不同的逻辑，按照传统的方法需要使用if<br>else进行判断，但是使用状态模式则可以将不同的状态实例化为不同的子类，然后在不同的子类（实际上是不同的状态）中实现不同的逻辑，客户端使用的时候只需要实例化不同的状态的子类就可以调用不同状态下的同名方法。</p>
+<h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><p>访问者模式解决的是根据访问者的不同而执行不同的行为，即同样一个方法（方法名相同），但是当A调用这个方法时执行的是逻辑A，B调用这个方法时执行逻辑B，这种情况下就需要使用访问者模式来实现。具体到demo，我们想要实现不同的ComputerPart调用accept的时候执行不同的逻辑，只需要构造一个访问者类ComputerPartDisplayVisitor，它根据accept的调用者的不用执行不同的逻辑，而调用者只需要将this传入accept方法即可，accept方法会根据传入的参数类型的不同调用不同的逻辑（visit）。</p>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>当一个类的行为需要根据不同的状态改变时就需要使用策略模式，比如demo中Context类的executeStrategy方法执行的逻辑需要根据Context的Strategy成员的状态的变化而变化，传统地可以通过if<br>else语句来实现对Strategy状态的判断进而实现不同的算法，但是如果采用策略模式，Context类就不必关心当前Strategy的状态，而将这种执行不同算法的控制权交给了客户端。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/16/适配器模式之类适配器与对象适配器的区别及代码实现/" rel="next" title="适配器模式之类适配器与对象适配器的区别及代码实现">
+                <i class="fa fa-chevron-left"></i> 适配器模式之类适配器与对象适配器的区别及代码实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/22/使用python绘制混淆矩阵（confusion_matrix）/" rel="prev" title="使用python绘制混淆矩阵（confusion_matrix）">
+                使用python绘制混淆矩阵（confusion_matrix） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建型设计模式"><span class="nav-number">1.</span> <span class="nav-text">创建型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂方法"><span class="nav-number">1.1.</span> <span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂"><span class="nav-number">1.2.</span> <span class="nav-text">抽象工厂</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">1.3.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器（建造者）模式"><span class="nav-number">1.4.</span> <span class="nav-text">生成器（建造者）模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.5.</span> <span class="nav-text">原型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构型设计模式"><span class="nav-number">2.</span> <span class="nav-text">结构型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合模式"><span class="nav-number">2.1.</span> <span class="nav-text">组合模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰者模式"><span class="nav-number">2.2.</span> <span class="nav-text">装饰者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理模式"><span class="nav-number">2.3.</span> <span class="nav-text">代理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#享元模式"><span class="nav-number">2.4.</span> <span class="nav-text">享元模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桥接模式"><span class="nav-number">2.5.</span> <span class="nav-text">桥接模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适配器模式"><span class="nav-number">2.6.</span> <span class="nav-text">适配器模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行为型设计模式"><span class="nav-number">3.</span> <span class="nav-text">行为型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模板模式"><span class="nav-number">3.1.</span> <span class="nav-text">模板模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#观察者模式"><span class="nav-number">3.2.</span> <span class="nav-text">观察者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代器模式"><span class="nav-number">3.3.</span> <span class="nav-text">迭代器模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#责任链模式"><span class="nav-number">3.4.</span> <span class="nav-text">责任链模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备忘录模式"><span class="nav-number">4.</span> <span class="nav-text">备忘录模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式"><span class="nav-number">5.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态模式"><span class="nav-number">6.</span> <span class="nav-text">状态模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问者模式"><span class="nav-number">7.</span> <span class="nav-text">访问者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式"><span class="nav-number">8.</span> <span class="nav-text">策略模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共212.5k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -313,7 +1304,131 @@
         onPopupClose();
       }
     });
-  </script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz","0aMQbm6Xk3vkvN16T1yCsmTh")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><script type="text/x-mathjax-config">
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -321,20 +1436,40 @@
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       });
-    </script><script type="text/x-mathjax-config">
+    </script>
+
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
-    </script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script><script type="text/x-mathjax-config">
+</script>
+
+<script type="text/x-mathjax-config">
   MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
       all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></body></html>
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
