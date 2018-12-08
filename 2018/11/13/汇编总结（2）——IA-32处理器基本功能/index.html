@@ -1,4 +1,1544 @@
-<!DOCTYPE html><html class="theme-next gemini" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"e32cdd0f"}),daovoice("update")</script><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222"><meta name="keywords" content="汇编,"><meta name="description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel"><meta name="keywords" content="汇编"><meta property="og:type" content="article"><meta property="og:title" content="汇编总结（2）——IA-32处理器基本功能"><meta property="og:url" content="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/index.html"><meta property="og:site_name" content="DmrfCoder&#39;s page"><meta property="og:description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg"><meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fx6ibcljdgj31kw0bs42z.jpg"><meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6k1ugd6nj31220hswlu.jpg"><meta property="og:updated_time" content="2018-12-07T12:30:01.894Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="汇编总结（2）——IA-32处理器基本功能"><meta name="twitter:description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel"><meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/"><title>汇编总结（2）——IA-32处理器基本功能 | DmrfCoder's page</title><script>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-130602831-1","auto"),ga("send","pageview")</script></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div> <a href="https://github.com/DmrfCoder"><img style="position:absolute;top:0;right:0;border:0" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">DmrfCoder's page</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> Archives</a></li><li class="menu-item menu-item-moments"><a href="/news/" rel="section"><i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i><br> Moments</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> Tags</a></li><li class="menu-item menu-item-about"><a href="/user/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> About me</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="DmrfCoder"><meta itemprop="description" content=""><meta itemprop="image" content="/images/photo.png"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="DmrfCoder's page"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">汇编总结（2）——IA-32处理器基本功能</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T17:54:55+08:00">2018-11-13</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span></span> <span id="/2018/11/13/汇编总结（2）——IA-32处理器基本功能/" class="leancloud_visitors" data-flag-title="汇编总结（2）——IA-32处理器基本功能"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span><div class="post-wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">字数统计&#58;</span> <span title="字数统计">5.1k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">18</span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="IA-32处理器简介"><a href="#IA-32处理器简介" class="headerlink" title="IA-32处理器简介"></a>IA-32处理器简介</h2><p>这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。</p><h3 id="IA-32系列处理器"><a href="#IA-32系列处理器" class="headerlink" title="IA-32系列处理器"></a>IA-32系列处理器</h3><h4 id="IA-32系列处理器指什么"><a href="#IA-32系列处理器指什么" class="headerlink" title="IA-32系列处理器指什么"></a>IA-32系列处理器指什么</h4><p>首先明确IA-32系列处理器是什么：</p><blockquote><p>IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器</p></blockquote><p>代表的型号比如：</p><ul><li>Intel 80386/80486</li><li>Intel Pentium(奔腾)</li><li>Intel Xeon(至强)</li><li>Intel Core(酷睿)</li></ul><p>其最大特点是保持了与先前处理器的兼容。</p><h4 id="处理器的主要指标"><a href="#处理器的主要指标" class="headerlink" title="处理器的主要指标"></a>处理器的主要指标</h4><ul><li>处理器的位数<ul><li>16位</li><li>32位</li><li>64位</li></ul></li><li>主频</li><li>平行化程度<ul><li>流水线</li><li>多核</li></ul></li></ul><h3 id="保护方式和实地址方式"><a href="#保护方式和实地址方式" class="headerlink" title="保护方式和实地址方式"></a>保护方式和实地址方式</h3><h4 id="保护方式"><a href="#保护方式" class="headerlink" title="保护方式"></a>保护方式</h4><p>保护方式是IA-32系列处理器的常态工作方式，只有在保护方式下， IA-32系列处理器才能发挥出其全部性能和特点 。</p><p>windows和Linux都运行于保护方式。</p><p><strong>保护方式的主要特点：</strong></p><ul><li>全部32根地址线有效，可寻址高达4G字节的物理地址空间</li><li>支持存储器分段管理和可选的存储器分页管理机制</li><li>支持虚拟存储器的实现</li><li>提供完善的保护机制</li><li>支持操作系统实现多任务管理</li></ul><h4 id="实地址方式（实方式）"><a href="#实地址方式（实方式）" class="headerlink" title="实地址方式（实方式）"></a>实地址方式（实方式）</h4><p>实地址方式(Real-address mode)是最初的工作方式，是处理器重新开始运行后的最初工作方式。</p><p>实地址方式是IA-32系列处理器中最初的处理器的工作方式（最早的8086/8088只能工作在实地址方式，因为其没有保护方式）。</p><p><strong>实地址方式的特点：</strong></p><ul><li>只能访问最低端的1M字节的物理地址空间。地址空间的范围是00000H至FFFFFH 。</li><li>只支持存储器的分段管理，而且每个存储段的大小限于 64K字节 。</li><li>实地址对应保护方式下的虚地址。这应该是实地址方式 的名称由来。实地址方式常常被简称为实⽅方式 。</li><li>在实方式下，IA-32系列处理器不能发挥其全部性能。</li></ul><h2 id="通用寄存器及使用"><a href="#通用寄存器及使用" class="headerlink" title="通用寄存器及使用"></a>通用寄存器及使用</h2><p>关于寄存器的几点注意点：</p><blockquote><p>寄存器是处理器内的特殊存储单元。</p></blockquote><p>&gt;</p><blockquote><p>处理器内有多种不同用途的寄存器。</p></blockquote><p>&gt;</p><blockquote><p>寄存器分别有各自的名称，以便表示及访问。</p></blockquote><p>IA-32系列CPU有8个32位通用寄存器：EAX、 EBX、 ECX、 EDX、 ESI、 EDI、 EBP、 ESP</p><p>主要功能：存储数据、参与算术逻辑运算、给出存储单元的地址。</p><p><strong>注意：</strong><br>可以单独直接访问这些通用寄存器的低16位，他们是8个16位通用寄存器，名称分别是：AX、BX、CX、DX、SI、DI、BP、SP，对应16位处理器Intel<br>8086的8个通用寄存器。</p><p>还可以单独直接访问AX、BX、CX、DX的高8位和低8位，示意图如下：</p><p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg" alt=""></p><p>带H的寄存器（比如AH、BH）代表的是X寄存器（AX、BX）的High（高）字节，对应的，AL代表的就是AX的Low（低）字节。</p><h3 id="简单传送指令"><a href="#简单传送指令" class="headerlink" title="简单传送指令"></a>简单传送指令</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>MOV</td><td>传送指令</td><td>MOV DEST,SRC</td><td>DEST &lt;=SRC</td><td>源和目标的尺寸必须一致，不能同时是存储单元。</td></tr><tr><td>XCHG</td><td>交换指令</td><td>XCHG OPER1,OPER2</td><td>把操作数oper1的内容与操作数oper2的内容交换</td><td></td></tr></tbody></table></div><p>oper1和oper2可以是通用寄存器或存储单元，但不能同时是操作单元，也不能是立即数，也不能同时是存储单元。</p><h3 id="简单加减指令"><a href="#简单加减指令" class="headerlink" title="简单加减指令"></a>简单加减指令</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>ADD</td><td>加法指令</td><td>ADD DEST,SRC</td><td>DEST&lt;=DEST+SRC</td><td>两数相加</td></tr><tr><td>SUB</td><td>减法指令</td><td>SUB DEST,SRC</td><td>DEST&lt;=DEST-SRC</td><td>两数相减</td></tr><tr><td>INC</td><td>加1指令</td><td>INC DEST</td><td>DEST&lt;=DEST+1</td><td></td></tr><tr><td>DEC</td><td>减1指令</td><td>DEC DEST</td><td>DEST&lt;=DEST-1</td><td></td></tr><tr><td>NEG</td><td>取补指令</td><td>NEG OPRD</td><td>OPRD=0-OPRD</td><td>对操作数取补（相反数）</td></tr></tbody></table></div><h2 id="标志寄存器及使用"><a href="#标志寄存器及使用" class="headerlink" title="标志寄存器及使用"></a>标志寄存器及使用</h2><h3 id="标志寄存器（FLAGS-register）"><a href="#标志寄存器（FLAGS-register）" class="headerlink" title="标志寄存器（FLAGS register）"></a>标志寄存器（FLAGS register）</h3><p><strong>标志寄存器</strong> 是一个32位的寄存器，主要反映处理器的状态和运算结果的某些特征，认为主要是 <strong>状态标志</strong> 和 <strong>控制标志</strong> 以及<br><strong>系统标志</strong> 三部分。</p><p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fx6ibcljdgj31kw0bs42z.jpg" alt="qq_pic_merged_1542097086949"></p><p>如上图所示，标两个字母的是状态标志位，标着X的是系统标志位，标着字母C的是控制标志位，阴影部分是不使用的保留位。</p><h3 id="状态标志"><a href="#状态标志" class="headerlink" title="状态标志"></a>状态标志</h3><div class="table-container"><table><thead><tr><th>标志</th><th>标志名</th><th>主要功能</th></tr></thead><tbody><tr><td>CF</td><td>进位标志（Carry flag）</td><td>当算术运算产生进位或者借位时，置标志（1），否则清标志（0）。</td></tr><tr><td>SF</td><td>符号标志（Sign flag）</td><td>反映运算结果的符号位(符号位为1，置标志;否则清)，与运算结果的最高位相同。</td></tr><tr><td>ZF</td><td>零标志（Zero flag）</td><td>当运算结果为0时，置标志;否则清标志。</td></tr><tr><td>OF</td><td>溢出标志（Overflow flag）</td><td>反映有符号数的加减运算是否引起溢出，如果溢出，置标志，否则清标志。</td></tr><tr><td>PF</td><td>奇偶标志（Parity flag）</td><td></td></tr><tr><td>AF</td><td>辅助进位标志（Auxiliary Carry flag）</td><td></td></tr></tbody></table></div><h3 id="状态标志操作指令"><a href="#状态标志操作指令" class="headerlink" title="状态标志操作指令"></a>状态标志操作指令</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th></tr></thead><tbody><tr><td>CLC（clear carry flag）</td><td>清进位标志指令</td><td>CLC</td><td>使进位标志CF为0</td></tr><tr><td>STC(set carry flag)</td><td>置进位标志指令</td><td>STC</td><td>使进位标志CF为1</td></tr><tr><td>CMC（complement carry flag）</td><td>进位标志取反指令</td><td>CMC</td><td>使进位标志CF取反</td></tr><tr><td>LAHF（load status flags into AH register）</td><td>获取状态标志操作指令</td><td>LAHF</td><td></td></tr></tbody></table></div><p>把位于标志寄存器低端的8位同时送到寄存器AH的对应位<br>SAHF（store AH into Flags） | 设置状态标志操作指令 | SAHF |<br>对标志寄存器中的低8位产生影响，使得状态标志位SF、ZF、AF、PF和CF分别成为来自寄存器AH中对应位的值，但保留位（位1、位3、位5）不受影响</p><h3 id="带进位加减指令"><a href="#带进位加减指令" class="headerlink" title="带进位加减指令"></a>带进位加减指令</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>ADC（add with carry）</td><td>带进位加法指令</td><td>ADC DEST,SRC</td><td>DEST &lt;=DEST+SRC+CF</td><td></td></tr></tbody></table></div><p>与add指令不同之处是要再加上进位标志cf的值<br>SBB(substraction with borrow) | 带借位减法 | SBB DEST,SRC |<br>DEST&lt;=DEST-(SRC+CF) | 与sub指令不同之处是要再减上借位标志cf的值</p><h2 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h2><h3 id="存储器分段"><a href="#存储器分段" class="headerlink" title="存储器分段"></a>存储器分段</h3><p>CPU能够通过其总线直接寻址访问的 <em>存储器</em> 被称为 <strong>内存</strong> ，每一个字节存储单元有一个唯一的地址，称之为 <strong>物理地址</strong> 。<br>CPU的地址线数量决定了可产生的最大物理地址， n根地址线，可形成的最大物理地址是 2 n 2^n 2 n<br>-1,所有可形成的物理地址的集合被称为物理地址空间.</p><p>物理地址空间大小不等于实际安装的物理内存大小。</p><p>为了有效地管理存储器，常常把地址空间划分为若干逻辑段， 对应存储空间被划分为若干存储段。逻辑段和存储段是一致的。<br>一般说来，运行着的程序在存储器中映像有三部分组成:</p><ul><li><p>代码，代码是要执行的指令序列；</p></li><li><p>数据，数据是要处理加工的内容；</p></li><li><p>堆栈，堆栈是按“先进后出”规则存取的区域。</p></li></ul><p>通常，代码、数据和堆栈分别占用不同的存储器段，相应的段也就被称为 <strong>代码段</strong> 、 <strong>数据段</strong> 和 <strong>堆栈段</strong> 。</p><p>在分段之后，程序中使用的某个存储单元总是属于某个段。 所以，可以采用某某段某某单元的方式来表示存储单元。</p><h3 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h3><p>在程序中用于表示存储单元的地址被称为 <strong>逻辑地址</strong> 。</p><p>由于采用分段存储管理方式，程序中使用的逻辑地址是二维的，第一维给出某某段，第二维给出段内的某某单元。</p><p>二维的逻辑地址: 段号∶偏移</p><p>在实方式和保护方式下，都通过偏移指定段内的某某单元。在实方式下，段号是 <strong>段值</strong> ;在保护方式下，段号则是 <strong>段选择子</strong> 。</p><p>逻辑地址转换为物理地址的过程为由段号得到段起始地址，再加上偏移。</p><p>需要注意的是；</p><ul><li><p>保护方式下，物理地址是32位，段起始地址是32位，偏移是32位;</p></li><li><p>在实方式下，物理地址是20位，段起始地址是20位，偏移是16位。</p></li></ul><p>逻辑地址中的段号(段值或者段选择子)存放在哪里呢?<br>答案是，当前使用段的段号存放在段寄存器(Segment Registers)中。</p><h3 id="段寄存器-1"><a href="#段寄存器-1" class="headerlink" title="段寄存器"></a>段寄存器</h3><div class="table-container"><table><thead><tr><th>段寄存器名称</th><th>中文名</th><th>解释</th><th>出现时期</th></tr></thead><tbody><tr><td>CS（Code Segment）</td><td>代码段寄存器</td><td>当前代码段</td><td>Intel 8060处理器</td></tr><tr><td>SS（Stack Segment）</td><td>堆栈段寄存器</td><td>当前堆栈段</td><td>Intel 8060处理器</td></tr><tr><td>DS（Data Segment）</td><td>数据段寄存器</td><td>当前数据段</td><td>Intel 8060处理器</td></tr><tr><td>ES（Extra Segment）</td><td>附加段寄存器</td><td>可用于指定数据段</td><td>Intel 8060处理器</td></tr><tr><td>FS</td><td>附加段寄存器</td><td>可用于指定数据段</td><td>80386开始</td></tr><tr><td>GS</td><td>附加段寄存器</td><td>可用于指定数据段</td><td>80386开始</td></tr></tbody></table></div><h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><p>表示指令中操作数所在的方法称为寻址方式，主要分为三大类：</p><ul><li>立即寻址</li><li>寄存器寻址</li><li>存储器寻址</li></ul><p>此外还有固定寻址和I/O端口寻址等</p><h3 id="立即寻址方式和寄存器寻址方式"><a href="#立即寻址方式和寄存器寻址方式" class="headerlink" title="立即寻址方式和寄存器寻址方式"></a>立即寻址方式和寄存器寻址方式</h3><h4 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h4><p>说白了当操作数是立即数的时候就是立即寻址方式，比如：</p><p>​<br> mov eax,12345678H</p><p>所以：</p><ul><li>立即数作为指令的一部分，跟在操作码后面存放在代码段</li><li>如果立即数由多个字节构成，那么作为指令的一部分存储时，也采用“高高低低”规则</li><li>只有源操作数才可采用立即寻址方式， <strong>目的操作数不能采用立即寻址方式</strong></li></ul><h4 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h4><p>就是操作数在CPU内部的寄存器中，指令中指定寄存器，不需要通过访问存储器来取得操作数，所以采用寄存器寻址方式的指令执行速度较快。</p><h3 id="32位的存储器寻址方式"><a href="#32位的存储器寻址方式" class="headerlink" title="32位的存储器寻址方式"></a>32位的存储器寻址方式</h3><p>当指令的操作数在存储单元时，指定存储单元就指定了操作数。</p><p>为了灵活地访问存储器，IA-32系列CPU提供了多种表示存储单元偏移的方式，即有多种存储器寻址方式：</p><ul><li>直接寻址</li><li>寄存器间接</li><li>寄存器相对</li><li>基址加变址</li><li>通用</li></ul><h4 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h4><p>操作数在存储器中，指令直接包含操作数所在存储单元的有效地址。</p><p>​<br> mov ecx,[95480H]</p><h4 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h4><p>操作数在存储器中，由八个32位通用寄存器之一给出操作数所在存储单元的有效地址。</p><p>寄存器间接寻址方式中，给出操作数所在存储单元有效地址的寄存器相当于c语言中的指针变量，它含有要访问存储单元的地址。</p><p>​<br> mov ecx,[esi]</p><h4 id="32位寄存器寻址方式的通用表示"><a href="#32位寄存器寻址方式的通用表示" class="headerlink" title="32位寄存器寻址方式的通用表示"></a>32位寄存器寻址方式的通用表示</h4><p>存储单元的有效地址可以由三部分内容相加构成:</p><ul><li>一个32位的基地址寄存器</li><li>一个可乘上比例因子1、2、4或8的32位的变址寄存器</li><li>一个8位、16位或32位的位移量</li></ul><p>这三部分可省去任意的两部分。</p><p>​<br> add dx ,[ecx+5328H]//寄存器相对寻址方式<br> xchg [ebx,esi],dx//基址加变址寻址方式<br> mov ebx,[edi+eax*4+300H]//基址加放大因子的变址寻址方式</p><p>在某条具体的指令中，如果有存储器操作数，那么其尺寸是确定的。在大多数情况下，存储器操作数的尺寸是一 目了然的，因为通常要求一条指令中的多个操作数的尺寸<br>一致，所以指令中的寄存器操作数的尺寸就决定了存储器操作数的尺寸。 <strong>在少数情况下，需要显式地指定存储器操作数的尺寸。</strong></p><p>​<br> LEA EBX , bufi<br> MOV DWORD PTR [EBX], 5 // 双字<br> MOV WORD PTR [EBX+4], 5 //字<br> MOV BYTE PTR [EBX+8], 5 //字节</p><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果 <strong>基址寄存器</strong> 不是 <strong>EBP</strong> 或者 <strong>ESP</strong> ，那么缺省引用的段寄存器是 <strong>DS</strong> ;</p><p>如果 <strong>基址寄存器</strong> 是EBP或者ESP，那么缺省引 用的段寄存器是 <strong>SS</strong> 。</p><p>当EBP作为 <strong>变址寄存器</strong> 使用( <strong>ESP不 能作为变址寄存器使用</strong> )时，缺省引用的段寄存器仍然是 <strong>DS</strong> 。</p><p>无论存储器寻址方式简单或者复杂，如果由基址寄存器、 带比例因子的变址寄存器和位移量这三部分相加所得 <strong>超过 32位，那么有效地址仅为低32位</strong> 。</p><h3 id="取有效地址指令"><a href="#取有效地址指令" class="headerlink" title="取有效地址指令"></a>取有效地址指令</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>LEA（load effective address）</td><td>取有效地址指令</td><td>LEA REC,OPRD</td><td></td></tr><tr><td>把操作数oprd的有效地址传送到操作数rec，源操作数oprd必须是一个存储器操作数，目的操作数rec必须是一个16位或32位的通用寄存器</td><td></td></tr></tbody></table></div><p>与mov指令的区别：mov：移动地址中的值lea：将地址进行移动</p><p>lea指令的妙用：</p><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6k1ugd6nj31220hswlu.jpg" alt=""></p><h2 id="指令寄存器和简单控制转移指令"><a href="#指令寄存器和简单控制转移指令" class="headerlink" title="指令寄存器和简单控制转移指令"></a>指令寄存器和简单控制转移指令</h2><h3 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h3><p>IA-32系列CPU有一个32位的指令指针寄存器EIP，由CS和EIP确定所取指令的存储单元地址。段寄存器CS给出当前代码段的段号，指令指针寄存器EIP给出偏移。</p><p>实方式下，段的最大范围是64K，EIP中高16位必须是0，相当于只有低16位的IP起作用。</p><p>CPU 执行代码(程序)就是一条接一条地执行机器指<br>令。可以把CPU执行指令的过程看作一条处理指令的流水线，其第一步是从存储器中取出指令。在取出一条指令后，会根据所取指令的长度，自动调整指令指针寄存器 E I<br>P 的值，使其指向下一条指令。这样，就实现了顺序执⾏指令。</p><p>那么如果我们不想顺序执行指令，而想非自动顺序调整EIP的内容，这就是所谓的 <strong>转移</strong> 。</p><p>衍生出的 <strong>控制转移指令</strong> 就是专门用于改变EIP内容的指令，主要包括：</p><ul><li>条件转移指令</li><li>无条件转移指令</li><li>循环指令</li><li>函数调用及返回指令</li><li>等</li></ul><p>这些控制转移指令的实质就是根据不同的情形改变EIP的内容以实现转移。</p><h3 id="常用条件转移指令"><a href="#常用条件转移指令" class="headerlink" title="常用条件转移指令"></a>常用条件转移指令</h3><h4 id="条件转移"><a href="#条件转移" class="headerlink" title="条件转移"></a>条件转移</h4><p>所谓条件转移指，当某一条件满足时，发生转移，否则继续顺序执行。换句话说，当某一条件满足时，就改变 EIP的内容，从而实施转移，否则顺序执行 。</p><p>标志寄存器中的 <strong>状态标志</strong> 被用于表示条件。绝大部分条件转移指令 <strong>根据某个标志或者某几个标志</strong> 来判断条件是否满足。</p><p>条件转移类似于高级语言的分支。</p><h4 id="条件转移指令"><a href="#条件转移指令" class="headerlink" title="条件转移指令"></a>条件转移指令</h4><p>主要可以分为三类：</p><ul><li>根据一个标志判别</li><li>根据两个标志判别</li><li>根据三个标志判别</li></ul><div class="table-container"><table><thead><tr><th>指令格式</th><th>转移条件</th><th>转移说明</th><th>其他说明</th></tr></thead><tbody><tr><td>JZ 标号 JE 标号</td><td>ZF=1 同上</td><td>等于0转移(Jump if zero) 相等转移(Jump if equal)</td><td>单个标志</td></tr><tr><td>JNZ 标号 JNE 标号</td><td>ZF=0 同上</td><td>不等于0转移(Jump if not zero) 不相等转移(Jump if not</td></tr><tr><td>equal)</td><td>单个标志</td></tr><tr><td>JB 标号 JNAE 标号 JC 标号</td><td>CF=1 同上 同上</td><td><code>低于转移 不高于等于转移 进位位被置转移</code></td><td>单个标志 (无符号数)</td></tr><tr><td>JNBE 标号 JA 标号</td><td>(CF或ZF)=0 同上</td><td>不低于等于转移 高于转移</td><td>两个标志 (无符号数)</td></tr><tr><td>JLE 标号 JNG 标号</td><td>((SF异或OF)或ZF)=1 同上</td><td>小于等于转移 不大于转移</td><td>三个标志 (有符号数)</td></tr><tr><td>JNLE 标号 JG 标号</td><td>((SF异或OF)或ZF)=1 同上</td><td>不小于等于转移 大于转移</td><td>三个符号（有符号数）</td></tr></tbody></table></div><h4 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h4><p>条件转移指令本身不影响标志。</p><p>条件转移指令在条件满足的情况下， <strong>只改变指令指针寄存器EIP</strong> 。也就是说，条件转移的转移目的地仅限于 <strong>同一个代码段内</strong><br>。这种不改变代码段寄存器CS，仅改变EIP的 转移被称为 <strong>段内转移</strong> 。</p><p>条件转移指令可以实现向前方转移，也可以实现向后方 转移。</p><h3 id="比较指令和数值大小比较"><a href="#比较指令和数值大小比较" class="headerlink" title="比较指令和数值大小比较"></a>比较指令和数值大小比较</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>CMP</td><td>比较指令</td><td>CMP DEST,SRC</td><td>根据dest-src的差影响各状态标志寄存器</td><td>不把dest-</td></tr></tbody></table></div><p>src的结果送入dest</p><p>比较指令是根据DEST-SRC的差影响标志寄存器的各状态标志（但不把结果送到DEST中）来判断两个数的大小关系的，判断的准则如下：</p><ul><li><p>根据零标志ZF是否置位，判断两者是否相等;</p></li><li><p>如果两者是无符号数，可根据进位标志CF判断大小;</p></li><li><p>如果两者是有符号数，要同时根据符号标志SF和溢出标志OF判断大小。</p></li></ul><p>为了方便进行数值大小比较，IA-32系列CPU提供两套以数值大小为条件的条件转移指令，一套适用于无符号数之间的比较，另一套适用于有符号数之间的比较：</p><ul><li><p>有符号数间的次序关系称为大于(G)、等于(E) 和小于（L）；</p></li><li><p>无符号数间的次序关系称为高于（A）、等于（E）和低于（B）；</p></li></ul><h3 id="简单无条件转移指令"><a href="#简单无条件转移指令" class="headerlink" title="简单无条件转移指令"></a>简单无条件转移指令</h3><p>类似于高级语言中的goto语句，就是jmp语句：</p><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>JMP</td><td>无条件段内直接转移指令</td><td>JMP LABEL</td><td>使控制无条件地转移到标号为label的位置</td><td>无条件转移指令本身不影响标志</td></tr></tbody></table></div><h2 id="堆栈和堆栈操作"><a href="#堆栈和堆栈操作" class="headerlink" title="堆栈和堆栈操作"></a>堆栈和堆栈操作</h2><p>所谓堆栈其实就是一段内存区域，只是对它的访问操作仅限于一端进行，地址较 <strong>小</strong> 的一端被称为 <strong>栈顶</strong> ，地址较 <strong>大</strong> 的一端被称为<br><strong>栈底</strong> 。</p><p>堆栈段寄存器 <strong>SS</strong> 含有当前堆栈段的 <strong>段号</strong> ，SS指示堆栈所在内存区域的位置。 堆栈指针寄存器 <strong>ESP</strong><br>含有栈顶的偏移（有效地址），ESP指向 <strong>栈顶</strong> 。</p><p>堆栈的主要用途：</p><ul><li>保护寄存器内容或者保护现场;</li><li>保存返回地址;</li><li>传递参数;</li><li>安排局部变量或者临时变量。</li></ul><h3 id="堆栈操作"><a href="#堆栈操作" class="headerlink" title="堆栈操作"></a>堆栈操作</h3><div class="table-container"><table><thead><tr><th>指令</th><th>中文名</th><th>格式</th><th>解释</th><th>备注</th></tr></thead><tbody><tr><td>PUSH</td><td>进栈指令</td><td>PUSH SRC</td><td>把源操作数src压入堆栈</td><td></td></tr></tbody></table></div><p>源操作数src可以是32位通用寄存器、16位通用寄存器和段寄存器，也可以是双字存储单元或者字符存储单元，还可以是立即数<br>POP | 出栈指令 | POP DEST | 从栈顶弹出一个双字或字数据到目的操作数 |<br>如果目的操作数是双字的，那么就从栈顶弹出一个双字数据，否则，从栈顶弹出一个字数据，出栈至少弹出一个字（16位）<br>PUSHA | 16位通用寄存器全进栈指令 | PUSHA | 将所有8个16位通用寄存器的内容压入堆栈 | 压入顺序是AX CX DX<br>BX SP BP SI DI，然后对战指针寄存器SP的值减16，所以SP进栈的内容是PUSHA指令执行之前的值<br>POPA | 16位通用寄存器全出栈指令 | POPA | 以PUSHA相反的顺序从堆栈中弹出内容，从而恢复PUSHA之前的寄存器状态 |<br>SP的值不是由堆栈弹出的，而是通过增加16来恢复<br>PUSHAD | 32位通用寄存器全进栈指令 | PUSHAD | 将所有8个32位通用寄存器的内容压入堆栈 | 压入顺序是EAX ECX<br>EDX EBX ESP EBP ESI EDI，然后对战指针寄存器SP的值减32，所以SP进栈的内容是PUSHAD指令执行之前的值<br>POPAD | 32位通用寄存器全出栈指令 | POPAD | 以PUSHAD相反的顺序从堆栈中弹出内容，从而恢复PUSHAD之前的寄存器状态<br>| ESP的值不是由堆栈弹出的，而是通过增加32来恢复</p></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/汇编/" rel="tag"><i class="fa fa-tag"></i> 汇编</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2018/11/09/Normalizing rows with Python/" rel="next" title="Normalizing rows with Python"><i class="fa fa-chevron-left"></i> Normalizing rows with Python</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2018/11/13/汇编总结（1）——基础知识/" rel="prev" title="汇编总结（1）——基础知识">汇编总结（1）——基础知识<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"><script>window._bd_share_config={common:{bdText:"",bdMini:"1",bdMiniList:!1,bdPic:""},image:{viewList:["tsina","douban","sqq","qzone","weixin","twi","fbook"],viewText:"分享到：",viewSize:"16"},slide:{bdImg:"5",bdPos:"left",bdTop:"100"}}</script><script>with(document)(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="//bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)</script></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder"><p class="site-author-name" itemprop="name">DmrfCoder</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">134</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">12</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">75</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/DmrfCoder" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i> CSDN</a></span><span class="links-of-author-item"><a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i> Google</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IA-32处理器简介"><span class="nav-number">1.</span> <span class="nav-text">IA-32处理器简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IA-32系列处理器"><span class="nav-number">1.1.</span> <span class="nav-text">IA-32系列处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IA-32系列处理器指什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">IA-32系列处理器指什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理器的主要指标"><span class="nav-number">1.1.2.</span> <span class="nav-text">处理器的主要指标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保护方式和实地址方式"><span class="nav-number">1.2.</span> <span class="nav-text">保护方式和实地址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#保护方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">保护方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实地址方式（实方式）"><span class="nav-number">1.2.2.</span> <span class="nav-text">实地址方式（实方式）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用寄存器及使用"><span class="nav-number">2.</span> <span class="nav-text">通用寄存器及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单传送指令"><span class="nav-number">2.1.</span> <span class="nav-text">简单传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单加减指令"><span class="nav-number">2.2.</span> <span class="nav-text">简单加减指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标志寄存器及使用"><span class="nav-number">3.</span> <span class="nav-text">标志寄存器及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标志寄存器（FLAGS-register）"><span class="nav-number">3.1.</span> <span class="nav-text">标志寄存器（FLAGS register）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态标志"><span class="nav-number">3.2.</span> <span class="nav-text">状态标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态标志操作指令"><span class="nav-number">3.3.</span> <span class="nav-text">状态标志操作指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带进位加减指令"><span class="nav-number">3.4.</span> <span class="nav-text">带进位加减指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段寄存器"><span class="nav-number">4.</span> <span class="nav-text">段寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器分段"><span class="nav-number">4.1.</span> <span class="nav-text">存储器分段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑地址"><span class="nav-number">4.2.</span> <span class="nav-text">逻辑地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段寄存器-1"><span class="nav-number">4.3.</span> <span class="nav-text">段寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻址方式"><span class="nav-number">5.</span> <span class="nav-text">寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#立即寻址方式和寄存器寻址方式"><span class="nav-number">5.1.</span> <span class="nav-text">立即寻址方式和寄存器寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#立即寻址方式"><span class="nav-number">5.1.1.</span> <span class="nav-text">立即寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寄存器寻址方式"><span class="nav-number">5.1.2.</span> <span class="nav-text">寄存器寻址方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32位的存储器寻址方式"><span class="nav-number">5.2.</span> <span class="nav-text">32位的存储器寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接寻址方式"><span class="nav-number">5.2.1.</span> <span class="nav-text">直接寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寄存器间接寻址"><span class="nav-number">5.2.2.</span> <span class="nav-text">寄存器间接寻址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32位寄存器寻址方式的通用表示"><span class="nav-number">5.2.3.</span> <span class="nav-text">32位寄存器寻址方式的通用表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">5.2.4.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取有效地址指令"><span class="nav-number">5.3.</span> <span class="nav-text">取有效地址指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令寄存器和简单控制转移指令"><span class="nav-number">6.</span> <span class="nav-text">指令寄存器和简单控制转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令指针寄存器"><span class="nav-number">6.1.</span> <span class="nav-text">指令指针寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用条件转移指令"><span class="nav-number">6.2.</span> <span class="nav-text">常用条件转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#条件转移"><span class="nav-number">6.2.1.</span> <span class="nav-text">条件转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件转移指令"><span class="nav-number">6.2.2.</span> <span class="nav-text">条件转移指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较指令和数值大小比较"><span class="nav-number">6.3.</span> <span class="nav-text">比较指令和数值大小比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单无条件转移指令"><span class="nav-number">6.4.</span> <span class="nav-text">简单无条件转移指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈和堆栈操作"><span class="nav-number">7.</span> <span class="nav-text">堆栈和堆栈操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆栈操作"><span class="nav-number">7.1.</span> <span class="nav-text">堆栈操作</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2018</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">DmrfCoder</span></div><div class="theme-info"><div class="powered-by"></div> <span class="post-count">博客全站共211.8k字</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/three/three.min.js"></script><script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script><script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script type="text/javascript">
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="汇编,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编总结（2）——IA-32处理器基本功能">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/index.html">
+<meta property="og:site_name" content="DmrfCoder&#39;s page">
+<meta property="og:description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fx6ibcljdgj31kw0bs42z.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6k1ugd6nj31220hswlu.jpg">
+<meta property="og:updated_time" content="2018-12-07T12:30:01.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编总结（2）——IA-32处理器基本功能">
+<meta name="twitter:description" content="IA-32处理器简介这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。 IA-32系列处理器IA-32系列处理器指什么首先明确IA-32系列处理器是什么：  IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器  代表的型号比如：  Intel 80386/80486  Intel Pentium(奔腾)  Intel Xeon(至强)  Intel">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/">
+
+
+
+
+
+  <title>汇编总结（2）——IA-32处理器基本功能 | DmrfCoder's page</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://github.com/DmrfCoder">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+	</a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder's page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/11/13/汇编总结（2）——IA-32处理器基本功能/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder's page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编总结（2）——IA-32处理器基本功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T17:54:55+08:00">
+                2018-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/汇编/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/13/汇编总结（2）——IA-32处理器基本功能/" class="leancloud_visitors" data-flag-title="汇编总结（2）——IA-32处理器基本功能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="IA-32处理器简介"><a href="#IA-32处理器简介" class="headerlink" title="IA-32处理器简介"></a>IA-32处理器简介</h2><p>这部分主要介绍了主要的IA-32系列处理器以及著名的保护方式和实地址方式的工作模式。</p>
+<h3 id="IA-32系列处理器"><a href="#IA-32系列处理器" class="headerlink" title="IA-32系列处理器"></a>IA-32系列处理器</h3><h4 id="IA-32系列处理器指什么"><a href="#IA-32系列处理器指什么" class="headerlink" title="IA-32系列处理器指什么"></a>IA-32系列处理器指什么</h4><p>首先明确IA-32系列处理器是什么：</p>
+<blockquote>
+<p>IA-32系列处理器泛指基于英特尔IA-32架构的32位微处理器</p>
+</blockquote>
+<p>代表的型号比如：</p>
+<ul>
+<li>Intel 80386/80486 </li>
+<li>Intel Pentium(奔腾) </li>
+<li>Intel Xeon(至强) </li>
+<li>Intel Core(酷睿) </li>
+</ul>
+<p>其最大特点是保持了与先前处理器的兼容。</p>
+<h4 id="处理器的主要指标"><a href="#处理器的主要指标" class="headerlink" title="处理器的主要指标"></a>处理器的主要指标</h4><ul>
+<li>处理器的位数 <ul>
+<li>16位 </li>
+<li>32位 </li>
+<li>64位 </li>
+</ul>
+</li>
+<li>主频 </li>
+<li>平行化程度 <ul>
+<li>流水线 </li>
+<li>多核 </li>
+</ul>
+</li>
+</ul>
+<h3 id="保护方式和实地址方式"><a href="#保护方式和实地址方式" class="headerlink" title="保护方式和实地址方式"></a>保护方式和实地址方式</h3><h4 id="保护方式"><a href="#保护方式" class="headerlink" title="保护方式"></a>保护方式</h4><p>保护方式是IA-32系列处理器的常态工作方式，只有在保护方式下， IA-32系列处理器才能发挥出其全部性能和特点 。</p>
+<p>windows和Linux都运行于保护方式。</p>
+<p><strong>保护方式的主要特点：</strong></p>
+<ul>
+<li>全部32根地址线有效，可寻址高达4G字节的物理地址空间 </li>
+<li>支持存储器分段管理和可选的存储器分页管理机制 </li>
+<li>支持虚拟存储器的实现 </li>
+<li>提供完善的保护机制 </li>
+<li>支持操作系统实现多任务管理 </li>
+</ul>
+<h4 id="实地址方式（实方式）"><a href="#实地址方式（实方式）" class="headerlink" title="实地址方式（实方式）"></a>实地址方式（实方式）</h4><p>实地址方式(Real-address mode)是最初的工作方式，是处理器重新开始运行后的最初工作方式。</p>
+<p>实地址方式是IA-32系列处理器中最初的处理器的工作方式（最早的8086/8088只能工作在实地址方式，因为其没有保护方式）。</p>
+<p><strong>实地址方式的特点：</strong></p>
+<ul>
+<li>只能访问最低端的1M字节的物理地址空间。地址空间的范围是00000H至FFFFFH 。 </li>
+<li>只支持存储器的分段管理，而且每个存储段的大小限于 64K字节 。 </li>
+<li>实地址对应保护方式下的虚地址。这应该是实地址方式 的名称由来。实地址方式常常被简称为实⽅方式 。 </li>
+<li>在实方式下，IA-32系列处理器不能发挥其全部性能。 </li>
+</ul>
+<h2 id="通用寄存器及使用"><a href="#通用寄存器及使用" class="headerlink" title="通用寄存器及使用"></a>通用寄存器及使用</h2><p>关于寄存器的几点注意点：</p>
+<blockquote>
+<p>寄存器是处理器内的特殊存储单元。</p>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>处理器内有多种不同用途的寄存器。</p>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>寄存器分别有各自的名称，以便表示及访问。</p>
+</blockquote>
+<p>IA-32系列CPU有8个32位通用寄存器：EAX、 EBX、 ECX、 EDX、 ESI、 EDI、 EBP、 ESP</p>
+<p>主要功能：存储数据、参与算术逻辑运算、给出存储单元的地址。</p>
+<p><strong>注意：</strong><br>可以单独直接访问这些通用寄存器的低16位，他们是8个16位通用寄存器，名称分别是：AX、BX、CX、DX、SI、DI、BP、SP，对应16位处理器Intel<br>8086的8个通用寄存器。</p>
+<p>还可以单独直接访问AX、BX、CX、DX的高8位和低8位，示意图如下：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fx5odj789jj310i0gggru.jpg" alt=""></p>
+<p>带H的寄存器（比如AH、BH）代表的是X寄存器（AX、BX）的High（高）字节，对应的，AL代表的就是AX的Low（低）字节。</p>
+<h3 id="简单传送指令"><a href="#简单传送指令" class="headerlink" title="简单传送指令"></a>简单传送指令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MOV</td>
+<td>传送指令</td>
+<td>MOV DEST,SRC</td>
+<td>DEST &lt;=SRC</td>
+<td>源和目标的尺寸必须一致，不能同时是存储单元。  </td>
+</tr>
+<tr>
+<td>XCHG</td>
+<td>交换指令</td>
+<td>XCHG OPER1,OPER2</td>
+<td>把操作数oper1的内容与操作数oper2的内容交换</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>oper1和oper2可以是通用寄存器或存储单元，但不能同时是操作单元，也不能是立即数，也不能同时是存储单元。  </p>
+<h3 id="简单加减指令"><a href="#简单加减指令" class="headerlink" title="简单加减指令"></a>简单加减指令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADD</td>
+<td>加法指令</td>
+<td>ADD DEST,SRC</td>
+<td>DEST&lt;=DEST+SRC</td>
+<td>两数相加  </td>
+</tr>
+<tr>
+<td>SUB</td>
+<td>减法指令</td>
+<td>SUB DEST,SRC</td>
+<td>DEST&lt;=DEST-SRC</td>
+<td>两数相减  </td>
+</tr>
+<tr>
+<td>INC</td>
+<td>加1指令</td>
+<td>INC DEST</td>
+<td>DEST&lt;=DEST+1</td>
+<td></td>
+</tr>
+<tr>
+<td>DEC</td>
+<td>减1指令</td>
+<td>DEC DEST</td>
+<td>DEST&lt;=DEST-1</td>
+<td></td>
+</tr>
+<tr>
+<td>NEG</td>
+<td>取补指令</td>
+<td>NEG OPRD</td>
+<td>OPRD=0-OPRD</td>
+<td>对操作数取补（相反数）  </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="标志寄存器及使用"><a href="#标志寄存器及使用" class="headerlink" title="标志寄存器及使用"></a>标志寄存器及使用</h2><h3 id="标志寄存器（FLAGS-register）"><a href="#标志寄存器（FLAGS-register）" class="headerlink" title="标志寄存器（FLAGS register）"></a>标志寄存器（FLAGS register）</h3><p><strong>标志寄存器</strong> 是一个32位的寄存器，主要反映处理器的状态和运算结果的某些特征，认为主要是 <strong>状态标志</strong> 和 <strong>控制标志</strong> 以及<br><strong>系统标志</strong> 三部分。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fx6ibcljdgj31kw0bs42z.jpg" alt="qq_pic_merged_1542097086949"></p>
+<p>如上图所示，标两个字母的是状态标志位，标着X的是系统标志位，标着字母C的是控制标志位，阴影部分是不使用的保留位。</p>
+<h3 id="状态标志"><a href="#状态标志" class="headerlink" title="状态标志"></a>状态标志</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th>标志名</th>
+<th>主要功能  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CF</td>
+<td>进位标志（Carry flag）</td>
+<td>当算术运算产生进位或者借位时，置标志（1），否则清标志（0）。  </td>
+</tr>
+<tr>
+<td>SF</td>
+<td>符号标志（Sign flag）</td>
+<td>反映运算结果的符号位(符号位为1，置标志;否则清)，与运算结果的最高位相同。  </td>
+</tr>
+<tr>
+<td>ZF</td>
+<td>零标志（Zero flag）</td>
+<td>当运算结果为0时，置标志;否则清标志。  </td>
+</tr>
+<tr>
+<td>OF</td>
+<td>溢出标志（Overflow flag）</td>
+<td>反映有符号数的加减运算是否引起溢出，如果溢出，置标志，否则清标志。  </td>
+</tr>
+<tr>
+<td>PF</td>
+<td>奇偶标志（Parity flag）</td>
+<td></td>
+</tr>
+<tr>
+<td>AF</td>
+<td>辅助进位标志（Auxiliary Carry flag）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="状态标志操作指令"><a href="#状态标志操作指令" class="headerlink" title="状态标志操作指令"></a>状态标志操作指令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLC（clear carry flag）</td>
+<td>清进位标志指令</td>
+<td>CLC</td>
+<td>使进位标志CF为0  </td>
+</tr>
+<tr>
+<td>STC(set carry flag)</td>
+<td>置进位标志指令</td>
+<td>STC</td>
+<td>使进位标志CF为1  </td>
+</tr>
+<tr>
+<td>CMC（complement carry flag）</td>
+<td>进位标志取反指令</td>
+<td>CMC</td>
+<td>使进位标志CF取反  </td>
+</tr>
+<tr>
+<td>LAHF（load status flags into AH register）</td>
+<td>获取状态标志操作指令</td>
+<td>LAHF</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>把位于标志寄存器低端的8位同时送到寄存器AH的对应位<br>SAHF（store AH into Flags）  |  设置状态标志操作指令  |  SAHF  |<br>对标志寄存器中的低8位产生影响，使得状态标志位SF、ZF、AF、PF和CF分别成为来自寄存器AH中对应位的值，但保留位（位1、位3、位5）不受影响  </p>
+<h3 id="带进位加减指令"><a href="#带进位加减指令" class="headerlink" title="带进位加减指令"></a>带进位加减指令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADC（add with carry）</td>
+<td>带进位加法指令</td>
+<td>ADC DEST,SRC</td>
+<td>DEST &lt;=DEST+SRC+CF</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>与add指令不同之处是要再加上进位标志cf的值<br>SBB(substraction with borrow)  |  带借位减法  |  SBB DEST,SRC  |<br>DEST&lt;=DEST-(SRC+CF)  |  与sub指令不同之处是要再减上借位标志cf的值  </p>
+<h2 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h2><h3 id="存储器分段"><a href="#存储器分段" class="headerlink" title="存储器分段"></a>存储器分段</h3><p>CPU能够通过其总线直接寻址访问的 <em>存储器</em> 被称为 <strong>内存</strong> ，每一个字节存储单元有一个唯一的地址，称之为 <strong>物理地址</strong> 。<br>CPU的地址线数量决定了可产生的最大物理地址， n根地址线，可形成的最大物理地址是  2  n  2^n  2  n<br>-1,所有可形成的物理地址的集合被称为物理地址空间.</p>
+<p>物理地址空间大小不等于实际安装的物理内存大小。</p>
+<p>为了有效地管理存储器，常常把地址空间划分为若干逻辑段， 对应存储空间被划分为若干存储段。逻辑段和存储段是一致的。<br>一般说来，运行着的程序在存储器中映像有三部分组成:</p>
+<ul>
+<li><p>代码，代码是要执行的指令序列； </p>
+</li>
+<li><p>数据，数据是要处理加工的内容； </p>
+</li>
+<li><p>堆栈，堆栈是按“先进后出”规则存取的区域。 </p>
+</li>
+</ul>
+<p>通常，代码、数据和堆栈分别占用不同的存储器段，相应的段也就被称为 <strong>代码段</strong> 、 <strong>数据段</strong> 和 <strong>堆栈段</strong> 。</p>
+<p>在分段之后，程序中使用的某个存储单元总是属于某个段。 所以，可以采用某某段某某单元的方式来表示存储单元。</p>
+<h3 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h3><p>在程序中用于表示存储单元的地址被称为 <strong>逻辑地址</strong> 。</p>
+<p>由于采用分段存储管理方式，程序中使用的逻辑地址是二维的，第一维给出某某段，第二维给出段内的某某单元。</p>
+<p>二维的逻辑地址: 段号∶偏移</p>
+<p>在实方式和保护方式下，都通过偏移指定段内的某某单元。在实方式下，段号是 <strong>段值</strong> ;在保护方式下，段号则是 <strong>段选择子</strong> 。</p>
+<p>逻辑地址转换为物理地址的过程为由段号得到段起始地址，再加上偏移。</p>
+<p>需要注意的是；</p>
+<ul>
+<li><p>保护方式下，物理地址是32位，段起始地址是32位，偏移是32位; </p>
+</li>
+<li><p>在实方式下，物理地址是20位，段起始地址是20位，偏移是16位。 </p>
+</li>
+</ul>
+<p>逻辑地址中的段号(段值或者段选择子)存放在哪里呢?<br>答案是，当前使用段的段号存放在段寄存器(Segment Registers)中。</p>
+<h3 id="段寄存器-1"><a href="#段寄存器-1" class="headerlink" title="段寄存器"></a>段寄存器</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>段寄存器名称</th>
+<th>中文名</th>
+<th>解释</th>
+<th>出现时期  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS（Code Segment）</td>
+<td>代码段寄存器</td>
+<td>当前代码段</td>
+<td>Intel 8060处理器  </td>
+</tr>
+<tr>
+<td>SS（Stack Segment）</td>
+<td>堆栈段寄存器</td>
+<td>当前堆栈段</td>
+<td>Intel 8060处理器  </td>
+</tr>
+<tr>
+<td>DS（Data Segment）</td>
+<td>数据段寄存器</td>
+<td>当前数据段</td>
+<td>Intel 8060处理器  </td>
+</tr>
+<tr>
+<td>ES（Extra Segment）</td>
+<td>附加段寄存器</td>
+<td>可用于指定数据段</td>
+<td>Intel 8060处理器  </td>
+</tr>
+<tr>
+<td>FS</td>
+<td>附加段寄存器</td>
+<td>可用于指定数据段</td>
+<td>80386开始  </td>
+</tr>
+<tr>
+<td>GS</td>
+<td>附加段寄存器</td>
+<td>可用于指定数据段</td>
+<td>80386开始  </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><p>表示指令中操作数所在的方法称为寻址方式，主要分为三大类：</p>
+<ul>
+<li>立即寻址 </li>
+<li>寄存器寻址 </li>
+<li>存储器寻址 </li>
+</ul>
+<p>此外还有固定寻址和I/O端口寻址等</p>
+<h3 id="立即寻址方式和寄存器寻址方式"><a href="#立即寻址方式和寄存器寻址方式" class="headerlink" title="立即寻址方式和寄存器寻址方式"></a>立即寻址方式和寄存器寻址方式</h3><h4 id="立即寻址方式"><a href="#立即寻址方式" class="headerlink" title="立即寻址方式"></a>立即寻址方式</h4><p>说白了当操作数是立即数的时候就是立即寻址方式，比如：</p>
+<p>​<br>    mov eax,12345678H</p>
+<p>所以：</p>
+<ul>
+<li>立即数作为指令的一部分，跟在操作码后面存放在代码段 </li>
+<li>如果立即数由多个字节构成，那么作为指令的一部分存储时，也采用“高高低低”规则 </li>
+<li>只有源操作数才可采用立即寻址方式， <strong>目的操作数不能采用立即寻址方式</strong></li>
+</ul>
+<h4 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h4><p>就是操作数在CPU内部的寄存器中，指令中指定寄存器，不需要通过访问存储器来取得操作数，所以采用寄存器寻址方式的指令执行速度较快。</p>
+<h3 id="32位的存储器寻址方式"><a href="#32位的存储器寻址方式" class="headerlink" title="32位的存储器寻址方式"></a>32位的存储器寻址方式</h3><p>当指令的操作数在存储单元时，指定存储单元就指定了操作数。</p>
+<p>为了灵活地访问存储器，IA-32系列CPU提供了多种表示存储单元偏移的方式，即有多种存储器寻址方式：</p>
+<ul>
+<li>直接寻址 </li>
+<li>寄存器间接 </li>
+<li>寄存器相对 </li>
+<li>基址加变址 </li>
+<li>通用 </li>
+</ul>
+<h4 id="直接寻址方式"><a href="#直接寻址方式" class="headerlink" title="直接寻址方式"></a>直接寻址方式</h4><p>操作数在存储器中，指令直接包含操作数所在存储单元的有效地址。</p>
+<p>​<br>    mov ecx,[95480H]</p>
+<h4 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h4><p>操作数在存储器中，由八个32位通用寄存器之一给出操作数所在存储单元的有效地址。</p>
+<p>寄存器间接寻址方式中，给出操作数所在存储单元有效地址的寄存器相当于c语言中的指针变量，它含有要访问存储单元的地址。</p>
+<p>​<br>    mov ecx,[esi]</p>
+<h4 id="32位寄存器寻址方式的通用表示"><a href="#32位寄存器寻址方式的通用表示" class="headerlink" title="32位寄存器寻址方式的通用表示"></a>32位寄存器寻址方式的通用表示</h4><p>存储单元的有效地址可以由三部分内容相加构成:</p>
+<ul>
+<li>一个32位的基地址寄存器 </li>
+<li>一个可乘上比例因子1、2、4或8的32位的变址寄存器 </li>
+<li>一个8位、16位或32位的位移量 </li>
+</ul>
+<p>这三部分可省去任意的两部分。</p>
+<p>​<br>    add dx ,[ecx+5328H]//寄存器相对寻址方式<br>    xchg [ebx,esi],dx//基址加变址寻址方式<br>    mov ebx,[edi+eax*4+300H]//基址加放大因子的变址寻址方式</p>
+<p>在某条具体的指令中，如果有存储器操作数，那么其尺寸是确定的。在大多数情况下，存储器操作数的尺寸是一 目了然的，因为通常要求一条指令中的多个操作数的尺寸<br>一致，所以指令中的寄存器操作数的尺寸就决定了存储器操作数的尺寸。 <strong>在少数情况下，需要显式地指定存储器操作数的尺寸。</strong></p>
+<p>​<br>    LEA EBX , bufi<br>    MOV DWORD PTR [EBX], 5 // 双字<br>    MOV WORD PTR [EBX+4], 5 //字<br>    MOV BYTE PTR [EBX+8], 5 //字节</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>如果 <strong>基址寄存器</strong> 不是 <strong>EBP</strong> 或者 <strong>ESP</strong> ，那么缺省引用的段寄存器是 <strong>DS</strong> ;</p>
+<p>如果 <strong>基址寄存器</strong> 是EBP或者ESP，那么缺省引 用的段寄存器是 <strong>SS</strong> 。</p>
+<p>当EBP作为 <strong>变址寄存器</strong> 使用( <strong>ESP不 能作为变址寄存器使用</strong> )时，缺省引用的段寄存器仍然是 <strong>DS</strong> 。</p>
+<p>无论存储器寻址方式简单或者复杂，如果由基址寄存器、 带比例因子的变址寄存器和位移量这三部分相加所得 <strong>超过 32位，那么有效地址仅为低32位</strong> 。</p>
+<h3 id="取有效地址指令"><a href="#取有效地址指令" class="headerlink" title="取有效地址指令"></a>取有效地址指令</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LEA（load effective address）</td>
+<td>取有效地址指令</td>
+<td>LEA REC,OPRD</td>
+<td></td>
+</tr>
+<tr>
+<td>把操作数oprd的有效地址传送到操作数rec，源操作数oprd必须是一个存储器操作数，目的操作数rec必须是一个16位或32位的通用寄存器</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>与mov指令的区别：mov：移动地址中的值lea：将地址进行移动  </p>
+<p>lea指令的妙用：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fx6k1ugd6nj31220hswlu.jpg" alt=""></p>
+<h2 id="指令寄存器和简单控制转移指令"><a href="#指令寄存器和简单控制转移指令" class="headerlink" title="指令寄存器和简单控制转移指令"></a>指令寄存器和简单控制转移指令</h2><h3 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h3><p>IA-32系列CPU有一个32位的指令指针寄存器EIP，由CS和EIP确定所取指令的存储单元地址。段寄存器CS给出当前代码段的段号，指令指针寄存器EIP给出偏移。</p>
+<p>实方式下，段的最大范围是64K，EIP中高16位必须是0，相当于只有低16位的IP起作用。</p>
+<p>CPU 执行代码(程序)就是一条接一条地执行机器指<br>令。可以把CPU执行指令的过程看作一条处理指令的流水线，其第一步是从存储器中取出指令。在取出一条指令后，会根据所取指令的长度，自动调整指令指针寄存器 E I<br>P 的值，使其指向下一条指令。这样，就实现了顺序执⾏指令。</p>
+<p>那么如果我们不想顺序执行指令，而想非自动顺序调整EIP的内容，这就是所谓的 <strong>转移</strong> 。</p>
+<p>衍生出的 <strong>控制转移指令</strong> 就是专门用于改变EIP内容的指令，主要包括：</p>
+<ul>
+<li>条件转移指令 </li>
+<li>无条件转移指令 </li>
+<li>循环指令 </li>
+<li>函数调用及返回指令 </li>
+<li>等 </li>
+</ul>
+<p>这些控制转移指令的实质就是根据不同的情形改变EIP的内容以实现转移。</p>
+<h3 id="常用条件转移指令"><a href="#常用条件转移指令" class="headerlink" title="常用条件转移指令"></a>常用条件转移指令</h3><h4 id="条件转移"><a href="#条件转移" class="headerlink" title="条件转移"></a>条件转移</h4><p>所谓条件转移指，当某一条件满足时，发生转移，否则继续顺序执行。换句话说，当某一条件满足时，就改变 EIP的内容，从而实施转移，否则顺序执行 。</p>
+<p>标志寄存器中的 <strong>状态标志</strong> 被用于表示条件。绝大部分条件转移指令 <strong>根据某个标志或者某几个标志</strong> 来判断条件是否满足。</p>
+<p>条件转移类似于高级语言的分支。</p>
+<h4 id="条件转移指令"><a href="#条件转移指令" class="headerlink" title="条件转移指令"></a>条件转移指令</h4><p>主要可以分为三类：</p>
+<ul>
+<li>根据一个标志判别 </li>
+<li>根据两个标志判别 </li>
+<li>根据三个标志判别 </li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令格式</th>
+<th>转移条件</th>
+<th>转移说明</th>
+<th>其他说明  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JZ 标号 JE 标号</td>
+<td>ZF=1 同上</td>
+<td>等于0转移(Jump if zero) 相等转移(Jump if equal)</td>
+<td>单个标志  </td>
+</tr>
+<tr>
+<td>JNZ 标号 JNE 标号</td>
+<td>ZF=0 同上</td>
+<td>不等于0转移(Jump if not zero) 不相等转移(Jump if not</td>
+</tr>
+<tr>
+<td>equal)</td>
+<td>单个标志  </td>
+</tr>
+<tr>
+<td>JB 标号 JNAE 标号 JC 标号</td>
+<td>CF=1 同上 同上</td>
+<td><code>低于转移 不高于等于转移 进位位被置转移</code></td>
+<td>单个标志 (无符号数)  </td>
+</tr>
+<tr>
+<td>JNBE 标号 JA 标号</td>
+<td>(CF或ZF)=0 同上</td>
+<td>不低于等于转移 高于转移</td>
+<td>两个标志 (无符号数)  </td>
+</tr>
+<tr>
+<td>JLE 标号 JNG 标号</td>
+<td>((SF异或OF)或ZF)=1 同上</td>
+<td>小于等于转移 不大于转移</td>
+<td>三个标志 (有符号数)  </td>
+</tr>
+<tr>
+<td>JNLE 标号 JG 标号</td>
+<td>((SF异或OF)或ZF)=1 同上</td>
+<td>不小于等于转移 大于转移</td>
+<td>三个符号（有符号数）  </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h4><p>条件转移指令本身不影响标志。</p>
+<p>条件转移指令在条件满足的情况下， <strong>只改变指令指针寄存器EIP</strong> 。也就是说，条件转移的转移目的地仅限于 <strong>同一个代码段内</strong><br>。这种不改变代码段寄存器CS，仅改变EIP的 转移被称为 <strong>段内转移</strong> 。</p>
+<p>条件转移指令可以实现向前方转移，也可以实现向后方 转移。</p>
+<h3 id="比较指令和数值大小比较"><a href="#比较指令和数值大小比较" class="headerlink" title="比较指令和数值大小比较"></a>比较指令和数值大小比较</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMP</td>
+<td>比较指令</td>
+<td>CMP DEST,SRC</td>
+<td>根据dest-src的差影响各状态标志寄存器</td>
+<td>不把dest-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>src的结果送入dest  </p>
+<p>比较指令是根据DEST-SRC的差影响标志寄存器的各状态标志（但不把结果送到DEST中）来判断两个数的大小关系的，判断的准则如下：</p>
+<ul>
+<li><p>根据零标志ZF是否置位，判断两者是否相等; </p>
+</li>
+<li><p>如果两者是无符号数，可根据进位标志CF判断大小; </p>
+</li>
+<li><p>如果两者是有符号数，要同时根据符号标志SF和溢出标志OF判断大小。 </p>
+</li>
+</ul>
+<p>为了方便进行数值大小比较，IA-32系列CPU提供两套以数值大小为条件的条件转移指令，一套适用于无符号数之间的比较，另一套适用于有符号数之间的比较：</p>
+<ul>
+<li><p>有符号数间的次序关系称为大于(G)、等于(E) 和小于（L）； </p>
+</li>
+<li><p>无符号数间的次序关系称为高于（A）、等于（E）和低于（B）； </p>
+</li>
+</ul>
+<h3 id="简单无条件转移指令"><a href="#简单无条件转移指令" class="headerlink" title="简单无条件转移指令"></a>简单无条件转移指令</h3><p>类似于高级语言中的goto语句，就是jmp语句：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JMP</td>
+<td>无条件段内直接转移指令</td>
+<td>JMP LABEL</td>
+<td>使控制无条件地转移到标号为label的位置</td>
+<td>无条件转移指令本身不影响标志  </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="堆栈和堆栈操作"><a href="#堆栈和堆栈操作" class="headerlink" title="堆栈和堆栈操作"></a>堆栈和堆栈操作</h2><p>所谓堆栈其实就是一段内存区域，只是对它的访问操作仅限于一端进行，地址较 <strong>小</strong> 的一端被称为 <strong>栈顶</strong> ，地址较 <strong>大</strong> 的一端被称为<br><strong>栈底</strong> 。</p>
+<p>堆栈段寄存器 <strong>SS</strong> 含有当前堆栈段的 <strong>段号</strong> ，SS指示堆栈所在内存区域的位置。 堆栈指针寄存器 <strong>ESP</strong><br>含有栈顶的偏移（有效地址），ESP指向 <strong>栈顶</strong> 。</p>
+<p>堆栈的主要用途：</p>
+<ul>
+<li>保护寄存器内容或者保护现场; </li>
+<li>保存返回地址; </li>
+<li>传递参数; </li>
+<li>安排局部变量或者临时变量。 </li>
+</ul>
+<h3 id="堆栈操作"><a href="#堆栈操作" class="headerlink" title="堆栈操作"></a>堆栈操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>中文名</th>
+<th>格式</th>
+<th>解释</th>
+<th>备注  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PUSH</td>
+<td>进栈指令</td>
+<td>PUSH SRC</td>
+<td>把源操作数src压入堆栈</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>源操作数src可以是32位通用寄存器、16位通用寄存器和段寄存器，也可以是双字存储单元或者字符存储单元，还可以是立即数<br>POP  |  出栈指令  |  POP DEST  |  从栈顶弹出一个双字或字数据到目的操作数  |<br>如果目的操作数是双字的，那么就从栈顶弹出一个双字数据，否则，从栈顶弹出一个字数据，出栈至少弹出一个字（16位）<br>PUSHA  |  16位通用寄存器全进栈指令  |  PUSHA  |  将所有8个16位通用寄存器的内容压入堆栈  |  压入顺序是AX CX DX<br>BX SP BP SI DI，然后对战指针寄存器SP的值减16，所以SP进栈的内容是PUSHA指令执行之前的值<br>POPA  |  16位通用寄存器全出栈指令  |  POPA  |  以PUSHA相反的顺序从堆栈中弹出内容，从而恢复PUSHA之前的寄存器状态  |<br>SP的值不是由堆栈弹出的，而是通过增加16来恢复<br>PUSHAD  |  32位通用寄存器全进栈指令  |  PUSHAD  |  将所有8个32位通用寄存器的内容压入堆栈  |  压入顺序是EAX ECX<br>EDX EBX ESP EBP ESI EDI，然后对战指针寄存器SP的值减32，所以SP进栈的内容是PUSHAD指令执行之前的值<br>POPAD  |  32位通用寄存器全出栈指令  |  POPAD  |  以PUSHAD相反的顺序从堆栈中弹出内容，从而恢复PUSHAD之前的寄存器状态<br>|  ESP的值不是由堆栈弹出的，而是通过增加32来恢复</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"><i class="fa fa-tag"></i>
+
+ 汇编</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/09/Normalizing rows with Python/" rel="next" title="Normalizing rows with Python">
+                <i class="fa fa-chevron-left"></i> Normalizing rows with Python
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/13/汇编总结（1）——基础知识/" rel="prev" title="汇编总结（1）——基础知识">
+                汇编总结（1）——基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">134</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IA-32处理器简介"><span class="nav-number">1.</span> <span class="nav-text">IA-32处理器简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IA-32系列处理器"><span class="nav-number">1.1.</span> <span class="nav-text">IA-32系列处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IA-32系列处理器指什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">IA-32系列处理器指什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理器的主要指标"><span class="nav-number">1.1.2.</span> <span class="nav-text">处理器的主要指标</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保护方式和实地址方式"><span class="nav-number">1.2.</span> <span class="nav-text">保护方式和实地址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#保护方式"><span class="nav-number">1.2.1.</span> <span class="nav-text">保护方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实地址方式（实方式）"><span class="nav-number">1.2.2.</span> <span class="nav-text">实地址方式（实方式）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用寄存器及使用"><span class="nav-number">2.</span> <span class="nav-text">通用寄存器及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单传送指令"><span class="nav-number">2.1.</span> <span class="nav-text">简单传送指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单加减指令"><span class="nav-number">2.2.</span> <span class="nav-text">简单加减指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标志寄存器及使用"><span class="nav-number">3.</span> <span class="nav-text">标志寄存器及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标志寄存器（FLAGS-register）"><span class="nav-number">3.1.</span> <span class="nav-text">标志寄存器（FLAGS register）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态标志"><span class="nav-number">3.2.</span> <span class="nav-text">状态标志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态标志操作指令"><span class="nav-number">3.3.</span> <span class="nav-text">状态标志操作指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带进位加减指令"><span class="nav-number">3.4.</span> <span class="nav-text">带进位加减指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#段寄存器"><span class="nav-number">4.</span> <span class="nav-text">段寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存储器分段"><span class="nav-number">4.1.</span> <span class="nav-text">存储器分段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑地址"><span class="nav-number">4.2.</span> <span class="nav-text">逻辑地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#段寄存器-1"><span class="nav-number">4.3.</span> <span class="nav-text">段寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻址方式"><span class="nav-number">5.</span> <span class="nav-text">寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#立即寻址方式和寄存器寻址方式"><span class="nav-number">5.1.</span> <span class="nav-text">立即寻址方式和寄存器寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#立即寻址方式"><span class="nav-number">5.1.1.</span> <span class="nav-text">立即寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寄存器寻址方式"><span class="nav-number">5.1.2.</span> <span class="nav-text">寄存器寻址方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32位的存储器寻址方式"><span class="nav-number">5.2.</span> <span class="nav-text">32位的存储器寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接寻址方式"><span class="nav-number">5.2.1.</span> <span class="nav-text">直接寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寄存器间接寻址"><span class="nav-number">5.2.2.</span> <span class="nav-text">寄存器间接寻址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32位寄存器寻址方式的通用表示"><span class="nav-number">5.2.3.</span> <span class="nav-text">32位寄存器寻址方式的通用表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">5.2.4.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取有效地址指令"><span class="nav-number">5.3.</span> <span class="nav-text">取有效地址指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令寄存器和简单控制转移指令"><span class="nav-number">6.</span> <span class="nav-text">指令寄存器和简单控制转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令指针寄存器"><span class="nav-number">6.1.</span> <span class="nav-text">指令指针寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用条件转移指令"><span class="nav-number">6.2.</span> <span class="nav-text">常用条件转移指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#条件转移"><span class="nav-number">6.2.1.</span> <span class="nav-text">条件转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件转移指令"><span class="nav-number">6.2.2.</span> <span class="nav-text">条件转移指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意-1"><span class="nav-number">6.2.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较指令和数值大小比较"><span class="nav-number">6.3.</span> <span class="nav-text">比较指令和数值大小比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单无条件转移指令"><span class="nav-number">6.4.</span> <span class="nav-text">简单无条件转移指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈和堆栈操作"><span class="nav-number">7.</span> <span class="nav-text">堆栈和堆栈操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#堆栈操作"><span class="nav-number">7.1.</span> <span class="nav-text">堆栈操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共211.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -313,7 +1853,131 @@
         onPopupClose();
       }
     });
-  </script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz","0aMQbm6Xk3vkvN16T1yCsmTh")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><script type="text/x-mathjax-config">
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -321,20 +1985,40 @@
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       });
-    </script><script type="text/x-mathjax-config">
+    </script>
+
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
-    </script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script><script type="text/x-mathjax-config">
+</script>
+
+<script type="text/x-mathjax-config">
   MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
       all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></body></html>
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
