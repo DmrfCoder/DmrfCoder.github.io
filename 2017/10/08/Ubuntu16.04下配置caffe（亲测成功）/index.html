@@ -1,62 +1,1112 @@
-<!DOCTYPE html><html class="theme-next gemini" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"e32cdd0f"}),daovoice("update")</script><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222"><meta name="keywords" content="ubuntu,caffe,"><meta name="description" content="前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感"><meta name="keywords" content="ubuntu,caffe"><meta property="og:type" content="article"><meta property="og:title" content="Ubuntu16.04下配置caffe（亲测成功）"><meta property="og:url" content="http://www.mashangxue123.com/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/index.html"><meta property="og:site_name" content="DmrfCoder&#39;s page"><meta property="og:description" content="前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy049w5fij30jy04hgmx.jpg"><meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04dlad7j30k403c3zi.jpg"><meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04gw7p1j30jz06z40i.jpg"><meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04k29c0j30jr04hwfs.jpg"><meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy059i6nxj30w70jzag3.jpg"><meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0659ynuj30d302jmxi.jpg"><meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxy06qcev2j30hu04rwfr.jpg"><meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0amgvklj30xc0iq772.jpg"><meta property="og:updated_time" content="2018-12-07T03:11:02.476Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Ubuntu16.04下配置caffe（亲测成功）"><meta name="twitter:description" content="前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感"><meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy049w5fij30jy04hgmx.jpg"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://www.mashangxue123.com/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/"><title>Ubuntu16.04下配置caffe（亲测成功） | DmrfCoder's page</title><script>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-130602831-1","auto"),ga("send","pageview")</script></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div> <a href="https://github.com/DmrfCoder"><img style="position:absolute;top:0;right:0;border:0" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">DmrfCoder's page</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> Archives</a></li><li class="menu-item menu-item-moments"><a href="/news/" rel="section"><i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i><br> Moments</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> Tags</a></li><li class="menu-item menu-item-about"><a href="/user/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> About me</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="DmrfCoder"><meta itemprop="description" content=""><meta itemprop="image" content="/images/photo.png"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="DmrfCoder's page"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Ubuntu16.04下配置caffe（亲测成功）</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T17:55:23+08:00">2017-10-08</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span></span> <span id="/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/" class="leancloud_visitors" data-flag-title="Ubuntu16.04下配置caffe（亲测成功）"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span><div class="post-wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">字数统计&#58;</span> <span title="字数统计">2.6k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">10</span></div></div></header><div class="post-body" itemprop="articleBody"><h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感谢，好了，废话不多说，进入正文！</p><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p><strong>1：安装开发所需依赖包</strong><br><strong>2：下载安装CUDA8.0并验证是否安装成功</strong><br><strong>3: 下载安装cudnn并验证是否安装成功</strong><br><strong>4：下载安装opencv并验证是否安装成功</strong><br><strong>5：安装编译caffe</strong></p><p><strong>特别说明：</strong><br>1:本教程版本搭配为：Ubuntu16.04+CUDA8.0+Opencv3.1.0，建议初学者尽量按照本教程的搭配进行配置，防止出现版本不搭造成的错误，这一点笔者真是深有体会，当然鼓励大家尝试新版本，如果有成功的同仁麻烦告诉我你的搭配，笔者不胜感激。<br>2:建议大家在输入所有命令之前加上sudo，防止出现“权限不够”这类情况，笔者为了节省时间在教程里面有的需要加sudo的地方没有加，大家可不要偷懒～～<br>3：本文参考blog：<a href="http://blog.csdn.net/yhaolpz，感谢大神博主的教程" target="_blank" rel="noopener">http://blog.csdn.net/yhaolpz，感谢大神博主的教程</a></p><h2 id="安装开发所需依赖包"><a href="#安装开发所需依赖包" class="headerlink" title="安装开发所需依赖包"></a>安装开发所需依赖包</h2><p>命令行直接复制粘贴进以下命令即可：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install --no-install-recommends libboost-all-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler</span><br><span class="line"></span><br><span class="line">sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install git cmake build-essential</span><br></pre></td></tr></table></figure><p>因为有一定的几率安装失败，而如果刚好某个依赖安装失败导致后期出现莫名的错误那你可就欲哭无泪了，安装完成之后建议大家验证一下是否安装成功，验证方法是再在终端输入一遍sudo<br>apt-get install ..的命令，如图：</p><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy049w5fij30jy04hgmx.jpg" alt="1"></p><p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04dlad7j30k403c3zi.jpg" alt="2"></p><p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04gw7p1j30jz06z40i.jpg" alt="3"></p><p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04k29c0j30jr04hwfs.jpg" alt="4"></p><h2 id="下载安装CUDA8-0并验证是否安装成功"><a href="#下载安装CUDA8-0并验证是否安装成功" class="headerlink" title="下载安装CUDA8.0并验证是否安装成功"></a>下载安装CUDA8.0并验证是否安装成功</h2><h3 id="下载安装CUDA8-0"><a href="#下载安装CUDA8-0" class="headerlink" title="下载安装CUDA8.0"></a>下载安装CUDA8.0</h3><p>NVIDIA官网提供两种方式来安装CUDA，即run安装和deb安装，这里不建议初学者使用run安装，因为run安装对Linix版本和Linix kernel版本以及GCC版本都有严格要求，稍有不符，可能就会导致失败，所以这里为大家介绍deb方式安装：</p><p>首先下载CUDA8.0的deb包（可去官网下，也可至笔者的网盘下载，网盘链接见文末），下载好之后依次键入以下命令：</p><pre><code>    sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ubuntu,caffe,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感">
+<meta name="keywords" content="ubuntu,caffe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16.04下配置caffe（亲测成功）">
+<meta property="og:url" content="http://www.mashangxue123.com/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/index.html">
+<meta property="og:site_name" content="DmrfCoder&#39;s page">
+<meta property="og:description" content="前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy049w5fij30jy04hgmx.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04dlad7j30k403c3zi.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04gw7p1j30jz06z40i.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04k29c0j30jr04hwfs.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy059i6nxj30w70jzag3.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0659ynuj30d302jmxi.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxy06qcev2j30hu04rwfr.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0amgvklj30xc0iq772.jpg">
+<meta property="og:updated_time" content="2018-12-07T03:11:02.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu16.04下配置caffe（亲测成功）">
+<meta name="twitter:description" content="前言：历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy049w5fij30jy04hgmx.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/">
+
+
+
+
+
+  <title>Ubuntu16.04下配置caffe（亲测成功） | DmrfCoder's page</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://github.com/DmrfCoder">
+		<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+	</a>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DmrfCoder's page</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DmrfCoder's page">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu16.04下配置caffe（亲测成功）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T17:55:23+08:00">
+                2017-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/08/Ubuntu16.04下配置caffe（亲测成功）/" class="leancloud_visitors" data-flag-title="Ubuntu16.04下配置caffe（亲测成功）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>历经一个国庆的折腾，终于成功在Ubuntu下搭建好了caffe，过程中遇到的坑真的是数不胜数，最大的一次坑是本来已经配置好了结果手残命令行一阵不知名命令之后电脑崩溃又得重装系统，结果装好系统再配置的时候出现了比第一次更多的坑，真是说多了都是泪，为了让大家避免我遇到的坑，特写此文章，希望能帮助到有的同学，同时说明本人目前是大二本科生，能力有限，文章中如有不正确的地方希望大家积极指出，本人不胜感谢，好了，废话不多说，进入正文！</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p><strong>1：安装开发所需依赖包</strong><br><strong>2：下载安装CUDA8.0并验证是否安装成功</strong><br><strong>3: 下载安装cudnn并验证是否安装成功</strong><br><strong>4：下载安装opencv并验证是否安装成功</strong><br><strong>5：安装编译caffe</strong></p>
+<p><strong>特别说明：</strong><br>1:本教程版本搭配为：Ubuntu16.04+CUDA8.0+Opencv3.1.0，建议初学者尽量按照本教程的搭配进行配置，防止出现版本不搭造成的错误，这一点笔者真是深有体会，当然鼓励大家尝试新版本，如果有成功的同仁麻烦告诉我你的搭配，笔者不胜感激。<br>2:建议大家在输入所有命令之前加上sudo，防止出现“权限不够”这类情况，笔者为了节省时间在教程里面有的需要加sudo的地方没有加，大家可不要偷懒～～<br>3：本文参考blog：<a href="http://blog.csdn.net/yhaolpz，感谢大神博主的教程" target="_blank" rel="noopener">http://blog.csdn.net/yhaolpz，感谢大神博主的教程</a></p>
+<h2 id="安装开发所需依赖包"><a href="#安装开发所需依赖包" class="headerlink" title="安装开发所需依赖包"></a>安装开发所需依赖包</h2><p>命令行直接复制粘贴进以下命令即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install --no-install-recommends libboost-all-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler</span><br><span class="line"></span><br><span class="line">sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install git cmake build-essential</span><br></pre></td></tr></table></figure>
+<p>因为有一定的几率安装失败，而如果刚好某个依赖安装失败导致后期出现莫名的错误那你可就欲哭无泪了，安装完成之后建议大家验证一下是否安装成功，验证方法是再在终端输入一遍sudo<br>apt-get install ..的命令，如图：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy049w5fij30jy04hgmx.jpg" alt="1"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04dlad7j30k403c3zi.jpg" alt="2"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04gw7p1j30jz06z40i.jpg" alt="3"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy04k29c0j30jr04hwfs.jpg" alt="4"></p>
+<h2 id="下载安装CUDA8-0并验证是否安装成功"><a href="#下载安装CUDA8-0并验证是否安装成功" class="headerlink" title="下载安装CUDA8.0并验证是否安装成功"></a>下载安装CUDA8.0并验证是否安装成功</h2><h3 id="下载安装CUDA8-0"><a href="#下载安装CUDA8-0" class="headerlink" title="下载安装CUDA8.0"></a>下载安装CUDA8.0</h3><p>NVIDIA官网提供两种方式来安装CUDA，即run安装和deb安装，这里不建议初学者使用run安装，因为run安装对Linix版本和Linix kernel版本以及GCC版本都有严格要求，稍有不符，可能就会导致失败，所以这里为大家介绍deb方式安装：</p>
+<p>首先下载CUDA8.0的deb包（可去官网下，也可至笔者的网盘下载，网盘链接见文末），下载好之后依次键入以下命令：  </p>
+<pre><code>    sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
     sudo apt-get update
     sudo apt-get install cuda
-</code></pre><h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><p>命令：</p><pre><code>sudo gedit /etc/profile
-</code></pre><p>在文件最后加上</p><pre><code>     PATH=/usr/local/cuda/bin:$PATH 
+</code></pre><h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><p>命令：</p>
+<pre><code>sudo gedit /etc/profile
+</code></pre><p>在文件最后加上    </p>
+<pre><code>     PATH=/usr/local/cuda/bin:$PATH 
      export PATH
      LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64 
      export LD_ LIBRARY_PATH    
-</code></pre><p>使用以下命令使其生效：</p><pre><code>source /etc/profile
-</code></pre><p>安装完成以后一定要 <strong>重启电脑</strong> 使其生效。</p><h3 id="验证CUDA8-0是否安装成功"><a href="#验证CUDA8-0是否安装成功" class="headerlink" title="验证CUDA8.0是否安装成功"></a>验证CUDA8.0是否安装成功</h3><p>重启电脑之后请读者可依次键入以下命令验证CUDA8.0是否安装成功：</p><p>​<br> cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery<br> sudo make<br> ./deviceQuery</p><p>如果看到类似以下信息就说明CUDA安装成功：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy059i6nxj30w70jzag3.jpg" alt="5"></p><h2 id="下载安装cudnn并验证是否安装成功"><a href="#下载安装cudnn并验证是否安装成功" class="headerlink" title="下载安装cudnn并验证是否安装成功"></a>下载安装cudnn并验证是否安装成功</h2><h3 id="下载安装cudnn"><a href="#下载安装cudnn" class="headerlink" title="下载安装cudnn"></a>下载安装cudnn</h3><p>读者可以登录官网： <a href="https://developer.nvidia.com/rdp/cudnn-download，注册后下载cudnn，笔者这里上传了我用的cudnn，下载链接见文末。" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download，注册后下载cudnn，笔者这里上传了我用的cudnn，下载链接见文末。</a></p><p>下载完成后解压，得到一个 cuda 文件夹，该文件夹下include 和 lib64 两个文件夹，命令行进入 cudn/include路径下，然后进行以下操作：</p><pre><code>sudo cp cudnn.h /usr/local/cuda/include/  #复制头文件
-</code></pre><p>然后命令行进入 cudn/lib64路径下，运行以下命令（注意：下面命令的..so.5.1.10和..so.5视个人的情况而定，如果你没有使用CUDN8.0以及其对应的cudnn版本，..so.后面的数字不一定与下面相同，读者可直接到你的文件目录下模糊查找对应的so版本）：</p><pre><code>sudo cp lib* /usr/local/cuda/lib64/ #复制动态链接库
+</code></pre><p>使用以下命令使其生效：    </p>
+<pre><code>source /etc/profile
+</code></pre><p>安装完成以后一定要 <strong>重启电脑</strong> 使其生效。</p>
+<h3 id="验证CUDA8-0是否安装成功"><a href="#验证CUDA8-0是否安装成功" class="headerlink" title="验证CUDA8.0是否安装成功"></a>验证CUDA8.0是否安装成功</h3><p>重启电脑之后请读者可依次键入以下命令验证CUDA8.0是否安装成功：</p>
+<p>​<br>        cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery<br>        sudo make<br>        ./deviceQuery</p>
+<p>如果看到类似以下信息就说明CUDA安装成功：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy059i6nxj30w70jzag3.jpg" alt="5"></p>
+<h2 id="下载安装cudnn并验证是否安装成功"><a href="#下载安装cudnn并验证是否安装成功" class="headerlink" title="下载安装cudnn并验证是否安装成功"></a>下载安装cudnn并验证是否安装成功</h2><h3 id="下载安装cudnn"><a href="#下载安装cudnn" class="headerlink" title="下载安装cudnn"></a>下载安装cudnn</h3><p>读者可以登录官网： <a href="https://developer.nvidia.com/rdp/cudnn-download，注册后下载cudnn，笔者这里上传了我用的cudnn，下载链接见文末。" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download，注册后下载cudnn，笔者这里上传了我用的cudnn，下载链接见文末。</a></p>
+<p>下载完成后解压，得到一个 cuda 文件夹，该文件夹下include 和 lib64 两个文件夹，命令行进入 cudn/include路径下，然后进行以下操作：</p>
+<pre><code>sudo cp cudnn.h /usr/local/cuda/include/  #复制头文件
+</code></pre><p>然后命令行进入 cudn/lib64路径下，运行以下命令（注意：下面命令的..so.5.1.10和..so.5视个人的情况而定，如果你没有使用CUDN8.0以及其对应的cudnn版本，..so.后面的数字不一定与下面相同，读者可直接到你的文件目录下模糊查找对应的so版本）：</p>
+<pre><code>sudo cp lib* /usr/local/cuda/lib64/ #复制动态链接库
 cd /usr/local/cuda/lib64/
 sudo rm -rf libcudnn.so libcudnn.so.5 #删除原有动态文件
 sudo ln -s libcudnn.so.5.1.10 libcudnn.so.5 #生成软衔接
 sudo ln -s libcudnn.so.5 libcudnn.so #生成软链接
-</code></pre><h3 id="验证cudnn是否安装成功"><a href="#验证cudnn是否安装成功" class="headerlink" title="验证cudnn是否安装成功"></a>验证cudnn是否安装成功</h3><p>键入以下命令：</p><pre><code>nvcc -V
-</code></pre><p>如果出现类似以下内容则说明安装成功：</p><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0659ynuj30d302jmxi.jpg" alt="6"></p><h2 id="下载安装opencv并验证是否安装成功"><a href="#下载安装opencv并验证是否安装成功" class="headerlink" title="下载安装opencv并验证是否安装成功"></a>下载安装opencv并验证是否安装成功</h2><h3 id="下载安装opencv"><a href="#下载安装opencv" class="headerlink" title="下载安装opencv"></a>下载安装opencv</h3><p>读者可进入官网 : [<a href="http://opencv.org/releases.html" target="_blank" rel="noopener">http://opencv.org/releases.html</a> , 选择 3.1.0 版本的 source , 下载 opencv-3.1.0.zip，也可至笔者的网盘下载，下载链接见文末，下载后解压至你想安装的目录，命令行进入已解压的文件夹 opencv-3.1.0 目录下，执行以下命令：</p><pre><code>mkdir build # 创建编译的文件目录
+</code></pre><h3 id="验证cudnn是否安装成功"><a href="#验证cudnn是否安装成功" class="headerlink" title="验证cudnn是否安装成功"></a>验证cudnn是否安装成功</h3><p>键入以下命令：    </p>
+<pre><code>nvcc -V
+</code></pre><p>如果出现类似以下内容则说明安装成功：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0659ynuj30d302jmxi.jpg" alt="6"></p>
+<h2 id="下载安装opencv并验证是否安装成功"><a href="#下载安装opencv并验证是否安装成功" class="headerlink" title="下载安装opencv并验证是否安装成功"></a>下载安装opencv并验证是否安装成功</h2><h3 id="下载安装opencv"><a href="#下载安装opencv" class="headerlink" title="下载安装opencv"></a>下载安装opencv</h3><p>读者可进入官网 : [<a href="http://opencv.org/releases.html" target="_blank" rel="noopener">http://opencv.org/releases.html</a> , 选择 3.1.0 版本的 source , 下载 opencv-3.1.0.zip，也可至笔者的网盘下载，下载链接见文末，下载后解压至你想安装的目录，命令行进入已解压的文件夹 opencv-3.1.0 目录下，执行以下命令：</p>
+<pre><code>mkdir build # 创建编译的文件目录
 cd build
 cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
 make -j8  #编译
-</code></pre><p>这里需要注意的是，在执行cmake…的时候会下载一个压缩包，下载的地址是被墙掉的，可能大家有的人给自己的chrome搭了梯子，但是因为是通过终端下载的，所以就算你的chrome可以上外网也不一定下的来（因为你的终端不一定可以翻过去），这就导致会报类似如下的错误：</p><p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxy06qcev2j30hu04rwfr.jpg" alt="7"><br>解决方法是读者去网上自行找下好的包然后导入，但是网上大多都是要积分才能下载的，这里笔者上传我的包（其实我也是花积分下载的）免费给大家，也算是为人民服务哈哈，下载链接同样见文末，下载后直接把下载的压缩包放入<br><strong>你的opencv目录/opencv-3.1.0/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e</strong><br>下，然后再次执行cmake…就可以正常了。<br>编译成功后进行安装：</p><pre><code>sudo make install 
-</code></pre><p>PS：<br>1:make 的时候可能会报错：</p><pre><code>CMake Error at cuda_compile_generated_matrix_operations.cu.o.cmake :206 (message):
+</code></pre><p>这里需要注意的是，在执行cmake…的时候会下载一个压缩包，下载的地址是被墙掉的，可能大家有的人给自己的chrome搭了梯子，但是因为是通过终端下载的，所以就算你的chrome可以上外网也不一定下的来（因为你的终端不一定可以翻过去），这就导致会报类似如下的错误：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxy06qcev2j30hu04rwfr.jpg" alt="7"><br>解决方法是读者去网上自行找下好的包然后导入，但是网上大多都是要积分才能下载的，这里笔者上传我的包（其实我也是花积分下载的）免费给大家，也算是为人民服务哈哈，下载链接同样见文末，下载后直接把下载的压缩包放入<br><strong>你的opencv目录/opencv-3.1.0/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e</strong><br>下，然后再次执行cmake…就可以正常了。<br>编译成功后进行安装：</p>
+<pre><code>sudo make install 
+</code></pre><p>PS：<br>1:make 的时候可能会报错：    </p>
+<pre><code>CMake Error at cuda_compile_generated_matrix_operations.cu.o.cmake :206 (message):
 Error generating
 /home/yy/opencv-2.4.9/build/modules/core/CMakeFiles/cuda_compile.dir/__/dynamicuda/src/cuda/./cuda_compile_generated_matrix_operations.cu.o
 make[2]: *** [modules/core/CMakeFiles/cuda_compile.dir/__/dynamicuda/src/cuda/./cuda_compile_generated_matrix_operations.cu.o] 错误 1
 make[1]: *** [modules/core/CMakeFiles/opencv_core.dir/all] 错误 2
 make: *** [all] 错误 2
-</code></pre><p>解决方案</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cmake -D CMAKE_BUILD_TYPE=bulid -D CMAKE_INSTALL_PREFIX=/usr/local -D</span><br><span class="line">CUDA_GENERATION=Kepler ..</span><br></pre></td></tr></table></figure><p>然后再make。</p><p>sudo make时，也可能出现</p><pre><code> make[2]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/src/graphcuts.cpp.o] Error 1
+</code></pre><p>解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cmake -D CMAKE_BUILD_TYPE=bulid -D CMAKE_INSTALL_PREFIX=/usr/local -D</span><br><span class="line">CUDA_GENERATION=Kepler ..</span><br></pre></td></tr></table></figure>
+<p>然后再make。</p>
+<p>sudo make时，也可能出现   </p>
+<pre><code> make[2]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/src/graphcuts.cpp.o] Error 1
         make[1]: *** [modules/cudalegacy/CMakeFiles/opencv_cudalegacy.dir/all] Error 2
         make: *** [all] Error 2
-</code></pre><p>的错误。<br>那是因为 cuda-8.0与OpenCV 3.1.0发生了冲突。解决方法：修改openCV 3.1.0源码，使其兼容cuda-8.0,可做如下操作：</p><pre><code>sudo gedit opencv-3.1.0/modules/cudalegacy/src/graphcuts.cpp
-</code></pre><p>将第四十五行位置的</p><p>​</p><pre><code>#if !defined (HAVE_CUDA) || defined (CUDA_DISABLER)
-</code></pre><p>改为</p><p>​</p><pre><code> #if !defined(HAVE_CUDA)||defined(CUDA_DISABLER)||(CUDART_VERSION&gt;=8000)
-</code></pre><p>然后重新执行make.</p><h3 id="验证opencv安装是否成功"><a href="#验证opencv安装是否成功" class="headerlink" title="验证opencv安装是否成功"></a>验证opencv安装是否成功</h3><p>在终端输入以下命令：</p><pre><code>pkg-config --modversion opencv  
-</code></pre><p>如果正常输出opencv版本则说明opencv安装成功。</p><h2 id="下载配置编译caffe"><a href="#下载配置编译caffe" class="headerlink" title="下载配置编译caffe"></a>下载配置编译caffe</h2><h3 id="下载caffe"><a href="#下载caffe" class="headerlink" title="下载caffe"></a>下载caffe</h3><p>首先在你要安装的路径下 clone ：</p><pre><code>git clone https://github.com/BVLC/caffe.git
-</code></pre><h3 id="配置caffe（这部分引自大神的blog）"><a href="#配置caffe（这部分引自大神的blog）" class="headerlink" title="配置caffe（这部分引自大神的blog）"></a>配置caffe（这部分引自大神的blog）</h3><p>进入 caffe ，将 Makefile.config.example 文件复制一份并更名为 Makefile.config ：</p><pre><code>sudo cp Makefile.config.example Makefile.config
-</code></pre><p>然后修改 Makefile.config 文件，在 caffe 目录下打开该文件：</p><pre><code>sudo gedit Makefile.config
-</code></pre><p>修改 Makefile.config 文件内容：</p><p>将</p><h1 id="USE-CUDNN-1"><a href="#USE-CUDNN-1" class="headerlink" title="USE_CUDNN := 1"></a>USE_CUDNN := 1</h1><p>修改成：<br>USE_CUDNN := 1</p><p>将</p><h1 id="OPENCV-VERSION-3"><a href="#OPENCV-VERSION-3" class="headerlink" title="OPENCV_VERSION := 3"></a>OPENCV_VERSION := 3</h1><p>修改为：<br>OPENCV_VERSION := 3</p><p>将</p><h1 id="WITH-PYTHON-LAYER-1"><a href="#WITH-PYTHON-LAYER-1" class="headerlink" title="WITH_PYTHON_LAYER := 1"></a>WITH_PYTHON_LAYER := 1</h1><p>修改为<br>WITH_PYTHON_LAYER := 1</p><p>将</p><pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+</code></pre><p>的错误。<br>那是因为 cuda-8.0与OpenCV 3.1.0发生了冲突。解决方法：修改openCV 3.1.0源码，使其兼容cuda-8.0,可做如下操作：</p>
+<pre><code>sudo gedit opencv-3.1.0/modules/cudalegacy/src/graphcuts.cpp
+</code></pre><p>将第四十五行位置的</p>
+<p>​    </p>
+<pre><code>#if !defined (HAVE_CUDA) || defined (CUDA_DISABLER)
+</code></pre><p>改为</p>
+<p>​    </p>
+<pre><code> #if !defined(HAVE_CUDA)||defined(CUDA_DISABLER)||(CUDART_VERSION&gt;=8000)
+</code></pre><p>然后重新执行make.</p>
+<h3 id="验证opencv安装是否成功"><a href="#验证opencv安装是否成功" class="headerlink" title="验证opencv安装是否成功"></a>验证opencv安装是否成功</h3><p>在终端输入以下命令：    </p>
+<pre><code>pkg-config --modversion opencv  
+</code></pre><p>如果正常输出opencv版本则说明opencv安装成功。</p>
+<h2 id="下载配置编译caffe"><a href="#下载配置编译caffe" class="headerlink" title="下载配置编译caffe"></a>下载配置编译caffe</h2><h3 id="下载caffe"><a href="#下载caffe" class="headerlink" title="下载caffe"></a>下载caffe</h3><p>首先在你要安装的路径下 clone ：  </p>
+<pre><code>git clone https://github.com/BVLC/caffe.git
+</code></pre><h3 id="配置caffe（这部分引自大神的blog）"><a href="#配置caffe（这部分引自大神的blog）" class="headerlink" title="配置caffe（这部分引自大神的blog）"></a>配置caffe（这部分引自大神的blog）</h3><p>进入 caffe ，将 Makefile.config.example 文件复制一份并更名为 Makefile.config ：    </p>
+<pre><code>sudo cp Makefile.config.example Makefile.config
+</code></pre><p>然后修改 Makefile.config 文件，在 caffe 目录下打开该文件：    </p>
+<pre><code>sudo gedit Makefile.config
+</code></pre><p>修改 Makefile.config 文件内容：</p>
+<p>将  </p>
+<h1 id="USE-CUDNN-1"><a href="#USE-CUDNN-1" class="headerlink" title="USE_CUDNN := 1"></a>USE_CUDNN := 1</h1><p>修改成：<br>USE_CUDNN := 1</p>
+<p>将  </p>
+<h1 id="OPENCV-VERSION-3"><a href="#OPENCV-VERSION-3" class="headerlink" title="OPENCV_VERSION := 3"></a>OPENCV_VERSION := 3</h1><p>修改为：<br>OPENCV_VERSION := 3</p>
+<p>将  </p>
+<h1 id="WITH-PYTHON-LAYER-1"><a href="#WITH-PYTHON-LAYER-1" class="headerlink" title="WITH_PYTHON_LAYER := 1"></a>WITH_PYTHON_LAYER := 1</h1><p>修改为<br>WITH_PYTHON_LAYER := 1</p>
+<p>将  </p>
+<pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib 
-</code></pre><p> 修改为：<br> INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</p><pre><code>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
-</code></pre><p>然后修改 caffe 目录下的 Makefile 文件：<br>将：</p><pre><code>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)
-</code></pre><p>替换为：</p><pre><code>NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
-</code></pre><p>将：</p><pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5
-</code></pre><p>改为：</p><pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
-</code></pre><p>然后修改 /usr/local/cuda/include/host_config.h 文件 :</p><p>将</p><pre><code>`#error-- unsupported GNU version! gcc versions later than 4.9 are not` supported!
-</code></pre><p>改为</p><pre><code>    //#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
-</code></pre><h3 id="编译caffe"><a href="#编译caffe" class="headerlink" title="编译caffe"></a>编译caffe</h3><p>键入以下命令：</p><pre><code>make all -j8
-</code></pre><p>这里的-j后面的参数试你电脑的配置决定<br>PS:后期有几位小伙伴按照上面的配置之后在make这里报错，贴出几个常见的报错信息及解决方案：<br>1：</p><pre><code>error while loading shared libraries: libopencv_core.so.2.2: cannot open shared object file: No such file or directory
-</code></pre><p>注：每个人的libopencv_core.so后面的数字不一样，但是大概是这个么个报错<br>解决方案1：这个错误可能是因为你没有装ffmpeg，输入</p><pre><code>sudo apt-get install ffmpeg
-</code></pre><p>安装，安装成功之后再执行make即可。<br>解决方案2：如果使用解决方案1无效，则：<br>在/usr/local/lib下搜索报错信息中的.so文件（比如示例报错信息就是搜索libopencv_core.so.2.2），如果找到该共享库的话，那么在/etc/ld.so.conf.d/xxxx.conf<br>注意（xxxx.conf）是你自己命名的。比如我缺少opencv库 那么我就写<br>opencv.conf。接下来，就在xxxx.conf文件中写path路径，比如说共享库在/usr/local/opencv/libopencv_core.so.2.4中的话，你就写<br>/usr/local/opencv/<br>最后 sudo ldconfig -v 如果有共享库输出的话，就证明成功了。<br>2：fatal error: hdf5.h<br>解决方案：<br>在Makefile.config文件中把下面第一行代码改为第二行代码：</p><pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+</code></pre><p> 修改为：<br>    INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</p>
+<pre><code>LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
+</code></pre><p>然后修改 caffe 目录下的 Makefile 文件：<br>将：</p>
+<pre><code>NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)
+</code></pre><p>替换为：    </p>
+<pre><code>NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
+</code></pre><p>将：    </p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5
+</code></pre><p>改为：    </p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
+</code></pre><p>然后修改 /usr/local/cuda/include/host_config.h 文件 :</p>
+<p>将    </p>
+<pre><code>`#error-- unsupported GNU version! gcc versions later than 4.9 are not` supported!
+</code></pre><p>改为    </p>
+<pre><code>    //#error-- unsupported GNU version! gcc versions later than 4.9 are not supported!
+</code></pre><h3 id="编译caffe"><a href="#编译caffe" class="headerlink" title="编译caffe"></a>编译caffe</h3><p>键入以下命令：    </p>
+<pre><code>make all -j8
+</code></pre><p>这里的-j后面的参数试你电脑的配置决定<br>PS:后期有几位小伙伴按照上面的配置之后在make这里报错，贴出几个常见的报错信息及解决方案：<br>1：  </p>
+<pre><code>error while loading shared libraries: libopencv_core.so.2.2: cannot open shared object file: No such file or directory
+</code></pre><p>注：每个人的libopencv_core.so后面的数字不一样，但是大概是这个么个报错<br>解决方案1：这个错误可能是因为你没有装ffmpeg，输入</p>
+<pre><code>sudo apt-get install ffmpeg
+</code></pre><p>安装，安装成功之后再执行make即可。<br>解决方案2：如果使用解决方案1无效，则：<br>在/usr/local/lib下搜索报错信息中的.so文件（比如示例报错信息就是搜索libopencv_core.so.2.2），如果找到该共享库的话，那么在/etc/ld.so.conf.d/xxxx.conf<br>注意（xxxx.conf）是你自己命名的。比如我缺少opencv库 那么我就写<br>opencv.conf。接下来，就在xxxx.conf文件中写path路径，比如说共享库在/usr/local/opencv/libopencv_core.so.2.4中的话，你就写<br>/usr/local/opencv/<br>最后 sudo ldconfig -v 如果有共享库输出的话，就证明成功了。<br>2：fatal error: hdf5.h<br>解决方案：<br>在Makefile.config文件中把下面第一行代码改为第二行代码：    </p>
+<pre><code>INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 1
 INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
 1
-</code></pre><p>在Makefile文件中把下面第一行代码改为第二行代码。</p><pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5
+</code></pre><p>在Makefile文件中把下面第一行代码改为第二行代码。    </p>
+<pre><code>LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5
 1
 LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial
 1
-</code></pre><h3 id="测试caffe"><a href="#测试caffe" class="headerlink" title="测试caffe"></a>测试caffe</h3><p>键入以下命令：</p><pre><code>make runtest -j8
-</code></pre><p>PS:这里可能会出现如下错误：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error while loading shared libraries: libcudart.so.8.0: cannot open shared</span><br><span class="line">object file: No such file or directory</span><br></pre></td></tr></table></figure><p>解决方案：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig /usr/local/cuda/lib64</span><br></pre></td></tr></table></figure><p>如果出现类似如下信息则说明caffe配置成功：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0amgvklj30xc0iq772.jpg" alt="8"></p><p><strong>至此我们就完成caffe的配置工作了，希望大家可以积极指出本文的不足之处便于笔者改正，不胜感激，最后给出本文的所有资源大礼包，下载链接:<a href="https://pan.baidu.com/s/1pKU5hrX" target="_blank" rel="noopener"><br>https://pan.baidu.com/s/1pKU5hrX</a> 密码: xk5x</strong></p></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i> ubuntu</a><a href="/tags/caffe/" rel="tag"><i class="fa fa-tag"></i> caffe</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2017/05/14/My-first-hackthon/" rel="next" title="My first hackthon"><i class="fa fa-chevron-left"></i> My first hackthon</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2017/10/30/Ubuntu16.04下配置NDK的方法/" rel="prev" title="Ubuntu16.04下配置Android NDK的方法">Ubuntu16.04下配置Android NDK的方法<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"><script>window._bd_share_config={common:{bdText:"",bdMini:"1",bdMiniList:!1,bdPic:""},image:{viewList:["tsina","douban","sqq","qzone","weixin","twi","fbook"],viewText:"分享到：",viewSize:"16"},slide:{bdImg:"5",bdPos:"left",bdTop:"100"}}</script><script>with(document)(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="//bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)</script></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder"><p class="site-author-name" itemprop="name">DmrfCoder</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">134</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">12</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">75</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/DmrfCoder" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i> CSDN</a></span><span class="links-of-author-item"><a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i> Google</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装开发所需依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装开发所需依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装CUDA8-0并验证是否安装成功"><span class="nav-number">4.</span> <span class="nav-text">下载安装CUDA8.0并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装CUDA8-0"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装CUDA8.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境变量"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证CUDA8-0是否安装成功"><span class="nav-number">4.2.</span> <span class="nav-text">验证CUDA8.0是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装cudnn并验证是否安装成功"><span class="nav-number">5.</span> <span class="nav-text">下载安装cudnn并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装cudnn"><span class="nav-number">5.1.</span> <span class="nav-text">下载安装cudnn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证cudnn是否安装成功"><span class="nav-number">5.2.</span> <span class="nav-text">验证cudnn是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装opencv并验证是否安装成功"><span class="nav-number">6.</span> <span class="nav-text">下载安装opencv并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装opencv"><span class="nav-number">6.1.</span> <span class="nav-text">下载安装opencv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证opencv安装是否成功"><span class="nav-number">6.2.</span> <span class="nav-text">验证opencv安装是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载配置编译caffe"><span class="nav-number">7.</span> <span class="nav-text">下载配置编译caffe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载caffe"><span class="nav-number">7.1.</span> <span class="nav-text">下载caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置caffe（这部分引自大神的blog）"><span class="nav-number">7.2.</span> <span class="nav-text">配置caffe（这部分引自大神的blog）</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#USE-CUDNN-1"><span class="nav-number"></span> <span class="nav-text">USE_CUDNN := 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OPENCV-VERSION-3"><span class="nav-number"></span> <span class="nav-text">OPENCV_VERSION := 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WITH-PYTHON-LAYER-1"><span class="nav-number"></span> <span class="nav-text">WITH_PYTHON_LAYER := 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译caffe"><span class="nav-number">0.1.</span> <span class="nav-text">编译caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试caffe"><span class="nav-number">0.2.</span> <span class="nav-text">测试caffe</span></a></li></ol></li></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2018</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">DmrfCoder</span></div><div class="theme-info"><div class="powered-by"></div> <span class="post-count">博客全站共211.8k字</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/three/three.min.js"></script><script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script><script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script type="text/javascript">
+</code></pre><h3 id="测试caffe"><a href="#测试caffe" class="headerlink" title="测试caffe"></a>测试caffe</h3><p>键入以下命令：</p>
+<pre><code>make runtest -j8
+</code></pre><p>PS:这里可能会出现如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error while loading shared libraries: libcudart.so.8.0: cannot open shared</span><br><span class="line">object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig /usr/local/cuda/lib64</span><br></pre></td></tr></table></figure>
+<p>如果出现类似如下信息则说明caffe配置成功：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy0amgvklj30xc0iq772.jpg" alt="8"></p>
+<p><strong>至此我们就完成caffe的配置工作了，希望大家可以积极指出本文的不足之处便于笔者改正，不胜感激，最后给出本文的所有资源大礼包，下载链接:<a href="https://pan.baidu.com/s/1pKU5hrX" target="_blank" rel="noopener"><br>https://pan.baidu.com/s/1pKU5hrX </a> 密码: xk5x
+</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i>
+
+ ubuntu</a>
+          
+            <a href="/tags/caffe/" rel="tag"><i class="fa fa-tag"></i>
+
+ caffe</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/14/My-first-hackthon/" rel="next" title="My first hackthon">
+                <i class="fa fa-chevron-left"></i> My first hackthon
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/30/Ubuntu16.04下配置NDK的方法/" rel="prev" title="Ubuntu16.04下配置Android NDK的方法">
+                Ubuntu16.04下配置Android NDK的方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">134</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言："><span class="nav-number">1.</span> <span class="nav-text">前言：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装开发所需依赖包"><span class="nav-number">3.</span> <span class="nav-text">安装开发所需依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装CUDA8-0并验证是否安装成功"><span class="nav-number">4.</span> <span class="nav-text">下载安装CUDA8.0并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装CUDA8-0"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装CUDA8.0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境变量"><span class="nav-number">4.1.1.</span> <span class="nav-text">配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证CUDA8-0是否安装成功"><span class="nav-number">4.2.</span> <span class="nav-text">验证CUDA8.0是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装cudnn并验证是否安装成功"><span class="nav-number">5.</span> <span class="nav-text">下载安装cudnn并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装cudnn"><span class="nav-number">5.1.</span> <span class="nav-text">下载安装cudnn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证cudnn是否安装成功"><span class="nav-number">5.2.</span> <span class="nav-text">验证cudnn是否安装成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装opencv并验证是否安装成功"><span class="nav-number">6.</span> <span class="nav-text">下载安装opencv并验证是否安装成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装opencv"><span class="nav-number">6.1.</span> <span class="nav-text">下载安装opencv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证opencv安装是否成功"><span class="nav-number">6.2.</span> <span class="nav-text">验证opencv安装是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载配置编译caffe"><span class="nav-number">7.</span> <span class="nav-text">下载配置编译caffe</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载caffe"><span class="nav-number">7.1.</span> <span class="nav-text">下载caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置caffe（这部分引自大神的blog）"><span class="nav-number">7.2.</span> <span class="nav-text">配置caffe（这部分引自大神的blog）</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#USE-CUDNN-1"><span class="nav-number"></span> <span class="nav-text">USE_CUDNN := 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OPENCV-VERSION-3"><span class="nav-number"></span> <span class="nav-text">OPENCV_VERSION := 3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WITH-PYTHON-LAYER-1"><span class="nav-number"></span> <span class="nav-text">WITH_PYTHON_LAYER := 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译caffe"><span class="nav-number">0.1.</span> <span class="nav-text">编译caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试caffe"><span class="nav-number">0.2.</span> <span class="nav-text">测试caffe</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共211.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -371,7 +1421,131 @@ LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl
         onPopupClose();
       }
     });
-  </script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz","0aMQbm6Xk3vkvN16T1yCsmTh")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><script type="text/x-mathjax-config">
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -379,20 +1553,40 @@ LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       });
-    </script><script type="text/x-mathjax-config">
+    </script>
+
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
-    </script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script><script type="text/x-mathjax-config">
+</script>
+
+<script type="text/x-mathjax-config">
   MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
       all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></body></html>
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
