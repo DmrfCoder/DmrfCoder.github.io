@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ubuntu下如何安装shadowsockes GUI版]]></title>
+    <url>%2F2018%2F12%2F09%2Fubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85shadowsockes-GUI%E7%89%88%2F</url>
+    <content type="text"><![CDATA[就三条命令： 123sudo add-apt-repository ppa:hzwhuang/ss-qt5 sudo apt-get update sudo apt-get install shadowsocks-qt5 安装完之后就可以按win键search到你的 shadowsocks 软件]]></content>
+      <categories>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>Shadowsockets</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[如何快速搭建自己的SS服务器]]></title>
+    <url>%2F2018%2F12%2F09%2F%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84SS%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[环境说明本地环境：ubuntu16.04所用服务器：Vultr本地ss客户端：Shadowsockes-qt5 服务器端配置注册账号并充值首先打开Vultr官网，进行账户注册： 注册完成后进行登录进入你的主页面并点击左边的billing进行充值： 然后进行以下三步： 这里是选择支付宝付款，当然如果你用其他支付方式也是完全没有问题的。 server创建充值完毕后我们就可以春构建创建server了，步骤如下：点击主页面的加号： 然后会进入创建页面，主要有三部分需要配置好：Server Location：建议选择Totyo，因为离的比较近，所以速度会快点 Server Type：选择你习惯的操作系统，建议选择ubuntu16.04: Server Size：建议选择25Gb的，大概5美刀一个月（如果2.5美元的有选那个最便宜，但是我搞的时候脱销了……） 后面的不用管，保持默认就可以，然后点击deploy now就可以进行创建，大概等几分钟就可以创建好。然后你的个人主页就应该有你刚才创建的server的详细信息： 点击上图的红圈，就会转到如下页面： 其中红圈的三个是我们后面要用到的信息。 配置server的ss服务ubuntu下打开终端直接输入： 1ssh root@111.111.111 其中root@后面换成你刚才页面中的IP Address，然后回车，之后会让你输入密码，点击你服务器页面信息（就是上一张图）的password后面的复制，然后粘贴到你的终端就可以了，然后就可以顺利连上你的远程服务器。然后运行以下命令进行ShadowSocks搭建： 1: 1wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh 2: 1chmod +x shadowsocks-all.sh 3: 1./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log 然后选择脚本（Python、R、Go、libev），任选一个： 123456Which Shadowsocks server you&apos;d select:1.Shadowsocks-Python2.ShadowsocksR3.Shadowsocks-Go4.Shadowsocks-libevPlease enter a number (default 1): 我选的是1，然后输入密码和端口： 1234567891011121314You choose = Shadowsocks-PythonPlease enter password for Shadowsocks-Python(default password: teddysun.com):password = passPlease enter a port for Shadowsocks-Python [1-65535](default port: 8989):port = 8808Press any key to start...or Press Ctrl+C to cancel 注意把上面的password和port换成你自己的。然后其他的配置都是傻瓜式，根据你的需要配置成你自己的就可以，完成后会出现： 12345678Congratulations, Shadowsocks-Go server install completed!Your Server IP : 45.32.73.59Your Server Port : 8808Your Password : psssYour Encryption Method: aes-256-cfbWelcome to visit: https://teddysun.com/486.htmlEnjoy it! 上面的信息就是你在客户端进行登录时需要的信息，直接在ss客户端进行配置即可。]]></content>
+      <categories>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>科学上网</tag>
+        <tag>Shadowsocks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[检讨]]></title>
     <url>%2F2018%2F12%2F08%2F%E6%A3%80%E8%AE%A8%2F</url>
     <content type="text"><![CDATA[亲爱的小草莓： ​ 我怀着无比悲痛的心情写这封检讨书给你，虽然文字已经不能表达我内心的悔恨和痛苦，但是我还是想响应组织的号召正式地写一份检讨书给你以洗刷我的罪孽。 ​ 首先我先解释一下事件的前因后果：那是十月份的一天，那天天气很棒，我走在路上抬头看去，太阳就像你一样，美丽又动人，多看一眼都是享受。然后小gay的女朋友在群里说她的手机丢了，大家的联系方式都没了，让大家发短信到她手机上方便她记录大家的联系方式。由于思想意识的放松，我竟然头脑发热发了个我爱她过去，心想这样会比较有辨识度，她就会知道这个陌生的号码是来自哪里的，发完之后我甚至还一阵得劲，觉得美滋滋，过了两分钟并没有收到她的回复，我有一..失落，为了引起她的重视，我觉得大胆地再爱她一次，所以就又发了一条再爱一次的短信，我知道这条短信发过去就全完了，我辜负了党和组织对我的信任，我想我之前入党失败也是因为这方面原因。再到后来她还是没有回复我的短信，我才意识到这个世界还是你最好，那一瞬间你就像大白兔奶糖一样融化在了我的心里。 ​ 虽然确实有客观因素导致了此次事件的发生，但是作为一个对爱情负责的男人，我不会逃避，更不会为自己找借口，我会痛定思痛反省自己，力争避免类似错误的发生，在这里我做出如下承诺： 以后不主动和女孩子闲聊，如果是女孩子主动找我闲聊，我会尽可能冷淡一点，比及时向你报告 以后只对你说爱你，禁止在其他异性身上使用任何暧昧的字眼 不和陌生的异性搭讪，如果被异性搭讪，我会假装高冷 下雨天不和异性共用一把伞，会站在原地等你来接我 ​ 以上条款如果违反，我自愿给你买一杯奶茶 + 写一份实验报告 + 陪你去吃一次鸡肉卷。 ​ 不知不觉已经写了六百多个字，虽然我还想写，但是由于组织规定我只能写五百字，为了不违反规定，我只能忍住很多很多我想要表达歉意的言辞，但是我的内心是极其后悔的，我不应该惹你生气，希望组织能再给我一次机会，我会尽力表现，争创一流，为实现xx梦而奋斗！ ​ ​ 2018.12.08 ​ ai-exception]]></content>
