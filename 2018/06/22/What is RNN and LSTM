@@ -113,7 +113,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="What is RNN and LSTM?">
 <meta property="og:url" content="http://www.mashangxue123.com/2018/06/22/What is RNN and LSTM">
-<meta property="og:site_name" content="DmrfCoder&#39;s page">
+<meta property="og:site_name" content="ai-exception">
 <meta property="og:description" content="摘要本文将介绍一种常用的神经网络—循环神经网络(Recurrent Neural Network,RNN)以及循环神经网络的一个重要的变体—长短时记忆网络(Long Short-Term Memory,LSTM). 循环神经网络循环神经网络的主要用途是处理和预测序列数据.传统的卷积神经网络(CNN)或者全连接神经网络(FC)都是从输入层到隐含层再到输出层,层与层之间是全连接或部分连接的,但是每层之">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-
@@ -167,7 +167,7 @@ orient/strip%7CimageView2/2/w/458">
 
 
 
-  <title>What is RNN and LSTM? | DmrfCoder's page</title>
+  <title>What is RNN and LSTM? | ai-exception</title>
   
 
 
@@ -207,7 +207,7 @@ orient/strip%7CimageView2/2/w/458">
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">DmrfCoder's page</span>
+        <span class="site-title">ai-exception</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -365,7 +365,7 @@ orient/strip%7CimageView2/2/w/458">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DmrfCoder's page">
+      <meta itemprop="name" content="ai-exception">
     </span>
 
     
