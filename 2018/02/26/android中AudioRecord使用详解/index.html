@@ -1,9 +1,1026 @@
-<!DOCTYPE html><html class="theme-next gemini" lang="zh-Hans"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script></script><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>!function(e,t,o,c,i,a,n){e.DaoVoiceObject=i,e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},e[i].l=1*new Date,a=t.createElement(o),n=t.getElementsByTagName(o)[0],a.async=1,a.src=c,a.charset="utf-8",n.parentNode.insertBefore(a,n)}(window,document,"script",("https:"==document.location.protocol?"https:":"http:")+"//widget.daovoice.io/widget/0f81ff2f.js","daovoice"),daovoice("init",{app_id:"e32cdd0f"}),daovoice("update")</script><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222"><meta name="keywords" content="AudioRecord,"><meta name="description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：     123read"><meta name="keywords" content="AudioRecord"><meta property="og:type" content="article"><meta property="og:title" content="android中AudioRecord使用详解"><meta property="og:url" content="http://www.mashangxue123.com/2018/02/26/Android中AudioRecord使用详解/index.html"><meta property="og:site_name" content="ai-exception"><meta property="og:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：     123read"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2018-12-07T08:36:36.885Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="android中AudioRecord使用详解"><meta name="twitter:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：     123read"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!1,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://www.mashangxue123.com/2018/02/26/Android中AudioRecord使用详解/"><title>android中AudioRecord使用详解 | ai-exception</title><script>!function(e,a,t,n,g,c,o){e.GoogleAnalyticsObject=g,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),o=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",o.parentNode.insertBefore(c,o)}(window,document,"script",0,"ga"),ga("create","UA-130602831-1","auto"),ga("send","pageview")</script></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">ai-exception</span><span class="logo-line-after"><i></i></span></a></div><p class="site-subtitle"></p></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br> Home</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br> Archives</a></li><li class="menu-item menu-item-moments"><a href="/news/" rel="section"><i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i><br> Moments</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br> Categories</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br> Tags</a></li><li class="menu-item menu-item-about"><a href="/user/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br> About me</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br> Search</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/02/26/Android中AudioRecord使用详解/"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="DmrfCoder"><meta itemprop="description" content=""><meta itemprop="image" content="/images/photo.png"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="ai-exception"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">android中AudioRecord使用详解</h1><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T23:45:29+08:00">2018-02-26</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span></span> <span id="/2018/02/26/Android中AudioRecord使用详解/" class="leancloud_visitors" data-flag-title="android中AudioRecord使用详解"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span> <span class="post-meta-item-text">阅读次数&#58;</span><span class="leancloud-visitors-count"></span></span><div class="post-wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span> <span class="post-meta-item-text">字数统计&#58;</span> <span title="字数统计">1.7k</span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">阅读时长 &asymp;</span> <span title="阅读时长">6</span></div></div></header><div class="post-body" itemprop="articleBody"><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。</p><h1 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h1><p>AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。<br>通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read(<span class="keyword">byte</span>[], <span class="keyword">int</span>, <span class="keyword">int</span>)</span><br><span class="line">read(<span class="keyword">short</span>[], <span class="keyword">int</span>, <span class="keyword">int</span>)</span><br><span class="line">read(ByteBuffer, <span class="keyword">int</span>).</span><br></pre></td></tr></table></figure><p>无论使用哪种音频格式，使用AudioRecord是最方便的。</p><p>在创建AudioRecord对象时，AudioRecord会初始化，并和音频缓冲区连接，用来缓冲新的音频数据。<br>根据构造时指定的缓冲区大小，来决定AudioRecord能够记录多长的数据。 从硬件设备读取的数据，应小于整个记录缓冲区。</p><h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><strong>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</strong></p><h2 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h2><p><strong>audioSource：</strong><br>音频源：指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC<br><strong>sampleRateInHz：</strong><br>采样率：音频的采样频率，每秒钟能够采样的次数，采样率越高，音质越高。给出的实例是44100、22050、11025但不限于这几个参数。例如要采集低质量的音频就可以使用4000、8000等低采样率。<br><strong>channelConfig：</strong><br>声道设置：android支持双声道立体声和单声道。MONO单声道，STEREO立体声<br><strong>audioFormat：</strong><br>编码制式和采样大小：采集来的数据当然使用PCM编码(脉冲代码调制编码，即PCM编码。PCM通过抽样、量化、编码三个步骤将连续变化的模拟信号转换为数字编码。)<br>android支持的采样大小16bit<br>或者8bit。当然采样大小越大，那么信息量越多，音质也越高，现在主流的采样大小都是16bit，在低质量的语音传输的时候8bit足够了。<br><strong>bufferSizeInBytes：</strong><br>采集数据需要的缓冲区的大小，如果不知道最小需要的大小可以在getMinBufferSize()查看。</p><h1 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h1><h2 id="public-int-getAudioFormat"><a href="#public-int-getAudioFormat" class="headerlink" title="public int getAudioFormat ()"></a>public int getAudioFormat ()</h2><p>返回设置的音频数据格式。</p><h2 id="public-int-getAudioSource"><a href="#public-int-getAudioSource" class="headerlink" title="public int getAudioSource ()"></a>public int getAudioSource ()</h2><p>返回音频录制源。</p><h2 id="public-int-getChannelConfiguration"><a href="#public-int-getChannelConfiguration" class="headerlink" title="public int getChannelConfiguration ()"></a>public int getChannelConfiguration ()</h2><p>返回设置的频道设置。</p><h2 id="public-int-getChannelCount"><a href="#public-int-getChannelCount" class="headerlink" title="public int getChannelCount ()"></a>public int getChannelCount ()</h2><p>返回设置的频道数目。</p><h2 id="public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><a href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig" class="headerlink" title="public static int getMinBufferSize (int sampleRateInHz, int channelConfig,"></a>public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</h2><p>int audioFormat)</p><p>返回成功创建AudioRecord对象所需要的最小缓冲区大小。<br>注意：这个大小并不保证在负荷下的流畅录制，应根据预期的频率来选择更高的值，AudioRecord实例在推送新数据时使用此值。</p><h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sampleRateInHz      默认采样率，单位Hz。</span><br><span class="line"></span><br><span class="line">channelConfig           描述音频通道设置。</span><br><span class="line"></span><br><span class="line">audioFormat             音频数据保证支持此格式</span><br></pre></td></tr></table></figure><p></p><h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>如果硬件不支持录制参数，或输入了一个无效的参数，则返回ERROR_BAD_VALUE，如果硬件查询到输出属性没有实现，或最小缓冲区用byte表示，则返回ERROR。</p><h2 id="public-int-getNotificationMarkerPosition"><a href="#public-int-getNotificationMarkerPosition" class="headerlink" title="public int getNotificationMarkerPosition ()"></a>public int getNotificationMarkerPosition ()</h2><p>返回通知，标记框架中的位置。</p><h2 id="public-int-getPositionNotificationPeriod"><a href="#public-int-getPositionNotificationPeriod" class="headerlink" title="public int getPositionNotificationPeriod ()"></a>public int getPositionNotificationPeriod ()</h2><p>返回通知，更新框架中的时间位置。</p><h2 id="public-int-getRecordingState"><a href="#public-int-getRecordingState" class="headerlink" title="public int getRecordingState ()"></a>public int getRecordingState ()</h2><p>返回AudioRecord实例的录制状态。</p><h2 id="public-int-getSampleRate"><a href="#public-int-getSampleRate" class="headerlink" title="public int getSampleRate ()"></a>public int getSampleRate ()</h2><p>返回设置的音频数据样本采样率，单位Hz。</p><h2 id="public-int-getState"><a href="#public-int-getState" class="headerlink" title="public int getState ()"></a>public int getState ()</h2><p>返回AudioRecord实例的状态。 这点非常有用，用在AudioRecord 实例创建成功后，检查初始化属性。 它能肯定请求到了合适的硬件资源。</p><h2 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h2><p>从音频硬件录制缓冲区读取数据。</p><h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">audioData        写入的音频录制数据。</span><br><span class="line"></span><br><span class="line">offsetInShorts           目标数组 audioData 的起始偏移量。</span><br><span class="line"></span><br><span class="line">sizeInShorts              请求读取的数据大小。</span><br></pre></td></tr></table></figure><p></p><h3 id="返回值：-1"><a href="#返回值：-1" class="headerlink" title="返回值："></a>返回值：</h3><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>返回数值不会超过sizeInShorts。</p><h2 id="public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><a href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes" class="headerlink" title="public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)"></a>public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据。</p><h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br> audioData 写入的音频录制数据。</p><pre><code>       offsetInBytes            audioData的起始偏移值，单位byte。
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AudioRecord,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：     123read">
+<meta name="keywords" content="AudioRecord">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android中AudioRecord使用详解">
+<meta property="og:url" content="http://www.mashangxue123.com/2018/02/26/Android中AudioRecord使用详解/index.html">
+<meta property="og:site_name" content="ai-exception">
+<meta property="og:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：     123read">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-07T08:36:36.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android中AudioRecord使用详解">
+<meta name="twitter:description" content="摘要本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。 类概述AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：     123read">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.mashangxue123.com/2018/02/26/Android中AudioRecord使用详解/">
+
+
+
+
+
+  <title>android中AudioRecord使用详解 | ai-exception</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ai-exception</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.mashangxue123.com/2018/02/26/Android中AudioRecord使用详解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ai-exception">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">android中AudioRecord使用详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T23:45:29+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/26/Android中AudioRecord使用详解/" class="leancloud_visitors" data-flag-title="android中AudioRecord使用详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文介绍了android中AudioRecord的一些基本使用，主要参考官方文档，本文不讲过多理论知识，主要介绍在实际开发中的使用方法。</p>
+<h1 id="类概述"><a href="#类概述" class="headerlink" title="类概述"></a>类概述</h1><p>AudioRecord类在Java应用程序中管理音频资源，用来记录从平台音频输入设备产生的数据。<br>通过AudioRecord对象来完成”pulling”（读取）数据。 应用通过以下几个方法负责立即从AudioRecord对象读取：    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">read(<span class="keyword">byte</span>[], <span class="keyword">int</span>, <span class="keyword">int</span>)</span><br><span class="line">read(<span class="keyword">short</span>[], <span class="keyword">int</span>, <span class="keyword">int</span>)</span><br><span class="line">read(ByteBuffer, <span class="keyword">int</span>).</span><br></pre></td></tr></table></figure>
+<p>无论使用哪种音频格式，使用AudioRecord是最方便的。</p>
+<p>在创建AudioRecord对象时，AudioRecord会初始化，并和音频缓冲区连接，用来缓冲新的音频数据。<br>根据构造时指定的缓冲区大小，来决定AudioRecord能够记录多长的数据。 从硬件设备读取的数据，应小于整个记录缓冲区。</p>
+<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><strong>public AudioRecord (int audioSource, int sampleRateInHz, int channelConfig,<br>int audioFormat, int bufferSizeInBytes)</strong></p>
+<h2 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h2><p><strong>audioSource：</strong><br>音频源：指的是从哪里采集音频。这里我们当然是从麦克风采集音频，所以此参数的值为MIC<br><strong>sampleRateInHz：</strong><br>采样率：音频的采样频率，每秒钟能够采样的次数，采样率越高，音质越高。给出的实例是44100、22050、11025但不限于这几个参数。例如要采集低质量的音频就可以使用4000、8000等低采样率。<br><strong>channelConfig：</strong><br>声道设置：android支持双声道立体声和单声道。MONO单声道，STEREO立体声<br><strong>audioFormat：</strong><br>编码制式和采样大小：采集来的数据当然使用PCM编码(脉冲代码调制编码，即PCM编码。PCM通过抽样、量化、编码三个步骤将连续变化的模拟信号转换为数字编码。)<br>android支持的采样大小16bit<br>或者8bit。当然采样大小越大，那么信息量越多，音质也越高，现在主流的采样大小都是16bit，在低质量的语音传输的时候8bit足够了。<br><strong>bufferSizeInBytes：</strong><br>采集数据需要的缓冲区的大小，如果不知道最小需要的大小可以在getMinBufferSize()查看。</p>
+<h1 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a>公共方法</h1><h2 id="public-int-getAudioFormat"><a href="#public-int-getAudioFormat" class="headerlink" title="public int getAudioFormat ()"></a>public int getAudioFormat ()</h2><p>返回设置的音频数据格式。</p>
+<h2 id="public-int-getAudioSource"><a href="#public-int-getAudioSource" class="headerlink" title="public int getAudioSource ()"></a>public int getAudioSource ()</h2><p>返回音频录制源。</p>
+<h2 id="public-int-getChannelConfiguration"><a href="#public-int-getChannelConfiguration" class="headerlink" title="public int getChannelConfiguration ()"></a>public int getChannelConfiguration ()</h2><p>返回设置的频道设置。</p>
+<h2 id="public-int-getChannelCount"><a href="#public-int-getChannelCount" class="headerlink" title="public int getChannelCount ()"></a>public int getChannelCount ()</h2><p>返回设置的频道数目。</p>
+<h2 id="public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><a href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig" class="headerlink" title="public static int getMinBufferSize (int sampleRateInHz, int channelConfig,"></a>public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</h2><p>int audioFormat)</p>
+<p>返回成功创建AudioRecord对象所需要的最小缓冲区大小。<br>注意：这个大小并不保证在负荷下的流畅录制，应根据预期的频率来选择更高的值，AudioRecord实例在推送新数据时使用此值。</p>
+<h3 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sampleRateInHz      默认采样率，单位Hz。</span><br><span class="line"></span><br><span class="line">channelConfig           描述音频通道设置。</span><br><span class="line"></span><br><span class="line">audioFormat             音频数据保证支持此格式</span><br></pre></td></tr></table></figure></p>
+<h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>如果硬件不支持录制参数，或输入了一个无效的参数，则返回ERROR_BAD_VALUE，如果硬件查询到输出属性没有实现，或最小缓冲区用byte表示，则返回ERROR。</p>
+<h2 id="public-int-getNotificationMarkerPosition"><a href="#public-int-getNotificationMarkerPosition" class="headerlink" title="public int getNotificationMarkerPosition ()"></a>public int getNotificationMarkerPosition ()</h2><p>返回通知，标记框架中的位置。</p>
+<h2 id="public-int-getPositionNotificationPeriod"><a href="#public-int-getPositionNotificationPeriod" class="headerlink" title="public int getPositionNotificationPeriod ()"></a>public int getPositionNotificationPeriod ()</h2><p>返回通知，更新框架中的时间位置。</p>
+<h2 id="public-int-getRecordingState"><a href="#public-int-getRecordingState" class="headerlink" title="public int getRecordingState ()"></a>public int getRecordingState ()</h2><p>返回AudioRecord实例的录制状态。</p>
+<h2 id="public-int-getSampleRate"><a href="#public-int-getSampleRate" class="headerlink" title="public int getSampleRate ()"></a>public int getSampleRate ()</h2><p>返回设置的音频数据样本采样率，单位Hz。</p>
+<h2 id="public-int-getState"><a href="#public-int-getState" class="headerlink" title="public int getState ()"></a>public int getState ()</h2><p>返回AudioRecord实例的状态。 这点非常有用，用在AudioRecord 实例创建成功后，检查初始化属性。 它能肯定请求到了合适的硬件资源。</p>
+<h2 id="public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><a href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts" class="headerlink" title="public int read (short[] audioData, int offsetInShorts, int sizeInShorts)"></a>public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</h2><p>从音频硬件录制缓冲区读取数据。</p>
+<h3 id="参数解释：-1"><a href="#参数解释：-1" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">audioData        写入的音频录制数据。</span><br><span class="line"></span><br><span class="line">offsetInShorts           目标数组 audioData 的起始偏移量。</span><br><span class="line"></span><br><span class="line">sizeInShorts              请求读取的数据大小。</span><br></pre></td></tr></table></figure></p>
+<h3 id="返回值：-1"><a href="#返回值：-1" class="headerlink" title="返回值："></a>返回值：</h3><p>返回short型数据，表示读取到的数据，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>返回数值不会超过sizeInShorts。</p>
+<h2 id="public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><a href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes" class="headerlink" title="public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)"></a>public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据。</p>
+<h3 id="参数解释：-2"><a href="#参数解释：-2" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br>           audioData        写入的音频录制数据。</p>
+<pre><code>       offsetInBytes            audioData的起始偏移值，单位byte。
 
        sizeInBytes                读取的最大字节数。
-</code></pre><h3 id="返回值：-2"><a href="#返回值：-2" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。</p><h2 id="public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><a href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes" class="headerlink" title="public int read (ByteBuffer audioBuffer, int sizeInBytes)"></a>public int read (ByteBuffer audioBuffer, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据，直接复制到指定缓冲区。 如果audioBuffer不是直接的缓冲区，此方法总是返回0。</p><h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br> audioBuffer 存储写入音频录制数据的缓冲区。</p><pre><code>     sizeInBytes                请求的最大字节数。
-</code></pre><h3 id="返回值：-3"><a href="#返回值：-3" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。<br>public void release ()：释放本地AudioRecord资源。<br>对象不能经常使用此方法，而且在调用release()后，必须设置引用为null。</p><h2 id="public-int-setNotificationMarkerPosition-int-markerInFrames"><a href="#public-int-setNotificationMarkerPosition-int-markerInFrames" class="headerlink" title="public int setNotificationMarkerPosition (int markerInFrames)"></a>public int setNotificationMarkerPosition (int markerInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置位置标记。</p><h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>      markerInFrames      在框架中快速标记位置。
-</code></pre><h3 id="返回值：-4"><a href="#返回值：-4" class="headerlink" title="返回值："></a>返回值：</h3><p>返回错误或成功代码，请见SUCCESS、ERROR_BAD_VALUE、ERROR_INVALID_OPERATION。</p><h2 id="public-int-setPositionNotificationPeriod-int-periodInFrames"><a href="#public-int-setPositionNotificationPeriod-int-periodInFrames" class="headerlink" title="public int setPositionNotificationPeriod (int periodInFrames)"></a>public int setPositionNotificationPeriod (int periodInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置时间标记。</p><h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br> markerInFrames 在框架中快速更新时间标记。</p><h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回错误或成功代码</p><h2 id="public-void-setRecordPositionUpdateListener"><a href="#public-void-setRecordPositionUpdateListener" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener, Handler handler)</p><p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。 使用此方法来将Handler 和别的线程联系起来，来接收AudioRecord<br>事件，比创建AudioTrack 实例更好一些。</p><h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br> handler 用来接收事件通知消息。</p><h2 id="public-void-setRecordPositionUpdateListener-1"><a href="#public-void-setRecordPositionUpdateListener-1" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener)</p><p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。</p><h2 id="public-void-startRecording"><a href="#public-void-startRecording" class="headerlink" title="public void startRecording ()"></a>public void startRecording ()</h2><p>AudioRecord实例开始进行录制。</p><h1 id="受保护方法"><a href="#受保护方法" class="headerlink" title="受保护方法"></a>受保护方法</h1><h2 id="protected-void-finalize"><a href="#protected-void-finalize" class="headerlink" title="protected void finalize ()"></a>protected void finalize ()</h2><p>通知VM回收此对象内存。 此方法只能用在运行的应用程序没有任何线程再使用此对象，来告诉垃圾回收器回收此对象。</p><p>此方法用于释放系统资源，由垃圾回收器清除此对象。 默认没有实现，由VM来决定，但子类根据需要可重写finalize()。<br>在执行期间，调用此方法可能会立即抛出未定义异常，但是可以忽略。</p><p>注意：VM保证对象可以一次或多次调用finalize()，但并不保证finalize()会马上执行。<br>例如，对象B的finalize()可能延迟执行，等待对象A的finalize()延迟回收A的内存。<br>为了安全起见，请看ReferenceQueue，它提供了更多地控制VM的垃圾回收。</p></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/AudioRecord/" rel="tag"><i class="fa fa-tag"></i> AudioRecord</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2018/02/25/《颠覆者》/" rel="next" title="《颠覆者》"><i class="fa fa-chevron-left"></i> 《颠覆者》</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2018/03/04/python报错 unindent does not match any outer indentation level解决方案/" rel="prev" title="python报错 unindent does not match any outer indentation level解决方案">python报错 unindent does not match any outer indentation level解决方案<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"><script>window._bd_share_config={common:{bdText:"",bdMini:"1",bdMiniList:!1,bdPic:""},image:{viewList:["tsina","douban","sqq","qzone","weixin","twi","fbook"],viewText:"分享到：",viewSize:"16"},slide:{bdImg:"5",bdPos:"left",bdTop:"100"}}</script><script>with(document)(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="//bdimg.share.baidu.com/static/api/js/share.js?cdnversion="+~(-new Date/36e5)</script></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder"><p class="site-author-name" itemprop="name">DmrfCoder</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">137</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">12</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">78</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/DmrfCoder" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i> E-Mail</a></span><span class="links-of-author-item"><a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i> CSDN</a></span><span class="links-of-author-item"><a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i> Google</a></span></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类概述"><span class="nav-number">2.</span> <span class="nav-text">类概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数解释"><span class="nav-number">3.1.</span> <span class="nav-text">参数解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公共方法"><span class="nav-number">4.</span> <span class="nav-text">公共方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getAudioFormat"><span class="nav-number">4.1.</span> <span class="nav-text">public int getAudioFormat ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getAudioSource"><span class="nav-number">4.2.</span> <span class="nav-text">public int getAudioSource ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getChannelConfiguration"><span class="nav-number">4.3.</span> <span class="nav-text">public int getChannelConfiguration ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getChannelCount"><span class="nav-number">4.4.</span> <span class="nav-text">public int getChannelCount ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><span class="nav-number">4.5.</span> <span class="nav-text">public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释："><span class="nav-number">4.5.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值："><span class="nav-number">4.5.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getNotificationMarkerPosition"><span class="nav-number">4.6.</span> <span class="nav-text">public int getNotificationMarkerPosition ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getPositionNotificationPeriod"><span class="nav-number">4.7.</span> <span class="nav-text">public int getPositionNotificationPeriod ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getRecordingState"><span class="nav-number">4.8.</span> <span class="nav-text">public int getRecordingState ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getSampleRate"><span class="nav-number">4.9.</span> <span class="nav-text">public int getSampleRate ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getState"><span class="nav-number">4.10.</span> <span class="nav-text">public int getState ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><span class="nav-number">4.11.</span> <span class="nav-text">public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-1"><span class="nav-number">4.11.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-1"><span class="nav-number">4.11.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><span class="nav-number">4.12.</span> <span class="nav-text">public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-2"><span class="nav-number">4.12.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-2"><span class="nav-number">4.12.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><span class="nav-number">4.13.</span> <span class="nav-text">public int read (ByteBuffer audioBuffer, int sizeInBytes)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-3"><span class="nav-number">4.13.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-3"><span class="nav-number">4.13.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-setNotificationMarkerPosition-int-markerInFrames"><span class="nav-number">4.14.</span> <span class="nav-text">public int setNotificationMarkerPosition (int markerInFrames)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-4"><span class="nav-number">4.14.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-4"><span class="nav-number">4.14.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-setPositionNotificationPeriod-int-periodInFrames"><span class="nav-number">4.15.</span> <span class="nav-text">public int setPositionNotificationPeriod (int periodInFrames)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-5"><span class="nav-number">4.15.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">4.15.2.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-void-setRecordPositionUpdateListener"><span class="nav-number">4.16.</span> <span class="nav-text">public void setRecordPositionUpdateListener</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-6"><span class="nav-number">4.16.1.</span> <span class="nav-text">参数解释：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-void-setRecordPositionUpdateListener-1"><span class="nav-number">4.17.</span> <span class="nav-text">public void setRecordPositionUpdateListener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-void-startRecording"><span class="nav-number">4.18.</span> <span class="nav-text">public void startRecording ()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受保护方法"><span class="nav-number">5.</span> <span class="nav-text">受保护方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#protected-void-finalize"><span class="nav-number">5.1.</span> <span class="nav-text">protected void finalize ()</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2018</span><span class="with-love"><i class="fa fa-user"></i></span> <span class="author" itemprop="copyrightHolder">DmrfCoder</span></div><div class="theme-info"><div class="powered-by"></div> <span class="post-count">博客全站共213.3k字</span></div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/three/three.min.js"></script><script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script><script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script type="text/javascript">
+</code></pre><h3 id="返回值：-2"><a href="#返回值：-2" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。</p>
+<h2 id="public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><a href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes" class="headerlink" title="public int read (ByteBuffer audioBuffer, int sizeInBytes)"></a>public int read (ByteBuffer audioBuffer, int sizeInBytes)</h2><p>从音频硬件录制缓冲区读取数据，直接复制到指定缓冲区。 如果audioBuffer不是直接的缓冲区，此方法总是返回0。</p>
+<h3 id="参数解释：-3"><a href="#参数解释：-3" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br>         audioBuffer               存储写入音频录制数据的缓冲区。</p>
+<pre><code>     sizeInBytes                请求的最大字节数。
+</code></pre><h3 id="返回值：-3"><a href="#返回值：-3" class="headerlink" title="返回值："></a>返回值：</h3><p>读入缓冲区的总byte数，如果对象属性没有初始化，则返回ERROR_INVALID_OPERATION，如果参数不能解析成有效的数据或索引，则返回ERROR_BAD_VALUE。<br>读取的总byte数不会超过sizeInBytes。<br>public void release ()：释放本地AudioRecord资源。<br>对象不能经常使用此方法，而且在调用release()后，必须设置引用为null。</p>
+<h2 id="public-int-setNotificationMarkerPosition-int-markerInFrames"><a href="#public-int-setNotificationMarkerPosition-int-markerInFrames" class="headerlink" title="public int setNotificationMarkerPosition (int markerInFrames)"></a>public int setNotificationMarkerPosition (int markerInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置位置标记。</p>
+<h3 id="参数解释：-4"><a href="#参数解释：-4" class="headerlink" title="参数解释："></a>参数解释：</h3><pre><code>      markerInFrames      在框架中快速标记位置。
+</code></pre><h3 id="返回值：-4"><a href="#返回值：-4" class="headerlink" title="返回值："></a>返回值：</h3><p>返回错误或成功代码，请见SUCCESS、ERROR_BAD_VALUE、ERROR_INVALID_OPERATION。</p>
+<h2 id="public-int-setPositionNotificationPeriod-int-periodInFrames"><a href="#public-int-setPositionNotificationPeriod-int-periodInFrames" class="headerlink" title="public int setPositionNotificationPeriod (int periodInFrames)"></a>public int setPositionNotificationPeriod (int periodInFrames)</h2><p>如果设置了setRecordPositionUpdateListener(OnRecordPositionUpdateListener)或setRecordPositionUpdateListener(OnRecordPositionUpdateListener,<br>Handler)，则通知监听者设置时间标记。</p>
+<h3 id="参数解释：-5"><a href="#参数解释：-5" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br>           markerInFrames      在框架中快速更新时间标记。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回错误或成功代码</p>
+<h2 id="public-void-setRecordPositionUpdateListener"><a href="#public-void-setRecordPositionUpdateListener" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener, Handler handler)</p>
+<p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。 使用此方法来将Handler 和别的线程联系起来，来接收AudioRecord<br>事件，比创建AudioTrack 实例更好一些。</p>
+<h3 id="参数解释：-6"><a href="#参数解释：-6" class="headerlink" title="参数解释："></a>参数解释：</h3><p>​<br>              handler    用来接收事件通知消息。</p>
+<h2 id="public-void-setRecordPositionUpdateListener-1"><a href="#public-void-setRecordPositionUpdateListener-1" class="headerlink" title="public void setRecordPositionUpdateListener"></a>public void setRecordPositionUpdateListener</h2><p>(AudioRecord.OnRecordPositionUpdateListener listener)</p>
+<p>当之前设置的标志已经成立，或者周期录制位置更新时，设置处理监听者。</p>
+<h2 id="public-void-startRecording"><a href="#public-void-startRecording" class="headerlink" title="public void startRecording ()"></a>public void startRecording ()</h2><p>AudioRecord实例开始进行录制。</p>
+<h1 id="受保护方法"><a href="#受保护方法" class="headerlink" title="受保护方法"></a>受保护方法</h1><h2 id="protected-void-finalize"><a href="#protected-void-finalize" class="headerlink" title="protected void finalize ()"></a>protected void finalize ()</h2><p>通知VM回收此对象内存。 此方法只能用在运行的应用程序没有任何线程再使用此对象，来告诉垃圾回收器回收此对象。</p>
+<p>此方法用于释放系统资源，由垃圾回收器清除此对象。 默认没有实现，由VM来决定，但子类根据需要可重写finalize()。<br>在执行期间，调用此方法可能会立即抛出未定义异常，但是可以忽略。</p>
+<p>注意：VM保证对象可以一次或多次调用finalize()，但并不保证finalize()会马上执行。<br>例如，对象B的finalize()可能延迟执行，等待对象A的finalize()延迟回收A的内存。<br>为了安全起见，请看ReferenceQueue，它提供了更多地控制VM的垃圾回收。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AudioRecord/" rel="tag"><i class="fa fa-tag"></i>
+
+ AudioRecord</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/25/《颠覆者》/" rel="next" title="《颠覆者》">
+                <i class="fa fa-chevron-left"></i> 《颠覆者》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/04/python报错 unindent does not match any outer indentation level解决方案/" rel="prev" title="python报错 unindent does not match any outer indentation level解决方案">
+                python报错 unindent does not match any outer indentation level解决方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类概述"><span class="nav-number">2.</span> <span class="nav-text">类概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造函数"><span class="nav-number">3.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数解释"><span class="nav-number">3.1.</span> <span class="nav-text">参数解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公共方法"><span class="nav-number">4.</span> <span class="nav-text">公共方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getAudioFormat"><span class="nav-number">4.1.</span> <span class="nav-text">public int getAudioFormat ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getAudioSource"><span class="nav-number">4.2.</span> <span class="nav-text">public int getAudioSource ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getChannelConfiguration"><span class="nav-number">4.3.</span> <span class="nav-text">public int getChannelConfiguration ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getChannelCount"><span class="nav-number">4.4.</span> <span class="nav-text">public int getChannelCount ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-static-int-getMinBufferSize-int-sampleRateInHz-int-channelConfig"><span class="nav-number">4.5.</span> <span class="nav-text">public static int getMinBufferSize (int sampleRateInHz, int channelConfig,</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释："><span class="nav-number">4.5.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值："><span class="nav-number">4.5.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getNotificationMarkerPosition"><span class="nav-number">4.6.</span> <span class="nav-text">public int getNotificationMarkerPosition ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getPositionNotificationPeriod"><span class="nav-number">4.7.</span> <span class="nav-text">public int getPositionNotificationPeriod ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getRecordingState"><span class="nav-number">4.8.</span> <span class="nav-text">public int getRecordingState ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getSampleRate"><span class="nav-number">4.9.</span> <span class="nav-text">public int getSampleRate ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-getState"><span class="nav-number">4.10.</span> <span class="nav-text">public int getState ()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-read-short-audioData-int-offsetInShorts-int-sizeInShorts"><span class="nav-number">4.11.</span> <span class="nav-text">public int read (short[] audioData, int offsetInShorts, int sizeInShorts)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-1"><span class="nav-number">4.11.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-1"><span class="nav-number">4.11.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-read-byte-audioData-int-offsetInBytes-int-sizeInBytes"><span class="nav-number">4.12.</span> <span class="nav-text">public int read (byte[] audioData, int offsetInBytes, int sizeInBytes)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-2"><span class="nav-number">4.12.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-2"><span class="nav-number">4.12.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-read-ByteBuffer-audioBuffer-int-sizeInBytes"><span class="nav-number">4.13.</span> <span class="nav-text">public int read (ByteBuffer audioBuffer, int sizeInBytes)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-3"><span class="nav-number">4.13.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-3"><span class="nav-number">4.13.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-setNotificationMarkerPosition-int-markerInFrames"><span class="nav-number">4.14.</span> <span class="nav-text">public int setNotificationMarkerPosition (int markerInFrames)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-4"><span class="nav-number">4.14.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值：-4"><span class="nav-number">4.14.2.</span> <span class="nav-text">返回值：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-int-setPositionNotificationPeriod-int-periodInFrames"><span class="nav-number">4.15.</span> <span class="nav-text">public int setPositionNotificationPeriod (int periodInFrames)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-5"><span class="nav-number">4.15.1.</span> <span class="nav-text">参数解释：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">4.15.2.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-void-setRecordPositionUpdateListener"><span class="nav-number">4.16.</span> <span class="nav-text">public void setRecordPositionUpdateListener</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数解释：-6"><span class="nav-number">4.16.1.</span> <span class="nav-text">参数解释：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-void-setRecordPositionUpdateListener-1"><span class="nav-number">4.17.</span> <span class="nav-text">public void setRecordPositionUpdateListener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public-void-startRecording"><span class="nav-number">4.18.</span> <span class="nav-text">public void startRecording ()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#受保护方法"><span class="nav-number">5.</span> <span class="nav-text">受保护方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#protected-void-finalize"><span class="nav-number">5.1.</span> <span class="nav-text">protected void finalize ()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共214.4k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -318,7 +1335,131 @@
         onPopupClose();
       }
     });
-  </script><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script><script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz","0aMQbm6Xk3vkvN16T1yCsmTh")</script><script>function showTime(e){var t=new AV.Query(e),c=[],u=$(".leancloud_visitors");u.each(function(){c.push($(this).attr("id").trim())}),t.containedIn("url",c),t.find().done(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),s=o.get("time"),r=document.getElementById(i);$(r).find(t).text(s)}for(n=0;n<c.length;n++){i=c[n],r=document.getElementById(i);var l=$(r).find(t);""==l.text()&&l.text(0)}}else u.find(t).text(0)}).fail(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),s=e.attr("id").trim(),r=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",s),t.find({success:function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)}})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",r),n.set("url",s),n.set("time",1),n.save(null,{success:function(e){$(document.getElementById(s)).find(".leancloud-visitors-count").text(e.get("time"))},error:function(e,t){console.log("Failed to create")}})}},error:function(e){console.log("Error:"+e.code+" "+e.message)}})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script><script type="text/x-mathjax-config">
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
@@ -326,20 +1467,40 @@
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
       });
-    </script><script type="text/x-mathjax-config">
+    </script>
+
+    <script type="text/x-mathjax-config">
       MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
       });
-    </script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script><script type="text/x-mathjax-config">
+</script>
+
+<script type="text/x-mathjax-config">
   MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
     for(i=0; i < all.length; i += 1) {
       all[i].SourceElement().parentNode.className += ' has-jax';
     }
   });
-</script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script></body></html>
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

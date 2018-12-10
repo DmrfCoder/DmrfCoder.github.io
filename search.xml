@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[如何编写脚本将CSDN的博客批量导出到hexo下的md格式]]></title>
+    <url>%2F2018%2F12%2F10%2F%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC%E5%B0%86CSDN%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%89%B9%E9%87%8F%E5%AF%BC%E5%87%BA%E5%88%B0hexo%E4%B8%8B%E7%9A%84md%E6%A0%BC%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[最近自己搭了一个个人主页，终于可以不用忍受第三方博客平台的限制写一些自己的文章了，可是搭好了博客如何将自己原来的文章迁移到新的博客地址呢？如果手动一篇一篇导出效率太低，而且工作量太大，所以笔者写了个脚本将原来博客平台（csdn）上自己的文章批量爬取到本地并做相应的格式转换以保证可以直接发布到hexo下的博客平台。 操作环境MacBook Pro (13-inch, 2018, Four Thunderbolt 3 Ports)+pycharm+python3.6 目标将csdn下的博客批量导出并转化为hexo可以直接解析的格式，对于每一篇文章，我们重点关注以下信息： 标题（title） 正文 发表时间（date） 所属类别（categories） 对应标签（tags） 括号中的英文就是hexo下博客需要符合的格式标准，我们只需要将csdn中每一篇文章的上述属性爬取下来并以特定的格式写入文件即可，下面看实现： 文章爬取首先我们应该针对csdn的博客系统写一个通用的request函数（方法）： 12345678def request_get(url): session = requests.Session() headers = &#123; 'User-Agent': 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36'&#125; response = requests.get(url, headers=headers, timeout=3) return response 这里的headers里面的信息是通过查看页面的审查元素信息找到的。 然后我们就可以发起请求，注意看代码注释： 123456789101112131415161718192021222324252627282930313233343536373839404142434445def start_spider(): # 把下面这个base_url换成你csdn的地址 base_url = 'https://blog.csdn.net/qq_36982160/' second_url = base_url + 'article/list/' # 从第一页开始爬取 start_url = second_url + '1' number = 1 count = 0 # 开始爬取第一个article_list，返回信息在html中 html = request_get(start_url) # 这个循环是对你博客的article_list页面的循环 while html.status_code == 200: # 获取下一页的 url selector = etree.HTML(html.text) #cur_article_list_page[0]就是当前article_list页面中的文章的list cur_article_list_page = selector.xpath('//*[@id="mainBox"]/main/div[2]') d = cur_article_list_page[0].xpath('//*[@id="mainBox"]/main/div[2]/div[2]/h4/a') l = cur_article_list_page[0].findall('data-articleid') # 这个循环是对你每一个article_list中的那些文章的循环 for elem in cur_article_list_page[0]: item_content = elem.attrib #通过对比拿到的数据和网页中的有效数据发现返回每一个article_list中的list都有一两个多余元素，每个多余元素都有style属性，利用这一特点进行过滤 if item_content.has_key('style'): continue else: if item_content.has_key('data-articleid'): #拿到文章对应的articleid articleid = item_content['data-articleid'] #用于打印进度 count += 1 print(count) #爬取单篇文章 CrawlingItemBlog(base_url, articleid) # 进行下一article_list的爬取 number += 1 next_url = second_url + str(number) html = request_get(next_url) 然后按照拿到的每一个id对单篇文章进行爬取和解析并转化为hexo可解析的markdown格式： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102def CrawlingItemBlog(base_url, id): second_url = base_url + 'article/details/' url = second_url + id # 发送request请求并接受返回值 item_html = request_get(url) if item_html.status_code == 200: ''' 需要的信息： 1：标题 2：markdown内容 3：发表日期 4：标签 5：类别 ''' # 利用BeautifulSoup解析返回的html soup = BeautifulSoup(item_html.text) c = soup.find(id="content_views") # 标题 title_article = soup.find(attrs=&#123;'class': 'title-article'&#125;) # 这里是将标题作为最后存储的文件名 file_name = title_article.get_text() title_article = title_article.prettify() # 设置hexo格式博客开头的格式（title） hexo_title = 'title: ' + file_name + '\n' # 文章的categories hexo_categories = '' # 有可能出现这篇文章没有categories的情况 try: hexo_categories = soup.find(attrs=&#123;'class': 'tags-box space'&#125;).find(attrs=&#123;'class': 'tag-link'&#125;).get_text() except Exception: pass if hexo_categories == '': pass else: # 去除拿到的str中的'\t' hexo_categories = hexo_categories.replace('\t', '') hexo_categories = 'categories:\n' + '- ' + hexo_categories + '\n' # 发表时间 time = soup.find(attrs=&#123;'class': 'time'&#125;).get_text() s_time1 = time.split('年') year = s_time1[0] s_time2 = s_time1[1].split('月') month = s_time2[0] s_time3 = s_time2[1].split('日') day = s_time3[0] minite = s_time3[1].strip() hexo_date = 'date: ' + year + '-' + month + '-' + day + ' ' + minite + '\n' hexo_tags = '' # 获取tags tags = '' try: tags = soup.find(attrs=&#123;'class': 'tags-box artic-tag-box'&#125;).get_text() except Exception: pass if tags == '': pass else: tags = tags.split('\n') tags = tags[2] tags = tags.replace('\t', ' ') tags = tags.split(' ') hexo_tags = 'tags:\n' for tag in tags: if tag == '': continue else: hexo_tags = hexo_tags + '- ' + tag + '\n' # 将html转化为markdown text_maker = html2text.HTML2Text() text_maker.bypass_tables = False text = text_maker.handle(c.prettify()) # 有的文章名字特殊，会新建文件失败 try: #写入文件 f = codecs.open('./mds/' + file_name + '.md', 'w', encoding='utf-8') hexo_str = '---\n' + hexo_title + hexo_date + hexo_categories + hexo_tags + '\n---\n' f.write(hexo_str) f.write(text) f.close() except Exception: print(file_name) return True else: return False 至此就完成了csdn上博客的导出以及格式化为hexo下的博客格式，然后将导出的文章（默认在mds目录下）放在hexo博客目录的source/_post下即可。 详细代码地址github]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>博客迁移</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Deep Neural Network]]></title>
+    <url>%2F2018%2F12%2F10%2FDeep-Neural-Network%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[ubuntu下如何安装shadowsockes GUI版]]></title>
     <url>%2F2018%2F12%2F09%2Fubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85shadowsockes-GUI%E7%89%88%2F</url>
     <content type="text"><![CDATA[就三条命令： 123sudo add-apt-repository ppa:hzwhuang/ss-qt5 sudo apt-get update sudo apt-get install shadowsocks-qt5 安装完之后就可以按win键search到你的 shadowsocks 软件]]></content>
@@ -477,8 +494,8 @@
         <category>Android</category>
       </categories>
       <tags>
-        <tag>Android Studio</tag>
         <tag>gradle</tag>
+        <tag>Android Studio</tag>
       </tags>
   </entry>
   <entry>
@@ -490,8 +507,8 @@
       </categories>
       <tags>
         <tag>报错解决方案</tag>
-        <tag>Android Studio</tag>
         <tag>gradle</tag>
+        <tag>Android Studio</tag>
       </tags>
   </entry>
   <entry>
