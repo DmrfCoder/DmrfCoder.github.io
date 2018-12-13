@@ -522,8 +522,8 @@
         <category>Android</category>
       </categories>
       <tags>
-        <tag>Android Studio</tag>
         <tag>gradle</tag>
+        <tag>Android Studio</tag>
       </tags>
   </entry>
   <entry>
@@ -535,8 +535,8 @@
       </categories>
       <tags>
         <tag>报错解决方案</tag>
-        <tag>Android Studio</tag>
         <tag>gradle</tag>
+        <tag>Android Studio</tag>
       </tags>
   </entry>
   <entry>
@@ -862,9 +862,9 @@
         <category>Ncnn</category>
       </categories>
       <tags>
+        <tag>Android</tag>
         <tag>caffe</tag>
         <tag>Deep Learning</tag>
-        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -875,9 +875,9 @@
         <category>Ncnn</category>
       </categories>
       <tags>
+        <tag>Android</tag>
         <tag>caffe</tag>
         <tag>Deep Learning</tag>
-        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -1346,8 +1346,8 @@
       </categories>
       <tags>
         <tag>报错解决方案</tag>
-        <tag>ubuntu</tag>
         <tag>caffe</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -1382,8 +1382,8 @@
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>caffe</tag>
+        <tag>ubuntu</tag>
         <tag>mnist</tag>
       </tags>
   </entry>
@@ -1419,8 +1419,8 @@
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>caffe</tag>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>
