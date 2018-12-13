@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="coursera,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="AbstractAs we know, a well chosen initialization can speed up the convergence of gradient descent and increase the odds of gradient descent converging to a lower training (and generalization) error .S">
+<meta name="keywords" content="coursera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The impact of different initialization strategies on neural networks">
+<meta property="og:url" content="http://www.ai-exception.com/2018/12/13/The impact of different initialization strategies on neural networks/index.html">
+<meta property="og:site_name" content="ai-exception">
+<meta property="og:description" content="AbstractAs we know, a well chosen initialization can speed up the convergence of gradient descent and increase the odds of gradient descent converging to a lower training (and generalization) error .S">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fy4zbcs2pcj30c70703zd.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fy53h24km2j31920scdkd.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fy53hed7g2j30jg0b4aad.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fy53hkik8ij30jg0b4400.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fy544ebk15j31920scaem.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy544kub2hj30jg0b4q3e.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fy544q1t7yj30jg0b4myk.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fy53vwdco8j31920scq7k.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fy53woayl0j30jg0b4mxo.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fy53wv65huj30jg0b475k.jpg">
+<meta property="og:updated_time" content="2018-12-13T06:46:46.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The impact of different initialization strategies on neural networks">
+<meta name="twitter:description" content="AbstractAs we know, a well chosen initialization can speed up the convergence of gradient descent and increase the odds of gradient descent converging to a lower training (and generalization) error .S">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fy4zbcs2pcj30c70703zd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ai-exception.com/2018/12/13/The impact of different initialization strategies on neural networks/">
+
+
+
+
+
+  <title>The impact of different initialization strategies on neural networks | ai-exception</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ai-exception</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ai-exception.com/2018/12/13/The impact of different initialization strategies on neural networks/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DmrfCoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ai-exception">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">The impact of different initialization strategies on neural networks</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T14:46:30+08:00">
+                2018-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/13/The impact of different initialization strategies on neural networks/" class="leancloud_visitors" data-flag-title="The impact of different initialization strategies on neural networks">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>As we know, a well chosen initialization can <strong>speed up the convergence of gradient descent</strong> and i<strong>ncrease the odds of gradient descent converging to a lower training (and generalization) error</strong> .So in this article, we will explore the impact of different parameter initialization strategies on training in deep learning.</p>
+<p>In this experience,we will try three different initialization strategies:</p>
+<ul>
+<li>Zeros initialization</li>
+<li>Random initialization</li>
+<li>He initialization</li>
+</ul>
+<h2 id="Load-dataset"><a href="#Load-dataset" class="headerlink" title="Load dataset"></a>Load dataset</h2><p>To get started, we need load dataset for our experience : </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"><span class="keyword">from</span> init_utils <span class="keyword">import</span> sigmoid, relu, compute_loss, forward_propagation, backward_propagation</span><br><span class="line"><span class="keyword">from</span> init_utils <span class="keyword">import</span> update_parameters, predict, load_dataset, plot_decision_boundary, predict_dec</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">'figure.figsize'</span>] = (<span class="number">7.0</span>, <span class="number">4.0</span>) <span class="comment"># set default size of plots</span></span><br><span class="line">plt.rcParams[<span class="string">'image.interpolation'</span>] = <span class="string">'nearest'</span></span><br><span class="line">plt.rcParams[<span class="string">'image.cmap'</span>] = <span class="string">'gray'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># load image dataset: blue/red dots in circles</span></span><br><span class="line">train_X, train_Y, test_X, test_Y = load_dataset()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fy4zbcs2pcj30c70703zd.jpg" alt="png"></p>
+<p>What we goal is train a model toi classifier the blue dots and red dots.</p>
+<h2 id="Neural-Network-model"><a href="#Neural-Network-model" class="headerlink" title="Neural Network model"></a>Neural Network model</h2><p>I will use a 3-layer neural network (already implemented on init_utils). Here are the initialization methods we will experiment with:  </p>
+<ul>
+<li><em>Zeros initialization</em> —  setting <code>initialization = &quot;zeros&quot;</code> in the input argument.</li>
+<li><em>Random initialization</em> — setting <code>initialization = &quot;random&quot;</code> in the input argument. This initializes the weights to large random values.  </li>
+<li><em>He initialization</em> — setting <code>initialization = &quot;he&quot;</code> in the input argument. This initializes the weights to random values scaled according to a paper by He et al., 2015. </li>
+</ul>
+<p>The model code as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(X, Y, learning_rate = <span class="number">0.01</span>, num_iterations = <span class="number">15000</span>, print_cost = True, initialization = <span class="string">"he"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements a three-layer neural network: LINEAR-&gt;RELU-&gt;LINEAR-&gt;RELU-&gt;LINEAR-&gt;SIGMOID.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- input data, of shape (2, number of examples)</span></span><br><span class="line"><span class="string">    Y -- true "label" vector (containing 0 for red dots; 1 for blue dots), of shape (1, number of examples)</span></span><br><span class="line"><span class="string">    learning_rate -- learning rate for gradient descent </span></span><br><span class="line"><span class="string">    num_iterations -- number of iterations to run gradient descent</span></span><br><span class="line"><span class="string">    print_cost -- if True, print the cost every 1000 iterations</span></span><br><span class="line"><span class="string">    initialization -- flag to choose which initialization to use ("zeros","random" or "he")</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- parameters learnt by the model</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">        </span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    costs = [] <span class="comment"># to keep track of the loss</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>] <span class="comment"># number of examples</span></span><br><span class="line">    layers_dims = [X.shape[<span class="number">0</span>], <span class="number">10</span>, <span class="number">5</span>, <span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize parameters dictionary.</span></span><br><span class="line">    <span class="keyword">if</span> initialization == <span class="string">"zeros"</span>:</span><br><span class="line">        parameters = initialize_parameters_zeros(layers_dims)</span><br><span class="line">    <span class="keyword">elif</span> initialization == <span class="string">"random"</span>:</span><br><span class="line">        parameters = initialize_parameters_random(layers_dims)</span><br><span class="line">    <span class="keyword">elif</span> initialization == <span class="string">"he"</span>:</span><br><span class="line">        parameters = initialize_parameters_he(layers_dims)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Loop (gradient descent)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, num_iterations):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Forward propagation: LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID.</span></span><br><span class="line">        a3, cache = forward_propagation(X, parameters)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Loss</span></span><br><span class="line">        cost = compute_loss(a3, Y)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Backward propagation.</span></span><br><span class="line">        grads = backward_propagation(X, Y, cache)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Update parameters.</span></span><br><span class="line">        parameters = update_parameters(parameters, grads, learning_rate)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Print the loss every 1000 iterations</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"Cost after iteration &#123;&#125;: &#123;&#125;"</span>.format(i, cost))</span><br><span class="line">            costs.append(cost)</span><br><span class="line">            </span><br><span class="line">    <span class="comment"># plot the loss</span></span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.plot(costs)</span><br><span class="line">    plt.ylabel(<span class="string">'cost'</span>)</span><br><span class="line">    plt.xlabel(<span class="string">'iterations (per hundreds)'</span>)</span><br><span class="line">    plt.title(<span class="string">'init with'</span>+initialization+<span class="string">' Learning rate ='</span> + str(learning_rate))</span><br><span class="line">    plt.show()</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<h2 id="2-Zero-initialization"><a href="#2-Zero-initialization" class="headerlink" title="2 - Zero initialization"></a>2 - Zero initialization</h2><p>There are two types of parameters to initialize in a neural network:</p>
+<ul>
+<li>the weight matrices $(W^{[1]}, W^{[2]}, W^{[3]}, …, W^{[L-1]}, W^{[L]})$</li>
+<li>the bias vectors $(b^{[1]}, b^{[2]}, b^{[3]}, …, b^{[L-1]}, b^{[L]})$</li>
+</ul>
+<p><strong>Exercise</strong>: Implement the following function to initialize all parameters to zeros. You’ll see later that this does not work well since it fails to “break symmetry”, but lets try it anyway and see what happens. Use np.zeros((..,..)) with the correct shapes.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_zeros</span><span class="params">(layers_dims)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    layer_dims -- python array (list) containing the size of each layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your parameters "W1", "b1", ..., "WL", "bL":</span></span><br><span class="line"><span class="string">                    W1 -- weight matrix of shape (layers_dims[1], layers_dims[0])</span></span><br><span class="line"><span class="string">                    b1 -- bias vector of shape (layers_dims[1], 1)</span></span><br><span class="line"><span class="string">                    ...</span></span><br><span class="line"><span class="string">                    WL -- weight matrix of shape (layers_dims[L], layers_dims[L-1])</span></span><br><span class="line"><span class="string">                    bL -- bias vector of shape (layers_dims[L], 1)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    L = len(layers_dims)  <span class="comment"># number of layers in the network</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1</span>, L):</span><br><span class="line">        parameters[<span class="string">'W'</span> + str(l)] = np.zeros(shape=(layers_dims[l], layers_dims[l - <span class="number">1</span>]))</span><br><span class="line">        parameters[<span class="string">'b'</span> + str(l)] = np.zeros(shape=(layers_dims[l], <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<p>Run the following code to train our model on 15,000 iterations using zeros initialization:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_with_zeros_init</span><span class="params">()</span>:</span></span><br><span class="line">    parameters = model(train_X, train_Y, initialization=<span class="string">"zeros"</span>)</span><br><span class="line">    print(<span class="string">"On the train set:"</span>)</span><br><span class="line">    predictions_train = predict(train_X, train_Y, parameters)</span><br><span class="line">    print(<span class="string">"On the test set:"</span>)</span><br><span class="line">    predictions_test = predict(test_X, test_Y, parameters)</span><br><span class="line">    print(<span class="string">"predictions_train = "</span> + str(predictions_train))</span><br><span class="line">    print(<span class="string">"predictions_test = "</span> + str(predictions_test))</span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.title(<span class="string">"Model with Zeros initialization"</span>)</span><br><span class="line">    axes = plt.gca()</span><br><span class="line">    axes.set_xlim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">    axes.set_ylim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">    plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+<p>The outputs are as follows:</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fy53h24km2j31920scdkd.jpg" alt="image-20181213141955112"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fy53hed7g2j30jg0b4aad.jpg" alt="image-20181213142015360"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fy53hkik8ij30jg0b4400.jpg" alt="image-20181213142024175"></p>
+<p>The performance is really bad, and the cost does not really decrease, and the algorithm performs no better than random guessing. Why? From the details of the predictions and the decision boundary, we can find that the model is predicting 0 for every example. </p>
+<p>In general, initializing all the weights to zero results in the network failing to break symmetry(对称性). This means that every neuron in each layer will learn the same thing, and you might as well be training a neural network with $n^{[l]}=1$ for every layer, and the network is no more powerful than a linear classifier such as logistic regression. </p>
+<h3 id="What-we-should-remember"><a href="#What-we-should-remember" class="headerlink" title="What we should remember"></a>What we should remember</h3><ul>
+<li>The weights $W^{[l]}$ should be initialized randomly to break symmetry. </li>
+<li>It is however okay to initialize the biases $b^{[l]}$ to zeros. Symmetry is still broken so long as $W^{[l]}$ is initialized randomly. </li>
+</ul>
+<h2 id="Random-initialization"><a href="#Random-initialization" class="headerlink" title="Random initialization"></a>Random initialization</h2><p>To break symmetry, lets intialize the weights randomly. Following random initialization, each neuron can then proceed to learn a different function of its inputs. In this exercise, you will see what happens if the weights are intialized randomly, but to very large values. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_random</span><span class="params">(layers_dims)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">        Arguments:</span></span><br><span class="line"><span class="string">        layer_dims -- python array (list) containing the size of each layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Returns:</span></span><br><span class="line"><span class="string">        parameters -- python dictionary containing your parameters "W1", "b1", ..., "WL", "bL":</span></span><br><span class="line"><span class="string">                        W1 -- weight matrix of shape (layers_dims[1], layers_dims[0])</span></span><br><span class="line"><span class="string">                        b1 -- bias vector of shape (layers_dims[1], 1)</span></span><br><span class="line"><span class="string">                        ...</span></span><br><span class="line"><span class="string">                        WL -- weight matrix of shape (layers_dims[L], layers_dims[L-1])</span></span><br><span class="line"><span class="string">                        bL -- bias vector of shape (layers_dims[L], 1)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"></span><br><span class="line">    np.random.seed(<span class="number">3</span>)  <span class="comment"># This seed makes sure your "random" numbers will be the as ours</span></span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    L = len(layers_dims)  <span class="comment"># integer representing the number of layers</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1</span>, L):</span><br><span class="line">        parameters[<span class="string">'W'</span> + str(l)] = np.random.randn(layers_dims[l], layers_dims[l - <span class="number">1</span>])*<span class="number">10</span></span><br><span class="line">        parameters[<span class="string">'b'</span> + str(l)] = np.zeros(shape=(layers_dims[l], <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<p>Run the following code to train our model on 15,000 iterations using random initialization:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_with_random_init</span><span class="params">()</span>:</span></span><br><span class="line">    parameters = model(train_X, train_Y, initialization=<span class="string">"random"</span>)</span><br><span class="line">    print(<span class="string">"On the train set:"</span>)</span><br><span class="line">    predictions_train = predict(train_X, train_Y, parameters)</span><br><span class="line">    print(<span class="string">"On the test set:"</span>)</span><br><span class="line">    predictions_test = predict(test_X, test_Y, parameters)</span><br><span class="line">    print(<span class="string">"predictions_train = "</span> + str(predictions_train))</span><br><span class="line">    print(<span class="string">"predictions_test = "</span> + str(predictions_test))</span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.title(<span class="string">"Model with random initialization"</span>)</span><br><span class="line">    axes = plt.gca()</span><br><span class="line">    axes.set_xlim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">    axes.set_ylim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">    plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+<p>And the outputs are as follows:</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fy544ebk15j31920scaem.jpg" alt="image-20181213144220568"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy544kub2hj30jg0b4q3e.jpg" alt="image-20181213144231773"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fy544q1t7yj30jg0b4myk.jpg" alt="image-20181213144240224"></p>
+<p>We can  see “inf” as the cost after the iteration 0, this is because of numerical roundoff; a more numerically sophisticated implementation would fix this. But this isn’t worth worrying about for our purposes. </p>
+<p>Anyway, it looks like we have broken symmetry, and this gives better results. than before. The model is no longer outputting all 0s. </p>
+<p><strong>Observations</strong>:</p>
+<ul>
+<li>The cost starts very high. This is because with large random-valued weights, the last activation (sigmoid) outputs results that are very close to 0 or 1 for some examples, and when it gets that example wrong it incurs a very high loss for that example. Indeed, when $\log(a^{[3]}) = \log(0)$, the loss goes to infinity.</li>
+<li>Poor initialization can lead to vanishing/exploding gradients, which also slows down the optimization algorithm. </li>
+<li>If you train this network longer you will see better results, but initializing with overly large random numbers slows down the optimization.</li>
+</ul>
+<h3 id="In-summary"><a href="#In-summary" class="headerlink" title="In summary"></a>In summary</h3><ul>
+<li>Initializing weights to very large random values does not work well. </li>
+<li>Hopefully intializing with small random values does better. The important question is: how small should be these random values be? Lets find out in the next part! </li>
+</ul>
+<h2 id="He-initialization"><a href="#He-initialization" class="headerlink" title="He initialization"></a>He initialization</h2><p>Finally, try “He Initialization”; this is named for the first author of He et al., 2015. (If you have heard of “Xavier initialization”, this is similar except Xavier initialization uses a scaling factor for the weights $W^{[l]}$ of <code>sqrt(1./layers_dims[l-1])</code> where He initialization would use <code>sqrt(2./layers_dims[l-1])</code>.):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_he</span><span class="params">(layers_dims)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">       Arguments:</span></span><br><span class="line"><span class="string">       layer_dims -- python array (list) containing the size of each layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">       Returns:</span></span><br><span class="line"><span class="string">       parameters -- python dictionary containing your parameters "W1", "b1", ..., "WL", "bL":</span></span><br><span class="line"><span class="string">                       W1 -- weight matrix of shape (layers_dims[1], layers_dims[0])</span></span><br><span class="line"><span class="string">                       b1 -- bias vector of shape (layers_dims[1], 1)</span></span><br><span class="line"><span class="string">                       ...</span></span><br><span class="line"><span class="string">                       WL -- weight matrix of shape (layers_dims[L], layers_dims[L-1])</span></span><br><span class="line"><span class="string">                       bL -- bias vector of shape (layers_dims[L], 1)</span></span><br><span class="line"><span class="string">       """</span></span><br><span class="line"></span><br><span class="line">    np.random.seed(<span class="number">3</span>)</span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    L = len(layers_dims) - <span class="number">1</span>  <span class="comment"># integer representing the number of layers</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> range(<span class="number">1</span>, L + <span class="number">1</span>):</span><br><span class="line">        parameters[<span class="string">'W'</span> + str(l)] = np.random.randn(layers_dims[l], layers_dims[l - <span class="number">1</span>]) * np.sqrt(<span class="number">2</span> / layers_dims[l - <span class="number">1</span>])</span><br><span class="line">        parameters[<span class="string">'b'</span> + str(l)] = np.zeros(shape=(layers_dims[l], <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<p>And run the code as follow to train with he initialization:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_with_he_init</span><span class="params">()</span>:</span></span><br><span class="line">    parameters = model(train_X, train_Y, initialization=<span class="string">"he"</span>)</span><br><span class="line">    print(<span class="string">"On the train set:"</span>)</span><br><span class="line">    predictions_train = predict(train_X, train_Y, parameters)</span><br><span class="line">    print(<span class="string">"On the test set:"</span>)</span><br><span class="line">    predictions_test = predict(test_X, test_Y, parameters)</span><br><span class="line">    print(<span class="string">"predictions_train = "</span> + str(predictions_train))</span><br><span class="line">    print(<span class="string">"predictions_test = "</span> + str(predictions_test))</span><br><span class="line">    plt.figure()</span><br><span class="line">    plt.title(<span class="string">"Model with he initialization"</span>)</span><br><span class="line">    axes = plt.gca()</span><br><span class="line">    axes.set_xlim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">    axes.set_ylim([<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">    plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+<p>The outputs are as follows:</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fy53vwdco8j31920scq7k.jpg" alt="image-20181213143411097"></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fy53woayl0j30jg0b4mxo.jpg" alt="image-20181213143455882"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fy53wv65huj30jg0b475k.jpg" alt="image-20181213143506983"></p>
+<p><strong>Observations</strong>:</p>
+<ul>
+<li>The model with He initialization separates the blue and the red dots very well in a small number of iterations.</li>
+</ul>
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><p>We have seen three different types of initializations. For the same number of iterations and same hyperparameters the comparison is:</p>
+<table> 
+    <tr>
+        <td>
+        Model
+        </td>
+        <td>
+        Train accuracy
+        </td>
+        <td>
+        Problem/Comment
+        </td>
+        </tr>
+    <td>
+    3-layer NN with zeros initialization
+    </td>
+    <td>
+    50%
+    </td>
+    <td>
+    fails to break symmetry
+    </td>
+<tr>
+    <td>
+    3-layer NN with large random initialization
+    </td>
+    <td>
+    83%
+    </td>
+    <td>
+    too large weights 
+    </td>
+</tr>
+<tr>
+    <td>
+    3-layer NN with He initialization
+    </td>
+    <td>
+    99%
+    </td>
+    <td>
+    recommended method
+    </td>
+</tr>
+    </table> 
+
+
+<h3 id="What-we-should-remember-from-this-blog"><a href="#What-we-should-remember-from-this-blog" class="headerlink" title="What we should remember from this blog"></a>What we should remember from this blog</h3><ul>
+<li>Different initializations lead to different results</li>
+<li>Random initialization is used to break symmetry and make sure different hidden units can learn different things</li>
+<li>Don’t intialize to values that are too large</li>
+<li>He initialization works well for networks with ReLU activations. </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="DmrfCoder 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="DmrfCoder 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/coursera/" rel="tag"><i class="fa fa-tag"></i>
+
+ coursera</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/10/如何编写脚本将CSDN的博客批量导出到hexo下的md格式/" rel="next" title="如何编写脚本将CSDN的博客批量导出到hexo下的md格式">
+                <i class="fa fa-chevron-left"></i> 如何编写脚本将CSDN的博客批量导出到hexo下的md格式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="DmrfCoder">
+            
+              <p class="site-author-name" itemprop="name">DmrfCoder</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">140</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Load-dataset"><span class="nav-number">2.</span> <span class="nav-text">Load dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Network-model"><span class="nav-number">3.</span> <span class="nav-text">Neural Network model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Zero-initialization"><span class="nav-number">4.</span> <span class="nav-text">2 - Zero initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-we-should-remember"><span class="nav-number">4.1.</span> <span class="nav-text">What we should remember</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random-initialization"><span class="nav-number">5.</span> <span class="nav-text">Random initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-summary"><span class="nav-number">5.1.</span> <span class="nav-text">In summary</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#He-initialization"><span class="nav-number">6.</span> <span class="nav-text">He initialization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusions"><span class="nav-number">7.</span> <span class="nav-text">Conclusions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-we-should-remember-from-this-blog"><span class="nav-number">7.1.</span> <span class="nav-text">What we should remember from this blog</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DmrfCoder</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共217.8k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
