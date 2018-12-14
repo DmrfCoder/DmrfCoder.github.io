@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fy6c5h76wyj30cd07q748.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6c5k0pfpj30cq07qdgg.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6c7wsz1kj317s0cwq5c.jpg">
-<meta property="og:updated_time" content="2018-12-14T08:18:39.505Z">
+<meta property="og:updated_time" content="2018-12-14T08:21:39.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Regularization">
 <meta name="twitter:description" content="AbstractDeep Learning models have so much flexibility and capacity that overfitting can be a serious problem, if the training dataset is not big enough. Sure it does well on the training set, but the">
@@ -573,12 +573,12 @@ Cost after iteration 20000: 0.2680916337127301
 </li>
 </ul>
 <h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>Finally, <strong>dropout</strong> is a widely used regularization technique that is specific to deep learning.<br><strong>It randomly shuts down some neurons in each iteration.</strong> Watch these two videos to see what this means!</p>
-<video src="images/dropout1.mp4"></video>
+<video src="./images/dropout1.mp4"></video>
 
 
 
 <p>At each iteration, we shut down (= set to zero) each neuron of a layer with probability $1 - keep_prob$ or keep it with probability $keep_prob$ (50% here). The dropped neurons don’t contribute to the training in both the forward and backward propagations of the iteration.</p>
-<video src="images/dropout2.mp4"></video>
+<video src="./images/dropout2.mp4"></video>
 
 <p>When we shut some neurons down, we actually modify our model. The idea behind drop-out is that at each iteration, we train a different model that uses only a subset of our neurons. With dropout, our neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time. </p>
 <h3 id="Forward-propagation-with-dropout"><a href="#Forward-propagation-with-dropout" class="headerlink" title="Forward propagation with dropout"></a>Forward propagation with dropout</h3><p>I will  implement the forward propagation with dropout. I am using a 3 layer neural network, and will add dropout to the first and second hidden layers. We will not apply dropout to the input layer or output layer. </p>
