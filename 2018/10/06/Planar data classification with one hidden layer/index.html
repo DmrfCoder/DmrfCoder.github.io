@@ -125,7 +125,7 @@
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fx66m84uglj31kg0lmk1n.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fx66midno9j31kg0lmakg.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fx66mp0303j31kg0lmq8y.jpg">
-<meta property="og:updated_time" content="2018-12-11T01:21:10.575Z">
+<meta property="og:updated_time" content="2018-12-14T03:52:16.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Planar data classification with one hidden layer">
 <meta name="twitter:description" content="From Logistic Regression with a Neural Network mindset, we achieved the Neural Network which use Logistic Regression to resolve the linear classification . In this blog ,we will achieve a Neural Netwo">
@@ -598,6 +598,7 @@ J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large{(} \small y^{(i)}\log\left(a^{[
 <li>The best hidden layer size seems to be around n_h = 5. Indeed, a value around here seems to  fits the data well without also incurring noticable overfitting.</li>
 <li>You will also learn later about regularization, which lets you use very large models (such as n_h = 50) without much overfitting. </li>
 </ul>
+<h2 id="links"><a href="#links" class="headerlink" title="links"></a>links</h2><p><a href="https://github.com/DmrfCoder/CourseraAi/tree/master/DeepNeuralNetWork" target="_blank" rel="noopener">github</a></p>
 
       
     </div>
@@ -782,7 +783,7 @@ J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large{(} \small y^{(i)}\log\left(a^{[
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">142</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -865,7 +866,7 @@ J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large{(} \small y^{(i)}\log\left(a^{[
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Which-I-will-Code"><span class="nav-number">1.</span> <span class="nav-text">Which I will Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Defining-the-neural-network-structure"><span class="nav-number">2.</span> <span class="nav-text">Defining the neural network structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#layer-size"><span class="nav-number">2.1.</span> <span class="nav-text">layer_size()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialize-the-model’s-parameters"><span class="nav-number">3.</span> <span class="nav-text">Initialize the model’s parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initialize-parameters"><span class="nav-number">3.1.</span> <span class="nav-text">initialize_parameters()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Loop"><span class="nav-number">4.</span> <span class="nav-text">The Loop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forward-propagation"><span class="nav-number">4.1.</span> <span class="nav-text">forward_propagation()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step"><span class="nav-number">4.1.1.</span> <span class="nav-text">Step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code"><span class="nav-number">4.1.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compute-cost"><span class="nav-number">4.2.</span> <span class="nav-text">compute_cost()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#backward-propagation"><span class="nav-number">4.3.</span> <span class="nav-text">backward propagation()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Integrate-above-base-function-in-nn-model"><span class="nav-number">5.</span> <span class="nav-text">Integrate above base function in nn_model()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Predictions"><span class="nav-number">6.</span> <span class="nav-text">Predictions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Print-accuracy"><span class="nav-number">6.0.1.</span> <span class="nav-text">Print accuracy</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Tuning-hidden-layer-size-optional-ungraded-exercise"><span class="nav-number">7.</span> <span class="nav-text">Tuning hidden layer size (optional/ungraded exercise)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interpretation"><span class="nav-number">7.1.</span> <span class="nav-text">Interpretation</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Which-I-will-Code"><span class="nav-number">1.</span> <span class="nav-text">Which I will Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Defining-the-neural-network-structure"><span class="nav-number">2.</span> <span class="nav-text">Defining the neural network structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#layer-size"><span class="nav-number">2.1.</span> <span class="nav-text">layer_size()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialize-the-model’s-parameters"><span class="nav-number">3.</span> <span class="nav-text">Initialize the model’s parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initialize-parameters"><span class="nav-number">3.1.</span> <span class="nav-text">initialize_parameters()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Loop"><span class="nav-number">4.</span> <span class="nav-text">The Loop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forward-propagation"><span class="nav-number">4.1.</span> <span class="nav-text">forward_propagation()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step"><span class="nav-number">4.1.1.</span> <span class="nav-text">Step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Code"><span class="nav-number">4.1.2.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compute-cost"><span class="nav-number">4.2.</span> <span class="nav-text">compute_cost()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#backward-propagation"><span class="nav-number">4.3.</span> <span class="nav-text">backward propagation()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Integrate-above-base-function-in-nn-model"><span class="nav-number">5.</span> <span class="nav-text">Integrate above base function in nn_model()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Predictions"><span class="nav-number">6.</span> <span class="nav-text">Predictions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Print-accuracy"><span class="nav-number">6.0.1.</span> <span class="nav-text">Print accuracy</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Tuning-hidden-layer-size-optional-ungraded-exercise"><span class="nav-number">7.</span> <span class="nav-text">Tuning hidden layer size (optional/ungraded exercise)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Interpretation"><span class="nav-number">7.1.</span> <span class="nav-text">Interpretation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#links"><span class="nav-number">8.</span> <span class="nav-text">links</span></a></li></div>
             
 
           </div>
@@ -910,7 +911,7 @@ J = - \frac{1}{m} \sum\limits_{i = 0}^{m} \large{(} \small y^{(i)}\log\left(a^{[
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共219.4k字</span>
+  <span class="post-count">博客全站共221k字</span>
 </div>
 
         
