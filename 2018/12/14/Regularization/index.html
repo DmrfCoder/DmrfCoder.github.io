@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="coursera,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="AbstractDeep Learning models have so much flexibility and capacity that overfitting can be a serious problem, if the training dataset is not big enough. Sure it does well on the training set, but the">
+<meta name="keywords" content="coursera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Regularization">
+<meta property="og:url" content="http://www.ai-exception.com/2018/12/14/Regularization/index.html">
+<meta property="og:site_name" content="ai-exception">
+<meta property="og:description" content="AbstractDeep Learning models have so much flexibility and capacity that overfitting can be a serious problem, if the training dataset is not big enough. Sure it does well on the training set, but the">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6azpdabcj30zk0mkq60.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fy6b4ms6xvj30c70700tk.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fy6bavjmbej30cd07qt8p.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6bb14rc8j30cq07q3z5.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fy6bkbfmdwj30cd07qmx3.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6bkkaptwj30cq07qq3k.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fy6c5h76wyj30cd07q748.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6c5k0pfpj30cq07qdgg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6c7wsz1kj317s0cwq5c.jpg">
+<meta property="og:updated_time" content="2018-12-14T08:10:31.603Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regularization">
+<meta name="twitter:description" content="AbstractDeep Learning models have so much flexibility and capacity that overfitting can be a serious problem, if the training dataset is not big enough. Sure it does well on the training set, but the">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6azpdabcj30zk0mkq60.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ai-exception.com/2018/12/14/Regularization/">
+
+
+
+
+
+  <title>Regularization | ai-exception</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ai-exception</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ai-exception.com/2018/12/14/Regularization/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ai-exception">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ai-exception">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Regularization</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T16:09:30+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/14/Regularization/" class="leancloud_visitors" data-flag-title="Regularization">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Deep Learning models have so much flexibility and capacity that <strong>overfitting can be a serious problem</strong>, if the training dataset is not big enough. Sure it does well on the training set, but the learned network <strong>doesn’t generalize to new examples</strong> that it has never seen! This article will use regularization in our deep learning models.</p>
+<h2 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h2><p><strong>Problem Statement</strong>: You have just been hired as an AI expert by the French Football Corporation. They would like you to recommend positions where France’s goal keeper should kick the ball so that the French team’s players can then hit it with their head. </p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6azpdabcj30zk0mkq60.jpg" alt="1"></p>
+<center>Figure 1: Football field</center>
+
+<center>The goal keeper kicks the ball in the air, the players of each team are fighting to hit the ball with their head</center>
+
+
+
+<p>They give you the following 2D dataset from France’s past 10 games.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_X, train_Y, test_X, test_Y = load_2D_dataset()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fy6b4ms6xvj30c70700tk.jpg" alt="output_3_0"></p>
+<p>Each dot corresponds to a position on the football field where a football player has hit the ball with his/her head after the French goal keeper has shot the ball from the left side of the football field.</p>
+<ul>
+<li>If the dot is blue, it means the French player managed to hit the ball with his/her head</li>
+<li>If the dot is red, it means the other team’s player hit the ball with their head</li>
+</ul>
+<p><strong>Our goal</strong>: Use a deep learning model to find the positions on the field where the goalkeeper should kick the ball.</p>
+<p><strong>Analysis of the dataset</strong>: This dataset is a little noisy, but it looks like a diagonal line separating the upper left half (blue) from the lower right half (red) would work well. </p>
+<p>I will first try a non-regularized model. Then I will show you  how to regularize it and decide which model we will choose to solve the French Football Corporation’s problem. </p>
+<h3 id="Non-regularized-model"><a href="#Non-regularized-model" class="headerlink" title="Non-regularized model"></a>Non-regularized model</h3><p>I will use the following neural network. This model can be used:</p>
+<ul>
+<li>in <em>regularization mode</em> — by setting the <code>lambd</code> input to a non-zero value. We use “<code>lambd</code>“ instead of “<code>lambda</code>“ because “<code>lambda</code>“ is a reserved keyword in Python. </li>
+<li>in <em>dropout mode</em> — by setting the <code>keep_prob</code> to a value less than one</li>
+</ul>
+<p>I will first try the model without any regularization. Then, I will implement:</p>
+<ul>
+<li><em>L2 regularization</em> — functions: “<code>compute_cost_with_regularization()</code>“ and “<code>backward_propagation_with_regularization()</code>“</li>
+<li><em>Dropout</em> — functions: “<code>forward_propagation_with_dropout()</code>“ and “<code>backward_propagation_with_dropout()</code>“</li>
+</ul>
+<p>In each part, I will run this model with the correct inputs so that it calls the functions I’ve implemented:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(X, Y, learning_rate = <span class="number">0.3</span>, num_iterations = <span class="number">30000</span>, print_cost = True, lambd = <span class="number">0</span>, keep_prob = <span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements a three-layer neural network: LINEAR-&gt;RELU-&gt;LINEAR-&gt;RELU-&gt;LINEAR-&gt;SIGMOID.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- input data, of shape (input size, number of examples)</span></span><br><span class="line"><span class="string">    Y -- true "label" vector (1 for blue dot / 0 for red dot), of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    learning_rate -- learning rate of the optimization</span></span><br><span class="line"><span class="string">    num_iterations -- number of iterations of the optimization loop</span></span><br><span class="line"><span class="string">    print_cost -- If True, print the cost every 10000 iterations</span></span><br><span class="line"><span class="string">    lambd -- regularization hyperparameter, scalar</span></span><br><span class="line"><span class="string">    keep_prob - probability of keeping a neuron active during drop-out, scalar.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- parameters learned by the model. They can then be used to predict.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">        </span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    costs = []                            <span class="comment"># to keep track of the cost</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]                        <span class="comment"># number of examples</span></span><br><span class="line">    layers_dims = [X.shape[<span class="number">0</span>], <span class="number">20</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initialize parameters dictionary.</span></span><br><span class="line">    parameters = initialize_parameters(layers_dims)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Loop (gradient descent)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, num_iterations):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Forward propagation: LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID.</span></span><br><span class="line">        <span class="keyword">if</span> keep_prob == <span class="number">1</span>:</span><br><span class="line">            a3, cache = forward_propagation(X, parameters)</span><br><span class="line">        <span class="keyword">elif</span> keep_prob &lt; <span class="number">1</span>:</span><br><span class="line">            a3, cache = forward_propagation_with_dropout(X, parameters, keep_prob)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Cost function</span></span><br><span class="line">        <span class="keyword">if</span> lambd == <span class="number">0</span>:</span><br><span class="line">            cost = compute_cost(a3, Y)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cost = compute_cost_with_regularization(a3, Y, parameters, lambd)</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># Backward propagation.</span></span><br><span class="line">        <span class="keyword">assert</span>(lambd==<span class="number">0</span> <span class="keyword">or</span> keep_prob==<span class="number">1</span>)    <span class="comment"># it is possible to use both L2 regularization and dropout, </span></span><br><span class="line">                                            <span class="comment"># but this assignment will only explore one at a time</span></span><br><span class="line">        <span class="keyword">if</span> lambd == <span class="number">0</span> <span class="keyword">and</span> keep_prob == <span class="number">1</span>:</span><br><span class="line">            grads = backward_propagation(X, Y, cache)</span><br><span class="line">        <span class="keyword">elif</span> lambd != <span class="number">0</span>:</span><br><span class="line">            grads = backward_propagation_with_regularization(X, Y, cache, lambd)</span><br><span class="line">        <span class="keyword">elif</span> keep_prob &lt; <span class="number">1</span>:</span><br><span class="line">            grads = backward_propagation_with_dropout(X, Y, cache, keep_prob)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Update parameters.</span></span><br><span class="line">        parameters = update_parameters(parameters, grads, learning_rate)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Print the loss every 10000 iterations</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">10000</span> == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"Cost after iteration &#123;&#125;: &#123;&#125;"</span>.format(i, cost))</span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># plot the cost</span></span><br><span class="line">    plt.plot(costs)</span><br><span class="line">    plt.ylabel(<span class="string">'cost'</span>)</span><br><span class="line">    plt.xlabel(<span class="string">'iterations (x1,000)'</span>)</span><br><span class="line">    plt.title(<span class="string">"Learning rate ="</span> + str(learning_rate))</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+<p>Let’s train the model without any regularization, and observe the accuracy on the train/test sets.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"On the training set:"</span>)</span><br><span class="line">predictions_train = predict(train_X, train_Y, parameters)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"On the test set:"</span>)</span><br><span class="line">predictions_test = predict(test_X, test_Y, parameters)</span><br><span class="line">plt.title(<span class="string">"Model without regularization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-0.75</span>,<span class="number">0.40</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-0.75</span>,<span class="number">0.65</span>])</span><br><span class="line"><span class="comment">#to plot the decision boundary of our model.</span></span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+<p>Output:</p>
+<pre><code>Cost after iteration 0: 0.6557412523481002
+Cost after iteration 10000: 0.16329987525724216
+Cost after iteration 20000: 0.13851642423255986
+On the training set:
+Accuracy: 0.947867298578
+On the test set:
+Accuracy: 0.915
+</code></pre><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fy6bavjmbej30cd07qt8p.jpg" alt="png"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6bb14rc8j30cq07q3z5.jpg" alt="png"></p>
+<p>The train accuracy is 94.8% while the test accuracy is 91.5%. This is the <strong>baseline model</strong> (I will observe the impact of regularization on this model). </p>
+<p>The non-regularized model is obviously overfitting the training set. It is fitting the noisy points! Lets now look at two techniques to reduce overfitting.</p>
+<h3 id="L2-Regularization"><a href="#L2-Regularization" class="headerlink" title="L2 Regularization"></a>L2 Regularization</h3><p>The standard way to avoid overfitting is called <strong>L2 regularization</strong>. It consists of appropriately modifying our cost function, from:</p>
+<script type="math/tex; mode=display">
+J = -\frac{1}{m} \sum\limits_{i = 1}^{m} \large{(}\small  y^{(i)}\log\left(a^{[L](i)}\right) + (1-y^{(i)})\log\left(1- a^{[L](i)}\right) \large{)} \tag{1}</script><p>To:</p>
+<script type="math/tex; mode=display">
+J_{regularized} = \small \underbrace{-\frac{1}{m} \sum\limits_{i = 1}^{m} \large{(}\small y^{(i)}\log\left(a^{[L](i)}\right) + (1-y^{(i)})\log\left(1- a^{[L](i)}\right) \large{)} }_\text{cross-entropy cost} + \underbrace{\frac{1}{m} \frac{\lambda}{2} \sum\limits_l\sum\limits_k\sum\limits_j W_{k,j}^{[l]2} }_\text{L2 regularization cost} \tag{2}</script><p>Let’s modify out cost and observe the consequences.</p>
+<h4 id="compute-cost-with-regularization"><a href="#compute-cost-with-regularization" class="headerlink" title="compute_cost_with_regularization"></a>compute_cost_with_regularization</h4><p>I will implement <code>compute_cost_with_regularization()</code> which computes the cost given by formula (2). To calculate $\sum\limits<em>k\sum\limits_j W</em>{k,j}^{[l]2}$  , I will use <code>np.sum(np.square(Wl))</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost_with_regularization</span><span class="params">(A3, Y, parameters, lambd)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implement the cost function with L2 regularization. See formula (2) above.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A3 -- post-activation, output of forward propagation, of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    Y -- "true" labels vector, of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing parameters of the model</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    cost - value of the regularized loss function (formula (2))</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    m = Y.shape[<span class="number">1</span>]</span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    W3 = parameters[<span class="string">"W3"</span>]</span><br><span class="line">    </span><br><span class="line">    cross_entropy_cost = compute_cost(A3, Y) <span class="comment"># This gives you the cross-entropy part of the cost</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    L2_regularization_cost = (<span class="number">1</span> / m) * (lambd / <span class="number">2</span>) * (np.sum(np.square(W1))+np.sum(np.square(W2))+np.sum(np.square(W3))) </span><br><span class="line">    </span><br><span class="line">    cost = cross_entropy_cost + L2_regularization_cost</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br></pre></td></tr></table></figure>
+<p>Of course, because I changed the cost, we have to change backward propagation as well! All the gradients have to be computed with respect to this new cost. </p>
+<p>I will implement the changes needed in backward propagation to take into account regularization. The changes only concern dW1, dW2 and dW3. For each, we have to add the regularization term’s gradient ($\frac{d}{dW} ( \frac{1}{2}\frac{\lambda}{m}  W^2) = \frac{\lambda}{m} W$).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation_with_regularization</span><span class="params">(X, Y, cache, lambd)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the backward propagation of our baseline model to which we added an L2 regularization.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- input dataset, of shape (input size, number of examples)</span></span><br><span class="line"><span class="string">    Y -- "true" labels vector, of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    cache -- cache output from forward_propagation()</span></span><br><span class="line"><span class="string">    lambd -- regularization hyperparameter, scalar</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    gradients -- A dictionary with the gradients with respect to each parameter, activation and pre-activation variables</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    (Z1, A1, W1, b1, Z2, A2, W2, b2, Z3, A3, W3, b3) = cache</span><br><span class="line"></span><br><span class="line">    dZ3 = A3 - Y</span><br><span class="line"></span><br><span class="line">    dW3 = <span class="number">1.</span> / m * np.dot(dZ3, A2.T) + (lambd / m) * W3</span><br><span class="line">    db3 = <span class="number">1.</span> / m * np.sum(dZ3, axis=<span class="number">1</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    dA2 = np.dot(W3.T, dZ3)</span><br><span class="line">    dZ2 = np.multiply(dA2, np.int64(A2 &gt; <span class="number">0</span>))</span><br><span class="line">    dW2 = <span class="number">1.</span> / m * np.dot(dZ2, A1.T) + (lambd / m) * W2</span><br><span class="line">    db2 = <span class="number">1.</span> / m * np.sum(dZ2, axis=<span class="number">1</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    dA1 = np.dot(W2.T, dZ2)</span><br><span class="line">    dZ1 = np.multiply(dA1, np.int64(A1 &gt; <span class="number">0</span>))</span><br><span class="line">    dW1 = <span class="number">1.</span> / m * np.dot(dZ1, X.T) + (lambd / m) * W1</span><br><span class="line">    db1 = <span class="number">1.</span> / m * np.sum(dZ1, axis=<span class="number">1</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    gradients = &#123;<span class="string">"dZ3"</span>: dZ3, <span class="string">"dW3"</span>: dW3, <span class="string">"db3"</span>: db3, <span class="string">"dA2"</span>: dA2,</span><br><span class="line">                 <span class="string">"dZ2"</span>: dZ2, <span class="string">"dW2"</span>: dW2, <span class="string">"db2"</span>: db2, <span class="string">"dA1"</span>: dA1,</span><br><span class="line">                 <span class="string">"dZ1"</span>: dZ1, <span class="string">"dW1"</span>: dW1, <span class="string">"db1"</span>: db1&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> gradients</span><br></pre></td></tr></table></figure>
+<p>Let’s now run the model with L2 regularization $(\lambda = 0.7)$. The <code>model()</code> function will call: </p>
+<ul>
+<li><code>compute_cost_with_regularization</code> instead of <code>compute_cost</code></li>
+<li><code>backward_propagation_with_regularization</code> instead of <code>backward_propagation</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, lambd = <span class="number">0.7</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"On the train set:"</span>)</span><br><span class="line">predictions_train = predict(train_X, train_Y, parameters)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"On the test set:"</span>)</span><br><span class="line">predictions_test = predict(test_X, test_Y, parameters)</span><br><span class="line">plt.title(<span class="string">"Model with L2-regularization"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-0.75</span>,<span class="number">0.40</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-0.75</span>,<span class="number">0.65</span>])</span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+<pre><code>Cost after iteration 0: 0.6974484493131264
+Cost after iteration 10000: 0.2684918873282239
+Cost after iteration 20000: 0.2680916337127301
+</code></pre><p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fy6bkbfmdwj30cd07qmx3.jpg" alt="2"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6bkkaptwj30cq07qq3k.jpg" alt="3"></p>
+<p>Congrats, the test set accuracy increased to 93%. We have saved the French football team!</p>
+<h4 id="Observations"><a href="#Observations" class="headerlink" title="Observations"></a>Observations</h4><ul>
+<li>The value of $\lambda$ is a hyperparameter that we can tune using a dev set.</li>
+<li>L2 regularization makes our decision boundary smoother. If $\lambda$ is too large, it is also possible to “oversmooth”, resulting in a model with high bias.</li>
+</ul>
+<h5 id="What-is-L2-regularization-actually-doing"><a href="#What-is-L2-regularization-actually-doing" class="headerlink" title="What is L2-regularization actually doing?"></a>What is L2-regularization actually doing?</h5><p>L2-regularization relies on the assumption that a model with small weights is simpler than a model with large weights. Thus, by penalizing the square values of the weights in the cost function you drive all the weights to smaller values. It becomes too costly for the cost to have large weights! This leads to a smoother model in which the output changes more slowly as the input changes. </p>
+<h4 id="What-you-should-remember——the-implications-of-L2-regularization-on"><a href="#What-you-should-remember——the-implications-of-L2-regularization-on" class="headerlink" title="What you should remember——the implications of L2-regularization on"></a>What you should remember——the implications of L2-regularization on</h4><ul>
+<li>The cost computation:<ul>
+<li>A regularization term is added to the cost</li>
+</ul>
+</li>
+<li>The backpropagation function:<ul>
+<li>There are extra terms in the gradients with respect to weight matrices</li>
+</ul>
+</li>
+<li>Weights end up smaller (“weight decay”): <ul>
+<li>Weights are pushed to smaller values.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><p>Finally, <strong>dropout</strong> is a widely used regularization technique that is specific to deep learning.<br><strong>It randomly shuts down some neurons in each iteration.</strong> Watch these two videos to see what this means!</p>
+<video src="../images/dropout1.mp4"></video>
+
+
+
+<p>At each iteration, we shut down (= set to zero) each neuron of a layer with probability $1 - keep_prob$ or keep it with probability $keep_prob$ (50% here). The dropped neurons don’t contribute to the training in both the forward and backward propagations of the iteration.</p>
+<video src="../images/dropout2.mp4"></video>
+
+<p>When we shut some neurons down, we actually modify our model. The idea behind drop-out is that at each iteration, we train a different model that uses only a subset of our neurons. With dropout, our neurons thus become less sensitive to the activation of one other specific neuron, because that other neuron might be shut down at any time. </p>
+<h3 id="Forward-propagation-with-dropout"><a href="#Forward-propagation-with-dropout" class="headerlink" title="Forward propagation with dropout"></a>Forward propagation with dropout</h3><p>I will  implement the forward propagation with dropout. I am using a 3 layer neural network, and will add dropout to the first and second hidden layers. We will not apply dropout to the input layer or output layer. </p>
+<p><strong>Instructions</strong>:<br>I would like to shut down some neurons in the first and second layers. To do that, I am going to carry out 4 Steps:</p>
+<ol>
+<li>In lecture, we dicussed creating a variable $d^{[1]}$ with the same shape as $a^{[1]}$ using <code>np.random.rand()</code> to randomly get numbers between 0 and 1. Here, I will use a vectorized implementation, so create a random matrix $D^{[1]} = [d^{<a href="1">1</a>} d^{<a href="2">1</a>} … d^{<a href="m">1</a>}] $ of the same dimension as $A^{[1]}$.</li>
+<li>Set each entry of $D^{[1]}$ to be 0 with probability (<code>1-keep_prob</code>) or 1 with probability (<code>keep_prob</code>), by thresholding values in $D^{[1]}$ appropriately. Hint: to set all the entries of a matrix X to 0 (if entry is less than 0.5) or 1 (if entry is more than 0.5) I would do: <code>X = (X &lt; 0.5)</code>. Note that 0 and 1 are respectively equivalent to False and True.</li>
+<li>Set $A^{[1]}$ to $A^{[1]} * D^{[1]}$. (I am shutting down some neurons). We can think of $D^{[1]}$ as a mask, so that when it is multiplied with another matrix, it shuts down some of the values.</li>
+<li>Divide $A^{[1]}$ by <code>keep_prob</code>. By doing this I am  assuring that the result of the cost will still have the same expected value as without drop-out. (This technique is also called inverted dropout.)</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_propagation_with_dropout</span><span class="params">(X, parameters, keep_prob=<span class="number">0.5</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the forward propagation: LINEAR -&gt; RELU + DROPOUT -&gt; LINEAR -&gt; RELU + DROPOUT -&gt; LINEAR -&gt; SIGMOID.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- input dataset, of shape (2, number of examples)</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your parameters "W1", "b1", "W2", "b2", "W3", "b3":</span></span><br><span class="line"><span class="string">                    W1 -- weight matrix of shape (20, 2)</span></span><br><span class="line"><span class="string">                    b1 -- bias vector of shape (20, 1)</span></span><br><span class="line"><span class="string">                    W2 -- weight matrix of shape (3, 20)</span></span><br><span class="line"><span class="string">                    b2 -- bias vector of shape (3, 1)</span></span><br><span class="line"><span class="string">                    W3 -- weight matrix of shape (1, 3)</span></span><br><span class="line"><span class="string">                    b3 -- bias vector of shape (1, 1)</span></span><br><span class="line"><span class="string">    keep_prob - probability of keeping a neuron active during drop-out, scalar</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A3 -- last activation value, output of the forward propagation, of shape (1,1)</span></span><br><span class="line"><span class="string">    cache -- tuple, information stored for computing the backward propagation</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    np.random.seed(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># retrieve parameters</span></span><br><span class="line">    W1 = parameters[<span class="string">"W1"</span>]</span><br><span class="line">    b1 = parameters[<span class="string">"b1"</span>]</span><br><span class="line">    W2 = parameters[<span class="string">"W2"</span>]</span><br><span class="line">    b2 = parameters[<span class="string">"b2"</span>]</span><br><span class="line">    W3 = parameters[<span class="string">"W3"</span>]</span><br><span class="line">    b3 = parameters[<span class="string">"b3"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># LINEAR -&gt; RELU -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line">    Z1 = np.dot(W1, X) + b1</span><br><span class="line">    A1 = relu(Z1)</span><br><span class="line">    <span class="comment"># Steps 1-4 below correspond to the Steps 1-4 described above.</span></span><br><span class="line">    D1 = np.random.rand(A1.shape[<span class="number">0</span>], A1.shape[<span class="number">1</span>])  <span class="comment"># Step 1: initialize matrix D1 = np.random.rand(..., ...)</span></span><br><span class="line">    D1 = D1 &lt; keep_prob  <span class="comment"># Step 2: convert entries of D1 to 0 or 1 (using keep_prob as the threshold)</span></span><br><span class="line">    A1 = np.multiply(A1, D1)  <span class="comment"># Step 3: shut down some neurons of A1</span></span><br><span class="line">    A1 = A1 / keep_prob  <span class="comment"># Step 4: scale the value of neurons that haven't been shut down</span></span><br><span class="line">    Z2 = np.dot(W2, A1) + b2</span><br><span class="line">    A2 = relu(Z2)</span><br><span class="line">    <span class="comment">### (approx. 4 lines)</span></span><br><span class="line">    D2 = np.random.rand(A2.shape[<span class="number">0</span>], A2.shape[<span class="number">1</span>])  <span class="comment"># Step 1: initialize matrix D2 = np.random.rand(..., ...)</span></span><br><span class="line">    D2 = D2 &lt;keep_prob  <span class="comment"># Step 2: convert entries of D2 to 0 or 1 (using keep_prob as the threshold)</span></span><br><span class="line">    A2 = A2 * D2  <span class="comment"># Step 3: shut down some neurons of A2</span></span><br><span class="line">    A2 = A2 / keep_prob  <span class="comment"># Step 4: scale the value of neurons that haven't been shut down</span></span><br><span class="line">    Z3 = np.dot(W3, A2) + b3</span><br><span class="line">    A3 = sigmoid(Z3)</span><br><span class="line"></span><br><span class="line">    cache = (Z1, D1, A1, W1, b1, Z2, D2, A2, W2, b2, Z3, A3, W3, b3)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> A3, cache</span><br></pre></td></tr></table></figure>
+<h3 id="Backward-propagation-with-dropout"><a href="#Backward-propagation-with-dropout" class="headerlink" title="Backward propagation with dropout"></a>Backward propagation with dropout</h3><p>I will implement the backward propagation with dropout. As before, I am  training a 3 layer network. Add dropout to the first and second hidden layers, using the masks $D^{[1]}$ and $D^{[2]}$ stored in the cache. </p>
+<p><strong>Instruction</strong>:<br>Backpropagation with dropout is actually quite easy. I will have to carry out 2 Steps:</p>
+<ol>
+<li>I had previously shut down some neurons during forward propagation, by applying a mask $D^{[1]}$ to <code>A1</code>. In backpropagation, I will have to shut down the same neurons, by reapplying the same mask $D^{[1]}$ to <code>dA1</code>. </li>
+<li>During forward propagation, I had divided <code>A1</code> by <code>keep_prob</code>. In backpropagation, I’ll therefore have to divide <code>dA1</code> by <code>keep_prob</code> again (the calculus interpretation is that if $A^{[1]}$ is scaled by <code>keep_prob</code>, then its derivative $dA^{[1]}$ is also scaled by the same <code>keep_prob</code>).</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backward_propagation_with_dropout</span><span class="params">(X, Y, cache, keep_prob)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the backward propagation of our baseline model to which we added dropout.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- input dataset, of shape (2, number of examples)</span></span><br><span class="line"><span class="string">    Y -- "true" labels vector, of shape (output size, number of examples)</span></span><br><span class="line"><span class="string">    cache -- cache output from forward_propagation_with_dropout()</span></span><br><span class="line"><span class="string">    keep_prob - probability of keeping a neuron active during drop-out, scalar</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    gradients -- A dictionary with the gradients with respect to each parameter, activation and pre-activation variables</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    (Z1, D1, A1, W1, b1, Z2, D2, A2, W2, b2, Z3, A3, W3, b3) = cache</span><br><span class="line"></span><br><span class="line">    dZ3 = A3 - Y</span><br><span class="line">    dW3 = <span class="number">1.</span> / m * np.dot(dZ3, A2.T)</span><br><span class="line">    db3 = <span class="number">1.</span> / m * np.sum(dZ3, axis=<span class="number">1</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    dA2 = np.dot(W3.T, dZ3)</span><br><span class="line">    <span class="comment">### (≈ 2 lines of code)</span></span><br><span class="line">    dA2 = dA2 * D2  <span class="comment"># Step 1: Apply mask D2 to shut down the same neurons as during the forward propagation</span></span><br><span class="line">    dA2 = dA2 / keep_prob  <span class="comment"># Step 2: Scale the value of neurons that haven't been shut down</span></span><br><span class="line">    dZ2 = np.multiply(dA2, np.int64(A2 &gt; <span class="number">0</span>))</span><br><span class="line">    dW2 = <span class="number">1.</span> / m * np.dot(dZ2, A1.T)</span><br><span class="line">    db2 = <span class="number">1.</span> / m * np.sum(dZ2, axis=<span class="number">1</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    dA1 = np.dot(W2.T, dZ2)</span><br><span class="line">    <span class="comment">### (≈ 2 lines of code)</span></span><br><span class="line">    dA1 = dA1 * D1  <span class="comment"># Step 1: Apply mask D1 to shut down the same neurons as during the forward propagation</span></span><br><span class="line">    dA1 = dA1 / keep_prob  <span class="comment"># Step 2: Scale the value of neurons that haven't been shut down</span></span><br><span class="line">    dZ1 = np.multiply(dA1, np.int64(A1 &gt; <span class="number">0</span>))</span><br><span class="line">    dW1 = <span class="number">1.</span> / m * np.dot(dZ1, X.T)</span><br><span class="line">    db1 = <span class="number">1.</span> / m * np.sum(dZ1, axis=<span class="number">1</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    gradients = &#123;<span class="string">"dZ3"</span>: dZ3, <span class="string">"dW3"</span>: dW3, <span class="string">"db3"</span>: db3, <span class="string">"dA2"</span>: dA2,</span><br><span class="line">                 <span class="string">"dZ2"</span>: dZ2, <span class="string">"dW2"</span>: dW2, <span class="string">"db2"</span>: db2, <span class="string">"dA1"</span>: dA1,</span><br><span class="line">                 <span class="string">"dZ1"</span>: dZ1, <span class="string">"dW1"</span>: dW1, <span class="string">"db1"</span>: db1&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> gradients</span><br></pre></td></tr></table></figure>
+<p>Let’s now run the model with dropout (<code>keep_prob = 0.86</code>). It means at every iteration I shut down each neurons of layer 1 and 2 with 14% probability. The function <code>model()</code> will now call:</p>
+<ul>
+<li><code>forward_propagation_with_dropout</code> instead of <code>forward_propagation</code>.</li>
+<li><code>backward_propagation_with_dropout</code> instead of <code>backward_propagation</code>.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">parameters = model(train_X, train_Y, keep_prob = <span class="number">0.86</span>, learning_rate = <span class="number">0.3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> (<span class="string">"On the train set:"</span>)</span><br><span class="line">predictions_train = predict(train_X, train_Y, parameters)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"On the test set:"</span>)</span><br><span class="line">predictions_test = predict(test_X, test_Y, parameters)</span><br><span class="line">plt.title(<span class="string">"Model with dropout"</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([<span class="number">-0.75</span>,<span class="number">0.40</span>])</span><br><span class="line">axes.set_ylim([<span class="number">-0.75</span>,<span class="number">0.65</span>])</span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+<p>Output:</p>
+<pre><code>Cost after iteration 0: 0.6543912405149825
+Cost after iteration 10000: 0.06101698657490559
+Cost after iteration 20000: 0.060582435798513114
+On the train set:
+Accuracy: 0.928909952607
+On the test set:
+Accuracy: 0.95
+</code></pre><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fy6c5h76wyj30cd07q748.jpg" alt="4"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6c5k0pfpj30cq07qdgg.jpg" alt="5"></p>
+<p>Dropout works great! The test accuracy has increased again (to 95%)! Our model is not overfitting the training set and does a great job on the test set. The French football team will be forever grateful to we! </p>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><ul>
+<li>A <strong>common mistake</strong> when using dropout is to use it both in training and testing. We should use dropout (randomly eliminate nodes) only in training. </li>
+<li><p>Deep learning frameworks like <a href="https://www.tensorflow.org/api_docs/python/tf/nn/dropout" target="_blank" rel="noopener">tensorflow</a>, <a href="http://doc.paddlepaddle.org/release_doc/0.9.0/doc/ui/api/trainer_config_helpers/attrs.html" target="_blank" rel="noopener">PaddlePaddle</a>, <a href="https://keras.io/layers/core/#dropout" target="_blank" rel="noopener">keras</a> or <a href="http://caffe.berkeleyvision.org/tutorial/layers/dropout.html" target="_blank" rel="noopener">caffe</a> come with a dropout layer implementation. Don’t stress——we will soon learn some of these frameworks.<br><strong>What you should remember about dropout:</strong></p>
+</li>
+<li><p>Dropout is a regularization technique.</p>
+</li>
+<li>We only use dropout during training. Don’t use dropout (randomly eliminate nodes) during test time.</li>
+<li>Apply dropout both during forward and backward propagation.</li>
+<li>During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if keep_prob is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. We can check that this works even when keep_prob is other values than 0.5.  </li>
+</ul>
+<h2 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h2><p><strong>Here are the results of our three models</strong>: </p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fy6c7wsz1kj317s0cwq5c.jpg" alt="image-20181214160805789"></p>
+<p>Note that regularization hurts training set performance! This is because it limits the ability of the network to overfit to the training set. But since it ultimately gives better test accuracy, it is helping your system.<br><strong>What we want you to remember from this article</strong>:</p>
+<ul>
+<li>Regularization will help we reduce overfitting.</li>
+<li>Regularization will drive our weights to lower values.</li>
+<li>L2 regularization and Dropout are two very effective regularization techniques.</li>
+</ul>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><p><a href="https://github.com/DmrfCoder/CourseraAi/tree/master/Regularization" target="_blank" rel="noopener">github</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="ai-exception 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="ai-exception 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/coursera/" rel="tag"><i class="fa fa-tag"></i>
+
+ coursera</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/14/Gradient Checking/" rel="next" title="Gradient Checking">
+                <i class="fa fa-chevron-left"></i> Gradient Checking
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="ai-exception">
+            
+              <p class="site-author-name" itemprop="name">ai-exception</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">143</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement"><span class="nav-number">2.</span> <span class="nav-text">Implement</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-regularized-model"><span class="nav-number">2.1.</span> <span class="nav-text">Non-regularized model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L2-Regularization"><span class="nav-number">2.2.</span> <span class="nav-text">L2 Regularization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compute-cost-with-regularization"><span class="nav-number">2.2.1.</span> <span class="nav-text">compute_cost_with_regularization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Observations"><span class="nav-number">2.2.2.</span> <span class="nav-text">Observations</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#What-is-L2-regularization-actually-doing"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">What is L2-regularization actually doing?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-you-should-remember——the-implications-of-L2-regularization-on"><span class="nav-number">2.2.3.</span> <span class="nav-text">What you should remember——the implications of L2-regularization on</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">3.</span> <span class="nav-text">Dropout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-propagation-with-dropout"><span class="nav-number">3.1.</span> <span class="nav-text">Forward propagation with dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backward-propagation-with-dropout"><span class="nav-number">3.2.</span> <span class="nav-text">Backward propagation with dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Note"><span class="nav-number">3.3.</span> <span class="nav-text">Note</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusions"><span class="nav-number">4.</span> <span class="nav-text">Conclusions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Links"><span class="nav-number">5.</span> <span class="nav-text">Links</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ai-exception</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共224.3k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JPtogBfdkQuninsLWN80PLoY-gzGzoHsz", "0aMQbm6Xk3vkvN16T1yCsmTh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

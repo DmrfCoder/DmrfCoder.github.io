@@ -1,5 +1,5 @@
+http://www.ai-exception.com/2018/12/14/Regularization/
 http://www.ai-exception.com/2018/12/14/Gradient Checking/
 http://www.ai-exception.com/2018/12/13/deeplearning 常用python工具包使用/
 http://www.ai-exception.com/2018/12/13/The impact of different initialization strategies on neural networks/
 http://www.ai-exception.com/2018/12/10/如何编写脚本将CSDN的博客批量导出到hexo下的md格式/
-http://www.ai-exception.com/2018/12/10/Deep-Neural-Network/
