@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ai-exception.com/2018/12/18/Optimization%20methods/</loc>
+    
+    <lastmod>2018-12-18T03:33:23.737Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.ai-exception.com/2018/12/14/Regularization/</loc>
+    
+    <lastmod>2018-12-18T03:33:09.754Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ai-exception.com/2018/12/13/The%20impact%20of%20different%20initialization%20strategies%20on%20neural%20networks/</loc>
     
     <lastmod>2018-12-18T03:02:30.859Z</lastmod>
@@ -12,20 +26,6 @@
     <loc>http://www.ai-exception.com/2018/12/10/Deep-Neural-Network/</loc>
     
     <lastmod>2018-12-18T03:02:21.170Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ai-exception.com/2018/12/18/Optimization%20methods/</loc>
-    
-    <lastmod>2018-12-18T02:59:39.762Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ai-exception.com/2018/12/14/Regularization/</loc>
-    
-    <lastmod>2018-12-14T08:27:41.830Z</lastmod>
     
   </url>
   
