@@ -1,5 +1,5 @@
+http://www.ai-exception.com/2018/12/22/科创经验分享/
 http://www.ai-exception.com/2018/12/18/Optimization methods/
 http://www.ai-exception.com/2018/12/14/Regularization/
 http://www.ai-exception.com/2018/12/14/Gradient Checking/
 http://www.ai-exception.com/2018/12/13/deeplearning 常用python工具包使用/
-http://www.ai-exception.com/2018/12/13/The impact of different initialization strategies on neural networks/

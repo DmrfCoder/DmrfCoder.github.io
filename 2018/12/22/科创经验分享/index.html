@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Other,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="尊敬的各位领导、老师，亲爱的同学们，大家晚上好，首先非常荣幸今天能有这么一个机会在这里和大家分享一些我和我的团队在过去一年科创经历中的一些感想和收获，我们团队做的工作大概是基于超声波和深度学习去实现人手对智能手机或者智能手表这样的电子设备的隔空控制，具体的实现细节我就不在这里多讲了，感兴趣的同学可以通过我主页上的联系方式联系我一起学习交流，今天更多想和大家聊的是怎么样才可以做好一个科创，希望通过">
+<meta name="keywords" content="Other">
+<meta property="og:type" content="article">
+<meta property="og:title" content="科创经验分享">
+<meta property="og:url" content="http://www.ai-exception.com/2018/12/22/科创经验分享/index.html">
+<meta property="og:site_name" content="ai-exception">
+<meta property="og:description" content="尊敬的各位领导、老师，亲爱的同学们，大家晚上好，首先非常荣幸今天能有这么一个机会在这里和大家分享一些我和我的团队在过去一年科创经历中的一些感想和收获，我们团队做的工作大概是基于超声波和深度学习去实现人手对智能手机或者智能手表这样的电子设备的隔空控制，具体的实现细节我就不在这里多讲了，感兴趣的同学可以通过我主页上的联系方式联系我一起学习交流，今天更多想和大家聊的是怎么样才可以做好一个科创，希望通过">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfud2xxkyj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfue56oqrj31hc0u0qv5.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuedppj3j31hc0u01ky.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuen440uj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfueslbczj31hc0u07wh.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfuf4kblqj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfuffai4pj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fyfum308bhj31hc0u0qv5.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fyfug5wxwlj31hc0u0qv5.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfumpeff1j31hc0u0qv5.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfumufelfj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfun7e3ukj31hc0u0u0x.jpg">
+<meta property="og:image" content="http://www.ai-exception.com/Users/dmrfcoder/Documents/gesture/科创经验分享/2018科创基金开题科创经验分享-22日-薛方岗%202%202/2018科创基金开题科创经验分享-22日-薛方岗%202%202.013.jpeg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfunnl33wj31hc0u0qv5.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuo6rad4j31hc0u0qv5.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuoiu0x7j31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfup49y2pj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfupixgrqj31hc0u0u0x.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfupp8efoj31hc0u0u0x.jpg">
+<meta property="og:updated_time" content="2018-12-22T13:39:48.888Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="科创经验分享">
+<meta name="twitter:description" content="尊敬的各位领导、老师，亲爱的同学们，大家晚上好，首先非常荣幸今天能有这么一个机会在这里和大家分享一些我和我的团队在过去一年科创经历中的一些感想和收获，我们团队做的工作大概是基于超声波和深度学习去实现人手对智能手机或者智能手表这样的电子设备的隔空控制，具体的实现细节我就不在这里多讲了，感兴趣的同学可以通过我主页上的联系方式联系我一起学习交流，今天更多想和大家聊的是怎么样才可以做好一个科创，希望通过">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfud2xxkyj31hc0u0u0x.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ai-exception.com/2018/12/22/科创经验分享/">
+
+
+
+
+
+  <title>科创经验分享 | ai-exception</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ai-exception</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ai-exception.com/2018/12/22/科创经验分享/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ai-exception">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ai-exception">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">科创经验分享</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T21:39:25+08:00">
+                2018-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index">
+                    <span itemprop="name">Other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfud2xxkyj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.001"></p>
+<p>尊敬的各位领导、老师，亲爱的同学们，大家晚上好，首先非常荣幸今天能有这么一个机会在这里和大家分享一些我和我的团队在过去一年科创经历中的一些感想和收获，我们团队做的工作大概是基于超声波和深度学习去实现人手对智能手机或者智能手表这样的电子设备的隔空控制，具体的实现细节我就不在这里多讲了，感兴趣的同学可以通过我主页上的联系方式联系我一起学习交流，今天更多想和大家聊的是怎么样才可以做好一个科创，希望通过我的分享能给大家一点启发和帮助。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfue56oqrj31hc0u0qv5.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.002"></p>
+<p>首先我想和大家讨论一下科创适合哪些人群，我认为科创主要适合以下三类人群：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuedppj3j31hc0u01ky.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.003"></p>
+<p>第一类，我们想象一下你是个将来有读研打算的学霸，就我目前的认知读研主要有两个途径，一个就是我们今天正在进行的研究生考试，在这里我想问一下大家有没有人知道今年的考研人数有多少？大概290万，那么有没有人知道今年大概招收多少研究生？大概不到70万，也就是说考研成功的概率只有1/4，我们学校好点，我听说大概成功率在1/3，而且考研那得多累啊，天天起早贪黑吹不好睡不好搞不好女朋友还能和别人私奔了，所以我建议如果你有读研的想法，最好还是选择保研，保研会比考研性价比高的多得多得多，而在我们学校科创是保研的必要条件，也就是说如果你没有科创，就算你绩点排名专业第一，你还是没有保研资格。所以我认为对于有读研打算的同学们是非常有必要的。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuen440uj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.004"></p>
+<p>第二类，你是一个热爱技术的极客，以后想做个技术大牛，那么科创对你来说有什么意义呢？我不知道大家有没有关注最近互联网行业的新闻，最近互联网新闻常常出现的一个字眼叫做互联网寒冬，不管大大小小的企业都在裁员，尽管他们不承认，我看到大家最同情的一个案例是知乎一个应届生，工作还不到三个月，领导叫到办公室三分钟签完字卷铺盖就走人，所以说未来的行业竞争力还是很激烈的，那么作为一个搞技术的工程师，如何才能提高自己的核心竞争力，避免在以后的竞争中处于劣势呢？我认为核心不在于你会多少技术，也不在于你写了多少代码，重点在于你软实力的提升，通过科创，你可以锻炼自己的团队合作能力、自我学习能力、接受新事物的能力，这些能力不是你随随便便开发两个app、写两个网站就能锻炼出来的，所以我认为科创对于以后打算走技术流的同学也是非常适合的。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfueslbczj31hc0u07wh.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.005"></p>
+<p>第三类，你即不是学霸又不是技术达人，你目前每天的主要活动就是在宿舍玩游戏，但是又不甘于现状，想要让自己变得和现在不一样，那么科创就是一个很好的契机，通过科创，你会放下手中的游戏，认真地去学习一些知识和技能，我相信一年以后的你会感谢自己当初选择了科创。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfuf4kblqj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.007"></p>
+<p>接下来我想和大家讨论一下我们可以从科创中收获什么</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfuffai4pj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.008"></p>
+<p>我这里主要总结了五条：</p>
+<p>第一，更前沿的行业技术，通过科创，你会接触到那些平时你只在新闻和科普专栏上看到的新技术，你就有那么一瞬间发出“哇，好神奇”这样的感叹。</p>
+<p>当然通过科创你还有机会接触到更多优秀的人，你可以和你的组员们一起出去参加比赛，在比赛的过程中你会有机会认识各种各样能力出众的陌生人，你会从他们身上学到很多东西。</p>
+<p>还有就是更加实用的英语技能，我知道在坐的各位同学们可能常常会有这样的感叹，就是我明明英语过了四六级，可是还是看不懂专业论文，为什么呢？这就是理论和实践的差距，但是通过科创，你不得不去咬着牙看那些看不懂的专业论文，直到某一天你会惊奇地发现你竟然可以毫不费力地读完一篇英语论文了。</p>
+<p>更优雅的检索能力，这点怎么解读呢，你之前遇到问题可能更多的是去百度、去谷歌，但是科创中你会发现很多问题是谷歌不到的，因为你遇到的问题很有可能是大家之前都没有遇到的，这个时候我们更多的可能失去查阅检索一些专业的论文，注意只会简单百度和掌握文档检索能力是两个截然不同的概念。</p>
+<p>最后一点就是更加强悍的自学能力，我认为大学更多的意义不是 教会我们求微积分，也不是教会我们c语言，更多的意义在于教会我们如何去自学，因为你只有具有了强悍的自学能力，你才能不断接受新事物、新技术，才能不断进步，而科创是最好的一种锻炼自学能力的方式，通过不断自我学习、自我提升，最终你得到的不仅仅是一张科创结题证书，更多的是一种自我学习的能力。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fyfum308bhj31hc0u0qv5.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.008"></p>
+<p>好，说完了科创的意义，我相信很多同学已经跃跃欲试了，那么我们就来讨论一下如何如何做好科创</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fyfug5wxwlj31hc0u0qv5.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.011"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfumpeff1j31hc0u0qv5.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.010"></p>
+<p>相信对互联网创业有点了解的同学们应该都听过这样一句话，叫做互联网行业要想创业成功，面临的最大的三个问题就是：找人、找钱、找战略方向，科创不是创业，但是我页同样总结了三个对做好科创十分重要的问题：找队友，找导师、找题目</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfumufelfj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.011"></p>
+<p>为什么我觉得这三个问题很重要呢，我把它总结为了一个等式，叫做科创=和一群优秀的队友，在优秀的指导老师的领航下，解决一个有意义的题目，可以看到在这句话中有三个关键因素：队友、指导老师、题目，所以说要想做好一个科创，这三个部分哪个部分都不能有问题，所以接下来就谈谈我对找队友、找导师、找题目这三个问题的一点建议</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfun7e3ukj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.012"></p>
+<p>首先，第一个问题，如何找到称心如意的队友，我想给大家提三点建议：</p>
+<p>第一，不要羞于和陌生人组队，怎么解读呢，比如你打算做一个和深度学习相关的科创题目，刚好听说隔壁班上有一个之前有个相关项目经验的同学，你想和他组队，但是又觉得不认识人家，很不好意思和人家组队，这种情况我的建议是一定要勇敢尝试，我们团队有个成员，是我隔壁班上的一位男生，做科创之前呢我们两连面都没见过，但是因为当时做科创的时候我们两有技术上的互补，所以就一起组队做了，事实证明大家合作的很好，现在科创做完了，照样还是每天在一起吹牛皮一起讨论技术，不仅收获了科创，还收获了友情，所以我觉得大家一点要勇于去接触陌生的同学，这样肯定会有意外的收获。</p>
+<p>第二点，叫做不要羞于和异性组队，为什么我鼓励大家勇于和异性组队呢，不仅仅是因为那句男女搭配干活不累，因为我们在科创的过程中会遇到很多问题是需要异性合作才能完成的，比如去做一个关于科创的展示，男生可能更善于表达，女生可能更善于策划，这样通过大家互相合作工作效率会提高很多。还有就是你能忍受一个组里4个队员有两对都是男生吗，我们在座的很多的男生可能上大学到现在和女生一句话都没说过，说实话我当时也差不多，本来我性格就比较内向，在女生面前不善言辞，加上大学女生实在太少了，所以直到大二甚至都没和女生说过几句话，直到科创，我认识了现在的女朋友是吧，然后一起工作一起学习，多好啊哈哈</p>
+<p>第三个建议是不要羞于跨专业组队，比如你做一个项目，需要考虑的不光是功能上的问题，还有安全问题，这个时候你就会发现你需要一个信息安全专业的队友，你就应该勇于去联系，这样才能让你团队的能力更加丰富。</p>
+<p><img src="/Users/dmrfcoder/Documents/gesture/科创经验分享/2018科创基金开题科创经验分享-22日-薛方岗 2 2/2018科创基金开题科创经验分享-22日-薛方岗 2 2.013.jpeg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.013"></p>
+<p>其次，关于找导师，我的第一个建议是不要羞于联系“领导”，我知道大家很多同学都会觉得领导们平时会比较忙，可能没时间搞科研，也没时间指导大家科创，其实这是很大的一个误解，比如据我所知我们学院的陈兵院长、孙涵院长等，他们的科研能力都非常强，而且也很乐于指导大家进行科创活动，所以我建议如果大家感兴趣的方向和他们的研究方向相同的一定要敢于联系他们。</p>
+<p>其次，不要羞于去联系不认识的老师，比如当时我做科创的时候对深度学习这方面比较感兴趣，听说学院有很多老师科研能力都很强，比如陈灿松老师、张道强老师、赵彦超老师等，但是觉得他们都很忙，而且觉得他们更多的精力可能在指导他们带的硕士生、博士生上，可能没时间指导我一个本科生做科创，知道后来我联系了我的指导老师赵彦超老师才明白，其实那些老师们都很乐于帮助大家做这些有意思的事情，所以我建议大家一点要敢于去联系他们。</p>
+<p>最后给大家的一个建议是大家可以去学院的官网上查看我们学院老师的研究方向和联系方式，ppt上是链接，看到中意的老师感觉联系吧，下手晚了就被抢走了。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfunnl33wj31hc0u0qv5.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.014"></p>
+<p>关于找题目我的第一个建议是不要盲目跟风，比如可能很多同学觉得这两年人工智能很火，身边很多同学也都准备做这方面的题目，所以就也跟着随便找了一个深度学习方面的题目，但是到头来自己的兴趣并不在这方面，这样你怎么可能做好呢？事实上我们学院的航空航天软件等其他方面都有非常雄厚的师资力量和研究水平，希望大家一定要结合自己的兴趣，不要盲目跟风，一定要从自己的实际情况出发去选择题目呀。</p>
+<p>然后呢，我想送给大家两个词语，这两个词语不是我的原创，是去年科创开题仪式仪式上我们的孙涵院长在致辞的时候提到的，我到现在都记忆犹新，叫做颠覆性、创新性，今天我同样想把这两个词送给大家，我建议大家在确定题目的时候，要敢于挑战那些领域内新的方向，不要拘泥于已有的东西去做研究，事实上我认为科创的真正意义就是在于可以让大家百花齐放，每个人都能做出不一样的东西。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuo6rad4j31hc0u0qv5.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.015"></p>
+<p>最后一个问题，我想和大家讨论一下如何取得一个不错的结果，关于这点我想给大家几点建议</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fyfuoiu0x7j31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.016"></p>
+<p>第一个叫做不要拖延，大家很多人科创开题之后可能想着哎呀我寒假做吧，结果到了寒假回到家一堆糖衣炮弹搞得你连电脑都不想开，然后又想着下学期做，结果到了下学期又想着暑假做，到了暑假又想着开学做，没想到开学之后就要结题了，所以我建议大家一定不要拖延，就算你做慢点，也不要一再往后拖。</p>
+<p> 第二点叫做坚持不懈，很多同学可能科创刚开题一个月还热情高涨天天泡在实验室做实验，坚持了一个月就有点坚持不下去了，然后就天天打游戏又或者陪女朋友是吧，这样的结果肯定是很难结题的。</p>
+<p> 第三点叫做踏实务实，举个例子，我们去年科创开题不到一个月，我偶遇了一个同学，我就问他科创做的怎么样了，他告诉我他们正在写论文，想要尽快先发一篇论文，我当时就很惊奇啊，这不到一个月就准备发论文了，这效率也太高 了吧，结果后来又一次我又遇到他了，他告诉我论文没发成，他也不想做了，结果最后就草草了事，所以我建议不要给自己定太高的名利性目标，香港有一位歌手年纪很大了很有名，他的一首歌我非常喜欢，我觉得有句歌词写的很不错，叫做“期望带来失望的恶性循环”，是吧，你越期望的事情往往越失望，所以我建议大家一定要踏实务实，从每一行代码写起，一点一滴去积累，我相信日积月累最终你一定能取得不错的成果。</p>
+<p> 第四点叫做勤于交流，交流不仅仅限于你和你的队友们，还有你和你的指导老师，科创是一个团队活动，他和我们自己去搞开发是不一样的，所以一定要勤于交流，有什么问题要及时互相沟通，这样可以很大程度上提高团队的效率。</p>
+<p>  第五点叫做多写文档，科创是一个团队项目，你写的代码不仅限于你自己使用和阅读，还需要你的队友去理解，所以我建议大家一定要养成写文档的习惯，这样不管是对科创还是对于你以后的工作来说都是大有益处的。</p>
+<p>  最后一点叫做善于总结，每过一段时间，比如一个月，就总结一下过去一个月的成果，这样既明确了未来一段时间的努力方向，也对自己是一种激励。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfup49y2pj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.017"></p>
+<p>最后给大家推荐几款我们团队之前一直在用的几款工具</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fyfupixgrqj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.018"></p>
+<p>最后送给大家一段话，相信和一群志趣相投的人在一起，通过一年的不懈努力，一定会做出甚至连你们自己都不敢相信的优秀成果，甚至一不小心还有可能改变世界，即使你们才大二。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fyfupp8efoj31hc0u0u0x.jpg" alt="2018科创基金开题科创经验分享-22日-薛方岗 2 2.019"></p>
+<p>谢谢大家，我今天的分享就到此结束了，ppt上有我的联系方式还有我的个人主页，今天的ppt我会放在我的个人主页，同时欢迎大家有什么问题随时联系我大家一起沟通和学习，最后预祝各位学弟学妹们可以在新的一期科创中取得优异的成绩！谢谢大家。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="ai-exception 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="ai-exception 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Other/" rel="tag"><i class="fa fa-tag"></i>
+
+ Other</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/18/Optimization methods/" rel="next" title="Optimization Methods">
+                <i class="fa fa-chevron-left"></i> Optimization Methods
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="ai-exception">
+            
+              <p class="site-author-name" itemprop="name">ai-exception</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">145</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ai-exception</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共232.6k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
