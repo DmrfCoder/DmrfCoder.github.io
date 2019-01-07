@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.ai-exception.com/2018/05/17/Android%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2019-01-07T15:48:28.819Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.ai-exception.com/user/index.html</loc>
     
     <lastmod>2019-01-07T15:39:20.980Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://www.ai-exception.com/news/index.html</loc>
     
     <lastmod>2019-01-07T14:38:43.829Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ai-exception.com/2018/05/17/2018-05-17-Android%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    
-    <lastmod>2019-01-07T08:51:12.798Z</lastmod>
     
   </url>
   
@@ -691,13 +691,6 @@
     <loc>http://www.ai-exception.com/2018/02/26/Android%E4%B8%ADAudioRecord%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</loc>
     
     <lastmod>2018-12-07T08:36:36.885Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.ai-exception.com/2018/06/18/Error:Execution%20failed%20for%20task%20':app:preDebugAndroidTestBuild'.%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    
-    <lastmod>2018-12-07T08:34:57.544Z</lastmod>
     
   </url>
   
