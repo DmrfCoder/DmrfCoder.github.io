@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="coursera,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="In this article, I will implement convolutional (CONV) and pooling (POOL) layers in numpy, including both forward propagation and  backward propagation.  Before you read the text, I hope you remember">
+<meta name="keywords" content="coursera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Convolutional Neural Networks:Step by Step">
+<meta property="og:url" content="http://www.ai-exception.com/2019/01/12/Convolution_model-Step_by_Step/index.html">
+<meta property="og:site_name" content="ai-exception">
+<meta property="og:description" content="In this article, I will implement convolutional (CONV) and pooling (POOL) layers in numpy, including both forward propagation and  backward propagation.  Before you read the text, I hope you remember">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz32g19lv8j30xk0bejtc.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fz32je25h0j30qe0d63z3.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fz32kre5yxj30vw0qan55.jpg">
+<meta property="og:image" content="http://www.ai-exception.com/2019/01/12/Convolution_model-Step_by_Step/output_7_2.png">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz32s1j96qg30em0aojsv.gif">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fz452za9bcj30s80ks76f.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fz4585ifckj31720nan64.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fz458hqeuqj31620mydp4.jpg">
+<meta property="og:updated_time" content="2019-01-12T14:42:51.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Convolutional Neural Networks:Step by Step">
+<meta name="twitter:description" content="In this article, I will implement convolutional (CONV) and pooling (POOL) layers in numpy, including both forward propagation and  backward propagation.  Before you read the text, I hope you remember">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fz32g19lv8j30xk0bejtc.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ai-exception.com/2019/01/12/Convolution_model-Step_by_Step/">
+
+
+
+
+
+  <title>Convolutional Neural Networks:Step by Step | ai-exception</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ai-exception</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/news/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ai-exception.com/2019/01/12/Convolution_model-Step_by_Step/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ai-exception">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ai-exception">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Convolutional Neural Networks:Step by Step</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T12:14:25+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  27
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>In this article, I will implement convolutional (CONV) and pooling (POOL) layers in numpy, including both forward propagation and  backward propagation. </p>
+<p>Before you read the text, I hope you remember the following symbols:</p>
+<ul>
+<li>Superscript $[l]$ denotes an object of the $l^{th}$ layer. <ul>
+<li>Example: $a^{[4]}$ is the $4^{th}$ layer activation. $W^{[5]}$ and $b^{[5]}$ are the $5^{th}$ layer parameters.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Superscript $(i)$ denotes an object from the $i^{th}$ example. </p>
+<ul>
+<li>Example: $x^{(i)}$ is the $i^{th}$ training example input.</li>
+</ul>
+</li>
+<li><p>Lowerscript $i$ denotes the $i^{th}$ entry of a vector.</p>
+<ul>
+<li>Example: $a^{[l]}_i$ denotes the $i^{th}$ entry of the activations in layer $l$, assuming this is a fully connected (FC) layer.</li>
+</ul>
+</li>
+<li><p>$n_H$, $n_W$ and $n_C$ denote respectively the height, width and number of channels of a given layer. If you want to reference a specific layer $l$, you can also write $n_H^{[l]}$, $n_W^{[l]}$, $n_C^{[l]}$. </p>
+</li>
+<li>$n<em>{H</em>{prev}}$, $n<em>{W</em>{prev}}$ and $n<em>{C</em>{prev}}$ denote respectively the height, width and number of channels of the previous layer. If referencing a specific layer $l$, this could also be denoted $n_H^{[l-1]}$, $n_W^{[l-1]}$, $n_C^{[l-1]}$. </li>
+</ul>
+<p>I assume that you are already familiar with <code>numpy</code> and/or have completed the previous article of this deep-learning theme articles. Let’s get started!</p>
+<h2 id="Outline-of-the-Assignment"><a href="#Outline-of-the-Assignment" class="headerlink" title="Outline of the Assignment"></a>Outline of the Assignment</h2><p>I will be implementing the building blocks of a convolutional neural network! Each function I will implement will have detailed instructions that will walk I through the steps needed:</p>
+<ul>
+<li>Convolution functions, including:<ul>
+<li>Zero Padding</li>
+<li>Convolve window </li>
+<li>Convolution forward</li>
+<li>Convolution backward </li>
+</ul>
+</li>
+<li>Pooling functions, including:<ul>
+<li>Pooling forward</li>
+<li>Create mask </li>
+<li>Distribute value</li>
+<li>Pooling backward </li>
+</ul>
+</li>
+</ul>
+<p>This article will ask you to implement these functions from scratch in <code>numpy</code>. In the next article, I will use the TensorFlow equivalents of these functions to build the following model:</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fz32g19lv8j30xk0bejtc.jpg" alt="model"></p>
+<p><strong>Note</strong> that for every forward function, there is its corresponding backward equivalent. Hence, at every step of your forward module you will store some parameters in a cache. These parameters are used to compute gradients during backpropagation. </p>
+<h2 id="Convolutional-Neural-Networks"><a href="#Convolutional-Neural-Networks" class="headerlink" title="Convolutional Neural Networks"></a>Convolutional Neural Networks</h2><p>Although programming frameworks make convolutions easy to use, they remain one of the hardest concepts to understand in Deep Learning. A convolution layer transforms an input volume into an output volume of different size, as shown below. </p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fz32je25h0j30qe0d63z3.jpg" alt="conv_nn"></p>
+<p>In this part, I will build every step of the convolution layer. I will first implement two helper functions: one for zero padding and the other for computing the convolution function itself. </p>
+<h3 id="Zero-Padding"><a href="#Zero-Padding" class="headerlink" title="Zero-Padding"></a>Zero-Padding</h3><p>Zero-padding adds zeros around the border of an image:</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fz32kre5yxj30vw0qan55.jpg" alt="PAD"></p>
+<center> <u> <font color="purple"> Figure 1 </font></u><font color="purple">  : Zero-Padding<br> Image (3 channels, RGB) with a padding of 2. </font></center>
+
+<p>The main benefits of padding are the following:</p>
+<ul>
+<li><p>It allows you to use a CONV layer without necessarily shrinking the height and width of the volumes. This is important for building deeper networks, since otherwise the height/width would shrink as you go to deeper layers. An important special case is the “same” convolution, in which the height/width is exactly preserved after one layer. </p>
+</li>
+<li><p>It helps us keep more of the information at the border of an image. Without padding, very few values at the next layer would be affected by pixels as the edges of an image.</p>
+</li>
+</ul>
+<p>What I implemented in the following function which pads all the images of a batch of examples X with zeros. <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html" target="_blank" rel="noopener">Use np.pad</a>. Note if we want to pad the array “a” of shape $(5,5,5,5,5)$ with <code>pad = 1</code> for the 2nd dimension, <code>pad = 3</code> for the 4th dimension and <code>pad = 0</code> for the rest, we would do:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = np.pad(a, ((<span class="number">0</span>,<span class="number">0</span>), (<span class="number">1</span>,<span class="number">1</span>), (<span class="number">0</span>,<span class="number">0</span>), (<span class="number">3</span>,<span class="number">3</span>), (<span class="number">0</span>,<span class="number">0</span>)), <span class="string">'constant'</span>, constant_values = (..,..))</span><br></pre></td></tr></table></figure>
+<h4 id="Implement"><a href="#Implement" class="headerlink" title="Implement:"></a>Implement:</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">zero_pad</span><span class="params">(X, pad)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Pad with zeros all images of the dataset X. The padding is applied to the height and width of an image,</span></span><br><span class="line"><span class="string">    as illustrated in Figure 1.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Argument:</span></span><br><span class="line"><span class="string">    X -- python numpy array of shape (m, n_H, n_W, n_C) representing a batch of m images</span></span><br><span class="line"><span class="string">    pad -- integer, amount of padding around each image on vertical and horizontal dimensions</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    X_pad -- padded image of shape (m, n_H + 2*pad, n_W + 2*pad, n_C)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    X_pad = np.pad(X, ((<span class="number">0</span>, <span class="number">0</span>), (pad, pad), (pad, pad), (<span class="number">0</span>, <span class="number">0</span>)), mode=<span class="string">'constant'</span>, constant_values=(<span class="number">0</span>, <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> X_pad</span><br></pre></td></tr></table></figure>
+<h4 id="Test-code"><a href="#Test-code" class="headerlink" title="Test code"></a>Test code</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demoZeroPad</span><span class="params">()</span>:</span></span><br><span class="line">    np.random.seed(<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># (m, n_H, n_W, n_C)</span></span><br><span class="line">    x = np.random.randn(<span class="number">4</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">    x_pad = zero_pad(x, <span class="number">2</span>)</span><br><span class="line">    print(<span class="string">"x.shape ="</span>, x.shape)</span><br><span class="line">    print(<span class="string">"x_pad.shape ="</span>, x_pad.shape)</span><br><span class="line">    print(<span class="string">"x[1,1] ="</span>, x[<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">    print(<span class="string">"x_pad[1,1] ="</span>, x_pad[<span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    fig, axarr = plt.subplots(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    axarr[<span class="number">0</span>].set_title(<span class="string">'x'</span>)</span><br><span class="line">    axarr[<span class="number">0</span>].imshow(x[<span class="number">0</span>, :, :, <span class="number">0</span>])</span><br><span class="line">    axarr[<span class="number">1</span>].set_title(<span class="string">'x_pad'</span>)</span><br><span class="line">    axarr[<span class="number">1</span>].imshow(x_pad[<span class="number">0</span>, :, :, <span class="number">0</span>])</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+<p>Output:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x.shape = (<span class="number">4</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">x_pad.shape = (<span class="number">4</span>, <span class="number">7</span>, <span class="number">7</span>, <span class="number">2</span>)</span><br><span class="line">x[<span class="number">1</span>,<span class="number">1</span>] = [[ <span class="number">0.90085595</span> <span class="number">-0.68372786</span>]</span><br><span class="line"> [<span class="number">-0.12289023</span> <span class="number">-0.93576943</span>]</span><br><span class="line"> [<span class="number">-0.26788808</span>  <span class="number">0.53035547</span>]]</span><br><span class="line">x_pad[<span class="number">1</span>,<span class="number">1</span>] = [[ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]]</span><br></pre></td></tr></table></figure>
+<p><img src="output_7_2.png" alt="png"></p>
+<h3 id="Single-step-of-convolution"><a href="#Single-step-of-convolution" class="headerlink" title="Single step of convolution"></a>Single step of convolution</h3><p>In this part,I will  implement a single step of convolution, in which I apply the filter to a single position of the input. This will be used to build a convolutional unit, which: </p>
+<ul>
+<li>Takes an input volume </li>
+<li>Applies a filter at every position of the input</li>
+<li>Outputs another volume (usually of different size)</li>
+</ul>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fz32s1j96qg30em0aojsv.gif" alt="Convolution_schematic"></p>
+<center> <u> <font color="purple"> Figure 2 </font></u><font color="purple">  : Convolution operation<br> with a filter of 2x2 and a stride of 1 (stride = amount you move the window each time you slide) </font></center>
+
+<p>In a computer vision application, each value in the matrix on the left corresponds to a single pixel value, and we convolve a 3x3 filter with the image by multiplying its values element-wise with the original matrix, then summing them up and adding a bias. In this first step of the exercise, I will implement a single step of convolution, corresponding to applying a filter to just one of the positions to get a single real-valued output. </p>
+<p>Later in this article, I’ll apply this function to multiple positions of the input to implement the full convolutional operation. </p>
+<h4 id="conv-single-step-Hint"><a href="#conv-single-step-Hint" class="headerlink" title="conv_single_step(). Hint."></a>conv_single_step(). <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.sum.html" target="_blank" rel="noopener">Hint</a>.</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_single_step</span><span class="params">(a_slice_prev, W, b)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Apply one filter defined by parameters W on a single slice (a_slice_prev) of the output activation</span></span><br><span class="line"><span class="string">    of the previous layer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    a_slice_prev -- slice of input data of shape (f, f, n_C_prev)</span></span><br><span class="line"><span class="string">    W -- Weight parameters contained in a window - matrix of shape (f, f, n_C_prev)</span></span><br><span class="line"><span class="string">    b -- Bias parameters contained in a window - matrix of shape (1, 1, 1)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    Z -- a scalar value, result of convolving the sliding window (W, b) on a slice x of the input data</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Element-wise product between a_slice and W. Do not add the bias yet.</span></span><br><span class="line">    s = a_slice_prev * W</span><br><span class="line">    <span class="comment"># Sum over all entries of the volume s.</span></span><br><span class="line">    Z = np.sum(s)</span><br><span class="line">    <span class="comment"># Add bias b to Z. Cast b to a float() so that Z results in a scalar value.</span></span><br><span class="line">    Z = Z + float(b)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Z</span><br></pre></td></tr></table></figure>
+<h3 id="Convolutional-Neural-Networks-Forward-pass"><a href="#Convolutional-Neural-Networks-Forward-pass" class="headerlink" title="Convolutional Neural Networks - Forward pass"></a>Convolutional Neural Networks - Forward pass</h3><p>In the forward pass, we will take many filters and convolve them on the input. Each ‘convolution’ gives us a 2D matrix output. You will then stack these outputs to get a 3D volume: </p>
+<center>
+<video width="620" height="440" src="/Users/dmrfcoder/Desktop/cnn1/conv_kiank.mp4" type="video/mp4" controls>
+</video>
+</center>
+
+<p>Now I will implement the function below to convolve the filters W on an input activation A_prev. This function takes as input A_prev, the activations output by the previous layer (for a batch of m inputs), F filters/weights denoted by W, and a bias vector denoted by b, where each filter has its own (single) bias. Finally we also have access to the hyperparameters dictionary which contains the stride and the padding. </p>
+<p><strong>Hint</strong>: </p>
+<ol>
+<li>To select a 2x2 slice at the upper left corner of a matrix “a_prev” (shape (5,5,3)), I would do:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a_slice_prev = a_prev[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>,:]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>This will be useful when we will define <code>a_slice_prev</code> below, using the <code>start/end</code> indexes we will define.</p>
+<ol>
+<li><p>To define a_slice I will need to first define its corners <code>vert_start</code>, <code>vert_end</code>, <code>horiz_start</code> and <code>horiz_end</code>. This figure may be helpful for us to find how each of the corner can be defined using h, w, f and s in the code below.</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fz452za9bcj30s80ks76f.jpg" alt="vert_horiz_kiank"></p>
+</li>
+</ol>
+<center> <u> <font color="purple"> Figure 3 </font></u><font color="purple">  : Definition of a slice using vertical and horizontal start/end (with a 2x2 filter) <br> This figure shows only a single channel.  </font></center>
+
+<p><strong>Reminder</strong>:<br>The formulas relating the output shape of the convolution to the input shape is:</p>
+<script type="math/tex; mode=display">n_H = \lfloor \frac{n_{H_{prev}} - f + 2 \times pad}{stride} \rfloor +1</script><script type="math/tex; mode=display">n_W = \lfloor \frac{n_{W_{prev}} - f + 2 \times pad}{stride} \rfloor +1</script><script type="math/tex; mode=display">n_C = \text{number of filters used in the convolution}</script><p>For this exercise, we won’t worry about vectorization, and will just implement everything with for-loops.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_forward</span><span class="params">(A_prev, W, b, hparameters)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the forward propagation for a convolution function</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A_prev -- output activations of the previous layer, numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)</span></span><br><span class="line"><span class="string">    W -- Weights, numpy array of shape (f, f, n_C_prev, n_C)</span></span><br><span class="line"><span class="string">    b -- Biases, numpy array of shape (1, 1, 1, n_C)</span></span><br><span class="line"><span class="string">    hparameters -- python dictionary containing "stride" and "pad"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    Z -- conv output, numpy array of shape (m, n_H, n_W, n_C)</span></span><br><span class="line"><span class="string">    cache -- cache of values needed for the conv_backward() function</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from A_prev's shape (≈1 line)</span></span><br><span class="line">    (m, n_H_prev, n_W_prev, n_C_prev) = A_prev.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from W's shape (≈1 line)</span></span><br><span class="line">    (f, f, n_C_prev, n_C) = W.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve information from "hparameters" (≈2 lines)</span></span><br><span class="line">    stride = hparameters[<span class="string">'stride'</span>]</span><br><span class="line">    pad = hparameters[<span class="string">'pad'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute the dimensions of the CONV output volume using the formula given above. Hint: use int() to floor. (≈2 lines)</span></span><br><span class="line">    n_H = int((n_H_prev - f + <span class="number">2</span> * pad) / stride) + <span class="number">1</span></span><br><span class="line">    n_W = int((n_W_prev - f + <span class="number">2</span> * pad) / stride) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize the output volume Z with zeros. (≈1 line)</span></span><br><span class="line">    Z = np.zeros(shape=(m, n_H, n_W, n_C))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create A_prev_pad by padding A_prev</span></span><br><span class="line">    A_prev_pad = zero_pad(A_prev, pad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):  <span class="comment"># loop over the batch of training examples</span></span><br><span class="line">        a_prev_pad = A_prev_pad[i]  <span class="comment"># Select ith training example's padded activation</span></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):  <span class="comment"># loop over vertical axis of the output volume</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):  <span class="comment"># loop over horizontal axis of the output volume</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):  <span class="comment"># loop over channels (= #filters) of the output volume</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice" (≈4 lines)</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = h * stride + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = w * stride + f</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Use the corners to define the (3D) slice of a_prev_pad (See Hint above the cell). (≈1 line)</span></span><br><span class="line">                    a_slice_prev = a_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :]</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Convolve the (3D) slice with the correct filter W and bias b, to get back one output neuron. (≈1 line)</span></span><br><span class="line">                    Z[i, h, w, c] = conv_single_step(a_slice_prev, W[:, :, :, c], b[:, :, :, c])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span> (Z.shape == (m, n_H, n_W, n_C))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Save information in "cache" for the backprop</span></span><br><span class="line">    cache = (A_prev, W, b, hparameters)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Z, cache</span><br></pre></td></tr></table></figure>
+<p>Finally, CONV layer should also contain an activation, in which case we would add the following line of code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Convolve the window to get back one output neuron</span></span><br><span class="line">Z[i, h, w, c] = ...</span><br><span class="line"><span class="comment"># Apply activation</span></span><br><span class="line">A[i, h, w, c] = activation(Z[i, h, w, c])</span><br></pre></td></tr></table></figure>
+<p>We don’t need to do it here. </p>
+<h2 id="Pooling-layer"><a href="#Pooling-layer" class="headerlink" title="Pooling layer"></a>Pooling layer</h2><p>The pooling (POOL) layer reduces the height and width of the input. It helps reduce computation, as well as helps make feature detectors more invariant to its position in the input. The two types of pooling layers are: </p>
+<ul>
+<li>Max-pooling layer: slides an ($f, f$) window over the input and stores the max value of the window in the output.</li>
+<li>Average-pooling layer: slides an ($f, f$) window over the input and stores the average value of the window in the output.</li>
+</ul>
+<table>
+<td>
+<img src="https://ws1.sinaimg.cn/large/006tNc79gy1fz4585ifckj31720nan64.jpg" style="width:500px;height:300px;">
+</td><td>
+</td><td>
+    <img src="https://ws4.sinaimg.cn/large/006tNc79gy1fz458hqeuqj31620mydp4.jpg" style="width:500px;height:300px;">
+    </td><td>
+</td></table>
+
+<p>These pooling layers have no parameters for backpropagation to train. However, they have hyperparameters such as the window size $f$. This specifies the height and width of the fxf window we would compute a max or average over. </p>
+<h3 id="Forward-Pooling"><a href="#Forward-Pooling" class="headerlink" title="Forward Pooling"></a>Forward Pooling</h3><p>Now, I am going to implement MAX-POOL and AVG-POOL, in the same function. </p>
+<p><strong>Reminder</strong>:<br>As there’s no padding, the formulas binding the output shape of the pooling to the input shape is:</p>
+<script type="math/tex; mode=display">n_H = \lfloor \frac{n_{H_{prev}} - f}{stride} \rfloor +1</script><script type="math/tex; mode=display">n_W = \lfloor \frac{n_{W_{prev}} - f}{stride} \rfloor +1</script><script type="math/tex; mode=display">n_C = n_{C_{prev}}</script><p>Implement:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pool_forward</span><span class="params">(A_prev, hparameters, mode=<span class="string">"max"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the forward pass of the pooling layer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A_prev -- Input data, numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)</span></span><br><span class="line"><span class="string">    hparameters -- python dictionary containing "f" and "stride"</span></span><br><span class="line"><span class="string">    mode -- the pooling mode you would like to use, defined as a string ("max" or "average")</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A -- output of the pool layer, a numpy array of shape (m, n_H, n_W, n_C)</span></span><br><span class="line"><span class="string">    cache -- cache used in the backward pass of the pooling layer, contains the input and hparameters</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from the input shape</span></span><br><span class="line">    (m, n_H_prev, n_W_prev, n_C_prev) = A_prev.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve hyperparameters from "hparameters"</span></span><br><span class="line">    f = hparameters[<span class="string">"f"</span>]</span><br><span class="line">    stride = hparameters[<span class="string">"stride"</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Define the dimensions of the output</span></span><br><span class="line">    n_H = int(<span class="number">1</span> + (n_H_prev - f) / stride)</span><br><span class="line">    n_W = int(<span class="number">1</span> + (n_W_prev - f) / stride)</span><br><span class="line">    n_C = n_C_prev</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize output matrix A</span></span><br><span class="line">    A = np.zeros((m, n_H, n_W, n_C))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):  <span class="comment"># loop over the training examples</span></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):  <span class="comment"># loop on the vertical axis of the output volume</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):  <span class="comment"># loop on the horizontal axis of the output volume</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):  <span class="comment"># loop over the channels of the output volume</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice" (≈4 lines)</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = h * stride + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = w * stride + f</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Use the corners to define the current slice on the ith training example of A_prev, channel c. (≈1 line)</span></span><br><span class="line">                    a_prev_slice = A_prev[i, vert_start:vert_end, horiz_start:horiz_end, c]</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Compute the pooling operation on the slice. Use an if statment to differentiate the modes. Use np.max/np.mean.</span></span><br><span class="line">                    <span class="keyword">if</span> mode == <span class="string">"max"</span>:</span><br><span class="line">                        A[i, h, w, c] = np.max(a_prev_slice)</span><br><span class="line">                    <span class="keyword">elif</span> mode == <span class="string">"average"</span>:</span><br><span class="line">                        A[i, h, w, c] = np.average(a_prev_slice)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Store the input and hparameters in "cache" for pool_backward()</span></span><br><span class="line">    cache = (A_prev, hparameters)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span> (A.shape == (m, n_H, n_W, n_C))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> A, cache</span><br></pre></td></tr></table></figure>
+<p> We have now implemented the forward passes of all the layers of a convolutional network. </p>
+<h2 id="Backpropagation-in-convolutional-neural-networks"><a href="#Backpropagation-in-convolutional-neural-networks" class="headerlink" title="Backpropagation in convolutional neural networks"></a>Backpropagation in convolutional neural networks</h2><p>In modern deep learning frameworks, we only have to implement the forward pass, and the framework takes care of the backward pass, so most deep learning engineers don’t need to bother with the details of the backward pass. The backward pass for convolutional networks is complicated. If you wish however, you can work through this portion of the article to get a sense of what backprop in a convolutional network looks like. </p>
+<p>When in an earlier course we implemented a simple (fully connected) neural network, we used backpropagation to compute the derivatives with respect to the cost to update the parameters. Similarly, in convolutional neural networks we can to calculate the derivatives with respect to the cost in order to update the parameters. The backprop equations are not trivial I briefly presented them below.</p>
+<h3 id="Convolutional-layer-backward-pass"><a href="#Convolutional-layer-backward-pass" class="headerlink" title="Convolutional layer backward pass"></a>Convolutional layer backward pass</h3><p>Let’s start by implementing the backward pass for a CONV layer. </p>
+<h4 id="Computing-dA"><a href="#Computing-dA" class="headerlink" title="Computing dA:"></a>Computing dA:</h4><p>This is the formula for computing $dA$ with respect to the cost for a certain filter $W_c$ and a given training example:</p>
+<script type="math/tex; mode=display">dA += \sum _{h=0} ^{n_H} \sum_{w=0} ^{n_W} W_c \times dZ_{hw} \tag{1}</script><p>Where $W<em>c$ is a filter and $dZ</em>{hw}$ is a scalar corresponding to the gradient of the cost with respect to the output of the conv layer Z at the hth row and wth column (corresponding to the dot product taken at the ith stride left and jth stride down). Note that at each time, we multiply the the same filter $W_c$ by a different dZ when updating dA. We do so mainly because when computing the forward propagation, each filter is dotted and summed by a different a_slice. Therefore when computing the backprop for dA, we are just adding the gradients of all the a_slices. </p>
+<p>In code, inside the appropriate for-loops, this formula translates into:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">da_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :] += W[:,:,:,c] * dZ[i, h, w, c]</span><br></pre></td></tr></table></figure></p>
+<h4 id="Computing-dW"><a href="#Computing-dW" class="headerlink" title="Computing dW:"></a>Computing dW:</h4><p>This is the formula for computing $dW_c$ ($dW_c$ is the derivative of one filter) with respect to the loss:</p>
+<script type="math/tex; mode=display">dW_c  += \sum _{h=0} ^{n_H} \sum_{w=0} ^ {n_W} a_{slice} \times dZ_{hw}  \tag{2}</script><p>Where $a<em>{slice}$ corresponds to the slice which was used to generate the acitivation $Z</em>{ij}$. Hence, this ends up giving us the gradient for $W$ with respect to that slice. Since it is the same $W$, we will just add up all such gradients to get $dW$. </p>
+<p>In code, inside the appropriate for-loops, this formula translates into:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dW[:,:,:,c] += a_slice * dZ[i, h, w, c]</span><br></pre></td></tr></table></figure></p>
+<h4 id="Computing-db"><a href="#Computing-db" class="headerlink" title="Computing db:"></a>Computing db:</h4><p>This is the formula for computing $db$ with respect to the cost for a certain filter $W_c$:</p>
+<script type="math/tex; mode=display">db = \sum_h \sum_w dZ_{hw} \tag{3}</script><p>As you have previously seen in basic neural networks, db is computed by summing $dZ$. In this case, we are just summing over all the gradients of the conv output (Z) with respect to the cost. </p>
+<p>In code, inside the appropriate for-loops, this formula translates into:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db[:,:,:,c] += dZ[i, h, w, c]</span><br></pre></td></tr></table></figure></p>
+<p>I will implement the <code>conv_backward</code> function below and  sum over all the training examples, filters, heights, and widths. I will  then compute the derivatives using formulas 1, 2 and 3 above. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_backward</span><span class="params">(dZ, cache)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implement the backward propagation for a convolution function</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dZ -- gradient of the cost with respect to the output of the conv layer (Z), numpy array of shape (m, n_H, n_W, n_C)</span></span><br><span class="line"><span class="string">    cache -- cache of values needed for the conv_backward(), output of conv_forward()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dA_prev -- gradient of the cost with respect to the input of the conv layer (A_prev),</span></span><br><span class="line"><span class="string">               numpy array of shape (m, n_H_prev, n_W_prev, n_C_prev)</span></span><br><span class="line"><span class="string">    dW -- gradient of the cost with respect to the weights of the conv layer (W)</span></span><br><span class="line"><span class="string">          numpy array of shape (f, f, n_C_prev, n_C)</span></span><br><span class="line"><span class="string">    db -- gradient of the cost with respect to the biases of the conv layer (b)</span></span><br><span class="line"><span class="string">          numpy array of shape (1, 1, 1, n_C)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve information from "cache"</span></span><br><span class="line">    (A_prev, W, b, hparameters) = cache</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from A_prev's shape</span></span><br><span class="line">    (m, n_H_prev, n_W_prev, n_C_prev) = A_prev.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from W's shape</span></span><br><span class="line">    (f, f, n_C_prev, n_C) = W.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve information from "hparameters"</span></span><br><span class="line">    stride = hparameters[<span class="string">'stride'</span>]</span><br><span class="line">    pad = hparameters[<span class="string">'pad'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from dZ's shape</span></span><br><span class="line">    (m, n_H, n_W, n_C) = dZ.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize dA_prev, dW, db with the correct shapes</span></span><br><span class="line">    dA_prev = np.zeros(shape=(m, n_H_prev, n_W_prev, n_C_prev))</span><br><span class="line">    dW = np.zeros(shape=(f, f, n_C_prev, n_C))</span><br><span class="line">    db = np.zeros(shape=(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, n_C))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Pad A_prev and dA_prev</span></span><br><span class="line">    A_prev_pad = zero_pad(A_prev, pad)</span><br><span class="line">    dA_prev_pad = zero_pad(dA_prev, pad)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):  <span class="comment"># loop over the training examples</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># select ith training example from A_prev_pad and dA_prev_pad</span></span><br><span class="line">        a_prev_pad = A_prev_pad[i]</span><br><span class="line">        da_prev_pad = dA_prev_pad[i]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):  <span class="comment"># loop over vertical axis of the output volume</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):  <span class="comment"># loop over horizontal axis of the output volume</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):  <span class="comment"># loop over the channels of the output volume</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice"</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = h * stride + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = w * stride + f</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Use the corners to define the slice from a_prev_pad</span></span><br><span class="line">                    a_slice = a_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :]</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Update gradients for the window and the filter's parameters using the code formulas given above</span></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line"></span><br><span class="line">                        da_prev_pad[vert_start:vert_end, horiz_start:horiz_end, :] += W[:, :, :, c] * dZ[i, h, w, c]</span><br><span class="line">                    <span class="keyword">except</span> Exception:</span><br><span class="line">                        a = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">                    dW[:, :, :, c] += a_slice * dZ[i, h, w, c]</span><br><span class="line">                    db[:, :, :, c] += dZ[i, h, w, c]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Set the ith training example's dA_prev to the unpaded da_prev_pad (Hint: use X[pad:-pad, pad:-pad, :])</span></span><br><span class="line">        dA_prev_pad[i, :, :, :] = da_prev_pad</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span> (dA_prev.shape == (m, n_H_prev, n_W_prev, n_C_prev))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dA_prev, dW, db</span><br></pre></td></tr></table></figure>
+<h2 id="Pooling-layer-backward-pass"><a href="#Pooling-layer-backward-pass" class="headerlink" title="Pooling layer - backward pass"></a>Pooling layer - backward pass</h2><p>Next, let’s implement the backward pass for the pooling layer, starting with the MAX-POOL layer. Even though a pooling layer has no parameters for backprop to update, we still need to backpropagation the gradient through the pooling layer in order to compute gradients for layers that came before the pooling layer. </p>
+<h3 id="Max-pooling-backward-pass"><a href="#Max-pooling-backward-pass" class="headerlink" title="Max pooling - backward pass"></a>Max pooling - backward pass</h3><p>Before jumping into the backpropagation of the pooling layer, I am going to build a helper function called <code>create_mask_from_window()</code> which does the following: </p>
+<script type="math/tex; mode=display">X = \begin{bmatrix}
+1 && 3 \\
+4 && 2
+\end{bmatrix} \quad \rightarrow  \quad M =\begin{bmatrix}
+0 && 0 \\
+1 && 0
+\end{bmatrix}\tag{4}</script><p>As you can see, this function creates a “mask” matrix which keeps track of where the maximum of the matrix is. True (1) indicates the position of the maximum in X, the other entries are False (0). You’ll see later that the backward pass for average pooling will be similar to this but using a different mask.  </p>
+<p>I will implement <code>create_mask_from_window()</code> firstly. This function will be helpful for pooling backward.<br>Hints:</p>
+<ul>
+<li><a href="">np.max()</a> may be helpful. It computes the maximum of an array.</li>
+<li><p>If we have a matrix X and a scalar x: <code>A = (X == x)</code> will return a matrix A of the same size as X such that:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A[i,j] = True if X[i,j] = x</span><br><span class="line">A[i,j] = False if X[i,j] != x</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Here, we don’t need to consider cases where there are several maxima in a matrix.</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_mask_from_window</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Creates a mask from an input matrix x, to identify the max entry of x.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    x -- Array of shape (f, f)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    mask -- Array of the same shape as window, contains a True at the position corresponding to the max entry of x.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    mask = x == np.max(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mask</span><br></pre></td></tr></table></figure>
+<p>Why do we keep track of the position of the max? It’s because this is the input value that ultimately influenced the output, and therefore the cost. Backprop is computing gradients with respect to the cost, so anything that influences the ultimate cost should have a non-zero gradient. So, backprop will “propagate” the gradient back to this particular input value that had influenced the cost. </p>
+<h3 id="Average-pooling-backward-pass"><a href="#Average-pooling-backward-pass" class="headerlink" title="Average pooling - backward pass"></a>Average pooling - backward pass</h3><p>In max pooling, for each input window, all the “influence” on the output came from a single input value—the max. In average pooling, every element of the input window has equal influence on the output. So to implement backprop, I will now implement a helper function that reflects this.</p>
+<p>For example if we did average pooling in the forward pass using a 2x2 filter, then the mask you’ll use for the backward pass will look like: </p>
+<script type="math/tex; mode=display">dZ = 1 \quad \rightarrow  \quad dZ =\begin{bmatrix}
+1/4 && 1/4 \\
+1/4 && 1/4
+\end{bmatrix}\tag{5}</script><p>This implies that each position in the $dZ$ matrix contributes equally to output because in the forward pass, we took an average. </p>
+<p>I will implement the function below to equally distribute a value dz through a matrix of dimension shape. <a href="https://docs.scipy.org/doc/numpy-1.13.0/reference/generated/numpy.ones.html" target="_blank" rel="noopener">Hint</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distribute_value</span><span class="params">(dz, shape)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Distributes the input value in the matrix of dimension shape</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dz -- input scalar</span></span><br><span class="line"><span class="string">    shape -- the shape (n_H, n_W) of the output matrix for which we want to distribute the value of dz</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    a -- Array of size (n_H, n_W) for which we distributed the value of dz</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from shape (≈1 line)</span></span><br><span class="line">    (n_H, n_W) = shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute the value to distribute on the matrix (≈1 line)</span></span><br><span class="line">    average = dz / (n_W * n_H)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Create a matrix where every entry is the "average" value (≈1 line)</span></span><br><span class="line">    a = np.ones(shape=shape) * average</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+<h3 id="Putting-it-together-Pooling-backward"><a href="#Putting-it-together-Pooling-backward" class="headerlink" title="Putting it together: Pooling backward"></a>Putting it together: Pooling backward</h3><p>We now have everything we need to compute backward propagation on a pooling layer.</p>
+<p>Now I will implement the <code>pool_backward</code> function in both modes (<code>&quot;max&quot;</code> and <code>&quot;average&quot;</code>). I will once again use 4 for-loops (iterating over training examples, height, width, and channels). I will use an <code>if/elif</code> statement to see if the mode is equal to <code>&#39;max&#39;</code> or <code>&#39;average&#39;</code>. If it is equal to ‘average’ I will use the <code>distribute_value()</code> function I implemented above to create a matrix of the same shape as <code>a_slice</code>. Otherwise, the mode is equal to ‘<code>max</code>‘, and I will create a mask with <code>create_mask_from_window()</code> and multiply it by the corresponding value of dZ.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pool_backward</span><span class="params">(dA, cache, mode=<span class="string">"max"</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Implements the backward pass of the pooling layer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dA -- gradient of cost with respect to the output of the pooling layer, same shape as A</span></span><br><span class="line"><span class="string">    cache -- cache output from the forward pass of the pooling layer, contains the layer's input and hparameters</span></span><br><span class="line"><span class="string">    mode -- the pooling mode you would like to use, defined as a string ("max" or "average")</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dA_prev -- gradient of cost with respect to the input of the pooling layer, same shape as A_prev</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve information from cache (≈1 line)</span></span><br><span class="line">    (A_prev, hparameters) = cache</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve hyperparameters from "hparameters" (≈2 lines)</span></span><br><span class="line">    stride = hparameters[<span class="string">'stride'</span>]</span><br><span class="line">    f = hparameters[<span class="string">'f'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Retrieve dimensions from A_prev's shape and dA's shape (≈2 lines)</span></span><br><span class="line">    m, n_H_prev, n_W_prev, n_C_prev = A_prev.shape</span><br><span class="line">    m, n_H, n_W, n_C = dA.shape</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize dA_prev with zeros (≈1 line)</span></span><br><span class="line">    dA_prev = np.zeros(shape=(m, n_H_prev, n_W_prev, n_C_prev))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):  <span class="comment"># loop over the training examples</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># select training example from A_prev (≈1 line)</span></span><br><span class="line">        a_prev = A_prev[i]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> range(n_H):  <span class="comment"># loop on the vertical axis</span></span><br><span class="line">            <span class="keyword">for</span> w <span class="keyword">in</span> range(n_W):  <span class="comment"># loop on the horizontal axis</span></span><br><span class="line">                <span class="keyword">for</span> c <span class="keyword">in</span> range(n_C):  <span class="comment"># loop over the channels (depth)</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Find the corners of the current "slice" (≈4 lines)</span></span><br><span class="line">                    vert_start = h * stride</span><br><span class="line">                    vert_end = h * stride + f</span><br><span class="line">                    horiz_start = w * stride</span><br><span class="line">                    horiz_end = w * stride + f</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># Compute the backward propagation in both modes.</span></span><br><span class="line">                    <span class="keyword">if</span> mode == <span class="string">"max"</span>:</span><br><span class="line"></span><br><span class="line">                        <span class="comment"># Use the corners and "c" to define the current slice from a_prev (≈1 line)</span></span><br><span class="line">                        a_prev_slice = a_prev[vert_start:vert_end, horiz_start:horiz_end, c]</span><br><span class="line">                        <span class="comment"># Create the mask from a_prev_slice (≈1 line)</span></span><br><span class="line">                        mask = create_mask_from_window(a_prev_slice)</span><br><span class="line">                        <span class="comment"># Set dA_prev to be dA_prev + (the mask multiplied by the correct entry of dA) (≈1 line)</span></span><br><span class="line">                        dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += mask * dA[i, h, w, c]</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">elif</span> mode == <span class="string">"average"</span>:</span><br><span class="line"></span><br><span class="line">                        <span class="comment"># Get the value a from dA (≈1 line)</span></span><br><span class="line">                        da = dA[i, h, w, c]</span><br><span class="line">                        <span class="comment"># Define the shape of the filter as fxf (≈1 line)</span></span><br><span class="line">                        shape = (f, f)</span><br><span class="line">                        <span class="comment"># Distribute it to get the correct slice of dA_prev. i.e. Add the distributed value of da. (≈1 line)</span></span><br><span class="line">                        dA_prev[i, vert_start: vert_end, horiz_start: horiz_end, c] += distribute_value(da, shape)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Making sure your output shape is correct</span></span><br><span class="line">    <span class="keyword">assert</span> (dA_prev.shape == A_prev.shape)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dA_prev</span><br></pre></td></tr></table></figure>
+<h3 id="Congratulations"><a href="#Congratulations" class="headerlink" title="Congratulations"></a>Congratulations</h3><p>Congratulation on completing this article. You now understand how convolutional neural networks work. You have implemented all the building blocks of a neural network. In the next article I will implement a ConvNet using TensorFlow.</p>
+<h2 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h2><p><a href="https://github.com/DmrfCoder/CourseraAi/tree/master/ConvolutionModel" target="_blank" rel="noopener">Github</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="ai-exception 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="ai-exception 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/coursera/" rel="tag"><i class="fa fa-tag"></i>
+
+ coursera</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/Speech-in-kechuang/" rel="next" title="Science and Technology Open Speech">
+                <i class="fa fa-chevron-left"></i> Science and Technology Open Speech
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/12/Convolution_model-Application/" rel="prev" title="Convolutional Neural Networks:Application">
+                Convolutional Neural Networks:Application <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="ai-exception">
+            
+              <p class="site-author-name" itemprop="name">ai-exception</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">140</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline-of-the-Assignment"><span class="nav-number">1.</span> <span class="nav-text">Outline of the Assignment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Convolutional-Neural-Networks"><span class="nav-number">2.</span> <span class="nav-text">Convolutional Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zero-Padding"><span class="nav-number">2.1.</span> <span class="nav-text">Zero-Padding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Implement"><span class="nav-number">2.1.1.</span> <span class="nav-text">Implement:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-code"><span class="nav-number">2.1.2.</span> <span class="nav-text">Test code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-step-of-convolution"><span class="nav-number">2.2.</span> <span class="nav-text">Single step of convolution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#conv-single-step-Hint"><span class="nav-number">2.2.1.</span> <span class="nav-text">conv_single_step(). Hint.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-Neural-Networks-Forward-pass"><span class="nav-number">2.3.</span> <span class="nav-text">Convolutional Neural Networks - Forward pass</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pooling-layer"><span class="nav-number">3.</span> <span class="nav-text">Pooling layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-Pooling"><span class="nav-number">3.1.</span> <span class="nav-text">Forward Pooling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backpropagation-in-convolutional-neural-networks"><span class="nav-number">4.</span> <span class="nav-text">Backpropagation in convolutional neural networks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-layer-backward-pass"><span class="nav-number">4.1.</span> <span class="nav-text">Convolutional layer backward pass</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Computing-dA"><span class="nav-number">4.1.1.</span> <span class="nav-text">Computing dA:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Computing-dW"><span class="nav-number">4.1.2.</span> <span class="nav-text">Computing dW:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Computing-db"><span class="nav-number">4.1.3.</span> <span class="nav-text">Computing db:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pooling-layer-backward-pass"><span class="nav-number">5.</span> <span class="nav-text">Pooling layer - backward pass</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Max-pooling-backward-pass"><span class="nav-number">5.1.</span> <span class="nav-text">Max pooling - backward pass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Average-pooling-backward-pass"><span class="nav-number">5.2.</span> <span class="nav-text">Average pooling - backward pass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Putting-it-together-Pooling-backward"><span class="nav-number">5.3.</span> <span class="nav-text">Putting it together: Pooling backward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Congratulations"><span class="nav-number">5.4.</span> <span class="nav-text">Congratulations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Links"><span class="nav-number">6.</span> <span class="nav-text">Links</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ai-exception</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共239.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
