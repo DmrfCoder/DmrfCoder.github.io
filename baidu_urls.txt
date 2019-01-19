@@ -1,5 +1,5 @@
+http://www.ai-exception.com/2019/01/19/Keras Tutorial-HappyHouse/
 http://www.ai-exception.com/2019/01/12/Convolution_model-Application/
 http://www.ai-exception.com/2019/01/12/Convolution_model-Step_by_Step/
 http://www.ai-exception.com/2019/01/07/Speech-in-kechuang/
 http://www.ai-exception.com/2018/12/22/科创经验分享/
-http://www.ai-exception.com/2018/12/18/Optimization methods/

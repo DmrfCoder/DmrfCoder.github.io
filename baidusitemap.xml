@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.ai-exception.com/2019/01/19/Keras%20Tutorial-HappyHouse/</loc>
+    <lastmod>2019-01-19T02:43:28.056Z</lastmod>
+  </url>  <url>
+    <loc>http://www.ai-exception.com/2018/12/14/Gradient%20Checking/</loc>
+    <lastmod>2019-01-18T15:31:42.620Z</lastmod>
+  </url>  <url>
     <loc>http://www.ai-exception.com/2018/12/14/Regularization/</loc>
     <lastmod>2019-01-12T15:13:58.021Z</lastmod>
   </url>  <url>
@@ -42,9 +48,6 @@
   </url>  <url>
     <loc>http://www.ai-exception.com/2018/10/06/Logistic%20Regression%20with%20a%20Neural%20Network%20mindset/</loc>
     <lastmod>2018-12-14T03:50:27.565Z</lastmod>
-  </url>  <url>
-    <loc>http://www.ai-exception.com/2018/12/14/Gradient%20Checking/</loc>
-    <lastmod>2018-12-14T03:49:20.342Z</lastmod>
   </url>  <url>
     <loc>http://www.ai-exception.com/2018/10/06/%E6%B1%87%E7%BC%96%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</loc>
     <lastmod>2018-12-11T06:32:54.968Z</lastmod>
