@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://ai-exception.com"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "e32cdd0f"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-32x32-next.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] 概述开发背景随着一个个开源社区的不断成长，越来越多的技术人员在各种论坛发表自己的技术博客（blog），本系统希望实现一个团队博客管理的目的，即将一个团队成员的所有博客进行统一管理，有利于团队内部人员的技术交流和共同成长。 开发目标通过本系统，使用者可以看到团队中所有的成员，管理员登录后可以对团队的人员进行编辑和管理。同时，管理员可以对系统成员的博客进行查看和管理。 参考资料spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式课程设计——博客管理系统（BlogManageSystem）实验报告">
+<meta property="og:url" content="http://www.ai-exception.com/2018/03/26/博客管理系统/index.html">
+<meta property="og:site_name" content="ai-exception">
+<meta property="og:description" content="[TOC] 概述开发背景随着一个个开源社区的不断成长，越来越多的技术人员在各种论坛发表自己的技术博客（blog），本系统希望实现一个团队博客管理的目的，即将一个团队成员的所有博客进行统一管理，有利于团队内部人员的技术交流和共同成长。 开发目标通过本系统，使用者可以看到团队中所有的成员，管理员登录后可以对团队的人员进行编辑和管理。同时，管理员可以对系统成员的博客进行查看和管理。 参考资料spring">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fzywg081pmj312h0ohgn7.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywgup849j30zd0qxaai.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fzywh1k7a4j30zj0qzjrv.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fzywhdz5xbj30zi0b40tk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywhieqinj30zj08n751.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzywhnjci1j30b00ff0tg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywhz038lj30eq0qdq37.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywoitpflj30x30bct8x.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywoucigrj30w60bxjro.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fzywp17u81j30xl0c0dg8.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywp9bajzj30wc08ydgm.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzywrbhg7gj30y0081dgh.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fzywvhsjppj30xc08ddg6.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fzywwbrrg0j30yc0d3mxq.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fzywwhn4bpj30yp08ogme.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fzywxxem4tj30xe07374u.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fzywyv1cdlj30x709mq3t.jpg">
+<meta property="og:updated_time" content="2019-02-08T04:43:55.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式课程设计——博客管理系统（BlogManageSystem）实验报告">
+<meta name="twitter:description" content="[TOC] 概述开发背景随着一个个开源社区的不断成长，越来越多的技术人员在各种论坛发表自己的技术博客（blog），本系统希望实现一个团队博客管理的目的，即将一个团队成员的所有博客进行统一管理，有利于团队内部人员的技术交流和共同成长。 开发目标通过本系统，使用者可以看到团队中所有的成员，管理员登录后可以对团队的人员进行编辑和管理。同时，管理员可以对系统成员的博客进行查看和管理。 参考资料spring">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fzywg081pmj312h0ohgn7.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ai-exception.com/2018/03/26/博客管理系统/">
+
+
+
+
+
+  <title>设计模式课程设计——博客管理系统（BlogManageSystem）实验报告 | ai-exception</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-130602831-1', 'auto');
+  ga('send', 'pageview');
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ai-exception</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-moments">
+          <a href="/moments/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fal fa-calendar"></i> <br>
+            
+            Moments
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/user/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About me
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ai-exception.com/2018/03/26/博客管理系统/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ai-exception">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/photo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ai-exception">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设计模式课程设计——博客管理系统（BlogManageSystem）实验报告</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T20:44:32+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="开发背景"><a href="#开发背景" class="headerlink" title="开发背景"></a>开发背景</h3><p>随着一个个开源社区的不断成长，越来越多的技术人员在各种论坛发表自己的技术博客（blog），本系统希望实现一个团队博客管理的目的，即将一个团队成员的所有博客进行统一管理，有利于团队内部人员的技术交流和共同成长。</p>
+<h3 id="开发目标"><a href="#开发目标" class="headerlink" title="开发目标"></a>开发目标</h3><p>通过本系统，使用者可以看到团队中所有的成员，管理员登录后可以对团队的人员进行编辑和管理。同时，管理员可以对系统成员的博客进行查看和管理。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>springmvc官方文档：<a href="http://projects.spring.io/spring-framework/" target="_blank" rel="noopener">http://projects.spring.io/spring-framework/</a><br>springmvc主要框架介绍：<a href="http://spring.io/projects" target="_blank" rel="noopener">http://spring.io/projects</a><br>一位大牛的教程：<a href="https://my.oschina.net/gaussik/blog" target="_blank" rel="noopener">https://my.oschina.net/gaussik/blog</a></p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><h3 id="需求陈述"><a href="#需求陈述" class="headerlink" title="需求陈述"></a>需求陈述</h3><ul>
+<li>管理员的注册以及登录</li>
+<li>用户的管理</li>
+<li>博客的管理<h3 id="操作用例"><a href="#操作用例" class="headerlink" title="操作用例"></a>操作用例</h3><h4 id="管理员注册与登录"><a href="#管理员注册与登录" class="headerlink" title="管理员注册与登录"></a>管理员注册与登录</h4>用户进入该模块之后只需输入nickname和密码然后点击登录即可进行登录<br>，若需要注册只需点击对应的注册button进入注册页面，注册页面与登录页面想死，主要区别是后端的处理。<h4 id="用户信息管理"><a href="#用户信息管理" class="headerlink" title="用户信息管理"></a>用户信息管理</h4>这个模块首先使用表格的形式展示出当前系统所的用户信息，其次，对每一个用户都应该有详情、修改、删除三个按钮以管理用户。另外，在本页面还需有一个增加用户的button用于管理员增加用户。<h4 id="博客信息管理"><a href="#博客信息管理" class="headerlink" title="博客信息管理"></a>博客信息管理</h4>本页面以表格的形式列出当前系统的所有博客，博客信息包括博客的标题、作者、发布日期，对于每一篇博客应该留有详情、修改、删除三大按钮，另外在本页面还需设置一个添加博客的按钮以添加新博客。</li>
+</ul>
+<h3 id="功能分析划分"><a href="#功能分析划分" class="headerlink" title="功能分析划分"></a>功能分析划分</h3><p>划分为登录注册、用户管理、博客管理三大功能模块</p>
+<h4 id="系统登录注册"><a href="#系统登录注册" class="headerlink" title="系统登录注册"></a>系统登录注册</h4><p>实现管理员登录和注册，注册并登录成功后默认进入用户管理模块，可以看到当前系统的所有用户信息并对其进行管理。</p>
+<h4 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h4><p>实现用户信息的显示、添加、删除、修改功能。</p>
+<h4 id="博客管理"><a href="#博客管理" class="headerlink" title="博客管理"></a>博客管理</h4><p>实现博客的显示、添加、删除、修改功能。</p>
+<h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><p>Ubuntu16.04+Intellij IDEA+tomcat8.5+MySQL</p>
+<h2 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h2><h3 id="UML类图"><a href="#UML类图" class="headerlink" title="UML类图"></a>UML类图</h3><p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fzywg081pmj312h0ohgn7.jpg" alt="1"></p>
+<h3 id="界面设计"><a href="#界面设计" class="headerlink" title="界面设计"></a>界面设计</h3><h4 id="登录界面设计"><a href="#登录界面设计" class="headerlink" title="登录界面设计"></a>登录界面设计</h4><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywgup849j30zd0qxaai.jpg" alt="2"></p>
+<h4 id="注册界面设计"><a href="#注册界面设计" class="headerlink" title="注册界面设计"></a>注册界面设计</h4><p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fzywh1k7a4j30zj0qzjrv.jpg" alt="3"></p>
+<h4 id="用户管理界面设计"><a href="#用户管理界面设计" class="headerlink" title="用户管理界面设计"></a>用户管理界面设计</h4><p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fzywhdz5xbj30zi0b40tk.jpg" alt="4"></p>
+<h4 id="博客管理界面设计"><a href="#博客管理界面设计" class="headerlink" title="博客管理界面设计"></a>博客管理界面设计</h4><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywhieqinj30zj08n751.jpg" alt="5"></p>
+<h3 id="数据库结构设计"><a href="#数据库结构设计" class="headerlink" title="数据库结构设计"></a>数据库结构设计</h3><h4 id="user（用户）"><a href="#user（用户）" class="headerlink" title="user（用户）"></a>user（用户）</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Nullable</th>
+<th>Auto_increment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>NO</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>varchar(45)</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>password</td>
+<td>varchar(45)</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>varchar(45)</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>varchar(45)</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="blog-博客"><a href="#blog-博客" class="headerlink" title="blog(博客)"></a>blog(博客)</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Nullable</th>
+<th>Auto_increment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>NO</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>title</td>
+<td>varchar(100)</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>content</td>
+<td>varchar(255)</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>int(11)</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>pub_date</td>
+<td>date</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="manager-管理员"><a href="#manager-管理员" class="headerlink" title="manager(管理员)"></a>manager(管理员)</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Nullable</th>
+<th>Auto_increment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int(11)</td>
+<td>NO</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>varchar(45)</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>password</td>
+<td>varchar(45)</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="数据库E-R图"><a href="#数据库E-R图" class="headerlink" title="数据库E-R图"></a>数据库E-R图</h4><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fzywhnjci1j30b00ff0tg.jpg" alt="6"></p>
+<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><h3 id="程序流程图"><a href="#程序流程图" class="headerlink" title="程序流程图"></a>程序流程图</h3><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywhz038lj30eq0qdq37.jpg" alt="7"></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h4><ul>
+<li>BlogController</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.BlogEntity;</span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.UserEntity;</span><br><span class="line"><span class="keyword">import</span> com.dmrf.repository.BlogRepository;</span><br><span class="line"><span class="keyword">import</span> com.dmrf.repository.UserRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.ModelMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ModelAttribute;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BlogController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    BlogRepository blogRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看所有博文</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/blogs"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showBlogs</span><span class="params">(ModelMap modelMap)</span> </span>&#123;</span><br><span class="line">        List&lt;BlogEntity&gt; blogList = blogRepository.findAll();</span><br><span class="line">        modelMap.addAttribute(<span class="string">"blogList"</span>, blogList);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/blogs"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加博文</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/blogs/add"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addBlog</span><span class="params">(ModelMap modelMap)</span> </span>&#123;</span><br><span class="line">        List&lt;UserEntity&gt; userList = userRepository.findAll();</span><br><span class="line">        <span class="comment">// 向jsp注入用户列表</span></span><br><span class="line">        modelMap.addAttribute(<span class="string">"userList"</span>, userList);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/addBlog"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加博文，POST请求，重定向为查看博客页面</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/blogs/addP"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addBlogPost</span><span class="params">(@ModelAttribute(<span class="string">"blog"</span>)</span> BlogEntity blogEntity) </span>&#123;</span><br><span class="line">        <span class="comment">// 打印博客标题</span></span><br><span class="line">        System.out.println(blogEntity.getTitle());</span><br><span class="line">        <span class="comment">// 打印博客作者</span></span><br><span class="line">        System.out.println(blogEntity.getUserByUserId().getNickname());</span><br><span class="line">        <span class="comment">// 存库</span></span><br><span class="line">        blogRepository.saveAndFlush(blogEntity);</span><br><span class="line">        <span class="comment">// 重定向地址</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/admin/blogs"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看博文详情，默认使用GET方法时，method可以缺省</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/admin/blogs/show/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showBlog</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id, ModelMap modelMap) </span>&#123;</span><br><span class="line">        BlogEntity blog = blogRepository.findOne(id);</span><br><span class="line">        modelMap.addAttribute(<span class="string">"blog"</span>, blog);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/blogDetail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改博文内容，页面</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/admin/blogs/update/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">updateBlog</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id, ModelMap modelMap) </span>&#123;</span><br><span class="line">        <span class="comment">// 是不是和上面那个方法很像</span></span><br><span class="line">        BlogEntity blog = blogRepository.findOne(id);</span><br><span class="line">        List&lt;UserEntity&gt; userList = userRepository.findAll();</span><br><span class="line">        modelMap.addAttribute(<span class="string">"blog"</span>, blog);</span><br><span class="line">        modelMap.addAttribute(<span class="string">"userList"</span>, userList);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/updateBlog"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改博客内容，POST请求</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/blogs/updateP"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">updateBlogP</span><span class="params">(@ModelAttribute(<span class="string">"blogP"</span>)</span> BlogEntity blogEntity) </span>&#123;</span><br><span class="line">        <span class="comment">// 更新博客信息</span></span><br><span class="line">        System.out.println(blogEntity.getTitle());</span><br><span class="line">        blogRepository.updateBlog(blogEntity.getTitle(), blogEntity.getUserByUserId().getId(),</span><br><span class="line">                blogEntity.getContent(), blogEntity.getPubDate(), blogEntity.getId());</span><br><span class="line">        blogRepository.flush();</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/admin/blogs"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除博客文章</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/admin/blogs/delete/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">deleteBlog</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> <span class="keyword">int</span> id) </span>&#123;</span><br><span class="line">        blogRepository.delete(id);</span><br><span class="line">        blogRepository.flush();</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/admin/blogs"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UserController</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.UserEntity;</span><br><span class="line"><span class="keyword">import</span> com.dmrf.repository.UserRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ui.ModelMap;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ModelAttribute;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 自动装配数据库接口，不需要再写原始的Connection来操作数据库</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    UserRepository userRepository;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users"</span>, method = &#123;RequestMethod.GET,RequestMethod.POST&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsers</span><span class="params">(ModelMap modelMap)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 查询user表中所有记录</span></span><br><span class="line">        List&lt;UserEntity&gt; userList = userRepository.findAll();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将所有记录传递给要返回的jsp页面，放在userList当中</span></span><br><span class="line">        modelMap.addAttribute(<span class="string">"userList"</span>, userList);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回pages目录下的admin/users.jsp页面</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/users"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// get请求，访问添加用户 页面</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users/add"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 返回 admin/addUser.jsp页面</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/addUser"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// post请求，处理添加用户请求，并重定向到用户管理页面</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users/addP"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addUserPost</span><span class="params">(@ModelAttribute(<span class="string">"user"</span>)</span> UserEntity userEntity) </span>&#123;</span><br><span class="line">        <span class="comment">// 注意此处，post请求传递过来的是一个UserEntity对象，里面包含了该用户的信息</span></span><br><span class="line">        <span class="comment">// 通过@ModelAttribute()注解可以获取传递过来的'user'，并创建这个对象</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据库中添加一个用户，该步暂时不会刷新缓存</span></span><br><span class="line">        <span class="comment">//userRepository.save(userEntity);</span></span><br><span class="line">        System.out.println(userEntity.getFirstName());</span><br><span class="line">        System.out.println(userEntity.getLastName());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据库中添加一个用户，并立即刷新缓存</span></span><br><span class="line">        userRepository.saveAndFlush(userEntity);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 重定向到用户管理页面，方法为 redirect:url</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/admin/users"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看用户详情</span></span><br><span class="line">    <span class="comment">// @PathVariable可以收集url中的变量，需匹配的变量用&#123;&#125;括起来</span></span><br><span class="line">    <span class="comment">// 例如：访问 localhost:8080/admin/users/show/1 ，将匹配 id = 1</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users/show/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">showUser</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer userId, ModelMap modelMap) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到userId所表示的用户</span></span><br><span class="line">        UserEntity userEntity = userRepository.findOne(userId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 传递给请求页面</span></span><br><span class="line">        modelMap.addAttribute(<span class="string">"user"</span>, userEntity);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/userDetail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新用户信息 页面</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users/update/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">updateUser</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer userId, ModelMap modelMap) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到userId所表示的用户</span></span><br><span class="line">        UserEntity userEntity = userRepository.findOne(userId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 传递给请求页面</span></span><br><span class="line">        modelMap.addAttribute(<span class="string">"user"</span>, userEntity);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/updateUser"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新用户信息 操作</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users/updateP"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">updateUserPost</span><span class="params">(@ModelAttribute(<span class="string">"userP"</span>)</span> UserEntity user) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 更新用户信息</span></span><br><span class="line">        userRepository.updateUser(user.getNickname(), user.getFirstName(),</span><br><span class="line">                user.getLastName(), user.getPassword(), user.getId());</span><br><span class="line">        userRepository.flush(); <span class="comment">// 刷新缓冲区</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/admin/users"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除用户</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/users/delete/&#123;id&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">deleteUser</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Integer userId) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除id为userId的用户</span></span><br><span class="line">        userRepository.delete(userId);</span><br><span class="line">        <span class="comment">// 立即刷新</span></span><br><span class="line">        userRepository.flush();</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"redirect:/admin/users"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>MainController</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.ManagerEntity;</span><br><span class="line"><span class="keyword">import</span> com.dmrf.repository.ManagerRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ModelAttribute;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainController</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 自动装配数据库接口，不需要再写原始的Connection来操作数据库</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    ManagerRepository managerRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/login"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/manager/signupP"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addManagerPost</span><span class="params">(@ModelAttribute(<span class="string">"manager"</span>)</span> ManagerEntity managerEntity) </span>&#123;</span><br><span class="line">        <span class="comment">// 注意此处，post请求传递过来的是一个ManagerEntity对象，里面包含了该用户的信息</span></span><br><span class="line">        <span class="comment">// 通过@ModelAttribute()注解可以获取传递过来的'manager'，并创建这个对象</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据库中添加一个用户，该步暂时不会刷新缓存</span></span><br><span class="line"><span class="comment">//        userRepository.save(userEntity);</span></span><br><span class="line">        System.out.println(managerEntity.getNickname());</span><br><span class="line">        System.out.println(managerEntity.getPassword());</span><br><span class="line">        <span class="comment">// 存库</span></span><br><span class="line">        managerRepository.saveAndFlush(managerEntity);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 重定向到首页</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/blogs"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/signupP"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">SignUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"signup"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/signup"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/admin/loginP"</span>, method = RequestMethod.POST)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">Login</span><span class="params">(@ModelAttribute(<span class="string">"manager"</span>)</span> ManagerEntity managerEntity) </span>&#123;</span><br><span class="line">        System.out.println(managerEntity.getNickname());</span><br><span class="line">        System.out.println(managerEntity.getPassword());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 找到userId所表示的用户</span></span><br><span class="line">        ManagerEntity managerEntity1 = managerRepository.queryManager(managerEntity.getNickname(), managerEntity.getPassword());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(managerEntity1 == <span class="keyword">null</span>) &#123;<span class="keyword">return</span> <span class="string">"error"</span>;&#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"admin/blogs"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/hello"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="model"><a href="#model" class="headerlink" title="model"></a>model</h4><ul>
+<li>BlogEntity</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.format.annotation.DateTimeFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"blog"</span>, schema = <span class="string">"springdemo"</span>, catalog = <span class="string">""</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BlogEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line">    <span class="keyword">private</span> String content;</span><br><span class="line">    <span class="meta">@DateTimeFormat</span>(pattern = <span class="string">"yyyy-MM-dd"</span>)</span><br><span class="line">    <span class="keyword">private</span> Date pubDate;</span><br><span class="line">    <span class="keyword">private</span> UserEntity userByUserId;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"id"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"title"</span>, nullable = <span class="keyword">false</span>, length = <span class="number">100</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTitle</span><span class="params">(String title)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.title = title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"content"</span>, nullable = <span class="keyword">true</span>, length = <span class="number">255</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getContent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContent</span><span class="params">(String content)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.content = content;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"pub_date"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">getPubDate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pubDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPubDate</span><span class="params">(Date pubDate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pubDate = pubDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        BlogEntity that = (BlogEntity) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (id != that.id) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (title != <span class="keyword">null</span> ? !title.equals(that.title) : that.title != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (content != <span class="keyword">null</span> ? !content.equals(that.content) : that.content != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (pubDate != <span class="keyword">null</span> ? !pubDate.equals(that.pubDate) : that.pubDate != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = id;</span><br><span class="line">        result = <span class="number">31</span> * result + (title != <span class="keyword">null</span> ? title.hashCode() : <span class="number">0</span>);</span><br><span class="line">        result = <span class="number">31</span> * result + (content != <span class="keyword">null</span> ? content.hashCode() : <span class="number">0</span>);</span><br><span class="line">        result = <span class="number">31</span> * result + (pubDate != <span class="keyword">null</span> ? pubDate.hashCode() : <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ManyToOne</span></span><br><span class="line">    <span class="meta">@JoinColumn</span>(name = <span class="string">"user_id"</span>, referencedColumnName = <span class="string">"id"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserEntity <span class="title">getUserByUserId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userByUserId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserByUserId</span><span class="params">(UserEntity userByUserId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userByUserId = userByUserId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ManagerEntity</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Objects;</span><br><span class="line"></span><br><span class="line"><span class="comment">//@NamedQuery(name = "ManagerEntity.queryManager", query = "SELECT mg FROM ManagerEntity mg WHERE mg.nickname AND mg.password")</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"manager"</span>, schema = <span class="string">"springdemo"</span>, catalog = <span class="string">""</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ManagerEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"id"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"nickname"</span>, nullable = <span class="keyword">false</span>, length = <span class="number">45</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNickname</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> nickname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNickname</span><span class="params">(String nickname)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nickname = nickname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"password"</span>, nullable = <span class="keyword">false</span>, length = <span class="number">45</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ManagerEntity that = (ManagerEntity) o;</span><br><span class="line">        <span class="keyword">return</span> id == that.id &amp;&amp;</span><br><span class="line">                Objects.equals(nickname, that.nickname) &amp;&amp;</span><br><span class="line">                Objects.equals(password, that.password);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Objects.hash(id, nickname, password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UserEntity</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.model;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.*;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span>(name = <span class="string">"user"</span>, schema = <span class="string">"springdemo"</span>, catalog = <span class="string">""</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserEntity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">private</span> String nickname;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String firstName;</span><br><span class="line">    <span class="keyword">private</span> String lastName;</span><br><span class="line">    <span class="keyword">private</span> Collection&lt;BlogEntity&gt; blogsById;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"id"</span>, nullable = <span class="keyword">false</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"nickname"</span>, nullable = <span class="keyword">false</span>, length = <span class="number">45</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNickname</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> nickname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNickname</span><span class="params">(String nickname)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nickname = nickname;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"password"</span>, nullable = <span class="keyword">false</span>, length = <span class="number">45</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"first_name"</span>, nullable = <span class="keyword">true</span>, length = <span class="number">45</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getFirstName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> firstName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFirstName</span><span class="params">(String firstName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Basic</span></span><br><span class="line">    <span class="meta">@Column</span>(name = <span class="string">"last_name"</span>, nullable = <span class="keyword">true</span>, length = <span class="number">45</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getLastName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lastName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLastName</span><span class="params">(String lastName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        UserEntity that = (UserEntity) o;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (id != that.id) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (nickname != <span class="keyword">null</span> ? !nickname.equals(that.nickname) : that.nickname != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (password != <span class="keyword">null</span> ? !password.equals(that.password) : that.password != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (firstName != <span class="keyword">null</span> ? !firstName.equals(that.firstName) : that.firstName != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (lastName != <span class="keyword">null</span> ? !lastName.equals(that.lastName) : that.lastName != <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result = id;</span><br><span class="line">        result = <span class="number">31</span> * result + (nickname != <span class="keyword">null</span> ? nickname.hashCode() : <span class="number">0</span>);</span><br><span class="line">        result = <span class="number">31</span> * result + (password != <span class="keyword">null</span> ? password.hashCode() : <span class="number">0</span>);</span><br><span class="line">        result = <span class="number">31</span> * result + (firstName != <span class="keyword">null</span> ? firstName.hashCode() : <span class="number">0</span>);</span><br><span class="line">        result = <span class="number">31</span> * result + (lastName != <span class="keyword">null</span> ? lastName.hashCode() : <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OneToMany</span>(mappedBy = <span class="string">"userByUserId"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Collection&lt;BlogEntity&gt; <span class="title">getBlogsById</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> blogsById;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBlogsById</span><span class="params">(Collection&lt;BlogEntity&gt; blogsById)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.blogsById = blogsById;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h4><ul>
+<li>BlogRepository</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.BlogEntity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Modifying;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Query;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.repository.query.Param;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BlogRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">BlogEntity</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改博文操作</span></span><br><span class="line">    <span class="meta">@Modifying</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"update BlogEntity blog set blog.title=:qTitle, blog.userByUserId.id=:qUserId,"</span> +</span><br><span class="line">            <span class="string">" blog.content=:qContent, blog.pubDate=:qPubDate where blog.id=:qId"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateBlog</span><span class="params">(@Param(<span class="string">"qTitle"</span>)</span> String title, @<span class="title">Param</span><span class="params">(<span class="string">"qUserId"</span>)</span> <span class="keyword">int</span> userId, @<span class="title">Param</span><span class="params">(<span class="string">"qContent"</span>)</span> String content,</span></span><br><span class="line"><span class="function">                    @<span class="title">Param</span><span class="params">(<span class="string">"qPubDate"</span>)</span> Date pubDate, @<span class="title">Param</span><span class="params">(<span class="string">"qId"</span>)</span> <span class="keyword">int</span> id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ManagerRepository</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.ManagerEntity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Modifying;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Query;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.repository.query.Param;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ManagerRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">ManagerEntity</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Modifying</span>      <span class="comment">// 说明该方法是修改操作</span></span><br><span class="line">    <span class="meta">@Transactional</span>  <span class="comment">// 说明该方法是事务性操作</span></span><br><span class="line">    <span class="comment">// 定义查询</span></span><br><span class="line">    <span class="comment">// @Param注解用于提取参数</span></span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"update ManagerEntity  us set us.nickname=:qNickname,  us.password=:qPassword where us.id=:qId"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateManager</span><span class="params">(@Param(<span class="string">"qNickname"</span>)</span> String nickname, @<span class="title">Param</span><span class="params">(<span class="string">"qPassword"</span>)</span> String password, @<span class="title">Param</span><span class="params">(<span class="string">"qId"</span>)</span> Integer id)</span>;</span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"SELECT mg FROM ManagerEntity mg WHERE mg.nickname=:qNickname AND mg.password=:qPassword"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ManagerEntity <span class="title">queryManager</span><span class="params">(@Param(<span class="string">"qNickname"</span>)</span> String nickname, @<span class="title">Param</span><span class="params">(<span class="string">"qPassword"</span>)</span> String password)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>UserRepository</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dmrf.repository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dmrf.model.UserEntity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Modifying;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.Query;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.repository.query.Param;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Repository;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by dmrf on 2018/5/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">UserEntity</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Modifying</span>      <span class="comment">// 说明该方法是修改操作</span></span><br><span class="line">    <span class="meta">@Transactional</span>  <span class="comment">// 说明该方法是事务性操作</span></span><br><span class="line">    <span class="comment">// 定义查询</span></span><br><span class="line">    <span class="comment">// @Param注解用于提取参数</span></span><br><span class="line">    <span class="meta">@Query</span>(<span class="string">"update UserEntity us set us.nickname=:qNickname, us.firstName=:qFirstName, us.lastName=:qLastName, us.password=:qPassword where us.id=:qId"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUser</span><span class="params">(@Param(<span class="string">"qNickname"</span>)</span> String nickname, @<span class="title">Param</span><span class="params">(<span class="string">"qFirstName"</span>)</span> String firstName,</span></span><br><span class="line"><span class="function">                           @<span class="title">Param</span><span class="params">(<span class="string">"qLastName"</span>)</span> String qLastName, @<span class="title">Param</span><span class="params">(<span class="string">"qPassword"</span>)</span> String password, @<span class="title">Param</span><span class="params">(<span class="string">"qId"</span>)</span> Integer id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="注册测试"><a href="#注册测试" class="headerlink" title="注册测试"></a>注册测试</h3><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywoitpflj30x30bct8x.jpg" alt="8"></p>
+<h3 id="登录测试"><a href="#登录测试" class="headerlink" title="登录测试"></a>登录测试</h3><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywoucigrj30w60bxjro.jpg" alt="9"></p>
+<h3 id="添加用户测试"><a href="#添加用户测试" class="headerlink" title="添加用户测试"></a>添加用户测试</h3><p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fzywp17u81j30xl0c0dg8.jpg" alt="10"><br><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywp9bajzj30wc08ydgm.jpg" alt="11"></p>
+<h3 id="删除用户测试"><a href="#删除用户测试" class="headerlink" title="删除用户测试"></a>删除用户测试</h3><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fzywrbhg7gj30y0081dgh.jpg" alt="13"></p>
+<h3 id="查看用户详情测试"><a href="#查看用户详情测试" class="headerlink" title="查看用户详情测试"></a>查看用户详情测试</h3><p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fzywvhsjppj30xc08ddg6.jpg" alt="14"></p>
+<h3 id="添加博客测试"><a href="#添加博客测试" class="headerlink" title="添加博客测试"></a>添加博客测试</h3><p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fzywwbrrg0j30yc0d3mxq.jpg" alt="15"><br><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fzywwhn4bpj30yp08ogme.jpg" alt="16"></p>
+<h3 id="删除博客测试"><a href="#删除博客测试" class="headerlink" title="删除博客测试"></a>删除博客测试</h3><p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fzywxxem4tj30xe07374u.jpg" alt="17"></p>
+<h3 id="查看博客详情测试"><a href="#查看博客详情测试" class="headerlink" title="查看博客详情测试"></a>查看博客详情测试</h3><p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fzywyv1cdlj30x709mq3t.jpg" alt="18"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="对mvc模式的理解和感悟"><a href="#对mvc模式的理解和感悟" class="headerlink" title="对mvc模式的理解和感悟"></a>对mvc模式的理解和感悟</h3><p>MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。</p>
+<ul>
+<li><p>Model（模型） - 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。</p>
+</li>
+<li><p>View（视图） - 视图代表模型包含的数据的可视化。</p>
+</li>
+<li><p>Controller（控制器） - 控制器作用于模型和视图上。它控制数据流向模型对象，并在数据变化时更新视图。它使视图与模型分离开。</p>
+</li>
+</ul>
+<p>在本项目中使用mvc模式，具体的model为三个Entity，controller为三个controller，view则是不同的jsp页面。具体机制是Event(事件)导致Controller改变Model或View，或者同时改变两者。只要 Controller改变了Model的数据或者属性，所有依赖的View都会自动更新。类似的，只要Controller改变了View，View会从潜在的Model中获取数据来刷新自己。通过这种模式，我们可以将系统的不同模块分离开来，对每一个功能模块分别进行开发和修改，各个模块之间层次分明，利于维护和团队交接开发。</p>
+<h3 id="心得体会"><a href="#心得体会" class="headerlink" title="心得体会"></a>心得体会</h3><p>说实话这是第一次写web应用，之前一直对这方面不感冒（其实到现在也是），但是硬着头皮查阅各种资料历经千辛万苦终于完成了这么一个简单的小系统还是感觉很有成就感。通过本次课程设计的完成，我不仅学到了一些简单的web开发技术，更重要的是对各大设计模式在实战项目中的应用理解，相信对以后的开发道路有着很积极的作用。</p>
+<h3 id="对本门课程设计的建议"><a href="#对本门课程设计的建议" class="headerlink" title="对本门课程设计的建议"></a>对本门课程设计的建议</h3><p>通过本次可好吃呢个设计的完成，我个人有以下两点建议：</p>
+<ul>
+<li><p>是否可以换一种项目载体，比如android开发、ios开发，不一定强制要求写web，因为不是所有人都对web感兴趣，只要能够很好地将设计模式运用到实际的开发中去即可。</p>
+</li>
+<li><p>是否可以换一种开发模式，本次课设要求必须单人开发，这样虽然可以保证人人都能实际地参与，但是确实会降低项目的完成度，如果可以允许两到三人组队完成，那么最终的项目完成度一定会更高，也会大大提高同学们团队开发的能力。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果觉得有帮助就请我喝杯咖啡鼓励我继续创作吧^_^</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="ai-exception 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="ai-exception 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/25/行为型模式——中介者模式/" rel="next" title="行为型模式——中介者模式">
+                <i class="fa fa-chevron-left"></i> 行为型模式——中介者模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/行为型模式——备忘录模式/" rel="prev" title="行为型模式——备忘录模式">
+                行为型模式——备忘录模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTQ5Mi8xODAzOQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/photo.png" alt="ai-exception">
+            
+              <p class="site-author-name" itemprop="name">ai-exception</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">144</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DmrfCoder" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xuefanggang97@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36982160" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/114058949111753522144" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发背景"><span class="nav-number">1.1.</span> <span class="nav-text">开发背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发目标"><span class="nav-number">1.2.</span> <span class="nav-text">开发目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">1.3.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需求分析"><span class="nav-number">2.</span> <span class="nav-text">需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求陈述"><span class="nav-number">2.1.</span> <span class="nav-text">需求陈述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作用例"><span class="nav-number">2.2.</span> <span class="nav-text">操作用例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管理员注册与登录"><span class="nav-number">2.2.1.</span> <span class="nav-text">管理员注册与登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户信息管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">用户信息管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#博客信息管理"><span class="nav-number">2.2.3.</span> <span class="nav-text">博客信息管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能分析划分"><span class="nav-number">2.3.</span> <span class="nav-text">功能分析划分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统登录注册"><span class="nav-number">2.3.1.</span> <span class="nav-text">系统登录注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户管理"><span class="nav-number">2.3.2.</span> <span class="nav-text">用户管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#博客管理"><span class="nav-number">2.3.3.</span> <span class="nav-text">博客管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行环境"><span class="nav-number">2.4.</span> <span class="nav-text">运行环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总体设计"><span class="nav-number">3.</span> <span class="nav-text">总体设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UML类图"><span class="nav-number">3.1.</span> <span class="nav-text">UML类图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#界面设计"><span class="nav-number">3.2.</span> <span class="nav-text">界面设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登录界面设计"><span class="nav-number">3.2.1.</span> <span class="nav-text">登录界面设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册界面设计"><span class="nav-number">3.2.2.</span> <span class="nav-text">注册界面设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户管理界面设计"><span class="nav-number">3.2.3.</span> <span class="nav-text">用户管理界面设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#博客管理界面设计"><span class="nav-number">3.2.4.</span> <span class="nav-text">博客管理界面设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库结构设计"><span class="nav-number">3.3.</span> <span class="nav-text">数据库结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#user（用户）"><span class="nav-number">3.3.1.</span> <span class="nav-text">user（用户）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#blog-博客"><span class="nav-number">3.3.2.</span> <span class="nav-text">blog(博客)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#manager-管理员"><span class="nav-number">3.3.3.</span> <span class="nav-text">manager(管理员)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库E-R图"><span class="nav-number">3.3.4.</span> <span class="nav-text">数据库E-R图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细设计"><span class="nav-number">4.</span> <span class="nav-text">详细设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序流程图"><span class="nav-number">4.1.</span> <span class="nav-text">程序流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">4.2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#controller"><span class="nav-number">4.2.1.</span> <span class="nav-text">controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#model"><span class="nav-number">4.2.2.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repository"><span class="nav-number">4.2.3.</span> <span class="nav-text">repository</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册测试"><span class="nav-number">5.1.</span> <span class="nav-text">注册测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录测试"><span class="nav-number">5.2.</span> <span class="nav-text">登录测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加用户测试"><span class="nav-number">5.3.</span> <span class="nav-text">添加用户测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除用户测试"><span class="nav-number">5.4.</span> <span class="nav-text">删除用户测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看用户详情测试"><span class="nav-number">5.5.</span> <span class="nav-text">查看用户详情测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加博客测试"><span class="nav-number">5.6.</span> <span class="nav-text">添加博客测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除博客测试"><span class="nav-number">5.7.</span> <span class="nav-text">删除博客测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看博客详情测试"><span class="nav-number">5.8.</span> <span class="nav-text">查看博客详情测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对mvc模式的理解和感悟"><span class="nav-number">6.1.</span> <span class="nav-text">对mvc模式的理解和感悟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#心得体会"><span class="nav-number">6.2.</span> <span class="nav-text">心得体会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对本门课程设计的建议"><span class="nav-number">6.3.</span> <span class="nav-text">对本门课程设计的建议</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ai-exception</span>
+
+  
+</div>
+
+
+ <!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共247.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
