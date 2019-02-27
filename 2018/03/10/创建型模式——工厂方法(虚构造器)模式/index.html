@@ -108,12 +108,12 @@
 <meta property="og:site_name" content="ai-exception">
 <meta property="og:description" content="概述工厂模式（Factory Pattern）是 面向对象语言最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。 介绍意图定义一个创建对象的接口， 让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行 。 主要解决主要解决接口选择的问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img-/%0Ablog.csdn.net/20180318151655716?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-12-05T14:40:07.110Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g0kyl8weojj30k00ha3zj.jpg">
+<meta property="og:updated_time" content="2019-02-27T06:20:42.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建型模式——工厂方法(虚构造器)模式">
 <meta name="twitter:description" content="概述工厂模式（Factory Pattern）是 面向对象语言最常用的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。 介绍意图定义一个创建对象的接口， 让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行 。 主要解决主要解决接口选择的问题。">
-<meta name="twitter:image" content="http://img-/%0Ablog.csdn.net/20180318151655716?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g0kyl8weojj30k00ha3zj.jpg">
 
 
 
@@ -474,40 +474,33 @@
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><h3 id="日志记录器"><a href="#日志记录器" class="headerlink" title="日志记录器"></a>日志记录器</h3><p>记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。</p>
 <h3 id="数据库访问"><a href="#数据库访问" class="headerlink" title="数据库访问"></a>数据库访问</h3><p>当用户不知道最后系统采用哪一类数据库，以及数据库可能有变化时。</p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式。有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过<br>new 就可以完成创建的对象，无需使用工厂模式。如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们的demo使用 ShapeFactory 来获取 Shape 对象。它将向 ShapeFactory 传递信息（CIRCLE / RECTANGLE /<br>SQUARE），以便获取它所需对象的类型:<br><img src="//img-
-blog.csdn.net/20180318151655716?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTgyMTYw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>我们的demo使用 ShapeFactory 来获取 Shape 对象。它将向 ShapeFactory 传递信息（CIRCLE / RECTANGLE /<br>SQUARE），以便获取它所需对象的类型:<br><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g0kyl8weojj30k00ha3zj.jpg" alt="2"></p>
 <h2 id="创建一个接口"><a href="#创建一个接口" class="headerlink" title="创建一个接口"></a>创建一个接口</h2><p>Shape.java</p>
-<pre><code> public interface Shape {
-   void draw();
-}
-</code></pre><h2 id="创建实现接口的实体类"><a href="#创建实现接口的实体类" class="headerlink" title="创建实现接口的实体类"></a>创建实现接口的实体类</h2><p>Rectangle.java</p>
-<pre><code>public class Rectangle implements Shape {
-
-   @Override
+<p>​<br>     public interface Shape {<br>       void draw();<br>    }</p>
+<h2 id="创建实现接口的实体类"><a href="#创建实现接口的实体类" class="headerlink" title="创建实现接口的实体类"></a>创建实现接口的实体类</h2><p>Rectangle.java</p>
+<p>​<br>    public class Rectangle implements Shape {</p>
+<pre><code>   @Override
    public void draw() {
       System.out.println(&quot;Inside Rectangle-&gt;draw() method.&quot;);
    }
 }
 </code></pre><p>Square.java</p>
-<pre><code>public class Square implements Shape {
-
-   @Override
+<p>​<br>    public class Square implements Shape {</p>
+<pre><code>   @Override
    public void draw() {
       System.out.println(&quot;Inside Square-&gt;draw() method.&quot;);
    }
 }
 </code></pre><p>Circle.java</p>
-<pre><code>public class Circle implements Shape {
-
-   @Override
+<p>​<br>    public class Circle implements Shape {</p>
+<pre><code>   @Override
    public void draw() {
       System.out.println(&quot;Inside Circle-&gt;draw() method.&quot;);
    }
 }
 </code></pre><h2 id="创建一个工厂，生成基于给定信息的实体类的对象"><a href="#创建一个工厂，生成基于给定信息的实体类的对象" class="headerlink" title="创建一个工厂，生成基于给定信息的实体类的对象"></a>创建一个工厂，生成基于给定信息的实体类的对象</h2><p>ShapeFactory.java</p>
-<pre><code>public class ShapeFactory {
-
-   //使用 getShape 方法获取形状类型的对象
+<p>​<br>    public class ShapeFactory {</p>
+<pre><code>   //使用 getShape 方法获取形状类型的对象
    public Shape getShape(String shapeType){
       if(shapeType == null){
          return null;
@@ -523,9 +516,8 @@ blog.csdn.net/20180318151655716?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
    }
 }
 </code></pre><h2 id="使用该工厂，通过传递类型信息来获取实体类的对象"><a href="#使用该工厂，通过传递类型信息来获取实体类的对象" class="headerlink" title="使用该工厂，通过传递类型信息来获取实体类的对象"></a>使用该工厂，通过传递类型信息来获取实体类的对象</h2><p>FactoryPatternDemo.java</p>
-<pre><code>public class FactoryPatternDemo {
-
-   public static void main(String[] args) {
+<p>​<br>    public class FactoryPatternDemo {</p>
+<pre><code>   public static void main(String[] args) {
       ShapeFactory shapeFactory = new ShapeFactory();
 
       //获取 Circle 的对象，并调用它的 draw 方法
@@ -547,10 +539,8 @@ blog.csdn.net/20180318151655716?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTg
       shape3.draw();
    }
 }
-</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><pre><code>Inside Circle-&gt;draw() method.
-Inside Rectangle-&gt;draw() method.
-Inside Square-&gt;draw() method.
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>工厂方法模式其实就是当一个类的实例化依赖于不同场景时需要使用的，比如上面demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的实现细节隐藏起来，用户只需要告诉工厂类自己需要什么情况下的产品，工厂就可以自动调用自己内部对应场景的代码从而返回一个用户需要的“产品”。</p>
+</code></pre><h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>​<br>    Inside Circle-&gt;draw() method.<br>    Inside Rectangle-&gt;draw() method.<br>    Inside Square-&gt;draw() method.</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>工厂方法模式其实就是当一个类的实例化依赖于不同场景时需要使用的，比如上面demo，根据不同的形状，实例化的Shape对象内部的实现逻辑不一样，这时候就可以使用工厂方法模式，将类内部的实现细节隐藏起来，用户只需要告诉工厂类自己需要什么情况下的产品，工厂就可以自动调用自己内部对应场景的代码从而返回一个用户需要的“产品”。</p>
 
       
     </div>
