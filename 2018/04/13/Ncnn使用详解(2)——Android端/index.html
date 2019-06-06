@@ -109,18 +109,18 @@
 <meta property="og:site_name" content="ai-exception">
 <meta property="og:description" content="摘要本片文章基于你已经完成了  这篇文章——PC端/)的学习，主要介绍如何将写好的c代码应用到Android项目中。 环境说明系统：Ubuntu16.04软件：Android Studio 前期准备之ndk安装在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开Android Studio，然后依次点击File-&amp;gt;Settings-&amp;gt;Appearance&amp;amp;Be">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy92p3m1lj30ix0e3jrw.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy92xgrrwj30xj0awjrt.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy93edjc9j311y0kogrp.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy93u9y4uj30j0041jsw.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy948bykej30wo07mwew.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy94r046fj309l0czt8z.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy94zwc4jj30m60db0tu.jpg">
-<meta property="og:updated_time" content="2018-12-07T08:20:41.866Z">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy92p3m1lj30ix0e3jrw.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy92xgrrwj30xj0awjrt.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy93edjc9j311y0kogrp.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy93u9y4uj30j0041jsw.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy948bykej30wo07mwew.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy94r046fj309l0czt8z.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy94zwc4jj30m60db0tu.jpg">
+<meta property="og:updated_time" content="2019-05-20T11:20:36.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ncnn使用详解(2)——Android端">
 <meta name="twitter:description" content="摘要本片文章基于你已经完成了  这篇文章——PC端/)的学习，主要介绍如何将写好的c代码应用到Android项目中。 环境说明系统：Ubuntu16.04软件：Android Studio 前期准备之ndk安装在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开Android Studio，然后依次点击File-&amp;gt;Settings-&amp;gt;Appearance&amp;amp;Be">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy92p3m1lj30ix0e3jrw.jpg">
+<meta name="twitter:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy92p3m1lj30ix0e3jrw.jpg">
 
 
 
@@ -467,16 +467,16 @@
       
         <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本片文章基于你已经完成了 <a href="../2018/04/13/Ncnn使用详解(1"> 这篇文章</a>——PC端/)的学习，主要介绍如何将写好的c代码应用到Android项目中。</p>
 <h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><p>系统：Ubuntu16.04<br>软件：Android Studio</p>
-<h1 id="前期准备之ndk安装"><a href="#前期准备之ndk安装" class="headerlink" title="前期准备之ndk安装"></a>前期准备之ndk安装</h1><p>在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开Android Studio，然后依次点击File-&gt;Settings-&gt;Appearance&amp;Behavior-&gt;System Settings-&gt;Android SDK，然后在SDK Tools下找到ndk，然后选中，点击apply就可以自动下载安装了，如图：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy92p3m1lj30ix0e3jrw.jpg" alt="2"><br>完成之后在你的sdk目录下会多出一个ndk-bundle的包，这就是你ndk的路径，类似下图：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy92xgrrwj30xj0awjrt.jpg" alt="3"><br>至此，ndk已经安装完毕了，下一步是配置ndk的环境变量：<br>首先打开profile：</p>
+<h1 id="前期准备之ndk安装"><a href="#前期准备之ndk安装" class="headerlink" title="前期准备之ndk安装"></a>前期准备之ndk安装</h1><p>在正式开始前我们需要先下载安装ndk，这里介绍一种简单高效的方式，打开Android Studio，然后依次点击File-&gt;Settings-&gt;Appearance&amp;Behavior-&gt;System Settings-&gt;Android SDK，然后在SDK Tools下找到ndk，然后选中，点击apply就可以自动下载安装了，如图：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy92p3m1lj30ix0e3jrw.jpg" alt="2"><br>完成之后在你的sdk目录下会多出一个ndk-bundle的包，这就是你ndk的路径，类似下图：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy92xgrrwj30xj0awjrt.jpg" alt="3"><br>至此，ndk已经安装完毕了，下一步是配置ndk的环境变量：<br>首先打开profile：</p>
 <pre><code>sudo vim /etc/profile
 </code></pre><p>打开后在profile文件的末尾加上：    </p>
 <pre><code>export NDK_HOME=sdkroot/ndk-bundle
 PATH=$NDK_HOME:$PATH
-</code></pre><p>sdkroot是你的sdk目录，每个人的不一样，视情况而定，下面是我的配置截图：  <img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy93edjc9j311y0kogrp.jpg" alt="4"><br>添加完成后保存退出，使用以下命令使配置的环境变量生效：    </p>
+</code></pre><p>sdkroot是你的sdk目录，每个人的不一样，视情况而定，下面是我的配置截图：  <img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy93edjc9j311y0kogrp.jpg" alt="4"><br>添加完成后保存退出，使用以下命令使配置的环境变量生效：    </p>
 <pre><code>source /etc/profile
 </code></pre><p>验证ndk是否配置成功：    </p>
 <pre><code>ndk-build -v
-</code></pre><p>出现类似以下输出即说明ndk配置成功：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy93u9y4uj30j0041jsw.jpg" alt="5"></p>
+</code></pre><p>出现类似以下输出即说明ndk配置成功：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy93u9y4uj30j0041jsw.jpg" alt="5"></p>
 <h1 id="编译ncnn-sdk"><a href="#编译ncnn-sdk" class="headerlink" title="编译ncnn sdk"></a>编译ncnn sdk</h1><p>我们需要将ncnn打包，这样我们才能在android ndk的代码中使用include</p>
 <p>​<br>    mkdir build-android<br>    cd build-android<br>    cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \<br>        -DANDROID_ABI=”armeabi-v7a” -DANDROID_ARM_NEON=ON \<br>        -DANDROID_PLATFORM=android-14 ..<br>    make<br>    make install</p>
 <p>参数说明：</p>
@@ -485,8 +485,8 @@ PATH=$NDK_HOME:$PATH
 
 ANDROID_PLATFORM 指定最低系统版本，&quot;android-14&quot; 就是 android-4.0
 </code></pre><p>你可以根据自己的需要设置自己的参数，详见 <a href="https://github.com/Tencent/ncnn/wiki/cmake-%E6%89%93%E5%8C%85-android-sdk" target="_blank" rel="noopener"> 这里
-</a><br>完成后你就可以在ncnn/build-android下找到install了，大概如图：<br> <img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy948bykej30wo07mwew.jpg" alt="6"><br>install下有include和lib两个文件夹，这两个文件夹下的东西后面会用到。</p>
-<h1 id="进行ndk开发"><a href="#进行ndk开发" class="headerlink" title="进行ndk开发"></a>进行ndk开发</h1><p>Android可以通过ndk-build和cmake两种方式来编译c，而且官方比较推荐的是cmake的方式，但是我用cmake试了好长时间一直报各种诡异的错误，应该是我还没有学到ncnn in ndk with cmake的正确打开方式，所以这里介绍一下使用ndk-build这种方式编译c，步骤如下：<br>我这里新建了一个android 的demo项目，项目结构如下：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy94r046fj309l0czt8z.jpg" alt="7"><br>主要是assets文件夹下放置你的bin和param文件，jni文件夹下放置你的cpp和两个mk文件，具体内容下面会介绍（可以直接在对应位置新建这两个文件夹），然后要修改你的app<br>gradle文件：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy94zwc4jj30m60db0tu.jpg" alt="8"><br>对应的内容你可以根据自己的情况修改，然后配置两个mk文件：  </p>
+</a><br>完成后你就可以在ncnn/build-android下找到install了，大概如图：<br> <img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy948bykej30wo07mwew.jpg" alt="6"><br>install下有include和lib两个文件夹，这两个文件夹下的东西后面会用到。</p>
+<h1 id="进行ndk开发"><a href="#进行ndk开发" class="headerlink" title="进行ndk开发"></a>进行ndk开发</h1><p>Android可以通过ndk-build和cmake两种方式来编译c，而且官方比较推荐的是cmake的方式，但是我用cmake试了好长时间一直报各种诡异的错误，应该是我还没有学到ncnn in ndk with cmake的正确打开方式，所以这里介绍一下使用ndk-build这种方式编译c，步骤如下：<br>我这里新建了一个android 的demo项目，项目结构如下：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy94r046fj309l0czt8z.jpg" alt="7"><br>主要是assets文件夹下放置你的bin和param文件，jni文件夹下放置你的cpp和两个mk文件，具体内容下面会介绍（可以直接在对应位置新建这两个文件夹），然后要修改你的app<br>gradle文件：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy94zwc4jj30m60db0tu.jpg" alt="8"><br>对应的内容你可以根据自己的情况修改，然后配置两个mk文件：  </p>
 <ul>
 <li><p>Android.mk </p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">LOCAL_PATH := $(call my-dir)</span><br><span class="line"></span><br><span class="line">#把这个路径改成你自己刚才编译的install路径，用全路径！</span><br><span class="line">NCNN_INSTALL_PATH := ncnn-master/build-android/install</span><br><span class="line"></span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line">LOCAL_MODULE := ncnn</span><br><span class="line">LOCAL_SRC_FILES := $(NCNN_INSTALL_PATH)/lib/libncnn.a</span><br><span class="line">include $(PREBUILT_STATIC_LIBRARY)</span><br><span class="line"></span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line"></span><br><span class="line">LOCAL_MODULE := demo</span><br><span class="line">#这个是你的cpp文件</span><br><span class="line">LOCAL_SRC_FILES := demo.cpp</span><br><span class="line"></span><br><span class="line">LOCAL_C_INCLUDES := $(NCNN_INSTALL_PATH)/include</span><br><span class="line"></span><br><span class="line">LOCAL_STATIC_LIBRARIES := ncnn</span><br><span class="line"></span><br><span class="line">LOCAL_CFLAGS := -O2 -fvisibility=hidden -fomit-frame-pointer -fstrict-aliasing -ffunction-sections -fdata-sections -ffast-math</span><br><span class="line">LOCAL_CPPFLAGS := -O2 -fvisibility=hidden -fvisibility-inlines-hidden -fomit-frame-pointer -fstrict-aliasing -ffunction-sections -fdata-sections -ffast-math</span><br><span class="line">LOCAL_LDFLAGS += -Wl,--gc-sections</span><br><span class="line"></span><br><span class="line">LOCAL_CFLAGS += -fopenmp</span><br><span class="line">LOCAL_CPPFLAGS += -fopenmp</span><br><span class="line">LOCAL_LDFLAGS += -fopenmp</span><br><span class="line"></span><br><span class="line">LOCAL_LDLIBS := -lz -llog -ljnigraphics</span><br><span class="line"></span><br><span class="line">include $(BUILD_SHARED_LIBRARY)</span><br></pre></td></tr></table></figure>
@@ -830,7 +830,7 @@ ANDROID_PLATFORM 指定最低系统版本，&quot;android-14&quot; 就是 androi
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.1k字</span>
+  <span class="post-count">博客全站共249.3k字</span>
 </div>
 
         

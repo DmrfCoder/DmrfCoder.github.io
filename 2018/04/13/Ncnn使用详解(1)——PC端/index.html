@@ -109,15 +109,15 @@
 <meta property="og:site_name" content="ai-exception">
 <meta property="og:description" content="写在前面本系列文章的内容关于ncnn会有两篇文章（一篇介绍pc端使用，一篇介绍android端使用），主要是因为之前在使用ncnn的时候网上的资料比较少，可能是大佬们的主要精力都放在了算法优化上，所以相关的基础实践资料就感觉比较少，本系列文章将详细介绍ncnn从源码编译到最终在Android端的应用流程，希望可以帮到有需要的同仁。 相关链接（主要参考）ncnn主页：  https://github">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9amaugsj310h08btar.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy9b5g51aj311x0h3jx2.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy9b9qxt7j311x0efgrz.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9er6dn4j30qw0a00u3.jpg">
-<meta property="og:updated_time" content="2018-12-07T08:26:31.473Z">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9amaugsj310h08btar.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9b5g51aj311x0h3jx2.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9b9qxt7j311x0efgrz.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9er6dn4j30qw0a00u3.jpg">
+<meta property="og:updated_time" content="2019-05-20T11:18:36.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ncnn使用详解(1)——PC端">
 <meta name="twitter:description" content="写在前面本系列文章的内容关于ncnn会有两篇文章（一篇介绍pc端使用，一篇介绍android端使用），主要是因为之前在使用ncnn的时候网上的资料比较少，可能是大佬们的主要精力都放在了算法优化上，所以相关的基础实践资料就感觉比较少，本系列文章将详细介绍ncnn从源码编译到最终在Android端的应用流程，希望可以帮到有需要的同仁。 相关链接（主要参考）ncnn主页：  https://github">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9amaugsj310h08btar.jpg">
+<meta name="twitter:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9amaugsj310h08btar.jpg">
 
 
 
@@ -466,13 +466,13 @@
 <h2 id="相关链接（主要参考）"><a href="#相关链接（主要参考）" class="headerlink" title="相关链接（主要参考）"></a>相关链接（主要参考）</h2><p>ncnn主页： <a href="https://github.com/Tencent/ncnn" target="_blank" rel="noopener"> https://github.com/Tencent/ncnn </a></p>
 <h2 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h2><p>系统：Ubuntu16.04</p>
 <h1 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h1><h2 id="从github下载源码"><a href="#从github下载源码" class="headerlink" title="从github下载源码"></a>从github下载源码</h2><pre><code>git clone https://github.com/Tencent/ncnn
-</code></pre><p>下载完后的目录结构应该是这样：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9amaugsj310h08btar.jpg" alt="9"><br>然后对ncnn源码进行编译(在ncnn根目录下执行)：  </p>
+</code></pre><p>下载完后的目录结构应该是这样：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9amaugsj310h08btar.jpg" alt="9"><br>然后对ncnn源码进行编译(在ncnn根目录下执行)：  </p>
 <pre><code>mkdir build
 cd build
 cmake ..
 make -j4    
-</code></pre><p>然后就可以编译成功了，相关截图：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxy9b5g51aj311x0h3jx2.jpg" alt="1"></p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxy9b9qxt7j311x0efgrz.jpg" alt="2"></p>
+</code></pre><p>然后就可以编译成功了，相关截图：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9b5g51aj311x0h3jx2.jpg" alt="1"></p>
+<p><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9b9qxt7j311x0efgrz.jpg" alt="2"></p>
 <h1 id="在电脑上实现ncnn加载caffe模型对目标进行分类"><a href="#在电脑上实现ncnn加载caffe模型对目标进行分类" class="headerlink" title="在电脑上实现ncnn加载caffe模型对目标进行分类"></a>在电脑上实现ncnn加载caffe模型对目标进行分类</h1><p>参考 <a href="https://github.com/Tencent/ncnn/wiki/ncnn-%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97-alexnet" target="_blank" rel="noopener"> 这里
 </a></p>
 <h2 id="准备caffe网络和模型"><a href="#准备caffe网络和模型" class="headerlink" title="准备caffe网络和模型"></a>准备caffe网络和模型</h2><p>caffe 的网络和模型通常是搞深度学习的研究者训练出来的，一般来说训练完会有    </p>
@@ -523,7 +523,7 @@ add_executable(demo demo.cpp)
 target_link_libraries(demo ncnn)
 
 add_subdirectory(ssd)
-</code></pre><p>然后打开ncnn根目录下的CMakeLists.txt文件，将编译examples语句的注释打开（默认是被注释掉的），如图：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxy9er6dn4j30qw0a00u3.jpg" alt="3"><br>更改后保存退出，现在就可以终端进入ncnn/build后执行：   </p>
+</code></pre><p>然后打开ncnn根目录下的CMakeLists.txt文件，将编译examples语句的注释打开（默认是被注释掉的），如图：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxy9er6dn4j30qw0a00u3.jpg" alt="3"><br>更改后保存退出，现在就可以终端进入ncnn/build后执行：   </p>
 <pre><code>make
 </code></pre><p>执行完毕后你就可以在ncnn/build/examples下找到你的可执行文件了（demo）</p>
 <h3 id="执行可执行文件"><a href="#执行可执行文件" class="headerlink" title="执行可执行文件"></a>执行可执行文件</h3><p>首先将你之前生成的.param和.bin文件复制到ncnn/build/examples目录下，然后终端cd到ncnn/build/examples，执行：    </p>
@@ -849,7 +849,7 @@ add_subdirectory(ssd)
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.1k字</span>
+  <span class="post-count">博客全站共249.3k字</span>
 </div>
 
         

@@ -109,14 +109,14 @@
 <meta property="og:site_name" content="ai-exception">
 <meta property="og:description" content="概述回溯算法是一种组织搜索的一般技术，它常常可以避免搜索所有的可能性，适用于求解那些有潜在的大量解但是有限个数的解已经检查过的问题。 3着色问题问题描述给出一个无向图G=(V,E)，需要用三种颜色之一为V中的每个顶点着色，要求没有两个相邻的顶点有相同的颜色。 算法思想我们称没有两个邻接顶点有同样颜色的着色方案为合法的，反之成为非法的。如果不考虑合法性的要求，给出n个顶点的无向图，将其用三种颜色着色">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyghqc8imj31ux0u0gnx.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxygjncihfj30u015cdlv.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fxygk7c3f6j31460u046m.jpg">
-<meta property="og:updated_time" content="2018-12-07T12:51:47.016Z">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxyghqc8imj31ux0u0gnx.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygjncihfj30u015cdlv.jpg">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygk7c3f6j31460u046m.jpg">
+<meta property="og:updated_time" content="2019-05-20T12:02:00.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="回溯算法">
 <meta name="twitter:description" content="概述回溯算法是一种组织搜索的一般技术，它常常可以避免搜索所有的可能性，适用于求解那些有潜在的大量解但是有限个数的解已经检查过的问题。 3着色问题问题描述给出一个无向图G=(V,E)，需要用三种颜色之一为V中的每个顶点着色，要求没有两个相邻的顶点有相同的颜色。 算法思想我们称没有两个邻接顶点有同样颜色的着色方案为合法的，反之成为非法的。如果不考虑合法性的要求，给出n个顶点的无向图，将其用三种颜色着色">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyghqc8imj31ux0u0gnx.jpg">
+<meta name="twitter:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxyghqc8imj31ux0u0gnx.jpg">
 
 
 
@@ -463,7 +463,7 @@
       
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>回溯算法是一种组织搜索的一般技术，它常常可以避免搜索所有的可能性，适用于求解那些有潜在的大量解但是有限个数的解已经检查过的问题。</p>
 <h1 id="3着色问题"><a href="#3着色问题" class="headerlink" title="3着色问题"></a>3着色问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给出一个无向图G=(V,E)，需要用三种颜色之一为V中的每个顶点着色，要求没有两个相邻的顶点有相同的颜色。</p>
-<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>我们称没有两个邻接顶点有同样颜色的着色方案为合法的，反之成为非法的。如果不考虑合法性的要求，给出n个顶点的无向图，将其用三种颜色着色，共有n^3种不同的方法，因为没一个顶点都有三种不同的着色方案，这就构成了一颗三叉树，如图：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxyghqc8imj31ux0u0gnx.jpg" alt="1"><br>在该三叉树中，从根到叶子节点的每一条路径代表一种着色方法（合法的和不合法的），我们需要做的就是选出一条合法的从根到叶子的路径即可。所以我们从跟节点开始向叶子节点走，这时有两种情况：</p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>我们称没有两个邻接顶点有同样颜色的着色方案为合法的，反之成为非法的。如果不考虑合法性的要求，给出n个顶点的无向图，将其用三种颜色着色，共有n^3种不同的方法，因为没一个顶点都有三种不同的着色方案，这就构成了一颗三叉树，如图：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxyghqc8imj31ux0u0gnx.jpg" alt="1"><br>在该三叉树中，从根到叶子节点的每一条路径代表一种着色方法（合法的和不合法的），我们需要做的就是选出一条合法的从根到叶子的路径即可。所以我们从跟节点开始向叶子节点走，这时有两种情况：</p>
 <ul>
 <li><p>从根到当前节点的路径对应一个合法的着色：   </p>
 <ul>
@@ -523,11 +523,11 @@
 <h2 id="Demo——旅行商问题求解"><a href="#Demo——旅行商问题求解" class="headerlink" title="Demo——旅行商问题求解"></a>Demo——旅行商问题求解</h2><p>参考： <a href="https://blog.csdn.net/qq_32400847/article/details/51813606" target="_blank" rel="noopener"> 这里 </a></p>
 <h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>给出一个城市的集合和一个定义在 <strong>每一对城市之间</strong> 的耗费函数，找出耗费最小的旅行。</p>
 <h3 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h3><p>考虑下图所示的情况及其代价矩阵，假定起始城市为1号城市：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxygjncihfj30u015cdlv.jpg" alt="屏幕快照 2018-12-07 20.32.53"><br>注意代价矩阵的特点，每条满足要求的回路在代价矩阵中的每一行每一列有且只有1个元素与之对应。据此，我们可以用贪心算法计算问题的上界：<br>以起始城市作为出发城市，每次从当前出发城市发出的多条边中，选择没有遍历过的最短边连接的城市，作为下一步达到城市。在这个问题中，从城市1出发，途经1→3→5→4→2→1，路径长度1+2+3+7+3=16作为上界，即最短路径长度<br>&lt;=16。<br>对于下界，一个简单的办法是直接将矩阵中每一行的最小元素相加，在这个问题中，路径长度1+3+1+3+2=10作为下界，即最短路径长度&gt;=10。更优的计算方式是<br><strong>将矩阵中每一行最小的2个元素相加除以2并向上取整</strong><br>。因为在一条路径上，每个城市有2条邻接边：进入该城市、离开该城市。对每一步经过的城市j，从最近的上一个城市i来，再到下一个最近城市k去，即i→j→k。在这个问题中，路径长度{(1+3)+(3+6)+(1+2)+(3+4)+(2+3)}/2向上取整等于14作为下界，即最短路径长度</p>
+<p><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygjncihfj30u015cdlv.jpg" alt="屏幕快照 2018-12-07 20.32.53"><br>注意代价矩阵的特点，每条满足要求的回路在代价矩阵中的每一行每一列有且只有1个元素与之对应。据此，我们可以用贪心算法计算问题的上界：<br>以起始城市作为出发城市，每次从当前出发城市发出的多条边中，选择没有遍历过的最短边连接的城市，作为下一步达到城市。在这个问题中，从城市1出发，途经1→3→5→4→2→1，路径长度1+2+3+7+3=16作为上界，即最短路径长度<br>&lt;=16。<br>对于下界，一个简单的办法是直接将矩阵中每一行的最小元素相加，在这个问题中，路径长度1+3+1+3+2=10作为下界，即最短路径长度&gt;=10。更优的计算方式是<br><strong>将矩阵中每一行最小的2个元素相加除以2并向上取整</strong><br>。因为在一条路径上，每个城市有2条邻接边：进入该城市、离开该城市。对每一步经过的城市j，从最近的上一个城市i来，再到下一个最近城市k去，即i→j→k。在这个问题中，路径长度{(1+3)+(3+6)+(1+2)+(3+4)+(2+3)}/2向上取整等于14作为下界，即最短路径长度</p>
 <blockquote>
 <p>=14。因此，以最短路径长度dist作为TSP问题目标函数，则dist的界为[14,16]。在问题求解过程中，如果1个部分解的目标函数dist下界超出此界限，则该部分解对应了死结点，可剪枝。对于1条正在生成的路径/部分解，设已经确定的顶点(已经经过/遍历的城市)集合为U=(r1,<br>r2, …,<br>rk)，则该部分解的目标函数的下界为(已经经过的路径的总长的2倍+从起点到最近未遍历城市的距离+从终点到最近未遍历城市的距离+进入/离开未遍历城市时各未遍历城市带来的最小路径成本)除以2并向上取整。假设正在生成的路径/部分解为1→4,U={1,4},未遍历城市={2,3,5},该部分解下界为{2*5+1+3+(3+6)+(1+2)+(2+3)}/2向上取整等于16：  </p>
 </blockquote>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxygk7c3f6j31460u046m.jpg" alt="屏幕快照 2018-12-07 20.33.29"></p>
+<p><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygk7c3f6j31460u046m.jpg" alt="屏幕快照 2018-12-07 20.33.29"></p>
 
       
     </div>
@@ -840,7 +840,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.1k字</span>
+  <span class="post-count">博客全站共249.3k字</span>
 </div>
 
         

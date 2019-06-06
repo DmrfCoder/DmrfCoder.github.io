@@ -109,12 +109,12 @@
 <meta property="og:site_name" content="ai-exception">
 <meta property="og:description" content="只调用一次的递归叫做尾递归 基数排序算法思想基数排序需要经历d次，d为所要排序数列中位数最多的数的位数，其过程是首先根据数列中数的个位的数值将所有数入0~9这10个队列，然后从0~9将元素依次出队，然后再根据十位元素的数值再次入队，然后出队，以此类推重复d次，最终即可完成排序。 时间空间复杂度及稳定性 T(n)=O(d*n) d为排序数中最大数的位数  S(n)=O(n)  稳定   代码​123">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxygm8bjqbj31dw0u0dgp.jpg">
-<meta property="og:updated_time" content="2018-12-07T12:35:54.575Z">
+<meta property="og:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygm8bjqbj31dw0u0dgp.jpg">
+<meta property="og:updated_time" content="2019-05-20T12:02:52.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="归纳法">
 <meta name="twitter:description" content="只调用一次的递归叫做尾递归 基数排序算法思想基数排序需要经历d次，d为所要排序数列中位数最多的数的位数，其过程是首先根据数列中数的个位的数值将所有数入0~9这10个队列，然后从0~9将元素依次出队，然后再根据十位元素的数值再次入队，然后出队，以此类推重复d次，最终即可完成排序。 时间空间复杂度及稳定性 T(n)=O(d*n) d为排序数中最大数的位数  S(n)=O(n)  稳定   代码​123">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fxygm8bjqbj31dw0u0dgp.jpg">
+<meta name="twitter:image" content="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygm8bjqbj31dw0u0dgp.jpg">
 
 
 
@@ -479,7 +479,7 @@
 <h2 id="迭代法实现代码（Exp）"><a href="#迭代法实现代码（Exp）" class="headerlink" title="迭代法实现代码（Exp）"></a>迭代法实现代码（Exp）</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Exp</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d[<span class="number">10</span>];<span class="comment">//假设n化为2进制数字后存在d数组里面</span></span><br><span class="line">    <span class="keyword">int</span> y=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = len(d); i &gt;=<span class="number">0</span> ; --i) &#123;</span><br><span class="line">        y=y*y;</span><br><span class="line">        <span class="keyword">if</span>(d[i]==<span class="number">1</span>)&#123;</span><br><span class="line">            y=y*x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>假设每次乘法的时间是常数，那么这两种方法所需的运行时间都是 <strong>senta(lohn)</strong> ，他们对于输入大小来说都是 <strong>线性</strong> 的。</p>
 <h1 id="多项式求值（Horner规则）"><a href="#多项式求值（Horner规则）" class="headerlink" title="多项式求值（Horner规则）"></a>多项式求值（Horner规则）</h1><h2 id="场景介绍-1"><a href="#场景介绍-1" class="headerlink" title="场景介绍"></a>场景介绍</h2><p>假设有n+2个数a<em>0,a_1,……,a_n和x序列，要对多项式 <em>*P_n(x)=a_n</em>x^n+a</em>(n-1)<em>x^(n-1)+…+a_1</em>x**<br>求值，传统的办法是分别对每一个子项求值，然后再对整个式子求值，但是这种方法很低效，因为它需要n+（n-1）+（n-2）+…..+1=n(n+1)/2次乘法。</p>
-<h2 id="归纳法解决思路"><a href="#归纳法解决思路" class="headerlink" title="归纳法解决思路"></a>归纳法解决思路</h2><p>首先我们发现原式可进行如下化简：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxygm8bjqbj31dw0u0dgp.jpg" alt="1"><br>化简之后我们可以发现如果我们假设已知P<em>(n-1)(x)，那么P_n(x)=x*P</em>(n-1)(x)+a_0,所以就有了算法HORNER。</p>
+<h2 id="归纳法解决思路"><a href="#归纳法解决思路" class="headerlink" title="归纳法解决思路"></a>归纳法解决思路</h2><p>首先我们发现原式可进行如下化简：<br><img src="https://picture-pool.oss-cn-beijing.aliyuncs.com/006tNbRwgy1fxygm8bjqbj31dw0u0dgp.jpg" alt="1"><br>化简之后我们可以发现如果我们假设已知P<em>(n-1)(x)，那么P_n(x)=x*P</em>(n-1)(x)+a_0,所以就有了算法HORNER。</p>
 <h2 id="HORNER算法代码实现"><a href="#HORNER算法代码实现" class="headerlink" title="HORNER算法代码实现"></a>HORNER算法代码实现</h2><p>​<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Horner</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> n,<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//数组A的长度为n+2，从A[0]到A[n+1]代表了a_0到a_(n+1)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> p=A[n+<span class="number">1</span>];<span class="comment">//p=a_(n+1)</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;=n ; ++i) &#123;</span><br><span class="line">        p=p*x+A[n+<span class="number">1</span>-i];<span class="comment">//p=p*x+a_(n-i)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="寻找多数元素"><a href="#寻找多数元素" class="headerlink" title="寻找多数元素"></a>寻找多数元素</h1><h2 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h2><p>令A[1…n]是一个整数序列，如果该序列中的某一个数x在该序列中出现的次数多余int(n/2)，则称x为该序列的 <strong>多数元素</strong> 。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
@@ -801,7 +801,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共249.1k字</span>
+  <span class="post-count">博客全站共249.3k字</span>
 </div>
 
         
